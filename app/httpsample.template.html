@@ -1,0 +1,41 @@
+<div>
+            {{title}}
+            <form [ngFormModel]= "form" >
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input type="text"
+                      (keyup)="checkLogin()"
+                      ngControl="login"
+                      #login="ngForm"
+                      id="login"
+                      class="form-control" />
+                      <!-- other option
+                      <div *ngIf="login is touched && login.errors"
+                      -->
+                  </div>
+                  <button id ="submit" class="btn btn-warning" (click)="cancelSubscription()">Cancel observable</button>
+            </form>
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="#user of users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr colspan="3">
+                    <th>user(s)</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+</div>
