@@ -1,5 +1,5 @@
 {
-  "name": "angular2-05-server",
+  "name": "pxai.github.io",
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"npm run tsc:w\" \"npm run rest\" ",
