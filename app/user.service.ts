@@ -1,4 +1,4 @@
-import {Http} from "angular2/http";
+import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 /**
 * http gets injected through the constructor argument
