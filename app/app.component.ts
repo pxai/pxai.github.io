@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated'
-//import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router'
-//import {OldStyleAsyncSampleComponent} from './oldstyleasyncsample.component';
-//import {ObservableSampleComponent} from './observablesample.component';
-//import {PromiseSampleComponent} from './promisesample.component';
+import {AboutComponent} from './about.component';
 import {HttpSampleComponent} from './httpsample.component';
 
 /**
@@ -18,14 +15,16 @@ import {HttpSampleComponent} from './httpsample.component';
                 <nav>
                 <ul>
                     <li><a [routerLink]="['HttpSample']">Http Sample</a></li>
+                    <li><a [routerLink]="['About']">About</a></li>
                 </ul>
                 </nav>
                 <router-outlet></router-outlet>`
 })
 @RouteConfig([
-  {path: '/httpsample', name: 'HttpSample', component: HttpSampleComponent}
+  {path: '/httpsample', name: 'HttpSample', component: HttpSampleComponent},
+  {path: '/about', name: 'About', component: AboutComponent}
   ])
 export class AppComponent {
-    private title: string = 'Server samples';
+    private title: string = 'pello.io';
 }
 

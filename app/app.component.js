@@ -10,10 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
-//import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router'
-//import {OldStyleAsyncSampleComponent} from './oldstyleasyncsample.component';
-//import {ObservableSampleComponent} from './observablesample.component';
-//import {PromiseSampleComponent} from './promisesample.component';
+var about_component_1 = require('./about.component');
 var httpsample_component_1 = require('./httpsample.component');
 /**
  * Form samples
@@ -22,16 +19,17 @@ var httpsample_component_1 = require('./httpsample.component');
 // Notice textContent is a dom element
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Server samples';
+        this.title = 'pello.io';
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
-            template: "<h1>{{title}}</h1>\n                <nav>\n                <ul>\n                    <li><a [routerLink]=\"['HttpSample']\">Http Sample</a></li>\n                </ul>\n                </nav>\n                <router-outlet></router-outlet>"
+            template: "<h1>{{title}}</h1>\n                <nav>\n                <ul>\n                    <li><a [routerLink]=\"['HttpSample']\">Http Sample</a></li>\n                    <li><a [routerLink]=\"['About']\">About</a></li>\n                </ul>\n                </nav>\n                <router-outlet></router-outlet>"
         }),
         router_deprecated_1.RouteConfig([
-            { path: '/httpsample', name: 'HttpSample', component: httpsample_component_1.HttpSampleComponent }
+            { path: '/httpsample', name: 'HttpSample', component: httpsample_component_1.HttpSampleComponent },
+            { path: '/about', name: 'About', component: about_component_1.AboutComponent }
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
