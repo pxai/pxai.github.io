@@ -1,7 +1,0 @@
-/**
-* style.css
-* Some custom styles for angular2 classes
-*/
-.ng-touched.ng-invalid {
-    background-color: lightsalmon;
-}
