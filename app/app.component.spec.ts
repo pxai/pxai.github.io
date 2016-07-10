@@ -24,7 +24,7 @@ describe('Smoke test', () => {
   });
 });
 
-/*describe('AppComponent with TCB', function () {
+describe('AppComponent with TCB', function () {
 
   it('should instantiate component',
     async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
@@ -33,7 +33,7 @@ describe('Smoke test', () => {
       expect(fixture.componentInstance instanceof AppComponent).toBe(true, 'should create AppComponent');
     });
   })));
-
+/*
   it('should have expected <h1> text',
     async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 
@@ -48,4 +48,5 @@ describe('Smoke test', () => {
     });
 
   })));
-});*/
+  */
+});

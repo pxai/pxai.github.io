@@ -13,15 +13,15 @@
         <td colspan="3" title="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0">Browser: Firefox 47.0.0 (Windows 10 0.0.0)</td>
       </tr>
       <tr class="overview">
-        <td colspan="3">Timestamp: 2016-06-26 15:45:10</td>
+        <td colspan="3">Timestamp: 2016-06-26 18:12:11</td>
       </tr>
       <tr>
         <td colspan="3">
-          1 tests / 
+          2 tests / 
           0 errors / 
-          0 failures / 
+          1 failures / 
           0 skipped / 
-          runtime: 0.003s
+          runtime: 0.251s
         </td>
       </tr>
       <tr class="header">
@@ -30,9 +30,26 @@
         <td>Suite / Results</td>
       </tr>
       <tr class="pass">
-        <td>Passed in 0.003s</td>
+        <td>Passed in 0.006s</td>
         <td>should run a passing test</td>
         <td>Smoke test</td>
+      </tr>
+      <tr class="fail">
+        <td>Failed</td>
+        <td>should instantiate component</td>
+        <td>
+          AppComponent with TCB
+          <br />Zone&lt;/ZoneDelegate&lt;/ZoneDelegate.prototype.invoke@node_modules/zone.js/dist/zone.js:323:20
+Zone&lt;/Zone&lt;/Zone.prototype.run@node_modules/zone.js/dist/zone.js:216:25
+scheduleResolveOrReject/&lt;@node_modules/zone.js/dist/zone.js:571:53
+Zone&lt;/ZoneDelegate&lt;/ZoneDelegate.prototype.invokeTask@node_modules/zone.js/dist/zone.js:356:24
+Zone&lt;/Zone&lt;/Zone.prototype.runTask@node_modules/zone.js/dist/zone.js:256:29
+drainMicroTaskQueue@node_modules/zone.js/dist/zone.js:474:26
+notify/&lt;/run@node_modules/core-js/client/shim.js:4016:23
+notify/&lt;@node_modules/core-js/client/shim.js:4029:29
+module.exports/flush@node_modules/core-js/client/shim.js:4374:10
+
+        </td>
       </tr>
     </table>
     <hr/>
