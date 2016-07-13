@@ -1,6 +1,6 @@
 
 # pello.io
-Based on angular2 
+Based on angular2, hosted in github
 # Angular 2 QuickStart Source
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
