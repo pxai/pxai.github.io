@@ -1,0 +1,26 @@
+<div>
+            {{title}}
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Text</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="#article of articles">
+                    <td>{{article.id}}</td>
+                    <td>{{article.title}}</td>
+                    <td>{{article.text}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr colspan="3">
+                    <th>article(s)</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+</div>
