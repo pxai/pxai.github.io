@@ -9,7 +9,7 @@ var htmlmin = require('gulp-htmlmin');
 var browserSync = require('browser-sync');
 var del = require('del');
 var typescript = require('gulp-typescript');
-const tscConfig = require('src/tsconfig.json');
+const tscConfig = typescript.createProject('./tsconfig.json');
 
 gulp.task('say_hello', function() {
 	console.log('Gulp says hello');
