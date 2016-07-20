@@ -8,6 +8,8 @@ var useref = require('gulp-useref');
 var htmlmin = require('gulp-htmlmin');
 var browserSync = require('browser-sync');
 var del = require('del');
+var typescript = require('gulp-typescript');
+const tscConfig = require('src/tsconfig.json');
 
 gulp.task('say_hello', function() {
 	console.log('Gulp says hello');
@@ -70,9 +72,16 @@ gulp.task('minifyhtml', function(){
 // Watch Our Files
 gulp.task('watch',function() {
   // and now my watch begins...
-  gulp.watch('src/js/*.js', ['minifyjs']);
-  gulp.watch('src/css/*.css', ['minifycss']);
-  gulp.watch('src/index.html', ['minifyhtml']);
+  gulp.watch('src/app/**/*.ts', ['compile']);
+//  gulp.watch('src/js/*.js', ['minifyjs']);
+//  gulp.watch('src/css/*.css', ['minifycss']);
+//  gulp.watch('src/index.html', ['minifyhtml']);
+});
+
+gulp.task('compile', ['clean'],function(){
+  gulp.src(['src/app/**/*.ts'])
+    .pipe(typescript(tscConfig.compilerOptions))
+    .pipe(gulp.dest('dist/app'))
 });
 
 // Clean dist files
@@ -81,7 +90,9 @@ gulp.task('clean', function() {
 });
 
 // Default
-gulp.task('default', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
+gulp.task('default', ['compile','browserSync','watch']);
+// Default optimized
+gulp.task('optimized', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
 // Just move files
 gulp.task('move',['just_move']);
 // Simple task
