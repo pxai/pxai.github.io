@@ -16,7 +16,7 @@ gulp.task('say_hello', function() {
 });
 
 gulp.task('just_move', function () {
-  return gulp.src('src/**/*')
+  return gulp.src(['src/index.html','src/favicon.ico','src/css/*.*'])
     .pipe(gulp.dest('dist/'));
 });
 
@@ -90,7 +90,7 @@ gulp.task('clean', function() {
 });
 
 // Default
-gulp.task('default', ['compile','browserSync','watch']);
+gulp.task('default', ['compile','just_move','browserSync','watch']);
 // Default optimized
 gulp.task('optimized', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
 // Just move files
