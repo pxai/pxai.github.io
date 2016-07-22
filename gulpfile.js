@@ -23,11 +23,11 @@ gulp.task('just_move', function () {
 
 gulp.task('copy_libs', ['clean'], function() {
   return gulp.src([
-      'node_modules/angular2/bundles/angular2-polyfills.js',
+      'node_modules/\@angular/bundles/angular2-polyfills.js',
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/rxjs/bundles/Rx.js',
-      'node_modules/angular2/bundles/angular2.dev.js',
-      'node_modules/angular2/bundles/router.dev.js'
+      'node_modules/\@angular/bundles/angular2.dev.js',
+      'node_modules/\@angular/bundles/router.dev.js'
     ])
     .pipe(gulp.dest('dist/lib'))
 });
@@ -91,9 +91,9 @@ gulp.task('minifyhtml', function(){
 gulp.task('watch',function() {
   // and now my watch begins...
   gulp.watch('src/app/**/*.ts', ['compile']);
+	gulp.watch('src/index.html', ['minifyhtml']);
 //  gulp.watch('src/js/*.js', ['minifyjs']);
 //  gulp.watch('src/css/*.css', ['minifycss']);
-//  gulp.watch('src/index.html', ['minifyhtml']);
 });
 
 gulp.task('compile', ['clean'],function(){
@@ -108,7 +108,7 @@ gulp.task('clean', function() {
 });
 
 // Default
-gulp.task('default', ['tslint','compile','just_move','copy_libs','browserSync','watch']);
+gulp.task('default', ['compile','just_move','copy_libs','browserSync','watch']);
 // Default optimized
 gulp.task('optimized', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
 // Just move files
