@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var useref = require('gulp-useref');
 var htmlmin = require('gulp-htmlmin');
 var browserSync = require('browser-sync');
+const tslint = require('gulp-tslint');
 var del = require('del');
 var typescript = require('gulp-typescript');
 const tscConfig = typescript.createProject('./tsconfig.json');
@@ -29,6 +30,12 @@ gulp.task('copy_libs', ['clean'], function() {
       'node_modules/angular2/bundles/router.dev.js'
     ])
     .pipe(gulp.dest('dist/lib'))
+});
+
+gulp.task('tslint', function() {
+  return gulp.src('app/**/*.ts')
+    .pipe(tslint())
+    .pipe(tslint.report('verbose'));
 });
 
 gulp.task('browserSync', function () {
@@ -101,7 +108,7 @@ gulp.task('clean', function() {
 });
 
 // Default
-gulp.task('default', ['compile','just_move','copy_libs','browserSync','watch']);
+gulp.task('default', ['tslint','compile','just_move','copy_libs','browserSync','watch']);
 // Default optimized
 gulp.task('optimized', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
 // Just move files
