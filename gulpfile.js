@@ -20,6 +20,17 @@ gulp.task('just_move', function () {
     .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('copy_libs', ['clean'], function() {
+  return gulp.src([
+      'node_modules/angular2/bundles/angular2-polyfills.js',
+      'node_modules/systemjs/dist/system.src.js',
+      'node_modules/rxjs/bundles/Rx.js',
+      'node_modules/angular2/bundles/angular2.dev.js',
+      'node_modules/angular2/bundles/router.dev.js'
+    ])
+    .pipe(gulp.dest('dist/lib'))
+});
+
 gulp.task('browserSync', function () {
   browserSync.init({
 	server : {
@@ -90,7 +101,7 @@ gulp.task('clean', function() {
 });
 
 // Default
-gulp.task('default', ['compile','just_move','browserSync','watch']);
+gulp.task('default', ['compile','just_move','copy_libs','browserSync','watch']);
 // Default optimized
 gulp.task('optimized', ['clean','movefonts','minifyjs','minifycss','minifyhtml','browserSync','watch']);
 // Just move files
