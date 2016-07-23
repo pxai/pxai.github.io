@@ -12,6 +12,3 @@ export class AboutComponent {
   public title: string = "@copy; pello.io - 2016";
 
 }
-
-
-
