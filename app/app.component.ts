@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated'
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AboutComponent} from './about.component';
 import {HttpSampleComponent} from './httpsample.component';
 import {ArticleComponent} from './article.component';
@@ -30,4 +30,3 @@ import {ArticleComponent} from './article.component';
 export class AppComponent {
     private title: string = 'pello.io';
 }
-
