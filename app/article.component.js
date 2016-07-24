@@ -1,4 +1,4 @@
-System.register(["@angular/core", './article.service', './article-detail.component'], function(exports_1, context_1) {
+System.register(["@angular/core", './article.service', './article-detail.component', '@angular/router-deprecated'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, article_service_1, article_detail_component_1;
+    var core_1, article_service_1, article_detail_component_1, router_deprecated_1, router_deprecated_2;
     var ArticleComponent;
     return {
         setters:[
@@ -22,6 +22,10 @@ System.register(["@angular/core", './article.service', './article-detail.compone
             },
             function (article_detail_component_1_1) {
                 article_detail_component_1 = article_detail_component_1_1;
+            },
+            function (router_deprecated_1_1) {
+                router_deprecated_1 = router_deprecated_1_1;
+                router_deprecated_2 = router_deprecated_1_1;
             }],
         execute: function() {
             //import {LoginValidator} from "./login.validator";
@@ -33,10 +37,12 @@ System.register(["@angular/core", './article.service', './article-detail.compone
             * Using a service to take care of the server interaction
             */
             ArticleComponent = (function () {
-                function ArticleComponent(articleService) {
+                function ArticleComponent(articleService, router, routeParams) {
                     this.title = "Articles";
                     this.subscription = '';
                     this._articleService = articleService;
+                    this._router = router;
+                    this._routeParams = routeParams;
                 }
                 ArticleComponent.prototype.getArticles = function () {
                     var _this = this;
@@ -44,6 +50,11 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                 };
                 ArticleComponent.prototype.ngOnInit = function () {
                     this.getArticles();
+                };
+                ArticleComponent.prototype.detail = function (article) {
+                    console.log("article selected: " + article.id);
+                    var link = ['ArticleDetailComponent', { id: article.id }];
+                    this._router.navigate(link);
                 };
                 ArticleComponent = __decorate([
                     core_1.Component({
@@ -53,7 +64,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                         directives: [article_detail_component_1.ArticleDetailComponent],
                         providers: [article_service_1.ArticleService]
                     }), 
-                    __metadata('design:paramtypes', [article_service_1.ArticleService])
+                    __metadata('design:paramtypes', [article_service_1.ArticleService, router_deprecated_2.Router, router_deprecated_1.RouteParams])
                 ], ArticleComponent);
                 return ArticleComponent;
             }());

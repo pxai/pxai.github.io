@@ -1,7 +1,10 @@
 import {Component} from "@angular/core";
 import {OnInit} from '@angular/core'; // Part of the lifecycle hook
+import {Article} from './article';
 import {ArticleService} from './article.service';
 import {ArticleDetailComponent} from './article-detail.component';
+import { RouteParams } from '@angular/router-deprecated';
+import { Router } from '@angular/router-deprecated';
 //import {LoginValidator} from "./login.validator";
 
 
@@ -24,11 +27,17 @@ export class ArticleComponent  implements OnInit {
   private title: string = "Articles";
   public articles;
   private subscription: string = '';
+  private _routeParams: RouteParams;
+  private _router : Router;
 
   private _articleService : ArticleService;
 
-  constructor(articleService: ArticleService) {
-      this._articleService = articleService;
+  constructor(articleService: ArticleService,
+                router: Router,
+                routeParams: RouteParams) {
+        this._articleService = articleService;
+        this._router = router;
+        this._routeParams = routeParams;
   }
 
   private getArticles () {
@@ -38,4 +47,10 @@ export class ArticleComponent  implements OnInit {
   public ngOnInit() {
       this.getArticles();
   }
+
+  public detail (article: Article) {
+    console.log("article selected: " + article.id);
+    let link = ['ArticleDetailComponent', { id: article.id }];
+    this._router.navigate(link);
+}
 }
