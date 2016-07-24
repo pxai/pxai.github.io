@@ -1,4 +1,4 @@
-System.register(["@angular/core"], function(exports_1, context_1) {
+System.register(["@angular/core", './article.service', './article-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,18 @@ System.register(["@angular/core"], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, article_service_1, article_detail_component_1;
     var ArticleComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (article_service_1_1) {
+                article_service_1 = article_service_1_1;
+            },
+            function (article_detail_component_1_1) {
+                article_detail_component_1 = article_detail_component_1_1;
             }],
         execute: function() {
             //import {LoginValidator} from "./login.validator";
@@ -27,18 +33,27 @@ System.register(["@angular/core"], function(exports_1, context_1) {
             * Using a service to take care of the server interaction
             */
             ArticleComponent = (function () {
-                function ArticleComponent() {
+                function ArticleComponent(articleService) {
                     this.title = "Articles";
-                    this.articles = [{ id: 1, title: 'Snowden', text: 'ed@kgb.ru' },
-                        { id: 2, title: 'jassange', text: 'julian@gob.pe' }];
                     this.subscription = '';
+                    this._articleService = articleService;
                 }
+                ArticleComponent.prototype.getArticles = function () {
+                    var _this = this;
+                    this._articleService.getArticles().then(function (articles) { return _this.articles = articles; });
+                };
+                ArticleComponent.prototype.ngOnInit = function () {
+                    this.getArticles();
+                };
                 ArticleComponent = __decorate([
                     core_1.Component({
                         selector: "control-group",
                         templateUrl: "app/partials/articles.template.html",
+                        // Other directives, injected
+                        directives: [article_detail_component_1.ArticleDetailComponent],
+                        providers: [article_service_1.ArticleService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [article_service_1.ArticleService])
                 ], ArticleComponent);
                 return ArticleComponent;
             }());

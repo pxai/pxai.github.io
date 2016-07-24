@@ -1,0 +1,11 @@
+<div>
+            {{title}}
+                  <div *ngFor="let article of articles">
+                    <div class="article" id="article_{{article_id}}">
+                      <h2>{{article.title}}</h2>
+                      <div>{{article.id}} - {{article.date}}</div>
+                      <div>{{article.content}}</div>
+                      <div>{{article.tags}}</div>
+                    </div>
+                  </div>
+</div>

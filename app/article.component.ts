@@ -1,4 +1,7 @@
 import {Component} from "@angular/core";
+import {OnInit} from '@angular/core'; // Part of the lifecycle hook
+import {ArticleService} from './article.service';
+import {ArticleDetailComponent} from './article-detail.component';
 //import {LoginValidator} from "./login.validator";
 
 
@@ -13,15 +16,26 @@ import {Component} from "@angular/core";
 @Component({
     selector: "control-group",
     templateUrl: "app/partials/articles.template.html",
+    // Other directives, injected
+    directives: [ArticleDetailComponent],
+    providers: [ArticleService]
 })
-export class ArticleComponent {
+export class ArticleComponent  implements OnInit {
   private title: string = "Articles";
-  public articles =  [{id: 1, title: 'Snowden', text: 'ed@kgb.ru'},
-              {id: 2, title: 'jassange', text: 'julian@gob.pe'}];
+  public articles;
   private subscription: string = '';
 
-   /*constructor () {
-   }*/
+  private _articleService : ArticleService;
 
+  constructor(articleService: ArticleService) {
+      this._articleService = articleService;
+  }
 
+  private getArticles () {
+      this._articleService.getArticles().then(articles => this.articles = articles);
+  }
+
+  public ngOnInit() {
+      this.getArticles();
+  }
 }
