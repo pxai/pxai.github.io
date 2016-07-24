@@ -12,7 +12,7 @@ import {Component} from "@angular/core";
 */
 @Component({
     selector: "control-group",
-    templateUrl: "app/articles.template.html",
+    templateUrl: "app/partials/articles.template.html",
 })
 export class ArticleComponent {
   private title: string = "Articles";

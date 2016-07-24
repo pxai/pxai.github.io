@@ -1,11 +1,22 @@
-"use strict";
-var testing_1 = require('@angular/core/testing');
-////////  SPECS  /////////////
-/// Delete this
-testing_1.describe('Smoke test', function () {
-    testing_1.it('should run a passing test', function () {
-        testing_1.expect(true).toEqual(true, 'should pass');
-    });
+System.register(['@angular/core/testing'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var testing_1;
+    return {
+        setters:[
+            function (testing_1_1) {
+                testing_1 = testing_1_1;
+            }],
+        execute: function() {
+            ////////  SPECS  /////////////
+            /// Delete this
+            testing_1.describe('Smoke test', function () {
+                testing_1.it('should run a passing test', function () {
+                    testing_1.expect(true).toEqual(true, 'should pass');
+                });
+            });
+        }
+    }
 });
 /*describe('AppComponent with TCB', function () {
 
@@ -32,5 +43,5 @@ testing_1.describe('Smoke test', function () {
 
   })));
 });
-*/ 
+*/
 //# sourceMappingURL=app.component.spec.js.map

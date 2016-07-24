@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
 */
 @Component({
     selector: 'about',
-    templateUrl: 'app/about.template.html'
+    templateUrl: 'app/partials/about.template.html'
 })
 export class AboutComponent {
   public title: string = '@copy; pello.io - 2016';
