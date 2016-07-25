@@ -54,7 +54,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                 };
                 ArticleComponent.prototype.detail = function (article) {
                     console.log("article selected: " + article.id);
-                    var link = ['/detail/:id', { id: article.id }];
+                    var link = ['Detail', { id: article.id }];
                     this._router.navigate(link);
                 };
                 ArticleComponent = __decorate([
@@ -66,7 +66,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                         providers: [article_service_1.ArticleService]
                     }),
                     router_deprecated_2.RouteConfig([
-                        { path: '/detail', name: 'Detail', component: article_detail_component_1.ArticleDetailComponent }
+                        { path: '/detail/:id', name: 'Detail', component: article_detail_component_1.ArticleDetailComponent }
                     ]), 
                     __metadata('design:paramtypes', [article_service_1.ArticleService, router_deprecated_3.Router, router_deprecated_1.RouteParams])
                 ], ArticleComponent);

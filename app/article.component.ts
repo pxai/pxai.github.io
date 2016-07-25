@@ -25,7 +25,7 @@ import { Router } from '@angular/router-deprecated';
     providers: [ArticleService]
 })
 @RouteConfig([
-  {path: '/detail', name: 'Detail', component: ArticleDetailComponent}
+  {path: '/detail/:id', name: 'Detail', component: ArticleDetailComponent}
   ])
 export class ArticleComponent  implements OnInit {
   private title: string = "Articles";
@@ -54,7 +54,7 @@ export class ArticleComponent  implements OnInit {
 
   public detail (article: Article) {
     console.log("article selected: " + article.id);
-    let link = ['/detail/:id', { id: article.id }];
+    let link = ['Detail', { id: article.id }];
     this._router.navigate(link);
 }
 }
