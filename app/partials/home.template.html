@@ -1,9 +1,21 @@
-<h1><img src="./app/img/logo.png"> {{title}}</h1>
-            <nav>
-            <ul>
-                <li><a [routerLink]="['Articles']">Last Articles</a></li>
-                <li><a [routerLink]="['About']">About</a></li>
-            </ul>
-            </nav>
+<nav class="navbar navbar-light" style="background-color: white;">
+  <a class="navbar-brand" href="/"><img src="./app/img/logo.png"> {{title}}</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Home </a>
+    </li>
+     <li class="nav-item active" >
+      <a [routerLink]="['Articles','Detail']">Last Articles</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['About']">About</a>
+    </li>
+  </ul>
+  <!--form class="form-inline pull-xs-right">
+    <input class="form-control" type="text" placeholder="Search">
+    <button class="btn btn-success-outline" type="submit">Search</button>
+  </form-->
+ </nav>
+
 <router-outlet></router-outlet>
 <footer><img src="./app/img/logotx.png" title="pello.io logo" alt="Pello.io logo"></footer>
