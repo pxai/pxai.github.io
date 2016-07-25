@@ -10,7 +10,7 @@ import {ArticleComponent} from './article.component';
     templateUrl: 'app/partials/home.template.html'
 })
 @RouteConfig([
-  {path: '/article', name: 'Article', component: ArticleComponent},
+  {path: '/articles/...', name: 'Articles', component: ArticleComponent},
   {path: '/about', name: 'About', component: AboutComponent}
   ])
 export class AppComponent {

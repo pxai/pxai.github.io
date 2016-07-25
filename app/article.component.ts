@@ -4,6 +4,7 @@ import {Article} from './article';
 import {ArticleService} from './article.service';
 import {ArticleDetailComponent} from './article-detail.component';
 import { RouteParams } from '@angular/router-deprecated';
+import { RouteConfig } from '@angular/router-deprecated';
 import { Router } from '@angular/router-deprecated';
 //import {LoginValidator} from "./login.validator";
 
@@ -23,9 +24,12 @@ import { Router } from '@angular/router-deprecated';
     directives: [ArticleDetailComponent],
     providers: [ArticleService]
 })
+@RouteConfig([
+  {path: '/detail', name: 'Detail', component: ArticleDetailComponent}
+  ])
 export class ArticleComponent  implements OnInit {
   private title: string = "Articles";
-  public articles;
+  public articles: Article[];
   private subscription: string = '';
   private _routeParams: RouteParams;
   private _router : Router;
@@ -50,7 +54,7 @@ export class ArticleComponent  implements OnInit {
 
   public detail (article: Article) {
     console.log("article selected: " + article.id);
-    let link = ['ArticleDetailComponent', { id: article.id }];
+    let link = ['/detail/:id', { id: article.id }];
     this._router.navigate(link);
 }
 }

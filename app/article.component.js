@@ -10,7 +10,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, article_service_1, article_detail_component_1, router_deprecated_1, router_deprecated_2;
+    var core_1, article_service_1, article_detail_component_1, router_deprecated_1, router_deprecated_2, router_deprecated_3;
     var ArticleComponent;
     return {
         setters:[
@@ -26,6 +26,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
             function (router_deprecated_1_1) {
                 router_deprecated_1 = router_deprecated_1_1;
                 router_deprecated_2 = router_deprecated_1_1;
+                router_deprecated_3 = router_deprecated_1_1;
             }],
         execute: function() {
             //import {LoginValidator} from "./login.validator";
@@ -53,7 +54,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                 };
                 ArticleComponent.prototype.detail = function (article) {
                     console.log("article selected: " + article.id);
-                    var link = ['ArticleDetailComponent', { id: article.id }];
+                    var link = ['/detail/:id', { id: article.id }];
                     this._router.navigate(link);
                 };
                 ArticleComponent = __decorate([
@@ -63,8 +64,11 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                         // Other directives, injected
                         directives: [article_detail_component_1.ArticleDetailComponent],
                         providers: [article_service_1.ArticleService]
-                    }), 
-                    __metadata('design:paramtypes', [article_service_1.ArticleService, router_deprecated_2.Router, router_deprecated_1.RouteParams])
+                    }),
+                    router_deprecated_2.RouteConfig([
+                        { path: '/detail', name: 'Detail', component: article_detail_component_1.ArticleDetailComponent }
+                    ]), 
+                    __metadata('design:paramtypes', [article_service_1.ArticleService, router_deprecated_3.Router, router_deprecated_1.RouteParams])
                 ], ArticleComponent);
                 return ArticleComponent;
             }());

@@ -104,7 +104,7 @@ gulp.task('compile', ['clean'],function(){
 
 // Clean dist files
 gulp.task('clean', function() {
-  return del(['dist/**/*']);
+  return del(['dist/js/*']);
 });
 
 // Default

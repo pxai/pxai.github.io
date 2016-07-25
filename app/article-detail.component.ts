@@ -1,5 +1,6 @@
 import {Component,  OnInit } from "@angular/core";
-import {RouteParams} from '@angular/router-deprecated';
+import { RouteParams } from '@angular/router-deprecated';
+import { Router } from '@angular/router-deprecated';
 import {Article} from "./article";
 import { ArticleService } from './article.service';
 

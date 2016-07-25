@@ -38,7 +38,7 @@ System.register(['@angular/core', '@angular/router-deprecated', './about.compone
                         templateUrl: 'app/partials/home.template.html'
                     }),
                     router_deprecated_1.RouteConfig([
-                        { path: '/article', name: 'Article', component: article_component_1.ArticleComponent },
+                        { path: '/articles/...', name: 'Articles', component: article_component_1.ArticleComponent },
                         { path: '/about', name: 'About', component: about_component_1.AboutComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
