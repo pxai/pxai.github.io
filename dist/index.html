@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <base href="/">
+    <title>pello.io - Pello Xabier Altadill Izura's home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+   
+    <!-- Polyfill(s) for older browsers -->
+  <script src="lib/angular2-polyfills.js"></script>
+  <script src="lib/system.src.js"></script>
+  <script src="lib/Rx.js"></script>
+  <script src="lib/angular2.dev.js"></script>
+  <script src="lib/router.dev.js"></script>
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+</html>
