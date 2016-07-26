@@ -24,11 +24,21 @@
 
   <body>
     <my-app>
+      <style >
+      #logo {
+        -webkit-animation:spin 3s linear infinite;
+        -moz-animation:spin 3s linear infinite;
+        animation:spin 3s linear infinite;
+      }
+      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      </style>
       <div class="container">
         <div class="row">
               <div class="col-md-4 col-md-offset-4">
-          <h1>Loading...</h1>
           <img id="logo" src="app/img/logoha.png" alt="Pello Xabier Altadill" title="pello.io logo" />
+          <div style="text-align:center">Loading...</div>
         </div>
         </div>
       </div>
