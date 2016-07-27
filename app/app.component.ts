@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AboutComponent} from './about.component';
 import {ArticleComponent} from './article.component';
+import {ArticleDetailComponent} from './article-detail.component';
 
 
 @Component({
@@ -15,4 +16,5 @@ import {ArticleComponent} from './article.component';
   ])
 export class AppComponent {
     private title: string = 'pello.io';
+
 }

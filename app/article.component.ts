@@ -25,7 +25,7 @@ import { Router } from '@angular/router-deprecated';
     providers: [ArticleService]
 })
 @RouteConfig([
-  {path: '/detail/:id', name: 'Detail', component: ArticleDetailComponent}
+  {path: '/detail/:id', name: 'Detail', component: ArticleDetailComponent, useAsDefault: true}
   ])
 export class ArticleComponent  implements OnInit {
   private title: string = "Articles";

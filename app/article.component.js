@@ -66,7 +66,7 @@ System.register(["@angular/core", './article.service', './article-detail.compone
                         providers: [article_service_1.ArticleService]
                     }),
                     router_deprecated_2.RouteConfig([
-                        { path: '/detail/:id', name: 'Detail', component: article_detail_component_1.ArticleDetailComponent }
+                        { path: '/detail/:id', name: 'Detail', component: article_detail_component_1.ArticleDetailComponent, useAsDefault: true }
                     ]), 
                     __metadata('design:paramtypes', [article_service_1.ArticleService, router_deprecated_3.Router, router_deprecated_1.RouteParams])
                 ], ArticleComponent);
