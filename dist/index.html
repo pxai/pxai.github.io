@@ -1,97 +1,29 @@
-Html Webpack Plugin:
-<pre>
-  Error: Child compilation failed:
-  Entry module not found: Error: Cannot resolve module 'raw' in C:\angular\pxai.  github.io:
-  Error: Cannot resolve module 'raw' in C:\angular\pxai.github.io
-  
-  - compiler.js:76 
-    [pxai.github.io]/[html-webpack-plugin]/lib/compiler.js:76:16
-  
-  - Compiler.js:214 Compiler.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compiler.js:214:10
-  
-  - Compiler.js:403 
-    [pxai.github.io]/[webpack]/lib/Compiler.js:403:12
-  
-  - Tapable.js:67 Compiler.next
-    [pxai.github.io]/[tapable]/lib/Tapable.js:67:11
-  
-  - CachePlugin.js:40 Compiler.<anonymous>
-    [pxai.github.io]/[webpack]/lib/CachePlugin.js:40:4
-  
-  - Tapable.js:71 Compiler.applyPluginsAsync
-    [pxai.github.io]/[tapable]/lib/Tapable.js:71:13
-  
-  - Compiler.js:400 Compiler.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compiler.js:400:9
-  
-  - Compilation.js:577 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:577:13
-  
-  - Tapable.js:60 Compilation.applyPluginsAsync
-    [pxai.github.io]/[tapable]/lib/Tapable.js:60:69
-  
-  - Compilation.js:572 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:572:10
-  
-  - Tapable.js:60 Compilation.applyPluginsAsync
-    [pxai.github.io]/[tapable]/lib/Tapable.js:60:69
-  
-  - Compilation.js:567 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:567:9
-  
-  - Tapable.js:60 Compilation.applyPluginsAsync
-    [pxai.github.io]/[tapable]/lib/Tapable.js:60:69
-  
-  - Compilation.js:563 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:563:8
-  
-  - Tapable.js:60 Compilation.applyPluginsAsync
-    [pxai.github.io]/[tapable]/lib/Tapable.js:60:69
-  
-  - Compilation.js:525 Compilation.seal
-    [pxai.github.io]/[webpack]/lib/Compilation.js:525:7
-  
-  - Compiler.js:397 Compiler.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compiler.js:397:15
-  
-  - Tapable.js:103 
-    [pxai.github.io]/[tapable]/lib/Tapable.js:103:11
-  
-  - Compilation.js:445 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:445:10
-  
-  - Compilation.js:344 Compilation.errorAndCallback
-    [pxai.github.io]/[webpack]/lib/Compilation.js:344:3
-  
-  - Compilation.js:358 Compilation.<anonymous>
-    [pxai.github.io]/[webpack]/lib/Compilation.js:358:11
-  
-  - NormalModuleFactory.js:29 onDoneResolving
-    [pxai.github.io]/[webpack]/lib/NormalModuleFactory.js:29:20
-  
-  - NormalModuleFactory.js:114 
-    [pxai.github.io]/[webpack]/lib/NormalModuleFactory.js:114:22
-  
-  - async.js:726 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:726:13
-  
-  - async.js:52 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:52:16
-  
-  - async.js:241 done
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:241:17
-  
-  - async.js:44 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:44:16
-  
-  - async.js:723 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:723:17
-  
-  - async.js:167 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:167:37
-  
-  - async.js:52 
-    [pxai.github.io]/[webpack]/[async]/lib/async.js:52:16
-  
-</pre><script type="text/javascript" src="/vendor.9b6686422510c4460e0b.bundle.js"></script><script type="text/javascript" src="/app.9b6686422510c4460e0b.bundle.js"></script>
+<!doctype html>
+<html lang="en" data-framework="angular2">
+  <head>
+    <meta charset="utf-8">
+    <title>pello.io</title>
+  </head>
+  <body>
+    <my-app>
+      <style >
+      #logo {
+        -webkit-animation:spin 3s linear infinite;
+        -moz-animation:spin 3s linear infinite;
+        animation:spin 3s linear infinite;
+      }
+      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      </style>
+      <div class="container">
+        <div class="row">
+              <div class="col-md-4 col-md-offset-4">
+          <img id="logo" src="app/img/logoha.png" alt="Pello Xabier Altadill" title="pello.io logo" />
+          <div style="text-align:center">Loading...</div>
+        </div>
+        </div>
+      </div>
+    </my-app>
+  <script type="text/javascript" src="/vendor.53d33e5184a1a71def67.bundle.js"></script><script type="text/javascript" src="/app.53d33e5184a1a71def67.bundle.js"></script></body>
+</html>
