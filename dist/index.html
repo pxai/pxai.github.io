@@ -1,29 +1,60 @@
-<!doctype html>
-<html lang="en" data-framework="angular2">
-  <head>
-    <meta charset="utf-8">
-    <title>pello.io</title>
-  </head>
-  <body>
-    <my-app>
-      <style >
-      #logo {
-        -webkit-animation:spin 3s linear infinite;
-        -moz-animation:spin 3s linear infinite;
-        animation:spin 3s linear infinite;
-      }
-      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-      </style>
-      <div class="container">
-        <div class="row">
-              <div class="col-md-4 col-md-offset-4">
-          <img id="logo" src="app/img/logoha.png" alt="Pello Xabier Altadill" title="pello.io logo" />
-          <div style="text-align:center">Loading...</div>
-        </div>
-        </div>
-      </div>
-    </my-app>
-  <script type="text/javascript" src="/vendor.5543cfa2983eed6abffe.bundle.js"></script></body>
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Angular2 Webpack Starter by @gdi2290 from @AngularClass</title>
+
+  <meta name="description" content="Angular2 Webpack Starter by @gdi2290 from @AngularClass">
+
+  
+  <!-- Configured Head Tags  -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/icon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/manifest.json">
+	<meta name="msapplication-TileColor" content="#00bcd4">
+	<meta name="msapplication-TileImage" content="/assets/icon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#00bcd4">
+  
+
+  <!-- base url -->
+  <base href="/">
+
+
+</head>
+
+<body>
+
+  <app>
+    Loading...
+  </app>
+
+  <!-- Google Analytics: change UA-71073175-1 to be your site's ID -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71073175-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  
+
+
+<script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>
