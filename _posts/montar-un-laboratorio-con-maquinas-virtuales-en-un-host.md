@@ -1,0 +1,146 @@
+﻿<p>Supongamos que queremos montar un laboratorio de máquinas virtuales para jugar con servidores y clientes. 
+
+Varias máquinas virtuales que queremos:
+<ul> 
+<li>que sean visibles desde el host o equipo físico, </li><li>que sean visibles entre ellas y</li><li>que además puedan salir al exterior a través
+
+del equipo físico. Y es más, 
+</li><li>queremos que esas máquinas virtuales tengan IP fija ya que al ser servidores no queremos que las IPs bailen
+</li></ul>
+</p>
+
+
+
+<p>Y Vamos a suponer que tenemos el siguiente escenario:</p>
+
+
+
+<p>Un equipo físico conectado a un router por DHCP, cuya ip es 192.168.0.1 y cuyas asignaciones de ips dinámicas son de la red 192.168.0.0/24,
+
+con el VMWare player instalado. 
+
+En VMWare Player por defecto se crea dos interfaces de red VMnet1 como Host-only y VMnet8 para hacer NAT
+
+Por defecto también VMnet1 y VMnet8 crean su propio servidor  DHCP y si conectamos los interfaces de red
+
+de las máquinas virtuales en esos modos (host-only o nat) y en el sistema operativo virtual el interface usa DHCP,
+
+entonces tomará esas direcciones.</p>
+
+
+
+<p>
+
+¿Qué configuración debemos especificar en el adaptador de red físico, en los dos que genera vmware y en los
+
+adaptadores de las máquinas virtuales?</p>
+
+
+
+<p>
+
+Si no hacemos nada, por defecto VMWare nos proporciona una tarjeta de red que utilizará NAT.
+
+En un entorno con DHCP en la red física la máquina virtual VMWare lo que hará será solicitar
+
+una IP al servidor DHCP. El problema añadido es que queremos EVITAR eso porque vamos a suponer que no tenemos
+
+muchas direcciones DHCP libres para asignar. Veamos las opciones: </p>
+
+
+
+<p>Los tipos de conexión que ofrecen los interfaces de red VMWare son:</p>
+
+<ul>
+
+<li><b>Bridging:</b> conecta el interfaz de red de la máquina virtual a la red física. Directamente.</li>
+
+
+
+<li><b>Host-only:</b> crea una red interna entre VM</li>
+
+
+
+<li><b>Nat:</b> la máquina virtual (o varias de ellas) comparten la IP del host (la máquina física)
+
+Puedes quitar el DHCP que se asigna y crear una red entre el host y las máquinas virtuales y se
+
+verán entre sí. Esto es lo que vamos a probar en este caso.</li>
+
+
+
+</ul>
+
+
+
+<h5>El -oculto- configurador de redes de VMWare</h5>
+
+<p>Lo que necesitamos es poder configurar esos interfaces virtuales de VMWare, ¿pero cómo?
+
+Si estás usando VMWare player por defecto no te saldrá el configurador de interfaces de red
+
+VMWare, así que para configurar los servidores DHCP de los interfaces tenemos que hacer la siguiente cosa:
+
+Ir a la carpeta de VMWare:</p>
+
+<pre>
+
+cd C:\Program Files (x86)\VMware\VMware Player>
+
+</pre>
+
+<p>Y ejecutar lo siguiente:</p>
+
+<pre>
+
+rundll32.exe vmnetui.dll VMNetUI_ShowStandalone
+
+</pre>
+
+
+
+<p>Eso ejecutará el configurador. Según tu versión del player esto puede variar, así
+
+que tendrás que ver artículos como este: http://rednectar.net/2011/07/20/finding-vmnetcfg-exe-in-vmware-player-3-1-4/
+
+o buscar en google por tu caso concreto.</p>
+
+
+
+<p>Este es el aspecto del configurador de interfaces de VMWare y ahí es donde podremos meter mano al VMNet8:</p>
+
+<img src="http://www.pello.info/images/vmware_netconfig2.png" alt="El configurador de redes de VMWare" title="El configurador de redes de VMWare" />
+
+
+
+<p>¿Y qué vamos a hacer ahí? Lo primero quitar el DHCP en el caso del NAT. Vamos a configurar que está en una red 192.168.42.0/24
+
+y vamos a hacer una cosa curiosa. Al adaptador VMNet8 le asignaremos 192.168.42.1 con gateway 192.168.42.2 en el configuración de nat diremos que el 
+
+gateway es efectivamente 192.168.42.2. ¿quién es? pues aparentemente el propio host, la 42.2 no la verá el mismo pero las máquinas virtuales sí.</p>
+
+<img src="http://www.pello.info/images/vmware_natconfig.png" alt="Detalles de la configuración NAT" title="Detalles de la configuración NAT" />
+
+
+
+<h5>Máquina virtual</h5>
+
+<p>Ahora en cada máquina virtual pondremos una IP fija de la red 192.168.42.0/24:</p>
+
+<pre>
+
+ip: 192.168.42.10
+
+máscara: 255.255.255.0
+
+gateway: 192.168.42.2
+
+dns: : 192.168.42.2
+
+</pre>
+
+<p>Y con eso conseguiremos los objetivos marcados: que se vean entre las virtuales, que se vean con el host y que las virtuales puedan
+
+salir a internet a través del host. Nota: para comprobar esa visibilidad he utilizado pings. <b>Si hubieramos usado el modo Host-only conseguiriamos lo mismo salvo la salida a internet</b>. Todas las máquinas eran
+
+windows 2012 server y para que el ping respondiera les he bajado el firewall hasta los tobillos a todos, no me gusta pero...</p>

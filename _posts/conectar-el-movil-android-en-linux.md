@@ -1,0 +1,148 @@
+<p>Una de las razones por las que nacio este codeblog era precisamente para
+apuntar recetas concretas en algún sitio para luego poder consultarlas,
+como por ejemplo establecer usuarios en mysql, la típica tontería que nunca te aprendes de memoria porque siempre la consultas. Hoy toca darle al android ya que...
+<p>
+...conectar el móvil android a un linux para poder usarlo como herramienta de desarrollo no es simple, o al menos no es plug-and-play. En mi caso se trata de un móvil LG-E430 sobre un Ubuntu 10.10.</p>
+<p>Previamente, antes de enchufar nada si listamos 
+los dispositivos USB con el comando <code>lsusb</code> vemos esto:
+</p>
+<pre class="brush: bash">
+linux:~# lsusb
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 002 Device 002: ID 0458:003a KYE Systems Corp. (Mouse Systems) 
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 003: ID 064e:a102 Suyin Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+linux:~# 
+</pre>
+
+<b>Enchufamos el móvil por usb</b>
+<p>Si hago un dmesg para ver si se ha detectado algo... en mi caso es un sí pero no.</p>
+<pre class="brush: bash">
+linux:~# dmesg:
+[  297.528177] usb 1-3: new high speed USB device using ehci_hcd and address 4
+[  297.751012] cdc_acm 1-3:1.0: This device cannot do calls on its own. It is not a modem.
+[  297.751303] cdc_acm 1-3:1.0: ttyACM0: USB ACM device
+[  297.751813] usbcore: registered new interface driver cdc_acm
+[  297.751823] cdc_acm: v0.26:USB Abstract Control Model driver for USB modems and ISDN adapters
+[  310.240109] EXT4-fs (sda3): error count: 4
+[  310.240124] EXT4-fs (sda3): initial error at 1343256584: __ext4_get_inode_loc:4779: inode 2244875: block 8913968
+[  310.240144] EXT4-fs (sda3): last error at 1343256827: ext4_remount:4236: inode 2244875: block 8913968
+...
+</pre>
+
+<p>Si ejecutamos ahora lsusb veremos que... el sistema algo parece que ve:</p>
+<pre class="brush: bash">
+linux:~#  lsusb
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 002 Device 002: ID 0458:003a KYE Systems Corp. (Mouse Systems) 
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 004: ID 1004:61f1 LG Electronics, Inc. 
+Bus 001 Device 003: ID 064e:a102 Suyin Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+linux:~# 
+</pre>
+<p>Aparece un nuevo dispositivo de LG, el que acabo de enganchar. PERO no lo veo con el SDK de android</p>
+
+<b>Configuración en /etc/udev/rules.d</b>
+<p>Para que udev sea capaz de reconocer ese dispositivo y lo podamos usar
+desde las herramientas de android debemos crear un fichero en el
+directorio /etc/udev/rules.d. El fichero debe llamarse <code>70-android.rules</code>,
+y pondremos ese número 70 para versiones de ubuntu superiores a la 9.10 y si fuera inferior
+pondriamos 51</p>
+
+<pre class="brush: bash">
+linux:~# cd /etc/udev/rules.d/
+linux:/etc/udev/rules.d# ls
+70-persistent-cd.rules  70-persistent-net.rules  README  z98_omnikey_rfid.rules
+linux:/etc/udev/rules.d# touch 70-android.rules
+linux:/etc/udev/rules.d# 
+</pre>
+
+<p>En el fichero 70-android.rules debemos meter esta línea, en la que
+indicamos el Id de fabricante (1004) en mi caso de LG</p>
+<code>
+SUBSYSTEM=="usb", ATTR{idVendor}=="1004", MODE="0666"
+</code><br />
+
+<i>En versiones de ubuntu previas  de 7.10 a 10.04</i><br />
+<code>
+SUBSYSTEM=="usb", SYSFS{idVendor}=="1004", MODE="0666"
+</code><br />
+
+<i>En versiones de ubuntu previas a 7.04</i><br />
+<code>
+SUBSYSTEM=="usb_device", SYSFS{idVendor}=="1004", MODE="0666"
+</code><br />
+<p>
+<i>Otros códigos:</i>
+Acer: 0502, Dell: 413c, Foxconn: 0489, Garmin-Asus: 091E, Google: 18d1,
+HTC: 0bb4, Huawei: 12d1, LG: 1004, Motorola: 22b8, Samsung: 04e8, Sony: 0fce, ZTE: 19D2,...
+</p>
+<p>Ahora cambiamos los permisos de ese fichero:</p>
+<pre class="brush: bash">
+linux:/etc/udev/rules.d# chmod 644 70-android.rules
+</pre>
+o de otra manera
+<pre class="brush: bash">
+linux:/etc/udev/rules.d# chmod a+r 70-android.rules 
+</pre>
+
+<p>Y reseteamos el udev</p>
+<pre class="brush: bash">
+linux:/etc/udev/rules.d# /etc/init.d/udev restart
+</pre>
+
+<p>Ahora haciendo dmesg las cosas cambian...</p>
+<pre class="brush: bash">
+linux:~# dmesg
+[  762.544156] usb 1-3: new high speed USB device using ehci_hcd and address 5
+[  762.741016] usbcore: registered new interface driver uas
+[  762.760833] Initializing USB Mass Storage driver...
+[  762.761227] scsi4 : usb-storage 1-3:1.0
+[  762.762631] usbcore: registered new interface driver usb-storage
+[  762.762644] USB Mass Storage support registered.
+[  763.077682] usb 1-3: USB disconnect, address 5
+[  763.348099] usb 1-3: new high speed USB device using ehci_hcd and address 6
+[  763.482402] cdc_acm 1-3:1.0: This device cannot do calls on its own. It is not a modem.
+[  763.482801] cdc_acm 1-3:1.0: ttyACM0: USB ACM device
+[  765.812811] usb 1-4: USB disconnect, address 3
+[  766.108147] usb 1-4: new high speed USB device using ehci_hcd and address 7
+[  766.282919] uvcvideo: Found UVC 1.00 device WebCam (064e:a102)
+[  766.300225] input: WebCam as /devices/pci0000:00/0000:00:1d.7/usb1/1-4/1-4:1.0/input/input12
+</pre>
+
+<b>Por fin</b>
+<p>Bueno, ahora para terminar de verificar que todo está correcto ejecutamos adb devices y
+nos debiera salir nuestro dispositivo.</p>
+<pre class="brush: bash">
+linux:~#:~/android-sdk-linux/platform-tools# ./adb devices
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+List of devices attached 
+LGOTMSc1cb5aeb	device
+
+linux:~/android-sdk-linux/platform-tools# 
+</pre>
+
+<b>Instalando apk desde la consola</b>
+<p>Ya tenemos el móvil android enganchado al linux y el adb lo puede ver así que podemos
+usar este comando para hacer lo que queramos. Y algo habitual es poder instalar APKs a mano.
+Por ejemplo si desarrollas con eclipse entras en cualquier proyecto android y <b>podrás encontrar
+el apk en la carpeta bin del proyecto</b>, que en eclipse no la ves por defecto pero por consola sí.
+Ahora ya puedes instalar un apk simplemente haciendo:
+</p>
+<pre class="brush: bash">
+linux:~/workspace/proyecto-android/bin# adb install proyecto-android.apk 
+2831 KB/s (1007057 bytes in 0.347s)
+	pkg: /data/local/tmp/proyecto-android.apk
+Success
+linux:~/workspace/proyecto-android/bin# 
+</pre>
+
+<p>Si la salida es Success, podemos encontrar la aplicación dentro de nuestro android lista para ser
+ejecutada.</p>

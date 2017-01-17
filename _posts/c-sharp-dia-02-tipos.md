@@ -1,0 +1,114 @@
+Vamos a ver que tipos hay por aquÃƒÂ­, buf los de toda la vida:
+<pre>
+/** 
+Numeros.cs
+ El ejemplo
+ Para compilar con MS: csc Numeros.cs , ejecucion: Numeros.exe
+ Para compilar con Mono: mcs Numeros.cs , ejecucion: mono Numeros.exe
+*/
+
+// Para documentar el codigo podemos usar etiquetas XML especificas.
+// Las mÃƒÂ¡s comunes son &lt;example&gt;, &lt;exception&gt;, &lt;list&gt;, &lt;param&gt;,
+// &lt;paramref&gt;, &lt;permission&gt;, &lt;remarks&gt;, &lt;returns&gt;, &lt;see&gt;, &lt;seealso&gt;, &lt;summary&gt;, y &lt;value&gt;.
+// Para compilar y sacar la documentacion hay que usar un flag: mcs /doc:documentacio.xml Numeros.cs
+
+// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+using System;
+
+// &lt;summary&gt;
+// Definicion de la clase numeros, que muestra tipos de numeros y otros tipos
+// esenciales de c#
+// &lt;/summary&gt;
+public class Numeros {
+
+	// Y aquÃƒÂ­ la funciÃƒÂ³n principal 
+	// &lt;returns&gt;void&lt;/returns&gt;
+	public static void Main () {
+		
+		// Variables numÃƒÂ©ricas
+		// u=unsigned, s=signed
+		// Enteros: int, uint, short, ushort, long, ulongs, byte, sbyte
+		// Flotantes: float, double, decimal
+		// Booleanos: bool
+		// Caracteres: char
+		int entero = 666;
+		int Entero = 55; // Efectivamente, c# es case sensitive
+		int parametro = 0, resultado = 0;
+		double coeficiente = 90.4;
+		const double PI = 3.1415; // Para definir constantes: const
+		char caracter = 'x';
+		bool verdadero = true;
+		bool falso = false;
+
+		
+		// AsÃƒÂ­ se muestran valores con el writeline, recuerda vagamente a c.
+		System.Console.WriteLine("Mostrando Entero: {0} y Coeficiente {1}", entero, coeficiente);
+		
+		System.Console.WriteLine("Y cuanto valia Pi? pues {0}", PI);
+		
+		// Disponemos de sizeof como en  c.
+		System.Console.WriteLine("Y su tamaÃƒÂ±o de variable es {0} bytes", sizeof( double ));
+		
+		System.Console.WriteLine("El resultado puede ser: {0}", entero + parametro * 5);
+		
+		// Podemos forzar tipos...
+		resultado = (int)PI * entero / Entero;
+		
+		System.Console.WriteLine("Resultado: {0} no es {1}", resultado, caracter);
+	
+	}
+
+}
+</pre>
+Y en cuanto a cadenas...
+<pre>
+/** 
+Cadenas.cs
+Uso de cadenas
+ Para compilar con MS: csc Cadenas.cs , ejecucion: Cadenas.exe
+ Para compilar con Mono: mcs Cadenas.cs , ejecucion: mono Cadenas.exe
+*/
+
+
+// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+using System;
+
+// &lt;summary&gt;
+// Definicion de la clase cadenas
+// esenciales de c#
+// &lt;/summary&gt;
+public class Cadenas {
+
+	// Y aquÃƒÂ­ la funciÃƒÂ³n principal 
+
+	public static void Main () {
+		
+		// Variables numÃƒÂ©ricas
+		string cadena = "Hola mundo";
+		string otraCadena = "Pues por aquÃƒÂ­ bien
+";
+				
+		
+		// AsÃƒÂ­ se muestran valores con el writeline, recuerda vagamente a c.
+		System.Console.WriteLine("Mostrando cadena: {0}", cadena);
+
+		// Se puede aplicar el escape para caracteres especiales: 
+		// Tab: 	
+		// Salto: 
+
+		// Backslash: \
+		// Comillas: "" y '
+		// Retroceso: 
+		System.Console.WriteLine("Mostrando cadena con tabulacion 	 {0}", cadena);
+		System.Console.WriteLine("Y esta otra: 
+ {0}", otraCadena);
+		
+		System.Console.WriteLine("A ver: 	Ahora 
+ Como \ se ve ""esto' no?
+");
+		
+	
+	}
+
+}
+</pre>

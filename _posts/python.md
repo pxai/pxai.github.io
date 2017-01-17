@@ -1,0 +1,81 @@
+<table>
+<tr><td valing="top">
+Cuando se programa un script de perl, si le vuelves a echar un ojo al programa
+cuesta un poco reconocer la paternidad del codigo. Conforme lo haces no
+te das cuenta pero cuando ves toda la ristra piensas "Ã‚Â¿y esto lo he hecho yo???"
+Ã‚Â¡Pues no es para tanto! bienvenidos a python. May the source be with you..
+</td>
+<td>
+<img src="/coders/images/running.jpg" border=0 alt="pilla bien de cafeina, la necesitaras">
+</td>
+</tr>
+</table>
+Lo primero que se puede decir: es un lenguaje interpretado y sin tipos de datos.<br>
+Ejemplo basico std
+<pre>
+#!/usr/bin/python
+
+# holanena.py
+# programa minimo de python que muestra un saludo por salida std
+# Pello Xabier Altadill Izura - http://www.pello.info
+
+# python no tiene tipado fuerte que se diga...
+saludo="hola nena"  # este es el saludo estandarizado por la tira ecol
+
+# nota: print mete el salto de linea
+print saludo
+
+</pre>
+
+Jugando con los operadores...
+<pre>
+#!/usr/bin/python
+
+# operadores.py
+# programa minimo de python que muestra operaciones basicas
+# Pello Xabier Altadill Izura - http://www.pello.info
+
+numero1 = 34
+
+numero2 = 4.5
+
+explicaciones = "Aqui se da una explicacion
+
+sobre el funcionamiento de los operadores basicos
+
+y tambien el salto de linea.
+"
+
+print explicaciones
+
+# inicio de multiples variables
+num1, num2, num3 = 25, 37, 15
+coma1, texto = 4.5, "mi nombre es legion"
+
+variable1 = numero0 = num3
+
+palabra = "Hay que fastidiarse"
+
+
+# Los operadores son los habituales: +,-,/,*
+resultado0 = (numero1 + numero2)/4
+
+# Concatenamos variables con ,. Admite comillas dobles o simples
+# si concatenamos string usamos +
+print "Hemos usado " , numero1, " y " , numero2
+print 'Resultado:  ' , resultado0
+
+# Entrada de datos
+cualquiera = input("Dame un numero cualquiera: ")
+print "Muy bien " , cualquiera , ", ya ves que lenguaje mas raro"
+
+
+# otra forma de mostrar cadenas largas con saltos
+print """
+Hasta otra
+      no olvide supervitaminarse y mineralizarse
+Agur
+"""
+
+</pre>
+Mas que codigo parece una novela...

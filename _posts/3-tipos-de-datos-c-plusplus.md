@@ -1,0 +1,221 @@
+Los tipos de datos de c++ no varian mucho respecto a c y son bastante evidentes, tal y como se puede apreciar en este codigo.
+
+<pre>
+/**
+* Tipos.cpp
+* Programa para sacar el tamaÃƒÂ±o de cada tipo de datos
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Tipos.cpp -o Tipos
+*/
+
+#include &lt;iostream.h&gt;
+
+int main () {
+
+	// Sacamos el tamaÃƒÂ±o de cada tipo	
+     cout << "El tamaÃƒÂ±o del int es:		"    << sizeof(int)    << " bytes.
+";
+     cout << "El tamaÃƒÂ±o del short es:	" << sizeof(short)  << " bytes.
+";
+     cout << "El tamaÃƒÂ±o del long es:	"  << sizeof(long)   << " bytes.
+";
+     cout << "El tamaÃƒÂ±o del char es:		"    << sizeof(char)   << " bytes.
+";
+     cout << "El tamaÃƒÂ±o del float es:		"   << sizeof(float)  << " bytes.
+";
+    cout << "El tamaÃƒÂ±o del double es:	"    << sizeof(double) << "  bytes.
+";
+
+
+	// Sacamos por salida standar  un mensaje
+	cout << "Termino el programa
+";
+
+	return 0;
+}
+</pre>
+
+Tambien se pueden definir constantes:
+
+<pre>
+/**
+* Constante.cpp
+* Programa en el que definimos un valor constante
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Constante.cpp -o Constante
+*/
+
+#include &lt;iostream.h&gt;
+
+#define MEMOLA 25
+
+int main () {
+
+	int y = 0;
+	// Definimos el valor constante
+	const float PI = 3.1416;
+
+	cout << "Ten fe en el caos: " << PI << endl;
+
+	// Sacamos por salida standar  un mensaje
+	cout << "
+Termino el programa : " << MEMOLA << endl;
+
+	return 0;
+}
+</pre>
+
+<b>Caracteres</b>
+<br>
+Echemos ahora un vistazo a los caracteres con este codigo que recorre los 200y pico codigos.
+
+<pre>
+/**
+* Caracteres.cpp
+* Programa para sacar cada caracter del sistema
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Caracteres.cpp -o Caracteres
+*/
+
+#include &lt;iostream.h&gt;
+
+#define MEMOLA 25
+
+int main () {
+
+	int y = 0;
+
+	// Limpiamos pantalla
+	cout << "Limpiamos?";
+	
+	// Atencion!! hasta que no pongamos algo no lograremos
+	// que el programa siga adelante, aunque sea INTRO
+	cin >> y;
+	cout << "Venga!";
+
+	// Vamos a recorrer todos los char
+	for (int i = 0;i < 256; i++) {
+		cout << (char) i;
+	}
+
+	// Sacamos por salida standar  un mensaje
+	cout << "
+Termino el programa : " << MEMOLA << endl;
+
+	return 0;
+}
+
+</pre>
+
+<b>Typedef</b>
+<br>
+Si amigos! tenemos la instruccion <b>typedef</b> para que podamos definir tipos de datos concretos. Vean este caso:
+
+
+<pre>
+/**
+* Typedef.cpp
+* Programa para mostrar como definir variables
+* y en especial el uso de typedef, que sirve para no escribir mucho
+* o para definir nuestros propios tipos
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Typedef.cpp -o Typedef
+*/
+
+#include &lt;iostream.h&gt;
+
+// Aqui ponemos el typedef para abreviar lo que ponemos.
+typedef unsigned short int USHORT;
+
+int main () {
+	// Vamos a definir variables
+	
+	// Un entero de 2 bytes
+	short int x = 34;
+
+	//Aqui va el que viene de typedef
+	USHORT y = 4;
+	
+	// Usando notacion HUNGARA
+	int i_contador = 45;
+	float f_contador = 0.0;	
+
+	//Usando CAMEL-notation
+	float variableQueMola = 4.5;
+
+	// Sacamos por pantalla
+	cout << "Variables:" << x << " " << i_contador << " " << variableQueMola <<endl;
+
+	// Sacamos por salida standar  un mensaje
+	cout << "Termino el programa
+";
+
+	return 0;
+}
+</pre>
+
+<b>Enumeraciones</b>
+Tambien disponemos de las clasicas enumeraciones.
+
+<pre>
+/**
+* Enumeracion.cpp
+* Programa para aprender a usar los tipos de dato llamados enum
+* que son enumeraciones de datos
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Enumeracion.cpp -o Enumeracion
+*/
+
+#include &lt;iostream.h&gt;
+
+// Aqui ponemos el typedef para abreviar lo que ponemos.
+typedef unsigned short int USHORT;
+
+// Definimos un tipo de dato ENUM
+typedef enum Colegas { Pello=666, Mikel=563, Andoni=14, David=567, Jokin=52, Helio=234, Jose=45, Sten=23 };
+
+int main () {
+	// Vamos a definir variables
+	 enum Dias { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+	Dias dia;
+	int i = 0;
+
+	// Pedimos un dato, hasta que no sea valido
+	do {
+		cout << "Seleccione un dia (0,6)";
+		cin >> i;
+	} while(i<0 || i>6);
+
+	// AL LORO, NO SE GUARDA EL NOMBRE, SE GUARDA EL NUMERO
+	// Cada valor de la enumeracion tiene un valor concreto
+	// Si no se especifica, sera el valor que le indiquemos
+	dia =  Dias(i);
+
+	cout << "Has elegido este dia: " << dia << endl;
+
+	// Enumeracion
+	cout << "El numero de este colega: " << Colegas(Pello) << endl;
+
+	//Aqui va el que viene de typedef
+	USHORT y = 4;
+	
+	float f_contador = 0.0;	
+
+	//Usando CAMEL-notation
+	float variableQueMola = 4.5;
+
+	// Sacamos por salida standar  un mensaje
+	cout << "Termino el programa
+";
+
+	return 0;
+}
+</pre>
+

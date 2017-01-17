@@ -1,0 +1,48 @@
+
+
+
+
+ Datos personales 
+
+
+
+
+Nombre: Pello Xabier Altadill Izura  Fecha y lugar de Nacimiento: Pamplona , 29/06/1976 Direcci&Atilde;&fnof;&Acirc;&sup3;n:mi casa E-mail: pello_en_la_direcci&oacute;n_pello_punto_info Permiso de conducir B1
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Idiomas 
+
+
+
+
+&Atilde;&sbquo;&Acirc;&middot; Ingl&eacute;s: hablado y escrito.  Nivel intermedio (tercero de la E.O.I.). &Atilde;&sbquo;&Acirc;&middot; Euskera: hablado y escrito.  Nivel avanzado (quinto de la E.O.I.).
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Estudios 
+
+
+
+
+&Atilde;&sbquo;&Acirc;&middot; 2001. Licenciado en Ingenier&iacute;a Superior en Inform&aacute;tica,  con el perfil de bases de datos y redes. Facultad de la UPV en Ibaeta, San Sebasti&Atilde;&fnof;&Acirc;

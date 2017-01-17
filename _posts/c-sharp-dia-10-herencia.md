@@ -1,0 +1,173 @@
+En un solo ejemplo de cÃƒÂ³digo vamos a ver como crear herencia de una clase a otra, en este caso de la clase Dispositivo a la clase Movil. AquÃƒÂ­ entrarÃƒÂ¡ en juego el polimorfismo, es decir, un mismo mÃƒÂ©todo en la clase hija y clase padre con distinto efecto.
+Merece la pena comentar que disponemos de clases abstractas y tambiÃƒÂ©n de clases que NO se puede heredar (sealed).
+Vamos a ver:
+<pre>
+/**
+* Dispositivo.cs
+* Superclase o clase padre para definir los dispositivos,
+* de esta heredarÃƒÂ¡n dispositivos mÃƒÂ¡s concretos como Ordenador, MÃƒÂ³vil,..
+*/
+
+using System;
+
+public class Dispositivo 
+{
+	// Atributos, algunos con sus accesos set y get
+	protected string nombre; // Protected: solo accesible para clases hijas
+	private int anchura;     // Private: inaccesible para cualquier otra clase
+	// Atributo con metodos set/get
+	protected int altura 
+		{
+				get { return altura; }
+				set {	altura = value; }
+		}
+	double peso;
+	int voltaje
+		{
+			get { return voltaje; }
+			set { voltaje = value; }
+		}	
+	
+	// Constructor sin parÃƒÂ¡metros
+	public Dispositivo ()
+	{
+		nombre = "Dispositivo";
+		anchura = 40;
+		altura = 50;
+		peso = 1.5;
+		voltaje = 12;		
+		
+		System.Console.WriteLine("Dispositivo creado {0}", nombre);
+	}
+	
+	// Constructor parametrizado
+	public Dispositivo (string nombre, int voltaje)
+	{
+		this.nombre = nombre;
+		anchura = 40;
+		altura = 50;
+		peso = 1.5;
+		this.voltaje = voltaje;		
+	}
+
+	// MÃƒÂ©todo destuctor
+	 ~Dispositivo()
+	{
+		System.Console.WriteLine("Dispositivo eliminado {0}", nombre);
+	}
+	
+	// Muestra todo Por pantalla
+	public void muestra()
+	{
+		System.Console.WriteLine("Nombre: {0}", nombre);
+		System.Console.WriteLine("Anchura: {0}", anchura);
+		System.Console.WriteLine("Altura: {0}", altura);
+		System.Console.WriteLine("Peso: {0}", peso);
+		System.Console.WriteLine("Voltaje: {0}", voltaje);
+	}
+	
+	// MÃƒÂ©todo VIRTUAL. Lo sobreescribimos en el hijo
+	// Enciende el dispositivo
+	public virtual void encender()
+	{
+		System.Console.WriteLine("Dispositivo {0} encendido", nombre);
+	}
+	
+	// MÃƒÂ©todo ABSTRACT. No se puede invocar el del padre,
+	// pero si el que implementa el hijo. Para usarlo la 
+	// clase tambiÃƒÂ©n debe ser abstracta: public abstract class Dispositivo
+	// apagar. Apaga el dispositivo
+	/*public abstract void apagar()
+	{
+		System.Console.WriteLine("Dispositivo {0} apagado", nombre);
+	}*/
+
+}
+
+
+// Clase Movil, que hereda de la clase dispositivo
+// por lo que se hace con sus atributos y mÃƒÂ©todos
+public class Movil : Dispositivo
+{
+	// Metemos un atributo propio
+	string marca;
+	
+	// Constructor, que invoca a la base
+	public Movil() : base()
+	{
+			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+	}
+	
+	// Constructor, que invoca a la base
+	public Movil(string nombre, int voltaje) : base(nombre, voltaje)
+	{
+			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+	}
+	
+	// Constructor, que invoca a la base en parte
+	public Movil(string marca, string nombre, int voltaje) : base(nombre, voltaje)
+	{
+			this.marca = marca;
+			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+	}
+	
+	// Llamada POLIMÃƒâ€œRFICA. Invoca el mismo mÃƒÂ©todo pero hace algo distinto
+	// Hay que poner la palabra new para indicarlo!!!
+	// toString : Muestra todo Por pantalla
+	public new void muestra() 
+	{
+		// Que haga lo mismo que la superclase...
+		base.muestra();
+		
+		// .. y ademÃƒÂ¡s
+		System.Console.WriteLine("Marca: {0}", marca);
+	}
+	
+	// MÃƒÂ©todo VIRTUAL. Para asegurarnos que al invocar "encender"
+	// se llama al hijo y no al padre debemos meter la palabra override
+	public override void encender ()
+	{
+		System.Console.WriteLine("Movil {0} encendido", marca);
+	}
+	
+	// Metodo principal
+	public static void Main ()
+	{
+			Movil tiemensA35i = new Movil();
+			Movil noki45210 = new Movil("Noki45210", 12);
+			Movil amotorola = new Movil("Amotorola", 9);
+			Dispositivo generico = new Dispositivo();
+			
+			tiemensA35i.muestra();
+			noki45210.muestra();
+			
+			System.Console.WriteLine("Tipo generico {0}", generico.GetType());
+			
+			// OPERADOR IS: sirve para comprobar el tipo de una clase
+			if (noki45210 is Movil)
+			{	
+				// Efectivamente, es un movil
+				System.Console.WriteLine("Tipo noki {0}", noki45210.GetType());
+			}
+			
+			System.Console.WriteLine("Altura Nokia: {0}", noki45210.altura);
+			
+			// Encendemos el movil
+			amotorola.encender();
+			
+			// Encendemos el dispositivo
+			generico.encender();
+			
+			// Sacamos sus datos...
+			amotorola.ToString();
+			
+	}
+}
+
+// SEALED: una clase de la que nadie puede heredar
+// Clase Marca
+public sealed class Marca
+{
+	public static string[] marca  = new string[3]{"TIEMENS","BENG","LGE"};
+}
+</pre>

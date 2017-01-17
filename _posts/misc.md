@@ -1,0 +1,34 @@
+<table>
+<tr>
+<td>
+     <div align="left"> <br>
+        <b>Dibujo</b><br>
+        <img src="images/luzea.jpg" width="599" height="219" alt="Por la espalda"> 
+        <br>
+        <table border="0">
+          <tr> 
+            <td>
+              <p>
+              <ul>
+                <li><b>Dibujos</b></li>
+			    <ul>
+                  <li><a href="/?p=misc.html">Dibujos sueltos</a> 
+                    <p> Esto es una serie de dibujos sin ninguna relacion que he ido haciendo  
+						quiza a alguien le pueda gustar alguno de ellos, quien sabe. Por lo general
+						la tÃƒÂ©matica no es muy variada y los temas recurrentes, como en los comics.
+						Los dibujos asÃƒÂ­ se empiezan, se terminan y ya esta. Es una apetencia,
+						como quien se toma un cafe.
+					</p>
+                  </li>
+                </ul>
+			</ul>
+              <p>&nbsp; </p>
+              </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+
+</td>
+</tr>
+</table>

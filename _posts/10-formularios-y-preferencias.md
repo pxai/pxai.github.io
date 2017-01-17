@@ -1,0 +1,20 @@
+<h1>
+	Formularios y preferencias</h1>
+<p>
+	Como cualquier otra aplicaci&oacute;n necesitamos formularios para recoger datos y adem&aacute;s tambi&eacute;n necesitamos poder guardar esos datos de manera persistente.&nbsp;</p>
+<p>
+	En slguiente ejemplo mostramos algunos de los controles m&aacute;s t&iacute;picos:</p>
+<ul>
+	<li>
+		EditText: normal, para nombres, emails, passwords</li>
+	<li>
+		DatePicker: para pedir una fecha</li>
+	<li>
+		Spinner: el dropdown de toda la vida.</li>
+</ul>
+<p>
+	Adem&aacute;s de eso tambi&eacute;n es necesario poder guardarlo y para eso se usa el mecanismo de preferences de android, que lo que hace es guardar esos datos en el sistema de ficheros del dispositivo.</p>
+<p>
+	<a href="http://www.pello.info/filez/android/10.FormPref.tar.gz">Descargar ejemplo de Formulario y Preferencias</a></p>
+<p>
+	&nbsp;</p>

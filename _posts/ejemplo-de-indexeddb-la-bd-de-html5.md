@@ -1,0 +1,399 @@
+<p>
+HTML5 trae un montón de nuevas posibilidades al navegador. Se ha hablado mucho del formato de vídeo,
+del canvas, los websockets, de los nuevos controles de formulario pero a mí en particular me ha interesado
+especialmente aquello de <i>una BD en el cliente</i>. Es un tema que no está tan documentado como el resto
+y que en muchos libros de HTML5 o ni se menciona o se hace de pasada. Y lo que es peor, hay información
+en blogs pero a nada que esté desfasada los ejemplos no funcionan como la llamada a <code>setVersion()</code>. Así que mucho ojo, si lees sobre este tema, procura que sea información reciente.
+</p>
+
+<p>Pues parece que va en serio. Había un par de modelos en liza, uno basado en SQLite llamado WebSQL y otro más del estilo noSQL. Aunque WebSQL éstá soportado aún por Safari, Opera y Chrome el consorcio ha dicho que
+WebSQL no va a formar parte del estándar, por tanto el w3 se decanta por el otro modelo, llamado IndexedDB
+y que viene a ser un estilo CouchDB, MongoDB, etc... es decir, olvídate de SQL, da la bienvenida a los
+ObjectStores, Bases de datos que se lo ponen a huevo a las aplicaciones javascript.
+</p>
+<img src="http://www.pello.info/images/indexeddb2.png" alt="Contenidos de indexedDB en la consola de desarrollador de chrome" title="Contenidos de indexedDB en la consola de desarrollador de chrome" />
+
+<h5>Conexión y estilo</h5>
+<p>
+No voy a poner todo el código aquí pero sí la parte de la conexión que es lo más curioso
+junto con las consultas, que son algo durillas si estás acostumbrado al SQL. Esto es Javascript
+y en el caso de los métodos en torno a IndexedDB funcionan de forma asíncrona. Es decir, al dar
+la orden de abrir la BD el programa no se detiene para hacerlo, sino que deja una petición que
+debe ser recogida por un handler (onsuccess, onerror, etc...). Con las operaciones CRUD es lo mismo. Y por otro lado hay operaciones
+como la de crear el ObjectStore <b>que solo se pueden llevar a cabo dentro de onupgradeneeded</b>
+de lo contrario te salta una excepción de illegal state. Cosas así que francamente me han traido de cabeza
+y con la conclusión de que IndexedDB necesita un wrapper para todos los navegadores que nos haga la vida más fácil, que seguramente ya lo habrá.
+</p>
+<p>Otra cosa curiosa con la que he jugado es con el cambio de versiones. Podemos pasarle un parámetro
+numérico a la llamada open para indicarla la versión de la BD. IndexedDB mantiene internamente un 
+control de versiones por lo visto. Si cambiamos a una versión nueva se disparará el evento onupgradeneeded donde podremos ajustar la BD. Ese evento también se dispará la primera vez que se abre la BD y ahí es donde se deben crear tablas e índices.</p>
+<pre class="brush: js">
+var db;
+			var openedDB;
+			var database = "linksdb";
+			var description = "A database containing interesting links";
+			var objectStore = 'links';
+		    var openDB;
+		/**	
+		 * openCreate
+		 * opens and/or creates an IndexedDB database 
+		 */
+		function openCreate () {
+			// We could open changing version ..open(database,3)
+			var openDB = indexedDB.open(database);
+			
+			// This is how we pass the DB instance to our var
+			openDB.onsuccess = function(event) {
+				db = event.target.result; 
+				console.log('Database opened ' + db);
+			};
+			
+			// Very importante event fired when
+			// 1. ObjectStore first time creation
+			// 2. Version change
+			openDB.onupgradeneeded  = function (event) {
+				// value of previous db instance is lost!! we get it back
+				// using the event
+				db = this.result;
+				console.log("updgrade needed: " + db);
+				 try {
+				 	//db.deleteObjectStore(objectStore);
+				 	console.log("Object store deleted");
+					
+					var store = db.createObjectStore(objectStore,{keyPath: 'id', autoIncrement:true});
+				 	console.log("Object store created");
+					
+					store.createIndex("link", "link", { unique: false });
+					console.log("Index created on link");
+					store.createIndex("description", "description", { unique: false });
+					console.log("Index created on description");
+
+				} catch  (e) {
+					console.log("Exception creating object store: " + e);
+				}
+			}
+			
+			openDB.onerror = function(event) {
+				console.log('Something went wrong...');
+			};
+			
+		}
+</pre>
+
+
+<h5>Demo CRUD</h5>
+<img src="http://www.pello.info/images/indexeddb1.png" alt="Logs del ejemplo de indexedDB en chrome" title="Logs del ejemplo de indexedDB en chrome" />
+<p>
+Bueno, basta de cháchara. Aquí debajo he metido todo el código de una BD indexedDB, que he comprobado y programado con la ayuda de Chrome (es donde me ha funcionado sin problema no he probado a actualizar el firefox y de explorer ya jejeje pa qué). Importante:
+<ul>
+<li>Abre la consola de desarrollador la parte Console para los logs y Resource para ver la BD</li>
+<li>Pincha en el enlace de OPEN/CREATE, y prueba las operaciones</li>
+</ul>
+El código fuente está glosado con referencias y algunas anotaciones que iba tomando, como por ejemplo
+dónde se mete la BBDD en el sistema de ficheros, alternativas, etc...
+Esta demo lo que hace es gestionar una tabla llamada links en las que metemos pues eso, enlaces de páginas
+con una descripción. Se le configura un id autonumérico (ver código) y también metemos índices a los campos link y description para que luego nos permita hacer búsquedas con esos campos.
+</p>
+
+      <p>IndexedDB CRUD, tested successfully with win32 Chrome v28.0.1500.95 m</p>
+		<a href="javascript:openCreate()">OPEN/CREATE Database</a>
+        <script>
+        // Listening to: Iron Maiden - Infinite Dreams
+        //   "Infinite Dreams I can't deny them
+        //    Infinity is hard to comprehend
+        //    I couldn't hear those screams
+        //    Even in my wildest dreams"
+        //
+        // @author Pello Xabier Altadill Izura
+        // @greetz web workers like you. Did I say web worker? mmm... next target.
+        // To delete within console: indexedDB.deleteDatabase('linksdb');
+        // Database should be in <location of the windows user profiles>\<account name>\AppData\Local\Google\Chrome\User Data\Default\IndexedDB
+        // refs: OUTDATED, HORRIBLE http://www.html5rocks.com/es/tutorials/indexeddb/todo/
+        // refs: http://nparashuram.com/IndexedDB/trialtool/index.html
+        // refs: GOOD https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB
+        // refs: http://hacks.mozilla.org/2010/06/comparing-indexeddb-and-webdatabase/
+        // refs: Wiley HTML5, Your Visual Blueprint for Designing Rich Web Pages and Applications (2012)
+        // -deprecated setVersion call-
+            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB;
+            var IDBDatabaseException = window.IDBDatabaseException || window.mozIDBDatabaseException || window.webkitIDBDatabaseException;
+            var IDBKeyRange = window.IDBKeyRange || window.mozIDBKeyRange || window.webkitIDBKeyRange;
+            var IDBTransaction = window.IDBTransaction || window.mozIDBTransaction || window.webkitIDBTransaction;
+
+			var db;
+			var openedDB;
+			var database = "linksdb";
+			var description = "A database containing interesting links";
+			var objectStore = 'links';
+		    var openDB;
+		/**	
+		 * openCreate
+		 * opens and/or creates an IndexedDB database 
+		 */
+		function openCreate () {
+			// We could opem changing version ..open(database,3)
+			var openDB = indexedDB.open(database);
+			
+			// This is how we pass the DB instance to our var
+			openDB.onsuccess = function(event) {
+				db = event.target.result; 
+				console.log('Database opened ' + db);
+			};
+			
+			// Very importante event fired when
+			// 1. ObjectStore first time creation
+			// 2. Version change
+			openDB.onupgradeneeded  = function (event) {
+				// value of previous db instance is lost!! we get back
+				// using the event
+				db = this.result;
+				console.log("updgrade needed: " + db);
+				 try {
+				 	//db.deleteObjectStore(objectStore);
+				 	console.log("Object store deleted");
+					
+					var store = db.createObjectStore(objectStore,{keyPath: 'id', autoIncrement:true});
+				 	console.log("Object store created");
+					
+					store.createIndex("link", "link", { unique: false });
+					console.log("Index created on link");
+					store.createIndex("description", "description", { unique: false });
+					console.log("Index created on description");
+
+				} catch  (e) {
+					console.log("Exception creating object store: " + e);
+				}
+			}
+			
+			openDB.onerror = function(event) {
+				console.log('Something went wrong...');
+			};
+			
+		}
+			
+	/**
+	 *getObjectStore 
+	 * Exception creating object store: [Exception... "The operation failed because the requested database object could not be found. For example,
+	 *  an object store did not exist but was being opened."  code: "8" nsresult: "0x80660003 (NotFoundError)"  location: "http://127.0.0.1:8020/test/indexedDB.html Line: 57"]
+   */
+  function getObjectStore(store_name, mode) {
+  	console.log(db+","+store_name+","+mode);
+  	
+  	//IDBTransaction.READ_ONLY: not recognized in my chrome
+    var trans = db.transaction(store_name, mode);
+    
+    return trans.objectStore(store_name);
+  }
+  
+
+  /**
+   * createData
+   * inserts data in our object store 
+   */
+function create () {
+	var link = document.getElementById('url').value;
+	var description = document.getElementById('description').value;
+	var store = getObjectStore('links',"readwrite");
+	var request = store.add({'link': link , 'description': description});
+	request.onsuccess = function(event) {
+		console.log('Data successfully created: id:' + event.target.result + " .link:" + link);
+	};
+	request.onerror = function(event) {
+		console.log('Error creating data: ' + link);
+	};
+}
+
+
+  /**
+   * readOne
+   * read one record from our object store 
+   */
+function readOne () {
+	var id = document.getElementById('idread').value;
+
+	var store = getObjectStore('links',"readonly")
+	var request = store.get(parseInt(id));
+	
+	request.onsuccess = function(event) {
+		var record = event.target.result;
+  		console.log("Link " + record.link + ". Description: " + record.description);
+	};
+	
+	request.onerror = function(event) {
+		console.log('Error reading data: ' + id);
+	};
+}
+
+
+  /**
+   * readOne
+   * read one record from our object store 
+   */
+function readAll () {
+
+	var store = getObjectStore('links',"readonly")
+
+	var resultset = [];
+	var request = store.openCursor();
+	request.onsuccess = function(event) {
+  		var cursor = event.target.result;
+  		if (cursor) {
+  			resultset.push(cursor.value);
+   			 console.log("Id " + cursor.key + " link " + cursor.value.link);
+    		 cursor.continue();
+  		} else {
+   		 console.log("EOF");
+  		}
+	};
+	
+	request.onerror = function(event) {
+		console.log('Error reading data: ' + id);
+	};
+}
+
+  /**
+   * readOne
+   * read one record from our object store 
+   */
+function readByLink () {
+
+	var link = document.getElementById('linksearch').value;
+	
+	var store = getObjectStore('links',"readwrite");
+
+	try {
+	// must be created an index
+	var index = store.index("link");
+	} catch (e) {
+		console.log("Error creating index:" + e);
+	}
+	console.log("Index stablished");
+	var resultset = [];
+
+	
+	// With this we could get just one object
+	var request = index.get(link);
+	request.onsuccess = function(event) {
+		var record = event.target.result;
+		console.log("Found: " + record.link);
+	};
+	
+	// With thiswe get all the matching records
+	var request2 = index.openCursor(link);
+	request2.onsuccess = function(event) {
+  		var cursor = event.target.result;
+  		if (cursor) {
+    		console.log("Link: " + cursor.value.link);
+    		cursor.continue();
+ 		 }
+	};
+	//var lowerBoundOpenKeyRange = IDBKeyRange.lowerBound(link,false);
+	// Match anything past parameter, but don't include
+	//var lowerBoundOpenKeyRange = IDBKeyRange.lowerBound(link, true);
+
+	// Match anything up to parameter, but not including
+	//var upperBoundOpenKeyRange = IDBKeyRange.upperBound(link, true);
+	//var boundKeyRange = IDBKeyRange.bound("Bill", "Donna", false, true);
+	/*
+	var request = index.openCursor(link);
+	*/	
+	/*index.openCursor(lowerBoundOpenKeyRange).onsuccess = function(event) {
+  	var cursor = event.target.result;
+  		if (cursor) {
+    		console.log(cursor.value);
+    		cursor.continue();
+ 		 }
+		};*/
+}
+
+  /**
+   * update
+   * inserts data in our object store 
+   */
+function update () {
+	var id = document.getElementById('idupdate').value;
+	var link = document.getElementById('urlupdate').value;
+	var description = document.getElementById('descriptionupdate').value;
+	var store = getObjectStore('links',"readwrite");
+	var request = store.put({'id':parseInt(id), 'link': link , 'description': description});
+	request.onsuccess = function(event) {
+		console.log('Data successfully updated: ' + link);
+	};
+	request.onerror = function(event) {
+		console.log('Error updating data: ' + link);
+	};
+}
+
+  /**
+   * delete
+   * delete data in our object store 
+   */
+function remove () {
+	var id = document.getElementById('idremove').value;
+	var store = getObjectStore('links',"readwrite");
+	var request = store.delete(parseInt(id));
+	request.onsuccess = function(event) {
+		console.log('Data successfully removed: ' + id);
+	};
+	request.onerror = function(event) {
+		console.log('Error removing data: ' + id);
+	};
+}
+
+
+  /**
+   * removeAll
+   * removeAll data in our object store 
+   */
+function removeAll () {
+	var id = document.getElementById('idremove').value;
+	var store = getObjectStore('links',"readwrite");
+	var request = store.clear();
+	request.onsuccess = function(event) {
+		console.log('ObjectStore successfully cleared: ');
+	};
+	request.onerror = function(event) {
+		console.log('Error clearing ObjectStore: ' + id);
+	};
+}
+
+  /**
+   * dropDB
+   * drops database
+   */
+function dropDB () {
+	try {
+		indexedDB.deleteDatabase(database);
+		console.log("database destroyed: " + database);
+	} catch (e) {
+		console.log("error droping database");
+	}
+}
+
+
+
+        </script>
+	<h5>IndexedDB CRUD</h5>
+	<h5>CREATE</h5>
+		url<input type="url" name="url" id="url" placeholder="Insert url here..."  />					
+		description<input type="text" name="description" id="description" placeholder="Insert description here"   />
+	<a href="javascript:create()">Create data</a><br />
+	<hr />
+		<h5>READ one</h5>
+		id<input type="text" name="idread" id="idread" placeholder="Insert id here"   />
+		<a href="javascript:readOne()">READ one record</a><br />	
+		<a href="javascript:readAll()">READ ALL</a><br />	
+		Link<input type="text" name="linksearch" id="linksearch" placeholder="Insert link here"   />
+		<a href="javascript:readByLink()">Search by link</a><br />	
+	<hr />
+		<h5>UPDATE</h5>
+		id<input type="text" name="idupdate" id="idupdate" placeholder="Insert id here"   />
+			url<input type="url" name="urlupdate" id="urlupdate" placeholder="Insert url here..."  />					
+		description<input type="text" name="descriptionupdate" id="descriptionupdate" placeholder="Insert description here"   />
+		<a href="javascript:update()">Update data</a><br />
+	<hr />
+		<h5>DELETE</h5>
+		id<input type="text" name="idremove" id="idremove" placeholder="Insert id here"   />
+		<a href="javascript:remove()">delete data</a><br />	
+		<a href="javascript:removeAll()">delete all</a><br />
+		<a href="javascript:dropDB()">Drop Database</a><br />
+	

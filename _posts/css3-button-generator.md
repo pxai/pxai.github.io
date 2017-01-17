@@ -1,0 +1,126 @@
+<p>Tengo pendiente crear una sección <em>labs</em> en la página para estas cosas. En fin, seguramente esto que puedes ver a continuación ya existe y tal, pero ya se sabe, el <em>reinventing the wheel</em> es una mala/buena costumbre. Se trata de un simple formulario en el que elegimos algunas propiedades para nuestro botón. El botón en principio no es más que un simple enlace. Al pulsar el botón generate se aplican los estilos css mediante un (horrible y mejorable) script de jquery y conseguimos una especie de botón.
+</p>
+Esto no ha sido más que una diversión con un par de objetivos:
+<ol>
+<li>Probar algunos campos de formulario de HTML5</li>
+<li>Probar algunas propiedades de CSS3: redondeos, sombras en texto y cajas, y gradientes</li>
+</ol>
+
+Lo he probado en chrome y parece que traga. Si no te funciona pues actualiza tu navegador o cámbialo por otro.
+		<script>
+		// Your eyes will suffer, this code needs refactoring everywhere
+		// But It's too late and It has been a long day... 
+
+		// TODO: a custom CSS property textarea.
+		$(document).ready(function() {
+			$("#generate").click(function() {
+				var backgroundColor = "background-color: " + $("#backcolor").val();
+				var foregroundColor = "color: " + $("#forecolor").val();
+				var padding = "padding: " + $("#padding").val() + "px";
+				var borderrad = "border-radius: " + $("#borderrad").val() + "px";
+				var boxShadow = "box-shadow: " + $("#boxshadowright").val() + "px " + $("#boxshadowbottom").val() + "px " + $("#boxshadowblur").val() + "px " + $("#boxshadowcolor").val();
+				var textShadow = "text-shadow: " + $("#textshadowright").val() + "px " + $("#textshadowbottom").val() + "px " + $("#textshadowblur").val() + "px " + $("#textshadowcolor").val();
+				var background = "background: " + $("#background").val();
+				var border = "border: " + $("#borderwidth").val() +"px " + $("#bordertype").val() + " " + $("#bordercolor").val();
+				
+				if ($("#border").is(':checked')) {
+					alert("Hostias: " + borderValue);
+				}
+				// Aplly CSS to button: allowed
+				//.css({ "background-color": "#ffe", "border-left": "5px solid #ccc" }) 
+				// and .css({backgroundColor: "#ffe", borderLeft: "5px solid #ccc" }). 
+				$("#button").css({	"text-decoration" : "none",
+						            "padding"		  : $("#padding").val() + "px",
+									"background-color" : $("#backcolor").val(),  
+									"color" : $("#forecolor").val(),  
+									"-moz-border-radius" : $("#borderrad").val(),  
+									"-webkit-border-radius" : $("#borderrad").val(),  
+									"border-radius" : $("#borderrad").val() + "px",
+									"box-shadow" :   $("#boxshadowright").val() + "px " + $("#boxshadowbottom").val() + "px " + $("#boxshadowblur").val() + "px " + $("#boxshadowcolor").val(),
+									"text-shadow" :   $("#textshadowright").val() + "px " + $("#textshadowbottom").val() + "px " + $("#textshadowblur").val() + "px " + $("#textshadowcolor").val(),
+									"background" : + $("#background").val(),
+									"border" : +  $("#borderwidth").val() +"px " + $("#bordertype").val() + " " + $("#bordercolor").val()
+						});
+				
+				
+				// Show result CSS				
+				$("#result_css").html("<pre>#button { \n\t" + backgroundColor + ";\n\t"
+														+ foregroundColor + ";\n\t"
+														+ padding + ";\n\t"
+														+ borderrad + ";\n\t"
+														+ boxShadow + ";\n\t"
+														+ textShadow + ";\n\t"
+														+ background + ";\n\t"
+														+ border + ";\n\t"
+														+ "}</pre>");
+			});
+		});
+		</script>
+			<div>
+				<section id="generator_form">
+					<form >
+						<fieldset>
+								<legend>Options</legend>
+								<label for="backcolor">Background color</label><br />
+								<input type="color" name="backcolor" id="backcolor" value="#da2929" /><br />
+								<label for="forecolor">Foreground color</label><br />
+								<input type="color" name="forecolor" id="forecolor" value="#ffffff" /><br />
+								<label for="padding">Padding</label><br />
+								<input type="range" min="0" max="100" name="padding" id="padding" value="10"  /><br />
+								<label for="borderrad">Border radius</label><br />
+								<input type="range" min="0" max="10" name="borderrad" id="borderrad" value="1"  /><br />
+								<label for="boxshadowcolor">Box shadow</label><br />
+								<input type="color" name="boxshadowcolor" id="boxshadowcolor" />&nbsp;
+								<label for="boxshadowright">Box right shadow</label>
+								<input type="number" name="boxshadowright" id="boxshadowright" value="2" />&nbsp;								
+								<label for="boxshadowbottom">Box down shadow</label>
+								<input type="number" name="boxshadowbottom" id="boxshadowbottom" value="2"   />&nbsp;								
+								<label for="boxshadowblur">Box shadow blur</label>
+								<input type="number" name="boxshadowblur" id="boxshadowblur" value="4"  /><br />								
+								<label for="textshadowcolor">Text shadow</label><br />
+								<input type="color" name="textshadowcolor" id="textshadowcolor" />&nbsp;
+								<label for="textshadowright">Text right shadow</label>
+								<input type="number" name="textshadowright" id="textshadowright" value="2" />&nbsp;								
+								<label for="textshadowbottom">Text down shadow</label>
+								<input type="number" name="textshadowbottom" id="textshadowbottom" value="2"   />&nbsp;								
+								<label for="textshadowblur">Text shadow blur</label>
+								<input type="number" name="textshadowblur" id="textshadowblur" value="4"  /><br />								
+								<label for="bordercolor">Border color</label><br />
+								<input type="color" name="bordercolor" id="bordercolor" />&nbsp;
+								<label for="bordertype">Border type</label>
+								<select name="bordertype" id="bordertype" >
+									<option value="none">none</option>
+									<option value="hidden">hidden</option>
+									<option value="solid">solid</option>
+									<option value="dotted">dotted</option>
+									<option value="dashed">dashed</option>
+									<option value="inset">inset</option>
+									<option value="outset">outset</option>
+									<option value="ridge">ridge</option>
+									<option value="groove">groove</option>
+									<option value="double">double</option>
+								</select>&nbsp;
+								<label for="borderwidth">Border width</label>
+								<input type="number" name="borderwidth" id="borderwidth" value="1" /><br />								
+								<label for="background">Background gradient <a href="http://www.zenelements.com/blog/css3-gradients/">Check ops</a></label>
+								<input type="text" name="background" id="background" value="linear-gradient(90deg, #ffffff 0%, #e4e4e4 50%,#ffffff 100%)" size="40" /><br />								
+								<label for="custom">Custom</label>
+								<textarea name="custom" id="custom" >border: 1px solid black;</textarea><br />								
+								<br />
+								<input type="button" name="generate" id="generate" value="Generate It!" />
+						</fieldset>	
+					</form>
+				</section>
+			</div>
+			<div>
+				<section id="result_button">
+					<h5>Result</h5>
+					<a href="#" id="button">Very cool button</a>
+				</section>
+			</div>			
+			<div>
+				<h5>CSS3 properties</h5>
+				<section id="result_css">
+					
+				</section>
+			</div>

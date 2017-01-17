@@ -1,0 +1,81 @@
+<h1>
+	JavaJutsu: matrices o arrays de varias dimensiones</h1>
+<p>
+	&iquest;C&oacute;mo creamos y accedemos a los elementos de un array de varias dimensiones? Muy f&aacute;cil. Como en c.</p>
+<p>
+	/**<br />
+	* Matrices<br />
+	* Clase que muestra la declaraci&oacute;n y uso de Arrays de varias dimensiones<br />
+	* le he llamado Matriz por distinguir, aunque formalmente puede ser los mismo.<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Matrices.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Matrices<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Matrices<br />
+	* Clase que muestra la declaraci&oacute;n y uso de Arrays de dos o m&aacute;s dimensiones<br />
+	*<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Matrices {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a definir un array de enteros de dos dimensiones y otro de tres<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int valores[][];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [][] dorsales;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos establecer el tama&ntilde;o mediante new, y puede ser distinto para cada dimensi&oacute;n:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En este caso definimos un array de DIEZ&nbsp; y TRES elementos &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [][] puntos = new int[10][3];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos inicializar los arreglos con valores concretos,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo cual ser&iacute;a una forma de impl&iacute;cita de especificar su tama&ntilde;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numeros[][] = {{7,15,42},{69,666,23},{5,87,1},{0,665,-1}};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char letras [][] = {{&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;},{&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;}};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos crear Matrices de Strings<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String heroes[][] = {{&quot;Gandalf&quot;,&quot;Trancos&quot;}, {&quot;Haplo&quot;,&quot;Alfred&quot;},{&quot;Jon Nieve&quot;, &quot;Brienne&quot;}};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos alterar valores de un elemento del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[0][1] = &quot;Aragorn&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[1][2] = 24;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y por supuesto operar con ellos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al elemento 0 del array heroes le concatenamos algo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[2][0] = heroes[2][0] + &quot; lord Comandante&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[3][1]++;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para recorrer estos arrays con un for, hay que anidar tantos for<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// como dimensiones tenga el array:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// ATENCI&Oacute;N a la forma de acceder al subarray en el segundo FOR&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Estos son los mayores heroes, por sagas: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i &lt; heroes.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Saga &quot; + i);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int j = 0; j &lt; heroes[i].length; j++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;\tEn el &iacute;ndice &quot; + i + &quot;,&quot; + j +&quot;: &quot; + heroes[i][j]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

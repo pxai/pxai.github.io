@@ -1,0 +1,20 @@
+<h1>
+	Manifest, la configuraci&oacute;n de la aplicaci&oacute;n</h1>
+<p>
+	Todo proyecto Android tiene un fichero de configuraci&oacute;n xml llamado&nbsp;AndroidManifest.xml donde se guarda toda la configuraci&oacute;n de la aplicaci&oacute;n, por ejemplo:</p>
+<ol>
+	<li>
+		nombre</li>
+	<li>
+		versi&oacute;n</li>
+	<li>
+		icono</li>
+	<li>
+		activity por defecto</li>
+	<li>
+		los permisos que debe tener para acceder a recursos del dispositivo</li>
+	<li>
+		permisos que puede dar a otras aplicaciones etc...</li>
+</ol>
+<p>
+	Descarga <a href="http://www.pello.info/filez/android/05.DroidManifest.tar.gz">este ejemplo tonto aqu&iacute;</a>.</p>

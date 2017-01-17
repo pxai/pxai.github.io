@@ -1,0 +1,244 @@
+Vamos a ver algunas estructuras bÃƒÂ¡sicas de c#. Hay alguna cosa curiosa en la forma de definir los arrays y las propiedades de las estructuras.
+Veamos la struct:
+<pre>
+/**
+* Estructuras.cs
+*
+*/
+
+using System;
+
+/**
+* Las estructuras de C# se comportan practicamente como clases, 
+* salvo que no es imprescindible instanciarlas y que se guardan
+* en memoria de otra forma. Veamo un ejemplo.
+*/
+public struct Casa 
+{
+	// Para que sean accesibles, hay que declararlos public
+	// y no se pueden inicializar.
+	public string calle;
+	public int pisos;
+	public int fechaConstruccion;
+}
+
+// AquÃƒÂ­ vemos una estructura con su constructor, sus mÃƒÂ©todos, etc..
+// pero OJO no puede tener mÃƒÂ©todos destructores
+struct Manzana
+{
+	public string nombre;
+	public Casa casa;
+	
+	// La estructura debe tener constructor CON PARAMETROS
+	public Manzana (string nombre)
+	{
+		// Establecemos algunos valores
+		this.nombre = nombre;
+		casa.calle = "Castellana";
+		casa.pisos = 14;
+		casa.fechaConstruccion = 1900;
+	}
+	
+	// Un mÃƒÂ©todo para aumentar el numero de pisos
+	// de una manzana
+	public void aumenta(int pisos)
+	{
+		casa.pisos += pisos;
+	}
+	
+}
+
+// Definimos la clase Ciudad para usar la estructura de calles
+public class Ciudad
+{
+	
+	public static void Main()
+	{
+		// La estructura se puede instanciar o no
+		Casa singular = new Casa();
+		
+		Casa particular; // Esta la usamos sin instanciar
+		Manzana manzanaCara = new Manzana("La mÃƒÂ¡s cara de todas");
+		
+		singular.pisos = 5;
+		singular.calle = "Gran VÃƒÂ­a";
+		singular.fechaConstruccion = 1989;
+		
+		System.Console.WriteLine("Una casa de {0} pisos en {1}", singular.pisos, singular.calle);
+		
+		particular.calle = "Leganitos";
+		particular.pisos = 40;
+		
+		// Lo mostramos a ver
+		System.Console.WriteLine("Una casa de {0} pisos en {1}", particular.pisos, particular.calle);
+		System.Console.WriteLine("Esta manzana es {0}", manzanaCara.nombre);
+
+	}
+}
+</pre>
+Las enumeraciones:
+<pre>
+/**
+* Enumeraciones.cs
+* Las enumeraciones son variables que contienen un numero limitado
+* de valores posibles
+*
+*/
+
+// Los enumeradores son como una lista de posibles valores
+// que implicitamente llevan asociado un nÃƒÂºmero entero
+public enum Dias
+{	
+	Lunes,        // = 0
+	Martes,       // = 1,
+	Miercoles,    // = 2,...
+	Jueves,
+	Viernes,
+	SÃƒÂ¡bado,
+	Domingo
+}
+
+
+// El nÃƒÂºmero entero puede ser establecido por nosotros
+// Para que no empiece contando desde 0, le asignamos valores
+public enum Mes
+{
+	Enero = 1,
+	Febrero = 2,
+	Marzo = 3,
+	Abril = 4,
+	Mayo = 5,
+	Junio = 6
+}
+
+// Podemos especificar un tipo distinto a int
+public enum Boton : byte
+{
+	Arranque,
+	Parada
+}
+
+public class Usalas
+{
+	
+	public static void Main()
+	{
+		// La estructura se puede instanciar o no
+		Dias diaSemana;
+		
+		// Establecemos el dÃƒÂ­a de la semana, hay que hacer Cast
+		diaSemana = (Dias) 3;
+
+		System.Console.WriteLine("El dÃƒÂ­a de la semana es {0} o {1}", diaSemana, (int)diaSemana);
+
+		diaSemana = (Dias) 6;
+		
+		switch (diaSemana)
+		{
+			case Dias.Lunes :
+				System.Console.WriteLine("Hoy es Lunes");
+				break;
+			case Dias.Martes :
+				System.Console.WriteLine("Hoy es Martes");
+				break;
+			case Dias.Miercoles :
+				System.Console.WriteLine("Hoy es Miercoles");
+				break;
+			case Dias.Jueves :
+				System.Console.WriteLine("Hoy es Jueves");
+				break;
+			case Dias.Viernes :
+				System.Console.WriteLine("Hoy es Viernes");
+				break;
+			default:
+				System.Console.WriteLine("Ã‚Â¡Estamos en finde!");	
+				break;						
+		}
+		
+		System.Console.WriteLine("El dÃƒÂ­a de la semana es {0}", diaSemana);
+
+	}
+}
+</pre>
+Y los arrays. Se crean con la palabra new. Al final simplemente se menciona lo de arrays multidimensionales y los arrays anidados.
+<pre>
+/**
+* Arrays.cs
+* Clase para comprobar el manejo de arrays en C#
+*/
+
+// Definimos una clase que contiene los datos de un equipo de futbol
+public class Equipo
+{
+	public string[] jugadores;
+	public int[] edades;
+	
+	public Equipo ()
+	{
+		// Se crea el array usando new y estableciendo el tamaÃƒÂ±o
+		jugadores = new string[11];
+		// Se crea e inicializa
+		edades = new int[11]{23,24,23,24,25,26,21,23,23,34,21};
+		
+	}
+	
+	public void inicializar()
+	{
+		jugadores[0] = "Casillas";
+		jugadores[1] = "Puyol";
+		jugadores[2] = "Pablo";
+		jugadores[3] = "Xavi";
+		jugadores[4] = "Xabi Alonso";
+		jugadores[5] = "Senna";
+		jugadores[6] = "RaÃƒÂºl";
+		jugadores[7] = "Cesc";
+		jugadores[8] = "Pernia";
+		jugadores[9] = "Torres";
+		jugadores[10] = "Villa";
+	}
+	
+	public static void Main ()
+	{
+		int i = 0;
+		
+		Equipo seleccion = new Equipo();
+
+		System.Console.WriteLine("Equipo creado");
+		
+		seleccion.inicializar();
+		
+		// Recorremos el array con un for convencional
+		// Usando la propiedad Length para controlar la longitud
+		for (i = 0; i &lt; seleccion.edades.Length; i++)
+		{
+			System.Console.WriteLine("Edad de jugador nÃ‚Âº{0}: {1}", i,seleccion.edades[i]);
+		}
+		
+		// Recorriendo el array con un foreach
+		foreach (string nombre in seleccion.jugadores)
+		{
+			System.Console.WriteLine("Jugador: {0}", nombre);
+		}
+		
+		
+		// Arrays MULTIDIMENSIONALES, se definen de forma curiosa
+		// con un [,]
+		string[,] ligaDeFutbol = new string[2,5];
+		ligaDeFutbol[0,0] = "Ricardo";
+		ligaDeFutbol[0,1] = "RaÃƒÂºl GarcÃƒÂ­a";
+		ligaDeFutbol[0,2] = "Milosevic";
+		ligaDeFutbol[1,0] = "Ronaldinho";
+		ligaDeFutbol[1,1] = "Eto'o";
+		
+		// DefiniciÃƒÂ³n con inicializaciÃƒÂ³n
+		int[,] valores = new int[,]{{2,7,3},{2,5,3}};
+		
+		// Arrays anidados, permiten meter arrays dentro de otros
+		// con tamaÃƒÂ±o distinto: se crean arrays de arrays
+		int[][] masValores = new int[3][];
+		masValores[0] = new int[3];
+		masValores[1] = new int[8];
+		masValores[2] = new int[1];
+	}
+}
+</pre>

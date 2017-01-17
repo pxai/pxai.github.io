@@ -1,0 +1,47 @@
+Para cuando te aprendes esto ya estara ipv6 en todas partes.
+Bueno, de momento solo son 20 bytes
+<pre>
+
+0                                   15 16                                   31
+.____________________________________________________________________________.___
+| 4-bit  | 4-bit   |      8-bit       |              16-bit                  | |
+|version |long.cab.|tipo de serv.(TOS)|  longitud total en bytes             | |
+|________|_________|__________________|______________________________________| |
+|           16-bit                    | 3-bit |         13-bit               | |
+|       identificacion                | flags |   offset de fragmentos       | |
+|_____________________________________|_______|______________________________|20 bytes
+|     8-bit        |     8-bit        |             16-bit                   | |
+|time-to-live(TTL) |  protocolo       |      chequeo cabecera                | |
+|__________________|__________________|______________________________________| |
+|                             32-bit                                         | |
+|                        direccion IP origen                                 | |
+|____________________________________________________________________________| |
+|                             32-bit                                         | |
+|                        direccion IP destino                                | |
+|____________________________________________________________________________|_|_
+|                           opciones                                         |
+/                        (si las hubiere)                                    /
+|____________________________________________________________________________|
+|                                                                            |
+|                           DATOS                                            |
+|                                                                            |
+/                                                                            /
+|                                                                            |
+|____________________________________________________________________________|
+</pre>
+
+-Version: hoy dia suele ser la 4 si es que es ipv4<br>
+-Longitud de cabecera: el limite es 60bytes (tb sirve para especificar si hay opciones)<br>
+-TOS: flags para darle vidilla o no a los datagramas: minimize delay, maximize throughput, <br>
+maximize reliability, y minimize monetary cost<br>
+-Longitu total: siendo un campo de 16 bits se deduce que el tamaÃƒÂ±o maximo de<br>
+un datagrama IP seria 65535. Aunque esto se suele fragmentar.<br>
+-Identificacion: un numero que identifica el paquete enviado (incremental)<br>
+-Flags<br>
+-Offset fragmentos: para cuando se fragmenta el datagrama<br>
+-TTL: el tiempo de vida del datagrama. Para que no ande vagando eternamente<br>
+-Protocolo: TCP, UDP, IGMP, ICMP<br>
+-Chequeo cabecera: para la validacion de que los datos son correctos<br>
+-Direccion origen: Ip de origen<br>
+-Direccion destino: IP de destino<br>
+-Opciones: valores opcionales, seguridad, timestamp, registro de rutas...<br>

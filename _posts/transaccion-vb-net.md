@@ -1,0 +1,80 @@
+Ejemplo simple de transaccion de BD con una <br>conexion simple de oleDB.
+<pre>
+Private Sub modificar()
+
+
+  Dim conexion As System.Data.OleDb.OleDbConnection
+  Dim comando As System.Data.OleDb.OleDbCommand
+  Dim datos As System.Data.OleDb.OleDbDataReader
+  Dim transaccion As OleDbTransaction
+
+  Dim cont As Integer
+
+  Dim conString As String
+  Dim sentencia As String
+  Dim contador As Integer
+  Dim listaTMP As DropDownList
+
+
+
+
+  cont = 0
+  contador = 0
+
+  'String de conexion para una bd access
+  conString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" 
+& Server.MapPath("Colegio.mdb")
+
+  'establecemos la sentencia
+   sentencia = "update estudiantes set nom_est='" & Request.Params("txtNombre") & 
+"' , dir_est='" & Request.Params("txtDireccion") & "' , f_n_est='" & 
+Request.Params("txtFechanacimiento") & "' where exp_est=" & Request.Params("txtExpediente")
+
+  'creamos el objeto conexion
+  conexion = New OleDbConnection(conString)
+
+  'todo lo hacemos en un bloque try-catch
+   Try
+
+     Response.Write("Valor seleccionado: " & Request.Params("ddlEmpresa") & "&lt;br&gt;")
+     Response.Write("Sentencia: " & sentencia & "&lt;br&gt;")
+  
+   'establecemos conexion
+     conexion.Open()
+
+     Response.Write("OK conexion establecida &lt;br&gt;")
+
+    'Creamos el objeto comando
+     comando = New OleDbCommand(sentencia, conexion)
+
+
+     Response.Write("OK comando creado &lt;br&gt;")
+
+    transaccion = conexion.BeginTransaction()
+   ' esto es necesario 
+   comando.Transaction = transaccion
+    comando.Connection = conexion
+
+
+
+   'ejecucion de una consulta
+    contador = comando.ExecuteNonQuery()
+
+
+
+   Response.Write("OK TRANSACCION COMPLETADA, registros afectados: " & contador & "&lt;br&gt;")
+            transaccion.Commit()
+
+            ' en caso de error.. capturamos y mostramos
+        Catch ex As Exception
+            Response.Write("Error al acceder a la BD -rollback-&lt;br&gt;" & ex.Message)
+            transaccion.Rollback()
+
+        Finally
+            'en cualquier caso hacemos esto (mal, sin comprobar)
+            conexion.Close()
+            conexion = Nothing
+            comando = Nothing
+        End Try
+    End Sub
+</pre>

@@ -1,0 +1,109 @@
+<h1>
+	Argumentos de programa principal o main</h1>
+<p>
+	A los programas de java tambi&eacute;n se les pueden pasar argumento a la hora de ejecutarlos. Para eso se utiliza el array de Strings args[].</p>
+<h3>
+	Argumentos tipo Cadena</h3>
+<p>
+	/**<br />
+	* ValoresCadenasArgumentos<br />
+	* Clase que muestra la declaraci&oacute;n de variables de cadenas o Strings<br />
+	* y c&oacute;mo pasarles lo que viene como argumento<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ValoresCadenasArgumentos.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ValoresCadenasArgumentos<br />
+	*/<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ValoresCadenasArgumentos<br />
+	* Clase que muestra la declaraci&oacute;n de variables de cadenas o Strings<br />
+	* y c&oacute;mo pasarles lo que viene como argumento.&nbsp; Los argumentos se trasvasan<br />
+	* a trav&eacute;s del par&aacute;metro args[] de la funci&oacute;n main. Ese par&aacute;metro es un conjunto<br />
+	* de Strings o Cadenas<br />
+	*<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ValoresCadenasArgumentos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En el caso de que el argumento sea una frase al ejecutar el programa la pasariamos as&iacute;:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//&nbsp;&nbsp; C:\jdk&gt;java ValoresCadenasArgumentos &quot;Dios le ayuda&quot;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String frase = &quot;A quien madruga, &quot; + args[0];<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El primer argumento es: &quot; + args[0]);&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;La frase final: \n&quot; + frase);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+<h3>
+	Argumentos para guardar en variable de tipo entero</h3>
+<p>
+	Atenci&oacute;n , en este caso tenemos que hacer una conversi&oacute;n.</p>
+<p>
+	/**<br />
+	* ValoresEnteros<br />
+	* Clase que muestra la declaraci&oacute;n de variables num&eacute;ricas enteras<br />
+	* y c&oacute;mo pasarles lo que viene como argumento<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ValoresEnteros.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ValoresEnteros<br />
+	*/<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ValoresEnteros<br />
+	* Muestra la declaraci&oacute;n de tipos num&eacute;ricos enteros b&aacute;sicos:<br />
+	* y c&oacute;mo pasarles lo que viene como argumento. En el caso<br />
+	* de los enteros HAY QUE CONVERTIR lo que viene por el argumento<br />
+	* porque viene como un String!<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ValoresEnterosArgumentos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n de variables: tipo nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int dias;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;short contador;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String diasString;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// As&iacute; no hay problemas porque son del MISMO TIPO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;diasString = args[0];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n a la CONVERSI&Oacute;N. Utilizamos la clase Integer,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// y s&uacute; metodo para convertir de String a int<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;dias = Integer.parseInt(args[0]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Con los short y con cualquier otro tipo b&aacute;sico hariamos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo mismo, usar su clase correspondiente y la misma funci&oacute;n:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;contador = Short.parseShort(args[0]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// ATENCI&Oacute;N: si lo que pasamos como argumento NO ES un entero<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// el programa casca irremediablemente y vomita una excepci&oacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a probar a mostrarlos por pantalla: concatenamos con +<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El total de d&iacute;as es: &quot; + dias);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El contador queda as&iacute;: &quot; + contador);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

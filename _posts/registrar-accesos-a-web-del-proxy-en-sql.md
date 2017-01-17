@@ -1,0 +1,203 @@
+Imaginemos que un gerente malvado quiere controlar a sus empleados y quiere registrar todos los accesos a la web que hacen (menos los suyos 'of course'). Usando un proxy squid o cualquier otro que genere los logs en el mismo formato, podemos hacer que se guarden en un gestor de BD para su posterior analisis.
+
+ 
+ 
+Mediante un script de perl se puede analizar el log del proxy cache SQUID y generar un fichero CSV (texto delimitado por punto y coma) para meterlo en una BD. 
+Luego con un script de shell se crea la tarea periodica y ya esta. 
+
+Aqui paso los elementos necesarios: 
+
+<pre>
+##### Script perl de cosecha propia (en su mayor parte) 
+# A este script hay que especificarle el dia del que se desean sacar 
+# los datos, sino sacara un CSV con todo lo que pille en el log. 
+
+CÃƒÂ³digo: 
+#!/usr/bin/perl -w 
+
+# extraer.pl - (c) Pello Xabier Altadill Izura - www.pello.info
+
+# Script para convertir los logs de SQUID a formato CSV. 
+# Si no se especifica fecha, crea un CSV de TODO! 
+
+# Librerias requeridas 
+use Time::localtime; 
+
+## Variables 
+my $PROGRAM = "Xtraer"; 
+# Pasamos parametros de inicio 
+
+my ($fichero,$dia) = @ARGV; 
+my $all = 0; 
+my $current_dia = ""; 
+my $url_inicio = ""; 
+
+## Chequeo de parametros 
+if (!defined($fichero)) { 
+die("Pasa el parametro del fichero.
+Agur
+"); 
+} 
+
+# Si no esta definida la variable dia, se muestra todo 
+$all = (!defined($dia)); 
+
+
+## Inicio de programa 
+#&println("Abriendo fichero: $fichero"); 
+unless (open (FICHERO_LOGS,$fichero) ) { 
+die("Lo siento, no se pudo abrir el fichero $fichero"); 
+} 
+
+## Definimos las varibles que corresponden con cada campo de log 
+my ($when,$elapsed,$who,$tag,$size,$method,$what,$id,$hier); 
+
+## Iteracion que procesa cada linea de log 
+while (&lt;FICHERO_LOGS&gt;) { 
+chomp; # Cortamos el new-line 
+@LINEA = split; # Et voila! convertimos la linea en un array. 
+# Asginamos el array a variables concretas 
+
+($when,$elapsed,$who,$tag,$size,$method,$what,$id,$hier) = @LINEA; 
+
+# salvamos la hora unix 
+$unix_hour = $when; 
+
+#Convertimos la hora Unix en una hora -human readable- 
+$when = &convertir($when); 
+$url_inicio = &sacar_url($what); 
+if ($all) { 
+print("$unix_hour;$when;$elapsed;$who;$tag;$size;$method;$what;$url_inicio;$id;$hier
+" 
+); 
+} elsif ($dia eq $current_dia) { 
+# sacamos por pantalla la linea en CSV en caso de que coincida el dia quequeremos 
+print("$unix_hour;$when;$elapsed;$who;$tag;$size;$method;$what;$url_inicio;$id;$hier
+" 
+); 
+} 
+} 
+
+# Cerramos el fichero 
+close(FICHERO_LOGS); 
+
+####### Subrutinas 
+# Esta no se usa ahora 
+sub println () { 
+ print "$PROGRAM> $_[0]
+"; 
+} 
+
+## convertir 
+# convierte la fecha de formato UNIX a formato normal 
+# parametro 1: la fecha en formato unix 
+sub convertir () { 
+my $nuevo = localtime($_[0]); 
+        my $mday =  $nuevo->mday; 
+$mday = (($mday <10)?"0":"") . $mday; 
+        my $mon = ($nuevo->mon+1); 
+$mon = (($mon <10)?"0":"") . $mon; 
+        my $year = ($nuevo->year+1900); 
+        my $hour = $nuevo->hour; 
+        my $min = $nuevo->min; 
+        my $sec = $nuevo->sec; 
+# Este es el formato propuesto, se puede cambiar a otro. 
+$current_dia = "$mday/$mon/$year"; 
+
+# In mysql datetime format 
+my $fecha = "$year/$mon/$mday $hour:$min:$sec"; 
+return $fecha; 
+} 
+
+## sacar_url 
+# extrae la url inicial de un enlace complejo 
+sub sacar_url () { 
+
+my ($url) = @_; 
+my $url_final = ""; 
+my $resultado_url = ""; 
+
+# Extraemos el protocolo: https:// , http://, ... 
+$url_final = substr($url,0,index($url,"//")+2); 
+
+# Le quitamos el protocolo 
+$resultado_url = substr($url,(index($url,"//")+2),length($url)); 
+
+# le quitamos el resto 
+$resultado_url = substr($resultado_url,0,index($resultado_url,"/")); 
+$resultado_url = $url_final . $resultado_url; 
+
+# Y devolucion! 
+return $resultado_url; 
+} 
+------------------------------------------------------------------------------------- 
+
+
+##### Estructura mysql (una tabla), mas los comandos para meter un usuario concreto. 
+
+CÃƒÂ³digo: 
+CREATE TABLE log ( 
+  logid char(16) NOT NULL default '', 
+  date datetime default NULL, 
+  elapsed_time int(11) default NULL, 
+  who char(30) default NULL, 
+  squid_code char(30) default NULL, 
+  size int(11) default NULL, 
+  mehtod char(15) default NULL, 
+  what char(255) default NULL, 
+  url_inicio char(255) default NULL, 
+  id char(30) default NULL, 
+  hier char(40) default NULL, 
+  PRIMARY KEY  (logid) 
+) TYPE=MyISAM; 
+
+-- aqui creamos permisos y passwords
+grant CREATE, INSERT, SELECT, DELETE on webdb.* to wcaccess@localhost; 
+grant CREATE, INSERT, SELECT, DELETE on webdb.* to wcaccess@'%'; 
+set password for 'wcaccess'@'localhost' = password('dFwY4.;u'); 
+set password for 'wcaccess'@'%' = password('dFwY4.;u'); 
+flush privileges; 
+
+
+------------------------------------------------------------------------------ 
+
+###### Script para poner en cron. 
+CÃƒÂ³digo: 
+
+#!/bin/sh 
+
+# crea_reporte - (c) Pello Xabier Altadill Izura - www.pello.info
+
+# Script para convertir los logs de SQUID a formato CSV, 
+# Utiliza un script de perl marca de la casa. 
+# grant CREATE, INSERT, SELECT, DELETE on webdb.* to wcaccess@localhost; 
+# grant CREATE, INSERT, SELECT, DELETE on webdb.* to wcaccess@'%'; 
+# set password for 'wcaccess'@'localhost' = password('dFwY4.;u'); 
+# set password for 'wcaccess'@'%' = password('dFwY4.;u'); 
+# flush privileges; 
+
+## Variables 
+
+# Fichero destino 
+DESTINO=/tmp/accesos 
+# Logs de donde sacamos los datos 
+FICHERO_LOG=/var/log/squid/access.log 
+# Calculo del dia anterior como parametro 
+DIAP=`date --date "1 day ago" +%d/%m/%Y` 
+# Calculo del dia anterior 
+DIA=`date --date "1 day ago" +%d.%m.%Y` 
+
+echo Iniciando extraccion del dia $DIA 
+/etc/scripts/feedsquid.pl $FICHERO_LOG $DIAP > $DESTINO.$DIA.csv && echo OK 
+
+echo Metiendo contenido... 
+mysql --user='wcaccess' --password='dFwY4.;u' webdb << EOF 
+LOAD DATA LOCAL INFILE "$DESTINO.$DIA.csv" REPLACE INTO table log FIELDS TERMINATED BY ';'; 
+EOF 
+
+echo Borrando: $DESTINO.$DIA.csv 
+
+rm -f $DESTINO.$DIA.csv 
+
+echo Finalizado. 
+</pre>

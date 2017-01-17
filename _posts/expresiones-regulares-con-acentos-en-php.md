@@ -1,0 +1,55 @@
+<p>A estas alturas de la existencia de las aplicaciones web sabido es que la validacion de datos es un requisito fundamental para que un usuario malicioso no nos la meta doblada.
+Practicamente todos los lenguajes disponen de un sistema de expresiones regulares que facilitan enormemente la validacion de datos entre otras tareas de interes.</p>
+<p>En el caso de php no es menos. Dispone del mecanismo regexp tanto en formato Posix como el de Perl, aunque cualquiera que este familiarizado con el uso de regexp le dara igual uno que otro. </p>
+<img src="http://coders.pello.info/images/strips/strip041.jpg" title="que jodidas son algunas expresiones" alt="coders">
+<p>Ã‚Â¿Que es una aplicacion web? en definitiva un conjunto de paginas (y componentes si eres de la logia OOP) que explotan una BBDD a traves de formularios. Esos formularios no deben permitir que se inserte cualquier cosa en ellos, y por eso la validacion en el lado servidor es IMPRESCINDIBLE.
+La validacion en el lado cliente SIEMPRE se la puede saltar un usuario malicioso, aunque puede ser util para no marear al usuario bienintencionado.</p>
+
+<p>
+Supongamos que en un campo de formulario el usuario debe meter su nombre y apellidos. Ã‚Â¿Con que expresion regular podriamos validar ese campo? Es sencillo: permitiendo SOLO caracteres y espacios en blanco [a-zA-Zs]. Se puede ir mas alla y meter guiones. Pero aqui llega el problema, en castellano tenemos la ÃƒÂ±, las acentuaciones, etc.. entonces que pasa con [a-z] ??
+no sirve. Podemos usar el valor w (word) pero puede que tampoco funcione.
+</p>
+
+<p>Ã‚Â¿Por que?</p>
+<p>En el momento de usar la expresion regular PHP no sabe que tiene que usar las locales espaÃƒÂ±olas.
+En fin, para poder validar campos con acentuaciones o en definitiva textos en castellano necesitamos tener las locales instaladas e invocarlas en php.</p>
+
+<p>Un solucion para Debian</p>
+<pre>
+Instalamos las locales si es que no estan con:
+midebianmola# dpkg-reconfigure locales
+</pre>
+<p>
+Eso nos sacara un interfaz curses donde facilmente podremos elegir los locales a generar. Podemos seleccionar todos los es_ES y ya esta.</p>
+
+<p>
+Luego a PHP hay que decirle que aplique esos locales. Sobre este tema
+se puede consultar mas en <a href="http://www.php.net">www.php.net</a> Asi:</p>
+<pre>
+$resul = setlocale(LC_ALL, "es_ES.ISO-8859-1");
+</pre>
+
+<p>Ahora cuando comprobemos expresiones regulares usando w u otros modificadores, los acentos y demas los aceptara como parte valida una palabra cualquiera</p>
+
+<pre>
+$resul = setlocale(LC_ALL, "es_ES.ISO-8859-1");
+
+// aceptamos palabras , puntos y espacios en blanco. Nada mas.
+if (preg_match("/^[.ws]+$/i",$_GET["prueba"]) == 1 ) {
+    echo "Cumple correctamente";
+} else {
+    echo "Pues no cumple";
+
+}
+</pre>
+
+<p>Algunas expresiones utiles, pero mejorables:</p>
+
+<ul>
+<li>Solo caractes con acentos: /^[[:alpha:]]+$/i </li>
+<li>Caracteres con acentos y espacios blancos: /^[ws]+$/ </li>
+<li>Caracteres con acentos, espacios en blanco y comas: /^[w,s]+$/ </li>
+<li>Solo caractes con acentos y cierto tam: /^[[:alpha:]]{1,4}$/i </li>
+<li>Solo numeros enteros: /^[[:digit:]]+$/ </li>
+<li>Un dni /^[[:digit:]]{8}[a-zA-Z]{1}$/ </li>
+ </ul>

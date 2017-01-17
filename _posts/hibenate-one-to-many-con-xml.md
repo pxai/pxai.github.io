@@ -1,0 +1,550 @@
+<p>
+	&nbsp;</p>
+<div>
+	Esta vez toca el caso de relaciones m&aacute;s t&iacute;pico entre entidades, la relaci&oacute;n uno a muchos o one-to-many. En un alarde de originalidad, en lugar de usar el de trabajador-departamento vamos a hacerlo con producto y tipo_producto. Es decir, un producto puede ser de distintos tipos, y para reflejar eso tenemos dentro de la entidad producto un campo que se refiere al c&oacute;digo de tipo de producto.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Lo pecualiar es que en la clase Producto en lugar de usar el campo idproducto hacemos referencia directamente</div>
+<div>
+	a la clase TipoProducto. De la misma forma, en la clase TipoProducto podemos hacer referencia a una conjunto de productos&nbsp;y ah&iacute; Hibernate podr&aacute; &quot;popular&quot; todos los productos que sean de ese tipo.&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	Puedes descargar el c&oacute;digo en google code. Las clases DAO casi ni merece la pena verlas aqu&iacute;.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>La clase Product</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Represents a Product</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Altadill</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz any kind of cheese</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Product {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private int id;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String description;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private ProductType productType;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Product () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param name</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param description</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param type</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Product(String name, String description, ProductType productType) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.name = name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.description = description;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.productType = productType;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;return &quot;Product [id=&quot; + id + &quot;, name=&quot; + name + &quot;, description=&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;+ description + &quot;]&quot;;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; // GETTERS/SETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;// ...</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>La clase ProductType</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Set;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Represents a ProductType</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Altadill</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz any kind of bread</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class ProductType {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private int id;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private Set&lt;Product&gt; products;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public ProductType () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param name</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public ProductType(String name) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.name = name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// GETTERS/SETTERS...</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Product.hbm.xml</strong></div>
+<div>
+	El mapeo de Product con la tabla product</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;!-- Mapping configuration details between Customer class and customer table --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;hibernate-mapping package=&quot;info.pello.maven.hibernate.HibernateSamples&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;class name=&quot;Product&quot; table=&quot;product&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;id name=&quot;id&quot; column=&quot;id&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;generator class=&quot;native&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/id&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;name&quot; column=&quot;name&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;description&quot; column=&quot;description&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;many-to-one name=&quot;productType&quot; class=&quot;info.pello.maven.hibernate.HibernateSamples.ProductType&quot; fetch=&quot;select&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;column name=&quot;idtype&quot; not-null=&quot;true&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/many-to-one&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/class&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/hibernate-mapping&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>ProductType.hbm.xml</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	El mapeo de ProductType con la tabla producttype</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;!-- Mapping configuration details between Customer class and customer table --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;hibernate-mapping package=&quot;info.pello.maven.hibernate.HibernateSamples&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;class name=&quot;ProductType&quot; table=&quot;producttype&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;id name=&quot;id&quot; column=&quot;id&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;generator class=&quot;native&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/id&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;name&quot; column=&quot;name&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- In lazy mode data will load only when used... --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;set name=&quot;products&quot; table=&quot;product&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; inverse=&quot;true&quot; lazy=&quot;true&quot; fetch=&quot;select&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;key&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;column name=&quot;idtype&quot; not-null=&quot;true&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/key&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;one-to-many class=&quot;info.pello.maven.hibernate.HibernateSamples.Product&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/set&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/class&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/hibernate-mapping&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>hibernate.cfg.xml</strong></div>
+<div>
+	La configuraci&oacute;n general de hibernate</div>
+<div>
+	Sin m&aacute;s, un par de l&iacute;neas para los dos nuevos mapeos.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Here comes the mapping definition - saved in resources dir with this hibernate config --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;mapping resource=&quot;Customer.hbm.xml&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;mapping resource=&quot;Car.hbm.xml&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;mapping resource=&quot;Insurance.hbm.xml&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;mapping resource=&quot;Product.hbm.xml&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;mapping resource=&quot;ProductType.hbm.xm</span>l&quot;/&gt;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Main.java</strong></div>
+<div>
+	La clase principal donde probamos los DAOs.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.ArrayList;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.List;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Main class</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz 4 u</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @listening &quot;Seasons in the Abyss - Slayer&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Close your eyes&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Look deep in your soul&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Step outside yourself&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* And let your mind go&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Frozen eyes stare deep in your mind as you die&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Main &nbsp;{</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * simple function for reusing</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param productDAOInterface</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public static void showAllProducts (ProductDAOInterface productDAOInterface) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;// SELECT ALL DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;List&lt;Product&gt; products = productDAOInterface.selectAll();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;String productDesc = &quot;&quot;;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;\n--- Products ----- table contents -----------&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; for(Product product : products) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;productDesc = &quot;Id: &quot; + product.getId() +&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;&quot; - Name: &quot; + product.getName() +</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;&quot; - Type: &quot; + product.getProductType().getName();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.println(productDesc);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Total products: &quot; + products.size());﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * simple function for reusing</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param productDAOInterface</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public static void showAllProductTypes (ProductTypeDAOInterface productTypeDAO) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;// SELECT ALL DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;List&lt;ProductType&gt; productTypes = productTypeDAO.selectAll();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;String productDesc = &quot;&quot;;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;\n--- ProductsTypes ----- table contents -----------&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; for(ProductType productType : productTypes) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;productDesc = &quot;Id: &quot; + productType.getId() +&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;&quot; - Name: &quot; + productType.getName() +</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;﻿ &nbsp;&quot; - Products: \n&quot;;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;productDesc += productType.getProducts().toString() + &quot;\n&quot;;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.println(productDesc);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Total products: &quot; + productTypes.size());﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; public static void main( String[] args )</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; {</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;ProductDAOInterface productDAO = new ProductDAO();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;ProductTypeDAOInterface productTypeDAO = new ProductTypeDAO();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllProducts(productDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // SELECT JUST ONE</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; Product oneProduct = productDAO.selectById(1);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Selected Name: &quot; + oneProduct.getName());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // INSERT NEW DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;ProductType productType = new ProductType(&quot;Luxurious&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;productTypeDAO.insert(productType);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;Product newProduct = new Product(&quot;Angulas&quot;,&quot;Angulas de Aginaga&quot;, productType);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;productDAO.insert(newProduct);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Inserted id: &quot; + newProduct.getId());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after new insert&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllProducts(productDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // UPDATE DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; newProduct.setName(&quot;Piperrark&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; productDAO.update(newProduct);</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after update&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllProducts(productDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // DELETE DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; productDAO.delete(newProduct);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllProducts(productDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllProductTypes(productTypeDAO);</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; }</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>

@@ -1,0 +1,82 @@
+Leer y escribir en un fichero de texto con VB .NET es muy facil.<br>
+Las funciones constructoras tienen muchas mas <br>opciones de las que aqui se ven.<br>
+Este es un ejemplo encapsulado en una clase:
+<pre>
+Imports System.IO
+
+Public Class Fichero
+
+    'constructor por defecto
+    Public Sub New()
+        nombrefichero = "fichero.txt"
+    End Sub
+
+    'Constructor parametrizado
+    Public Sub New(ByVal nombre As String)
+        nombrefichero = nombre
+    End Sub
+
+    Private nombrefichero As String
+
+    'guardar: retorna todo el contenido
+    Public Function guardar(ByVal contenido As String) As String
+        Dim fichTMP As StreamWriter
+        Dim resultado As String
+        Dim car As Char
+
+        resultado = ""
+
+        Try
+            fichTMP = New StreamWriter(nombrefichero, True)
+            'metemos el primer salto de linea - opcional
+            'fichTMP.Write(13)
+
+            For Each car In contenido
+                fichTMP.Write(car)
+            Next
+
+            'fichTMP.Write(13) opcional, si dejamos esto seria como un writeline
+
+
+        Catch ex As Exception
+            resultado = ex.Message
+        Finally
+            If Not fichTMP Is Nothing Then
+                fichTMP.Close()
+                fichTMP = Nothing
+            End If
+        End Try
+
+        Return resultado
+
+    End Function
+
+
+    'cargar: retorna todo el contenido
+    Public Function cargar() As String
+        Dim fichTMP As StreamReader
+        Dim resultado As String
+
+        resultado = ""
+
+        Try
+            fichTMP = New StreamReader(nombrefichero)
+            'fichTMP
+            resultado = fichTMP.ReadToEnd()
+
+
+        Catch ex As Exception
+            resultado = ex.Message & " Error al leer de: " & nombrefichero
+        Finally
+            If Not fichTMP Is Nothing Then
+                fichTMP.Close()
+                fichTMP = Nothing
+            End If
+        End Try
+
+        Return resultado
+
+    End Function
+End Class
+
+</pre>

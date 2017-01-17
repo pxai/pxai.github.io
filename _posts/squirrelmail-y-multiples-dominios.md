@@ -1,0 +1,62 @@
+Imaginemos que tenemos un servidor de correo con sendmail y <br>multiples dominios. Para distinguir las cuentas con mismo nombre y distinto dominio hemos creado las cuentas  asi:<br>
+info@dominio.com -> cuenta unix: infor.dominio.com<br>
+info@otrodominio.com -> cuenta unix: info.otrodominio.com<br>
+Dentro de sendmail usamos el mecanismo virtusertable para mapear
+las direcciones de email con las cuentas reales<br>
+
+Pero como se configura squirrelmail para que distinga esto
+
+<pre>
+// pello - dentro de src/compose.php
+// en la funcion:  function deliverMessage, justo debajo de la declaracion de globales
+// pello - hack para que ponga bien el from en un entorno multidominio con virtusertable
+
+// Vale, llega a la funcion deliverMessage la variable que contiene el usuario completo
+// por ejemplo: usuario.ejemplo.net
+
+$valores =  spliti ( ".", $username );
+
+// array que contiene los dos ultimas palabras.
+// OJO solo sirve para dominios simples, no de tercer nivel
+$dominio_t = array_slice($valores,count($valores)-2,2);
+
+// Array que toma el valor de nombre
+$direccion_t = array_slice($valores,0,count($valores)-2);
+
+// Guarda en una variable el dominio completo
+for ($i = 0; $i <= count($dominio_t); $i++) {
+        if ($i != 0 && $i != count($dominio_t)) {
+            $dominio .= "." . $dominio_t[$i];
+        } else {
+            $dominio .= $dominio_t[$i];
+        }
+}
+
+// Guarda en una variable el nombre completo sin dominio
+for ($i = 0; $i <= count($direccion_t); $i++) {
+        if ($i != 0 && $i != count($direccion_t)) {
+            $direccion .= "." . $direccion_t[$i];
+        } else {
+            $direccion .= $direccion_t[$i];
+        }
+}
+
+// reconstruye la direccion
+$email_real = $direccion ."@".$dominio;
+
+// mas adelante se asigna $email_real dentro de los if
+// $full_name = $email_real;
+//       $from_mail = $email_real;
+//       $from_addr = $email_real;
+//       $reply_to = $from_mail;
+
+// y tambien en el Contexto:
+//    $rfc822_header->from = $rfc822_header->parseAddress($from_mail,true);
+//    if ($full_name) {
+//        $from = $rfc822_header->from[0];
+</pre>
+
+<b>ATENCION COPYPASTEROS</b><br>
+Estas modificaciones estan echas deprisa y corriendo y de manera poco elegante<br>
+Basta con que haya direcciones tipo email@dominio.tercernivel.com para que
+no funciones. Revisar para cada caso.<br>

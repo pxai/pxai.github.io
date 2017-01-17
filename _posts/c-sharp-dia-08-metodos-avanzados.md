@@ -1,0 +1,201 @@
+Vamos a ver algunas opciones interesantes que tienen los mÃƒÂ©todos en C#.
+Para empezar, no podÃƒÂ­a faltar la sobrecarga:
+<pre>
+/**
+* Sobrecarga.cs
+* Clase que muestra como aplicar sobrecarga en mÃƒÂ©todos
+* de una clase. La sobrecarga consiste en crear varios mÃƒÂ©todos con el mismo
+* nombre pero con distintos parÃƒÂ¡metros.
+*/
+
+using System;
+
+// Vamos a declarar esto dentro del un espacio de nombres
+namespace Calculadoras
+{
+	
+ public class Calculadora 
+ {
+
+	string nombre;
+	
+	// MÃƒÂ©todo constructor
+	public Calculadora ()
+	{
+	}
+	
+	// MÃƒÂ©todo constructor SOBRECARGADO
+	public Calculadora (string nombre)
+	{
+		this.nombre = nombre;
+	}
+	
+	// MÃƒÂ©todo para sumar dos valores, enteros
+	public int sumar(int x, int y) 
+	{
+		return (x + y);
+	}
+	
+	// El mismo mÃƒÂ©todo, SOBRECARGADO con otros parÃƒÂ¡metros
+	public double sumar(double x, double y)
+	{
+		return (x + y);
+	}
+	
+	// El mismo mÃƒÂ©todo, SOBRECARGADO con otros parÃƒÂ¡metros
+	public decimal sumar(decimal x, decimal y)
+	{
+		return (x + y);
+	}
+
+	
+	// FunciÃƒÂ³n principal, para hacer pruebas
+	public static void Main ()
+	{
+		int a, b;
+		double v, w;
+		
+		a = b = 6;
+		v = 9.66;
+		w = 14.666;
+		
+		Calculadora calculadora = new Calculadora("Pexas Instruments");
+		
+		System.Console.WriteLine("Sumando a y b = {0}", calculadora.sumar(a, b));
+		System.Console.WriteLine("Sumando v y w = {0}", calculadora.sumar(v, w));
+				
+	}
+ }
+ 
+} // fin de namespace
+</pre>
+TambiÃƒÂ©n podemos pasar un nÃƒÂºmero variable de argumentos, y si se declaran de tipo object pueden contener cualquier cosa.
+<pre>
+/**
+* ParametrosVariables.cs
+* Clase que muestra la forma de poder pasar un nÃƒÂºmero variable de parÃƒÂ¡metros
+* a una funciÃƒÂ³n
+*/
+
+using System;
+
+
+// Vamos a declarar esto dentro del mismo espacio de nombres
+// para importar la SuperCalculadora en otra clase tendrÃƒÂ­amos que usar using Calculadoras
+namespace Calculadoras
+{
+	
+ public class SuperCalculadora
+ {
+		string nombre;
+		
+	// MÃƒÂ©todo constructor
+	public SuperCalculadora (string nombre)
+	{
+		this.nombre = nombre;
+	}
+	
+	// Sumador con numero de parametros variable: params int[]
+	public int sumar(params int[] argumentos) 
+	{
+		int resultado = 0;
+		int i;
+		
+		// Recorremos los argumentos y vamos sumando
+		for (i = 0; i < argumentos.Length; i++)
+		{
+			resultado += argumentos[i];
+		}
+		
+		return resultado;
+	}
+	
+	// Comprobamos variables con numero de parametros de CUALQUIER TIPO
+	public void valores(params object[] argumentos) 
+	{
+		int i;
+		
+		// Recorremos los argumentos y vamos sumando
+		for (i = 0; i < argumentos.Length; i++)
+		{			
+			System.Console.WriteLine("Nos han pasado {0}: {1}", i, argumentos[i]);
+		}
+	}
+	
+	
+	// FunciÃƒÂ³n principal, para hacer pruebas
+	public static void Main (string[] argumentos)
+	{
+		int i;
+		
+		// Vamos a controlar que al menos se pasa un parametro
+		if (argumentos.Length < 1)
+		{
+			System.Console.WriteLine("Pasa algÃƒÂºn parÃƒÂ¡metro por favor");
+			return;
+		}
+		
+		// Vamos a comprobar los parametros pasados como argumento al programa
+		for(i = 0; i < argumentos.Length; i++)
+		{
+			System.Console.WriteLine("Parametros pasados{0}: {1}", i, argumentos[i]);		
+		}
+		
+		// Instanciamos la calculadora y vamos a ver
+		SuperCalculadora calculadora = new SuperCalculadora(argumentos[0]);
+		
+		System.Console.WriteLine("Sumando valores = {0}", calculadora.sumar(4,5,11,87,23));
+		System.Console.WriteLine("Sumando valores = {0}", calculadora.sumar(66, 47));
+
+		calculadora.valores(66.6, -47, "Hola", true);
+		calculadora.valores(false, 29, "que tal", 31, 0, -19, "Como mola");				
+	}
+ }
+ 
+} // fin de namespace
+</pre>
+Y por ÃƒÂºtlimo, vemos otra vez los mÃƒÂ©todos estÃƒÂ¡ticos y el uso de otros espacios de nombres. Para que este ejemplo funcione hay que comentar el mÃƒÂ©todo Main de los cÃƒÂ³digos anteriores.
+<pre>
+/**
+* Estatico.cs
+* Vemos el uso de una clase que se usa directamente, sin necesidad
+* de crear instancias, como Console.
+* Para conseguirlo se usan mÃƒÂ©todos static
+* De paso vemos como invocar el namespace de las calculadoras
+* Para compilar: csc Estatico.cs ParametrosVariables.cs, para ejecutar: Estatico.exe
+*/
+
+using System;
+// Podemos  incluir otra librerÃƒÂ­a con using, pero si sus clases
+// tienen funciones  Main no nos dejarÃƒÂ¡
+using Calculadoras;
+
+
+public class Estatico
+{
+	// AquÃƒÂ­ vemos una Ã‚Â´mÃƒÂ©todo estatico que para usarse no 
+	// precisa que se instancie un objeto
+	public static void saluda()
+	{
+		System.Console.WriteLine("Que tal andamos");
+	}
+	
+	public static int sumar(params int[] valores)
+	{
+		SuperCalculadora sCalculadora = new SuperCalculadora("Desde Estatico");
+		
+		// Invocamos el mÃƒÂ©todo que nos ofrece SuperCalculadora
+		return sCalculadora.sumar(valores);
+	}
+	
+	// Clase principal
+	public static void Main ()
+	{
+		// Invocamos el mÃƒÂ©todo directamente
+		Estatico.saluda();
+		
+		System.Console.WriteLine("Si sumamos sale {0}", Estatico.sumar(15,69,33));
+	}
+
+}
+</pre>

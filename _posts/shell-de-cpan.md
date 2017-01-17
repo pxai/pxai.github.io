@@ -1,0 +1,49 @@
+..o como instalar modulos perl comodamente.<br>
+Ya se sabe, esta web se usa para anotar las tipicas cosas que siempre se olvidan.
+Un de ellas es invocar el shell CPAN.
+Que es eso del CPAN? no, no es el codigo fuente de una barra de pan.
+
+<br>
+Se trata del Comprehensive Perl Archive Network, el mega repositorio de modulos
+perl.
+Existen modules perl para todo. No es necesario listarlos, se puede contar con que existe todo lo que necesitas.
+
+<br>
+Muchas veces necesitamos uno de esos modulos y no vienen con la distribucion de turno.
+Vaya, que haces un apt-get y no cuela. Y lo que es mas rollo, a veces ese modulo depende de otros.
+
+<br>
+De forma manual podemos ir a http://search.cpan.org y buscar el modulo que necesitemos.
+Nos bajamos la fuentes y siempre se hace lo mismo:
+
+<pre>
+tar zxfp modulo.tar.gz
+cd modulo
+perl Makefile.PL
+make
+make install
+</pre>
+
+
+Para facilitar las tareas de instalacion de modulos perl disponemos del shell CPAN
+que se invoca asi:
+
+<pre>
+perl -MCPAN -e shell
+</pre>
+
+La primera vez que lo ejecutemos nos pedira un huevo de datos, pero no hay que preocuparse mucho,
+quiza convenga elegir un buen mirror "cercano" (la cercania en internet es muy relativa). Por ejemplo
+si estas en la uni tienes que tirar de rediris, eso es de cajon.
+<br>
+Una vez configurado ya estamos en el shell de cpan. Y desde ahi ya podemos instalar lo que 
+queramos sin que nos ponga pegas, y resolviendo dependencias.
+
+<br>
+
+<u>cpan</u><br>
+
+Y si queremos instalar el module Net-SNMP hacemos:<br>
+<pre>
+<u>cpan</u> install Net::SNMP
+</pre>

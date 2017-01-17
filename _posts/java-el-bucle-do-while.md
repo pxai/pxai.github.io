@@ -1,0 +1,77 @@
+<p>
+	JavaJutsu: el bucle do while</p>
+<p>
+	Esto es lo mismo que en c. El bucle do while es una iteraci&oacute;n que al menos se ejecuta una vez.</p>
+<p>
+	/**<br />
+	* DoWhile<br />
+	* Clase que muestra los bucles while<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac DoWhile.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java DoWhile<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase DoWhile<br />
+	* Muestra el uso de bucles do while. Este tipo de bucles<br />
+	* es como el while, repiten unas sentencias mientras una condici&oacute;n sea verdadera<br />
+	* pero en su caso la primera iteraci&oacute;n sucede siempre ya que la condici&oacute;n se comprueba<br />
+	* al final.<br />
+	* Formato:<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sentencias;<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} while();<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class DoWhile {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a comprobar si un n&uacute;mero es primo<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para eso hay que verificar que solo es divisible<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por si misma o por 1.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero, anterior;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Les asignamos a las dos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero = anterior = 7;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para guardar el resultado<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;boolean esPrimo = true; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ejecutamos el do-while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;anterior--;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (numero % anterior == 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;esPrimo = false;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} while(anterior &gt; 2 &amp;&amp; esPrimo);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Mostramos el resultado<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (esPrimo)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Este numero: &quot; + numero + &quot; es primo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;else<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Este numero: &quot; + numero + &quot; NO es primo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

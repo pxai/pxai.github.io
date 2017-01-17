@@ -1,0 +1,254 @@
+<p>
+	&nbsp;</p>
+<div>
+	<strong>Intro a la DI</strong></div>
+<div>
+	Una de las mayores ventajas de las pruebas unitarias, m&aacute;s incluso que la posibilidad de testear las aplicaciones es sin duda el hecho&nbsp;de que desarrollar las pruebas unitarias te lleva de manera irremediable a desarrollar un mejor c&oacute;digo: como poco te obliga a crear&nbsp;clases con m&eacute;todos que hacen una tarea muy concreta. Tambi&eacute;n est&aacute; la posibilidad de desarrollar partiendo de las pruebas (TDD) con un par.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Muchas veces cuando tratas de aprender algo una cosa lleva a la otra. Si tratas de profundizar en frameworks como mockito &nbsp;para falsear objetos en los tests unitarios (mock objects) cuando buscas ejemplos te empiezas a encontrar que necesitas ir m&aacute;s all&aacute;&nbsp;en el desacoplamiento de clases y aparece la DI (Dependency Injection). Y te encontrar&aacute;s con el cl&aacute;sico art&iacute;culo de Fowler</div>
+<div>
+	http://martinfowler.com/articles/injection.html que bueno en fin, es un gur&uacute; pero digamos que no es para todos los p&uacute;blicos.&nbsp;Fowler pone como ejemplo el framework Spring, una herramienta que ahora hace mil cosas pero cuya funci&oacute;n primigenia es facilitar&nbsp;la inyecci&oacute;n de dependencias.&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	Los or&iacute;genes de Spring se introducen por Rod Johnson en el libro Expert One-to-One: J2EE Design and Development,&nbsp;en especial en el cap&iacute;tulo 11 si mal no recuerdo. Ah&iacute; habla de los BeanFactories, el Application Context y de ficheros XML con los que&nbsp;generamos instancias y asignamos propiedades.</div>
+<div>
+	Bueno, yo lo que sugiero es echar un ojo a este ejemplo que es m&aacute;s simple:</div>
+<div>
+	&nbsp;</div>
+<div>
+	/**</div>
+<div>
+	* Representa a un mensajero de una empresa</div>
+<div>
+	* de mensajer&iacute;a.</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	* @greetz Taladros Friend&#39;s</div>
+<div>
+	*/</div>
+<div>
+	public class Mensajero &nbsp;{</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;private Furgoneta vehiculo = new Furgoneta();</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public Mensajero () {</div>
+<div>
+	&nbsp;}</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public void desplazarse () {</div>
+<div>
+	&nbsp; vehiculo.moverse();</div>
+<div>
+	&nbsp;}</div>
+<div>
+	&nbsp;</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	El mensajero necesita obviamente un veh&iacute;culo, y por tanto tiene un atributo que &eacute;l mismo</div>
+<div>
+	se encarga de instanciar. Hay un problema claro, y es que el Mensajero se limita a</div>
+<div>
+	desplazarse con una furgoneta y no podr&aacute; usar ning&uacute;n otro veh&iacute;culo. Encima no podremos</div>
+<div>
+	testear que realmente se llama al m&eacute;todo moverse() del atributo veh&iacute;culo que es privado.</div>
+<div>
+	A pesar de todo necesitamos que las clases hablen cooperen entre ellas pero debemos procurar</div>
+<div>
+	no acoplarlas tanto.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Para conseguir ese equilibrio usamos la DI que b&aacute;sicamente consiste en que esas dependencias se asignar&aacute;n</div>
+<div>
+	desde fuera de la clase Mensajero. Hay dos formas b&aacute;sicas de hacerlo, a trav&eacute;s de un par&aacute;metro en el constructor</div>
+<div>
+	o a trav&eacute;s de m&eacute;todos set. Adem&aacute;s no vamos a asignar una clase concreta sino un interfaz lo cual nos va a facilitar</div>
+<div>
+	dos cosas: poder meter distintos tipos de veh&iacute;culo (que deben implementar ese interfaz) y simplificar</div>
+<div>
+	el testeo del m&eacute;todo desplazarse.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Este ser&iacute;a el interfaz Veh&iacute;culo:</div>
+<div>
+	/**</div>
+<div>
+	* Interfaz para veh&iacute;culos</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	* @greetz Central</div>
+<div>
+	*/</div>
+<div>
+	public interface Vehiculo {</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public void moverse();</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	Y esta una implementaci&oacute;n de ese interfaz:</div>
+<div>
+	&nbsp;</div>
+<div>
+	/**</div>
+<div>
+	* Implementamos un veh&iacute;culo con la clase furgoneta.</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	* @greetz Tejedor</div>
+<div>
+	*/</div>
+<div>
+	public class Furgoneta implements Vehiculo {</div>
+<div>
+	&nbsp;private int deposito;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public void moverse() {</div>
+<div>
+	&nbsp; if (deposito &gt; 0)</div>
+<div>
+	&nbsp; &nbsp;deposito--;</div>
+<div>
+	&nbsp;}</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	Ahora cambiamos al mensajero por esto:</div>
+<div>
+	/**</div>
+<div>
+	* Representa a un mensajero de una empresa</div>
+<div>
+	* de mensajer&iacute;a. Version desacoplada</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	* @greetz Bar Taladros crew</div>
+<div>
+	*/</div>
+<div>
+	public class Mensajero &nbsp;{</div>
+<div>
+	&nbsp;</div>
+<div>
+	private Vehiculo vehiculo;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public Mensajero (Vehiculo vehiculo) {</div>
+<div>
+	&nbsp; this.vehiculo = vehiculo;</div>
+<div>
+	&nbsp;}</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;public void desplazarse () {</div>
+<div>
+	&nbsp; vehiculo.moverse();</div>
+<div>
+	&nbsp;}</div>
+<div>
+	&nbsp;</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	Ok, es muy simple como se puede apreciar. El veh&iacute;culo se asignara desde fuera. Y como se puede ver hasta ahora</div>
+<div>
+	no hemos creado clases complejas, todo tiende a POJOs, (Plain Old Java Objects). Con Spring, usando un fichero XML</div>
+<div>
+	podremos instanciar Veh&iacute;culo (un objeto de la clase Furgoneta) e inyectarla en una nueva instancia de Mensajero.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Aparte de conseguir desacoplar las clases, facilitaremos que se pueda testear el m&eacute;todo desplazarse, ya que ahora</div>
+<div>
+	tenemos acceso al Veh&iacute;culo que se utiliza, es un interfaz y podemos mockearlo o falsearlo en el test. Si lo que queremos</div>
+<div>
+	es comprobar que realmente se llama al m&eacute;todo moverse() hariamos algo as&iacute;:</div>
+<div>
+	&nbsp;</div>
+<div>
+	import static org.mockito.Mockito.*;</div>
+<div>
+	import org.junit.Test;</div>
+<div>
+	/**</div>
+<div>
+	* Testeando el M&eacute;todo desplazarse de Mensajero</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	* @greetz UUuuuOOooo</div>
+<div>
+	*/</div>
+<div>
+	public class MensajeroTest {</div>
+<div>
+	&nbsp;@Test</div>
+<div>
+	&nbsp;public void desplazarseLlamaAMoverse () {</div>
+<div>
+	&nbsp; // Creamos el mock para las pruebas</div>
+<div>
+	&nbsp; Vehiculo vehiculoFalso = mock(Vehiculo.class);</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; // Inyectamos esa instancia para la prueba</div>
+<div>
+	&nbsp; Mensajero mensajero = new Mensajero(vehiculoFalso);</div>
+<div>
+	&nbsp; mensajero.desplazarse();</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; // AHORA S&Iacute;, podemos verificar si se llama a moverse una vez</div>
+<div>
+	&nbsp; verify(vehiculoFalso, times(1)).moverse();</div>
+<div>
+	&nbsp;}</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	Bueno, <em>&quot;Talk!, Talk is for lovers Merlin!! I need a Spring sample to be King!!&quot;</em></div>
+<div>
+	Esto, ejem.. quiero decir que este post pretend&iacute;a introducir de alguna forma la DI o inyecci&oacute;n de dependencia</div>
+<div>
+	y tratar de vender los muchos beneficios de Spring que as&iacute; a botepronto se me ocurren tres:</div>
+<div>
+	&nbsp;- Desacoplar las clases y facilita que todo sean POJOs y te centres en el negocio</div>
+<div>
+	&nbsp;- Facilitar los tests unitarios</div>
+<div>
+	&nbsp;- Permite introducir los aspectos (AOP), cosa que es crema m&aacute;xima. Otro d&iacute;a.</div>

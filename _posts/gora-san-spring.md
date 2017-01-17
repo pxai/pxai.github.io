@@ -1,0 +1,340 @@
+<p>
+	Continuaci&oacute;n del anterior art&iacute;culo: <a href="http://www.pello.info/blog/viva-san-spring">viva San Spring</a>. <a href="http://code.google.com/p/erps-2dam-4vientos/source/browse/trunk/RunningBullsSpring/">C&oacute;digo en google code</a>.</p>
+<p>
+	El proyecto del encierro ten&iacute;a un problemilla, y era el acoplamiento de clases. En concreto la clase RunningOfBulls que se ten&iacute;a que preocupar de crear las instancias de los corredores y los toros. Lo que hemos hecho ahora es &quot;Springizar&quot; el proyecto con el objetivo de que cada clase se ocupe de sus cosas, as&iacute; que las instancias de los corredores y los toros ser&aacute;n inyectadas por Spring tal y como se defina en el fichero XML de spring.</p>
+<p>
+	<strong>Generando toros</strong></p>
+<p>
+	&nbsp;</p>
+<div>
+	Los generamos en el fichero XML. Para las properties de cada instancia usamos el prefijo &quot;p:&quot;. En los tres primeros metemos valores fijos, en los tres siguientes metemos valores aleatorios usando <strong>SpEL</strong>, un lenguaje propio de Spring que nos permite crear expresiones complejas. Con su sintaxis podemos crear expresiones matem&aacute;ticas, hacer referencias a objetos, a colecciones, etc...</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!-- We set fixed values to properties &nbsp;--&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull1&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_1&quot; p:weight=&quot;500&quot; p:speed=&quot;3&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull2&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_2&quot; p:weight=&quot;550&quot; p:speed=&quot;2&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull3&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_3&quot; p:weight=&quot;670&quot; p:speed=&quot;4&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!-- Now using SpEL sintax we set random values to properties --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull4&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_4&quot; p:weight=&quot;#{new java.util.Random().nextInt(500) + 200}&quot; p:speed=&quot;#{new java.util.Random().nextInt(6) + 1}&quot; &nbsp;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull5&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_5&quot; p:weight=&quot;#{new java.util.Random().nextInt(500) + 200}&quot; p:speed=&quot;#{new java.util.Random().nextInt(6) + 1}&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;bean id=&quot;bull6&quot; class=&quot;info.pello.runningbulls.Bull&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">p:name=&quot;SpringBull_6&quot; p:weight=&quot;#{new java.util.Random().nextInt(500) + 200}&quot; p:speed=&quot;#{new java.util.Random().nextInt(6) + 1}&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<p>
+	&nbsp;</p>
+<p>
+	A continuaci&oacute;n esos toros se agregan a modo de colecci&oacute;n en el Bean de RunningOfTheBulls:</p>
+<p>
+	<strong>Generando corredores</strong></p>
+<p>
+	A ver, esto no se puede crear tal y como se hac&iacute;a en el programa, ya que el programa creaba un n&uacute;mero aleatorio de instancias de Human, y eso es algo que en el XML no lo podemos simular, tendriamos que crear x instancias fijas.</p>
+<p>
+	As&iacute; que optamos por crear una clase que representa a la muchedumbre humana, y esa es la que utilizaremos para establecer la propiedad de los corredores humanos.</p>
+<p>
+	<strong>Clase&nbsp;<span style="font-family: 'courier new', courier, monospace; ">HumanCrowd</span></strong></p>
+<p>
+	&nbsp;</p>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.runningbulls;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Random;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Vector;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* It creates a crowd of human runners for the running</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Altadill</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz Snowden</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class HumanCrowd extends Vector&lt;Human&gt; {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; private int totalRunners;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; /**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* constructor, calls init to create the crowd</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @param total Runners to create</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; public HumanCrowd(int totalRunners) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.totalRunners = totalRunners;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; init();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; /**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* creates human runners Vector</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; private void init() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Random random = new Random();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // We create runners</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (int i = 0; i &lt; totalRunners; i++ ) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.add(new Human(&quot;Runner_&quot;+i,random.nextInt(6) + 1));</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>RunningOfTheBulls</strong></div>
+<div>
+	C&oacute;mo queda la clase? el m&eacute;todo init queda casi vac&iacute;o y hemos metido unos setters para las colecciones de toros y humanos. Esos setters los utilizar&aacute; Spring para inyectar las instancias.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">/**<br />
+		*<br />
+		*/<br />
+		package info.pello.runningbulls;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">import java.util.Random;<br />
+		import java.util.Vector;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">/**<br />
+		* Represents the crazy race that takes place in my hometown,<br />
+		* where 6 running bulls run through narrow streets crowded<br />
+		* with people from all around the world.<br />
+		*<br />
+		* @author Pello Altadill<br />
+		* @greetz my Blue mug<br />
+		*/<br />
+		public class RunningOfTheBulls {</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;private Vector&lt;Bull&gt; bulls;<br />
+		private Vector&lt;Human&gt; humanRunners;<br />
+		private Vector&lt;Human&gt; deadHumanCollection;<br />
+		private Random random;<br />
+		private int runnersOnRace;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;// These constants will never change...<br />
+		private final static int BULLS_IN_RACE = 6;<br />
+		public final static int RUNNING_DISTANCE = 850;<br />
+		public final static int STREET_WIDTH = 10;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * default constructor<br />
+		&nbsp; */<br />
+		public RunningOfTheBulls () {<br />
+		&nbsp; init();<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * init racers, both men and beasts<br />
+		&nbsp; */<br />
+		private void init () {<br />
+		&nbsp; random = new Random();<br />
+		&nbsp; deadHumanCollection = new Vector&lt;Human&gt;();<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * Here is where insanity is unleashed. The running of the bulls<br />
+		&nbsp; * is but a uncontrolled race where despite of your running skills<br />
+		&nbsp; * you&#39;re merged in a random events flow of unpredictable results.<br />
+		&nbsp; * Believe me, don&#39;t run.<br />
+		&nbsp; * Race will be considered finished when all the bulls reach the finish line.<br />
+		&nbsp; * When each of them arrives we take them off the bulls Vector.<br />
+		&nbsp; */<br />
+		public void makeThemRun () {<br />
+		&nbsp; do {<br />
+		&nbsp;&nbsp; // We make bulls run<br />
+		&nbsp;&nbsp; for (int i = 0; i &lt; bulls.size(); i++ ) {<br />
+		&nbsp;&nbsp;&nbsp; bulls.get(i).run();<br />
+		&nbsp;&nbsp;&nbsp; // remove if finished<br />
+		&nbsp;&nbsp;&nbsp; if (bulls.get(i).hasFinished()) {<br />
+		&nbsp;&nbsp;&nbsp;&nbsp; bulls.remove(i);<br />
+		&nbsp;&nbsp;&nbsp; }<br />
+		&nbsp;&nbsp; }</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp; // We make humans run for their lives<br />
+		&nbsp;&nbsp; for (int i = 0; i &lt; humanRunners.size(); i++ ) {<br />
+		&nbsp;&nbsp;&nbsp; humanRunners.get(i).run();<br />
+		&nbsp;&nbsp;&nbsp; if (isCaughtByBull(humanRunners.get(i))) {</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp; deadHumanCollection.add(humanRunners.get(i));<br />
+		&nbsp;&nbsp;&nbsp;&nbsp; humanRunners.remove(i);<br />
+		&nbsp;&nbsp;&nbsp;&nbsp; continue;<br />
+		&nbsp;&nbsp;&nbsp; }</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; // remove if finished<br />
+		&nbsp;&nbsp;&nbsp; if (humanRunners.get(i).hasFinished()) {<br />
+		&nbsp;&nbsp;&nbsp;&nbsp; humanRunners.remove(i);<br />
+		&nbsp;&nbsp;&nbsp; }<br />
+		&nbsp;&nbsp; }</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp; } while (!bulls.isEmpty());<br />
+		&nbsp;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;}<br />
+		&nbsp;</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * Tells us if human runner is caught by a bull<br />
+		&nbsp; * We consider that first if they are in the same coordinates<br />
+		&nbsp; * and a random value between 0 and 1.<br />
+		&nbsp; * @return<br />
+		&nbsp; */<br />
+		private boolean isCaughtByBull (Human human) {<br />
+		&nbsp; for (int i = 0; i &lt; bulls.size(); i++ ) {<br />
+		&nbsp;&nbsp; if (bulls.get(i).currentPosition().equals(human.currentPosition())) {<br />
+		&nbsp;&nbsp;&nbsp; System.out.println(&quot;Danger, &quot; + human.toString() + &quot; share same position with &quot; + bulls.get(i).toString());<br />
+		&nbsp;&nbsp;&nbsp; // caught or not?<br />
+		&nbsp;&nbsp;&nbsp; if (random.nextInt(2) == 0) { return true; }<br />
+		&nbsp;&nbsp; }<br />
+		&nbsp; }</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp; return false;<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * gives a report of Human caught by bulls<br />
+		&nbsp; * @return<br />
+		&nbsp; */<br />
+		public String deadReport () {<br />
+		&nbsp; String report = &quot;-- Wounded Humans Report --\n&quot;;<br />
+		&nbsp; for (Human human : deadHumanCollection) {<br />
+		&nbsp;&nbsp; report += human.toString() + &quot;\n&quot;;<br />
+		&nbsp; }</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp; report += &quot;TOTAL: &quot; + deadHumanCollection.size() + &quot;\n&quot;;<br />
+		&nbsp; return report;<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * @return the bulls<br />
+		&nbsp; */<br />
+		public Vector&lt;Bull&gt; getBulls() {<br />
+		&nbsp; return bulls;<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * @param bulls the bulls to set<br />
+		&nbsp; */<br />
+		public void setBulls(Vector&lt;Bull&gt; bulls) {<br />
+		&nbsp; this.bulls = bulls;<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * @return the humanRunners<br />
+		&nbsp; */<br />
+		public Vector&lt;Human&gt; getHumanRunners() {<br />
+		&nbsp; return humanRunners;<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<span style="font-family:courier new,courier,monospace;">&nbsp;/**<br />
+		&nbsp; * @param humanRunners the humanRunners to set<br />
+		&nbsp; */<br />
+		public void setHumanRunners(Vector&lt;Human&gt; humanRunners) {<br />
+		&nbsp; this.humanRunners = humanRunners;<br />
+		}<br />
+		}</span></div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		&nbsp;</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<strong>Spring AOP: introduciendo programaci&oacute;n orientada a aspectos.</strong><br />
+		El proyecto este tiene otro peque&ntilde;o problema, y es que est&aacute; lleno de mensajes<br />
+		que se sacan por pantalla. Las clases no tendr&iacute;an porqu&eacute; responsabilizarse de estar<br />
+		reportando continuamente lo que hacen, y esa y otras tareas transversales (logging, seguridad,...) debieran hacerse de forma externa. El AOP es otra vuelta de tuerca para desacoplar a&uacute;n m&aacute;s las clases y para que est&aacute;n se dediquen a su negocio y punto.</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		Para crear un aspecto necesitamos un par de cosillas: establecer el pointcut o momento del c&oacute;digo en el que se va a meter mano y luego establecer qu&eacute; clase y qu&eacute; metodo invocar en ese punto.</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		&nbsp;</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		En el fichero XML hemos declarado el uso de un aspecto para cuando los toros llamen al m&eacute;todo run:</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		<div style="word-wrap: break-word; white-space: pre-wrap; ">
+			<span style="font-family:courier new,courier,monospace;">&lt;aop:config&gt;<br />
+			&lt;aop:aspect ref=&quot;journalist&quot;&gt;<br />
+			&nbsp; &lt;aop:pointcut id=&quot;running&quot;<br />
+			&nbsp;&nbsp; expression=&quot;execution(* *.run(..))&quot; /&gt;<br />
+			&nbsp; &lt;aop:after pointcut-ref=&quot;running&quot;<br />
+			&nbsp;&nbsp; method=&quot;reportRunning&quot;/&gt;<br />
+			&lt;/aop:aspect&gt;<br />
+			&lt;/aop:config&gt;</span></div>
+		<div style="word-wrap: break-word; white-space: pre-wrap; ">
+			<br />
+			As&iacute; tenemos esta clase <strong>Journalist</strong> que se encargar&aacute; de sacar un aviso cada vez que se llame a run.</div>
+		<div style="word-wrap: break-word; white-space: pre-wrap; ">
+			Esto no es m&aacute;s que una prueba de concepto...</div>
+		<div style="word-wrap: break-word; white-space: pre-wrap; ">
+			<pre style="word-wrap: break-word; white-space: pre-wrap; ">
+package info.pello.runningbulls;
+
+/**
+ * The journalist is a kind of logger of the running.
+ * He will tell us about the events
+ * @author Pello Altadill
+ * @greetz Pedro J
+ */
+public class Journalist {
+	
+	/**
+	 * reports when a human is caught by a bull
+	 */
+	public void reportRunning () {
+		System.out.println(&quot;Running...&quot;);
+	}
+	
+}</pre>
+		</div>
+		<div style="word-wrap: break-word; white-space: pre-wrap; ">
+			&nbsp;</div>
+	</div>
+	<div style="color: rgb(0, 0, 0); word-wrap: break-word; white-space: pre-wrap; ">
+		&nbsp;</div>
+</div>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>

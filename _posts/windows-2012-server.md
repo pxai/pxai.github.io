@@ -1,0 +1,36 @@
+<img src="http://www.pello.info/images/w2012logo.jpg" alt="Logo de Windows2012" title="Logo de Windows2012" />
+<p>Con eso de escribir acerca de linux y de hacer bromas sobre lo horrible que es windows es muy común que de forma inmediata te encasillen como talibán linuxero. Más aún si eres fiel a Debian y despotricas de Ubuntu por estar hecho para ser fácil. Pero lo cierto es que ante la típica pregunta de un comercial de <i>¿Qué sistema es mejor?</i> o <i>¿qué lenguaje es mejor?</i> para mí la respuesta es tan clara como inconcreta: depende. Depende para qué. <i>¿Qué ordenador me compro?</i> pregunta el cuñado, pues lo mismo, depende para qué: ¿es para navegar por internet o para despiece de utillajes industriales y simulación de fatigas en 3D? Así como entre el colacao y el nesquick la opción está clara entre Windows y Linux pasa lo mismo ¿cuál es mejor? depende para qué los quieras. Además, hay muchos Windows... 
+</p>
+
+<h5>Una decada larga de cambios</h5>
+<p>Ya son muchas versiones de windows las que han pasado ante nuestros ojos. Personalmente con todas ellas siempre he tenido la misma impresión. Su rendimiento se degrada, un windows siempre va progresivamente volviéndose más torpe al menos como estación de trabajo normal. En cambio un linux tira siempre igual. Sin embargo al margen de esa experiencia también tengo una sensación de que a partir de la versión de windows 2000 Server, al menos en el ámbito del Server las cosas han ido mejorando. Y no solo eso, con la aparición del framework .NET se notó un cambio de estrategia al abrir el lenguaje c# como estándar y permitiendo que otros crearán su propia implementación (el caso de mono) que al final es una forma más inteligente de popularizar un lenguaje. <i>Algo se agita en Mordor</i> que diría el clásico.</p>
+
+
+
+<h5>Windows 2012 Server</h5>
+<img src="http://www.pello.info/images/w2012intro1.jpg" alt="La ventana del Server Manager al iniciarse Windows 2012" title="La ventana del Server Manager al iniciarse Windows 2012" />
+<p>La versión 2008 Server ya era cañera y esta 2012 viene a ser una afirmación actualizada que pretende recoger las ultimas tendencias en lo que a computación se refiere: el cloud computing, la virtualización (Hyper-V) y la customización del sistema. Vamos que no solamente es que tenga ese horrible interfaz de windows8. Hay más. Tenemos estas versiones principales:
+<ul>
+<li><b>Datacenter:</b> para grandes empresas que estén aplicando virtualización y cloud computing.</li>
+<li><b>Standar:</b> empresas medianas cuyos servidores están dentro de la propia organización.</li>
+<li><b>Essential:</b> medianas-pequeñas empresas hasta 25 usuarios</li>
+<li><b>Foundation:</b>lo que sería un SBS hasta 15 usuarios.</li>
+</ul>
+Cada uno tiene sus limitaciones en cuanto a número de procesadores, etc...
+</p>
+<h5>Los roles</h5>
+<img src="http://www.pello.info/images/w2012roles.jpg" alt="La ventana de gestión de roles de windows 2012" title="La ventana de gestión de roles de windows 2012" />
+
+<p>Otro elemento que resulta muy cómodo, que ya existía desde 2008 es el tema de aplicación de roles, que es una forma de simplificar la funcionalidad que queremos aplicar al servidor. Que lo queremos para DNS, pues le aplicamos ese rol. Que lo queremos para IIS, pues aplicamos ese rol. El rol puede traer consigo características y además herramientas administrativas. Siempre que las activemos o desactivemos windows nos avisará de las dependencias implicadas, que las puede haber. si tienes montada una infraestructura de virtualización puede ser interesante crear servidores que se dediquen a un rol concreto. Luego además con la herramienta de administración puedes agrupar los servidores por roles.</p>
+
+<h5>Un windows sin ventanas</h5>
+<p>Y por fin Windows tiene algo que siempre se le echaba en cara y es que hasta ahora era un sistema lastrado por un interfaz gráfico que a diferencia del mundo unix no era opcional. En el 2008 ya había un modo Core que contenía un interfaz gráfico mínimo. Pero ahora podemos tener un servidor Windows de consola ofreciendo servicios. Y lo que es mejor, es tan flexible que podemos pasar de la versión GUI a la core (es como se llama la versión de consola) con un comando, en ambas direcciones. Incluso también hay un estado intermedio con interfaz mínima, en la que no tenemos el escritorio pero podemos ejecutar programas vistuales (vamos, como cuando se estropeaba explorer.exe).
+Aquí vemos cómo desde la versión GUI, abriendo una ventana de PowerShell y ejecutando un comando se pasa al modo Core. Obviamente necesita unos minutos y requiere un reinicio.
+</p>
+<img src="http://www.pello.info/images/w2012cambio.jpg" alt="Cambiando a modo Core en windows 2012" title="Cambiando a modo Core en windows 2012" />
+
+<p>Una vez reiniciado, nos muestra una pantalla de login visual como en el GUI pero al validarse pasa a mostrarnos una consola. Si nos apabulla el tema podemos optar por el comando <code>sconfig</code> que es como un Server Manager pero de consola. Al menos será más rápido para apagar el servidor.</p>
+
+<img src="http://www.pello.info/images/w2012core.jpg" alt="El espartano interfez de windows 2012 Core" title="El espartano interfaz de windows 2012 Core" />
+
+<p>¿Y el PowerShell qué? aunque disponemos de los comandos DOS de toda la vida, el PowerShell 3.0 es algo que merecer toooda nuestra atención. Pero eso será otro día.</p>

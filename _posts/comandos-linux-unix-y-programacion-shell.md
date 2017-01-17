@@ -1,0 +1,7 @@
+<p>Hace un par de a&ntilde;os en el <a href="http://www.cuatrovientos.org">Instituto Cuatrovientos</a> de Pamplona montamos <a href="http://4party.cuatrovientos.org">una party</a> en la que hubo algunas charlas. En una de ellas se hizo un taller de consola donde se repasaron comandos linux y se introdujo la programaci&oacute;n shell. De ese taller realizado junto al gran I&ntilde;igo Tejedor se produjo un documento que resume los comandos de linux/unix y se proporciona una gu&iacute;a de iniciaci&oacute;n a la programaci&oacute;n de scripts de shell.</p>
+<p>&nbsp;</p>
+<ul>
+<li><a href="filez/shell/shell_linux.odt" title="Comandos linux unix y programaci&oacute;n scripts shell"><strong>Versi&oacute;n ODT</strong></a> de <em>Comandos linux unix y programaci&oacute;n scripts shell</em></li>
+<li><a href="filez/shell/shell_linux.pdf" title="Comandos linux unix y programaci&oacute;n scripts shell en pdf"><strong>Versi&oacute;n PDF</strong></a> de <em>Comandos linux unix y programaci&oacute;n scripts shell</em></li>
+<li><a href="filez/shell/shell_linux_html/shell_linux.html" title="Comandos linux unix y programaci&oacute;n scripts shell en HTML"><strong>Versi&oacute;n HTML online</strong></a> de <em>Comandos linux unix y programaci&oacute;n scripts shell</em></li>
+</ul>

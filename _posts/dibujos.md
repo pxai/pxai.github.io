@@ -1,0 +1,70 @@
+<table>
+<tr>
+<td>
+     <div align="left"> <br>
+        <b>Dibujos jar</b><br>
+        <table border="0">
+          <tr> 
+            <td> 
+              <p><b>Dibujos y comics</b></p>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr valign="top"> 
+                  <td width="43%">
+                    <p>Nota aclaratoria: <br>
+                      tenÃ­a dudas de si incluir o no esta secciÃ³n 
+                      en la web, ya que los contenidos de los dibujos podÃ­an 
+                      herir sensibilidades y no parecÃ­en el complemento 
+                      adecuado a un curriculum en el que se pretenda dar "cierta 
+                      imagen". Esta secciÃ³n es cumulo de "ciertas 
+                      imagenes". Considero el dibujo un arte y el comic por 
+                      extension tambiÃ©n lo es. En fin, tampoco me considero 
+                      un artista, no soy ningun experto en el arte y sus filosofias, 
+                      lo que si tengo claro y debo recordar, es que el comic <b>ES 
+                      UN ARTE TRANSGRESOR</b>. El propio nombre asÃ­ lo 
+                      indica (Comic). Por tanto, </p>
+					<table><tr><td aling="center">
+                    <center><b>AVISO</b></center>
+                      Si no tienes un mÃ­nimo de sentido del humor y la 
+                      mente minimamente abierta, mejor si sales de esta pÃ¡gina.
+					</td></tr></table>
+                  </td>
+                  <td width="57%"><img src="images/dibujo.jpg" width="277" height="363" alt="NeoRenteria?"></td>
+                </tr>
+              </table>
+              <p><br>
+              </p>
+              <br>
+              <ul>
+                <li><b>Comics</b></li>
+			<ul>
+			<li><a href="?q=node/view/7">Comics</a>
+				<p>
+				Los comics no los hago por nada en especial, es un simple entretenimiento
+				y dibujo lo que me da la gana. No suelo elaborar argumentos, mas que lo minimo
+				para poder llenar unas cuantas paginas. Lo que me entretiene es dibujar, no 
+				elaborar historias.
+				</p>
+			</li>
+			</ul>
+                <li><b>Dibujos</b></li>
+			    <ul>
+                  <li><a href="?q=node/view/8">Dibujos sueltos</a> 
+                    <p> Esto es una serie de dibujos sin ninguna relacion que he ido haciendo  
+						quiza a alguien le pueda gustar alguno de ellos, quien sabe. Por lo general
+						la tÃƒÂ©matica no es muy variada y los temas recurrentes, como en los comics.
+						Los dibujos asÃƒÂ­ se empiezan, se terminan y ya esta. Es una apetencia,
+						como quien se toma un cafe.
+					</p>
+                  </li>
+                </ul>
+			</ul>
+              <p>Â  </p>
+              </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+
+</td>
+</tr>
+</table>

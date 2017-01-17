@@ -1,0 +1,48 @@
+<p>
+	&nbsp;</p>
+<p style="margin-bottom: 0cm">
+	&nbsp;</p>
+<p style="margin-bottom: 0cm">
+	Mientras se meten comandos en una consola o sobre todo mientras programas en cualquier entorno o mientras ojeas documentaci&oacute;n o mientras haces todo eso a la vez puedes llegar poco a poco a un nivel de concentraci&oacute;n que en un entorno favorable puede llegar al <strong>deep hack</strong>.</p>
+<p style="margin-bottom: 0cm">
+	(http://catb.org/jargon/html/H/hack-mode.html)</p>
+<p style="margin-bottom: 0cm">
+	&nbsp;</p>
+<p style="margin-bottom: 0cm">
+	En cualquier trabajo si te interrumpen dicen que se tarda unos 10 minutos en volver a recuperar la concentraci&oacute;n. &iquest;C&oacute;mo se puede volver al trance de forma m&aacute;s &aacute;gil?</p>
+<p style="margin-bottom: 0cm">
+	&nbsp;</p>
+<p style="margin-bottom: 0cm">
+	Hay m&uacute;sica que quiz&aacute; pueda ayudar a alcanzar ese estado semim&iacute;stico. Hay mucho para elegir y por supuesto los gustos pueden variar, en mi caso me decanto por aquellas que m&aacute;s o menos siguen una misma pauta, es decir, NO me pongo un popurri de pachanga, heavy metal y cl&aacute;sica aleatoria.</p>
+<p style="margin-bottom: 0cm">
+	&Uacute;ltimamente le he echado una oreja a muchas bandas sonoras de pel&iacute;culas y videojuegos y hay aut&eacute;nticas joyas que pueden allanar el camino hacia el hack mode.</p>
+<p style="margin-bottom: 0cm">
+	Por si le sirve a alguien de inspiraci&oacute;n aqu&iacute; pongo una lista de &aacute;lbumes que suelo utilizar mientras le doy a la tecla:</p>
+<p style="margin-bottom: 0cm">
+	&nbsp;</p>
+<p style="margin-bottom: 0cm">
+	- OST Warhammer Spacemarine, la banda sonora del videojuego.</p>
+<p style="margin-bottom: 0cm">
+	- OST Inception, la banda sonora de Origen.</p>
+<p style="margin-bottom: 0cm">
+	- OST Prometheus, la peli en fin, la BSO cojonuda.</p>
+<p style="margin-bottom: 0cm">
+	- OST Silent Hill 1, el videojuego. Algo enfermizo, para trances profundos ;)</p>
+<p style="margin-bottom: 0cm">
+	- OST El Ilusionista</p>
+<p style="margin-bottom: 0cm">
+	- OST Alien &amp; OST Aliens</p>
+<p style="margin-bottom: 0cm">
+	- OST Conan the Destroyer</p>
+<p style="margin-bottom: 0cm">
+	- OST Magic, no confundir con las cartas de los cojones, es una peli antigua de Anthony Hopkins</p>
+<p style="margin-bottom: 0cm">
+	- Death Metal T&eacute;cnico: Necrophagist, sus dos &uacute;ltimos discos</p>
+<p style="margin-bottom: 0cm">
+	- Death Metal T&eacute;cnico: Gorod, Process of a new Decline</p>
+<p style="margin-bottom: 0cm">
+	- Death Metal T&eacute;cnico: A Loathing Requiem, Psalms of Misanthropy</p>
+<p style="margin-bottom: 0cm">
+	- Trash Metal: Angelus Apatrida, The Call</p>
+<p style="margin-bottom: 0cm">
+	- Heavy Metal: Children of Bodom, sobre todo el Hatebreeder y el Follow the Reaper&nbsp;</p>

@@ -1,0 +1,8 @@
+<p>
+	<a href="http://www.chaos.cx" target="_blank"><img alt="Logotipo del chaos" src="http://www.chaos.cx/images/chaoslogo.jpg" style="width: 130px; height: 38px; " /></a></p>
+<p>
+	En la url <a href="http://chaos.cx" target="_blank">http://www.chaos.</a>cx he colgado un experimento que sirve para compartir contenidos de forma an&oacute;nima, p&uacute;blica o&nbsp;privada: ya sean enlaces, fotos, v&iacute;deos, etc..</p>
+<p>
+	Todav&iacute;a es una versi&oacute;n <strong>prealfa y los errores</strong> campan a sus anchas.</p>
+<p>
+	Esta montado sobre una especie de framework que no merece tal nombre, en php+mysql y todo el c&oacute;digo est&aacute; alojado en <a href="https://github.com/pxai/chaos" target="_blank">github</a></p>

@@ -1,0 +1,45 @@
+<pre>
+1.- Enlaces
+* Tutorial de InyecciÃƒÂ³n SQL
+http://foro.elhacker.net/index.php/topic=98448.0.html
+
+* Manual de XSS
+http://foro.elhacker.net/index.php/topic=98324.0.html
+
+*[3] CERT. CERT Advisory CA-2000-02: Malicious HTML Tags Embedded in Client Web Requests, February 2000.
+http://www.cert.org/advisories/CA-2000-02.html.
+
+*[6] Peter W. Cross-Site Request Forgeries, 2001.
+http://www.securityfocus.com/archive/1/191390.
+
+*[2] Rain Forest Puppy. NT Web Technology Vulnerabilities. Phrack
+Magazine, 8, December 1998. http://www.phrack.org/phrack/54/P54-08.
+
+
+* HTML injection by example
+http://www.unixwiz.net/techtips/sql-injection.html
+
+* SQL injection walkthrough
+http://www.securiteam.com/securityreviews/5DP0N1P76E.html
+
+* Advanced SQL injection
+http://www.nextgenss.com/papers/more_advanced_sql_injection.pdf
+
+2.- Bibliografia
+* Addison.Wesley.-.Web.Hacking.-.Attacks.And.Defense
+* McGraw.Hill.Hacking.Exposed.Web.Applications
+
+3.- Papers
+
+*Session Riding
+http://www.securenet.de/papers/Session_Riding.pdf
+* Comun
+http://www.webappsec.org/projects/articles/062105.shtml
+
+4.- Webs
+www.securityfocus.com
+www.cert.org
+www.elhacker.org
+www.phrack.org
+
+</pre>

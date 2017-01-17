@@ -1,0 +1,23 @@
+<a href="http://www.pello.info/filez/labs/hipstered/index.html" title="try hipstered editor for free ;)" target="_new">
+<img src="http://www.pello.info/filez/labs/hipstered/img/logoxsmall.png" alt="Hipstered logo" title="Hipstered logo" />
+</a>
+<p>Como decía en la sección de proyectos, aunque algunos no estén desarrollados si la idea te sirve pues adelante. Este es uno de esos proyectos que querría haber terminado pero al menos de momento será complicado. Es el típico que si le dedicas un finde a saco lo sacas pero por desgracia no cuento con ese lujo. Lo que ahora mismo funciona no tiene nada de novedoso, pero lo que quiero añadir igual sí. Se trata de un editor de código web para navegador (hasta ahí nada novedoso):</p>
+
+<h5>hipstered: tan hipster que nadie lo usa.</h5>
+<img src="http://www.pello.info/images/hipstered1.png" alt="hipstered con varios ficheros abiertos" title="hipstered con varios ficheros abiertos" />
+<p>A ver que nadie se tome en serio lo de las gafas de pasta y mofarse de los frontenders. De hecho tras ver lo que se puede hacer con unas gafas de pasta al final del Padrino III prefiero no bromear al respecto. Como se puede apreciar el editor tiene el típico sistema de pestañas como cualquier editor de código. El código se destaca gracias a uno de tantos syntax highlighter que existen, este en concreto era codemirror, que va muy bien y tiene mil opciones. Por detrás hay javascript+jquery que básicamente se encarga de gestionar un array de <i>ficheros</i> y todo el tema de simular las pestañas, pestañas activas, etc.. que ha sido un poco rollo. Está todo hecho del tirón y necesita refactorizar por todas partes.
+</p>
+
+<h5>¿Qué más se puede hacer?</h5>
+<p>Existen un montón de editores de código que utilizan el navegador, algunos cañeros como <a href="https://c9.io/">cloud9</a>, otros más de aquí te pillo aquí te mato como <a href="http://jsfiddle.net/">jsfiddle</a>. Mi idea era crear este proyecto de editor como una aplicación que pudiera funcionar offline y que aprovechará el potencial de HTML5. Porque claro... si funciona offline ¿dónde guardamos los ficheros? Estas son algunas de las ideas que quedan pendientes añadir al hipstered:
+<ul>
+<li><b>Salvar ficheros en IndexedDB</b>: sin salir del navegador podriamos tener los ficheros guardados en nuestro equipo.</li>
+<li><b>Simular un sistema de ficheros en IndexedDB</b>: una tabla en la que haya carpetas virtuales y ficheros y un campo carpeta_padre. O incluso proyectos. Fácilmente.</li>
+<li><b>Configuraciones de usuario con LocalStorage/SessionStorage</b>: se puede meter usuario/contraseña, preferencias de aplicación</li>
+<li><b>IndexedDB guarda versiones</b>: la BBDD es a la vez un repositorio de software perfecto.</li>
+<li><b>Posibilidad de guardar en la nube</b>: o sincronizar todo lo que hay en indexedDB con un sitio remoto, por ejemplo a un servidor Node.js + MongoDB.</li>
+<li><b>Añadir websockets</b>: para trabajo en grupo. Aunque no se pueden intercambiar binarios, si se codifican... oh cielos, se me acaba de ocurrir otra cosa.</li>
+</ul>
+</p>
+<img src="http://www.pello.info/images/hipstered2.png" alt="hipstered en acción" title="hipstered en acción" />
+<p>Pues eso, <a href="http://www.pello.info/filez/labs/hipstered/index.html" target="_new">tal cual está ahora</a> es una tontería, un juguete. Pero metiéndole esas cosillas se puede conseguir una aplicación HTML5 principalmente offline más o menos útil. Con un poco de tiempo... Si quieres cacharrear y horrorizarte, <a href="http://www.pello.info/filez/labs/hipstered.tgz" title="descargar hipstered">te lo puedes bajar aquí</a></p>

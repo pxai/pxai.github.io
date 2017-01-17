@@ -1,0 +1,254 @@
+<img src="http://www.pello.info/images/sir2.jpg" alt="Javascript object like a sir" title="Javascript like a sir" />
+<p>In this post I will introduce Javascript objects, how to define them, how to add attributes and methods and how to access them. Maybe you have heard that Javascript is an object oriented language but that definition is not very precise, specially when comparing to other languages. There are no classes! (and it is considered a prototypal object oriented language). Anyway now we will dip our toes into the waters just a little to become familiar with the notation. Prototypes, inheritance and other advance stuff will come next.</p>
+
+<h4>Creating an object</h4>
+<p>Did you read well? We are creating an object, not a class. Hey, this looks like a JSON String. You know what? JSON stands for JavaScript Object Notation, it has nothing to do with the argonauts or that amiable chap of Camp Crystal Lake. Basically you put key-value pairs inside curly brackets, where values can be any kind of js data: number, boolean, string, arrays, functions or even objects</p>
+<pre class="brush: js;">
+// One single object
+var oneUser = {
+  login : 'falken',
+  password : 'josua'
+};
+
+typeof oneUser;
+
+otherUser = oneUser;
+
+otherUser.login = 'root';
+// Other way to access property
+oneUser['password'] = '1234';
+
+// The reference to the same!
+console.log('One: ')
+console.log(oneUser);
+console.log('Other: ');
+console.log(otherUser);
+
+Object { login="root",  password="1234"}
+Object { login="root",  password="1234"}
+</pre>
+
+<p>As you can see both oneUser and otherUser variables hold a reference to the same object.</p>
+
+<h4>Keys with quotes or not</h4>
+<p>We can leave out quotes, unless we want to use a key with special charactes, blank spaces, etc.. In the next example we can see how to reach attributes in two different ways and how to deal with nested objects.</p>
+
+<pre class="brush: js;">
+var oneCustomer = {
+  name : 'John Doe',
+  'Customer address' : 'c/ unknown',
+  '-+-+-+' : 'wtf',
+  payment : { ptype : 'Visa',
+             card  : '33442324234',
+             'expiry date' : 'never'
+            }
+};
+
+console.log(oneCustomer);
+
+oneCustomer['name'] = '';
+oneCustomer['-+-+-+'] = 'Something';
+oneCustomer.payment['ptype'] = 'Account';
+oneCustomer['payment'].card = '666';
+oneCustomer['payment']['expiry date'] = 0;
+
+console.log(oneCustomer);
+</pre>
+
+<h4>Functions as data</h4>
+<p>Ok, if we want these objects to behave as objects in other languages, we should add some code to them. Easy peasy.</p>
+
+<pre class="brush: js;">
+var student = {
+  id : 2,
+  name : 'John Doe',
+  sayHello : function () {
+              return 'Hello';
+            }
+}
+
+console.log(student);
+console.log(student.sayHello());
+
+Hello
+</pre>
+
+<p>By now maybe you have realized that Javascript hashtables are in fact objects</p>
+
+<h4>Adding more properties and methods</h4>
+<p>Why not? Javascript is interpreted and weakly typed. But don't get confused. We are still playing with objects, not with classes. When we want to extend attributes of functions to a class we can use prototype (not covered yet).</p>
+
+<pre class="brush: js;">
+...
+// Adding new properties and methods:
+student.age = 28;
+student.sayGoodbye = function () { return 'bye';};
+
+console.log(student.sayGoodbye());
+bye
+</pre>
+
+<h4>this</h4>
+<p>The well-known this is available too in Javascript. It refers current object. It comes in handy when we need to refer to our own properties in the object functions.</p>
+<p>This operator referes to current object</p>
+<pre class="brush: js;">
+var invoice = {
+  description : 'Sample invoice',
+    price:100.0,
+    vat: 5.0,
+  subtotal : function () {
+              return this.price;
+            },
+  total : function () {
+              return this.price + ((this.price * this.vat)/100);
+            }
+}
+
+console.log(invoice);
+console.log(invoice.total());
+
+</pre>
+
+<h4>Constructors</h4>
+<p>Ok, we have been playing around with single instances, but what if we want to create different instances of the same kind of object. There is no class keyword, but we can define a constructor function and the call it using new reserved word to create a fresh new instance. </p>
+
+<p>The next example shows a class of a kind in Javascript. It is a function with the name starting with uppercase (a convention to make it clear that this is not an ordinary function but a constructor), and inside we just add attributes and functions.</p>
+<pre class="brush: js;">
+/**
+* constructor for Web objects
+*/
+function Web () {
+  this.url = 'http://localhost';
+  this.name = 'Localhost';
+  this.showInfo = function () {
+    return this.url + ': ' + this.name;
+    }
+}
+
+var oneWeb = new Web();
+oneWeb.url = 'http://www.pello.info';
+oneWeb.name = 'Home sweet home';
+
+console.log(oneWeb);
+console.log(oneWeb.showInfo());
+
+var otherWeb = new Web();
+otherWeb.url = 'http://www.elmundo.es';
+otherWeb.name = 'El Mundo';
+
+console.log(otherWeb);
+console.log(otherWeb.showInfo());
+</pre>
+
+<p>Calling this function with new will create different instances.</p>
+
+<h4>Constructor with arguments</h4>
+<p>Being a function, adding arguments to the constructor is pretty straightforward.</p>
+
+<pre class="brush: js;">
+/**
+* constructor for Web objects
+*/
+function Web (url, name) {
+  this.url = url;
+  this.name = name;
+  this.showInfo = function () {
+    return this.url + ': ' + this.name;
+    }
+}
+
+var oneWeb = new Web('http://www.pello.info','Home sweet home');
+
+console.log(oneWeb);
+console.log(oneWeb.showInfo());
+
+var otherWeb = new Web('http://www.elmundo.es','El Mundo');
+
+console.log(otherWeb);
+console.log(otherWeb.showInfo());
+
+</pre>
+
+<h4>constructor property and instanceof operator</h4>
+<p>Every object has at least a constructor property that we can check. Also, we can check if an object is an instance of certain type. I'm reluctant to say class.</p>
+
+<pre class="brush: js;">
+typeof oneWeb;
+"object"
+
+oneWeb.constructor;
+Web(url, name)
+
+// Instance of operator
+if (oneWeb instanceof Web) {
+    console.log('Instance of Web');
+}
+</pre>
+
+<h4>Factory</h4>
+<p>Do you prefer factories to create instances? just create a function that returns an object.</p>
+
+<pre class="brush: js;">
+function factory (title,text) {
+  return {
+    title : title,
+    text : text,
+    show: function () {
+              return title + ': ' + text;
+           }
+  };
+}
+
+var comment = factory('sample','bla bla');
+var comment2 = factory('sample2','bla2 bla2');
+var comment3 = factory('sample2','bla2 bla2');
+
+comment.title = 'Other';
+console.log(comment);
+console.log(comment.show());
+
+console.log(comment2);
+console.log(comment2.show());
+</pre>
+
+<h4>Equality</h4>
+
+<p>Are two object equals? Not at all, the equality refers to be the same reference, that is, to point to the same object.</p>
+
+<pre class="brush: js;">
+// Both of these are not equals
+if (comment2 == comment3) {
+    console.log('Are equals ==');
+} else {
+    console.log('Are not equals ==');
+}
+Are not equals ==
+
+if (comment2 === comment3) {
+    console.log('Are equals ===');
+} else {
+    console.log('Are not equals ===');
+}
+Are not equals ===
+</pre>
+
+<p>Now by reference turns out to be... true</p>
+
+<pre class="brush: js;">
+var comment4 = comment3;
+
+if (comment3 == comment4) {
+    console.log('Are equals ==');
+} else {
+    console.log('Are not equals ==');
+}
+Are equals ==
+if (comment3 === comment4) {
+    console.log('Are equals ===');
+} else {
+    console.log('Are not equals ===');
+}
+Are equals ===
+</pre>
+
+<p>That's all for today. Object oriented Javascript is a hard road at first, but the payoff is worth it. Or so they say, greetz ;)</p>

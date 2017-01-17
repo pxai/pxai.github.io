@@ -1,0 +1,85 @@
+<table>
+<tr>
+<td>
+Al mysql se le pueden variar ciertas variables para que soporte mas conexiones simultaneas,
+etc.. tal y como se explica <a href="http://www.siliconvalleyccie.com/linux-adv/mysql.htm">aqui</a>.
+
+Todo se reduce a modificar los valores de /etc/my.cnf
+
+Estan muy bien unos ficheros de ejemplo que trae la propia distribucion.
+Se puede buscar por nombre:
+`my-huge.cnf', `my-large.cnf', `my-medium.cnf', y `my-small.cnf'
+</td>
+<td>
+<img src="/images/icons/recipe.png" border=0>
+</td>
+</tr>
+</table>
+
+Ahi se muestra como meter variables.
+Por ejemplo para meter mas conexiones simultaneas:
+<pre>
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+set-variable = max_connections=300
+#set-variable = key_buffer_size=512K
+#set-variable = sort_buffer_size=100K
+#set-variable = read_buffer_size=100K
+
+[mysql.server]
+user=mysql
+basedir=/var/lib
+
+[safe_mysqld]
+err-log=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</pre>
+
+Como saber que tal le va a mysql??
+
+<pre>
+mysqladmin status -p
+
+o
+
+mysqladmin extended-status -p
+</pre>
+Hay una variable que nos dice el numero de conexiones abortadas que nos puede dar
+una pista de como anda la maquina.
+
+Dentro del shell de mysql se puede preguntar:
+
+<pre>
+mysql> status
+--------------
+mysql  Ver 12.22 Distrib 4.0.24, for pc-linux-gnu (i386)
+
+Connection id:          87576
+Current database:
+Current user:           root@localhost
+SSL:                    Not in use
+Current pager:          stdout
+Using outfile:          ''
+Server version:         4.0.24_Debian-5-log
+Protocol version:       10
+Connection:             Localhost via UNIX socket
+Client characterset:    latin1
+Server characterset:    latin1
+UNIX socket:            /var/run/mysqld/mysqld.sock
+Uptime:                 6 days 16 hours 56 min 15 sec
+
+Threads: 48  Questions: 7730515  Slow queries: 1120  Opens: 400173  Flush tables: 1  
+Open tables: 64  Queries per second avg: 13.343
+--------------
+
+</pre>
+
+Por cierto, los mysql de Fedora 1 tienen un pequeÃƒÂ±o bug en el script de inicio que se corrige 
+segun dicen <a href"http://www.siliconvalleyccie.com/linux-adv/mysql.htm">aqui</a>
+hay que aÃƒÂ±adir la palabra $RANDOM
+
+<pre>
+if [ -n "`/usr/bin/mysqladmin -u $RANDOM ping 2> /dev/null`" ]; then
+if !([ -n "`/usr/bin/mysqladmin -u $RANDOM ping 2> /dev/null`" ]); then
+</pre>

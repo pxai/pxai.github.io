@@ -1,0 +1,48 @@
+<b>Libreria standard c++</b><br>
+La sintaxis de inclusion de librerias puede variar segun la version y la plataforma del compilador c++.
+<br>
+Puede ser asi:
+<pre>
+...
+#include &lt;iostream&gt;
+using namespace std;
+...
+</pre>
+O mas simple:
+<pre>
+...
+#include &lt;iostream.h&gt;
+...
+</pre>
+A lo que ibamos: al igual que en c, en c++ tenemos una libreria base para desarrollar aplicaciones.
+Aqui se hecha un rapido vistazo a todas ellas.<br>
+<br><b>#include &lt;iostream&gt;</b><br>
+Libreria basica de entrada/salida. Imprescindible.
+<br><b>#include &lt;string&gt;</b><br>
+Libreria para el manejo de string con las funciones mas usuales como strcpy, strncpy, strlen, strcat, strncat,
+incluso las que sirven para buscar dividir un string en tokens.
+<br><b>#include &lt;time&gt;</b><br>
+Libreria para escribir fechas, con distintas opciones. Podemos sacar la fecha del momento y separar los valores
+de dia, hora, minuto, etc..
+<br><b>#include &lt;stdlib&gt;</b><br>
+Otra libreria basica, que contiene funciones como los conversores de ascci-integer atoi, algoritmos de ordenacion
+de arreglos como qsort..
+<br>
+<b>Operadores de bits:</b><br>
+Otra opcion mas de c++
+<pre>
+&  	AND
+| 	OR
+^ 	exclusive OR
+~ 	complement
+</pre>
+Existen mas librerias standar y lo que es mejor, librerias muy potentes disponibles para desarrollar
+programas mas complejos: creacion de interfaces de ventanas, comunicaciones, etc..
+<br>
+<b>El estilo</b>
+A la hora de escribir codigo se pueden tomar muchas costumbres y vicios que no facilitan
+la generacion de un estilo claro. De todas formas, dentro de un mismo proyecto seria mejor
+mantener un mismo estilo.
+No debe ser una preocupacion, ya que existen programas para formatear el codigo fuente, meter
+espacios tabulaciones, saltos de linea, etc.
+

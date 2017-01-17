@@ -1,0 +1,152 @@
+There are plenty of examples out there explaining how to develop a webserver in node.js using the express framework. There are also great books like Professional Node.js and Smashing Node.js introducing details about express among many other topics. But there is also, imho, a big problem: all of them show different ways to solve the same problem. In addition to that there were changes in the framework (Express has recently changed to version 4) and some documentation and samples could be deprecated, so if you are trying to learn anything that involves JS don't forget to check publication dates, even for this post!!
+
+I'll show how to develop a very simple guestbook from scratch, trying to apply the KISS principle: Keep It Simple Stupid! simple and clear, and trying to put every piece of code in its proper place (routes, models, views, etc...)
+Bad news: the express.js official page doesn't show how to do this. the good news, if you install express-generator (a must) you get a system command called express which will create project templates. So, let's start in a sort of "official" way. Without options we'll get a project using jade as a template engine and plain css.
+<pre class="brush: js">
+express simple-express-mongoose
+</pre>
+This creates a directory with that name and an app.js with this content:
+<pre class="brush: js">
+var express = require('express');
+var path = require('path');
+var favicon = require('static-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(favicon());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
+app.use('/users', users);
+
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+/// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
+
+module.exports = app;
+</pre>
+
+<p>Let's simplify to leave only the routes:</p>
+<pre class="brush: js">
+var express = require('express');
+var index = require('./routes');
+var guestbook = require('./routes/guestbook');
+
+
+var app = express();
+
+app.use(express.static('public'));
+
+app.use('/', index);
+app.use('/guestbook', guestbook);
+
+app.listen(3000, function () {
+        console.log('Listening on port 3000');
+})
+</pre>
+<h5>Requiring all routes just once</h5>
+<p>Applications tend to grow and so we would have to require every route in the main entrypoint for express. Instead of that we can require just the <code>routes/index.js</code>
+</p>
+
+<pre class="brush:js">
+exports.home = require('./home');
+exports.guestbook = require('./guestbook');
+</pre>
+
+<p>
+Now  app.js has simplified route requires
+</p>
+<pre class="brush:js">
+var express = require('express');
+var routes = require('./routes'); // This will require 'routes/index.js' !!
+
+var app = express();
+
+app.use(express.static('public'));
+
+app.use('/', routes.home);
+app.use('/guestbook', routes.guestbook);
+
+app.listen(3000, function () {
+        console.log('Listening on port 3000');
+})
+</pre>
+<p>I've seen samples where all routes are added to express with just one line of code, but it wasn't working here for me.</p>
+<h5>Adding MongoDB support</h5>
+<p>
+Ok, now we want to show guestbook messages from a MongoDB database. As we are using mongoose, we must define a schema for each collection, and so we'll create a guestbook.js file in a models folder. Here we could try the same procedure used for routes. We create a <code>models/index.js</code> file which connects to MongoDB and exports all mongoose schemas. Here is models/index.js
+</p>
+<pre class="brush:js">
+/**
+ * models/index.js
+ * All models are here to import all of them just with one command
+ * in the main app.js, and by the way we connect to MongoDB
+ * Better to use an external config.. I know.
+ * https://github.com/pello-io/simple-express-mongoose
+ * Pello Altadill - http://pello.info
+ */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/blog');
+
+// optionally:
+//mongoose.set('debug', true);
+
+exports.GuestBook = require('./guestbook');
+</pre>
+
+<p>And this is the schema definition for the guestbook collection, mongoose style. MongoDB is a schemaless database but this driver forces you to define a schema.
+<script src="https://gist.github.com/pello-io/d6f47a66a12580cc852f.js"></script>
+
+<h5>The routes</h5>
+<p>Routes are separated, one file for the home request, other file for guestbook requests, and so forth as the app grows. home.js is pretty straightforward: when we receive a get request, just render the index.jade</p>
+<script src="https://gist.github.com/pello-io/786640b9e2a89a6ed568.js"></script>
+
+<p>And this is the route for guestbook.js, with the get and the post. post saves data and then redirects to get case.</p>
+<script src="https://gist.github.com/pello-io/5bdb4ac5ee897adbe31b.js"></script>
+<h5>app.js, finally</h5>
+<p>Here you have. There are more modules to load to improve this sample app, but at least routes and models now are kept apart.</p>
+<script src="https://gist.github.com/pello-io/82c0949f6a9268f380e2.js"></script>
+
+<p>You can <a href="https://github.com/pello-io/simple-express-mongoose.git">clone</a>, <a href="https://github.com/pello-io/simple-express-mongoose/archive/bf36577a2c2c078161ab08f8ff4b651ba9482e9a.zip">download</a>(at this point of development), copy-paste this project from <a href="https://github.com/pello-io/simple-express-mongoose">git</>. Don't forget to get the required node modules to make it work!</p>

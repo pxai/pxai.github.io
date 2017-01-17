@@ -1,0 +1,222 @@
+<b>Templates o plantillas c++</b><br>
+Gracias a c++ podemos definir clases-plantilla: son clases PARAMETRIZABLES
+por lo general entidades abstractas que se pueden concretar en algo mas concreto. El ejemplo
+mas claro es de las estructuras de datos tradicionales: Pilas, Listas, Colas, etc..<br>
+Esas estructuras pueden contener distintos tipos de datos: enteros, strings, objetos,...
+<br>
+Debemos reescribir la logica de cada estructura para cada tio de dato? NO!
+Podemos definir una clase plantilla para la Lista, la cola, la pila etc, y luego
+simplemente invocarlas especificando el tipo de dato. Asi de facil.
+<br>
+Veamos este horrible ejemplo de lista<br> (atencion a la complicadilla sintaxis)
+<pre>
+/**
+* Lista.hpp
+* Clase que define una estructura de datos lista Generica
+*
+* Pello Xabier Altadill Izura
+*/
+
+#include &lt;iostream.h&gt;
+
+// Asi es como declaramos una clase plantilla
+// template &lt;class nombre_generico&gt; class NombreClase
+template &lt;class GENERICO&gt; class Lista {
+
+ public:
+    // Constructor
+    Lista();
+    // Constructor
+    Lista(GENERICO elemento);
+    
+    // Constructor copia
+    Lista(Lista const &);
+    // Destructor
+    ~Lista();
+    
+    // agregar elemento
+    void agregar(Lista *nodo);
+    // se mueve hasta el siguiente dato
+    Lista* siguiente();
+    // comprueba si existe un elemento
+    bool existe(GENERICO dato);
+
+    // comprueba si existe un elemento
+    GENERICO getDato() { return this->dato;}
+        
+ private:
+    // un elemento que apunta a otra lista, asi sucesivamente
+    Lista *ladealao;
+    // el dato es del tipo GENERICO
+    GENERICO dato;
+    
+};
+
+    
+
+</pre>
+Y su implementacion
+<pre>
+/**
+* Lista.cpp
+* Programa que implementa la clase de Lista generica
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Lista.cpp
+*
+*/
+
+#include "Lista.hpp"
+
+// En la implementacion debemos detallar el tipo de dato,
+// especificando todo el tema de plantilla, o sea que en lugar
+// de poner Lista:: delante de cada funcion debemos poner TODO
+// el churro siguiente
+// template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::nombreFuncion
+
+    // Constructor
+    template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::Lista() {
+        ladealao = 0;
+        //dato = 0;
+        cout << "Nueva lista creada." << endl;
+    }
+    
+    // Constructor
+    template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::Lista(GENERICO elemento) {
+        ladealao = 0;
+        dato = elemento;
+        cout << "Nueva lista creada. Dato inicial: " << dato << endl;
+    }
+    
+    // Constructor copia
+    template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::Lista(Lista const & original) {
+        ladealao = new Lista;
+        ladealao = original.ladealao;
+        dato = original.dato;
+    }
+    
+    // Destructor
+    template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::~Lista() {
+    }
+    
+    // agregar elemento: AL LORO con donde se pone el retonno
+    template &lt;class GENERICO&gt; void Lista&lt;GENERICO&gt;::agregar(Lista *nodo) {
+        nodo->ladealao = this;
+        ladealao = 0;        
+    }
+
+    // se mueve hasta el siguiente dato
+     template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;* Lista&lt;GENERICO&gt;::siguiente() {
+         return ladealao;
+     }
+    
+     //Lista template &lt;class GENERICO&gt; Lista&lt;GENERICO&gt;::siguiente();
+    // comprueba si existe un elemento
+    template &lt;class GENERICO&gt; bool Lista&lt;GENERICO&gt;::existe(GENERICO dato) {
+        return false;
+    }
+        
+
+</pre>
+<b>Usando la lista</b><br>
+Y ahora definimos una clase llamada Nombre. Crearemos una lista de nombres.<br>
+Este es la definicion
+<pre>
+/**
+* Nombres.hpp
+* Clase que define los nombres. No es mas que una cobaya para probar el template
+*
+* Pello Xabier Altadill Izura
+*/
+
+// Esta clase la usaremos en el template, no hay qeu definir nada en especial
+
+
+class Nombre {
+
+ public:
+    // Constructor
+    Nombre():nombre("Jezabel") {
+    }
+    // Constructor
+    Nombre(char *nombre) {
+        this->nombre = nombre;
+    }
+    // Constructor copia
+    Nombre(Nombre const &);
+    // Destructor
+    ~Nombre(){}
+    // agregar elemento
+    char* getNombre() const { return this->nombre;}
+        
+ private:
+    // el dato
+    char *nombre;
+};
+
+</pre>
+Y su implementacion y los ejemplos de uso de plantillas
+<pre>
+/**
+* Nombres.cpp
+* Programa que implementa la clase nombres y utilza los templates
+* para crear una lista de nombres.
+*
+* Pello Xabier Altadill Izura
+* Compilando: g++ -o Nombre Lista.o Nombre.cpp
+*/
+
+#include "Nombre.hpp"
+#include "Lista.hpp"
+
+    // Constructor copia
+    Nombre::Nombre(Nombre const & original) {
+        nombre = new char;
+        nombre = original.getNombre();
+    }
+    
+
+// Funcion principal para las pruebas
+int main () {
+// Asi es como se implementan objetos con clases plantilla
+Lista&lt;Nombre&gt; listanombres;
+Lista&lt;Nombre&gt; *tmp, *final;
+Nombre test = Nombre("Prince");
+
+// podemos definir Listas de cualquier tipo basico
+Lista&lt;int&gt; listaenteros;
+
+// guardamos la posicion inicial; final es un puntero, le pasamos la direccion
+final = &listanombres;
+
+// vamos a crear unos cuantos NODOS y los aÃƒÂ±adimos
+tmp = new Lista&lt;Nombre&gt;;
+tmp->agregar(final);
+final = tmp;
+// otra mas...
+tmp = new Lista&lt;Nombre&gt;;
+tmp->agregar(final);
+final = tmp;
+// otra mas...
+tmp = new Lista&lt;Nombre&gt;;
+tmp->agregar(final);
+final = tmp;
+
+// y ahora recorremos la lista:
+tmp = &listanombres;
+while (tmp) {
+    cout << tmp->getDato().getNombre() << endl;
+    tmp = tmp->siguiente();
+}
+
+int i;
+
+
+cin >> i;
+return 0;
+}
+    
+
+</pre>
+
+Es un tema complejo pero util.

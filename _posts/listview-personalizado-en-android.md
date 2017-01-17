@@ -1,0 +1,486 @@
+<h5>... que acaba siendo un lector RSS</h5>
+<p>La idea de este proyecto era simplemente probar un poco la personalización de los elementos de un ListView. Pero como eso no es bastante y uno se lía y luego se viene arriba pues lo que he hecho es el típico lector de RSS que carga el contenido del ListView con las últimas noticias de una web. Y la petición y el parseo se hace a la manera de Android, con un AsyncTask. Esto es un poco como cuando haces una ensalada, que dices igual le añado esto, y esto otro, y ese trozo de queso y esa media manzana. Al final la lechuga queda enterrada en complementos. Pues bien, el BaseAdapter que extendemos para personalizar el ListView es la lechuga de esta ensalada de Android. </p>
+
+<img src="http://www.pello.info/images/androidrss.png" alt="Android RSS logo" title="super ocurrente logo de Android rss" />
+
+<h5>MainActivity</h5>
+<p>La activity contiene un botón y un listView donde vamos a cargar las noticias del RSS. Al pulsar el botón se pone en marcha el AsyncTask y una vez este ha terminado, desde le propio AsyncTask se carga la lista, no hace falta mandar mensajes. Por cierto, en el manifest no olvides activar el permiso para INTERNET.
+</p>
+<pre class="brush: java">
+package info.pello.android.listadapter;
+
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
+
+/**
+ * The main activity that holds de ListView
+ * @author Pello Xabier Altadill Izura
+ * @greetz quality RSS contents
+ */
+public class MainActivity extends Activity {
+
+	private RssListItemAdapter rssListItem;
+	private RssReaderAsyncTask rssReaderAsyncTask;
+	private ListView listNews;
+	private static final String RSS_URL = "http://www.pello.info/index.php/rss2";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		listNews = (ListView) findViewById(R.id.listNews);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/**
+	 * method called when refresh button is pressed
+	 * It Starts AsyncTask
+	 * @param v
+	 */
+	public void refreshNews(View v) {
+		Log.d("PELLODEBUG","MainActivity> refresh news...");
+		rssReaderAsyncTask = new RssReaderAsyncTask(this);
+		rssReaderAsyncTask.execute(RSS_URL);
+
+	}
+	
+	/**
+	 * refresh the List with parsed data from AsyncTask
+	 * @param rssItems
+	 */
+	public void refreshList (ArrayList<RssItem> rssItems) {
+		Log.d("PELLODEBUG","MainActivity> Async task finished...");
+		rssListItem = new RssListItemAdapter(this, rssItems);
+		listNews.setAdapter(rssListItem);
+	}
+	
+}
+
+</pre>
+
+<h5>RssListItemAdapter</h5>
+<p>Esta sería una clase que extiende un Adapter, en este caso el BaseAdapter. Nos permite crear una lista con aspecto personalizado. El método donde se cuece todo es getView, que es precisamente donde se "pinta"
+cada elemento de la lista.
+</p>
+<pre class="brush: java">
+package info.pello.android.listadapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+/**
+ * extends a base adapter to create a customized ListAdapter
+ * @author Pello Xabier Altadill Izura
+ * @greetz 4vientos students
+ */
+class RssListItemAdapter extends BaseAdapter {
+	
+	private Activity activity;
+	private ArrayList<RssItem> rssItems;
+	
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 * @param layoutId
+	 * @param rssItems
+	 */
+	public RssListItemAdapter(Activity activity,ArrayList<RssItem> rssItems) {
+		super();
+		this.activity = activity;
+		this.rssItems = rssItems;
+	}
+	
+	
+	/**
+	 * return number of items
+	 * @return int
+	 */
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return rssItems.size();
+	}
+
+	/**
+	 * returns one object in a given position
+	 * @param position
+	 * @return Object
+	 */
+	public Object getItem(int position) {
+		return rssItems.get(position);
+	}
+
+	/**
+	 * returns id for the item(position)
+	 */
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/**
+	 * for each list item it call this method to render it in the ListView
+	 * @param position
+	 * @param converView
+	 * @param parent
+	 * @result View
+	 */
+	public View getView(int position, View convertview, ViewGroup parent) {
+		View view = convertview;
+		if(convertview == null){
+			LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.item,null);
+		}
+		
+		RssItem item = rssItems.get(position);
+		Log.d("PELLODEBUG", item.toString());
+		
+		TextView textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+		textViewTitle.setText(item.getTitle());
+		
+		TextView textViewText = (TextView) view.findViewById(R.id.textViewText);
+		textViewText.setText(item.getText());
+	
+		
+		return view;
+		
+		
+	}
+
+}
+
+
+</pre>
+
+<h5>RssItem</h5>
+<p>Este no es más que un POJO para representar un item de un fichero RSS. Tiene los campos más interesantes para nuestro propósito, como son el título, la descripción, la url, la fecha, etc...
+</p>
+<pre class="brush: java">
+package info.pello.android.listadapter;
+
+/**
+ * represents an item from a Rss source
+ * @author Pello Xabier Altadill Izura
+ * @greetz to all the fresh news 
+ */
+public class RssItem {
+	private String title;
+	private String text;
+	private String url;
+	private String imageUrl;
+	private String rssDate;
+	
+	/**
+	 * default constructor
+	 */
+	public RssItem () {
+		
+	}
+	
+	/**
+	 * constructor with minimal params
+	 * @param title
+	 * @param text
+	 * @param url
+	 */
+	public RssItem (String title, String text, String url) {
+		this.title = title;
+		this.text = text;
+		this.url = url;
+		
+	}
+	/**
+	 * @param title
+	 * @param text
+	 * @param url
+	 * @param imageUrl
+	 * @param rssDate
+	 */
+	public RssItem(String title, String text, String url, String imageUrl,
+			String rssDate) {
+		this.title = title;
+		this.text = text;
+		this.url = url;
+		this.imageUrl = imageUrl;
+		this.rssDate = rssDate;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "RssItem [" + (title != null ? "title=" + title + ", " : "")
+				+ (text != null ? "text=" + text + ", " : "")
+				+ (url != null ? "url=" + url + ", " : "")
+				+ (imageUrl != null ? "imageUrl=" + imageUrl + ", " : "")
+				+ (rssDate != null ? "rssDate=" + rssDate : "") + "]";
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	// GETTERS/SETTERS
+	// ...
+	
+}
+
+</pre>
+
+<h5>RssReaderAsyncTask</h5>
+<p>Last but not least, el nombre lo dice todo: esta clase es un AsynTask que levantaremos para solicitar
+un fichero RSS, parsearlo y generar un ArrayList que le pasaremos a nuestra ListView personalizada con RssListItemAdapter. Necesitamos un AsyncTask porque la tarea va a necesitar un tiempo no muy concreto que se puede acercar al peligroso límite de los 6-7 segundos: debe descargar un fichero xml de la web y parsearlo, y todo ello en Java. Vamos que te da tiempo a levantarte y a echarte un cubito de hielo en el café. Algo que nos facilita las cosas es que podemos pasar una referencia de la Activity que le llama así que desde el AsyncTask podemos meter mano en el Activity sin problemas, cosa que con si la hicieras con un Thread Android diría que caca, Exception y <i>apurtu du</i>. En un principio había separado en dos la tarea de descargar el fichero y parsearlo, pero es una tontería porque el propio parser te puede descargar el fichero con un simple GET. Dejo el método porque en un futuro puede venir bien si necesitamos
+un descargador más evolucionado (proxy, parámetros post, usuario/password, ...).
+</p>
+<pre class="brush: java">
+package info.pello.android.listadapter;
+
+
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
+
+/**
+ * Extends AsyncTask to get RSS contents and parse the to populate
+ * a ListAdapter
+ * @author Pello Xabier Altadill Izura
+ * @greetz any
+ */
+public class RssReaderAsyncTask extends AsyncTask<String,String,Void> {
+	
+	// We well keep a reference to our caller activity
+	// so we can attach/detach in case of activity is destroyed in a rotation
+	private MainActivity mainActivity;
+	private ArrayList<RssItem> rssItems;
+
+	/**
+	 * Default constructor
+	 * @param mainActivity
+	 */
+	public RssReaderAsyncTask (MainActivity mainActivity) {
+		attach(mainActivity);
+	}
+	
+	/**
+	 * sets mainActivity reference
+	 * @param mainActivity
+	 */
+	public void attach(MainActivity mainActivity) {
+		this.mainActivity = mainActivity;
+	}
+
+	/**
+	 * when task is finished this reference is not needed any longer
+	 */
+	public void detach () {
+		this.mainActivity = null;
+	}
+	
+	/**
+	 * This is called before doInBackground and is a perfect place
+	 * to prepare the progress Bar.
+	 */
+	@Override
+	protected void onPreExecute () {
+		Toast.makeText(this.mainActivity, "Starting Async Task", Toast.LENGTH_SHORT).show();
+	}
+	
+	/**
+	 * This is where the task begins and runs
+	 * String... url declares variable arguments list,
+	 * and we can get values using indexes: url[0], url[1],...
+	 * Whenever we consider that we make som progress we can
+	 * notify through publishProgress()
+	 */
+	@Override
+	protected Void doInBackground(String... url) {
+		Log.d("PELLODEBUG","AT> URL passed to AsyncTask: " + url[0]);
+		String sampleRSS ="";
+		try {
+			rssItems = this.parseXML(url[0]);
+		} catch (Exception e) {
+			Log.d("PELLODEBUG","AT> Exception processing RSS: " + e.getMessage());
+		}
+		// With this call we notify to progressUpdate
+		Log.d("PELLODEBUG","AT> doInBackbround publishes progress");
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	/**
+	 * This method is called when we call this.publishProgress
+	 * and can be used to update contents,progress bars,... in the Activity
+	 */
+	@Override
+	protected void onProgressUpdate(String... item) {
+		Log.d("PELLODEBUG","AT> onProgressUpdate> on progress... ");
+
+	}
+	
+	/**
+	 * called when task is finished.
+	 */
+	@Override
+	protected void onPostExecute(Void unused) {
+		Toast.makeText(this.mainActivity, "Finished.", Toast.LENGTH_SHORT).show();
+		Log.d("PELLODEBUG","AT> onPostExecute was called: ");
+		this.mainActivity.refreshList(rssItems);
+		//this.mainActivity.getProgressBar1().setVisibility(ProgressBar.INVISIBLE);
+
+	}
+
+	/**
+     * parseXML
+	 * parses XML content from a given URL
+     * @return ArrayList with parsed data
+     */
+    private ArrayList<RssItem> parseXML (String rssContent) {
+		ArrayList<RssItem> rssItemsArray = new ArrayList<RssItem>();
+
+		// If we do it using a String
+		//Reader xml = new StringReader("<?xml..>..");
+		//Document doc = builder.parse(new InputSource(xml));
+		
+    	DocumentBuilder builder;
+    	DocumentBuilderFactory builderFactory;
+		try {
+			builderFactory = DocumentBuilderFactory.newInstance();
+			
+			// I tried this features to relax the parser but with no effect
+			// See: http://xerces.apache.org/xerces2-j/features.html
+			builderFactory.setNamespaceAware(true);
+			builderFactory.setValidating(false);
+			//builderFactory.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
+			
+			builder = builderFactory.newDocumentBuilder();
+
+    	Document doc=builder.parse(rssContent);
+    	NodeList items =doc.getElementsByTagName("item");
+    	
+    	for (int i=0;i<items.getLength();i++) {
+    		Element item = (Element)items.item(i);
+    		NodeList titles = item.getElementsByTagName("title");
+    		NodeList links = item.getElementsByTagName("link");
+    		NodeList descriptions = item.getElementsByTagName("description");
+ 
+    		Element title = (Element) titles.item(0);
+    		Element link = (Element) links.item(0);
+    		Element description = (Element) descriptions.item(0);
+    		
+    		// NOTE: description tag seems to be special due to CDATA
+    		
+    		RssItem rssItem = new RssItem(title.getFirstChild().getNodeValue(),
+    				description.getChildNodes().item(1).getTextContent().substring(0, 30),
+    				link.getFirstChild().getNodeValue());
+    		rssItemsArray.add(rssItem);
+
+    	}
+    	
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.d("PELLODEBUG","Parser exception: " + e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.d("PELLODEBUG","Parser General exception: " + e.getMessage());			
+		}
+		return rssItemsArray;
+    }
+
+
+    /**
+     * Makes a GET request to an URL
+     * @param url to be requested
+     * @return contents from url
+     */
+    public String get (String url) {
+    	// It makes use of apache's HttpClient, available on Android
+    	HttpGet request = new HttpGet(url);
+		HttpClient httpClient = new DefaultHttpClient();
+		String result = "";
+		request.setHeader("Accept", "application/xml");
+		
+    	try {
+			ResponseHandler<String> response = new BasicResponseHandler();
+			
+			String responseContents = httpClient.execute(request,response);
+
+			if (responseContents != null && responseContents.length() > 0) {
+				result += responseContents;
+			} else {
+				result += "Error\n"+responseContents;
+			}
+
+		} catch (ClientProtocolException e) {
+			result += "Unexpected ClientProtocolException" + e.getMessage();
+		} catch (IOException e) {
+			e.printStackTrace();
+			result += "Unexpected IOException" + e.getMessage();
+		}
+		Log.d("PELLODEBUG","RssReader> Result: "+ result);
+		return result;
+    }
+
+}
+
+</pre>
+
+<img src="http://www.pello.info/images/androidlistadapter.png" alt="Pantallazo del programa" title="Sí, ya quitaré las etiquetas de la descripción..." />
+
+<h5>Problemas en el parseo</h5>
+<p>Aunque en el pantallazo sale el RSS de esta página, previamente estaba probando con otro RSS, pero el parser (que es el oficial) me soltaba una excepción porque al parecer no le gustaba el contenido de la etiqueta dc:creator, que contenía un salto de línea una etiqueta de imagen... <i>sorry mate</i>. Igual el que estaba mal era mi parser, de todas formas he tratado de alterar la configuración del parser con las features y NO ha funcionado. Quizá una solución sea meter nuestro propio Handler. O lo más directo, usar un parser tipo JSOUP que es transigente con los errores. Al menos para el parser oficial no he visto una solución clara.</p>

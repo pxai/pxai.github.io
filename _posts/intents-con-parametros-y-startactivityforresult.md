@@ -1,0 +1,199 @@
+<p>Cuando en Android queremos abrir una nueva pantalla o Activity se hace de una manera
+muy curiosa: se crea un Intent. Los Intent son eso, intentos. No garantizan que el resultado
+vaya a ser el correcto ni si quiera que alguien vaya a responder, y es que los intents se pueden
+usar tanto para abrir Activities como para solicitar cualquier cosa (iniciar una llamada, mandar
+un mensaje, etc... ). </p>
+
+<p>Con los intents en definitiva se llama a componentes de cualquier tipo. Pueden ser internos
+de la propia aplicación, pueden ser de aplicaciones externas (que lo mismo no existen, eso se resuelve
+en tiempo de ejecución, de ahí el concepto de 'intento'), servicios, etc... Se distinguen dos tipos de intents:
+<ul>
+<li><b>Explícitos</b>: nuestro programa lanza una petición a una clase concreta, lo típico cuando una Activity llama a otra</li>
+<li><b>Implícitos</b>: nuestro programa lanza una petición y Android busca a alguien que le pueda atender. Es lo habitual en los servicios básicos del dispositivo.</li>
+</ul>
+</p>
+
+<p>En este post dedicado a Android vamos a ver dos ejemplos de intent explícitos en los que una
+activity abre otras activities con dos particularidades. En una se aprovecha para pasar parámetros
+extra en el intent. Y en la otra se abre el intent ycon un callback para recoger una respuesta.</p>
+
+<img src="http://www.pello.info/images/androidintent.png" alt="Vista de los logs en el LogCat de eclipse" title="Vista de los logs en el LogCat de eclipse" />
+<h5>MainActivity</h5>
+<p>
+Activity principal con dos botones, cada uno para llamar a un activity.
+</p>
+<pre class="brush: java">
+package info.pello.android.intents;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+/**
+ * MainActivity shows how to start other activities with intent
+ * parameters and waiting for results.
+ * @author Pello Xabier Altadill Izura
+ * @greetz for the usual people
+ */
+public class MainActivity extends Activity {
+
+	private EditText editText1;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		editText1 = (EditText) this.findViewById(R.id.editText1);
+	}
+	
+	/**
+	 * Method invoked when button is clicked
+	 * configured in the layout
+	 * @param v
+	 */
+	public void openActivity (View v) {
+		Log.d("Opening another activity. Or trying to", "PELLODEBUG");
+		Intent intent = new Intent(this, AnotherActivity.class);
+		intent.putExtra("extraValue", editText1.getText().toString());
+		//intent.putExtra("extraValue","Seventh son of a seventh son");
+		startActivity(intent);
+	}
+	
+	/**
+	 * Method invoked when second button is clicked
+	 * configured in the layout
+	 * @param v
+	 */
+	public void openActivityResult (View v) {
+		Log.d("Opening activity wait for result. Or trying to", "PELLODEBUG");
+		Intent intent = new Intent(this, ChildActivity.class);
+		startActivityForResult(intent,666);
+	}
+	
+	/**
+	 * callback method when returning from activity started withResult
+	 */
+	// @Override
+	//protected void onActivityResult () {}
+	
+	/**
+	 * callback method when returning from activity started withResult
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
+	@Override
+	protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d("Callback when child activity finishes","PELLODEBUG");
+		Log.d("Req code: " + requestCode + ". Result code: " + resultCode,"PELLODEBUG");
+		Log.d("Extra data: " + data.getStringExtra("someData"),"PELLODEBUG");
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}
+
+</pre>
+
+<h5>OtherActivity</h5>
+<p>
+Activity a la que se llama con un intent que trae un parámetro extra.
+</p>
+<pre class="brush: java">
+package info.pello.android.intents;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+/**
+ * AnotherActivity shows how to get extra parameters from intent
+ * @author Pello Xabier Altadill Izura
+ * @greetz Mr. Remírez
+ */
+public class AnotherActivity extends Activity {
+	private TextView textView1;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.another_activity);
+		
+		textView1 = (TextView) findViewById(R.id.intentParameter);
+		
+		if (null != savedInstanceState)
+			Log.d("Bundle contents: " + savedInstanceState.toString(),"PELLODEBUG");
+		
+		Log.d("Passed parameter through intent: " +  getIntent().getStringExtra("extraValue"),"PELLODEBUG");
+		textView1.setText( getIntent().getStringExtra("extraValue"));
+		
+
+	}
+}
+
+</pre>
+
+
+<h5>ChildActivity</h5>
+<p>
+Activity al que se llama con un startActivityForResult. Debemos finalizar la activity
+creando un intent por si queremos devolver valores y llamando a setResult para que todo
+eso lo recoja la Activity que había llamado.
+</p>
+<pre class="brush: java">
+package info.pello.android.intents;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+
+/**
+ * ChildActivity started with startActivityForResult
+ * @author Pello Xabier Altadill Izura
+ * @greetz for the usual people
+ */
+public class ChildActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_child);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.child, menu);
+		return true;
+	}
+	
+	/**
+	 * method called when button is clicked
+	 * @param v
+	 */
+	public void goBack (View v) {
+		Log.d("Going back","PELLODEBUG");
+		Intent intent = new Intent();
+		intent.putExtra("someData","Kill kill kill");
+        setResult(RESULT_OK,intent);
+        finish();
+	}
+
+}
+
+</pre>

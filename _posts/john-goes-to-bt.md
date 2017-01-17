@@ -1,0 +1,5 @@
+<p><strong>Ofertars de trabajo para Lisp.</strong></p>
+<p>&nbsp;</p>
+<p><a href="http://coders.pello.info/images/strips/strip002.jpg" target="_new" title="Job offer for Lisp, c0ders"><img src="http://coders.pello.info/images/strips/strip002.jpg" border="1" alt="Job offer for Lisp, c0ders" title="Job offer for Lisp, c0ders" width="300" height="112" /></a></p>
+<p>(Pincha para ampliar)</p>
+<p>Muchas veces la imagen de empresa que se oculta tras una oferta de trabajo no se asemeja a lo que se trata de vender...</p>

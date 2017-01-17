@@ -1,0 +1,14 @@
+<h1>
+	Tabs y Ficheros de texto</h1>
+<p>
+	En nuestra aplicaci&oacute;n puede que nos interese meter unas pesta&ntilde;as o tabs para separar contenidos dentro de la misma pantalla o activity. Como todo en Android, lo de meter pesta&ntilde;as es una aventura, sobre todo en el layout del activity.</p>
+<p>
+	<a href="http://www.pello.info/filez/android/09.Tabs.tar.gz">Descargar ejemplo con tres pesta&ntilde;as.</a></p>
+<p>
+	Por otro lado, en la aplicaci&oacute;n que carga un fichero se ha utilizado una m&eacute;todo algo curioso sacado de internet, que en lugar de utilizar FileInputStream usa... en fin, mejor verlo. El fichero de texto se carga de una carpeta res/raw y luego se carga en un textview.</p>
+<p>
+	<a href="http://www.pello.info/filez/android/09.MostrarFichero.tar.gz">Descargar ejemplo de cargar fichero</a></p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>

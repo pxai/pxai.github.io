@@ -1,0 +1,135 @@
+Bueno, los operadores, nada nuevo bajo el sol.<br>
+Veamos los aritmÃƒÂ©ticos:
+<pre>
+/** 
+Operadores.cs
+ Una muestra de los operadores de c#
+ Para compilar con MS: csc Operadores.cs , ejecucion: Operadores.exe
+ Para compilar con Mono: mcs Operadores.cs , ejecucion: mono Operadores.exe
+*/
+
+// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+using System;
+
+// Definicion de la clase Operadores, que muestra tipos de Operadores.
+public class Operadores {
+
+	// Y aquÃƒÂ­ la funciÃƒÂ³n principal 
+	public static void Main () {
+		
+		int unNumero;
+		int otroNumero = 55;
+		
+		// Operador - para convertir un numero a negativo
+		int yOtro = -otroNumero;
+		
+		// Asignaciones multiples:
+		int num1, num2, num3;
+		num1 = num2 = num3 = 0;
+		
+
+		
+		unNumero = 3;
+		
+		// Operador unario
+		unNumero++;
+		unNumero--;
+		
+		// Primero se incrementa, luego se asigna.
+		otroNumero = ++unNumero;
+		
+		// Operadores Aritmeticos, los de siempre: +, -, *, /
+		num1 = num2 + num3;
+		num2 = num1 - num3;
+		num3 = num2 * num1;
+		num1 = num2 / num3;
+		num2 += num1;  // idem... num2 = num2 + num1;
+		
+		// Para sacar el resto o modulo: %
+		otroNumero = otroNumero % num1;
+		// equivalentes a 		otroNumero %= num1;
+
+		// Anidacion con parentesis
+		yOtro = (45 * num1) - 1 + yOtro;
+		
+		// La funcion Write escribe a stdout sin
+		System.Console.Write("Bienvenido al programa: ");
+		System.Console.WriteLine("estas son las opciones de operadores.");
+		
+	
+	}
+
+}
+</pre>
+Operadores de comparaciÃƒÂ³n, lÃƒÂ³gicos y de bits.
+<pre>
+/** 
+Comparativas.cs
+ Una muestra de los Comparativas de c#
+ Para compilar con MS: csc Comparativas.cs , ejecucion: Comparativas.exe
+ Para compilar con Mono: mcs Comparativas.cs , ejecucion: mono Comparativas.exe
+*/
+
+// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+using System;
+
+// Definicion de la clase Comparativas, que muestra tipos de Comparativas.
+public class Comparativas {
+
+	// Y aquÃƒÂ­ la funciÃƒÂ³n principal 
+	public static void Main () {
+		
+		
+		// Asignaciones multiples:
+		int a, b ,c;
+		a = b = c = 0;
+		double d = 4.5;
+		
+		a++;
+		b--;
+		c = a + b + 2;
+
+		// Operadores de comparacion e if: el estilo c
+		// ! negacion
+		//  == igualdad
+		//  != distinto
+		//  &lt;  menor que
+		//  &gt;  mayor que
+		// &gt;=  mayor o igual que
+		// &lt;=  menor o igual que
+		if (a &gt; b) 
+		{
+			System.Console.WriteLine("a es mayor que b");
+		}
+		
+		b++;
+		
+		// Operadores logicos: 
+		// && es el operador and
+		// || es el operador or 
+		if (b==0 && a&gt;0) 
+		{
+			System.Console.WriteLine("b es 0 y a es mayor que 0");
+		}
+		
+		// Anidando operadores
+		if ((b==0 && a&gt;0) || c&gt;0)
+		{
+			c = 0;
+		}		
+		
+		// Operador terciario, tambien como en c
+		// (comdicion)?resultado_si_verdadero:resultado_si_falso;
+		a = (b==0)?c:6;
+		
+		// Conversiones o cast
+		d = d + (double)a;
+		
+		// Operadores para manejar bits
+		// &, |, ^ : and, or y xor
+		// &lt;&lt; y &gt;&gt; desplazamientos
+	
+	}
+
+}
+</pre>

@@ -1,0 +1,213 @@
+<p><strong>Conociendo el depurador o debugger</strong></p>
+<p>Vamos a revisar algunas ordenes &uacute;tiles del depurador gdb. Supongamos que tenemos este programa:</p>
+<pre>void saludar (char *q)
+{
+char saludo[10] = &ldquo;Hola &ldquo;;
+char quien[15] = &rdquo; don &ldquo;;
+
+printf(&rdquo;%s, %s %s
+&rdquo;, saludo, quien, q);
+}
+
+int main(int argc, char * argv[])
+{
+int entero;
+entero = 0;
+saludar(argv[1]);
+entero = 1;
+printf(&rdquo;Ok, valor del entero %d
+&rdquo;, entero);
+
+return 0;
+}
+</pre>
+<p>Para poder depurarlo mejor, debemos compilarlo con el flag ggdb:</p>
+<pre>gcc -ggdb -o ejemplo ejemplo.c
+</pre>
+<p>Ahora ya podemos iniciar el depurador gdb:</p>
+<pre>gdb
+Copyright 2004 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are welcome to change it and/or distribute copies of it under certain conditions.
+Type &ldquo;show copying&rdquo; to see the conditions.
+There is absolutely no warranty for GDB. Type &ldquo;show warranty&rdquo; for details. This GDB was configured as &ldquo;i386-linux&rdquo;.
+(gdb)
+</pre>
+<p>Podemos invocarlo sin m&aacute;s y para cargar el programa que queremos depurar har&iacute;amos algo as&iacute;:</p>
+<pre>(gdb) file ejemplo
+Reading symbols from /home/pello/b0f/dia2/ejemplo&hellip;done.
+Using host libthread_db library &ldquo;/lib/tls/libthread_db.so.1&Prime;.
+(gdb)
+</pre>
+<p>Y si no podr&iacute;amos invocar el debugger directamente con el programa que queremos depurar:</p>
+<pre>gdb ejemplo
+&hellip;
+(gdb)
+</pre>
+<p><strong>list</strong> Bien. Con el comando list o l podemos echar un ojo al c&oacute;digo fuente. Esto es posible gracias a que est&aacute; compilado con -ggdb Se le pueden a&ntilde;adir n&uacute;meros para indicar las lineas que queremos ver: list 1 : para ver a partir de la 1&ordf; linea list 3,6 : para ver de la linea 3 a la 6</p>
+<pre>(gdb) list
+3 char saludo[10] = &ldquo;Hola &ldquo;;
+4 char quien[15] = &rdquo; don &ldquo;;
+5
+6 printf(&rdquo;%s, %s %s
+&rdquo;, saludo, quien, q);
+7 }
+8
+9 int main(int argc, char * argv[])
+10 {
+11 int entero;
+12 entero = 0;
+
+(gdb) list 1,5
+1 void saludar (char *q)
+2 {
+3 char saludo[10] = &ldquo;Hola &ldquo;;
+4 char quien[15] = &rdquo; don &ldquo;;
+5
+(gdb)
+</pre>
+<p><strong>disassemble</strong> Esta opci&oacute;n desensambla el binario y muestra las instrucciones de ensamblador que componen el programa. Se le indica el nombre de funci&oacute;n, y puede ser la funci&oacute;n main o principal</p>
+<pre>(gdb) disas main
+Dump of assembler code for function main:
+0&times;0804840c : push %ebp
+0&times;0804840d : mov %esp,%ebp
+0&times;0804840f : sub $0&times;18,%esp
+0&times;08048412 : and $0xfffffff0,%esp
+0&times;08048415 : mov $0&times;0,%eax
+0&times;0804841a : sub %eax,%esp
+0&times;0804841c : movl $0&times;0,0xfffffffc(%ebp)
+0&times;08048423 : mov 0xc(%ebp),%eax
+0&times;08048426 : add $0&times;4,%eax
+0&times;08048429 : mov (%eax),%eax
+0&times;0804842b : mov %eax,(%esp)
+0&times;0804842e : call 0&times;80483a4 
+0&times;08048433 : movl $0&times;1,0xfffffffc(%ebp)
+0&times;0804843a : mov 0xfffffffc(%ebp),%eax
+0&times;0804843d : mov %eax,0&times;4(%esp)
+0&times;08048441 : movl $0&times;8048588,(%esp)
+0&times;08048448 : call 0&times;80482b8 &lt;_init+56&gt;
+0&times;0804844d : mov $0&times;0,%eax
+0&times;08048452 : leave
+0&times;08048453 : ret
+End of assembler dump.
+(gdb)
+</pre>
+<p>En esta especie de batiburrillo se puede aprender a distinguir algunas cosas: los valores m&aacute;s a la izquierda son las direcciones de memoria en la que se encuentran las instrucciones primero en hexadecimal y luego en una notaci&oacute;n relativa al inicio de main.  Si desensamblamos la funci&oacute;n saludar:</p>
+<pre>(gdb) disas saludar
+Dump of assembler code for function saludar:
+0&times;080483a4 : push %ebp
+0&times;080483a5 : mov %esp,%ebp
+0&times;080483a7 : push %edi
+0&times;080483a8 : sub $0&times;34,%esp
+0&times;080483ab : mov 0&times;8048564,%eax
+0&times;080483b0 : mov %eax,0xffffffe8(%ebp)
+0&times;080483b3 : movzwl 0&times;8048568,%eax
+0&times;080483ba : mov %ax,0xffffffec(%ebp)
+0&times;080483be : movl $0&times;0,0xffffffee(%ebp)
+</pre>
+<p><strong>run</strong> Para ejecutar el programa usamos la instrucci&oacute;n run o r. Se le pueden pasar par&aacute;metros como si estuvieramos en la linea de comandos.</p>
+<pre>(gdb) run Juan
+Starting program: /home/64kbytes/b0f/dia2/ejemplo
+Hola , don Juan
+Ok, valor del entero 1
+
+Program exited normally.
+(gdb)
+</pre>
+<p>Pero claro, puede que nos interese ejecutar paso a paso. Para eso establecemos un punto de ruptura o break point   <br /> <strong>break</strong> Con break o b establecemos d&oacute;nde debe detenerse la ejecuci&oacute;n para que se siga paso a paso. Podemos establecerlo por nombre de funci&oacute;n o por linea:  break main : para depurarlo desde el principio break 10 : para depurar desde la linea 10</p>
+<pre>(gdb) break main
+Breakpoint 2 at 0&times;804841c: file ejemplo.c, line 12.
+(gdb)
+</pre>
+<p>A partir de ah&iacute; podemos iniciar la ejecuci&oacute;n paso a paso con distintas instrucciones:  <br /> <strong>step</strong> Mediante step o s ejecutamos el programa linea a linea. En caso de pasarlo un par&aacute;metro num&eacute;rico repetir&iacute;a el c&oacute;digo de la linea ese n&uacute;mero de veces.  stepi o si e similar pero en ese caso solo se ejecuta una instrucci&oacute;n al margen de lo que haya en toda la linea.  Vamos a ejecutar paso a paso:</p>
+<pre>(gdb) break main
+Note: breakpoints 2, 3 and 4 also set at pc 0&times;804841c.
+Breakpoint 5 at 0&times;804841c: file ejemplo.c, line 12.
+(gdb) run
+Starting program: /home/pello/b0f/dia2/ejemplo Juan
+
+Breakpoint 2, main (argc=2, argv=0xbffff9b4) at ejemplo.c:12
+12 entero = 0;
+(gdb) s
+13 saludar(argv[1]);
+(gdb) s
+
+Breakpoint 1, saludar (q=0&times;2 <address>) at ejemplo.c:2
+2 {
+(gdb) s
+3 char saludo[10] = &ldquo;Hola &ldquo;;
+(gdb)
+</address></pre>
+<p>&hellip;y seguir&iacute;a.  Existen otras instrucciones similares a step.  <br /> <strong>next</strong> Next y nexti tratan las llamadas a funciones como una instrucci&oacute;n&iquest; m&aacute;s sin meterse a depurar dentro de ellas.  <strong>kill</strong> Podemos interrumpir la ejecuci&oacute;n con la instrucci&oacute;n kill o k.</p>
+<pre>(gdb) k
+Kill the program being debugged? (y or n) y
+(gdb)
+</pre>
+<p><strong>info registers</strong> Este comando te da informaci&oacute;n sobre el estado de los registros. Muy &uacute;til en la depuraci&oacute;n y en los overflows ya que son valores muy indicativos:</p>
+<pre>(gdb) info registers
+eax 0&times;0 0
+ecx 0&times;4003de6d 1073995373
+edx 0&times;2 2
+ebx 0&times;40156ff4 1075146740
+esp 0xbffff920 0xbffff920
+ebp 0xbffff938 0xbffff938
+esi 0&times;0 0
+edi 0&times;40015cc0 1073831104
+eip 0&times;804841c 0&times;804841c
+eflags 0&times;282 642
+cs 0&times;73 115
+ss 0&times;7b 123
+ds 0&times;7b 123
+es 0&times;7b 123
+fs 0&times;0 0
+gs 0&times;33 51
+(gdb)
+</pre>
+<p><strong>info frame</strong> Con este comando podemos ver el contenido del frame actual de la pila. Muy &uacute;til para ver los vlaores del EIP por ejemplo:</p>
+<pre>(gdb) info frame
+Stack level 0, frame at 0xbffff950:
+eip = 0&times;804841e in main (pila.c:34); saved eip 0&times;4003dea8
+source language c.
+Arglist at 0xbffff948, args: argc=2, argv=0xbffff9c4
+Locals at 0xbffff948, Previous frame&rsquo;s sp is 0xbffff950
+Saved registers:
+ebp at 0xbffff948, eip at 0xbffff94c
+(gdb) n
+</pre>
+<p><strong>info stack</strong> Con info stack podemos ver las llamadas acumuladas en la pila.</p>
+<pre>(gdb) info stack
+#0 0&times;080483f0 in cambiar (valor=4) at pila.c:21
+#1 0&times;08048436 in main (argc=2, argv=0xbffff9c4) at pila.c:34
+(gdb)
+</pre>
+<p><strong>x: examinando la memoria</strong> Para saber qu&eacute; narices se guarda en memoria nada mejor que el comando x con sus muchas opciones. El formato general del comando es: x/[formato] direcci&oacute;n Donde el [formato] puede ser, adem&aacute;s de un n&uacute;mero, o de octal, x de hexadecimal, d de decimal e u de decimal sin signo, y otros como t de binario, f de float, a para direcciones, i para instrucciones, c caracteres and s para cadenas. Y adem&aacute;s se le a&ntilde;ade el tama&ntilde;o: b para bytes, h para medio word, w para word, g para 8 bytes. Una combinaci&oacute;n &uacute;til para examinar la memoria en bytes</p>
+<pre>(gdb) x/bx main
+0&times;80483e6 : 0&times;55
+(gdb) [enter]
+0&times;80483e7 : 0&times;89
+(gdb) [enter]
+0&times;80483e8 : 0xe5
+(gdb)
+</pre>
+<p>Ah&iacute; vemos cada instrucci&oacute;n del programa: 0&times;55, 0&times;89, 0xe5 en hexadecimal.  Por ejemplo, para ver la parte de memoria a la que apunta el $esp</p>
+<pre>(gdb) x/100 $esp
+0xbffffc50: &ldquo;f&thorn;&yuml;&iquest;@_25@&rdquo;
+0xbffffc59: &ldquo;&rdquo;
+0xbffffc5a: &ldquo;&rdquo;
+0xbffffc5b: &ldquo;&rdquo;
+0xbffffc5c: &ldquo;@_25@@e01@&rdquo;
+0xbffffc65: &ldquo;&rdquo;
+0xbffffc66: &ldquo;&rdquo;
+0xbffffc67: &ldquo;&rdquo;
+&hellip;
+</pre>
+<p><strong>print</strong> Para sacar los valores concretos de variables y registros podemos usar la funci&oacute;n print o p, indic&aacute;ndole lo que queremos mostrar.  Por ejemplo el valor de un registro:</p>
+<pre>(gdb) print $ebx
+$1 = 1075146740
+(gdb)
+</pre>
+<p>O el valor de una variable</p>
+<pre>(gdb) print saludo
+$3 = &ldquo;Hola 00000000&Prime;
+(gdb)
+</pre>
+<p>Y de momento es suficiente para poder empezar</p>

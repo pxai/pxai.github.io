@@ -1,0 +1,906 @@
+<p>
+	&nbsp;</p>
+<div>
+	Las tablas de una BD nunca suelen venir solas y lo que es peor, a veces incluso tienen v&iacute;nculos entre s&iacute;. Vamos a ver c&oacute;mo configurar las aplicaciones que usan hibernate para cada caso en sus dos sabores, por XML y con anotaciones. Hoy toca la relaci&oacute;n uno a uno con XML.</div>
+<div>
+	&nbsp;</div>
+<div>
+	El ejemplo t&iacute;pico de relaci&oacute;n 1:1 que se suele ver por ah&iacute; es el de una entidad y otra con el detalle correspondiente a esa entidad.</div>
+<div>
+	Por ejemplo: Producto - Detalle producto, o Cliente - Direcci&oacute;n Cliente</div>
+<div>
+	&nbsp;</div>
+<div>
+	No me meter&eacute; en discusiones sobre si al encontrarnos la relaci&oacute;n 1:1 autom&aacute;ticamente se unen las dos entidades, bla bla,...&nbsp;simplemente quiero ver c&oacute;mo hace hibernate para el caso one to one. &iquest;Vale? ya me echar&aacute;s la bronca otro d&iacute;a.</div>
+<div>
+	&nbsp;</div>
+<div>
+	El caso que propongo es lo de menos, ser&iacute;a la entidad Car y la entidad Insurance, es decir, el seguro del coche, cuyo campo clave es precisamente el mismo que el del coche.&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	El <a href="http://code.google.com/p/erps-2dam-4vientos/source/browse/trunk/HibernateSamples/">c&oacute;digo fuente est&aacute; en google code</a>, incluyendo el volcado de la BD en la carpeta resources.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Car</strong></div>
+<div>
+	Clase que representa al coche...&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Represents a company car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Altadill</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Car {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private int id;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String registration;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String model;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private Insurance insurance;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Car () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param id</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param registration</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param model</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Car(int id, String registration, String model) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.id = id;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.registration = registration;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.model = model;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿<span class="Apple-tab-span" style="white-space: pre; "> </span>// getters/setters</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">//... &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Insurance</strong></div>
+<div>
+	Clase que representa al seguro</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Represents the insurance for a car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Insurance {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private int idcar;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String company;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private String type;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private double cost;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;private Car car;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Insurance () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param company</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param type</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param cost</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Insurance(String company, String type, double cost) {</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.company = company;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.type = type;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;this.cost = cost;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿<span class="Apple-tab-span" style="white-space: pre; "> </span>// getters/setters</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">//... &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>CarDAO</strong></div>
+<div>
+	Vamos a obviar los chistes malso sobre pelos ochenteros. El DAO para Car</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.List;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.hibernate.Session;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.hibernate.SessionFactory;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* implementation of carDAOInterface</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz Blue mug</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class CarDAO implements CarDAOInterface {</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * selects one car by Id</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param id</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @return Car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Car selectById(int id) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Car car = (Car) session.get(Car.class, id);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;return car;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * retrieves all cars from db</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @return List of cars</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public List&lt;Car&gt; selectAll() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;List&lt;Car&gt; cars = session.createQuery(&quot;from Car&quot;).list();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;return cars;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * inserts a new car in database</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * retrieves generated id and sets to car instance</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param new car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void insert(Car car) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Integer id = (Integer) session.save(car);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;car.setId(id);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * updates car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param car to update</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void update(Car car) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.merge(car);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * delete given car</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param car to delete</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void delete(Car car) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.delete(car);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>InsuranceDAO</strong></div>
+<div>
+	El DAO de insurance</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.List;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.hibernate.Session;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.hibernate.SessionFactory;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* implementation of insuranceDAOInterface</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz Blue mug</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class InsuranceDAO implements InsuranceDAOInterface {</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * selects one insurance by Id</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param id</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @return Insurance</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public Insurance selectById(int id) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Insurance insurance = (Insurance) session.get(Insurance.class, id);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;return insurance;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * retrieves all insurances from db</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @return List of insurances</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public List&lt;Insurance&gt; selectAll() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;List&lt;Insurance&gt; insurances = session.createQuery(&quot;from Insurance&quot;).list();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;return insurances;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * inserts a new insurance in database</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * insurance must come with the idcar set&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param new insurance</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void insert(Insurance insurance) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.save(insurance); &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * updates insurance</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param insurance to update</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void update(Insurance insurance) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.merge(insurance);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * delete given insurance</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param insurance to delete</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public void delete(Insurance insurance) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;SessionFactory sessionFactory = HibernateSession.getSessionFactory();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;Session session = sessionFactory.openSession();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.beginTransaction();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.delete(insurance);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.getTransaction().commit();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; &nbsp; &nbsp;session.close();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Mapeo de Car</strong></div>
+<div>
+	Ahora llega lo interesante: el mapeo de clase-tabla car.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;!-- Mapping configuration details between Customer class and customer table --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;hibernate-mapping package=&quot;info.pello.maven.hibernate.HibernateSamples&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;class name=&quot;Car&quot; table=&quot;car&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;id name=&quot;id&quot; column=&quot;id&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;generator class=&quot;native&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/id&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;registration&quot; column=&quot;registration&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;model&quot; column=&quot;model&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&lt;one-to-one name=&quot;insurance&quot; class=&quot;info.pello.maven.hibernate.HibernateSamples.Insurance&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cascade=&quot;save-update&quot;&gt;&lt;/one-to-one&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/class&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/hibernate-mapping&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Mapeo de Insurance</strong></div>
+<div>
+	Y la otra parte el mapeo de clase-tabla insurance.</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;!-- Mapping configuration details between Customer class and customer table --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;hibernate-mapping package=&quot;info.pello.maven.hibernate.HibernateSamples&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;class name=&quot;Insurance&quot; table=&quot;insurance&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;id name=&quot;idcar&quot; type=&quot;java.lang.Integer&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;column name=&quot;idcar&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;generator class=&quot;foreign&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;param name=&quot;property&quot;&gt;car&lt;/param&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/generator&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/id&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;one-to-one name=&quot;car&quot; class=&quot;info.pello.maven.hibernate.HibernateSamples.Car&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; constrained=&quot;true&quot;&gt;&lt;/one-to-one&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;company&quot; column=&quot;company&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;type&quot; column=&quot;type&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;cost&quot; column=&quot;cost&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/class&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/hibernate-mapping&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>Clase principal</strong></div>
+<div>
+	Montado sobre un ejemplo anterior, se comenta c&oacute;digo y se prueba el resto.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.maven.hibernate.HibernateSamples;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.List;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* Main class</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz 4 u</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @listening &quot;Mouth for war - Pantera&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;Revenge&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;I&#39;m screaming revenge again&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;Wrong&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;I&#39;ve been wrong for far too long&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;Been constantly so frustrated&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;I&#39;ve moved mountains with less&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* &nbsp;When I channel my hate to productive&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">I* &nbsp;don&#39;t find it hard to impress</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Main &nbsp;{</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * simple function for reusing</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param customerDAO</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public static void showAll (CustomerDAO customerDAO) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;// SELECT ALL DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;List&lt;Customer&gt; customers = customerDAO.selectAll();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;\n--- CUSTOMER ----- table contents -----------&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; for(Customer customer : customers) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.print(&quot;Id: &quot; + customer.getId());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot; - Name: &quot; + customer.getName());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Total Customers: &quot; + customers.size());﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * simple function for reusing</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; * @param customerDAO</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;public static void showAllCars (CarDAOInterface carDAO) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;﻿ &nbsp;// SELECT ALL DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;List&lt;Car&gt; cars = carDAO.selectAll();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;\n--- CARS ----- table contents -----------&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; for(Car car : cars) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.print(&quot;Id: &quot; + car.getId());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.print(&quot; - Model: &quot; + car.getModel());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot; - Insurance: &quot; + car.getInsurance().getCompany());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Total cars: &quot; + cars.size());﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;}</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; public static void main( String[] args )</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;/*</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;CustomerDAO customerDAO = new CustomerDAO();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAll(customerDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // SELECT JUST ONE</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; Customer oneCustomer = customerDAO.selectById(1);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Selected Name: &quot; + oneCustomer.getName());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // INSERT NEW DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;Customer newCustomer = new Customer(0,&quot;Phil Anselmo&quot;,&quot;Suicide note&quot;,&quot;phil@pantera.com&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;customerDAO.insert(newCustomer);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Inserted id: &quot; + newCustomer.getId());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after new insert&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAll(customerDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // UPDATE DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; newCustomer.setName(&quot;Dimebag Darrell&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; customerDAO.update(newCustomer);</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after update&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAll(customerDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // DELETE DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; customerDAO.delete(newCustomer);</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after deletion&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAll(customerDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;CarDAOInterface carDAO = new CarDAO();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllCars(carDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // SELECT JUST ONE</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; Car oneCar = carDAO.selectById(1);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Selected Name: &quot; + oneCar.getRegistration());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // INSERT NEW DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;Insurance insurance = new Insurance(&quot;Lagun Aro&quot;,&quot;Full&quot;,666.66);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;Car newCar = new Car(0,&quot;5646DFR&quot;,&quot;Volkswagen passat&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;newCar.setInsurance(insurance);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;insurance.setCar(newCar);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;carDAO.insert(newCar);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;System.out.println(&quot;Inserted id: &quot; + newCar.getId());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Show data after new insert&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; ﻿ &nbsp;showAllCars(carDAO);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; // UPDATE DATA</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; ne

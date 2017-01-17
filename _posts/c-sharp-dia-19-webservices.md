@@ -1,0 +1,70 @@
+Vaya, pues esto de los webservices, con c# parece mÃƒÂ¡s fÃƒÂ¡cil de lo esperado.
+Primero se crea una clase hija de WebService, atenciÃƒÂ³n a la extensiÃƒÂ³n
+<pre>
+<%@WebService Language="C#" Class="Saludo"%>
+
+/**
+* Saluda.asmx
+* Ejemplo bÃƒÂ¡sico de webservice.
+* SE trata de una clase con un mÃƒÂ©todo accesible
+* como servicio web, un mÃƒÂ©todo que muestra el saludo standar
+* En el caso de IIS, cuelgalÃƒÂ³ en inetpub/wwwroot y verÃƒÂ¡s que pasa:
+* se detecta el servicio y te permite ejecutarlo
+*
+* Para crear el proxy:
+* E:>wsdl http://localhost/Saluda.asmx?wsdl /out:c:inetpubwwwrootSaluda.cs
+*
+* Para crear la libreria a partir del proxy:
+* csc /t:library Saluda.cs
+*/
+
+using System;
+using System.Web.Services;
+
+// Nuestra clase hereda de WebService
+public class Saludo : WebService
+{
+
+[WebMethod]
+public string saludoStandar( string quien )
+ {
+	return "Hola nena, un saludo de parte de " + quien;
+ }
+ 
+}
+</pre>
+Podemos colgar ese fichero directamente de IIS y ver lo que ocurre. Magia!
+A continuaciÃƒÂ³n creamos un proxy de nuestro servicio web, cosa de la que se encarga el compilador.
+
+Y luego, podemos crear un cliente de prueba, adjuntando la librerÃƒÂ­a del proxy en la compilaciÃƒÂ³n:
+<pre>
+/**
+* ClienteSaluda.cs
+* Un programa cliente del servicio Web Saluda
+* Muy simple, hay que compilarlo usando la librerÃƒÂ­a creada
+* con el proxy del webservice.
+* Compilacion: csc /r:Saluda.dll ClienteSaluda.cs
+*/
+
+using System;
+
+
+public class ClienteSaluda
+{
+
+	// MÃƒÂ©todo principal
+	public static void Main ()
+	{
+		string resultado = "";
+		
+		System.Console.WriteLine("Vamos a invocar el servicio web");
+		
+		// creamos la instancia del servicio
+		Saludo miSaludo = new Saludo();
+		resultado = miSaludo.saludoStandar("Icaza");
+		
+		System.Console.WriteLine("Resultado: {0}", resultado );
+		
+	}
+}
+</pre>

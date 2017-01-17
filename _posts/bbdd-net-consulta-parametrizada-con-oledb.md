@@ -1,0 +1,296 @@
+<p><span style="font-weight: bold;">4. Acceso a BBDD</span><br /><br />Para el acceso a BBDD desde .NET tenemos varias opciones:</p>
+<ul>
+<li>OleDb: es una opci&oacute;n sencilla para acceder a objetos ole, como por ejemplos ficheros de Access. Si la BBDD es sencilla es una forma f&aacute;cil de tener una web din&aacute;mica.</li>
+<li>ODBC: es la opci&oacute;n que necesitamos cuando no hay librer&iacute;as .NET para el gestor de BBDD o cuando queremos hacer que el acceso a la BBDD sea transparente. Es m&aacute;s lento porque al final estamos pasando por un puente intermedio.</li>
+<li>Sql: es la opci&oacute;n para acceder a BBDD SqlServer. Cualquier web ASP.NET medianamente seria tendr&iacute;a que usar la BBDD "de la casa".</li>
+</ul>
+<p>Las instrucciones para acceder son las mismas, lo &uacute;nico que cambia es el prefijo de las clases: OleDb, Odbc y Sql.<br /><br />Veamos un ejemplo con una p&aacute;gina web en la que se muestran los datos de una BBDD access y se permite insertar nuevos registros. <strong>IMPORTANTE:</strong> para poder ver el reflejo de la inserci&oacute;n nada m&aacute;s hacerlo, la parte de mostrar datos hay que hacerla en el m&eacute;todo Page_PreRender, ya que si los ponemos en el Page_Load el insert se har&aacute; m&aacute;s tarde (el soporte del evento de hacer clic en un bot&oacute;n se hace despu&eacute;s del Load).</p>
+<p>&nbsp;</p>
+<p><strong>Ejemplo de consulta parametrizada:</strong></p>
+<p>&nbsp;</p>
+<pre>ï»¿using System;
+
+using System.Collections;
+
+using System.Configuration;
+
+using System.Data;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.Security;
+
+using System.Web.UI;
+
+using System.Web.UI.HtmlControls;
+
+using System.Web.UI.WebControls;
+
+using System.Web.UI.WebControls.WebParts;
+
+using System.Xml.Linq;
+
+using System.Data.OleDb;
+
+
+
+public partial class OleDb : System.Web.UI.Page
+
+{
+
+    protected void Page_Load(object sender, EventArgs e)
+
+    {
+
+
+
+
+
+    }
+
+
+
+    // Hay que hacer el select en el prerender, para QUE RECOJA LAS INSERCCIONES.
+
+    // Esto es porque los eventos se tratan despu&eacute;s del Load.
+
+    protected void Page_PreRender(object sender, EventArgs e)
+
+    {
+
+        // String de conexion, al estilo de ASP
+
+        // El mapPath hace la magia cuando tenemos el fichero incluido
+
+        string stringConexion = "Provider=Microsoft.Jet.OLEDB.4.0;"
+
+        + "User Id=;Password=;" + @"Data Source=" + Server.MapPath("discos.mdb");
+
+
+
+        // Esta es la consulta que ejecutaremos
+
+        string consulta = "SELECT * FROM Discos";
+
+
+
+        // Creamos el objeto de la conexion
+
+        OleDbConnection conexion = new OleDbConnection(stringConexion);
+
+
+
+        // Creamos el objeto para ejecutar la sentencia
+
+        OleDbCommand sentencia = new OleDbCommand(consulta, conexion);
+
+
+
+        // Un resultSet o recordSet para guardar el resultado de la sentencia
+
+        OleDbDataReader resultSet = null;
+
+
+
+        try
+
+        { // metemos control de excepciones, por si las moscas
+
+
+
+            // Abrimos la conexi&Atilde;&sup3;n
+
+            conexion.Open();
+
+
+
+            // Ejecutamos la sentencia y mostramos el resultado
+
+            resultSet = sentencia.ExecuteReader();
+
+
+
+            // NOTA: si fuera un INSERT, UPDATE o DELETE se har&iacute;&shy;a as&iacute;:
+
+            // int registros = sentencia.ExecuteNonQuery(); // registros ser&Atilde;&shy;an los reg afectados
+
+
+
+            lblResultado.Text += "Estos datos hay en la tabla&lt;br /&gt;";
+
+
+
+            // Recorremos el resultado
+
+            while (resultSet.Read())
+
+            {
+
+                // Para tomar una columna de cada registro usamos funciones de este pelo
+
+                // segun el tipo de dato: getString, getBoolean, getDouble,...
+
+                // En caso de duda resultSet.GetValue(3).getType().toString()
+
+                // nombre, estilo , precio
+
+                lblResultado.Text += "Int&eacute;rprete:  " + resultSet.GetString(1);
+
+                lblResultado.Text += "Estilo:  " + resultSet.GetString(2);
+
+                lblResultado.Text += "Precio:  " + resultSet.GetDecimal(3) + "&lt;br /&gt;";
+
+            }
+
+
+
+            // IMPORTANTE, al final de la consulta hay que cerrar
+
+            // tanto el datareader como la conexi&Atilde;&sup3;n!!!
+
+            resultSet.Close();
+
+            conexion.Close();
+
+        }
+
+        catch (OleDbException ode)
+
+        {
+
+            lblResultado.Text += "Error de OleDb: {0} " + ode;
+
+        }
+
+    }
+
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+
+    {
+
+        // String de conexion, al estilo de ASP
+
+        // El mapPath hace la magia cuando tenemos el fichero incluido
+
+        string stringConexion = "Provider=Microsoft.Jet.OLEDB.4.0;"
+
+        + "User Id=;Password=;" + @"Data Source=" + Server.MapPath("discos.mdb");
+
+
+        // Esta es la consulta que ejecutaremos
+
+        //string consulta = "insert into discos (interprete,estilo,precio) values (+txtNombre.Text+,+txtEstilo.Tex + ," +txtPrecio.Text+")";
+
+        // parametrizada mejor para evitar el SQLInject
+
+        string consulta = "insert into discos (interprete,estilo,precio) values (?,?,?)";
+
+
+
+
+        // Creamos el objeto de la conexion
+
+        OleDbConnection conexion = new OleDbConnection(stringConexion);
+
+
+
+        // Creamos el objeto para ejecutar la sentencia
+
+        OleDbCommand sentencia = new OleDbCommand(consulta, conexion);
+
+
+
+        // Un resultSet o recordSet para guardar el resultado de la sentencia
+
+        int resultado = 0;
+
+
+
+        try
+
+        { // metemos control de excepciones, por si las moscas
+
+
+
+            // Abrimos la conexi&oacute;n
+
+            conexion.Open();
+
+
+
+
+
+           sentencia.Parameters.Add(new OleDbParameter("interprete", OleDbType.VarChar));
+
+            sentencia.Parameters.Add(new OleDbParameter("estilo", OleDbType.VarChar));
+
+            sentencia.Parameters.Add(new OleDbParameter("precio", OleDbType.Decimal));
+
+
+
+            sentencia.Parameters["interprete"].Value = txtNombre.Text;
+
+            sentencia.Parameters["estilo"].Value = txtEstilo.Text;
+
+            sentencia.Parameters["precio"].Value = Decimal.Parse(txtPrecio.Text);
+
+      
+
+       
+
+      // sentencia.Parameters.Add(new OleDbParameter("interprete
+
+            
+
+            // Ejecutamos la sentencia y mostramos el resultado
+
+            resultado = sentencia.ExecuteNonQuery();
+
+
+
+            // NOTA: si fuera un INSERT, UPDATE o DELETE se har&iacute;a as&iacute;:
+
+            // int registros = sentencia.ExecuteNonQuery(); // registros ser&Atilde;&shy;an los reg afectados
+
+
+
+            lblResultado.Text += "Ok insert correcto: "+resultado+"&lt;br /&gt;"+consulta+"&lt;br /&gt;";
+
+
+
+
+
+
+
+            // IMPORTANTE, al final de la consulta hay que cerrar
+
+            // tanto el datareader como la conexi&oacute;n!!!
+
+
+
+            conexion.Close();
+
+        }
+
+        catch (OleDbException ode)
+
+        {
+
+            lblResultado.Text += "Error de OleDb: {0} " + ode + "&lt;br /&gt;&lt;b&gt;"+sentencia.CommandText+"&lt;/b&gt;";
+
+        }
+
+
+
+
+
+    }
+
+}
+
+
+</pre>

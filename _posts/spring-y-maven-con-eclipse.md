@@ -1,0 +1,114 @@
+<p>
+	<strong>Nice and easy please</strong></p>
+<p>
+	Antes de meterme a pasar el ejemplo de RunningOfTheBulls a Spring he procurado pelearme un poco con dos IDE: netbeans y eclipse. La idea es ir viendo cu&aacute;l de los dos te lo pone m&aacute;s f&aacute;cil para crear este tipo de proyectos. Se supone que esos frameworks y esos IDE est&aacute;n pensados para hacerte el trabajos sucio, no para que t&uacute; te rompas la cabeza tratando de configurar classpaths y a&ntilde;adiendo todos los ficheros jar para que la cosa compile de una vez.</p>
+<p>
+	Esto es lo que veo a d&iacute;a de hoy, 7 de julio de 2013.</p>
+<p>
+	A ver, lo que queremos es desarrollar un proyecto java, de consola, que utilice Spring y Maven. Y queremos usar un IDE que nos lo de hecho, quiero que el IDE trabaje para m&iacute; y no al rev&eacute;s. Lo que me encuentro:</p>
+<p>
+	<strong>Netbeans 7.3.1.&nbsp;</strong></p>
+<p>
+	Tiene soporte para crear proyectos Maven pero no proyectos Spring. Vale, lo tendr&iacute;amos que meter a mano. Vale, hay un plugin de spring, pero no funciona para esta versi&oacute;n. Vale, te podr&iacute;as crear un proyecto base y tirar de &eacute;l. Vamos a probar con eclipse.</p>
+<p>
+	<strong>Eclipse J2EE KEPLER</strong></p>
+<p>
+	Soporte de serie para crear proyectos Maven. Para los proyectos Spring debemos incluir un plugin, el STS que est&aacute; en&nbsp;<a href="http://www.springsource.org/sts">http://www.springsource.org/sts</a>&nbsp;o bien podemos bajar una especie de Eclipse que ya trae Spring integrado. Con el plugin ya podemos crear proyectos de varios tipos pero resalto un par:</p>
+<ol>
+	<li>
+		Proyecto Spring &quot;normal&quot;: <span style="font-family:courier new,courier,monospace;">New &gt; Other &gt;Spring &gt; Spring project &gt; Simple &gt; Simple java</span>: eso te crea un proyecto que en teor&iacute;a tiene soporte para Spring, y te lo marca con una S. Cosa que puedes hacer con cualquier proyecto al vuelo, bot&oacute;n derecho <span style="font-family:courier new,courier,monospace;">Spring Tools &gt; Add Spring Nature</span>: PEEEERO. Creando el proyecto de esta manera no te incluye las librer&iacute;as Spring WTF!!! Y claro, &iquest;cu&aacute;les hay que meter? claro, como dice alg&uacute;n video tutorial te incluyes todos los jar de org.springframework.* que tienes en la carpeta plugins de eclipse m&aacute;s los apachecommons &nbsp;y a correr. Pero eso es una full (&iquest;me entiendes pavo?), aunque te lo hagas con una User Library para reutilizarla.</li>
+	<li>
+		<strong>Proyecto Spring + Maven</strong>. Cojonudo. Te lo da hecho COMO ES L&Oacute;GICO. &iquest;para qu&eacute; serv&iacute;a Maven sino para resolver dependencias entre otras cosas? Pues listo. El proyecto viene con la estructura Maven y un fichero pom.xml que ya indica las librer&iacute;as concretas que se necesitan. &iexcl;CREMA!</li>
+</ol>
+<p>
+	Si elegimos la segunda opci&oacute;n, que es la l&oacute;gica y aparte es lo que andabamos persiguiendo solo falta aclarar una cosa. &iquest;<strong>D&oacute;nde narices metemos el fichero xml con las definiciones de beans de Spring</strong>? En la carpeta de resources de maven. Por cierto, en los proyectos Spring, eclipse no hace magia ni te incluye ese fichero de forma autom&aacute;tica ni nada al menos de primeras. Hay que meterlo a manubrio con un <span style="font-family:courier new,courier,monospace;">New &gt; Other &gt; Spring &gt; Spring Bean Configuration File</span> &nbsp;y eso te mete un XML con la cabecera precisa eso s&iacute; para que metas los beans y las inyecciones. En el caso del encierro el fichero inicial es este:</p>
+<p>
+	&nbsp;</p>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;bean id=&quot;runningbulls&quot; class=&quot;info.pello.runningbulls.RunningOfTheBulls&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/beans&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Y la clase principal que inicia todo es:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">package info.pello.runningbulls;</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">import org.springframework.context.ApplicationContext;</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">import org.springframework.context.support.ClassPathXmlApplicationContext;;</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">/**</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp;* Fires the running of the bulls</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Altadill</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp;* @greetz 2 u as usual</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">public class Main {</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">/**</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">* @param args</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">*/</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">public static void main(String[] args) {</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">// TODO Auto-generated method stub</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; ApplicationContext context = new ClassPathXmlApplicationContext(&quot;hellospring.xml&quot;);</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; RunningOfTheBulls runningOfTheBulls = (RunningOfTheBulls) context.getBean(&quot;runningbulls&quot;);</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; runningOfTheBulls.makeThemRun();</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; System.out.println(runningOfTheBulls.deadReport());</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">}</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">}</span></div>
+	<div>
+		&nbsp;</div>
+</div>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>

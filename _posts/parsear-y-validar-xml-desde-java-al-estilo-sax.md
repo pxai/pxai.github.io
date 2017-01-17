@@ -1,0 +1,211 @@
+<h2>
+	Parsear XML con java</h2>
+<p>
+	De esto se pueden encontrar miles de ejemplos por la red. En mi caso ten&iacute;a hecho alguno, el problema es que el c&oacute;digo era del a&ntilde;o 2001. Y sigue funcionando pero tirando de un fichero jar que contiene unas librer&iacute;as que vete a saber t&uacute;. El caso es que he tratado de hacer un ejemplo de esto con material m&aacute;s actualizado tal y como se cuenta en la web oficial de oracle-java (qui&eacute;n lo dir&iacute;a en el 2001). Bueno, al l&iacute;o:</p>
+<p>
+	Este ser&iacute;a el fichero XML:</p>
+<p>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+	&lt;!DOCTYPE PROPERTIES SYSTEM &quot;properties.dtd&quot;&gt;<br />
+	&lt;PROPERTIES&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;system_version&quot; &gt;1.0.01&nbsp;&nbsp; &nbsp;&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;loglevel&quot; &gt;1&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;logfile&quot; &gt;Data/log/output.log&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;multiuser_y_n&quot; &gt;y&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;server_y_n&quot; &gt;y&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;language&quot; &gt;en&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;db_type&quot; &gt;sql&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;jdbc_driver&quot; &gt;sun.jdbc.odbc.JdbcOdbcDriver&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;jdbc_url&quot; &gt;jdbc:odbc:pruebas&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;jdbc_user&quot; &gt;&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;jdbc_password&quot; &gt;&lt;/PROPERTY&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;PROPERTY NAME=&quot;init.d&quot; &gt;Data/etc/init.d&lt;/PROPERTY&gt;<br />
+	&lt;/PROPERTIES&gt;</p>
+<p>
+	Y como se puede ver debe seguir los dictados de un fichero DTD, que en este caso es muy sencillo y es este:</p>
+<p>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />
+	&lt;!-- P. Al. --&gt;<br />
+	&lt;!-- Generic properties file--&gt;<br />
+	&lt;!ELEMENT PROPERTIES (PROPERTY*)&gt;<br />
+	&lt;!ELEMENT PROPERTY (#PCDATA)&gt;<br />
+	&lt;!ATTLIST PROPERTY<br />
+	&nbsp;&nbsp; &nbsp;NAME CDATA #REQUIRED<br />
+	&gt;</p>
+<p>
+	Como ya sabr&aacute;s a estas alturas de siglo existen dos formas b&aacute;sicas de leer un fichero XML desde un programa: una es cargando todo el fichero de golpe.</p>
+<p>
+	En este caso he hecho un parser de SAX usando las librer&iacute;as m&aacute;s simples y menos ex&oacute;ticas posible. Ojo!! para que valida el tema del uso del DTD hay que meter los m&eacute;todos de error (error, fatalError, warning), porque si no es as&iacute; no nos empanaremos.</p>
+<p>
+	import java.io.File;<br />
+	import java.io.IOException;<br />
+	<br />
+	import javax.xml.parsers.ParserConfigurationException;<br />
+	import javax.xml.parsers.SAXParser;<br />
+	import javax.xml.parsers.SAXParserFactory;<br />
+	<br />
+	import org.xml.sax.Attributes;<br />
+	import org.xml.sax.SAXException;<br />
+	import org.xml.sax.SAXParseException;<br />
+	import org.xml.sax.helpers.DefaultHandler;<br />
+	<br />
+	/**<br />
+	&nbsp;* Simple XML parser using SAX.<br />
+	&nbsp;* SAX is somehow an event-driven parser, instead of loading the whole<br />
+	&nbsp;* document in some data structure it discovers elements as it reads the<br />
+	&nbsp;* XML file. In this class we can set validation to control if the document<br />
+	&nbsp;* follows a DTD or not.<br />
+	&nbsp;* In many examples you will see that an inner private class is defined as<br />
+	&nbsp;* a extension of the DefaultHandler. In this implementation I tried to<br />
+	&nbsp;* develop a simple class.<br />
+	&nbsp;* ATTENTION! if you want to get DTD validation errors, when you extend the DefaultHandler<br />
+	&nbsp;* you have to add error, faltalError and warning methods<br />
+	&nbsp;* @author Pello Altadill<br />
+	&nbsp;* @greetz keeper of the orthody<br />
+	&nbsp;*/<br />
+	public class XMLSAXParser&nbsp; extends DefaultHandler&nbsp; {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;private String filename;&nbsp;&nbsp; &nbsp;// The filename of the XML document<br />
+	&nbsp;&nbsp;&nbsp; private boolean validation = true; // If we want validation or not<br />
+	&nbsp;&nbsp;&nbsp; private String element = &quot;&quot;; // The element we are looking for<br />
+	&nbsp;&nbsp;&nbsp; private boolean found = false;&nbsp;&nbsp; &nbsp;// A flag to control if element is found or not<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * constructor<br />
+	&nbsp;&nbsp; &nbsp; * @param filename of XML file to be parsed<br />
+	&nbsp;&nbsp; &nbsp; * @param element we look for<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public XMLSAXParser (String filename,String element) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.filename = filename;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.element = element;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * @return the validation<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public boolean isValidation() {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return validation;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * @param validation the validation to set<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public void setValidation(boolean validation) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.validation = validation;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * inits XML parse<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public void parse () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; File file = new File(filename);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;saxParserFactory.setValidating(validation);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; SAXParser parser;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; try {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parser = saxParserFactory.newSAXParser();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// I am the handler. Me, myself and I<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; DefaultHandler handler = this;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; parser.parse(file,handler);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} catch (ParserConfigurationException e) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.err.println(&quot;ParserConfigurationException&quot; + e);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} catch (SAXException e) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.err.println(&quot;SAXException: &quot; + e);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} catch (IOException e) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.err.println(&quot;IOException: &quot; + e);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} catch (Exception e) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.err.println(&quot;Exception: &quot; + e);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * handles warning<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param e SAXParseException<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void warning(SAXParseException e) throws SAXException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Warning: &quot; + e);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * handles error in document<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param e SAXParseException<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void error(SAXParseException e) throws SAXException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Error: &quot; + e);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * handles fatal error in document<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param e SAXParseException<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void fatalError(SAXParseException e) throws SAXException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Fatal error: &quot; + e);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * method called when a XML element is found<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param uri<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param localName<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param qName<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param attributes<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public void startElement(String uri, String localName,<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String qName, Attributes attributes)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws SAXException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp; // Have we found the element we wanted?<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (qName.equalsIgnoreCase(element)) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; found = true;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Method called when characters inside the element are found<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param ch[]<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param start<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param length<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void characters(char ch[], int start, int length)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws SAXException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Show characters only when we are in the element<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// we wanted<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (found) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;ELEMENT found: &quot; + new String(ch, start, length));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;found = false;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * called when whitespaces are found<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void ignorableWhitespace(char buf[], int offset, int len)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws SAXException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //System.out.println(&quot;white space, ignore it: &quot; + offset + &quot;: &quot; + len);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * called when parsed document begins<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startDocument() throws SAXException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;Start of document parsing.&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * called when parsed document ends<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; public void endDocument() throws SAXException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;End of document parsing&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; *<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param args<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static void main(String args[]) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;XMLSAXParser xmlSaxParser = new XMLSAXParser(&quot;properties.xml&quot;, &quot;PROPERTY&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;xmlSaxParser.parse();<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}</p>
+<p>
+	&nbsp;</p>

@@ -1,0 +1,28 @@
+<table>
+<tr>
+<td>
+   <div align="left"> <br>
+        <b><a href="http://lynx.isc.org/">Lynx</a> Theme for <a href="http://www.webmin.com">webmin</a></b><br>
+        <table border="0">
+          <tr>
+            <td> 
+              <p align="left">This is very simple theme for webmin based on Lynx 
+                appearence. It reduces the presence of images to achieve faster 
+                navigation, and tries to simplify webmin look-and-feel to suit 
+                Lynx browser users.<br>
+                <img src="/images/lynxth.jpg" width="548" height="439" alt="Screenshot for this theme" border="0"> 
+              </p>
+              <p>Webmin theme based on Lynx</p>
+              <p>Note: It keeps module index visible in every webmin page</p>
+              <a href="/filez/lynxth.wbt">download </a>
+<p><br>
+              </p>
+              </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+
+</td>
+</tr>
+</table>

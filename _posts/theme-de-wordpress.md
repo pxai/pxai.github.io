@@ -1,0 +1,66 @@
+Bueno, para variar un poco que mejor que hacerse un theme de Wordpress. Puede resultar algo contradictorio hablar de eso en un blog tan descaradamente drupaliano como este, pero lo cierto es que hacer ese theme no es mÃƒÂ¡s que una excusa para poner en prÃƒÂ¡ctica (mÃƒÂ¡s bien en tela de juicio) los conocimientos de css, y mÃƒÂ¡s en concreto del posicionamiento de bloques.
+
+Lo malo es que cuando se te mete un diseÃƒÂ±o como este en la cabeza:<br>
+<img src="images/wp.jpg" alt="bueno, el tipico" title="bueno, el tipico"><br>
+empiezas a darle al css y te puedes armar un lÃƒÂ­o bastante grande.
+Como bien dicen en el ÃƒÂ­ndice de uno de los <a href="http://www.e-ghost.deusto.es/cursillosjulio/cursillo.php?cursillo=16">supercursos de eghost</a>, las tablas html son para lo que son, y a estas alturas de milenio solo debieramos usar DIVs para el diseÃƒÂ±o.
+<br><br>
+Bueno, pues no es tan complicado, estas serÃƒÂ­an la pautas:<br><br>
+* Usamos bloques div, todos ellos dentro de un div padre <br>
+* Centrar todo en medio:
+<pre>
+	margin: 20px auto 0 auto;
+</pre>
+* Ancho predefinido de 800px;<br>
+* Dentro del bloque padre, todos los bloques van seguidos, sin anidar: barra lateral, principal y pie.<br>
+* La barra lateral debe flotar:
+<pre>
+	float: right;
+</pre>
+* La parte central no muy ancha:
+<pre>
+	width: 550px;
+</pre>
+* El pie con un clear, para que se quede abajo:
+<pre>
+	clear:both;
+</pre>
+
+* Para que el tÃƒÂ­tulo haga mejor contraste le he metido una sombra al texto echa a pelo, ya que  el atributo especÃƒÂ­fico de text-shadow no tira ni en exploiter ni en mozillass.<br>
+
+Por otro lado tiene el tÃƒÂ­pico mecanismo para que la imagen de cabecera cambie cada dÃƒÂ­a. Es muy simple, tan solo hay que preocuparse de subir imÃƒÂ¡genes al directorio correspondiente y el programa hace el resto. AquÃƒÂ­ esta el cÃƒÂ³digo:
+<pre>
+ 	/**
+ 	* todaysRandomImage
+ 	* Displays random image in header, one per day
+ 	*/
+ 	function todaysRandomImage () 
+ 	{
+ 		$imagepath = "images/random/";
+ 		$images;
+		$d = dir(dirname(__FILE__)."/images/random");
+	
+		while (false !== ($entrada = $d->read())) 
+		{
+			if ($entrada != "." && $entrada!="..") 
+			{
+				$images[] = $imagepath.$entrada;
+			}
+		}
+		$d->close();
+		
+		// we take the total amount of files
+		$total = count($images);
+		// take day of the year
+		$today = date("z");
+		// select one index 
+		$selected = $today % $total;
+		// and return images array element: image path
+		return $images[$selected];
+
+ 	}
+</pre>
+
+Ã‚Â¿El resultado?<br>
+<a href="http://www.pello.info/?q=node/view/116">AQUÃ¯Â¿Â½? LO TIENES</a>
+<br><br>

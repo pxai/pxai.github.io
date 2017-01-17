@@ -1,0 +1,15 @@
+<table>
+<tr>
+<td>
+<div align="left">
+Pagina creada con <a href="http://www.drupal.org">DRUPAL</a> Pello Xabier Altadill Izura.
+</div>
+      <ul>
+        <li>Dise&ntilde;o: drupal</li>
+        <li>Programaci&oacute;n: drupal</li>
+        <li>Programas utilizados: pico, vi, crimson editor y drupal</li>
+      </ul>
+
+</td>
+</tr>
+</table>

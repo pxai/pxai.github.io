@@ -1,0 +1,14 @@
+<h1>
+	Mapas y geolocalizaci&oacute;n</h1>
+<p>
+	&nbsp;</p>
+<div>
+	Desde una aplicaci&oacute;n de android pueden utilizarse los servicios de geolocalizaci&oacute;n del propio m&oacute;vil, lo cual nos puede servir para establecer unas coordenadas o simplemente para buscar una posici&oacute;n desde el programa.</div>
+<div>
+	&nbsp;</div>
+<div>
+	La geolocalizaci&oacute;n tambi&eacute;n puede ser imprescindible si nuestra aplicaci&oacute;n est&aacute; basada en geolocalizaci&oacute;n del tipo gu&iacute;a garraf&oacute;n. Este tipo de aplicaciones precisan premisos especiales para que se puedan usar estos servicios.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<a href="http://www.pello.info/filez/android/14.Mapas.tar.gz">Demo no funciona</a></div>

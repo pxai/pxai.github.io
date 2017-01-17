@@ -1,0 +1,40 @@
+Si, es una chorrada pero que siempre se olvida.
+La gestion de usuarios con mysql es un horror de los mas 
+confuso. 
+
+Primero creamos la BBDD como superusuario 
+CÃƒÂ³digo: 
+#mysqadmin create bbdd_nueva 
+
+
+Entramos como superusuario en la BBDD mysql 
+(catalogo o metadatos, donde se almacena informacion de la propia 
+BBDD). 
+
+CÃƒÂ³digo: 
+#mysql -u root mysql -p 
+
+
+Y ejecutando esto creamos un usuario con password que 
+tiene control total de la BBDD: 
+
+CÃƒÂ³digo: 
+mysql> GRANT ALL ON BBBD_NUEVA.* TO USUARIO@'host'  IDENTIFIED BY 'PASSWORD'; 
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.03 sec)
+
+ATENCION! nunca olvidarse el flush privileges
+Otro ejemplo:
+mysql> GRANT ALL ON hacienda.* TO Juancker@'%'  IDENTIFIED BY 'PASSWORD'; 
+mysql> GRANT ALL ON hacienda.* TO Juancker@'localhost'  IDENTIFIED BY 'PASSWORD'; 
+
+
+Con ello, el usuario USUARIO podra acceder desde el host de esta manera: 
+
+CÃƒÂ³digo: 
+# mysql -u USUARIO BBDD_NUEVA -p 
+Password: 
+
+mysql> 

@@ -1,0 +1,81 @@
+<table>
+<tr>
+<td>
+     <div align="left"> <br>
+        <b>Dibujos</b><br>
+        <table width="0" border="0" cellspacing="0" cellpadding="0">
+          <tr align="left" valign="top"> 
+            <td width="518" align="center"><img src="images/detail01.jpg" width="279" height="200" alt="Un mango"></td>
+          </tr>
+        </table>
+        <br>
+        <table border="0">
+          <tr> 
+            <td>
+              <p><b>Dibujos y comics</b><br>
+                La mayoria de los comics que hago no tienen ningun valor como 
+                historia interesante, el argumento es nulo. La &uacute;nica motivaci&oacute;n 
+                es dibujar escenas de acci&oacute;n pura y dura. Hombre para variar 
+                un poco he creado la tira <a href="http://coders.pello.info/">c0ders</a>, 
+                una historieta sobre tres programadores.</p>
+              <p align="center"><a href="http://coders.pello.info"><img src="images/wildbunch.jpg" width="309" height="169" alt="IR A CODERS" border="0"></a></p>
+              <p>En general los comics largos suelo hacerlos en euskera, aunque 
+                para lo que se dice, no merece la pena una traducci&oacute;n exhaustiva.</p>
+              <ul>
+                <li><b>Comics</b> 
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr align="left" valign="top"> 
+                      <td>
+                        <p><a href="http://afotoschulas.galeon.com/hm.html"><b>Herioaren Mezularia</b></a> (blanco, negro y rojo)<br>
+                          La idea es tan simple como conocida: un asesino a sueldo 
+                          va completando su lista de encargos hasta que cumple 
+                          con todos; pero cuando va a cobrar lo convenido, unas 
+                          diferencias contractuales hace que se cargue a su contratista.<br>
+                          Por ello se vera perseguido por todos sus clientes anteriores, 
+                          los cuales convocan a todos los asesinos a sueldo de 
+                          la ciudad para que acaben con el.</p>
+                        <p>Aunque el tambi&eacute;n se une a la convocatoria...</p>
+                        <p>Este tema esta claramente inspirado en la p&eacute;licula 
+                          The Killer de John Woo, aunque ahora que lo pienso, 
+                          la peli la vi despues de hacer este comic.</p>
+                      </td>
+                      <td>
+                        <p><img src="images/detail05.jpg" width="211" height="369" alt="Que duro es trabajar..." border="0"></p>
+                        <p>&nbsp;</p>
+                      </td>
+                    </tr>
+                    <tr align="left" valign="top"> 
+                      <td>
+                        <p><a href="ymajs.html"><b>Yo mate a John Scatman</b></a> 
+                          (blanco, negro y rojo)<br>
+                          Un chaval que esta en su casa desayunando tanquilamente 
+                          se sobresalta cuando por la radio sale la cancion de 
+                          Scatman, la tipica &quot;canci&oacute;n del a&ntilde;o&quot;. 
+                          En un arrebato de furia incontrolada decide acabar de 
+                          una vez con el responsable del hit superventas: el tambien 
+                          quiere sus minutos de gloria. </p>
+                        <p>Aprovechando que Scatman esta de visita en la emisora 
+                          de los 40 local, el protagonista se viste con una gabardina 
+                          y armado hasta los dientes va en busca de su victima. 
+                          Aunque antes de llegar a ella se tendra que quitar de 
+                          encima a los guardaespaldas y a los seguratas.<br>
+                        </p>
+                        <p>Sin dejar de lado la acci&oacute;n bal&iacute;stica, 
+                          esta aventura es algo m&aacute;s gore, ya que nuestro 
+                          protagonista lleva unos cuchillos muy respetables.</p>
+                      </td>
+                      <td><img src="images/detail04.jpg" width="242" height="255" alt="Lluvia de plomo"></td>
+                    </tr>
+                  </table>
+                </li>
+              </ul>
+              <p>&nbsp; </p>
+              </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+
+</td>
+</tr>
+</table>
