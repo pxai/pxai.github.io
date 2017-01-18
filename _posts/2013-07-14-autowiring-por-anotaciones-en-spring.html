@@ -1,0 +1,888 @@
+﻿---
+layout: post
+title: "Autowiring por anotaciones en Spring" 
+date: 2013-07-14 23:18:05 
+categories: coding
+---
+<p>
+	 </p>
+<div>
+	En el artículo anterior tratabamos de ahorrarnos algo de configuración XML mediante el autowiring, y dejabamos pendiente la inyección de dependencias mediante anotaciones en las propias clases.</div>
+<div>
+	 </div>
+<div>
+	Eso es lo que veremos ahora. El proyecto consiste una serie de clases que representan las clases de un partido de fútbol, con unas relaciones obvias.</div>
+<div>
+	 </div>
+<div>
+	-Clase Player: representa un jugador.</div>
+<div>
+	-Clase Home: representa un estadio</div>
+<div>
+	-Clase Team: representa un equipo, contiene un Hashtable de jugadores y un estadio.</div>
+<div>
+	-Clase Referee: representa un árbitro</div>
+<div>
+	-Clase Match: el partido, contiene un estadio, un árbitro y dos equipos.</div>
+<div>
+	 </div>
+<div>
+	Como siempre <a href="http://code.google.com/p/erps-2dam-4vientos/source/browse/trunk/Football/">el código lo tienes en google code</a></div>
+<div>
+	 </div>
+<div>
+	Para hacer la inyección por anotaciones necesitaremos básicamente dos cosas:</div>
+<div>
+	1- En el fichero XML a la instancia le debemos indicar una etiqueta <qualifier name="..." /> que luego</div>
+<div>
+	usaremos...</div>
+<div>
+	2-  ...en la clase en la que vamos a inyectar, delante de la propiedad a inyectar o en el método set ponemos las</div>
+<div>
+	siguientes anotaciones (son exclusivas de Spring):</div>
+<div>
+	@Autowired</div>
+<div>
+	@Qualifier("el-name-del-xml")</div>
+<div>
+	 </div>
+<div>
+	Ahora veamos la pinta que tiene cada clase, omitiremos métodos set/get</div>
+<div>
+	 </div>
+<div>
+	<strong>Clase Player </strong></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Random;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * Represents a football player</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabie Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz Jan Urban</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Player {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int number;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private String position;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int kick;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int pass;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int dodge; // dribbling</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">    private Random random = new Random();</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Player () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">init();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* Constructor using some fields</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param name</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param number</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param position</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Player (String name, int number, String position) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.name = name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.number = number;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.position = position;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* inits player playing atributes</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private void init () {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.kick = random.nextInt(6) + 1;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.pass = random.nextInt(6) + 1;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.dodge = random.nextInt(6) + 1;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return "Player [name=" + name + ", number=" + number + ", position="</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ position + ", kick=" + kick + ", pass=" + pass + ", dodge="</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ dodge + ", random=" + random + "]";</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// SETTERS/GETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// ...</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<strong>Clase Home</strong></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * Represents a football player</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabie Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz Old Sadar</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Home {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  private int capacity;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  /**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">   * default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">   */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  public Home () {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  }</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param name</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param capacity</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Home(String name, int capacity) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.name = name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.capacity = capacity;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return "Home [name=" + name + ", capacity=" + capacity + "]";</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// SETTERS/GETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// ...</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<strong>Clase Referee</strong></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Autowired;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Qualifier;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * The referee of the match</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz Undiano Mallenco</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Referee {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private String country;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Referee assistant1;</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Referee assistant2;</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Referee assistant3;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Referee () {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return "Referee [" + (name != null ? "name=" + name + ", " : "")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ (country != null ? "country=" + country + ", " : "")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ (assistant1 != null ? "assistant1=" + assistant1 + ", " : "")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ (assistant2 != null ? "assistant2=" + assistant2 + ", " : "")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ (assistant3 != null ? "assistant3=" + assistant3 : "") + "]";</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// SETTERS/GETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// ...</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  </span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<strong>Clase Team</strong></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Hashtable;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Autowired;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Qualifier;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * Represents a football stadium</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabie Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz Osasuna</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Team {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private String name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Hashtable<Integer,Player> players;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Autowired</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Qualifier("sadar")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Home homeStadium;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Team () {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param name</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param players</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @param homeStadium</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Team(String name, Hashtable<Integer, Player> players,</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">Home homeStadium) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">super();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.name = name;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.players = players;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">this.homeStadium = homeStadium;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return "Team [name=" + name + ", players=" + players.toString() + ", homeStadium="</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ homeStadium + "]";</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// SETTERS/GETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// ...</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<strong>Clase Match</strong></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import java.util.Date;</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Autowired;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.beans.factory.annotation.Qualifier;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * Represents a football match between two teams</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz Blue Mug</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Match {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Autowired</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Qualifier("osasuna")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Team homeTeam;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Autowired</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Qualifier("erreala")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Team visitorTeam;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Autowired</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Qualifier("undiano")</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Referee referee;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Autowired</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Home stadium; // There is only one Home in xml file. Spring</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> // will inject that.</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private Date date;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int homeGoal;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">private int visitorGoal;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* default constructor</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public Match () {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* gives result of the match</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @return</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String outcome() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// TODO Auto-generated method stub</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return homeTeam.getName() + " " + homeGoal + " - " +</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  visitorTeam.getName() + " " + visitorGoal;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/* (non-Javadoc)</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">* @see java.lang.Object#toString()</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">@Override</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public String toString() {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">return "Match [homeTeam=" + homeTeam.toString() + "\n, visitorTeam=" + visitorTeam.toString() + "\n, referee=" </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ referee.toString() + "\n, stadium=" + stadium.toString() + "\n, date="</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ date + ", homeGoal=" + homeGoal + ", visitorGoal="</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">+ visitorGoal + "]";</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// SETTERS/GETTERS</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">// ...</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<strong>Clase App</strong></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.spring.football;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.context.ApplicationContext;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">import org.springframework.context.support.ClassPathXmlApplicationContext;</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * Main App</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @author Pello Xabier Altadill Izura</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> * @greetz u </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> */</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class App {</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">    public static void main (String args[]) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">ApplicationContext context = new ClassPathXmlApplicationContext("football.xml");</span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">Match match = (Match) context.getBean("match");</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">                </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">        System.out.println("Match data: " + match.toString());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">    }</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<strong>Fichero XML</strong></div>
+<div>
+	 </div>
+<div>
+	Atención a la forma de inyectar el hashtable de jugadores en el Team.</div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><?xml version="1.0" encoding="UTF-8"?></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><beans xmlns="http://www.springframework.org/schema/beans"</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xmlns:context="http://www.springframework.org/schema/context"</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xsi:schemaLocation="http://www.springframework.org/schema/beans </span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">http://www.springframework.org/schema/beans/spring-beans-3.2.xsd</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">http://www.springframework.org/schema/context</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">http://www.springframework.org/schema/context/spring-context-3.0.xsd"></span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><!-- To enable autowiring through annotations --></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><!-- Don't forget to add context-related xsd lines above --></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><context:annotation-config /></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="match" class="info.pello.spring.football.Match"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="team1" class="info.pello.spring.football.Team"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <qualifier value="osasuna" /> <!-- Used in autowiring with qualifier  --></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <property name="name" value="Osasuna" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <!-- This is the way to wire a Hashtable --></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <property name="players"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <map></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  <entry key="24" value-ref="player1" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  <entry key="1" value-ref="player2" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> </map></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> </property></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="team2" class="info.pello.spring.football.Team"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <qualifier value="erreala" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <property name="homeStadium" ref="home1" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <property name="name" value="Real Sociedad" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <property name="players"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> <map></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  <entry key="4" value-ref="player3" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">  <entry key="17" value-ref="player4" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> </map></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"> </property><span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="home1" class="info.pello.spring.football.Home"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><qualifier value="sadar" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Sadar" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="referee" class="info.pello.spring.football.Referee"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><qualifier value="undiano" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Undiano Mallenco" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="assistant1" class="info.pello.spring.football.Referee"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><qualifier value="rafa" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Rafa Guerrero" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="assistant2" class="info.pello.spring.football.Referee"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><qualifier value="fermin" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Fermín en del Banderín" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="assistant3" class="info.pello.spring.football.Referee"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><qualifier value="chicho" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Chicho Terremoto" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="player1" class="info.pello.spring.football.Player"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Ilarra" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="number" value="24" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="position" value="Midfielder" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="player2" class="info.pello.spring.football.Player"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Casillas" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="number" value="1" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="position" value="Keeper" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="player3" class="info.pello.spring.football.Player"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Pepe" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="number" value="4" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="position" value="Defender" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><bean id="player4" class="info.pello.spring.football.Player"></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="name" value="Azpilicueta" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="number" value="17" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"><property name="position" value="Fullback" /></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></bean></span></div>
+<div>
+	 </div>
+<div>
+	<span style="font-family:courier new,courier,monospace;"></beans></span></div>
+<div>
+	 </div>
+<div>
+	 </div>
+<div>
+	Ojo: todavía necesitaremos declarar los beans en el fichero XML de spring. Lo que nos vamos a ahorrar son</div>
+<div>
+	las inyecciones de clases. Si queremos ahorrarnos más aúnu tenemos OTRA OPCIÓN mas: el autodiscovery. Pero eso</div>
+<div>
+	igual, otro día.</div>
+<p>
+	 </p>

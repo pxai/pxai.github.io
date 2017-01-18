@@ -1,0 +1,178 @@
+﻿---
+layout: post
+title: "Keeping Node.js app.js clean + custom middleware for express" 
+date: 2014-07-26 23:03:41 
+categories: coding
+---
+<img src="http://chicagouncommon.com/photography/neat_stuff.jpg" alt="neat stuff" title="Neat stuff" />
+<p>
+This post has two purposes: to continue <a href="http://www.pello.info/index.php/blog/node-js-express-routes-mongoose-simple-and-separated">the previous one</a> showing ways to improve the organization of routes and secondly to see how to add your own middleware to an express application.
+</p>
+<p>The previous version have a problem when it comes to the routes. We require all of them with a single require command but we were applying them one by one.</p>
+<pre class="brush:js">
+var routes = require('./routes');
+...
+// We set routes
+app.use('/', routes.home);
+app.use('/guestbook', routes.guestbook);
+</pre>
+<h5>Use a contructor in routes/index.js</h5>
+<p><i>There Is More Than One Way To Do It</i> claims the <b>Programming Perl</b> book on the cover. Something that, undoubtedly, fits Node.js. There is more than one style in Node-foo, and I guess that you have to choose the way that better fits your needs. My need here was to minimize the code to initialize the routes in the main file of the Node.js express application. We change the routes/index.js to have a constructor with a parameter: the express app itself</p>
+<p>This is routes/index.js</p>
+<pre class="brush: js">
+/**
+ * routes/index.js
+ * All routes are here to import all of them just with one command
+ * in the main app.js
+ * https://github.com/pello-io/simple-express-mongoose
+ * Pello Altadill - http://pello.info
+ */
+var home = require('./home');
+var guestbook = require('./guestbook');
+
+module.exports = function (app) {
+	home(app);
+	guestbook(app);
+}
+</pre>
+
+<p>See those calls to home and guestbook? we are passing again the express app instance to each route file, where we also change its shape to get that parameter. <b>Be careful!</b> now we have to specify the complete route to '/guestbook/', something that in fact makes everything much more clear</p>
+
+<pre class="brush: js">
+/**
+ * routes/guestbook.js
+ * The router for guestbook operations.
+ * Keep in mind that here '/' refers to '/guestbook/'
+ * https://github.com/pello-io/simple-express-mongoose
+ * Pello Altadill - http://pello.info
+ */
+var mongoose = require('mongoose');
+var GuestBook = mongoose.model('GuestBook');
+
+module.exports = function (app) {
+
+    /**
+    * get
+    * GETs all guestbook data.
+    */
+    app.get('/guestbook/', function(req, res) {
+    ...
+}
+</pre>
+
+<p>home.js does the same</p>
+<pre class="brush: js">
+/**
+ * routes/home.js
+ * The home page, just renders the jade template
+ * https://github.com/pello-io/simple-express-mongoose
+ * Pello Altadill - http://pello.info
+ */
+module.exports = function (app) {
+
+	app.get('/', function(req, res) {
+	    res.render('index.jade' , {title: 'Home page'});
+	});
+
+}
+</pre>
+
+<p>And now, this is how the main app.js looks like. Instead of using each route separately, now it's enough to do it once. In this example may seem a useless effort, but when your app evolves to have many different routes dispersed in many files we will add all of them with just one command, keeping our main app.js nice and clean.</p>
+<pre class="brush: js">
+/**
+* app.js
+* Main entrypoint for the app
+* https://github.com/pello-io/simple-express-mongoose
+* Pello Altadill - http://pello.info
+*/
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var models = require('./models');
+var routes = require('./routes');
+var middleware = require('./middleware');
+
+var app = express();
+
+// If we want to use post data:
+app.use(bodyParser());
+
+// We set middlewares
+middleware(app);
+
+// We set all the routes with one single call
+routes(app);
+
+// We set static content
+app.use(express.static('public'));
+
+// And there we go, listening on port 3000
+app.listen(3000, function () {
+    console.log('now listening on http://localhost:3000');
+});
+</pre>
+
+<h5>Creating custom middleware</h5>
+<p>If you are using connect or express then it's probably making use of more than one middleware. In a nutshell, the middleware is some code that is executed between the request and te response in a Node.js web application. Therefore, whenever you call <code>app.use(whatever)</code> you are already applying middleware like routes, bodyParser, etc...</p>
+
+<h6>Some dummy middlewares</h6>
+<p>Let's create some middleware for testing. The first will just log the requests made to our server and the second will log a message. The second its useful only to observe the way the middlewares are chained for each request. As we can have more than one custom middleware and following the same style of the routes and models, we'll create a folder called middleware with an index.js file that will load and apply all the middlewares.</p>
+
+<p>This is how the logrequest middleware looks like. <b>Don't forget the next()</b> call, or the request will not go on to next middleware!!!</p>
+<pre class="brush: js">
+/**
+* logrequest
+* this just logs every request to console
+*/
+
+module.exports = function logRequest (req, res, next) {
+  console.log('request received: ');
+  console.log("["+req.method+"] " + req.url);
+  console.log(req.body);
+  // and go on... if you don't call next the request will hang
+  next();
+}
+</pre>
+
+<p>And this is the dummy middleware</p>
+<pre class="brush: js">
+/**
+* dummyddleware.js
+* A dummy middleware just to see the order it is being called
+*/
+
+module.exports = function dummyddleware (req,res, next) {
+	console.log('Dummy middleware');
+	next();
+}
+</pre>
+
+<p>And the index.js that applies them both to the expres app</p>
+<pre class="brush: js">
+/**
+ * middleware/index.js
+ * All middleware are here to import all of them just with one command
+ * in the main app.js
+ * Note that maybe this is not always desirable if you want to apply
+ * any other middleware in a different order into app.js file.
+ * @greetz for any
+ */
+var logrequest = require('./logrequest');
+var dummyddleware = require('./dummyddleware');
+
+module.exports = function (app) {
+	app.use(logrequest);
+	app.use(dummyddleware);
+}
+</pre>
+
+<p>Finally as we have seen before, in the main entry-point we can just add</p>
+<pre class="brush: js">
+var middleware = require('./middleware');
+...
+// We set middleware
+middleware(app);
+</pre>
+<p>At the time of writing this I'm receiving very valuable feedback about how to organize your projects, even with fullstack app generators. <i>Which one is the best?</i> It's the usual devious question that comes from a sales manager or the like. It depends on the project nature, don't you think?</p>
+
+<p>You can <a href="https://github.com/pello-io/simple-express-mongoose.git">clone</a>, <a href="https://github.com/pello-io/simple-express-mongoose/archive/5e6253ef789d5df6e0982d94b268e67527b67656.zip">download</a>(at this point of development), copy-paste this project from <a href="https://github.com/pello-io/simple-express-mongoose">git</>. Don't forget to get the required node modules to make it work!</p>

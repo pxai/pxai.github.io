@@ -1,0 +1,78 @@
+﻿---
+layout: post
+title: "06.Moverse entre activities" 
+date: 2012-05-04 12:27:25 
+categories: coding
+---
+<h1>
+	Esqueleto de aplicaci&oacute;n</h1>
+<p>
+	Esta aplicaci&oacute;n llamada SerONoSer no es m&aacute;s que un esqueleto de programa con su inicio, su men&uacute; y tres pantallas: juego, ayuda y setup. Sirve m&aacute;s que nada para ver como se carga una activity desde otra pulsando botones. Por cierto, aunque parezca obvio es fundamental <strong>hacer referencia a TODAS las activities </strong>en el fichero AndroidManifest.xml.</p>
+<p>
+	&nbsp;</p>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>SerONoSerSplashActivity</strong></div>
+<p>
+	La cosa es un poco engorrosa, por ejemplo, dentro del Splash:</p>
+<p>
+	&nbsp;</p>
+<div>
+	package info.pello.android;</div>
+<div>
+	&nbsp;</div>
+<div>
+	import android.app.Activity;</div>
+<div>
+	import android.content.Intent;</div>
+<div>
+	import android.os.Bundle;</div>
+<div>
+	import android.view.View;</div>
+<div>
+	import android.view.View.OnClickListener;</div>
+<div>
+	import android.widget.Button;</div>
+<div>
+	&nbsp;</div>
+<div>
+	public class SerONoSerSplashActivity extends Activity {</div>
+<div>
+	&nbsp; &nbsp; /** Called when the activity is first created. */</div>
+<div>
+	&nbsp; &nbsp; @Override</div>
+<div>
+	&nbsp; &nbsp; public void onCreate(Bundle savedInstanceState) {</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; super.onCreate(savedInstanceState);</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; setContentView(R.layout.splash);</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp;// iniciar.setOnClickListener(this);</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Button botonmenu = (Button) findViewById(R.id.botonmenu);</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp;botonmenu.setOnClickListener(new View.OnClickListener() {</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span> &nbsp; &nbsp;public void onClick(View view) {</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span> &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space:pre"> </span>Intent miIntent = new Intent(SerONoSerSplashActivity.this, SerONoSerMenuActivity.class);</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span> &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space:pre"> </span>startActivity(miIntent);</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span> &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space:pre"> </span>SerONoSerSplashActivity.this.finish();</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span> &nbsp; &nbsp;}</div>
+<div>
+	&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space:pre"> </span>});</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; }</div>
+<div>
+	&nbsp; &nbsp;&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	}</div>

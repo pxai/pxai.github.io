@@ -1,0 +1,299 @@
+﻿---
+layout: post
+title: "Hibernate self join con XML" 
+date: 2013-08-12 14:26:02 
+categories: coding
+---
+<p>
+El hecho de echar un ojo a SGBD noSQL no significa que lo relacional esté proscrito, por eso hay
+que seguir investigando más escenarios de hibernate.
+Existen situaciones en las que una tabla o entidad se hace referencia a sí misma. El ejemplo típico
+es el de empleado con un campo idjefe que hace referencia a otro empleado. Otro mítico se da en los
+foros, donde un mensaje puede tener un id de mensaje padre. Siguiendo con nuestro ejemplo del ERP vamos
+a ver cómo apañar el mapeo a si mismo con la tabla departamento, suponiendo un escenario en el que
+un departamento puede tener subdepartamentos. Si quieres ver el código completo <a href="http://code.google.com/p/erps-2dam-4vientos/source/browse/trunk/HibernateSamples/">echa un ojo
+en google code.</a>. 
+</p>
+
+<p>Una cosilla antes de proceder. No sé si a estas alturas lo habrán apañado en mysql
+pero al menos hasta hace un par de años no podías hacer una consulta única en una tabla
+autoreferenciada que te devolviera todos los registros de forma recursiva. Cosa que en oracle
+si se puede por ejemplo. Si estoy equivocado, <a href="http://twitter.com/pelloxabier">incrépame en el tuister ese</a>. Quizá no lo intenté lo suficiente.</p>
+<img src="http://www.pello.info/images/tryharder.jpg" title="Sí, ya lo sé..." alt="Sí, ya lo sé..." />
+
+<h5>Department.hbm.xml</h5>
+<p>
+Aquí está la madre del cordero el fichero de configuración donde mapeamos la clase con
+la tabla y le indicamos cómo hacer el join a sí mismo. Al final tenemos la referencia
+al departamento principal de tres formas. 
+<ol>
+<li>Por un lado tenemos el id de departamento principal
+mapeado a main_department.</li> 
+<li>Por otro lado hacemos un mapeo a la propia clase para tener una instancia
+de departamento que representa al departamento principal</li>
+<li>Y por último tendremos un set con subdepartamentos en el caso de estar ante departamento
+principal</li>
+</ol>
+Esas tres referencias se reflejan perfectamente en la clase <b>Department.java</b> más adelante.
+</p>
+<pre class="brush: xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+ <!-- Mapping configuration details for self joining table -->
+<hibernate-mapping package="info.pello.maven.hibernate.HibernateSamples">
+ 
+    <<class name="Department" table="department">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="description" column="description"/>
+        <property name="mainDepartmentId" type="int" update="false"
+            insert="false" column="main_department" length="10"/>
+    <many-to-one name="mainDepartment" class="info.pello.maven.hibernate.HibernateSamples.Department" column="main_department"
+            not-null="false"/>
+    <set name="departments" table="department" lazy="false" cascade="all-delete-orphan"
+            inverse="false">
+              <key column="main_department"/>
+              <one-to-many class="info.pello.maven.hibernate.HibernateSamples.Department" />
+     </set>
+    </class>
+ 
+</hibernate-mapping>
+</pre>
+
+<h5>Department.java: la entidad</h5>
+<p>
+Siguiendo un poco la lógica del mapeo xml, la clase que representa la entidad Department aparte 
+de mapear las columnas de una en una también añade un par de propiedades una para representar el Department padre y otra para los subdepartamentos.
+</p>
+<pre class="brush: java">
+/**
+ * 
+ */
+package info.pello.maven.hibernate.HibernateSamples;
+
+import java.util.Set;
+
+/**
+ * Represents a company Department
+ * @author Pello Altadill
+ * @greetz for those who keep on working even in summertime
+ */
+public class Department {
+	private int id;
+	private String name;
+	private String description;
+	private int mainDepartmentId; 
+	
+    private Set<Department> departments;
+    
+    private Department mainDepartment;
+	
+	public Department () {
+		
+	}
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param mainDepartment
+	 */
+	public Department(int id, String name, String description,
+			int mainDepartmentId) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.mainDepartmentId = mainDepartmentId;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + ", description="
+				+ description + ", mainDepartmentId=" + mainDepartmentId + "]";
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the mainDepartment
+	 */
+	public int getMainDepartmentId() {
+		return mainDepartmentId;
+	}
+
+	/**
+	 * @param mainDepartment the mainDepartment to set
+	 */
+	public void setMainDepartmentId(int mainDepartmentId) {
+		this.mainDepartmentId = mainDepartmentId;
+	}
+
+	/**
+	 * @return the departments
+	 */
+	public Set<Department> getDepartments() {
+		return departments;
+	}
+
+	/**
+	 * @param departments the departments to set
+	 */
+	public void setDepartments(Set<Department> departments) {
+		this.departments = departments;
+	}
+
+	/**
+	 * @return the mainDepartment
+	 */
+	public Department getMainDepartment() {
+		return mainDepartment;
+	}
+
+	/**
+	 * @param mainDepartment the mainDepartment to set
+	 */
+	public void setMainDepartment(Department mainDepartment) {
+		this.mainDepartment = mainDepartment;
+	}
+
+
+
+	
+}
+
+</pre>
+
+<h5>Clase principal</h5>
+<p>
+Muy brevemente, probamos el selectAll del DAO en el main y vemos que funciona.
+</p>
+<pre class="brush: java">
+...
+	
+	/**
+	 * shows all departments
+	 * @param departmentDAO
+	 */
+	public static void showAllDepartments (DepartmentDAOInterface departmentDAO) {
+		// SELECT ALL DATA
+    	List<Department> departments = departmentDAO.selectAll();
+        
+    	System.out.println("\n--- DEPARTMENT: ----- table contents -----------");
+        
+        for(Department department : departments) {
+        	System.out.print("Id: " + department.getId());
+        	System.out.println(" - Name: " + department.getName());
+        	System.out.println(" - Description: " + department.getDescription());
+        	System.out.println(" - Main ID: " + department.getMainDepartmentId());
+        	
+        	for (Department subdept : department.getDepartments()) {
+        		System.out.println("Subdepartment: " + subdept.toString());
+        	}
+        }
+
+        System.out.println("Total Departments: " + departments.size());	
+	}
+	...
+
+	// Y dentro del main:
+	...
+	   DepartmentDAOInterface departmentDAO = new DepartmentDAO();
+       showAllDepartments(departmentDAO);
+    ...
+</pre>
+
+<p>El resultado al ejecutar:</p>
+<pre class="brush: bash">
+...
+INFO: HHH000261: Table found: erp.department
+Aug 12, 2013 3:46:20 PM org.hibernate.tool.hbm2ddl.TableMetadata <init>
+INFO: HHH000037: Columns: [id, main_department, description, name]
+Hibernate: select department0_.id as id1_0_, department0_.name as name2_0_, department0_.description as descript3_0_, department0_.main_department as main4_0_ from department department0_
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+Hibernate: select department0_.main_department as main4_0_1_, department0_.id as id1_0_1_, department0_.id as id1_0_0_, department0_.name as name2_0_0_, department0_.description as descript3_0_0_, department0_.main_department as main4_0_0_ from department department0_ where department0_.main_department=?
+
+--- DEPARTMENT: ----- table contents -----------
+Id: 1 - Name: I+D
+ - Description: Departmento I+D
+ - Main ID: 0
+Subdepartment: Department [id=6, name=Black Ops, description=Secret Operations, mainDepartmentId=1]
+Subdepartment: Department [id=3, name=Chemical Warfare, description=Chemical Warfare dptment., mainDepartmentId=1]
+Id: 2 - Name: Financiero
+ - Description: Dpto Financiero
+ - Main ID: 0
+Subdepartment: Department [id=5, name=Chanchullos, description=Chanchullos y sobresueldos, mainDepartmentId=2]
+Id: 3 - Name: Chemical Warfare
+ - Description: Chemical Warfare dptment.
+ - Main ID: 1
+Id: 4 - Name: IT
+ - Description: Hello IT, have you tried to...
+ - Main ID: 0
+Id: 5 - Name: Chanchullos
+ - Description: Chanchullos y sobresueldos
+ - Main ID: 2
+Id: 6 - Name: Black Ops
+ - Description: Secret Operations
+ - Main ID: 1
+Total Departments: 6
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.214s
+[INFO] Finished at: Mon Aug 12 15:46:22 CEST 2013
+[INFO] Final Memory: 8M/20M
+[INFO] ------------------------------------------------------------------------
+
+</pre>

@@ -1,0 +1,107 @@
+﻿---
+layout: post
+title: "Java, entrada por consola readLine" 
+date: 2011-10-13 12:23:43 
+categories: coding
+---
+<p>
+	La entrada por consola se ha simplificado bastante con el objeto Console.</p>
+<p>
+	Ya no hace falta un StreamReader ni nada de eso.</p>
+<p>
+	/**<br />
+	* EntradaPorConsola<br />
+	* Clase que como solicitar datos al usuario y guardarlos<br />
+	* en variables.<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac EntradaPorConsola.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java EntradaPorConsola<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase EntradaPorConsola<br />
+	* Muestra como se solicitan datos al usuario por consola y guardarlos<br />
+	* en todo tipo de variables.<br />
+	* En el caso<br />
+	* de los enteros HAY QUE CONVERTIR lo que viene por el argumento<br />
+	* porque viene como un String!<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class EntradaPorConsola {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[]) &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Para leero por consola hay que crear<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// una instancia de Console<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Console consola = System.console();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n de variables: tipo nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int edad;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float temperatura;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String lectura;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;boolean booleano;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Para solicitar datos al usuario, usamos el m&eacute;todo<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// readLine();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Primero avisamos al usuario:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Por favor, introduce un texto cualquiera: &quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// As&iacute; no hay problemas porque son del MISMO TIPO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;lectura = consola.readLine(); &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y mostramos por pantalla lo que el usuario ha metido<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has escrito: &quot; + lectura + &quot;\n&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Primero avisamos al usuario:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Por favor, introduce un n&uacute;mero con decimales: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;lectura = consola.readLine(); &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n a la CONVERSI&Oacute;N. Utilizamos la clase Float,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// y s&uacute; metodo para convertir de String al tipo simple float<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;temperatura = Float.parseFloat(lectura);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y mostramos por pantalla lo que el usuario ha metido<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has escrito: &quot; + temperatura + &quot;\n&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Primero avisamos al usuario:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Por favor, introduce tu edad: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;lectura = consola.readLine(); &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n a la CONVERSI&Oacute;N. Utilizamos la clase Integer,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// y s&uacute; metodo para convertir de String al tipo simple int<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;edad = Integer.parseInt(lectura);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y mostramos por pantalla lo que el usuario ha metido<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has escrito: &quot; + edad);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a solicitar un booleano<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Por favor, introduce un valor booleano: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;lectura = consola.readLine(); &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n a la CONVERSI&Oacute;N. Utilizamos la clase Boolean,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// y s&uacute; metodo para convertir de String al tipo simple boolean<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;booleano = Boolean.parseBoolean(lectura);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y mostramos por pantalla lo que el usuario ha metido<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has escrito: &quot; + booleano);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

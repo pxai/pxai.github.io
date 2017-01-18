@@ -1,0 +1,189 @@
+﻿---
+layout: post
+title: "Creando m�dulos en Node.js" 
+date: 2013-08-18 22:45:09 
+categories: coding
+---
+<p>
+Lo del <a href='http://www.pello.info/index.php/blog/servidor-web-de-node-js-refactorizado'>servidor web con pocas líneas o refactorizado</a> para que tenga forma de clase va quedando más o menos apañado. Pero en cualquier proyecto que vaya creciendo vamos a necesitar bastantes más cosas y claro, ir metiendo todo el programa en un único fichero, aunque algún programador bajeril pueda decir que es más simple, pues está muy feo. Como en cualquier otro lenguaje y sea el tipo de programación que sea, como mínimo para facilitar la gestión del proyecto conviene separar. Una clase un fichero. Y en el caso de Node.js se les suele llamar módulos.
+</p>
+
+<h5>Módulos propios en Node.js</h5>
+<p>En los programas habrás observado que se suele empezar importando módulos: http, connect,... etc. Si queremos separar nuestro código por módulos y ponerlo en distintos ficheros y luego poder importarlos,
+debemos hacerlo de una forma especial. Cada método que queramos que sea usado desde fuera deberá ser exportado.</p>
+<p>Como ejemplo vamos a ver un módulo de logging que he creado haciendo uso del módulo para colorear
+los mensajes de consola. Este módulo de logging tiene distintos métodos según el tipo de error y el color
+del mensaje varía según el tipo. Hay unos colores y configuraciones por defecto que el usuario del módulo
+podrá cambiar:</p>
+<pre class="brush: js">
+/**
+* coloredlog
+* @author Pello Xabier Altadill Izura
+* @greetz any as always
+*/
+var color = require('colors');
+
+var name = '';       // Name to add
+var prefix = false;  // Whether to add [INFO],[WARN],[ERROR]
+var showDate = false;
+
+/**
+* we init colors to set a kind of 'theme'.
+*
+*/
+color.setTheme({
+		 msg_color: 'green',
+		 warning_color: 'yellow',
+		 error_color: 'red',
+		 request_color: 'blue'
+});
+
+/**
+* set prefixes for logging
+*/
+exports.setOpt = function (optName, optPrefix,optShowDate ) {
+	name = optName;
+	prefix = optPrefix;
+	date = optShowDate;
+};
+
+/**
+* allows user to set other colors
+*/
+exports.setColors = function (infoColor, warningColor, errorColor, requestColor) {
+	// We check params... and assign defaults if no value was given
+	infoColor = (infoColor!='')?infoColor:'green';
+	warningColor = (warningColor!='')?warningColor:'yellow';
+	errorColor = (errorColor!='')?errorColor:'red';
+	requestColor = (requestColor!='')?requestColor:'blue';
+	
+	color.setTheme({
+		 msg_color: infoColor,
+		 warning_color: warningColor,
+		 error_color: errorColor,
+		 request_color: requestColor
+	});
+};
+
+/**
+* log without colors
+*/
+exports.log= function (msg) {
+	finalPrefix = genPrefix('');
+	console.log(finalPrefix+msg);
+};
+
+/**
+* normal log, green color
+*/
+exports.loginfo = function (msg) {
+	finalPrefix = genPrefix('INFO');
+	console.log((finalPrefix+msg).msg_color);	
+};
+
+/**
+* warning log
+*/
+exports.logwarn = function (msg) {
+	finalPrefix = genPrefix('WARN');
+	console.log((finalPrefix+msg).warning_color);
+};
+
+/**
+* error log
+*/
+exports.logerr = function (msg) {
+	finalPrefix = genPrefix('ERROR');
+	console.log((finalPrefix+msg).error_color);
+};
+
+/**
+* conditional prefix generation, If any name is given and if type
+* prefix is required. Double ternary!!! - aj! mis hogos!!-
+*/
+function genPrefix (type) {
+		return (name!='')?name+' '+((prefix)?'['+type+']':'')+'> ':'';
+}
+
+</pre>
+
+<h5>¿Cómo exportamos y usamos esto?</h5>
+<p>Si hemos metido el fichero de modulos dentro de una carpeta llamada lib, basta con hacer un require
+de ese fichero y asignarlo a una variable. A partir de ahí con esa variable ya podemos acceder a todos
+los métodos exportados.</p>
+<pre class="brush: js">
+// We add some color to our logs...
+var logger = require('./lib/coloredlog.js'); // we can omit .js
+logger.setOpt('MusicChartSvr',true,false);
+
+...
+logger.logwarn(' 404 Resource not found: ' + req.url);
+...
+logger.loginfo('Express server listening on port ' + app.get('port'));
+...
+</pre>
+
+<p>Y así es como quedaría:</p>
+<img src="http://www.pello.info/images/nodemodules.jpg" title="Logger con colorines" alt="Logger con colorines" />
+
+<p>Ya decía yo que el pantallazo salía pesadito, no es por los colores, es el caballero oscuro que sale
+atrás. Por cierto, <a href="https://twitter.com/TheOfficialBale">el twitter de Christian Bale</a> el mejor de la historia. Qué grande eres.</p>
+
+<h5>¿Cómo exportar clases?</h5>
+<p>Si estás habituado a la programación orientada a objetos, eso de andar exportando función por función
+te debe paracer un horror innominado e innominable de las profundidades abisales más ignotas del oceano insondable. Bueno, nada te impide crear una clase y exportarla, si es que con eso te quedas más tranquilo. Así podrás lucir las gafas de pasta pero en el fondo seguirás siendo un ortodoxo reaccionario
+e intransigente que frunce el ceño ante cualquier tecnología rompedora.</p>
+<pre class="brush: js">
+/**
+* example of module but instead of exporting de gijon functions one by one
+* we create a class and we just export this with all its properties and methods.
+* @author Pello Xabier Altadill Izura
+* @greetz for those Keepers of the orthodoxy
+*
+* To use this from another module:
+*  var dummy = require('./lib/dummyclass');
+*  myDummy = new dummy.dummyclass(true);
+*  console.log(myDummy.toString());
+*/
+
+exports.dummyclass = function (a2) {
+
+	var self = this;
+	
+	this.attrib1 = 'Sense of life';
+	this.attrib2 = a2;
+	this.attrib3 = 42;
+
+	// Init function
+	this.init = function (a1, a2, a3) {
+		this.attrib1 = a1;
+		this.attrib2 = a2;
+		this.attrib3 = 3;
+	};
+
+	// toString to see attrib values
+	this.toString = function () {
+		return this.attrib1+","+this.attrib2+","+this.attrib3;
+	};
+};
+</pre>
+
+<h5>Creando un módulo para Node.js</h5>
+<p>Si tenemos un módulo decente compuesto de varios ficheros todos ordenaditos dentro de una misma
+carpeta podemos convertir eso en un módulo para Node.js agregando un fichero llamado package.json que indique los contenidos y el fichero principal del mismo. Una especie de Manifest. Este podría ser
+el contenido de uno de esos ficheros:</p>
+<pre class="brush: js">
+{
+  "name": "mysupersever",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node mysuperserver.js"
+  },
+  "dependencies": {
+    "express": "3.3.5",
+    "jade": "*"
+  }
+}
+
+</pre>

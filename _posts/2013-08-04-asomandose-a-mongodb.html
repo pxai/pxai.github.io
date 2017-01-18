@@ -1,0 +1,309 @@
+﻿---
+layout: post
+title: "Asom�ndose a MongoDB" 
+date: 2013-08-04 21:10:33 
+categories: coding
+---
+<p>
+Los gestores de bases de datos relaciones parecían algo eterno e inamovible en al informática
+por mucho que aparecieran nuevos lenguajes y entornos de programación. Pero las cosas cambian.
+Ahora las grandes BBDD no son sola las del gobierno y los bancos, ahora hay muchas aplicaciones
+que presentan un perfil distinto al de las aplicaciones tradicionales: son aplicaciones que también
+manejan muchos datos pero en los que sobre todo se hace mucha consulta. Y para acelerar al máximo
+el servicio de esas consultas el modo tradicional de servir los datos ha cambiado. El modelo entidad
+relación salta por los aires y se habla de cosas como noSQL.
+</p>
+
+<p>Aparte de eso, hay gestores de BD que facilitan el desarrollo de aplicaciones web en las que
+el peso del programa recae sobre el cliente. Hablamos de aplicaciones javascript cómo no. Mongo
+habla Javascript y guarda los datos en formato JSON, y eso le pone las cosas a huevo a Javascript. Este gestor,
+de todas formas, no es más que una pieza del puzzle, y en este post digamos que nos damos un
+primer baño en esta tecnología desde el punto de vista de quien está acostumbrado a lidiar
+con BD relacionales y busca las equivalencias. Bueno, <i>"Talk! Talk is for lovers Merlin!"</i>, vamos a entrar en harina.</p>
+
+<b>Inicio mongo</b>
+<p>
+En mi caso está instalado en un linux a través del gestor de paquetes, sin problema.
+Si no eres capaz de instalarte un mongo en tu equipo, en serio, deja la informática y serás
+mucho más féliz. No insistas, esto no es lo tuyo. Para el resto<br />
+Iniciamos el servidor:
+</p>
+<pre class="brush: bash">
+linux:~# /etc/init.d/mongodb start
+Rather than invoking init scripts through /etc/init.d, use the service(8)
+utility, e.g. service mongodb start
+
+Since the script you are attempting to invoke has been converted to an
+Upstart job, you may also use the start(8) utility, e.g. start mongodb
+mongodb start/running, process 1950
+linux:~# 
+</pre>
+
+<b>El cliente: mongo</b>
+<p>
+Para conectarnos al gestor de mongo
+podemos poner simplemente mongo o especificar una url o un BBDD, tal y como dice la ayuda:
+</p>
+<pre class="brush: bash">
+linux:~# mongo -h
+MongoDB shell version: 1.2.2
+usage: /usr/lib/mongodb/mongo [options] [db address] [file names (ending in .js)]
+db address can be:
+  foo                   foo database on local machine
+  192.169.0.5/foo       foo database on 192.168.0.5 machine
+  192.169.0.5:9999/foo  foo database on 192.168.0.5 machine on port 9999
+
+</pre>
+
+<p>
+Al no especificar nada se conectará a la máquina local.
+Podriamos iniciar la sesión indicando una BBDD
+</p>
+<pre class="brush: bash">
+linux:~# mongo test
+MongoDB shell version: 1.2.2
+url: test
+connecting to: test
+type "exit" to exit
+type "help" for help
+> 
+
+</pre>
+
+O bien podemos indicar la BBDD una vez iniciada la sesión:
+<pre  class="brush: bash">
+linux:~# mongo 
+MongoDB shell version: 1.2.2
+url: test
+connecting to: test
+type "exit" to exit
+type "help" for help
+> use test;
+switched to db test
+> 
+
+</pre>
+<p>
+En una primera sesión, vamos a insertar un registro y luego a hacer una consulta.
+Esto se hace de una manera peculiar. Primero definimos una variable en la que creamos
+el registro. Luego insertamos esa variable en una "tabla" llamada <i>tecnologias</i> y finalmente hacemos una consulta para
+ver si efectivamente se ha metido:
+</p>
+<pre class="brush: js">
+>
+> tecnologia={ nombre: 'angular', descripcion: 'Framework javascript', creación: new Date('01/01/2012')};
+{
+	"nombre" : "angular",
+	"descripcion" : "Framework javascript",
+	"creación" : "Sun Jan 01 2012 00:00:00 GMT+0100 (CET)"
+}
+> db.tecnologias.insert(tecnologia);
+> db.tecnologias.find();
+{ "_id" : ObjectId("51fe59da1b8c7a4eeb00eeb0"), "nombre" : "angular", "descripcion" : "Framework javascript", "creación" : "Sun Jan 01 2012 00:00:00 GMT+0100 (CET)" }
+> 
+
+</pre>
+<p>
+¿Qué formato es este? Esa sintaxis para definir variables, llamar a métodos es JAVASCRIPT.
+Y el formato de los datos es JSON. Con eso igual ya te empiezas a oler el percal. Mongo
+nos facilita enormemente el desarrollo de aplicaciones donde el peso lo lleva el lado
+del cliente.
+</p>
+
+<b>Ortodoxos del E/R abandonad toda doctrina</b>
+<p>Vale hemos creado una especie de registro, lo hemos insertado
+en una tabla que no estaba previamente definida ni nada...  con un par! Eso no
+es todo, ahora mira:
+</p>
+<pre class="brush: js">
+> tecnologia={ nombre:'backbone',descripcion:'Framework javascript', creación: new Date('01/02/2012'), lenguaje: 'javascript'}
+{
+	"nombre" : "backbone",
+	"descripcion" : "Framework javascript",
+	"creación" : "Mon Jan 02 2012 00:00:00 GMT+0100 (CET)",
+	"lenguaje" : "javascript"
+}
+> db.tecnologias.insert(tecnologia);
+> db.tecnologias.find();
+{ "_id" : ObjectId("51fe59da1b8c7a4eeb00eeb0"), "nombre" : "angular", "descripcion" : "Framework javascript", "creación" : "Sun Jan 01 2012 00:00:00 GMT+0100 (CET)" }
+{ "_id" : ObjectId("51fe5a771b8c7a4eeb00eeb1"), "nombre" : "backbone", "descripcion" : "Framework javascript", "creación" : "Mon Jan 02 2012 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+> tecnologia={ nombre:'txootx',descripcion:'Lenguaje de programación OO', autores: ['Mikel','Pello'], creación: new Date('01/02/2000'), lenguaje: 'txootx'};
+> db.tecnologias.insert(tecnologia);
+> 
+</pre>
+<p>
+¿Pero esto qué es? ¿Ahora metemos un registro que tiene otro campo más? Y luego... ¿un registro con un campo  de varios valores?
+Tanta herejía provocará sangre en los ojos de los más puretas.
+Pues sí amigos iba a decir que Mongo tiene más tragaderas que HTML5 pero dejémoslo en que es
+muy fléxible. Olvida la rigidez de los SGBD relaciones de toda la vida. Esto es una fieshta,
+pero eso esí, la carga de controlar estos formatos variables va a recaer sobre el código
+del programador, lo cual también se ha considerado un comportamiento propio de aquellos que llevan la marca del CAOS. Obviamente, el campo _id es generado por Mongo de forma automática.
+</p>
+
+<b>Consultas</b>
+<p>
+Para hacer consultas sobre las tablas podemos usar la función find. Un find sin parámetros como
+por ejemplo <code>db.tecnologias.find();</code> sería equivalente a un <code>select * from tabla</code>.
+Si queremos meter parámetros de búsqueda podemos meterlos en una lista en la llamada a find, y en 
+caso de querer controlar qué campos se ven o no ponemos una lista asignando 1 o 0. Veamos
+varios ejemplos:
+</p>
+<pre class="brush: js">
+> db.tecnologias.find({lenguaje: "java"});
+{ "_id" : ObjectId("51fe630f1b8c7a4eeb00eec4"), "nombre" : "java", "descripcion" : "Lenguaje de programación OO", "creación" : "Sun Jan 12 1992 00:00:00 GMT+0100 (CET)", "lenguaje" : "java" }
+> db.tecnologias.find({lenguaje: "javascript", nombre: "mongoDB"});
+{ "_id" : ObjectId("51fe630f1b8c7a4eeb00eec3"), "nombre" : "mongoDB", "descripcion" : "Base de datos noSQL", "creación" : "Sat Jan 02 2010 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+> db.tecnologias.find({lenguaje: "java"},{descripcion: 1});
+{ "_id" : ObjectId("51fe630f1b8c7a4eeb00eec4"), "descripcion" : "Lenguaje de programación OO" }
+>
+</pre>
+
+<p>Podemos (¡y debemos!) añadir un índice para acelerar las consultas. Basta con indicar el campo y listo.
+El número de registros que tendrá que analizar mongo será mucho menor.</p>
+<pre class="brush: js">
+ > db.tecnologias.ensureIndex({lenguaje:1});
+</pre>
+
+<b>Modificar</b>
+<p>
+Modificar se hace con la función (oh sorpresa) update. Y tiene cuatro parámetros:<br />
+<code>
+db.books.update({criterios_de_busqueda},{$set:{campos_a_modificar}},upsert_flag,multiple_flag);
+</code><br />
+Los criterios de búsqueda son como los que se pueden poner en las consultas. El segundo parámetro
+es donde establecemos los nuevos valores para aquellos registros que cumplen los criterios. El
+upsert es un flag boolean que en caso de ser true lo que hace es modificar si es posible y si no
+insertar nuevo valor (según ya tengamos valores igual no nos interesa). Y el multiple es para que modifique todos los registros no solo uno.
+Veamos un ejemplo. Vamos a cambiar el campo lenguaje a aquellos que sean javascript para llamarles ECMAscript.
+</p>
+<pre class="brush: js">
+db.tecnologias.update({lenguaje:"javascript"},{$set:{lenguaje: "ECMAScript"}},false,true);
+</pre>
+
+<p>También podemos alterar todos los registros para añadirles un campo que no tienen!
+Por ejemplo teníamos un registro inicial que no tenía el campo lenguaje. Ahora podemos
+alterar eso con esta orden update que incorpora ese campo (vacío) en caso de que no lo tenga.
+</p>
+<pre class="brush: js">
+> db.tecnologias.update({lenguaje:null},{$set:{lenguaje:""}},true,true);
+</pre>
+
+<b>Eliminar</b>
+<p>
+En el caso de querer eliminar usamos la función <i>remove</i>. Hay que tener ojo ya que
+si ejecutamos  <code>db.tecnologias.remove();</code> a secas ¡nos cargamos todo!.
+Al igual que en la consulta podemos meter parámetros de búsqueda.
+</p>
+<pre class="brush: js">
+> db.tecnologias.find();
+{ "_id" : ObjectId("51fe59da1b8c7a4eeb00eeb0"), "nombre" : "angular", "descripcion" : "Framework javascript", "creación" : "Sun Jan 01 2012 00:00:00 GMT+0100 (CET)" }
+{ "_id" : ObjectId("51fe5a771b8c7a4eeb00eeb1"), "nombre" : "backbone", "descripcion" : "Framework javascript", "creación" : "Mon Jan 02 2012 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+{ "_id" : ObjectId("51fe5d291b8c7a4eeb00eeb2"), "nombre" : "mongoDB", "descripcion" : "Base de datos noSQL", "creación" : "Sat Jan 02 2010 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+{ "_id" : ObjectId("51fe5d291b8c7a4eeb00eeb3"), "nombre" : "java", "descripcion" : "Lenguaje de programación OO", "creación" : "Sun Jan 12 1992 00:00:00 GMT+0100 (CET)", "lenguaje" : "java" }
+> db.tecnologias.remove({lenguaje: "java"});
+> db.tecnologias.find();
+{ "_id" : ObjectId("51fe59da1b8c7a4eeb00eeb0"), "nombre" : "angular", "descripcion" : "Framework javascript", "creación" : "Sun Jan 01 2012 00:00:00 GMT+0100 (CET)" }
+{ "_id" : ObjectId("51fe5a771b8c7a4eeb00eeb1"), "nombre" : "backbone", "descripcion" : "Framework javascript", "creación" : "Mon Jan 02 2012 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+{ "_id" : ObjectId("51fe5d291b8c7a4eeb00eeb2"), "nombre" : "mongoDB", "descripcion" : "Base de datos noSQL", "creación" : "Sat Jan 02 2010 00:00:00 GMT+0100 (CET)", "lenguaje" : "javascript" }
+
+</pre>
+
+<b>Volcar un fichero js</b>
+<p>Al igual que al iniciar una sesión en mysql podiamos volcar una fichero SQL para 
+ejecutar órdenes en modo batch, con el cliente mongo podemos hacer los mismo, solo que
+en lugar de pasarle un fichero sql le pasamos un fichero... js. Podemos tener
+un fichero con el siguiente contenido (con comentarios js):</p>
+<pre class="brush: js">
+
+// ojo que con esto nos cargamos todo
+db.tecnologias.remove();
+
+/**
+* Y ahora insertamos revistros.
+*/
+tecnologia={ nombre:'mongoDB',descripcion:'Base de datos noSQL', creación: new Date('01/02/2010'), lenguaje: 'javascript'};
+db.tecnologias.insert(tecnologia);
+tecnologia={ nombre:'java',descripcion:'Lenguaje de programación OO', creación: new Date('01/12/1992'), lenguaje: 'java'};
+db.tecnologias.insert(tecnologia);
+tecnologia={nombre:'php',descripcion:'PHP: PHP hypertext preprocesor', creación: new Date('01/12/1990'), lenguaje: 'php'};
+db.tecnologias.insert(tecnologia);
+tecnologia={ nombre:'c++',descripcion:'El mejor lenguaje de todos', creación: new Date('01/12/1970'), lenguaje: 'c++'};
+db.tecnologias.insert(tecnologia);
+tecnologia={ nombre:'c#',descripcion:'Lenguaje de programación C#', creación: new Date('01/12/1999'), lenguaje: 'C#'};
+db.tecnologias.insert(tecnologia);
+</pre>
+
+<p>Podemos ejecutar todo eso en nuestra BD mongo de forma muy fácil, ojo, sin necesidad de redirección.
+</p>
+<pre class="brush: js">
+linux:~# mongo test scriptmongo.js 
+MongoDB shell version: 1.2.2
+url: test
+connecting to: test
+linux:~#  
+</pre>
+
+<b>Dump/Restore</b>
+<p>Como decía Robert de Niro en Ronin "nunca me meto en un sitio del que no sé cómo voy a salir", y en
+asuntos de sistemas conviene tener la misma forma de pensar ante cualquier contingencia que puede
+surgir, y surgirá.
+Siempre nos quedaremos más tranquilos si podemos hacer un volcado de la BD para backup o para su traslado. Por defecto mongo los guarda
+en un directorio dump en el mismo sitio donde ejecutamos el dump</p>
+<pre class="brush: js">
+linux:~# mongodump -d test
+connected to: 127.0.0.1
+DATABASE: test	 to 	dump/test
+	test.test to dump/test/test.bson
+		 3 objects
+	test.system.indexes to dump/test/system.indexes.bson
+		 3 objects
+	test.tecnologias to dump/test/tecnologias.bson
+		 5 objects
+	test.pruebas to dump/test/pruebas.bson
+		 0 objects
+linux:~#  
+
+</pre>
+<p>Ese formato bson son una especie de datos binarios. Si queremos hacer un restore 
+basta con ejecutar:</p>
+
+<pre class="brush: bash">
+linux:~# mongorestore -d test dump/test/tecnologias.bson 
+connected to: 127.0.0.1
+dump/test/tecnologias.bson
+	 going into namespace [test.tecnologias]
+	 5 objects
+linux:~# 
+</pre>
+<p>Lo podemos hacer sobre datos ya existentes y no los duplica NI LOS MODIFICA. Mongo controla.</p>
+
+<b>Export/Import: Formato json</b>
+<p>Podemos volcar los datos en formato json y redirigirlos a un fichero en formato JSON</p>
+<pre class="brush: bash">
+linux:~# mongoexport -d test -c tecnologias > tecnologias.json
+connected to: 127.0.0.1
+linux:~# more tecnologias.json 
+{ "_id" : { "$oid" : "51fe630f1b8c7a4eeb00eec3" }, "nombre" : "mongoDB", "descripcion" : "Base de datos noSQ
+L", "creación" : { "$date" : 1262386800000 }, "lenguaje" : "javascript" }
+{ "_id" : { "$oid" : "51fe630f1b8c7a4eeb00eec4" }, "nombre" : "java", "descripcion" : "Lenguaje de programac
+ión OO", "creación" : { "$date" : 695170800000 }, "lenguaje" : "java" }
+{ "_id" : { "$oid" : "51fe630f1b8c7a4eeb00eec5" }, "nombre" : "php", "descripcion" : "PHP: PHP hypertext pre
+procesor", "creación" : { "$date" : 632098800000 }, "lenguaje" : "php" }
+{ "_id" : { "$oid" : "51fe630f1b8c7a4eeb00eec6" }, "nombre" : "c++", "descripcion" : "El mejor lenguaje de t
+odos", "creación" : { "$date" : 946800000 }, "lenguaje" : "c++" }
+{ "_id" : { "$oid" : "51fe630f1b8c7a4eeb00eec7" }, "nombre" : "c#", "descripcion" : "Lenguaje de programació
+n C#", "creación" : { "$date" : 916095600000 }, "lenguaje" : "C#" }
+exported 5 records
+linux:~# 
+
+</pre>
+
+<p>La operación contraria no tiene misterios. Por cierto, igual que con el restore  si hacemos el import 2 veces no duplica los datos ni nada.</p>
+<pre class="brush: bash">
+linux:~# mongoimport -d test -c tecnologias  tecnologias.json
+connected to: 127.0.0.1
+imported 5 objects
+linux:~# 
+</pre>
+
+Esto no es más que la punta del iceberg. Échale un ojo a MongoDB porque ya bastantes décadas llevamos con SQL.

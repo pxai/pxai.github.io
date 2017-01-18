@@ -1,0 +1,219 @@
+﻿---
+layout: post
+title: "Leyendo por consola y herencia en nodejs" 
+date: 2013-08-11 00:17:05 
+categories: coding
+---
+<p>Para poder hacer cosas básicas en la consola con node tenemos un objeto predefinido llamado <em>process</em> que nos provee de todo los necesario, desde jugar con la stdin, stdout, stderr hasta terminar la ejecución. En un alarde de originalidad, aquí tienes una calculadora muy simple en la que se deben introducir dos números y un operador.
+</p>
+<pre class="brush: js">
+/**
+* calc.js
+* Trying to code the good ol' calc with node event driven way
+* @author Pello Xabier Altadill Izura
+* @greetz for you
+* An easy/obvious/quick way to discover what comes in an object (events, props):
+* console.log(process);  console.log(process.stdin); ... 
+* Or just check the api online
+* http://nodejs.org/api/process.html 
+*/
+
+
+var parameters = Array();
+
+// We need this to get stdin
+process.stdin.resume();
+
+
+process.stdout.write('Calculator loaded.. \n');
+
+/**
+* on data event
+* fired when data is entered in stdin
+*/
+process.stdin.on('data', function (readedData) {
+	parameters.push(fulltrim(readedData+""));
+	process.stdout.write('You wrote: ' + readedData);
+
+	if (parameters.length > 2) {
+		console.log('We are done.');
+		calc();
+		resetCalc();
+	}
+});
+
+/**
+* performs the calc
+*/
+function calc () {
+	var result = 0;
+
+	for (i=0;i< parameters.length;i++)
+		console.log(i + ': ' + parameters[i]);
+	
+	switch(parameters[2]) {
+		case '+' :	result = parseInt(parameters[0]) + parseInt(parameters[1]);
+				break;
+		case '-' :	result = parameters[0] - parameters[1];
+				break;
+		case '*' :	result = parameters[0] * parameters[1];
+				break;
+		case '/' :	result = parameters[0] / parameters[1];
+				break;
+		default	:	result = 'Wrong operator: ' + parameters[2] + ' , use +,-,*,/';
+				process.exit(1);
+	}
+
+	console.log("Result: " + result);
+}
+
+/**
+* resets calculator
+* set new array to parameters and tells user to try again
+*/
+function resetCalc () {
+	parameters = Array();
+	console.log("Try again")
+}
+
+/**
+* Fulltrim oneliner, thnx stackoverflow
+* needed to remove trailing newline char,
+* whitespaces and such...
+*/
+function fulltrim (wordToTrim){return wordToTrim.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+
+</pre>
+
+<h5>Herencia</h5>
+<p>Con javascript, también se puede hacer POO, me refiero a la programación. Pero si no te gusta aplicar herencia con lo del prototype, puedes usar una utilidad de node. Aquí viene un ejemplo de javascript donde podemos ver varias cosas:</p>
+<ul>
+	<li>Cómo declarar clases con constructor (Character y Mage)</li>
+	<li>Cómo declarar clases en versión literal (Weapon)</li>
+	<li>Cómo añadir propiedades y métodos a la clase con prototype</li>
+	<li>Cómo hacer la herencia de golpe con el módulo utils de node.</li>
+</ul>
+<pre class="brush: js">
+/**
+* inheritance sample
+* @author Pello Xabier Altadill Izura
+* @greetz 2 u
+*/
+
+var util = require('util');
+
+function Character (newName,race) {
+	// Properties ///////////////
+	this.name = newName;
+	this.race = race;
+	this.weapon = null;
+	this.dateOfBirth = new Date();
+	
+	// Methods ////////////////
+	/**
+	* greet, says something -what-
+	*/
+	this.greet = function (what) {
+		return this.name + "> " + what;
+	}
+
+	/**
+	* toString, returns all properties
+	*/
+	this.toString = function () {
+		return 'Name: ' + this.name + ' ' +
+		       'Race: ' + race + ' ' +
+		       'Date of birth: ' + this.dateOfBirth;
+	}
+}
+
+// Another way to define a class is the literal version:
+// But beware, we will have just one instance
+/**
+* Weapon class
+*/
+var Weapon = {
+	name : 'Anduril',
+	type : 'Sword',
+	powers : [4,3,1],  // Attack, defense, magic 
+	attack: function () {
+			return this.powers[0] * Math.random();
+		},
+	defend: function () {
+			return this.powers[1] * Math.random();
+		},
+	toString: function () {
+			return 'Name: ' + this.name + ' ' +
+			       'Type: ' + this.type + ' ' +
+			       'Powers: ' + this.powers;
+		}
+}
+
+myCharacter = new Character('Legolas','Elf');
+
+otherCharacter = new Character('Aragorn','Dunedain');
+otherCharacter.weapon = Weapon;
+
+
+console.log(myCharacter.toString());
+console.log(otherCharacter.toString());
+console.log(otherCharacter.weapon.toString());
+console.log(otherCharacter.name + ' attacks:' + otherCharacter.weapon.attack());
+
+
+/**
+* Mage class
+* We must set school
+*/
+function Mage (school) { 
+	Mage.super_.call(this);
+	this.school = school;
+	this.mana = 100;
+	this.spells = ['freeze','fireball','infinitecoffee'];
+	this.castSpell = function (spellName) {
+				var power = Math.random();
+				this.mana -= power;
+				return 'Cast ' + spellName + ' spell: ' + power;
+			};
+}
+
+// In Javascript we can add properties and method to classes on the fly.
+// We add a new property and method to Character class
+Character.prototype.kissPower = 666;
+Character.prototype.kiss = function () {
+	return this.name + ' kisses you with ' + this.kissPower;
+}
+
+console.log(myCharacter.kiss());
+
+// With util we can add inheritance support
+util.inherits(Mage, Character);
+
+mage = new Mage('Necromancy');
+console.log(mage.castSpell(mage.spells[0]));
+
+
+mage.name = 'Gandalf';
+mage.kissPower = -4;
+
+console.log(mage.toString());
+console.log(mage.kiss());
+
+
+</pre>
+<p>
+La salida sería:
+</p>
+<pre class="brush: bash">
+linux# node inheritance.js 
+Name: Legolas Race: Elf Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
+Name: Aragorn Race: Dunedain Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
+Name: Anduril Type: Sword Powers: 4,3,1
+Aragorn attacks:1.9768171086907387
+Legolas kisses you with 666
+Cast freeze spell: 0.47500331955961883
+Name: Gandalf Race: undefined Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
+Gandalf kisses you with -4
+
+linux# 
+</pre>

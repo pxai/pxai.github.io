@@ -1,0 +1,339 @@
+﻿---
+layout: post
+title: "AsyncTask en Android" 
+date: 2013-08-18 11:06:08 
+categories: coding
+---
+<p>Los AsyncTask están recomendados para tareas concretas y finitas, como por ejemplo descargar el contenido
+de una URL. Si lo que necesitas es una especie de Hilo que esté ejecutándose contínuamente tendrías que usar los Thread convencionales (no se detienen ni al pulsar home ni al pulsar Back) o directamente crear
+un Service de Android.</p>
+
+<p>Para crear un AsyncTask debes extender la clase AsyncTask indicándole tres tipos de clase en la declaración, como por ejemplo AsyncTask&lt;String, String, Void&gt;. Esas clases se utilizan para indicar qué
+tipo de parámetros reciben los métodos que contiene AsyncTask, que por cierto son de número variable.
+Esos métodos que debemos sobrescribir nos dan una idea del ciclo de vida de un AsyncTask:
+<ul>
+<li><b>onPreExecute</b>: invocado antes de doInBackground, es el sitio ideal para iniciar barras de progreso o lo que precise el caso</li>
+<li><b>doInBackground</b>: es donde se lleva a cabo la tarea principal del task. Cada vez que llame a this.publishProgress(); se invocará al siguiente método:</li>
+<li><b>onProgressUpdate</b>: aquí es donde podemos aprovechar para actualizar información en el activity,
+barras de progreso o mostrar datos que vamos generando.</li>
+<li><b>onPostExecute</b>: una vez terminada la tarea, podemos aprovechar este método para resetear controles, ocultar barras de progreso o lo que necesitemos</li>
+</ul>
+</p>
+
+<h5>La MainActivity con una inner class para el AsyncTask</h5>
+<p>Esta activity llama a dos AsyncTask. La primera está definida dentro de la propia Activity como una inner class. Lo único que hace es contar hasta cierto número (se le pasa como parámetro) y va actualizando
+una barra de progreso. La otra AsyncTask está definida en una clase externa y se verá a continuación de este código: 
+</p>
+<pre class="brush: java">
+package info.pello.android.asynctask;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+* Android activity that shows how to deal with AsyncTasks
+* @author Pello Xabier Altadill Izura
+* @greetz my async friends
+*/
+public class MainActivity extends Activity {
+	
+	private JsonGetterTask jsonGetterTask;
+	private EditText editText1;
+	private ProgressBar progressBarInnerTask;
+	private ProgressBar progressBar1;
+	private TextView resultTextView;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		editText1 = (EditText) findViewById(R.id.editText1);
+		progressBarInnerTask = (ProgressBar) findViewById(R.id.progressBarInnerTask);
+		progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+		resultTextView = (TextView) findViewById(R.id.resultTextView);
+			
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	/**
+	 * @return the progressBar1
+	 */
+	public ProgressBar getProgressBar1() {
+		return progressBar1;
+	}
+
+	/**
+	 * @return the resultTextView
+	 */
+	public TextView getResultTextView() {
+		return resultTextView;
+	}
+
+	/**
+	 * this method is called when button is clicked
+	 * It starts an AsyncTask to retrieve a Json source
+	 * You've to create a new instance of the task or an exception like this will be thrown
+	 * 08-12 23:32:45.698: E/AndroidRuntime(2041): Caused by: java.lang.IllegalStateException: Cannot execute task: the task has already been executed (a task can be executed only once)
+
+	 * @param v
+	 */
+	public void getJson (View v) {
+		Log.d("Button clicked, let's grab some JSON data...","PELLODEBUG");
+		jsonGetterTask = new JsonGetterTask(this);
+		jsonGetterTask.execute(editText1.getText().toString());
+	}
+	
+	/**
+	 * this method is called when first button is clicked
+	 * It starts an inner AsyncTask defined here
+	 * @param v
+	 */
+	public void startInnerTask (View v) {
+		Log.d("InnerTask button clicked...","PELLODEBUG");
+		// We pass 20 to set the work to be done.
+		// this param will go to doInBackground
+		new InnerTask().execute(20);
+	}
+	
+	/**
+	 * Inner class for a symple AsyncTask
+	 * @author Pello Xabier Altadill Izura
+	 * @greetz any
+	 */
+	public class InnerTask extends AsyncTask<Integer,Void,Void> {
+
+		/**
+		 * This is called before doInBackground and is a perfect place
+		 * to prepare the progress Bar.
+		 */
+		@Override
+		protected void onPreExecute () {
+			Toast.makeText(MainActivity.this, "Let's start task", Toast.LENGTH_SHORT).show();
+			progressBarInnerTask.setProgress(0);
+		};
+		
+		/**
+		 * This is where the task begins and runs
+		 */
+		@Override
+		protected Void doInBackground(Integer... work) {
+			Log.d("InnerTask doInBackground " + work[0],"PELLODEBUG");
+			progressBarInnerTask.setMax(work[0]);
+
+			Log.d("InnerTask doInBackground " + work[0] + ":"+ progressBarInnerTask.getMax(),"PELLODEBUG");
+			
+			// We just sleep and publish progress
+			for (int i = 0; i<work[0]; i++) {
+				SystemClock.sleep(1000);
+				this.publishProgress();
+			}
+			
+			return null;
+		}
+		
+		/**
+		 * This method is called when we call this.publishProgress
+		 * and can be used to update contents,progress bars,... in the Activity
+		 */
+		@Override
+		protected void onProgressUpdate(Void... unused) {
+			Log.d("InnerTask> onProgressUpdate was called: ","PELLODEBUG");
+			progressBarInnerTask.incrementProgressBy(1);
+		}
+		
+		/**
+		 * called when task is finished.
+		 */
+		@Override
+		protected void onPostExecute(Void unused) {
+			Log.d("InnerTask> onPostExecute was called: ","PELLODEBUG");
+			Toast.makeText(MainActivity.this, "Task finished", Toast.LENGTH_SHORT).show();
+
+		}
+
+
+	}
+
+}
+
+</pre>
+
+<img src="http://www.pello.info/images/androidasynctask.png" title="Ejemplo AsyncTask de android" alt="Ejemplo AsyncTask de android" />
+
+<h5>La clase JsonGetter externa que extiende AsyncTask</h5>
+<p>Al contrario de lo que pasaba con los Thread, aquí Android sí que nos deja pasar
+una referencia a nuestra activity y así desde este Task podemos alterar las Views del Activity sin problema. Este AsyncTask simula recibir un String de JSON (hacerlo con un acceso a red con HttpClient es trivial) y conforme lo procesa va cargando un TextView. Al inicio y al final hace aparecer y desaparecer
+una progressbar indefinida (la del círculo).
+</p>
+<pre class="brush: java">
+package info.pello.android.asynctask;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+
+/**
+ * Extends AsyncTask to get the contents from an URL
+ * It provides a way to pass some values through generics:
+ * AsyncTask<Class1,Class2,Class3> where:
+ * -Class1: type of information for the task (e.g. the URL to get), passed
+ * 			through execute method
+ * -Class2: type of information to indicate progress, must be the same
+ *          class in onProgressUpdate method
+ * -Class3: type of information for the postTask
+ * @author Pello Xabier Altadill Izura
+ * @greetz any
+ */
+public class JsonGetterTask extends AsyncTask<String,String,Void> {
+	
+	// We well keep a reference to our caller activity
+	// so we can attach/detach in case of activity is destroyed in a rotation
+	private MainActivity mainActivity;
+
+	/**
+	 * Default constructor
+	 * @param mainActivity
+	 */
+	public JsonGetterTask (MainActivity mainActivity) {
+		attach(mainActivity);
+	}
+	
+	/**
+	 * sets mainActivity reference
+	 * @param mainActivity
+	 */
+	public void attach(MainActivity mainActivity) {
+		this.mainActivity = mainActivity;
+	}
+
+	/**
+	 * when task is finished this reference is not needed any longer
+	 */
+	public void detach () {
+		this.mainActivity = null;
+	}
+	
+	/**
+	 * This is called before doInBackground and is a perfect place
+	 * to prepare the progress Bar.
+	 */
+	@Override
+	protected void onPreExecute () {
+		Toast.makeText(this.mainActivity, "Starting Async Task", Toast.LENGTH_SHORT).show();
+		this.mainActivity.getProgressBar1().setVisibility(1);
+		this.mainActivity.getResultTextView().setText("");
+	}
+	
+	/**
+	 * This is where the task begins and runs
+	 * String... url declares variable arguments list,
+	 * and we can get values using indexes: url[0], url[1],...
+	 * Whenever we consider that we make som progress we can
+	 * notify through publishProgress()
+	 */
+	@Override
+	protected Void doInBackground(String... url) {
+		Log.d("URL passed to AsyncTask: " + url[0],"PELLODEBUG");
+		String sampleJSON ="{'data': {'technologies':[{name : 'Backbone', description : 'JS MVC Framework' , difficulty: 6}, {name : 'Angular', description: 'JS MVC Framework' ,difficulty: 8}, {name : 'CouchDB', description: 'noSQL Database' ,dificultty: 9} ]}, 'responseDetails': null, 'responseStatus': 200} ";
+		try {
+			this.parseJson(sampleJSON);
+		} catch (Exception e) {
+			Log.d("Exception processing JSON: " + e.getMessage(),"PELLODEBUG");
+		}
+		// With this call we notify to progressUpdate
+		Log.d("doInBackbround publishes progress","PELLODEBUG");
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * This method is called when we call this.publishProgress
+	 * and can be used to update contents,progress bars,... in the Activity
+	 */
+	@Override
+	protected void onProgressUpdate(String... item) {
+		Log.d("onProgressUpdate> json data: " + item[0] + " and " + item[1],"PELLODEBUG");
+		this.mainActivity.getResultTextView().append(item[0] + " and " + item[1]+"\n");
+	}
+	
+	/**
+	 * called when task is finished.
+	 */
+	@Override
+	protected void onPostExecute(Void unused) {
+		Toast.makeText(this.mainActivity, "Finished Async Task", Toast.LENGTH_SHORT).show();
+		Log.d("onPostExecute was called: ","PELLODEBUG");
+		this.mainActivity.getProgressBar1().setVisibility(ProgressBar.INVISIBLE);
+
+	}
+
+	/**
+	 * 
+	 * @param cadenaJSON
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 * @throws JSONException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public void parseJson (String cadenaJSON) throws IllegalStateException,
+	IOException, JSONException, NoSuchAlgorithmException {
+
+
+		String name = "";
+		String description = "";
+
+	 // We create an instance with the JSON string
+	 JSONObject mResponseObject = new JSONObject(cadenaJSON);
+
+	 // We get one object
+	 JSONObject responObject = mResponseObject.getJSONObject("data");
+
+	 // and from that object we get the array of data we need
+	 JSONArray registros = responObject.getJSONArray("technologies");
+
+	 Log.d("JSON parser> # records:" + registros.length(),"PELLODEBUG");
+
+	 // and now, for each record we process data.
+	 for (int i = 0; i < registros.length(); i++) {
+		 Log.d("JSON parser> json record data: " + i + "] " + registros.get(i).toString(),"PELLODEBUG");
+		 // We get name and description
+		 name = registros.getJSONObject(i).getString("name");
+		 description = registros.getJSONObject(i).getString("description");
+		 
+		 this.publishProgress(name, description);
+
+	 }
+
+	 Log.d("JSON parser> finished","PELLODEBUG");
+
+	}
+
+}
+
+</pre>

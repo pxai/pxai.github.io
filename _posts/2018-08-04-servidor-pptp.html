@@ -1,0 +1,128 @@
+﻿---
+layout: post
+title: "Servidor pptp" 
+date: 2018-08-04 18:51:00 
+categories: coding
+---
+<pre>
+Servidor PPTPD unleashed!!
+
+Vamos a la pagina por defecto del servidor pptpd de Linux mas extendido:
+http://www.poptop.org/ y descargamos la ultima version en RPM o source.
+
+Este servicio instala un fichero de configuracion:
+/etc/pptpd.conf
+Aqui interesa especificar la IP local y la remota del tunel:
+localip 192.168.10.1 (esta es la IP que se asignara al punto local)
+remoteip 192.168.10.2-254 (estas son las IP que se asignaran al punto remoto)
+
+Asi como la IP en la que escucha el servidor. 
+listen 200.15.67.78
+
+Atencion: para el caso de que se use PPTP para que desde un sitio remoto se pueda
+entrar en la red local como un equipo mas, lo que haremos sera poner como remoteip
+un rango concreto de la red local (reservado para este servicio). Configurarse una cuenta
+de acceso para este tipo de conexiones es muy sencillo desde cualquier windows. 
+
+En "Conexiones de Red" creamos una nueva red, elegimos "Conectar a mi lugar de trabajo",
+elegimos "Conectar a red privada virtual". Si nos conectamos a internet por modem 
+ponemos "Conectar antes ..", con ADSL no es necesario. Ponemos la IP wan de la red
+en la que queremos entrar. Y ya esta. Solo queda modificar una propiedad dentro de la
+pestaÃƒÂ±a seguridad : quitar "Requerir cifrado de datos". Y por cierto, funciona
+muy muy bien.
+
+Y un directorio con opciones:
+/etc/ppp
+Por un lado tenemos el fichero de chap-secrets, en la que metemos las CUENTAS:
+# Secrets for authentication using CHAP
+# client        server  secret   IP addresses
+Obaba 		*       xxxxx    192.168.10.10
+Azpeitia        *       xxxxx    192.168.10.2
+Madrid  	*       xxxxx    192.168.10.3
+Vitoria 	*       xxxxx    192.168.10.4
+Bilbao  	*       xxxxx    192.168.10.5
+Barcelona       *       xxxxx    192.168.10.6
+
+Por otro lado habra que meter mano en el fichero ip-up
+para que meta rutas al levantarse los tuneles.
+#Este case es para las redirecciones de IP.
+case "$5" in
+        192.168.10.2)
+                /sbin/route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.10.2
+        ;;
+
+        192.168.10.3)
+                /sbin/route add -net 192.168.3.0 netmask 255.255.255.0 gw 192.168.10.3
+        ;;
+
+        192.168.10.4)
+                /sbin/route add -net 192.168.4.0 netmask 255.255.255.0 gw 192.168.10.4
+        ;;
+
+        192.168.10.5)
+                /sbin/route add -net 192.168.5.0 netmask 255.255.255.0 gw 192.168.10.5
+        ;;
+
+        192.168.10.6)
+                /sbin/route add -net 192.168.6.0 netmask 255.255.255.0 gw 192.168.10.6
+
+        ;;
+
+        192.168.10.10)
+                /sbin/ruta-10
+        ;;
+
+esac
+
+
+exit 0
+
+Es decir, por cada tunel que se crea metemos una ruta para que se pueda llegar
+de una red a otra.
+
+En el fichero: options
+Especificamos cosas como la autentificacion y el tamaÃƒÂ±o maximo de paquete.
+lock
++chap
+proxyarp
+mru 1600
+
+El fichero pap-secrets seria el fichero de usuarios para autentificacion pap,
+pero este y el resto no se suele tocar.
+
+Una vez que se levanta el tunel veremos interfaces como estos (ejecutar ifconfig)
+ppp0      Link encap:Point-to-Point Protocol
+          inet addr:192.168.10.1  P-t-P:192.168.10.5  Mask:255.255.255.255
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:464442 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:323789 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:3
+          RX bytes:24042827 (22.9 Mb)  TX bytes:37393316 (35.6 Mb)
+
+ppp1      Link encap:Point-to-Point Protocol
+          inet addr:192.168.10.1  P-t-P:192.168.10.2  Mask:255.255.255.255
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:177253 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:127762 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:3
+          RX bytes:9194787 (8.7 Mb)  TX bytes:14070433 (13.4 Mb)
+
+Como se ve, se repite la IP local, pero no hay que olvidar que es un interfaz punto-
+a punto y se distingue por tener una ip en un lado y en otro. Como saber si hay trafico:
+Mirad los valores RX(recibir) y TX(transmitir), si son distintos de 0 es que has transmisiones.
+Si hechamos un vistazo en los procesos (ps -axf), veremos algo asi:
+583 ?        S      0:00 /usr/sbin/pptpd -d
+ 8467 ?        S      0:45  _ pptpd [81.24.14.219]
+ 8468 ?        S      0:00  |   _ /usr/sbin/pppd local 115200 192.168.10.1:192.168.10.6
+ 8487 ?        S      0:18  _ pptpd [227.227.107.206]
+ 8488 ?        S      0:00  |   _ /usr/sbin/pppd local 115200 192.168.10.1:192.168.10.2
+ 8527 ?        S      0:03  _ pptpd [200.44.133.38]
+ 8528 ?        S      0:00  |   _ /usr/sbin/pppd local 115200 192.168.10.1:192.168.10.4
+ 9103 ?        S      0:02  _ pptpd [217.17.14.113]
+ 9104 ?        S      0:00      _ /usr/sbin/pppd local 115200 192.168.10.1:192.168.10.5
+
+O sea, un proceso padre (ppptp -d), y un proceso hijo por cada tunel creado.
+Nota: la conexion la debe establecer el lado "cliente", y al llegar la demanda el servidor
+levanta el tunel. Se suele dejar un ping continuo en el lado cliente para no perder la conexion.
+
+</pre>

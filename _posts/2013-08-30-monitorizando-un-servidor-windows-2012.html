@@ -1,0 +1,45 @@
+﻿---
+layout: post
+title: "Monitorizando un servidor Windows 2012" 
+date: 2013-08-30 00:55:09 
+categories: coding
+---
+<p>Otra cosa no sé pero si queremos monitorizar un servidor windows por herramientas no será. En comparación revisar un linux puede parecer una tarea sencilla porque el sistema es tan simple (todo son procesos y ficheros), que con unos comandos y una revisión del log nos hacemos una idea rápido. En el caso de windows, el sistema dispone de una monitorización gráfica de serie con todo lujo de detalles, cosa que para linux te obligaría a meter cosas tipo RRDtool, mrtg, etc... aunque obviamente, de nada sirve tanto gráfico si no sabes interpretarlo o no sabes sacar conclusiones de tanta información.</p>
+
+<p>En este pos vamos a revisar algunos de las herramientas que trae Windows (son las de siempre) y a dar alguna pauta para la toma de decisiones. En cualquier caso, sea el sistema que sea, un sysadmin tiene que conocer el estado normal de su servidor, la carga que suele soportar, saber los procesos que tienen que estar en marcha para que de un rápido vistazo pueda saber si algo va mal.</p>
+
+
+<h5>El Adminsitrador de tareas</h5>
+<img src="http://www.pello.info/images/w12taskmgr.jpg" alt="El administrador de tareas de Windows 2012" title="El administrador de tareas de Windows 2012" />
+<p>Antes que nada, al menos debieras saberte cuatro formas para sacar el TaskMgr en un Windows:
+<ol>
+<li><b>Ctrl + Mayus + Esc</b>: el shorcut todo pro</li>
+<li><b>Ctrl + Alt + Supr + seleccionar Administrador de tareas</b>: un poco más largo pero muy usado</li>
+<li><b>Botón derecho sobre la barra de tareas + seleccionar Administrador de tareas</b>: raro ver a alguien usándolo</li>
+<li><b>Windows + escribir taskmgr</b>: pulsar inicio/tecla windows, nos sale el interfaz de los horrores y escribimos. Eso nos busca comandos u archivos.</li>
+</ol>
+El administrador de tareas es el monitor/gestor de procesos de Windows. Si pulsamos en la vista detallada podremos ver TODOS los procesos en ejecución con los detalles que queramos (pulsando en cualquier cabecera de columna botón derecho del ratón...) y con la comodidad de poder agruparlos por tipo, con lo que podemos distinguir:
+<ul>
+<li><b>Aplicaciones</b>: los programas que vemos en priemr plano.</li>
+<li><b>Procesos de Windows</b>: son aquellos procesos lanzados por el sistema operativo</li>
+<li><b>Procesos en segundo plano</b>: son otros procesos en ejecución instalados a parte de windows</li>
+</ul>
+Como siempre desde aquí podemos ejecutar programas (qué típico cuando petaba explorer.exe relanzarlo desde aquí) y matar procesos. Se supone que además podemos matar árboles de procesos, es decir, si un proceso tiene otros procesos hijos se carga todos. Aunque en fin, el éxito de ese tipo de comandos no siempre está garantizado. Y obviamente, ojo al cargarse procesos de windows.
+</p>
+<p>Por otro lado, el Task Manager también nos ofrece algo de información sobre el uso de CPU, memoria, red, etc... aunque si queremos más detalle disponemos de:</p>
+
+<h5>El monitor de recursos</h5>
+<img src="http://www.pello.info/images/w12monrsrc.jpg" alt="El monitor de recursos en Windows 2012" title="El monitor de recursos en Windows 2012" />
+<p>Podemos acceder a este monitor desde la pestaña rendimiento del TaskManager o desde las herramientas administrativas o tecleando su nombre. Este monitor nos ofrece más información aún de procesador, memoria, disco y red.</p>
+<p>Si el rendimiento de un servidor está cayendo, el primer sospechoso que debemos monitorizar es la memoria y su uso. Como en los sistemas ĺinux, si la ram está pillada y está tirando del disco duro debemos ir pensando en meter más RAM. Y por lo general siempre debe haber un 5% de memoria totalmente libre. El siguiente sospechoso en problemas de rendimiento debe ser la CPU. Si a la CPU le empieza a costar atender procesos y estos se empiezan a amontonar en una cola (>10%) hay que ir pensando en meter más CPU. O si los accesos al disco y a la red son bajos respecto al uso de la CPU, esto también puede indicar que la CPU no da de si y puede necesitarse o más cantidad (si se puede meter) o mejor CPU. En general siempre que veamos algún gráfico disparado, o valores descompensados de CPU, RAM y E/S sabremos que pasa algo. O por contra, puede que un gráfico de red bajo nos revele problemas en la configuración de red (un interfaz de red que no aprovecha toda su capacidad por ejemplo, por una mala negociación con el switch)</p>
+
+<h5>El monitor de rendimiento</h5>
+<img src="http://www.pello.info/images/w12monrend.jpg" alt="El monitor de rendimiento en Windows 2012" title="El monitor de rendimiento en Windows 2012" />
+<p>Hombre, las herramientas de monitorización en caliente pueden estar bien, el problema es que obligan al sysadmin a estar delante de la pantalla observando con su mirada experta. ¿Pero qué pasa si queremos hacer una monitorización más larga, o a horas intempestivas y además queremos un informe? Desde las herramientas administrativas disponemos del monitor de rendimiento, que nos permite hacer seguimiento muy detallado de los indicadores del sistema  y de eventos y nos genera informes estupendos. Como siempre hay que tener ojo ya que si metemos muchos parámetros a monitorizar esto acaba afectando propio rendimiento del sistema y estariamos haciendo el canelo. Algo útil en este monitor es que también podemos crear alertas según los parámetros que le demos.</p>
+
+<p>Aparte de estos monitores también disponemos del <b>Monitor de confiabilidad</b>, que se encarga de registrar los cambios en el sistema y nos da una relación entre los cambios de configuración y los cambios en la estabilidad. Y por último, cómo no, tenemos los logs de Windows, al que siguen sin cambiar de iconos. Nos referimos naturalmente al:</p>
+
+<h5>Visor de eventos</h5>
+<img src="http://www.pello.info/images/w12visorevent.jpg" alt="El visor de Eventos de toda la vida" title="El visor de Eventos de toda la vida" />
+
+<p>Sí amigos, la vida sigue igual. Pero es que es lo que hay. Así como en unix la carpeta /var/log es vital para saber qué narices pasa con el sistema o con los servicios, en Windows se unifica todo en el visor de eventos. La información que se genera es ingente pero se pueden crear filtros que nos den la información que más nos interese, por ejemplo un filtro que muestre todos los errores y mensajes críticos de los últimos siete días. Lo suyo es revisar el visor de eventos para ver si hay errores de forma regular.</p>

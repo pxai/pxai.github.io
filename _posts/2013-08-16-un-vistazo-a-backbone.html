@@ -1,0 +1,196 @@
+﻿---
+layout: post
+title: "Un vistazo a Backbone" 
+date: 2013-08-16 01:37:50 
+categories: coding
+---
+<img src="http://www.pello.info/images/backbone.png" alt="Backbone logo" title="Backbone logo" />
+<p><a href="http://backbonejs.org/">Backbone</a> es un framework MVC de javascript para clientes web
+que facilita el desarrollo de aplicaciones de una sola página. El hecho de aplicar MVC permite separar
+los datos de la presentación y Backbone lo hace sin invadir la página y con una serie de funciones que permiten la persistencia de datos en el servidor. Dicho de otro modo, podemos hacer páginas web que manejen
+registros de una BBDD sin estar recargando la página todo el rato, que es lo que ahora mola. También
+facilita las pruebas unitarias, permite aplicar distintos sistemas de plantillas, bla bla somos los mejores. Te recomiendo seguir la web oficial porque ha habido cambios (por ejemplo en el tema
+de validación, antes se hacía por defecto) y te puedes encontrar por ahí blogs desfasados (como este) que
+te confundirán. Si juegas con Backbone que no se te olvide incluir en la página el jquery, el <b>underscore</b> (backbone se apoya mucho en él) y por supuesto el backbone. Y en ese orden.
+</p>
+
+<p>Y como todo framework MVC, Backbone nos obliga amablemente a separar el modelo, la vista y el 
+controlador. Vamos a ver qué pinta tiene cada uno:</p>
+
+<h5>Model: El Modelo</h5>
+<p>
+Un model en Backbone viene a ser la clase que representa algo del dominio, es decir si la aplicación
+va de negocios pues en el modelo tendremos clases Cliente, Proveedor, etc..  la forma de definir
+un modelo de Backbone difiere algo de una clase convencional de Javascript con alguna peculiaridad
+extra: el método initialize, el hecho de que hay que usar set/get internamente (oh cielos), y el
+método validate con el que podemos hacer una validación de los atributos. Obviamente el modelo ignora
+al resto es una clase feliz que representa algo y que es ajena a las vistas y rutas.
+</p>
+<pre class="brush: js">
+/**
+* This model represents a mighty warrior with classic attributes
+* and methods like attack/defend
+*/
+ var Warrior = Backbone.Model.extend({
+		defaults: {
+			name: 'Frontend Warrior',
+			strength: 6,
+			agility: 6,
+			intelligence: 6 
+		},
+
+		/*
+		* default method invoked on init
+		*/
+		initialize: function(){
+				console.log('Warrior Initialized:  ' + this.toString());
+		},
+
+		/*
+		* default function to apply validation before setting any property
+		*/
+		validate: function(attribs,options){
+			console.log('validation> Checking strength for: ' + attribs.name + ':' + attribs.strength);
+			if(attribs.strength < 0 ) {
+				console.log('validation> Invalid strength');
+				return 'Invalid strength value';
+			}
+		},
+
+		/**
+		* attack method uses d6 roll and strength to return attack value
+		*/
+		attack: function() {
+			return d6.roll() + this.get('stregnth');
+		},
+
+		/**
+		* defend method uses d6 roll and agility to return attack value
+		*/
+		defend: function () {
+			return d6.roll() + this.get('agility');
+		},
+		/**
+		* dumps all warrior attributes
+		*/
+		toString: function () {
+			return 'Name: ' + this.get('name') + 
+				   ', Str: ' + this.get('strength') + 
+				   ', Agl: ' + this.get('agility') + 
+				   ', Int: ' + this.get('intelligence'); 
+		}
+
+});
+
+var warrior1 = new Warrior({name: 'Brom'});
+
+</pre>
+
+<h5>Collection: arrays de modelos</h5>
+<p>Dicho así queda como muy simplista pero básicamente es eso con algunos extras muy interesantes como
+una serie de utilidades para búsquedas, ordenar, etc... Crear una colección es bastante simple y ofrece
+varias alternativas para añadir, iniciar, extraer... Aquí tienes un ejemplo de modelo:
+</p>
+<pre class="brush: js">
+/**
+* We define a Collection of warriors
+* every element of the collection will have an id asigned
+* (represented with cid attribute)
+*/
+var WarriorCollection = Backbone.Collection.extend({
+	model: Warrior
+});
+
+var myWarriors = new WarriorCollection([warrior1,warrior2]);
+
+myWarriors.add([warrior3]);
+</pre>
+<p>Las collections tienen una serie de métodos donde está la miga como sync, fetch, save que son los que mandan llamadas al servidor pero eso para otro día, para cerrar el círculo.</p>
+
+<h5>View: La Vista</h5>
+<p>
+Los views se utilizan para poder visualizar modelos. Se les pasa como parametro un model o una collection,
+se establece una plantilla que debe estar dentro del HTML y con un render se pintan los datos. En este
+ejemplo se usa la forma básica con el sistema de underscore, pero Backbone es neutral respecto al sistema
+de plantillas, pudiendo aplicar otros.
+</p>
+<pre class="brush: js">
+/**
+* a view for the warrior.
+* el is a reference to a dom element where we will display data.
+*/
+var WarriorView = Backbone.View.extend({
+				template:_.template($('#warrior_template').html()),
+				warrior: {},
+				// called when instantiate
+				initialize: function() {
+				},
+
+				// render
+				render: function() {
+					console.log(this.model);
+					$(this.el).html(this.template(this.model));
+				},
+				renderAll: function() {
+					console.log(this.collection);
+					this.collection.each(this.renderOne, this);
+				},
+				renderOne: function (warrior) {
+					$(this.el).append(this.template(warrior));
+				}
+
+	});
+</pre>
+
+
+<h5>Router: Las Rutas</h5>
+<p>
+Esto sería lo que viene llamándose el controlador, aunque en los libros sobre Backbone se le da muchas vueltas a si esto eso MVC o MVP, en fin... básicamente es donde se hace el mapa de acciones. Backbone se
+queda con las peticiones que llegan a la propia página a través del... ¡¡¡hash!!! es lógico ya que es una
+forma muy simple de cambiar la url sin recargar la página, y ya se sabe, ahora lo que mola es NO cambiar
+de página (ay espera, que me ajuste las gafas de pasta y la camiseta de Naranjito que me pille en el FNAC). Es decir, si metemos un enlace en la página como: <code>pagina.html#cliente/1</code> lo que recibe el router de backbone es #cliente/1 y con eso decide a qué función llama. 
+</p>
+<pre class="brush: js">
+/**
+* The router is the controller part of Backbone.
+* Here we create the map of the actions supported by Warrior
+* where url hashvalues are assigned javascript functions.
+* e.g. thispage.html#author is mapped to js showAuthor function.
+*/
+var WarriorRoute = Backbone.Router.extend({
+		routes : {
+			'author' : 'showAuthor',
+			'warrior/all' : 'showAllWarriors',
+			'warrior/:id' : 'showWarrior',
+			// default route
+			'*other': 'default'
+
+		},
+		'showAuthor' : function () {
+				console.log('author: Pello Xabier Altadill Izura');
+			},
+		'showAllWarriors' : function (id) {
+				var warriorsToShow = myWarriors;
+				console.log('Warriors to show: ' + warriorsToShow.size());
+				var warrior_view = new WarriorView({ collection: warriorsToShow, el: $('#warrior')});
+				warrior_view.renderAll();
+			},
+		'showWarrior' : function (id) {
+				var warriorToShow = myWarriors.at(id);
+				console.log('showing warrior id: ' + warriorToShow);
+				var warrior_view = new WarriorView({ model: warriorToShow, el: $('#warrior')});
+				warrior_view.render();
+			},
+		'default' : function () {
+				console.log('sorry, route not supported');
+		}
+	});
+
+var myRoutes = new WarriorRoute();
+
+// We need this to make the routers work.
+Backbone.history.start();
+</pre>
+
+<p>Bueno, otra pieza más en el puzzle, ya solo falta el pegamento con las otras.</p>
+<p>Tienes <a href="http://www.pello.info/filez/labs/backbone/webcraft/webcraft.html" title="Ejemplo de backbone">este FEO (y escasamente funcional) ejemplo completo en está página</a>, abre la consola de javascript para ver los logs.</p>

@@ -1,0 +1,69 @@
+﻿---
+layout: post
+title: "Aplicaci�n PHP multilenguaje con locale" 
+date: 2002-04-09 14:27:00 
+categories: coding
+---
+<p>Crear una aplicaci&oacute;n multilenguaje es simple gracias a la funci&oacute;n gettext y todo el tema de ficheros mo. Se trata de crear un directorio con los ficheros de lenguaje, <em>compilar</em> esos ficheros y luego usarlos desde php o cualquier otro lenguaje.  En este ejemplo tenemos un php y dentro de su directorio tenemos el directorio de locale, por cada lenguaje un directorio y luego un dominio de aplicaci&oacute;n. Total:</p>
+<pre>./locale/es_ES/LC_MESSAGES/
+</pre>
+<p>Dentro de LC_MESSAGES tenemos los ficheros con las traducciones. Un ejemplo ser&iacute;a este:<br /> Fichero message.po</p>
+<pre>#  Fichero po
+#, php-format
+msgid "Translate this with gettext"
+msgstr "Esto es una prueba de gettext"
+
+msgid "Have a nice day"
+msgstr "Que pacha nenaaaa"
+
+msgid  "%s is your name and you are %d years old"
+msgstr "Tu nombre es %s y tienes %d a&ntilde;os"
+</pre>
+<p>Como se aprecia, pueden meterse cadenas con par&aacute;metros. Ese fichero de texto hay que convertirlo a fichero <strong>.po</strong>.<br /> Para eso hacemos:</p>
+<pre>msgfmt -o messages.mo messages.po
+</pre>
+<p>Y ya est&aacute;. Este ser&iacute;a un ejemplo de uso de gettext desde php.<br /> Hay que establecer una serie de par&aacute;metros antes de nada, como es l&oacute;gico hay que elegir el idioma... es bastante simple.</p>
+<pre>
+&lt;?php
+// Solución multilingual
+// Debemos crear un fichero
+
+// mostramos locale actual
+echo "Locale actual :".setlocale(LC_ALL, 0) . "&lt;br /&gt;";
+
+// Hay quien pone esto, pero en mi caso ha dado igual
+//putenv ("LANG=es_ES");
+
+// Aquí establecemos el locale
+$language = 'es_ES';
+
+$nuevoLocale =setlocale (LC_ALL, $language);
+
+echo "Ahora el locale es: $nuevoLocale &lt;br /&gt;";
+
+// ahora debemos establecer el fichero .mo y el directorio.
+// en nuestro caso esta en ./locale/es_ES/LC_MESSAGES/messages.mo
+$domain = 'messages';
+
+// Con estas dos llamadas terminamos de establecer la relación
+bindtextdomain($domain, "./locale");
+
+textdomain($domain);
+
+
+// Podemos usar la función
+echo gettext("Translate this with gettext"). "&lt;br /&gt;";
+
+// podemos usar el alias de gettext() que es _()
+echo _("Translate this with gettext"). "&lt;br /&gt;";
+
+
+echo _("Have a nice day") . "&lt;br /&gt;";
+$nombre = "Cthulhu";
+$edad = "23451";
+
+// Con parámetros y todo:
+echo sprintf(_("%s is your name and you are %d years old"),$nombre,$edad) . "&lt;br /&gt;";
+?&gt;
+
+</pre>

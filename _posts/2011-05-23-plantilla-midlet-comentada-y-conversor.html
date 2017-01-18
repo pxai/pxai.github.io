@@ -1,0 +1,141 @@
+﻿---
+layout: post
+title: "Plantilla Midlet comentada y conversor" 
+date: 2011-05-23 14:26:12 
+categories: coding
+---
+<h3>
+	Plantilla Midlet</h3>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	<br />
+	// lcdui lo necesitamos para Display y si usamos CommandListener<br />
+	import javax.microedition.lcdui.*;<br />
+	<br />
+	// Despu&eacute;s de tomar el Display (se coge no se crea) podemos<br />
+	// usar screens (m&uacute;ltiples). Form, TextBox y List son hijas de Screen<br />
+	<br />
+	// Canvas ser&iacute;a como los Screens pero para gr&aacute;ficos<br />
+	<br />
+	/**<br />
+	&nbsp;* @author luser<br />
+	&nbsp;* El CommandListener lo necesitamos para poder meter comandos<br />
+	&nbsp;* que interrumplan<br />
+	&nbsp;*/<br />
+	public class PrimerMidlet extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; private Command ordenSalida;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private Form formulario;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public PrimerMidlet ()<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create the Exit command, la prioridad es 2, muy alta<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ordenSalida = new Command(&quot;Salir&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create the main screen form<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario = new Form(&quot;El primero&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create a string item and add it to the screen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringItem strItem = new StringItem(&quot;T&iacute;tulo&quot;, &quot;pasa tron&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(strItem);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Esto ser&iacute;a usar un softbutton, es decir, una orden<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // que utilice botones concretos del dispositivo, que son pocos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // este tipo de comandos deben ser los m&aacute;s cruciales.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set the Exit command<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.addCommand(ordenSalida);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formulario);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura ordenes<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction (Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == ordenSalida) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // el false significa que el Midlet puede cancelar la orden<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp (false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // este avisa al gestor de aplicaciones del dispositivo que ya est&aacute;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+<h3>
+	Conversor de euros</h3>
+<p>
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	<br />
+	public class Conversor extends MIDlet implements CommandListener {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand; // The exit command<br />
+	&nbsp;&nbsp;&nbsp; private Command convertCommand; // The exit command<br />
+	&nbsp;&nbsp;&nbsp; private Display display;&nbsp;&nbsp;&nbsp;&nbsp; // The display for this MIDlet<br />
+	&nbsp;&nbsp;&nbsp; private TextBox cajaTexto;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public Conversor() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 0);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; convertCommand = new Command(&quot;Convertir&quot;, Command.OK, 0);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Pause, discontinue with the http tests<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp () {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto = new TextBox(&quot;Inserta euros&quot;,&quot;0&quot;,20,0);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.addCommand(convertCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(cajaTexto);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double pesetas = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == convertCommand)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pesetas = Double.parseDouble(cajaTexto.getString()) * 166.386;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setString(&quot;yeah: &quot; + pesetas);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == exitCommand)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	}<br />
+	&nbsp;</p>

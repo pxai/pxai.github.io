@@ -1,0 +1,53 @@
+﻿---
+layout: post
+title: "php dir crawler" 
+date: 2010-10-28 11:47:53 
+categories: coding
+---
+<p>
+	Con este simple programa podemos recorrer recursivamente un directorio y sus subdirectorios. Es mejorable. Lo que si comprueba es que no se mete en el directorio local y tampoco en el &quot;..&quot;</p>
+<p>
+	&nbsp;</p>
+<p>
+	crawler(&#39;/home/yomismo&#39;);</p>
+<pre class="brush: js">
+function crawler ($dir,$t=0)
+{
+    $d = dir($dir);
+    //echo &quot;Gestor: &quot; . $d-&gt;handle . &quot; &quot;;
+    //echo &quot;Ruta: &quot; . $d-&gt;path . &quot; &quot;;
+    $isdir = 0;
+   
+    while (false !== ($entrada = $d-&gt;read())) {
+            // Que no se meta en los especiales
+           if (preg_match(&quot;/^[..]{1,2}$/&quot;,$entrada)) continue;
+
+            $total = $dir.&quot;/&quot;.$entrada;
+           
+            if (!is_dir($total))
+            {
+               echo &quot;+&quot;.tabme($t).$entrada.&quot;
+&quot;;
+           }
+           else
+           {
+               echo &quot;&quot;.$entrada.&quot;
+&quot;;
+               $t++;
+               crawler($total,$t);
+               $t--;
+           }
+    }
+    $d-&gt;close();
+}
+
+function tabme ($t)
+{
+    $result = &quot;&quot;;
+
+    for ($i=0;$i&lt;$t;$i++) $result .= &quot;--&quot;;   
+   
+    return $result;
+}
+?&gt;
+</pre>

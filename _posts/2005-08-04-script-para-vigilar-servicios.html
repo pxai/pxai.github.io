@@ -1,0 +1,34 @@
+﻿---
+layout: post
+title: "Script para vigilar servicios" 
+date: 2005-08-04 16:40:00 
+categories: coding
+---
+Con este (mejorable) script se comprueba un determinado servicio. Se comprueba si existe su pid y si su puerto esta abierto. En caso de no estar abierto se ejecuta el comando especificado. 
+<br>
+En este ejemplo se ve el caso del servicio proftpd:
+
+<pre>
+#!/bin/bash
+
+# comprobador de proceso
+
+NOMBRE=proftpd
+PIDFILE=/usr/local/var/proftpd.pid
+PUERTO=21
+COMANDO="/etc/rc.d/init.d/proftpd restart"
+
+echo comprobando si $NOMBRE esta OK...
+
+
+if [ -f ${PIDFILE} ]
+then
+        echo PID [`cat ${PIDFILE}`]
+        netstat -ln | grep ":${PUERTO}" && echo $NOMBRE OK && exit 0
+else
+        echo NO existe. Comprobacion de puerto:
+        netstat -ln | grep ":${PUERTO}" || ${COMANDO}
+fi
+
+netstat -ln | grep ":${PUERTO}" || ${COMANDO}
+</pre>

@@ -1,0 +1,110 @@
+﻿---
+layout: post
+title: "Tunning de acceso a disco" 
+date: 2015-03-05 17:51:00 
+categories: coding
+---
+En el acceso a discos parece ser que el Kernel usa una configuracion bastante floja
+y conservadora y se puede mejorar. Gracias al comando hdparm podemos mejorar el rendimiento
+de manera muy apreciable.
+Los discos IDE tienen capacidades que se pueden aprovechar como el DMA, las transferencias de 32bits
+y el acceso a multiples sectores a la vez.
+
+Como es el disco?
+Podemos comprobar las capacidades del disco usando
+<pre>
+[root@firewall root]# hdparm -i /dev/hda
+
+/dev/hda:
+
+ Model=ST340014A, FwRev=3.06, SerialNo=3JX8JGSJ
+ Config={ HardSect NotMFM HdSw&gt;15uSec Fixed DTR&gt;10Mbs RotSpdTol&gt;.5% }
+ RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=4
+ BuffType=unknown, BuffSize=2048kB, MaxMultSect=16, MultSect=16
+ CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=78165360
+ IORDY=on/off, tPIO={min:240,w/IORDY:120}, tDMA={min:120,rec:120}
+ PIO modes:  pio0 pio1 pio2 pio3 pio4
+ DMA modes:  mdma0 mdma1 mdma2
+ UDMA modes: udma0 udma1 udma2 udma3 udma4 *udma5
+ AdvancedPM=no WriteCache=enabled
+ Drive conforms to: ATA/ATAPI-6 T13 1410D revision 2:
+
+ * signifies the current active mode
+</pre>
+
+Hay que quedarse con los parametros y los modos que muestra, ya que son capacidades que vamos
+a habilitar/modificar.
+
+Vamos a tunar el disco:
+-Para empezar le podemos hacer que use los 32 bits de E/S sobre el bus pci.
+<pre>
+[root@firewall root]#  hdparm -c1 /dev/hda 
+</pre>
+
+-Podemos habilitarle el DMA
+<pre>
+[root@firewall root]# hdparm -d1 /dev/hda
+</pre>
+
+-Para habilitar las transferencias UDMA mode2:
+<pre>
+[root@firewall root]# hdparm -d1 -X66 /dev/hda2
+</pre>
+
+
+-Uno de los valores en los que hay que fijarse es: MaxMultSect=16
+podemos habilitar que el disco funcione en modo sector multiple
+<pre>
+[root@firewall root]# hdparm -m 16 /dev/hda
+</pre>
+
+Esto significa que al acceder al disco se leeran varios sectores a la vez. A bajo nivel cuando se
+genere una interrupcion para acceder al disco en lugar de leer un sector se leeran multiples sectores.
+
+
+Vale, pero tenemos que aplicar esto y hacer un acto de fe?
+Bueno, a falta de herramientas de benchmarking potentes a mano podemos hacer una lectura de todo
+
+el sistema de ficheros y medir el tiempo de ejecucion antes y despues:
+
+<pre>
+[root@firewall root]# time ls -R /
+...
+
+real    0m13.270s
+user    0m1.898s
+sys     0m3.474s
+[root@firewall root]#
+</pre>
+
+Aplicamos el tunning:
+
+<pre>
+[root@firewall root]# hdparm -d1 -c1 -X66 -m 16 /dev/hda
+
+/dev/hda:
+ setting 32-bit IO_support flag to 1
+ setting multcount to 16
+ setting using_dma to 1 (on)
+ setting xfermode to 66 (UltraDMA mode2)
+ multcount    = 16 (on)
+ IO_support   =  1 (32-bit)
+ using_dma    =  1 (on)
+</pre>
+
+
+
+y volvemos a probar
+
+<pre>
+[root@firewall root]# time ls -R /
+...
+
+real    0m6.979s
+user    0m1.665s
+sys     0m2.807s
+
+[root@firewall root]#
+</pre>
+
+Y acabamos de duplicar la velocidad de acceso

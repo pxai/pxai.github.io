@@ -1,0 +1,323 @@
+﻿---
+layout: post
+title: "Alojamiento gratuito de Node.js en openshift" 
+date: 2013-08-24 15:27:46 
+categories: coding
+---
+<p>
+A la hora de desarrollar aplicaciones web tenemos muchos lenguajes donde elegir. Todos ellos funcionarán perfectamente en nuestro equipo local pero claro, ¿qué pasa si queremos publicar nuestra aplicación? ¿Y si además queremos hacerlo gratis? Una de las cosas que más atractivas de lenguajes como php es que lo tienes disponible para todos los sistemas, para todos los sabores de linux y lo que es mejor en infinidad de alojamientos gratuitos, con mysql incluido. Además php funciona de manera muy simple, ya que basta con subir los ficheros al servidor por FTP y apache hace el resto.</p>
+
+<img src="http://www.pello.info/images/itsfree.png" alt="It's free" title="It's free" />
+
+<p>¿Pero qué pasa con Node.js? Una aplicación node aparte de subirla hay que arrancarla, depende de módulos, ocupa un puerto propio... no es algo sencillo.  ¿Existe algún hosting gratis para colgar aplicaciones para jugar con los websockets por ejemplo?
+</p>
+
+<p>Pues por suerte sí, poco a poco van proliferando servicios (<a href="https://www.openshift.com">Openshift</a>, <a href="https://www.nodejitsu.com">Nodejitsu</a>, <a href="https://mongolab.com" title="Nombre poco afortunado pardiez">Mongolab</a>) con soporte para Node.js, MongoDB, MariaDB, etc... incluso para aplicaciones gordas para Tomcat. Algunos son de pago y otros ofrecen un soporte básico gratis. Tras jugar un poco con uno de ellos dejo aquí mis impresiones sobre...</p>
+
+<h5>Openshift</h5>
+<img src="http://www.pello.info/images/openshift.png" alt="Logo de openshift" title="Logo de openshift" />
+<p>RedHat es quién está detrás de este site que ofrece tanto planes de pago como uno básico que es free. Tienen unos conceptos curiosos llamados gears y cartdridge que son como unidades básicas para meter aplicaciones. Te lo venden como escalable, empiezas con poco y puedes ir creciendo. Y si usas lo mínimo, pues es gratis, y al menos una aplicación Node.JS sale gratis. Además ahora han metido soporte para MongoDB, así que ya nos lo ponen a huevo. Eso sí, olvídate de subir ficheros por FTP. Openshift trabaja con un programa propio llamado rhc y te obliga a usar GIT para actualizar el software,
+con lo que tus gafas de pasta vibrarán de la emoción.
+</p>
+
+<h5>Pasos para publicar una aplicación Node.js en Openshift</h5>
+<p>Lo primero obviamente es darse de alta en Openshift. Te pedirá un email que luego debes usar al crear la clave pública. A partir de ahí podemos operar usando la web para crear proyectos pero francamente, se requieren algunos pasos clave que necesitan la consola por narices así que me switcheo a las instrucciones de línea de comandos. Francamente usando linux para programar lo tendremos todo bastante más a mano.</p>
+
+<h5>Crea unas claves RSA</h5>
+<p>¿No has tenido que hacerlo nunca? ¿Qué pasa, has estado en hibernación? Muchos servicios populares y supermasivos como sourceforge o github te obligan a usar el tema de las claves. Generas un par de claves, una privada y otra pública. Le das al servidor la pública y a partir de ahí podrás acceder al shell del servidor y a otros servicios de manera directa. Es muy muy simple. Vas a la carpeta <code>.ssh</code> de tu home y ejecutas lo siguiente:
+</p>
+<pre class="brush: bash">
+root@bt:~/.ssh# ssh-keygen -t rsa -C "pello_altadill@dominio.org"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Passphrases do not match.  Try again.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+b4:2d:71:43:36:1f:92:62:28:f2:31:44:91:59:dc:91 pello_altadill@dominio.org
+The key's randomart image is:
++--[ RSA 2048]----+
+|       .+*=..o   |
+|       .oo.+E.   |
+|      .. *  * .  |
+|       + X o +   |
+|        S x      |
+|                 |
+|                 |
+|                 |
+|                 |
++-----------------+
+root@bt:~/.ssh# 
+</pre>
+
+<p>He alterado valores en la clave. El caso es que esto ha generado dos ficheros, el de la clave privada <i>id_rsa</i> y el de la pública <i>id_rsa.pub</i>. Ese fichero o su contenido es el que le tendremos que pasar al servidor.</p>
+
+
+<h5>Instalar rhc</h5>
+<p>Hay que instalar este comando a través de una aplicación para linux llamada <b>gem</b>, un gestor de paquetes de ruby. O sea que primero te instalas gem y con este te instalas el rhc.</p>
+
+<pre class="brush: bash">
+root@bt:~# gem install rhc
+
+
+# Para obtener ayuda usa
+
+root@bt:~# rhc -h
+
+# Y luego de cada comando
+
+root@bt:~# rhc help app
+</pre>
+
+<h5>Configurando el rhc o client tool</h5>
+<p>Tenemos creada nuestra clave publica asociada al email pello_altadill@dominio.org que por cierto es <b>el mismo email que he usado para darme de alta en openshift</b>.
+Y tenemos instalado el programa rhc. Ahora ya configuramos el cliente, así que en una consola desde el gnome o tu gestor de ventanas preferido haces:
+</p>
+
+<pre class="brush: bash">
+
+root@bt:~# rhc setup
+OpenShift Client Tools (RHC) Setup Wizard
+
+This wizard will help you upload your SSH keys, set your application namespace,
+and check that other programs like Git are properly installed.
+
+Login to openshift.redhat.com: pello_altadill@dominio.org
+Password: **********
+
+OpenShift can create and store a token on disk which allows to you to access the
+server without using your password. The key is stored in your home directory and
+should be kept secret.  You can delete the key at any time by running 'rhc
+logout'.
+Generate a token now? (yes|no) yes
+Generating an authorization token for this client ... lasts about 1 day
+
+Saving configuration to /root/.openshift/express.conf ... done
+
+Checking for git ... found git version 1.7.0.4
+
+Checking common problems .. done
+
+Checking your namespace ... pello
+
+Checking for applications ... 
+
+  You are using 1 of 3 total gears
+  The following gear sizes are available to you: small
+
+Your client tools are now configured.
+root@bt:~# 
+</pre>
+
+<p>Al ejecutar esto nos pedirá un password (a mí me ha salido un Dialog en gnome) para desbloquear nuestra clave privada de rsa, debemos meter la clave de que metimos al generar las claves rsa pública y privadas.</p>
+
+<h5>Creando un proyecto</h5>
+
+<p>Es más simple hacerlo por la web ya que desde ahí eliges el tipo de app,
+pero por consola también se puede, indicando el tipo de app:</p>
+<pre class="brush: bash">
+root@bt:/tmp#  rhc app create randomquote nodejs-0.6
+Application Options
+-------------------
+  Namespace:  pello
+  Cartridges: nodejs-0.6
+  Gear Size:  default
+  Scaling:    no
+
+Creating application 'randomquote' ... done
+
+
+Waiting for your DNS name to be available ... done
+
+Initialized empty Git repository in /tmp/randomquote/.git/
+Warning: Permanently added the RSA host key for IP address '54.226.77.79' to the list of known hosts.
+
+Your application 'randomquote' is now available.
+
+  URL:        http://randomquote-pello.rhcloud.com/
+  SSH to:     521884766673ca926000020c@randomquote-pello.rhcloud.com
+  Git remote: ssh://521884766673ca926000020c@randomquote-pello.rhcloud.com/~/git/randomquote.git/
+  Cloned to:  /tmp/randomquote
+
+Run 'rhc show-app randomquote' for more details about your app.
+root@bt:/tmp# 
+</pre>
+
+<p>Ese comando es una maravilla. Te genera el proyecto con un servidor Node.JS con express en marcha, te prepara el acceso por ssh (entras directo gracias al tema de la clave) y lo mejor de todo, te monta un repositorio git remoto y te lo deja clonado y listo. Si haces esto por web, te lo tienes que clonar a mano, que tampoco cuesta mucho.</p>
+
+<h5>¡¡A programar!! y actualizar</h5>
+<p>Ahora ya podemos meter mano en el proyecto. Te lo ponen a huevo con un fichero llamado server.js y uno de propiedades llamado package.json. También hay otro fichero para decirle qué dependencias necesitamos. He probado a cambiar el fichero principal (hay que incidarlo en package.json) y no le ha gustado. Esto tendré que mirarlo mejor. En cualquier caso, supongamos que hemos metido mano en el server. Ahora viene lo que a mi juicio es lo más elegante de Openshift: al hacer un git push, aparte de subirse el código openshift te reinicia el servidor de forma automática!!! Y encima es un proceso en el que podemos meter mano por lo visto y ofrecen servicios de integración Jenkins, que otro de los 3427349723984 a investigar por cierto. En fin, que tú haces un commit y un push y a correr:
+</p>
+
+<pre class="brush: bash">
+root@bt:/tmp/randomquote# git commit -a -m 'first commit'
+[master 9b07004] first commit
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+root@bt:/tmp/randomquote# git push
+Counting objects: 5, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 324 bytes, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Saving away previously installed Node modules
+remote: npm info it worked if it ends with ok
+remote: npm info using npm@1.1.37
+remote: npm info using node@v0.6.20
+remote: npm info preinstall OpenShift-Sample-App@1.0.0
+remote: npm info build /var/lib/openshift/521884766673ca926000020c/app-root/runtime/repo
+remote: npm info linkStuff OpenShift-Sample-App@1.0.0
+remote: npm info install OpenShift-Sample-App@1.0.0
+remote: npm info postinstall OpenShift-Sample-App@1.0.0
+remote: npm info ok 
+remote: Starting application randomquote
+To ssh://521884766673ca926000020c@randomquote-pello.rhcloud.com/~/git/randomquote.git/
+   1742c83..9b07004  master -> master
+root@bt:/tmp/randomquote# 
+
+</pre>
+
+<h5>El acceso por SSH</h5>
+<p>Openshift ofrece un shell. Aunque francamente, para lo esencial, programar y reiniciar no hace falta, salvo que nos encontremos con problemas claro está. El acceso es muy sencillo. Si se nos olvida la forma de acceso podemos ver la orden ssh en la web o usando el comando <code> rhc apps -l pello_altadill@dominio.org</code>
+Ahora ya nos podemos meter con una orden ssh y no nos pedirá password:
+</p>
+<pre class="brush: bash">
+root@bt:~# ssh 5206c53e320446e09400027d@randomquote-pello.rhcloud.com
+
+    *********************************************************************
+
+    You are accessing a service that is for use only by authorized users.  
+    If you do not have authorization, discontinue use at once. 
+    Any use of the services is subject to the applicable terms of the 
+    agreement which can be found at: 
+    https://www.openshift.com/legal
+
+    *********************************************************************
+
+    Welcome to OpenShift shell
+
+    This shell will assist you in managing OpenShift applications.
+
+    !!! IMPORTANT !!! IMPORTANT !!! IMPORTANT !!!
+    Shell access is quite powerful and it is possible for you to
+    accidentally damage your application.  Proceed with care!
+    If worse comes to worst, destroy your application with 'rhc app delete'
+    and recreate it
+    !!! IMPORTANT !!! IMPORTANT !!! IMPORTANT !!!
+
+    Type "help" for more info.
+
+[randomquote-pello.rhcloud.com 5206c53e344446e09400027d]\> 
+[randomquote-pello.rhcloud.com 5206c53e344446e09400027d]\> node
+> console.log('epa');
+epa
+undefined
+> .exit
+[randomquote-pello.rhcloud.com 5206c53e344446e09400027d]\>
+</pre>
+
+<p>
+Podemos iniciar/parar/reiniciar una app con:
+</p>
+<pre>
+ctl_app start
+ctl_app stop
+ctl_app restart
+
+El status:
+ctl_app status
+</pre>
+<p>
+Le podemos preguntar al shell cómo está nuestra aplicación.
+Nos pedirá el número de cartdridge:</p>
+<pre class="brush: bash">
+[randomquote-pello.rhcloud.com 5206c53e544446e09400027d]\> ctl_app status
+Cart to get the status for?
+1. nodejs-0.6
+?  1
+ATTR: quota_blocks=1048576
+ATTR: quota_files=40000
+CLIENT_RESULT: Application is running
+[randomquote-pello.rhcloud.com 5206c53e544446e09400027d]\>
+</pre>
+
+<p>Podemos usar los comandos básicos de linux para movernos por el sistema y por el proyecto. El servidor está en app_root/repo.
+</p>
+
+<p>
+Si quieres probar la tontería de servidor que hay montado, aquí tienes <a href="http://randomquote-pello.rhcloud.com/">el superservidor Node.JS llamado randomquote</a>, pincha y recarga, y asómbrate con mi talento xD</p>
+
+<p>Este es el código del servidor, basado en el que provee openshift. Le han dado forma de objeto y usa mucho el self. Le he quitado la mayoría de opciones por simplificarlo.
+</p>
+<pre class="brush: js">
+#!/bin/env node
+//  OpenShift sample Node application
+var express = require('express');
+var fs      = require('fs');
+
+
+
+var MyServer = function () {
+	self = this;
+
+    self.quotes = [{quote:'Judgement time',author:'Judge Dredd'},
+                  {quote:'I am the law',author:'Judge Dredd'},
+                  {quote:'I find your lack of faith disturbing',author:'Lord Vader'},
+                  {quote:'It is pointless to resist, my son',author:'Dad Vader'},
+                  {quote:'Te ponen buena nota porque eres mona',author:'Anhell'}
+                    ];
+    /**
+     *  Create the routing table entries + handlers for the application.
+     */
+    self.createRoutes = function() {
+        self.routes = { };
+        self.routes['/'] = function(req, res) {
+            var index = Math.round((self.quotes.length-1) * Math.random());
+            res.setHeader('Content-Type', 'text/html');
+            res.send(JSON.stringify(self.quotes[index]));
+        };
+    };
+
+        /**
+     *  Initialize the server (express) and create the routes and register
+     *  the handlers.
+     */
+    self.initializeServer = function() {
+        self.createRoutes();
+        var express = require('express');
+        self.app = express.createServer();
+
+        //  Add handlers for the app (from the routes).
+        for (var r in self.routes) {
+            self.app.get(r, self.routes[r]);
+        }
+    };
+
+       /**
+     *  Start the server (starts up the sample application).
+     */
+    self.start = function() {
+    	        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+                self.port = process.env.OPENSHIFT_NODEJS_PORT || 8666;
+        //  Start the app on the specific interface (and port).
+  self.app.listen(self.port, self.ipaddress, function() {
+            console.log('%s: Node server started on %s:%d ...',
+                        Date(Date.now() ), self.ipaddress, self.port);
+        });
+
+        
+    };
+
+};
+
+
+
+
+var quoteserver = new MyServer();
+quoteserver.initializeServer();
+quoteserver.start();
+</pre>
+<p>Habrá que seguir explorando otras opciones. Queda pendiente Nodejitsu y como no, Google Cloud, que ofrece php y java con Spring y todo.</p>

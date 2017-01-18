@@ -1,0 +1,183 @@
+﻿---
+layout: post
+title: "REST in Spring" 
+date: 2013-08-01 21:19:47 
+categories: coding
+---
+<p>
+Sí, llevamos un tiempo que se habla de REST y no es de extrañar ya que puede jugar un papel fundamental
+en la tendencia actual de restarle protagonismo al servidor y dárselo al cliente. Efectivamente,
+ahora lo que mola, lo trendy es que el navegador se encargue de la aplicación y el servidor de
+guardar los datos, todo ello poniendo al navegador ciego de frameworks javascript MVC/P.
+Es curioso que hasta hace no mucho, aún se veían aplicaciones web que se jactaban de
+minimizar el uso de javascript tratando de darle un aura de robustez y de fiabilidad para
+cualquier navegador.
+</p>
+<p>
+Por suerte esa época oscura ya está ampliamente superada y ahora podemos usar librerías
+en las que se puede confiar bastante más que en la correcta aplicación de un CSS. Y hasta aquí
+la cuota del abuelo cebolleta. ¿Qué es el REST ese? ¿Y qué tiene que ver con los datos?
+Yo voy a dar mi impresión, si no te gusta tienes trillones para elegir.</p>
+<p><b>REST</b> REpresentational State Transfer, se trata de la idea de mover el estado de los recursos del cliente al servidor,
+es decir, que los datos que tienes en el navegador se trasladen al servidor, representados de alguna manera (json, xml,...).
+ Por ejemplo que tú gestiones unos datos en el navegador y al consultar, añadir, eliminar, modificar todo ello
+se traslade al servidor.
+</p><p> 
+No he utilizado la palabra Webservices, ya que como dicen algunos me parece más correcto hablar
+de "recursos REST". Y eso es algo clave, ya que trabajar con recursos REST es mucho más sencillo
+que hacerlo con Webservice tradicionales. Un cliente o un consumidor de Webservices debe hablar el
+complicado lenguaje de los mismos. En cambio REST nos permite hablar: json, xml, html, etc..
+es mucho más flexible y se puede ajustar a cualquier entorno incluyendo los cada vez mán omnipresentes
+móviles/tabletas y las Smart TVs que vendrán (Smart TV es un gran ejemplo de oxímoron).</p>
+<b>RESTful URL</b>
+<p>
+Lo mejor para captar la idea de lo que supone REST es ver la anatomía de una RESTful url. Tradicionalmente
+cuando queriamos gestionar una información a través de la web el aspecto que tienen las URL podía ser así:</p>
+<ul>
+	<li>http://www.miapp.net/cliente.php?id=42</li>
+	<li>http://www.miapp.net/cliente.php?id=42&ac=update</li>
+	<li>http://www.miapp.net/cliente.php?id=42&ac=delete</li>
+</ul>
+<p>Es decir, las URL son <em>verbales</em> están orientadas a acciones. En cambio una URL de REST está orientada a
+su significado primigenio (URL: Universalr RESOURCE Locator), representa un RECURSO y no son verbales
+sino más bien <em>nominales</em>:</p>
+http://www.miapp.net/cliente/42
+<p>Vaya pero... si la URL representa un recurso... ¿Cómo podemos hacer para usar esa URL
+pero con distintas operaciones? Una cosa que podemos hacer es echar mano de los métodos HTTP
+que están ahí, olvidados pero se inventaron para algo y ahora los navegadores ya los soportan
+mayoritariamente (y si no hacer un workaround is trivial). No solo de GET y POST vive el frontender:</p>
+<ul>
+<li><b>GET</b>: para leer datos, (READ)</li>
+<li><b>PUT</b>: para modificar datos, (UPDATE)</li>
+<li><b>DELETE</b>: para borrar datos, (DELETE)</li>
+<li><b>POST</b>: para crear datos, (CREATE)</li>
+</ul>
+</p>
+<b>Dame algo de código primo</b>
+<p>Tras toda la parrafada anterior son tres reacciones las que me esperan: no tienes ni puta idea,
+eso que dices no es del todo preciso y la típica me he quedado igual sigo sin entender qué es REST.</p>
+<p>En el caso de Spring, la parte servidor de un recurso REST se controla con un eso, una clase
+controller del MVC de Spring. En esa clase podemos controlar la URL y el MÉTODO de la petición,
+algo clave en REST. Con eso, hacer un controller REST es... iba a decir trivial lo dejaremos en
+<i>pretty straightforward</i></p>
+<pre class="brush: java">
+
+package info.pello.playlist.controllers;
+
+import info.pello.playlist.Playlist;
+import info.pello.playlist.PlaylistDAO;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+/**
+ * controller for playlist REST resource
+ * @author Pello Xabier Altadill Izura	
+ * @greetz 4 u as always
+ */
+@Controller
+@RequestMapping("/playlist")
+public class PlaylistController {
+	
+	private PlaylistDAO playlistDAO;
+	
+
+	public void getPlaylistDAO (PlaylistDAO playlistDAO) {
+		this.playlistDAO = playlistDAO;
+	}
+	
+	/**
+	 * handles GET request
+	 * @param model
+	 * @return the name of the view to show
+	 * other possible config if pathvariable is id
+	 * public String getPlaylist(@PathVariable int id ,Map<String, Object> model) {
+	 */
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public String getPlaylist(@PathVariable("id") int id ,Model model) {
+		Playlist playlist = playlistDAO.getplaylistsById(id);
+		model.addAttribute(playlist);
+		
+		// We return view name
+		return "playlist/view";
+	}
+
+	/**
+	 * PUT, updates a playlist
+	 * @param id
+	 * @param playlist
+	 */
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void putPlaylist(@PathVariable("id") int id, Playlist playlist) {
+		playlistDAO.update(playlist);
+	}
+	
+	/**
+	 * POST, creates a new playlist
+	 * @param playlist
+	 * @param result
+	 * @param respone
+	 * @throws BindException
+	 */
+	@RequestMapping(method=RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public @ResponseBody Playlist createPlaylist(Playlist playlist, BindingResult result, HttpServletResponse response)  {
+		if (result.hasErrors()) {
+			// TODO
+			// We have to add @Valid to Playlist 
+			// In case of error we enter here
+		}
+		
+		playlistDAO.create(playlist);
+		response.setHeader("Location","/playlist/"+playlist.getId());
+		return playlist;
+	}
+	
+	/**
+	 * DELETE method for resource deletion
+	 * @param id
+	 */
+	@RequestMapping(value="/id",method=RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deletePlaylist(@PathVariable("id") int id) {
+		playlistDAO.delete(id);
+	}
+	
+}
+
+</pre>
+<p>Fíjate que en caso de DELETE/UPDATE, el recurso REST no manda respuesta HTTP. Al otro
+lado cabe imaginarse un cliente Javascript por ejemplo, mandando órdenes a este controlador
+para que el estado de la información se transfiera del cliente al servidor. Eso, es REST.</p>
+<br />
+<b>¿Y qué lenguaje se puede hablar?</b>
+<p>En el fichero de contexto de Spring podemos instanciar un ViewResolver para que
+el contenido pueda variar</p>
+<pre class="brush: xml">
+<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<property name="mediaTypes">
+		<map>
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="text/xml" />
+			<entry key="htm" value="text/html" />
+		</map>
+	</property>
+</bean>
+</pre>
+<b>¿Y el cliente?</b>
+<p>Si hacemos el cliente también en Spring, el framework nos facilita templates como
+los que tiene para JDBC que nos quitan todo el boilerplate. Pero lo suyo sería hacer un cliente
+en otro entorno ¿no?</p>

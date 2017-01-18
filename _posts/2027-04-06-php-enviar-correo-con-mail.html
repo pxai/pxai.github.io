@@ -1,0 +1,55 @@
+﻿---
+layout: post
+title: "PHP: enviar correo con mail()" 
+date: 2027-04-06 08:56:00 
+categories: coding
+---
+<b>Ã‚Â¿Quien no ha sufrido los problemas de enviar correos desde su aplicacion web?</b><br>
+A la hora de conseguir esa funcionalidad PHP nos provee de una unica funcion<br>
+y si se usa sin mas puede llevar a la frustracion por muchas causas:<br>
+* Colega... Ã‚Â¿donde esta mi FROM?<br>
+* Ã‚Â¿Por que me cambia el FROM por un www-data@localhost?<br>
+* Ã‚Â¿Por que no llega el correo?<br>
+<br>
+En resumen, el problema que tiene esa funciÃƒÂ³n es que si se usa sin mas puede
+que funcione o puede que no dependiendo del entorno: windows, linux, marca de servidor de correo,
+configuracion especifica local y del servidor destinatario, etc...
+<br>
+Pues bien, pese a que PHP provee y sigue manteniendo esta funcion tan simple y que en apariencia
+no hace lo que promete FUNCIONA. La clave esta en que <b>Hay que establecer correctamente las cabeceras</b>. 
+<br>
+<b>Ã‚Â¿CÃƒÂ³mo se hace eso?  Ã‚Â¿DÃƒÂ³nde busco? </b><br>
+No hay que complicarse, en el caso de PHP su <a href="http://www.php.net">sitio oficial</a> dispone de la documentacion de funciones con muuuuchas aportacion de programadores.
+Este ejemplo que nos dan funciona muy bien:
+<pre>
+&lt;?php
+$to      = 'pello@kgb.ru';
+$subject = 'Hola';
+$message = 'Esto llega por mis cojones';
+$headers = 'From: webmaster@example.com' . "
+" .
+   'Reply-To: webmaster@example.com' . "
+" .
+   'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+
+echo "OK, correo enviado";
+?&gt; 
+</pre>
+<br>
+A travÃƒÂ©s de la documentacion de la funcion mail podremos contemplar mas casos como el envio de adjuntos, envio en formato HTML, etc... <a href="http://es2.php.net/manual/en/function.mail.php">echa un ojo</a>
+<br>
+<b>Ã‚Â¿Puedo enviar un correo sin tener levantado un servidor local smtp?</b><br>
+Aunque puede depender de cada entorno, se puede hacer. Por ejemplo, con postfix instalado
+tenemos un alias del comando sendmail y lo podemos especificar en php.ini. Y es mas,
+podemos configurar postfix para que le pase el marron a otro servidor SMTP:
+En /etc/postfix/master.cf a la linea de smtp le metemos una opcion:
+<pre>
+# ==========================================================================
+# service type  private unpriv  chroot  wakeup  maxproc command + args
+#               (yes)   (yes)   (yes)   (never) (100)
+# ==========================================================================
+smtp      inet  n       -       -       -       -       smtpd
+        -o smtpd_proxy_filter=192.168.1.2:25
+</pre>

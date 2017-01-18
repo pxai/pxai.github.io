@@ -1,0 +1,358 @@
+ï»¿---
+layout: post
+title: "Ejemplo de VB NET calcular área y perímetro" 
+date: 2013-01-11 12:10:26 
+categories: coding
+---
+<p>
+	&nbsp;</p>
+<div>
+	Seguimos con Visual Basic .NET, en este caso un programilla en el que el usuario da una base y una altura y seg&uacute;n lo que elija se calcula el &aacute;rea de un tri&aacute;ngulo o el per&iacute;metro de un rect&aacute;ngulo. Aqu&iacute; se ve un pantallazo:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<img alt="" src="http://img841.imageshack.us/img841/6382/nuevaimagen1vz.png" style="width: 482px; height: 339px;" /></div>
+<div>
+	&nbsp;</div>
+<div>
+	Vamos, no es nada del otro jueves que digamos.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>La clase Tri&aacute;ngulo</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	Esta es una clase que representa un tri&aacute;ngulo y tiene un m&eacute;todo para calcular el &aacute;rea</div>
+<div>
+	&nbsp;</div>
+<div>
+	Public Class Triangulo</div>
+<div>
+	&nbsp; &nbsp; Private _base As Double</div>
+<div>
+	&nbsp; &nbsp; Private _altura As Double</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Public Property base As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Return _base</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Set(ByVal value As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _base = value</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Set</div>
+<div>
+	&nbsp; &nbsp; End Property</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Public Property altura As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Return _altura</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Set(ByVal value As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _altura = value</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Set</div>
+<div>
+	&nbsp; &nbsp; End Property</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <summary></summary></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; Constructor de la clase</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;<param name="base" /></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;<param name="altura" /></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <remarks></remarks></div>
+<div>
+	&nbsp; &nbsp; Public Sub New(ByVal base As Double, ByVal altura As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Me.base = base</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Me.altura = altura</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <summary></summary></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; Area, calcula el &aacute;rea de un tri&aacute;ngulo</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <returns>Double</returns></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <remarks></remarks></div>
+<div>
+	&nbsp; &nbsp; Public Function Area() As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Return ((_base * _altura) / 2)</div>
+<div>
+	&nbsp; &nbsp; End Function</div>
+<div>
+	&nbsp;</div>
+<div>
+	End Class</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>La clase Rect&aacute;ngulo</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	Esta es una clase que representa un rect&aacute;ngulo y tiene un m&eacute;todo para calcular el &aacute;rea y el per&iacute;metro</div>
+<div>
+	&nbsp;</div>
+<div>
+	Public Class Rectangulo</div>
+<div>
+	&nbsp; &nbsp; Private _base As Double</div>
+<div>
+	&nbsp; &nbsp; Private _altura As Double</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Public Property base As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Return _base</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Set(ByVal value As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _base = value</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Set</div>
+<div>
+	&nbsp; &nbsp; End Property</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Public Property altura As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Return _altura</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Get</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Set(ByVal value As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _altura = value</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End Set</div>
+<div>
+	&nbsp; &nbsp; End Property</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Public Sub New(ByVal base As Double, ByVal altura As Double)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Me.base = base</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Me.altura = altura</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <summary></summary></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; Area</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <returns>Double</returns></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <remarks></remarks></div>
+<div>
+	&nbsp; &nbsp; Public Function Area() As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Return _base * _altura</div>
+<div>
+	&nbsp; &nbsp; End Function</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <summary></summary></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; Perimetro</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39;</div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <returns>Double</returns></div>
+<div>
+	&nbsp; &nbsp; &#39;&#39;&#39; <remarks></remarks></div>
+<div>
+	&nbsp; &nbsp; Public Function Perimetro() As Double</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Return _base * 2 + _altura * 2</div>
+<div>
+	&nbsp; &nbsp; End Function</div>
+<div>
+	End Class</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>El interfaz</strong></div>
+<div>
+	&nbsp;</div>
+<div>
+	El interefaz de usuario no es m&aacute;s que una clase Form que b&aacute;sicamente atiende los eventos de los botones y los radiobuttons.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Public Class Form1</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbRectangulo.CheckedChanged</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; GroupBox1.Text = &quot;Rect&aacute;ngulo&quot;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblArea.Visible = False</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtArea.Visible = False</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtArea.Text = &quot;&quot;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; txtBase.Focus()</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblPerimetro.Visible = True</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtPerimetro.Visible = True</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbTriangulo.CheckedChanged</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; GroupBox1.Text = &quot;Tri&aacute;ngulo&quot;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblPerimetro.Visible = False</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtPerimetro.Visible = False</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtPerimetro.Text = &quot;&quot;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblArea.Visible = True</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; lblTxtArea.Visible = True</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; txtAltura.Focus()</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Me.Close()</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; Private Sub btnResultados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnResultados.Click</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Dim errores As Boolean = False</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Dim base As Double = 0</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Dim altura As Double = 0</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; If Not IsNumeric(txtAltura.Text) Then</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errores = True</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; txtAltura.Focus()</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End If</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; If Not IsNumeric(txtBase.Text) Then</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errores = True</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; txtBase.Focus()</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End If</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; If errores Then</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MsgBox(&quot;Error datos no num&eacute;ricos&quot;)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; Else</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; base = Double.Parse(txtBase.Text)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; altura = Double.Parse(txtAltura.Text)</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If rbRectangulo.Checked Then</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dim miRectangulo As Rectangulo = New Rectangulo(base, altura)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lblTxtPerimetro.Text = miRectangulo.Perimetro</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Else</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dim miTriangulo As Triangulo = New Triangulo(base, altura)</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lblTxtArea.Text = miTriangulo.Area</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; End If</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp; End If</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp; &nbsp; End Sub</div>
+<div>
+	End Class</div>

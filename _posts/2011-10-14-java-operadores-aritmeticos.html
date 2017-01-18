@@ -1,0 +1,96 @@
+ï»¿---
+layout: post
+title: "Java: operadores aritméticos" 
+date: 2011-10-14 14:28:41 
+categories: coding
+---
+<h1>
+	JavaJutsu: operadores aritm&eacute;ticos</h1>
+<p>
+	Los operadores aritm&eacute;ticos de java son iguales que en cualquier otro lenguaje tipo c.</p>
+<p>
+	/**<br />
+	* OperadoresAritmeticos<br />
+	* Clase que muestra el uso de operadores aritm&eacute;ticos: suma, resta...<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac OperadoresAritmeticos.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java OperadoresAritmeticos<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase OperadoresAritmeticos<br />
+	* Muestra la declaraci&oacute;n de operadores ar&iacute;tmeticos:<br />
+	* +, -, *, / : suma, resta, multiplicaci&oacute;n, divisi&oacute;n<br />
+	* % : resto de la divisi&oacute;n: 7 % 3 = 1<br />
+	* ++, -- : incremento y decremento en 1<br />
+	* - : cambio de signo<br />
+	*<br />
+	* Por &uacute;ltimo tenemos un operador condicional o terciario: ?:<br />
+	* que equivale a una estructura if-else. Mostramos un &nbsp;<br />
+	* ejemplo simple<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class OperadoresAritmeticos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int a,b,c;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float x,y,z;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;a = b = c = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x = y = z = 0;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Mostramos los valores antes y despu&eacute;s<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;a:&quot; + a + &quot;, b:&quot; + b + &quot;, c:&quot; + c);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x:&quot; + x + &quot;, y:&quot; + y + &quot;, z:&quot; + z);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;a = b + 45;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;c = a * 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x++;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;y = --z;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;a:&quot; + a + &quot;, b:&quot; + b + &quot;, c:&quot; + c);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x:&quot; + x + &quot;, y:&quot; + y + &quot;, z:&quot; + z);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Para operaciones en las que el resultado vaya a una de los propios<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// operandos (x = x + 4) podemos usar una operadores de asignaci&oacute;n especial:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// += , -=, *=, /=, %=<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;a += 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;c %= 2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n a la diferencia entre ++c y c++:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// a = ++c primero se incrementa c, luego se asigna a a<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// b = c++ primero se asigna a b, luego se incrementa c<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;a = b = c = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;c = 2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;a = ++c;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;b = c++;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;a:&quot; + a + &quot;, b:&quot; + b + &quot;, c:&quot; + c);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos hacer las operaciones m&aacute;s complejas.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para asegurar y aclarar el orden de operaciones podemos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// meter par&eacute;ntesis.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x = (y *34) + 42 - (1000 % z);&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// El operador condicional ?: permite asignar dos valores alternativos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// seg&uacute;n una condici&oacute;n:&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// (condici&oacute;n)?valor_si_condici&oacute;n_es_verdadera:valor_en_caso_contrario<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Si y es mayor que 0 a x se le asigna y, en caso contrario a x se le asigna 5 &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;z = (y &gt; 0)?y:5;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x:&quot; + x + &quot;, y:&quot; + y + &quot;, z:&quot; + z);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

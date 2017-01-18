@@ -1,0 +1,26 @@
+﻿---
+layout: post
+title: "Migrar BD access a Mysql" 
+date: 2007-05-09 13:26:00 
+categories: coding
+---
+<p>Supongo que habrÃ¡ formas mejores de hacerlo o incluso herramientas concretas. El caso es que se pueden pasar las tablas de access a Mysql de forma sencilla de dos maneras</p>
+<p><strong>Usando el odbc </strong></p>
+<p>Se puede hacer todo desde windows.</p>
+<ol>
+<li>Instalamos el appserv que ya trae el apache+mysql+php+phpmyadmin. </li>
+<li>Instalamos el ODBC para mysql.Â </li>
+<li>Creamos una BBDD mysql a travÃ©s de phpmyadmin</li>
+<li>Metemos una entrada en el gestor de odbc para la nueva BBDD mysql.</li>
+<li>Abrimos access. Si no muestra las tablas y solo se ven formularios hay que iniciarlo con la tecla mayÃºsculas apretada: asÃ­ veremos todos los objetos access (tablas, consultas,...)</li>
+<li>Seleccionamos una tabla y vamos a archivo>exportar. Exportamos a un origen odbc, seleccionamos la BBDD mysql y listo. La tabla pasarÃ¡ de access a Mysql</li>
+</ol>
+<p>A travÃ©s de ficheros CSV</p>
+<p>El mÃ©todo anterior parece bastante automÃ¡tico pero puede que los acentos no se pasen correctamente. AsÃ­ que podemos usar otra forma que asegure la presencia de nuestros queridos caracteres.</p>
+<ol>
+<li>Desde access exportamos las tablas en formato excel. O directamente a CSV</li>
+<li>Creamos una BBDD mysql para meter las tablas.</li>
+<li>Con cada tabla en formato CSV, con los campos separados por ; tenemos que importar los datos. Desde la consola de mysql hariamos lo siguiente:</li>
+</ol>
+<p><code> mysql> load data infile '/tmp/tablaexportada.csv' into table nueva_tabla character set UTF8 fields terminated by ';'; </code></p>
+<p>En el comando load data podemos decirle el juego de caracteres (UTF8) y asÃ­ las tildes se verÃ¡n bien. Probado con access 2003 y mysql5</p>

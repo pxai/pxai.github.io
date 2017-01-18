@@ -1,0 +1,65 @@
+﻿---
+layout: post
+title: "Java: variables caracteres" 
+date: 2011-09-29 12:23:42 
+categories: coding
+---
+<h1>
+	Variables de Caracteres, char</h1>
+<p>
+	En java tambi&eacute;n existen las variables tipo char, como en el c de toda la vida. Son variables que contienen un &uacute;nico caracter alfab&eacute;tico o especial.</p>
+<p>
+	/**<br />
+	* ValoresCaracteres<br />
+	* Clase que muestra la declaraci&oacute;n de variables de caracteres<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ValoresCaracteres.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ValoresCaracteres<br />
+	*/<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ValoresCaracteres<br />
+	* Muestra la declaraci&oacute;n de booleanos: son variables que solo<br />
+	* pueden contener un caracter, encerrado en comillas simples<br />
+	* por ejemplo &#39;a&#39; &nbsp;<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ValoresCaracteres {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Solo pueden ser true o false<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char caracter = &#39;A&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char ultima = &#39;z&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Los especiales comienzan por \<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char nuevaLinea = &#39;\n&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char tabulacion = &#39;\t&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char retornoCarro = &#39;\r&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char comillaSimple = &#39;\&#39;&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char contrabarra = &#39;\\&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char dobleComillas = &#39;\&quot;&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char formFeed = &#39;\f&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a probar a mostrarlos por pantalla: concatenamos con +<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Primera letra &quot; + caracter + &quot; y &uacute;ltima: &quot; + ultima);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Con la \\ usamos caracteres especiales&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Que parezca un \&quot;accidente\&quot; &quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Vamos a saltar \n y ahora otra vez: &quot; + nuevaLinea);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(tabulacion + &quot; Vamos a ver: &quot; + nuevaLinea + &quot; y ahora \r&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+<p>
+	&nbsp;</p>

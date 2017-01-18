@@ -1,0 +1,131 @@
+﻿---
+layout: post
+title: "Estructuras de control ASP" 
+date: 2029-01-05 12:22:00 
+categories: coding
+---
+Vamos a ver como se montan las estructuras de control if, while, etc en ASP:
+
+<pre>
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1252"&gt;
+&lt;meta name="GENERATOR" content="Microsoft FrontPage 4.0"&gt;
+&lt;meta name="ProgId" content="FrontPage.Editor.Document"&gt;
+&lt;title&gt;Pagina ASP 03 : estructuras de control&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;%
+Dim a, b, c, d, e
+
+a = 2
+b = 6
+d = 4.56
+e = "No por mucho madrugar amanece mas temprano, ÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂº y ÃƒÂ±&lt;br&gt;"
+Response.write("Vamos a ver&lt;br&gt;")
+
+'Estructura IF-ELSE
+
+if a &lt; d then
+ Response.write("a es menos que d &lt;br&gt;")
+else
+ Response.write("a es mayor o igual que d &lt;br&gt;")
+end if
+
+'Estructura elseif
+
+if a &gt; b then
+%&gt;
+ a es mayor que d &lt;br&gt;
+&lt;%
+elseif a &lt; b then
+%&gt;
+&lt;table border=1&gt;
+&lt;tr&gt;&lt;td&gt;B y A son iguales: &lt;%=b %&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;%
+else
+ Response.write("a es menos que d &lt;br&gt;")
+end if
+
+'Estructura while
+
+c = 0
+
+while (c&lt;10)
+ Response.write("Bucle c " & c & "&lt;br&gt;")
+ c = c + 1
+wend
+
+
+'Estructura for
+
+for b=0 to 25
+ Response.write("FOR b " & b & "&lt;br&gt;")
+next
+
+%&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+</pre>
+
+Mas ejemplos
+<pre>
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1252"&gt;
+&lt;meta name="GENERATOR" content="Microsoft FrontPage 4.0"&gt;
+&lt;meta name="ProgId" content="FrontPage.Editor.Document"&gt;
+&lt;title&gt;Pagina ASP 04 : estructuras de control dowhile y case&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;%
+Dim a, b, c, d, e
+
+a = 2
+b = 6
+d = 4.56
+e = "No por mucho madrugar amanece mas temprano, ÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂº y ÃƒÂ±&lt;br&gt;"
+Response.write("Vamos a ver&lt;br&gt;")
+
+'Estructura CASE
+Select case a
+	case 1 : Response.write("a: el valor es 1&lt;br&gt;")
+	case 2 : Response.write("a: el valor es 2 &lt;br&gt;")
+	case 3 : Response.write("a: el valor es 3 &lt;br&gt;")
+	case else: Response.write("No se que valor tiene a &lt;br&gt;")
+end Select
+
+Response.write("&lt;br&gt;&lt;b&gt;DoWhile&lt;/b&gt; mientras que&lt;br&gt;")
+
+'Estructura DoWhile (mientras que)
+d = 0
+do While d &gt; -10
+ Response.write("d es menor que -10 de momento: " & d & "&lt;br&gt;")
+ d = d - 1
+loop
+
+ Response.write("Valor actual: " & d & "&lt;br&gt;")
+
+Response.write("&lt;br&gt;&lt;b&gt;DoUntil&lt;/b&gt; Hasta que&lt;br&gt;")
+'Estructura DoUntil (hasta que)
+d = 0
+do Until d &lt; -10
+ Response.write("d es mayor que -10 de momento: " & d & "&lt;br&gt;")
+ d = d - 1
+loop
+
+%&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+</pre>

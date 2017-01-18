@@ -1,0 +1,538 @@
+﻿---
+layout: post
+title: "Construyendo el XML Schema" 
+date: 2013-07-14 00:25:08 
+categories: coding
+---
+<p>
+	&nbsp;</p>
+<div>
+	Vale, en los post anteriores hemos visto c&oacute;mo se crean tanto los tipos&nbsp;simples como los tipos complejos de un documento XML Schema. Por lo que se ve&nbsp;es una herramienta que permite hilar mucho m&aacute;s fino para crear documentos XML&nbsp;mucho m&aacute;s precisos y restrictivos de lo que se pod&iacute;a hacer con el DTD.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Pero ahora bien, &iquest;c&oacute;mo se crea un documento completo? &iquest;Se ponen primero los elementos&nbsp;simples y luego los complejos? &iquest;Se pone todo del tir&oacute;n?</div>
+<div>
+	&nbsp;</div>
+<div>
+	Tenemos m&aacute;s de una opci&oacute;n y elegir una u otro puede ir seg&uacute;n gustos o percepci&oacute;n &nbsp;de claridad. Yo particularmente recomendar&iacute;a, en caso de documentos don mucho elemento al menos,&nbsp;iniciar el documento con la declaraci&oacute;n de tipos simples, atributos, etc... y luego&nbsp;meter los tipos complejos. En cualquier caso, con IDEs como eclipse podemos crear el fichero XSD de una forma algo m&aacute;s visual para evitar problemas. Si lo hacemos a mano nos indicar&aacute; errores y tendremos que ir corrigiendo y haciendo bot&oacute;n derecho sobre el fichero XSD y seleccionar Validate. A veces aparece en rojo, ejecutas eso y el error desaparece... eclipse no es perfecto eh amigos del netbeans?</div>
+<div>
+	&nbsp;</div>
+<div>
+	Vamos a ver un ejemplo. Supongamos que tenemos un documento XML que define las&nbsp;caracter&iacute;sticas de un personaje de un juego:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;character&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">xsi:noNamespaceSchemaLocation=&quot;personaje.xsd&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;name&gt;Iker Nieve&lt;/name&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;race&gt;Human&lt;/race&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;guild&gt;Smith&lt;/guild&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;weapons&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;weapon type=&quot;axe&quot; damage=&quot;5&quot; defence=&quot;3&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;weapon type=&quot;shield&quot; damage=&quot;2&quot; defence=&quot;10&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/weapons&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;magic&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;spell cost=&quot;5&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;name&gt;Hellfire&lt;/name&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;type&gt;Elementalist&lt;/type&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/spell&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;spell cost=&quot;15&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;name&gt;Reanimate&lt;/name&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;type&gt;Necromancy&lt;/type&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/spell&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/character&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Vamos a ver formas de crear un XSD para este XML:</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<h3>
+	<span style="font-family:arial,helvetica,sans-serif;">1. Todo del tir&oacute;n:</span></h3>
+<div>
+	Trabajo de chinos para habernos matao:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot; ?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;character&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;name&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:whiteSpace value=&quot;collapse&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minLength value=&quot;8&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxLength value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;race&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Human&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Orc&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Elf&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Dwarf&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;guild&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Smith&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Cook&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Warrior&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Peasant&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;weapons&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;weapon&quot; minOccurs=&quot;1&quot; maxOccurs=&quot;10&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute name=&quot;type&quot; type=&quot;xs:string&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute name=&quot;damage&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute name=&quot;defence&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;8&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;magic&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;spell&quot; &nbsp;minOccurs=&quot;0&quot; maxOccurs=&quot;10&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &nbsp; &nbsp;&lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;type&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Elementalist&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Necromancy&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Cider Remains&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Coffe Remains&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:attribute name=&quot;cost&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span> &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;/xs:complexType&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:schema&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<h3>
+	2. La versi&oacute;n separada, mucho m&aacute;s manejable</h3>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!-- Definition of elements --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;name&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:whiteSpace value=&quot;collapse&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minLength value=&quot;8&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxLength value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;race&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Human&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Orc&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Elf&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Dwarf&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;guild&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Smith&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Cook&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Warrior&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:enumeration value=&quot;Peasant&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;weapon&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute name=&quot;type&quot; type=&quot;xs:string&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute ref=&quot;damage&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:attribute ref=&quot;defence&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;weapons&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;weapon&quot; &nbsp;minOccurs=&quot;1&quot; maxOccurs=&quot;10&quot; &nbsp;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;type&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Elementalist&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Necromancy&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Cider Remains&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;xs:enumeration value=&quot;Coffe Remains&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;spell&quot; &gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &nbsp; &nbsp;&lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &nbsp; &nbsp;&lt;xs:element ref=&quot;type&quot; /&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span> &lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:attribute ref=&quot;cost&quot; /&gt; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;magic&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;spell&quot; &nbsp;minOccurs=&quot;0&quot; maxOccurs=&quot;10&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!-- Attributes --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:attribute name=&quot;damage&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:attribute name=&quot;defence&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;8&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:attribute name=&quot;cost&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&quot;xs:int&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:minInclusive value=&quot;1&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:maxInclusive value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; <span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:attribute&gt;<span class="Apple-tab-span" style="white-space: pre; "> </span></span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;!-- And finally, character --&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;character&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;name&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;race&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;guild&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;weapons&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element ref=&quot;magic&quot; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:sequence&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/xs:complexType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:schema&gt;</span></div>
+<div>
+	&nbsp;</div>

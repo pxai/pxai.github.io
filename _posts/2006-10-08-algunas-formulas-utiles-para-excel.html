@@ -1,0 +1,21 @@
+﻿---
+layout: post
+title: "Algunas formulas �tiles para excel" 
+date: 2006-10-08 10:23:00 
+categories: coding
+---
+Esto del excel da una pereza, en fin. Si queremos crear formulas para generar contenido aleatorio de fechas, cÃ³digos o fecha y hora. EstÃ¡s hechas rÃ¡pido y mal, son mejorables.<br />
+<b>Generar fechas con horas</b><br />
+<code>
+=CONCATENAR(REDONDEAR(ALEATORIO()*10;0)+1;"/";REDONDEAR(ALEATORIO()*10;0)+1;"/19";REDONDEAR(ALEATORIO()*100;0))
+</code>
+<br />
+<b>Generar fechas con horas</b><br />
+<code>
+=CONCATENAR(REDONDEAR(ALEATORIO()*10;0)+1;"/";REDONDEAR(ALEATORIO()*10;0)+1;"/19";REDONDEAR(ALEATORIO()*100;0);" ";RESIDUO(REDONDEAR(ALEATORIO()*100;0);11)+1;":";RESIDUO(REDONDEAR(ALEATORIO()*100;0);59))
+</code>
+<br />
+<b>Generar nÃºmeros de mÃ³vil</b><br />
+<code>
+=CONCATENAR("6";REDONDEAR(ALEATORIO()*100000000;0))
+</code>

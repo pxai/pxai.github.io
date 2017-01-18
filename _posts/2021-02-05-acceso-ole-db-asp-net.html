@@ -1,0 +1,101 @@
+﻿---
+layout: post
+title: "Acceso Ole DB asp .NET" 
+date: 2021-02-05 19:34:00 
+categories: coding
+---
+Ejemplo basico de consulta a BD desde ASP .NET utilizando OleDB.
+
+<pre>
+Imports System.Data.OleDb
+
+
+Public Class WebForm1
+    Inherits System.Web.UI.Page
+    Protected WithEvents ddlEmpleados As System.Web.UI.WebControls.DropDownList
+    Protected WithEvents Label1 As System.Web.UI.WebControls.Label
+
+#Region " CÃƒÂ³digo generado por el DiseÃƒÂ±ador de Web Forms "
+
+    'El DiseÃƒÂ±ador de Web Forms requiere esta llamada.
+    &lt;System.Diagnostics.DebuggerStepThrough()&gt;vate Sub InitializeComponent()
+
+    End Sub
+
+    Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+Handles MyBase.Init
+        'CODEGEN: el DiseÃƒÂ±ador de Web Forms requiere esta llamada de mÃƒÂ©todo
+        'No lo modifique con el editor de cÃƒÂ³digo.
+        InitializeComponent()
+    End Sub
+
+#End Region
+
+    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Introducir aquÃƒÂ­ el cÃƒÂ³digo de usuario para inicializar la pÃƒÂ¡gina
+        Dim conexion As System.Data.OleDb.OleDbConnection
+        Dim comando As System.Data.OleDb.OleDbCommand
+        Dim datos As System.Data.OleDb.OleDbDataReader
+
+
+        Dim conString As String
+        Dim sentencia As String
+
+        If Not Me.IsPostBack Then
+            'Para cargar el combo solo una vez
+
+            'String de conexion para una bd access
+            conString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" & Server.MapPath("Empresa.mdb")
+
+            'establecemos la sentencia
+            sentencia = "select * from empleados"
+
+            'creamos el objeto conexion
+            conexion = New OleDbConnection(conString)
+
+            'todo lo hacemos en un bloque try-catch
+            Try
+
+                'establecemos conexion
+                conexion.Open()
+                Response.Write("OK conexion establecida &lt;br&gt;)
+
+                'Creamos el objeto comando
+                comando = New OleDbCommand(sentencia, conexion)
+
+                Response.Write("OK comando creado &lt;br&gt;")
+
+                'ejecucion de una consulta
+                datos = comando.ExecuteReader()
+                Response.Write("OK comando ejecutado &lt;br&gt;")
+
+                Dim tmpItem As ListItem
+
+                ' Recorremos el resultset y cargamos el combo
+                Do While datos.Read()
+                    tmpItem = New ListItem(datos("nombre") & " " & datos("apellidos"), datos("codigo"))
+                    ddlEmpleados.Items.Add(tmpItem)
+                Loop
+
+                ' en caso de error.. capturamos y mostramos
+            Catch ex As Exception
+                Response.Write("Error al acceder a la BD&lt;br&gt;" & ex.Message)
+            Finally
+                'en cualquier caso hacemos esto (mal, sin comprobar)
+                conexion.Close()
+                conexion = Nothing
+                comando = Nothing
+            End Try
+
+
+            'si la pagina ya se habia cargado antes aparecemos aqui
+        Else
+            Response.Write("OK, la pagina ya estaba cargada&lt;br&gt;")
+        End If
+
+
+    End Sub
+
+End Class
+
+</pre>

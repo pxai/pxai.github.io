@@ -1,0 +1,147 @@
+ï»¿---
+layout: post
+title: "Midlet j2me: petición http" 
+date: 2011-06-17 13:12:06 
+categories: coding
+---
+<p>
+	Ejemplo de un midlet que saca datos de la red, en concreto haciendo peticiones a una URL.</p>
+<p>
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.io.*;<br />
+	import javax.microedition.io.*;<br />
+	<br />
+	/**<br />
+	&nbsp;* @author luser<br />
+	&nbsp;*/<br />
+	public class HttpRequestTest extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand, goCommand, backCommand;<br />
+	private Display display;<br />
+	private Form locationScreen;<br />
+	private Form resultScreen;<br />
+	private TextField urlField;<br />
+	private StringItem itemResultado;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * HttpRequestTest<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public HttpRequestTest ()<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Pillamos la pantalla para el MIDlet<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display = Display.getDisplay(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos comandos esenciales<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goCommand = new Command(&quot;Go&quot;, Command.OK, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; backCommand = new Command(&quot;Back&quot;, Command.BACK, 2);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Formulario para tomar la URL<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen = new Form(&quot;Indica una URL destino&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; urlField = new TextField(&quot;url&quot;, &quot;http://localhost/Test.txt&quot;, 25, TextField.ANY);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.append(urlField);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Comandos salida y continuar<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.addCommand(goCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos la pantalla de resultado<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen = new Form(&quot;URL data:&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; itemResultado = new StringItem(&quot;&quot;, &quot;&quot;);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.append(itemResultado);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Metemos los comandos para volver<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.addCommand(backCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(locationScreen);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura los comandos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String html = &quot;&quot;;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == goCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Llamamos a la funci&oacute;n que saca los datos<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html = getData(urlField.getString());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(resultScreen);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; itemResultado.setText(html);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }else if (c == backCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Volvemos al inicio<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(locationScreen);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * getData<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Solicita una URL y devuelve un String con el resultado<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private String getData(String url) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StreamConnection conn = null;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InputStream in = null;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringBuffer data = new StringBuffer();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Abrimos la conexi&oacute;n as&iacute; de f&aacute;cil<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conn = (StreamConnection)Connector.open(url);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos un InoutStream de la conexi&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in = conn.openInputStream();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Vamos leyendo caracteres y los metemos en un string<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int ch;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (((char)(ch = in.read()) != &#39;\003&#39;) &amp;&amp; (ch != -1) )<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data.append((char)ch);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Si est&aacute; vac&iacute;o, msg al canto con alert<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (data.toString().equals(&quot;&quot;))<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(new Alert(&quot;Url&quot;,&quot;En esa URL no retorn&oacute; nada.&quot;, null,AlertType.ERROR));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return data.toString();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (IOException e) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return &quot;La conexi&oacute;n no se pudo establecer:&quot; + e.getMessage();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>

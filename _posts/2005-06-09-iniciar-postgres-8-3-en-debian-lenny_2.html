@@ -1,0 +1,70 @@
+﻿---
+layout: post
+title: "Iniciar postgres 8.3 en debian lenny" 
+date: 2005-06-09 11:48:00 
+categories: coding
+---
+<p>Resulta que el postgres no funciona solito en el lenny y hay que hacer algún apaño después del apt-get.</p>
+<p>Bueno esta es una solución, la primera parte con una explicación <a href="http://www.esdebian.org/foro/26836/inicializacion-postresql-83-debian-lenny">encontrada en internet</a> de la mano de Alvarus, pero no bastaba.</p>
+<pre>gandalf:~# mkdir -p /var/pgsql
+gandalf:~# mkdir -p /var/pgsql/data
+gandalf:~# chown postgres /var/pgsql/data
+
+gandalf:~# su - postgres
+postgres@gandalf:~$ /usr/lib/postgresql/8.3/bin/initdb -E utf8 -U postgres -D /var/pgsql/data/
+Los archivos de este cluster serán de propiedad del usuario «postgres».
+Este usuario también debe ser quien ejecute el proceso servidor.
+El cluster será inicializado con configuración local es_ES.UTF-8.
+La configuración de búsqueda en texto ha sido definida a «spanish».
+
+corrigiendo permisos en el directorio existente /var/pgsql/data ... hecho
+creando subdirectorios ... hecho
+seleccionando el valor para max_connections ... 100
+seleccionando el valor para shared_buffers/max_fsm_pages ... 24MB/153600
+creando archivos de configuración ... hecho
+creando base de datos template1 en /var/pgsql/data/base/1 ... hecho
+inicializando pg_authid ... hecho
+inicializando dependencias ... hecho
+creando las vistas de sistema ... hecho
+cargando las descripciones de los objetos del sistema ... hecho
+creando conversiones ... hecho
+creando directorios ... hecho
+estableciendo privilegios en objetos predefinidos ... hecho
+creando el esquema de información ... hecho
+haciendo vacuum a la base de datos template1 ... hecho
+copiando template1 a template0 ... hecho
+copiando template1 a postgres ... hecho
+
+ATENCIÓN: activando autentificación «trust» para conexiones locales.
+Puede cambiar esto editando pg_hba.conf o usando el parámetro -A
+la próxima vez que ejecute initdb.
+
+Completado. Puede iniciar el servidor de bases de datos usando:
+
+    /usr/lib/postgresql/8.3/bin/postgres -D /var/pgsql/data
+o
+    /usr/lib/postgresql/8.3/bin/pg_ctl -D /var/pgsql/data -l archivo_de_registro start
+
+postgres@gandalf:~$ 
+</pre>
+<p>Con eso no basta, luego hay que inicializar. Inicializar:</p>
+<pre>postgres@gandalf:~$ /usr/lib/postgresql/8.3/bin/postgres -D /var/pgsql/data
+LOG:  el sistema de bases de datos fue apagado en 2009-06-05 09:34:46 CEST
+LOG:  lanzador de autovacuum iniciado
+LOG:  el sistema de bases de datos está listo para aceptar conexiones
+
+gandalf:~# pg_createcluster 8.3 main
+Creating new cluster (configuration: /etc/postgresql/8.3/main, data: /var/lib/postgresql/8.3/main)...
+Moving configuration file /var/lib/postgresql/8.3/main/postgresql.conf to /etc/postgresql/8.3/main...
+Moving configuration file /var/lib/postgresql/8.3/main/pg_hba.conf to /etc/postgresql/8.3/main...
+Moving configuration file /var/lib/postgresql/8.3/main/pg_ident.conf to /etc/postgresql/8.3/main...
+Configuring postgresql.conf to use port 5433...
+</pre>
+<p>El puerto se inicia en el 5433. Lo podemos cambiar en postgresql.conf.  Ahora creamos la BBDD y un usuario especifico.</p>
+<pre>gandalf:~# su - postgres
+
+postgres@gandalf:~$ psql template1
+template1=# CREATE DATABASE nombredb;
+template1=# create user nombreusuario with password 'superpassword';
+template1=# grant all on database nombredb to nombreusuario;
+</pre>

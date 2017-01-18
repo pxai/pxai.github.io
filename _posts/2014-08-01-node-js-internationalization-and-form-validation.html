@@ -1,0 +1,38 @@
+﻿---
+layout: post
+title: "Node.js internationalization and form validation" 
+date: 2014-08-01 00:27:41 
+categories: coding
+---
+<p>In any application, no matter the languages or the environment you are using, it is always necessary to ensure that all data is validated before we try any operation. It's tedious, boring and maybe you prefer to focus on more interesting things but you may fear not only hackers, but also the users who from time to time become true hackers without been really aware of it: just applying unexpected input. For instance a form field could ask for the zip code and a regular user could answer (sincerely) 'I don't know'. And he is being honest but at the same time he is creating an exception and blowing out your super-duper node server.
+</p>
+<img src='http://s24.postimg.org/x6f2r69rl/image.jpg' border='0' alt="Form validation" title="Form validation" />
+<p>
+In addition to that and in order to be nice with a wider range of users you have to offer internationalization support. Once again, a boring but a mandatory task to take into account when you are dealing with the views. In this post I'll show one approach to solve these issues node.js trying to keep the code simple. Let's start with i18n.<p>
+
+<h5>Internationalization in Node.js</h5>
+<p>For Node.js and in general for any javascript based software we have then <a href="http://i18next.com">i18next</a> package. It comes with all you need to write multilingual applications, many available options for the language file format and many niceties as well. i18next can be used in both server and client side javascript. In this case I'll show just the translation files format, how to init i18next and how to apply in jade templates. In the event that you're using Angular (or maybe something not so mainstream :P) framework in the frontend, it is possible to reuse the work done in server side.</p>
+<h6>Language files</h6>
+<p>In the root of your project, just place a directory called <code>locales</code> and inside it one directory for each language you give support to (locales/en, locales/es), including <code>locales/dev/</code> which is the lang by default. And inside each directory, place a json file called <code>translation.json</code>. So we are using json format, but there are other formats available, and many other options including namespaces support.</p>
+<p>This is how the translation.json file looks like. Note that you can organize translations in groups</p>
+<script src="https://gist.github.com/pello-io/53d0dfee7388586777a9.js"></script>
+
+<h6>Applying i18next</h6>
+<p>In our main program, app.js, we will have to require, init and apply i18next to our express application to make it available for jade templates. This is app.js now, some init alternatives are commented. The loading of the translation files is done asynchronously.</p>
+<script src="https://gist.github.com/pello-io/06759c65ebf0e82a9f94.js"></script>
+
+<p>This is how we apply i18n in a jade template using function t(key), where key must have an entry in the translation files.</p>
+<script src="https://gist.github.com/pello-io/9e4f45eae5beccc141cb.js"></script>
+
+<h5>Simple form validation</h5>
+<p>As simple as using validation facilities from the mongoose driver. There are another options but in this case I wanted to make use of something that I already have instead of trying other packages. Check <a href="https://nodejsmodules.org/tags/forms">these modules</a> if you need something else or if you have forms that have nothing to do with an underlying database. Anyway, if we are using mongoose, we'll have to create validations.</p>
+<p>MongoDB is a schemaless document-oriented database and it can handle anything: each row in a collection could be completely different. However, Mongoose driver is much more than a simple way to access a database: it forces you to define schemas to map each collection in database, where at least you have to detail fields and data types. In a way, that is a first defense line. In those schema definitions (which deserve another long post devoted to mongoose exclusively) is where we can apply validations (built-in and custom), limits and even define custom error messages! Here I'm improving the schema for the guestbook collection.</p>
+<script src="https://gist.github.com/pello-io/e9ef0d9709d4f8a60f03.js"></script>
+
+<h5>Internationalization in mongoose validation messages</h5>
+<p>I'm applying i18n in the mongoose schema in a ... <i>cryptic</i> way. There is a problem if we try to use the i18next.t(key) function to apply messages in schemas. In the main app.js we are loading express routes. Routes are requiring schemas and as i18next are not loaded synchronously (and init options for that are not working as expected) so those t(key) calls in mongoose models will fail. We could refactor and reshape the main app.js, we could maybe use packages to force synchronous behaviour, but It is much more easier to use the key from translation files, which are simple strings.</p>
+<p>This is the guestbook.jade template, now with some error handling conditionals to show error messages. Mongoose stores all validation information in an err object which we simply pass to this jade template to be displayed.</p>
+<script src="https://gist.github.com/pello-io/3b12c4d77cb296b288b0.js"></script>
+<p>And finally the router where we get validation data from mongoose and we move to the template to be rendered.</p>
+<script src="https://gist.github.com/pello-io/f3cfe20f50839c2fe65d.js"></script>
+<p>Once again I tried to keep main app.js simple. There may be many other (and better) recipes because Node.js is like a bazaar with thousands of very active contributors. Greets to any.</p>

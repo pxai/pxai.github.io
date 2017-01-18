@@ -1,0 +1,267 @@
+﻿---
+layout: post
+title: "12. Herencia c++" 
+date: 2014-08-04 13:50:00 
+categories: coding
+---
+<b>La herencia</b>
+<br>
+Como bien se sabe la herencia no se reparte: se descuartiza. Bromas aparte,
+la herencia constituye una de las herramientas mas poderosas de culto OO.
+Si una clase hereda de la otra, <b>lo que hereda son todos sus atributos y metodos</b>.<br>
+Ademas de heredarlos puede sobreescribirlos, tanto los constructores-destructores como
+los metodos convencionales.
+<br>
+Veremos un ejemplo claro que resume lo que se puede hacer y los efectos de la herencia<br>
+Por un lado vemos la clase generica vehiculo y su descendiente: el coche.
+<br>La clase <b>Vehiculo</b>
+<pre>
+/**
+* Vehiculo.hpp
+* Clase que define el objeto vehiculo
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include <iostream.h>
+
+enum tipo_combustible { QUEROSENO, CANNABIS, GIRASOL, GASOIL, AGUA, PLUTONIO };
+
+class Vehiculo {
+    protected:
+        int cilindrada;
+        tipo_combustible combustible;
+        char *marca;
+    public:
+        Vehiculo();
+        Vehiculo(char *marca);
+        Vehiculo(int cilindrada, tipo_combustible combustible, char *marca);
+        ~Vehiculo();
+        Vehiculo(const Vehiculo &);
+        void arrancar();
+        void mover(int metros);
+        
+        // metodo tipo virtual, util cuando definamos PUNTEROS Y REFERENCIAS a vehiculo
+        virtual void claxon() const {
+                cout &lt;&lt; "&lt;clase vehiculo&gt; Mec-meeec!!  Que? meeec! Que de que? meec!" &lt;&lt; endl;
+        }
+        
+        char *getMarca() const  {return this->marca;}
+        tipo_combustible getCombustible() const {return this->combustible;}
+        int getCilindrada() const {return this->cilindrada;}
+};
+</pre>
+Y su implementacion...
+<pre>
+/**
+* Vehiculo.cpp
+* Fichero que implementa la clase vehiculo
+*
+* Pello Xabier Altadill Izura
+*
+* Compilacion: g++ -c Vehiculo.cpp
+*/
+
+#include "Vehiculo.hpp"
+
+    // Constructor
+    Vehiculo::Vehiculo() {
+        cout &lt;&lt; "&lt;clase vehiculo&gt; Vehiculo creado" &lt;&lt; endl;
+    }
+
+
+    // Constructor
+    Vehiculo::Vehiculo(char *marca) {
+        this->marca = marca;
+        cout &lt;&lt; "&lt;clase vehiculo&gt; Vehiculo creado con parametro marca: "  &lt;&lt; marca &lt;&lt; endl;
+    }
+
+    // Constructor con valores iniciados
+    Vehiculo::Vehiculo(int cilindrada, tipo_combustible combustible, char *marca) :
+    cilindrada(cilindrada),
+    combustible(combustible),
+    marca(marca)
+    {
+        cout &lt;&lt; "&lt;clase vehiculo&gt; Vehiculo creado con valores: " &lt;&lt; endl;
+        cout &lt;&lt; "&lt;clase vehiculo&gt; cilindrada: " &lt;&lt; cilindrada &lt;&lt; endl;
+        cout &lt;&lt; "&lt;clase vehiculo&gt; combustible: " &lt;&lt; combustible &lt;&lt; endl;
+        cout &lt;&lt; "&lt;clase vehiculo&gt; marca: " &lt;&lt; marca &lt;&lt; endl;
+    }
+    
+    // Destructor 
+    Vehiculo::~Vehiculo() {
+        cout &lt;&lt; "&lt;clase vehiculo&gt; Vehiculo destruido" &lt;&lt; endl;
+    }
+    
+    // Constructor copia de vehiculo
+    Vehiculo::Vehiculo(const Vehiculo & vehiculoOrigen) {
+    }
+    
+    // Arrancamos el vehiculo
+    void Vehiculo::arrancar() {
+        cout &lt;&lt; "&lt;clase vehiculo&gt; arrancando vehiculo. Brruum!!" &lt;&lt; endl;
+    }
+    
+    // Movemos el vehiculo unos metros
+    void Vehiculo::mover(int metros) {
+        cout &lt;&lt; "&lt;clase vehiculo&gt; moviendo vehiculo " &lt;&lt; metros &lt;&lt; " metros" &lt;&lt; endl;
+    }
+
+</pre>
+El <b>coche</b>, herencia de Vehiculo
+<pre>
+/**
+* Coche.hpp
+* Clase que define el objeto Coche, hijo de vehiculo, seÃƒÂ±or del capitalismo
+*
+* Pello Xabier Altadill Izura
+*
+*/
+#include "Vehiculo.hpp"
+
+class Coche : public Vehiculo {
+    protected:
+        int caballos;
+        char *motor;
+        
+    public:
+        
+        // Atencion: constructor pasando parametros por defecto estilo guru
+        // pero invocando a su clase padre
+        Coche():Vehiculo("Audi") {
+                cout &lt;&lt; "&lt;clase coche&gt; Coche destruido invocando al constructor vehiculo" &lt;&lt; endl;
+        }
+
+        // Constructor que sobreescribe al de vehiculo!
+        Coche(char *marca);
+
+        // Constructor
+        Coche(int cilindrada, tipo_combustible combustible, char *marca);
+        
+        // Constructor
+        Coche(int caballos, char *motor) {
+             this->caballos = caballos;
+             this->motor = motor;
+              cout &lt;&lt; "&lt;clase coche&gt; Coche construido con caballos y motor" &lt;&lt; endl;
+        }
+        
+        // Destructor
+        ~Coche();
+        
+        // Constructor copia
+        Coche(const Coche &);
+
+        // Metodo sobreescrito
+        void arrancar();
+
+        // metodo que sobreescribe al virtual
+        void claxon() const;
+
+        // getter/setter
+        int getCaballos() const {return this->caballos;} // inline
+        char *getMotor() const {return this->motor;}      // inline 
+};
+</pre>
+Y su implementacion
+<pre>
+/**
+* Coche.cpp
+* Fichero que implementa la clase Coche
+*
+* Pello Xabier Altadill Izura
+*
+* Compilacion:  g++ -c Vehiculo.cpp
+*               g++ Coche.cpp Vehiculo.o -o Coche
+*/
+#include "Coche.hpp"
+        
+        // Constructor de coche que sobreescribe
+        Coche::Coche(char *marca) {
+                cout &lt;&lt; "&lt;clase coche&gt; Coche construido con marca: " &lt;&lt; marca &lt;&lt; endl;
+        }
+
+        // Constructor de coche
+        Coche::Coche(int cilindrada, tipo_combustible combustible, char *marca) {
+                cout &lt;&lt; "&lt;clase coche&gt; Coche construido con parametros" &lt;&lt; endl;
+        }
+        
+        // Destructor de coche        
+        Coche::~Coche() {
+                cout &lt;&lt; "&lt;clase coche&gt; Coche destruido" &lt;&lt; endl;
+        }
+        
+        // Constructor copia de Coche       
+        Coche::Coche(const Coche & cocheOriginal) {
+                marca = new char;
+                marca = cocheOriginal.getMarca();
+                cout &lt;&lt; "&lt;clase coche&gt; Copia de coche" &lt;&lt; endl;
+        }
+        
+        // metodo sobreescrito
+        void Coche::arrancar () {
+                cout &lt;&lt; "&lt;clase coche&gt; BOOM! pam! pam! pret pret pret... pam! pret pret" &lt;&lt; endl;
+        }
+
+        // metodo que sobreescribe al virtual
+        void Coche::claxon() const {
+                cout &lt;&lt; "&lt;clase coche&gt; MOOOOOC!! Mecagon tus muelas MOC-MOOOC!!" &lt;&lt; endl;
+        }        
+
+// Funcion principal
+int main () {
+
+// Creamos varios coches. Veremos que al ser objetos heredados
+// se invocaran los constructores, copias, y destructores de la clase
+// padre Vehiculo
+Coche mibuga = Coche();
+Coche tucarro = Coche(mibuga);
+// probando constructor sobrescrito: se invocan los dos!
+Coche tequi = Coche("Alfalfa Romero");
+
+// podemos invocar los metodos del padre y usar sus atributos
+cout &lt;&lt; "La marca de mi buga es: " &lt;&lt; mibuga.getMarca() &lt;&lt; endl;
+mibuga.arrancar();
+
+// Invocando metodo sobreescrito: solo se invoca el del coche.
+tucarro.arrancar();
+
+// Y si queremos invocar el metodo del padre??
+tequi.Vehiculo::arrancar();
+
+// Creamos otro vehiculo con puntero a un COCHE
+Vehiculo *vehiculo = new Coche("LanborJini");
+
+// Esto invocara el metodo de vehiculo, el de la clase PADRE
+vehiculo->arrancar();
+vehiculo->mover(3);
+// Ahora queremos invocar el claxon, pero a cual de los metodos
+// se invocara, al del Coche o al de la clase vehiculo? al haber
+// definido el metodo claxon como virtual, se invocara el metodo correcto
+// que es el del coche (vehiculo es un puntero a coche).
+vehiculo->claxon();
+
+
+return 0;
+}
+</pre>
+<b>OUTPUT</b><br>
+La salida de la ejecucion de Coche.cpp seria:
+<pre>
+
+&lt;clase vehiculo&gt; Vehiculo creado con parametro marca: Audi
+&lt;clase coche&gt; Coche destruido invocando al constructor vehiculo
+&lt;clase vehiculo&gt; Vehiculo creado
+&lt;clase coche&gt; Copia de coche
+&lt;clase vehiculo&gt; Vehiculo creado
+&lt;clase coche&gt; Coche construido con marca: Alfalfa Romero
+La marca de mi buga es: Audi
+&lt;clase coche&gt; BOOM! pam! pam! pret pret pret... pam! pret pret
+&lt;clase coche&gt; BOOM! pam! pam! pret pret pret... pam! pret pret
+&lt;clase vehiculo&gt; arrancando vehiculo. Brruum!!
+&lt;clase vehiculo&gt; Vehiculo creado
+&lt;clase coche&gt; Coche construido con marca: LanborJini
+&lt;clase vehiculo&gt; arrancando vehiculo. Brruum!!
+&lt;clase vehiculo&gt; moviendo vehiculo 3 metros
+&lt;clase coche&gt; MOOOOOC!! Mecagon tus muelas MOC-MOOOC!!
+</pre>

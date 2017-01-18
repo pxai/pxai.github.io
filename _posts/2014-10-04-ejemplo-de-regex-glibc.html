@@ -1,0 +1,74 @@
+﻿---
+layout: post
+title: "Ejemplo de regex glibc" 
+date: 2014-10-04 18:52:00 
+categories: coding
+---
+Un ejemplo de uso de la libreria de regex de glibc, que trae
+herramientas basicas para las expresiones regulares.
+
+<pre>
+/**
+* regexp.c
+* ejemplo ultrabasico de uso libreria de expresiones regulares de glibc
+*
+* Se debe incluir la cabecera regex.h
+* No se comparan dos strings, se debe "crear" un regex_t con la funcion regcomp
+* y luego ya comparamos
+*
+* (c) Pello Xabier Altadill Izura - www.pello.info
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;regex.h&gt;
+
+// Programa principal.
+// acepta dos argumentos: una expresion regular y un string para matchear.
+int main(int argc, char *argv[]){
+
+  // este el regexp que se debe iniciar
+  regex_t expresion;
+  int count;
+
+
+  if (argc != 3) {
+        printf("Uso: %s expresion texto 
+",argv[0]);
+        exit(1);
+  }
+
+  printf("Hola, tus argumentos han sido: ./%s %s %s
+
+", argv[0],argv[1],argv[2]);
+
+  // CREACION de la expresion
+  // regcomp(&resultado, string-de-expresion, flag)
+  // los flag: REG_EXTENDED :expresiones extendidas POSIX
+  //           REG_ICASE :case insensitive
+  //           REG_NOSUB : se pasa de parametros nmatch y pmatch
+  //           REG_NEWLINE : en operadores globales -*,+,^ pasar del salto de linea
+  if(regcomp(&expresion, argv[1] , 0) != 0){
+    perror("ERROR GORDO! al crear expresion regular.");
+    printf("vamos vamos que nos vamos
+");
+    exit(1);
+  }
+
+    // USO de la expresion
+    // regexec(&regex, string-a-comparar, nmatch, pmatch, flags)
+   if(regexec(&expresion, argv[2], 0, NULL, 0) == 0) {
+      printf("%s &lt;=&gt; %s MATCH!!
+",argv[1],argv[2]);
+   } else {
+      printf("%s &lt;=&gt; %s ? NO HAY MATCH 
+",argv[1],argv[2]);
+   }
+
+  // Liberamos la memoria okupada por la expresion. autogestion ante todo
+  regfree(&expresion);
+
+  return 0;
+}
+
+</pre>

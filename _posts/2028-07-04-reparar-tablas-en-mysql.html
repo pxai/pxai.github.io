@@ -1,0 +1,63 @@
+﻿---
+layout: post
+title: "Reparar tablas en mysql" 
+date: 2028-07-04 10:05:00 
+categories: coding
+---
+Muchas veces las tablas de mysql se corrompen, es inevitable, el sistema gestor de bd mysql no es muy fiable(carece de integridad referencial, etc.)
+
+A veces el error esta en los ficheros MYI que albergan las tablas y basta con ejecutar un myisamchk para arreglarlo.
+
+Desde shell:
+CÃƒÂ³digo:
+myisamchk mi_tabla.MYI
+Checking MyISAM file: mi_tabla.MYI
+Data records:   21991   Deleted blocks:       0
+- check file-size
+- check key delete-chain
+- check record delete-chain
+- check index reference
+- check data record references index: 1
+
+
+
+Ademas de eso puede estar estropeada la tabla de datos, un fichero con extension MYD. Eso se refleja en que nos dara un mensaje de error como este:
+CÃƒÂ³digo:
+Can't open file: mi_tabla.MYD (errno: 145)
+
+
+Esto tiene arreglo. DEbemos iniciar una sesion mysql en la bd afectada y ejecutamos los siguientes comandos:
+
+CÃƒÂ³digo:
+mysql> REPAIR TABLE mi_tabla;
+
+
+Lo que mostrara algo asi:
+
+CÃƒÂ³digo:
++----------+--------+----------+----------+
+| Table    | Op     | Msg_type | Msg_text |
++----------+--------+----------+----------+
+| mi_tabla | repair | status   | OK       |
++----------+--------+----------+----------+
+
+1 row in set (1.50 sec)
+
+
+
+CÃƒÂ³digo:
+mysql> OPTIMIZE TABLE mi_tabla;
+
+
+Lo que mostrara algo asi:
+
+CÃƒÂ³digo:
++----------+----------+----------+----------+
+| Table    | Op       | Msg_type | Msg_text |
++----------+----------+----------+----------+
+| mi_tabla | optimize | status   | OK       |
++----------+----------+----------+----------+
+1 row in set (0.01 sec)
+
+
+Y esto solucionara los problemas.

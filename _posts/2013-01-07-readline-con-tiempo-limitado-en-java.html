@@ -1,0 +1,130 @@
+﻿---
+layout: post
+title: "ReadLine con tiempo limitado en java" 
+date: 2013-01-07 23:12:45 
+categories: coding
+---
+<p>
+	Supon&iacute;a que habr&iacute;a alguna forma de hacerlo en java y supon&iacute;a que de alguna forma utilizar&iacute;a hilos.</p>
+<p>
+	Despu&eacute;s de darle vueltas a un par de clases y tratar que un hilo desde el m&eacute;todo run pudiermos lanzar una excepci&oacute;n resulta que hay otras maneras. Una de ellas, algo engorrosa utiliza clases del paquete concurrent de java. Es un especie de ejecutor de tareas al que le tenemos que pasar una clase que implemente un interfaz determinado. Luego lanzamos esa clase con un tiempo de timeout (en segundos o como queramos).</p>
+<p>
+	Si la tarea, que es as&iacute;ncrona (en este caso est&aacute; a la espera de lo que haga el usuario) no se termina, salta una excepci&oacute;n que desconoc&iacute;a que es TimeoutException.</p>
+<p>
+	Todo est&aacute; basado en un post que encontr&eacute;, pero en lugar de mostrarlo en partes, he metido todo en una clase para poder reutilizarlo en cualquier lado. En el c&oacute;digo est&aacute; la url de la soluci&oacute;n que encontr&eacute;, muy bien documentada.</p>
+<p>
+	import java.io.BufferedReader;<br />
+	import java.io.IOException;<br />
+	import java.io.InputStreamReader;<br />
+	import java.util.concurrent.Callable;<br />
+	import java.util.concurrent.</p>
+<div id=":1fp">
+	<wbr>ExecutionException;<br />
+	import java.util.concurrent.<wbr>ExecutorService;<br />
+	import java.util.concurrent.<wbr>Executors;<br />
+	import java.util.concurrent.Future;<br />
+	import java.util.concurrent.TimeUnit;<br />
+	import java.util.concurrent.<wbr>TimeoutException;<br />
+	<br />
+	<br />
+	<br />
+	/**<br />
+	&nbsp;* @author Pello Xabier<br />
+	&nbsp;* As seen on<br />
+	&nbsp;* <a href="http://www.javaspecialists.eu/archive/Issue153.html" target="_blank">http://www.javaspecialists.eu/<wbr>archive/Issue153.html</wbr></a><br />
+	<wbr><wbr> &nbsp;* Simplificado y todo metido en una clase<br />
+	&nbsp;*/<br />
+	public class TimedInput {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; private long timeoutSecs;<br />
+	<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; // Necesitamos una clase que implemente Callable que haga la tarea<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; // De desta manera la podemos invocar desde un Executor<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; private class ConsoleReadLineTask implements Callable&lt;String&gt; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /**<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* m&eacute;todo que debemos implementar para el interfaz Callable<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @return String<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @throws IOException<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; public String call() {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; BufferedReader reader = new BufferedReader(new<br />
+	InputStreamReader(System.in));<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String readedInput = null;<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; readedInput = reader.readLine();<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException ioe) {<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return readedInput;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; /**<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* el constructor<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @param timeoutSecs el n&uacute;mero de segundos que esperaremos<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; public TimedInput (long timeoutSecs) {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.timeoutSecs = timeoutSecs;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; /**<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* readLine<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* Este m&eacute;todo es que el se invocar&aacute; desde cualquier lado para recoger<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* informaci&oacute;n, y encapsula todo el tema del timeout<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @param msg que se muestra al usuario para pedir datos<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @return un String con lo que se ha escrito o null en caso de timeout.<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;public String readLine(String msg) &nbsp;{<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ExecutorService executorService = Executors.<wbr>newSingleThreadExecutor();<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String readedInput = null;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Future lo utilizamos para recoger el resultado<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // de una tarea as&iacute;ncrona, vamos, de la task que hemos preparado<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Future&lt;String&gt; result = executorService.submit(new<br />
+	ConsoleReadLineTask());<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(msg);<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Aqu&iacute; est&aacute; la madre del cordero: espera el resultado un<br />
+	determinado tiempo<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // en caso de que no se haya completado la tarea SALTA UNA<br />
+	EXCEPCI&Oacute;N DE TIMEOUT<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // gracias a la cual sabemos que el usuario NO ha escrito nada.<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; readedInput = result.get(timeoutSecs, TimeUnit.SECONDS);<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (TimeoutException e) {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;Timeout, no has escrito nada, dejamos<br />
+	de esperar&quot;);<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result.cancel(true);<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // capturamos cualquier cosa, for the sake of simplicity<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // and the glory of your mother<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } finally {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // esto detiene todas las tareas en ejecuci&oacute;n y las que<br />
+	estuvieran en espera<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; executorService.shutdownNow();<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Si sali&oacute; bien devolveremos lo recogido en la Task que tiene el readLine<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // y si no, va un null.<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return readedInput;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	<br />
+	}
+	<div class="yj6qo ajU">
+		<div class="ajR" data-tooltip="Muestra el contenido reducido" id=":1gl" role="button" tabindex="0">
+			<img class="ajT" src="https://mail.google.com/mail/u/0/images/cleardot.gif" /></div>
+	</div>
+	</wbr></wbr></wbr></wbr></wbr></wbr></wbr></div>
+<p>
+	<wbr><wbr><wbr><wbr><wbr><wbr><wbr>
+	<p>
+		En el alg&uacute;n foro tambi&eacute;n he visto alguna soluci&oacute;n a&uacute;n m&aacute;s simple.</p>
+	<p>
+		http://www.coderanch.com/t/232213/threads/java/implement-timeout-threads</p>
+	</wbr></wbr></wbr></wbr></wbr></wbr></wbr></p>

@@ -1,0 +1,120 @@
+﻿---
+layout: post
+title: "La Oca en java - Goose Game" 
+date: 2013-04-30 07:39:06 
+categories: coding
+---
+<p>
+	&nbsp;</p>
+<h1>
+	LaOca - Goose Game</h1>
+<div>
+	<a href="http://code.google.com/p/entornos-1dam-4vientos-team/source/browse/trunk/LaOca/">C&oacute;digo en Google code</a></div>
+<div>
+	Con la intenci&oacute;n de servir como base para juegos de tablero m&aacute;s complejos esta ser&iacute;a una implementaci&oacute;n del juego de la OCA en java. Este juego es tan sumamente malo que todo lo juega la propia m&aacute;quina, no necesita intervenci&oacute;n humana alguna. As&iacute; que un programa principal crea la instancia de juego, a&ntilde;ade jugadores y los pone a tirar dados y a moverse. Al llegar todos a la meta el juego termina.</div>
+<div>
+	&nbsp;</div>
+<div>
+	El tablero es m&aacute;s simple, no contiene las 63 casillas est&aacute;ndar, pero lo mismo da. Est&aacute; hecho con un array y las casillas especiales tienen un valor de salto, que puede ser hacia adelante o hacia atr&aacute;s.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Faltar&iacute;a meter lo del pozo, que me suena que era varios turnos sin jugar.</div>
+<div>
+	&nbsp;</div>
+<h2>
+	Main</h2>
+<div>
+	&nbsp;</div>
+<div>
+	Clase principal</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">package info.pello.games.oca;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">/**&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* La Oca - Game of Goose&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* This is an implementation of a really dumb game where&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* players just roll dices and move on, without any possible&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* choice. So It&#39;s a perfect game to for a computer to resolve,&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* because no human intervention is really needed.&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* First coded for educational purposes, then just for fun&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* and finally... I don&#39;t know.&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @author Pello Xabierl Altadill&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;* @greets Movistar&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">public class Main {</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; /**&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* I try to keep the main function simple, just an instance&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* of Game class, initialization, a game loop and result.&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @param args&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; public static void main(String[] args) {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Game game = new Game();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; game.addPlayer(&quot;Pello&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; game.addPlayer(&quot;June&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; game.addPlayer(&quot;Josu&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; game.addPlayer(&quot;COM&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; do {</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(game.boardState());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(game.moveCurrent());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; game.nextTurn();</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } while (game.notFinished());</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(&quot;\nLast state:&quot;);</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(game.boardState());</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(game.gameResult());</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">}</span></div>
+<div>
+	&nbsp;</div>

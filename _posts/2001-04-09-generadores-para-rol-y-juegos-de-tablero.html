@@ -1,0 +1,25 @@
+﻿---
+layout: post
+title: "Generadores para rol y Juegos de tablero" 
+date: 2001-04-09 11:42:00 
+categories: coding
+---
+<p><a href="http://aroilun.nafarroa.org/" target="_new" title="Pincha para ir a la web del juego"><img src="http://aroilun.nafarroa.org/irudiak/logoa.png" border="0" title="Logo de Aro Ilun" /></a></p>
+<p>Alguna vez he jugado al rol. No he matado a nadie. Todav&iacute;a. Como es algo espor&aacute;dico paso de comprarme manuales y expansiones de los sacacuartos de D&amp;D y cualquier otra movida por el estilo. Existen infinidad de juegos y sistemas libres y gratuitos (<a href="http://www.rolgratis.com">rolgratis</a>) y un buen ejemplo ser&iacute;a el sistema RyF, es decir r&aacute;pido y f&aacute;cil. Basado en ese sistema cree Aro Ilun, de ambientaci&oacute;n fant&aacute;stica y que trata de <strong>mantenerse m&aacute;s simple </strong>a&uacute;n. Lo que interesa es el desarrollo &aacute;gil, sin perderse en intrincadas normas para poder meterle un hachazo a alguien.</p>
+<p>Cuando vas a montar una partida de rol bastante curro supone crear una trama como para que adem&aacute;s tengas que crear toda clase de personajes y lugares al detalle. Para agilizar el proceso me dio por crear una serie de aplicaciones web que sirvieran como auxiliar de cualquier master.</p>
+<p><a href="http://aroilun.nafarroa.org/index.php?orria=pertsonaiak" target="_new"><strong>Generador de personajes</strong></a></p>
+<p>En la web puede encontrarse un generado que asigna puntos de caracter&iacute;sticas y habilidades de forma aleatoria. El problemilla es que no pueden generarse n&uacute;meros aleatorios de cualquier forma ya que hay un l&iacute;mite en los puntos y un m&aacute;ximo en cada caracter&iacute;stica. Por ejemplo, no se pueden tener m&aacute;s de 12 puntos de fuerza. La soluci&oacute;n para repartir los puntos es muy simple. En lugar de hacer un random para cada una de los seis atributos de personaje, se hace un bucle mientras no se supere el m&aacute;ximo de puntos a repartir. Luego en cada vuelta eliges un atributo al azar y le das unos pocos puntos. Y as&iacute; poco a poco vas repartiendo puntos.</p>
+<p><a href="http://aroilun.nafarroa.org/index.php?orria=hiriak" target="_new"><strong>Generador de ciudades</strong></a></p>
+<p>Es bastante cutre, los hay mejores. Esto es aleatorio puro, con variaciones aleatorias.</p>
+<p><strong>Generador de <a href="http://aroilun.nafarroa.org/index.php?orria=mapak" target="_new">mapas</a> y <a href="http://aroilun.nafarroa.org/index.php?orria=kobazuloak" target="_new">grutas</a></strong></p>
+<p>Bueno, estos generadores siguen m&aacute;s o menos algoritmos similares a los que nos permitir&iacute;an crear un mapa de niveles o alturas, solo que en lugar de alturas se muestran distintos tipos de terreno: agua, arena, hierba, bosque, monte y hielo. Aleatoriamente se meten canales de agua. En el caso de las grutas la cosa es m&aacute;s f&aacute;cil, ya que solo hay o roca o vac&iacute;o. El algoritmo consigue que si tienes un hex&aacute;gono de un tipo alrededor surjan hex&aacute;gonos que seguramente ser&aacute;n del mismo tipo.</p>
+<p>Y si no te gusta, puedes generar mapas a mano.</p>
+<p><strong>Otras hierbas</strong></p>
+<p>Como no ten&iacute;a bastante, pues me dio por crear un par de juegos de tablero print&amp;play.</p>
+<p>&nbsp;</p>
+<p><a href="http://izarilun.nafarroa.org"><img src="http://cube.nafarroa.org/irudiak/logoizarilun.png" border="0" title="pincha para ir a la web de Izar Ilun" /></a></p>
+<p>Izar Ilun es un juego de estrategia de conquista espacial, modular y todo eso, con unas reglas ultrasimples.</p>
+<p>&nbsp;</p>
+<p><a href="http://cube.nafarroa.org"><img src="http://images.boardgamegeek.com/images/pic370939.jpg" border="0" title="pincha para ir a la web de Cube" /></a></p>
+<p>Cube es un juego para uno o varios jugadores basado en la famosa saga de pel&iacute;culas Cube, HyperCube,... tambi&eacute;n reglas simples.</p>
+<p>Gratis total hoygan!!</p>

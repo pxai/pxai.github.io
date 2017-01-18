@@ -1,0 +1,49 @@
+﻿---
+layout: post
+title: "No se encuentra system32/ntoskrnl.exe" 
+date: 2008-02-06 14:00:00 
+categories: coding
+---
+Supongamos un equipo con dos particiones:<br>
+1.- Una con windows 98 o XP<br>
+2.- La otra con windows2000 o 2003<br><br>
+Y ahora queremos meterle un linux. Para eso habra que hacer sitio para una particion,<br>
+ya sea con el partition magic, o con un liveCD con herramientas tipo <b>parted</b>.<br>
+<br>
+Puede que al instalarte un linux (una debian sarge por ejemplo), el gestor de arranque<br>
+grub te detecte todas las particiones pero al intentar arrancar la windows2000 puede
+que te diga:
+<pre>
+El siguiente archivo no se encuentra o esta daÃƒÂ±ado: system32/ntoskrnl.exe
+</pre>
+Que putada, mi brigada!!<br>
+<br>
+Bueno, me ha pasado un par de veces y las dos veces tenia la misma solucion.<br>
+Hay que editar el fichero boot.ini de windows (del XP o del 2003). Ese boot.ini es<br>
+el equivalente al lilo.conf o al grub.conf o al menu.lst de linux.<br>
+Con un win98 y un w2000 puede tener un aspecto asi:<br>
+<pre>
+[boot loader]
+timeout=30
+default=C:
+[operating systems]
+C:="Microsoft Windows"
+multi(0)disk(0)rdisk(0)partition(2)WINNT="Microsoft Windows 2000 Server" /fastdetect
+</pre>
+
+El problema es, muy probablemente, que al meter una particion nueva el numero
+de particion del fichero boot.ini puede no corresponderse. Y por tanto donde pone
+<pre>
+multi(0)disk(0)rdisk(0)partition(2)WINNT="Microsoft Windows 2000 Server" /fastdetect
+</pre>
+Habria que poner:
+<pre>
+multi(0)disk(0)rdisk(0)partition(3)WINNT="Microsoft Windows 2000 Server" /fastdetect
+</pre>
+El numero depende de donde se haya quedado la particion de w2000.<br>
+Para saber el numero con seguridad se puede echar un ojo en fdisk.<br><br>
+<b>Ã‚Â¿Vale, y como edito el boot.ini?</b><br>
+Si el XP arranca se pueden ver las dos particiones windows. En cualquier otro caso podemos<br>
+tirar de un liveCD  que sea capaz de montar ntfs en modo rw<br>
+El boot.ini estara en la raiz de la particion, es decir c:/ o d:/,<br>
+si no se ve hay que cambiar las opciones de carpeta y todo eso.

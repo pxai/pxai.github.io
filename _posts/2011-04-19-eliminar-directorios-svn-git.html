@@ -1,0 +1,27 @@
+﻿---
+layout: post
+title: "Eliminar directorios .svn .git" 
+date: 2011-04-19 09:47:04 
+categories: coding
+---
+<p>
+	Al utilizar alg&uacute;n software de control de versiones tipo CVS o subversion o GIT este te crea unos directorios ocultos que no tienen porqu&eacute; estar accesibles a todo el mundo en el caso de que el software est&eacute; colgado en internet. Podemos cargarnos esos directorios con un solo comando linux, aqu&iacute; mostramos tres variantes, dos de ellas usando find. Hay m&aacute;s. <code> </code></p>
+<pre>
+
+		find ./ -name .svn -exec rm -rf {} ;
+	
+		find . -name .svn -print0 | xargs -0 rm -rf
+	
+		rm -rf `find . -type d -name .svn`
+
+</pre>
+<p>
+	Si necesitamos tener los directorios .svn porque es una web y la actualizamos por subversion, conviene denegar el acceso a esos contenidos a trav&eacute;s de la configuraci&oacute;n del servidor web apache. Podemos poner directivas generales o un .htaccess que filtre por nombre de directorio o que simplemente use mod_rewrite: <code> </code></p>
+<pre>
+
+
+	RewriteEngine on
+
+	RewriteRule .*.svn/.* - [F]
+
+</pre>

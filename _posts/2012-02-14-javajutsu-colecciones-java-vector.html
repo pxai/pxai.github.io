@@ -1,0 +1,135 @@
+﻿---
+layout: post
+title: "JavaJutsu: colecciones java, Vector" 
+date: 2012-02-14 13:23:02 
+categories: coding
+---
+<h1>
+	Vector</h1>
+<p>
+	Java tiene un mont&oacute;n de clases &uacute;tiles para representar colecciones o estructuras de datos bien conocidas: listas, pilas,... Vamos a ver un Vector, una especie de array din&aacute;mico en el que no hace falta indicar el tama&ntilde;o.</p>
+<p>
+	/**<br />
+	* Vectores<br />
+	* Clase que muestra el uso de la estructura de datos Vector<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Vectores.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Vectores<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con Vector<br />
+	import java.util.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Vectores<br />
+	* Muestra el uso de la estructura de datos Vector<br />
+	* El Vector es un super array que permite tama&ntilde;o din&aacute;mico<br />
+	* y a&ntilde;ade muchos m&eacute;todos para gestionar su contenido.<br />
+	* Los elementos pueden ser cualquier objeto y se pueden repetir.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Vectores {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* Desde la funci&oacute;n principal probamos un Vector<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador crack = new Jugador(&quot;Maradona&quot;,10);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador catacrack = new Jugador(&quot;Drenthe&quot;,13);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador cr7 = new Jugador(&quot;Ronaldo&quot;,7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos una instancia de Vector para guardar una plantilla<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Vector plantilla = new Vector();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Metemos unos elementos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(crack);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(catacrack);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(cr7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Recorrer la estructura con un for;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0; i &lt; plantilla.size();i++) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;((Jugador)plantilla.elementAt(i)).sacarDatos();&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Otra pasada con Iterator:&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a recorrer con un Iterator<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Iterator iterador = plantilla.iterator();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Nota : enumeration est&aacute; algo desfasado...<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// podemos usar un while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;while (iterador.hasNext()) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tenemos que forzar el tipo que devuelve lista a Jugador<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador jugadorTmp = (Jugador)iterador.next();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ahora ya podemos jugar con esa variable<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadorTmp.sacarDatos();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a quitar elementos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por referencia de objeto -el primero que encuentre-<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeElement(cr7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por &iacute;ndice<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeElementAt(0);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// A&ntilde;adimos un elemento creado al vuelo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(new Jugador(&quot;Torres&quot;,9));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Otra pasada con Enumeration:&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Recorrer la estructura con el interfaz Enumeration<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Los elementos del Vector pasan a ser un Enumeration<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// con unas funciones a&ntilde;adidas: hasMoreElements y nextElement<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Nota : enumeration est&aacute; algo desfasado...<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// podemos usar un while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (Enumeration lista = plantilla.elements();lista.hasMoreElements();) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tenemos que forzar el tipo que devuelve lista a Jugador<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador jugadorTmp = (Jugador)lista.nextElement();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ahora ya podemos jugar con esa variable<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadorTmp.sacarDatos();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos dejar el Vector vac&iacute;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeAllElements();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}<br />
+	&nbsp;<br />
+	/**<br />
+	* Clase Jugador<br />
+	* la usamos como objeto para manejar con un vector<br />
+	*/<br />
+	class Jugador {<br />
+	&nbsp;&nbsp; &nbsp;public String nombre;<br />
+	&nbsp;&nbsp; &nbsp;public int dorsal;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Constructor<br />
+	&nbsp;&nbsp; &nbsp;* @param String nombre<br />
+	&nbsp;&nbsp; &nbsp;* @param int dorsal<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Jugador (String nombre, int dorsal) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.nombre = nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.dorsal = dorsal;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* sacarDatos<br />
+	&nbsp;&nbsp; &nbsp;* Muestra los datos de una jugador<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void sacarDatos () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;\nNombre: &quot; + nombre + &quot;\nDorsal: &quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	}</p>
