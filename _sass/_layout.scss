@@ -2,4 +2,27 @@ html, body {
     font-family: Helvetica, arial, sans-serif;
     background-color: darkslategray;
     color: white;
+    margin: 0;
+}
+
+header, main, footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+header {
+        height: 5em;
+    background-color: white;
+    padding: 2em;
+}
+header nav ul {
+    list-style: none;
+    margin: 0;
+}
+
+header nav ul li {
+        display: inline-block;
+        padding: 1em;
+        background-color: darkslategray;
 }
