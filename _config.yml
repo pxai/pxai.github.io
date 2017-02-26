@@ -16,7 +16,7 @@
 title: Pello Xabier site
 email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
-  My awesome description.
+  This is Pello Xabier's site
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: pelloxabier
@@ -27,9 +27,11 @@ markdown: kramdown
 theme: minima
 gems:
   - jekyll-feed
+  - jekyll-assets
 exclude:
   - Gemfile
   - Gemfile.lock
 permalink: /blog/:year/:month/:day/:title
 sass:
     sass_dir: _sass
+

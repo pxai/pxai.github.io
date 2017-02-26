@@ -8,9 +8,10 @@ html, body {
     margin: 0;
 }
 
-header, main, footer {
+header, nav, main, footer {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     width: 100%;
 }
 
@@ -19,11 +20,11 @@ header {
     background-color: white;
     padding: 2em;
 }
-header nav {
+ nav {
             align-self:  center;
 }
 
-header nav div {
+ nav div {
         display: inline-block;
         padding: 1em;
         background-color: $darkblue;
