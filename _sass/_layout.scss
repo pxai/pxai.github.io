@@ -1,25 +1,36 @@
-$darkblue : #214478;
-$lightblue : #5f8dd3;
+
 
 html, body {
     font-family: Helvetica, arial, sans-serif;
-    background-color: $darkblue;
-    color: white;
+    background-color: $backcolor;
+    color: $fgcolor;
     margin: 0;
 }
 
-header, nav, main, footer {
+nav, main, footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
+  padding: 1em 2em;
 }
 
 header {
-        height: 5em;
+  background-image: url(/images/aliens.jpg);
+  background-size:cover;
+        height: 10em;
     background-color: white;
     padding: 2em;
 }
+header > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+header > div > div {
+  font-size: 3em;
+}
+
  nav {
             align-self:  center;
 }
@@ -27,7 +38,7 @@ header {
  nav div {
         display: inline-block;
         padding: 1em;
-        background-color: $darkblue;
+        background-color: $backcolor;
         align-self:  center;
 }
 

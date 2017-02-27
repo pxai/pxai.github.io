@@ -1,3 +1,7 @@
+$backcolor: white;
+$titlecolor: #214478;
+$fgcolor: #5f8dd3;
+
 html, body {
     font-family: Helvetica, arial, sans-serif;
     background-color: darkslategray;
@@ -5,6 +9,6 @@ html, body {
 }
 
 a {
-    color: lightgray;
+    color: $fgcolor;
     text-decoration: none;
 }

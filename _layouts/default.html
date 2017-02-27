@@ -3,19 +3,20 @@
 		<head>
 			<title>{{ page.title }}</title>
 			<!-- link to main stylesheet -->
-			<link rel="stylesheet" type="text/css" href="css/style.css">
+			<link rel="stylesheet" type="text/css" href="/css/style.css">
 		</head>
 		<body>
             <header>
                 {% include header.html %}
 			</header>
 				{% include nav.html %}
+      <main>
 			<div class="container">
-			
-			{{ content }}
-			
-			</div><!-- /.container -->
 
+			{{ content }}
+
+			</div><!-- /.container -->
+      </main>
 			<footer>
                 {% include footer.html %}
 			</footer>
