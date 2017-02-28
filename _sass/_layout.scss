@@ -3,7 +3,8 @@
 html, body {
     font-family: Helvetica, arial, sans-serif;
     background-color: $backcolor;
-    color: $fgcolor;
+  color: #222;
+  font-size: 1em;
     margin: 0;
 }
 
@@ -27,8 +28,10 @@ header > div {
   flex-direction: row;
   justify-content: center;
 }
-header > div > div {
+#title {
   font-size: 3em;
+  color: white;
+  text-decoration: none;
 }
 
  nav {

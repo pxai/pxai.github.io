@@ -5,10 +5,15 @@ $fgcolor: #5f8dd3;
 html, body {
     font-family: Helvetica, arial, sans-serif;
     background-color: darkslategray;
-    color: white;
+    color: #222;
 }
 
 a {
     color: $fgcolor;
     text-decoration: none;
+}
+
+.meta {
+  font-style: italic;
+  color: #214478;
 }
