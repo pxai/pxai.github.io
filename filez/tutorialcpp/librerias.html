@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Librerias estandar</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Excepciones"
+HREF="excepciones.html"><LINK
+REL="NEXT"
+TITLE="Notas, autoria, licencia, referencias"
+HREF="notas.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="excepciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="notas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="LIBRERIAS"
+></A
+>Capítulo 22. Librerias estandar</H1
+><P
+>&#13;La libreria estandar de c++...
+
+La sintaxis de inclusion de librerias puede variar 
+segun la version y la plataforma del compilador c++.
+Puede ser asi:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN439"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+using namespace std;
+#include &#60;iostream&#62;
+
+...</PRE
+><P
+></P
+></DIV
+>  
+O mas simple:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN441"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+using namespace std;
+#include &#60;iostream&#62;
+...</PRE
+><P
+></P
+></DIV
+>  
+
+Pero, Â¿que narices es eso del namespace?
+Con eso de namespace lo que hacemos es declarar un zona concreta para variables, objetos, etc.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN443"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+int contador; // variable global
+
+// definimos el espacio de nombres freedomia
+namespace freedomia {
+
+	int contador;	
+	
+}
+
+// definimos el espacio de nombres libertonia
+namespace libertonia {
+
+	int acumulador;
+	int contador;	
+	
+}
+
+// vamos a probar
+int main () {
+
+	// asi utilizariamos la variable del espacio freedomia
+	freedomia::contador = 0;
+	
+	// y asi la otra, la global
+	::contador = 0;
+	
+	// QUE PASA SI no lo especificamos? efectivamente tendremos
+	// seremos unos ambiguos
+	
+	// y si somos unos vagos y no queremos especificar el espacio de nombres
+	// en cada uso de la variable??
+	// metemos la directiva using
+	using namespace libertonia;
+	
+	acumulador = 0;
+	
+	// pero OJO esto seguiria siendo ambiguo
+	contador = 0;
+
+	// using como declaracion.
+	// Pero que pasa si lo que realmente queremos es quitar esa ambiguedad
+	// y afirmar que en adelanta vamos a utilizar la variable de determinado namespace?
+	// ESTO se haria asi
+	using libertonia::contador;
+	
+	// ahora si, esto seria correcto
+	contador = 0;
+		
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+
+A lo que ibamos: al igual que en c, en c++ tenemos una 
+libreria base para desarrollar aplicaciones. Aqui se 
+hecha un rapido vistazo a todas ellas.
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN445"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>#include &#60;iostream&#62;
+Libreria basica de entrada/salida. Imprescindible.</PRE
+><P
+></P
+></DIV
+>  
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN447"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>#include &#60;string&#62;</PRE
+><P
+></P
+></DIV
+>  
+Libreria para el manejo de string con las funciones mas 
+usuales como strcpy, strncpy, strlen, strcat, strncat, 
+incluso las que sirven para buscar dividir un string en tokens.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN449"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>#include &#60;time&#62;</PRE
+><P
+></P
+></DIV
+>  
+
+Libreria para escribir fechas, con distintas opciones. 
+Podemos sacar la fecha del momento y separar los 
+valores de dia, hora, minuto, etc..
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN451"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>#include &#60;stdlib&#62;</PRE
+><P
+></P
+></DIV
+>  
+
+Otra libreria basica, que contiene funciones como los 
+conversores de ascci-integer atoi, algoritmos de 
+ordenacion de arreglos como qsort..</P
+><P
+>Veamos el listado que contiene las librerias del ambito estandar.
+<P
+></P
+><UL
+><LI
+><P
+>		iostream : entrada y salida      
+		</P
+></LI
+><LI
+><P
+>	iomanip : manipuladores de entrada/salido con argumentos
+		</P
+></LI
+><LI
+><P
+>	fstream : flujos de archivos
+		</P
+></LI
+><LI
+><P
+>	sstream : flujos de cadenas (tipo c++)
+		</P
+></LI
+><LI
+><P
+>	strstream : flujos de cadenas (tipo c)
+		</P
+></LI
+><LI
+><P
+>		vector : contenedor para crear vectores      
+		</P
+></LI
+><LI
+><P
+>		list : contenedor para crear listas      
+		</P
+></LI
+><LI
+><P
+>		deque : contenedor para una cola de extremo doble      
+		</P
+></LI
+><LI
+><P
+>		map : contenedor para grupo de pares (id,valor)      
+		</P
+></LI
+><LI
+><P
+>      string : cadenas
+		</P
+></LI
+><LI
+><P
+>      Librerias de c. Estan versioneadas para la libreria estandar de c++ las siguientes: cstdlib, cstdio, cerrno,
+      cassert, cstdarg, cstring, ctime, csignal, cstddef, csetjmp, cmath, clocale, climits, cfloat y cctype.
+		</P
+></LI
+></UL
+></P
+><P
+>Operadores de bits:
+Otra opcion mas de c++
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN478"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#38; AND
+| OR
+^ exclusive OR
+~ complement</PRE
+><P
+></P
+></DIV
+>  </P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="AEN481"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/cooking.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+  Figura: programar es como cocinar
+  </P
+><P
+>Existen mas librerias standar y lo que es mejor, 
+librerias muy potentes disponibles para desarrollar 
+programas mas complejos: creacion de interfaces de 
+ventanas, comunicaciones, etc..</P
+><P
+>El estilo A la hora de escribir codigo se pueden tomar 
+muchas costumbres y vicios que no facilitan la 
+generacion de un estilo claro. De todas formas, dentro 
+de un mismo proyecto seria mejor mantener un mismo 
+estilo. No debe ser una preocupacion, ya que existen 
+programas para formatear el codigo fuente, meter 
+espacios tabulaciones, saltos de linea, etc.
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="excepciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="notas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Excepciones</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Notas, autoria, licencia, referencias</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

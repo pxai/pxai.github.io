@@ -1,0 +1,532 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Herencia</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Arrays"
+HREF="arrays.html"><LINK
+REL="NEXT"
+TITLE="Herencia multiple"
+HREF="herencia-multiple.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="arrays.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="herencia-multiple.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HERENCIA"
+></A
+>Capítulo 13. Herencia</H1
+><P
+>&#13;La herencia
+Como bien se sabe la herencia no se reparte: se 
+descuartiza. Bromas aparte, la herencia constituye una 
+de las herramientas mas poderosas del culto OO. Si una 
+clase hereda de la otra, lo que hereda son todos sus 
+atributos y metodos.
+Ademas de heredarlos puede sobreescribirlos, tanto los 
+constructores-destructores como los metodos convencionales.
+Veremos un ejemplo claro que resume lo que se puede 
+hacer y los efectos de la herencia
+Por un lado vemos la clase generica vehiculo y su 
+descendiente: el coche.
+La clase Vehiculo
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN285"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Vehiculo.hpp
+* Clase que define el objeto vehiculo
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+enum tipo_combustible { QUEROSENO, CANNABIS, GIRASOL, GASOIL, AGUA, PLUTONIO };
+
+class Vehiculo {
+
+protected:
+
+	int cilindrada;
+	
+	tipo_combustible combustible;
+
+	char *marca;
+
+public:
+
+	Vehiculo();
+
+	Vehiculo(char *marca);
+	
+	Vehiculo(int cilindrada, tipo_combustible combustible, char *marca);
+	
+	~Vehiculo();
+
+	Vehiculo(const Vehiculo &#38;);
+
+	void arrancar();
+	
+	void mover(int metros);
+
+	// metodo tipo virtual, util cuando definamos PUNTEROS Y REFERENCIAS a vehiculo
+	virtual void claxon() const {
+
+		cout &#60;&#60; "&#60;clase vehiculo&#62; Mec-meeec!! Que? meeec! Que de que? meec!" &#60;&#60; endl;
+
+	}
+
+
+	char *getMarca() const {return this-&#62;marca;}
+
+	tipo_combustible getCombustible() const {return this-&#62;combustible;}
+	
+	int getCilindrada() const {return this-&#62;cilindrada;}
+	
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion...
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN287"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Vehiculo.cpp
+* Fichero que implementa la clase vehiculo
+*
+* Pello Xabier Altadill Izura
+*
+* Compilacion: g++ -c Vehiculo.cpp
+*/
+
+#include "Vehiculo.hpp"
+
+// Constructor
+Vehiculo::Vehiculo() {
+
+	cout &#60;&#60; "&#60;clase vehiculo&#62; Vehiculo creado" &#60;&#60; endl;
+
+}
+
+
+// Constructor
+Vehiculo::Vehiculo(char *marca) {
+	
+	this-&#62;marca = marca;
+	cout &#60;&#60; "&#60;clase vehiculo&#62; Vehiculo creado con parametro marca: " &#60;&#60; marca &#60;&#60; endl;
+	
+}
+
+
+// Constructor con valores iniciados
+Vehiculo::Vehiculo(int cilindrada, tipo_combustible combustible, char *marca) :
+	cilindrada(cilindrada),
+	combustible(combustible),
+	marca(marca)
+{
+
+	cout &#60;&#60; "&#60;clase vehiculo&#62; Vehiculo creado con valores: " &#60;&#60; endl;
+	cout &#60;&#60; "&#60;clase vehiculo&#62; cilindrada: " &#60;&#60; cilindrada &#60;&#60; endl;
+	cout &#60;&#60; "&#60;clase vehiculo&#62; combustible: " &#60;&#60; combustible &#60;&#60; endl;
+	cout &#60;&#60; "&#60;clase vehiculo&#62; marca: " &#60;&#60; marca &#60;&#60; endl;
+
+}
+
+
+// Destructor 
+Vehiculo::~Vehiculo() {
+	
+	cout &#60;&#60; "&#60;clase vehiculo&#62; Vehiculo destruido" &#60;&#60; endl;
+
+}
+
+
+// Constructor copia de vehiculo
+Vehiculo::Vehiculo(const Vehiculo &#38; vehiculoOrigen) {}
+
+
+// Arrancamos el vehiculo
+void Vehiculo::arrancar() {
+	
+	cout &#60;&#60; "&#60;clase vehiculo&#62; arrancando vehiculo. Brruum!!" &#60;&#60; endl;
+	
+}
+
+
+// Movemos el vehiculo unos metros
+void Vehiculo::mover(int metros) {
+	
+	cout &#60;&#60; "&#60;clase vehiculo&#62; moviendo vehiculo " &#60;&#60; metros &#60;&#60; " metros" &#60;&#60; endl;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+El coche, herencia de Vehiculo
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN289"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Coche.hpp
+* Clase que define el objeto Coche, hijo de vehiculo, se&#38;ntilde;or del capitalismo
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include "Vehiculo.hpp"
+
+class Coche : public Vehiculo {
+
+protected:
+
+	int caballos;
+
+	char *motor;
+
+public:
+
+	// Atencion: constructor pasando parametros por defecto estilo guru
+	// pero invocando a su clase padre
+	Coche():Vehiculo("Audi") {
+	
+		cout &#60;&#60; "&#60;clase coche&#62; Coche destruido invocando al constructor vehiculo" &#60;&#60; endl;
+
+	}
+
+
+	// Constructor que sobreescribe al de vehiculo!
+	Coche(char *marca);
+
+	// Constructor
+	Coche(int cilindrada, tipo_combustible combustible, char *marca);
+	
+	
+	// Constructor
+	Coche(int caballos, char *motor) {
+
+		this-&#62;caballos = caballos;
+		this-&#62;motor = motor;
+		cout &#60;&#60; "&#60;clase coche&#62; Coche construido con caballos y motor" &#60;&#60; endl;
+		
+	}
+
+
+	// Destructor
+	~Coche();
+	
+	// Constructor copia
+	Coche(const Coche &#38;);
+
+	// Metodo sobreescrito
+	void arrancar();
+	
+	// metodo que sobreescribe al virtual
+	void claxon() const;
+
+	// getter/setter
+	int getCaballos() const {return this-&#62;caballos;} // inline
+
+	char *getMotor() const {return this-&#62;motor;} // inline 
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN291"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Coche.cpp
+* Fichero que implementa la clase Coche
+*
+* Pello Xabier Altadill Izura
+*
+* Compilacion: g++ -c Vehiculo.cpp
+* g++ Coche.cpp Vehiculo.o -o Coche
+*/
+
+#include "Coche.hpp"
+
+// Constructor de coche que sobreescribe
+Coche::Coche(char *marca) {
+
+	cout &#60;&#60; "&#60;clase coche&#62; Coche construido con marca: " &#60;&#60; 
+	marca &#60;&#60; endl;
+
+}
+
+
+// Constructor de coche
+Coche::Coche(int cilindrada, tipo_combustible combustible, char *marca) {
+
+	cout &#60;&#60; "&#60;clase coche&#62; Coche construido con parametros" &#60;&#60; endl;
+
+}
+
+
+// Destructor de coche 
+Coche::~Coche() {
+	
+	cout &#60;&#60; "&#60;clase coche&#62; Coche destruido" &#60;&#60; endl;
+
+}
+
+
+// Constructor copia de Coche 
+Coche::Coche(const Coche &#38; cocheOriginal) {
+	
+	marca = new char;
+	marca = cocheOriginal.getMarca();
+	cout &#60;&#60; "&#60;clase coche&#62; Copia de coche" &#60;&#60; endl;
+
+}
+
+
+// metodo sobreescrito
+void Coche::arrancar () {
+	
+		cout &#60;&#60; "&#60;clase coche&#62; BOOM! pam! pam! pret pret pret... pam! pret pret" &#60;&#60; endl;
+
+}
+
+
+// metodo que sobreescribe al virtual
+void Coche::claxon() const {
+
+	cout &#60;&#60; "&#60;clase coche&#62; MOOOOOC!! Mecagon tus muelas MOC-MOOOC!!" &#60;&#60; endl;
+
+} 
+
+
+// Funcion principal
+int main () {
+	
+	// Creamos varios coches. Veremos que al ser objetos heredados
+	// se invocaran los constructores, copias, y destructores de la clase
+	// padre Vehiculo
+	Coche mibuga = Coche();
+	Coche tucarro = Coche(mibuga);
+
+	// probando constructor sobrescrito: se invocan los dos!
+	Coche tequi = Coche("Alfalfa Romero");
+	
+	// podemos invocar los metodos del padre y usar sus atributos
+	cout &#60;&#60; "La marca de mi buga es: " &#60;&#60; mibuga.getMarca() &#60;&#60; endl;
+
+	mibuga.arrancar();
+
+	// Invocando metodo sobreescrito: solo se invoca el del coche.
+	tucarro.arrancar();
+	
+	// Y si queremos invocar el metodo del padre??
+	tequi.Vehiculo::arrancar();
+	
+	// Creamos otro vehiculo con puntero a un COCHE
+	Vehiculo *vehiculo = new Coche("LanborJini");
+
+	// Esto invocara el metodo de vehiculo, el de la clase PADRE
+	vehiculo-&#62;arrancar();
+	vehiculo-&#62;mover(3);
+	
+	// Ahora queremos invocar el claxon, pero a cual de los metodos
+	// se invocara, al del Coche o al de la clase vehiculo? al haber
+	// definido el metodo claxon como virtual, se invocara el metodo correcto
+	// que es el del coche (vehiculo es un puntero a coche).
+	vehiculo-&#62;claxon();
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+OUTPUT
+La salida de la ejecucion de Coche.cpp seria:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN293"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#60;clase vehiculo&#62; Vehiculo creado con parametro marca: Audi
+&#60;clase coche&#62; Coche destruido invocando al constructor vehiculo
+&#60;clase vehiculo&#62; Vehiculo creado
+&#60;clase coche&#62; Copia de coche
+&#60;clase vehiculo&#62; Vehiculo creado
+&#60;clase coche&#62; Coche construido con marca: Alfalfa Romero 
+La marca de mi buga es: Audi
+&#60;clase coche&#62; BOOM! pam! pam! pret pret pret... pam! pret pret
+&#60;clase coche&#62; BOOM! pam! pam! pret pret pret... pam! pret pret
+&#60;clase vehiculo&#62; arrancando vehiculo. Brruum!!
+&#60;clase vehiculo&#62; Vehiculo creado
+&#60;clase coche&#62; Coche construido con marca: LanborJini
+&#60;clase vehiculo&#62; arrancando vehiculo. Brruum!!
+&#60;clase vehiculo&#62; moviendo vehiculo 3 metros
+&#60;clase coche&#62; MOOOOOC!! Mecagon tus muelas MOC-MOOOC!!</PRE
+><P
+></P
+></DIV
+>  
+
+
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="arrays.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="herencia-multiple.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Arrays</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Herencia multiple</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

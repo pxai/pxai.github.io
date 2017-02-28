@@ -1,0 +1,587 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Clases</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Parametros, ambito, sobrecarga"
+HREF="par-amb-sob.html"><LINK
+REL="NEXT"
+TITLE="Iteraciones"
+HREF="iteraciones.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="par-amb-sob.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="iteraciones.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="CLASES"
+></A
+>Capítulo 7. Clases</H1
+><P
+>&#13;Tu primera clase c++ No hay que perder de vista el 
+hecho de que c++ es un lenguaje orientado a objetos.
+Sin animos de volver a explicar que es la POO, los 
+beneficios que constituye vamos a limitarnos a resumir. 
+Una clase c++ es la representacion de un objeto. Un 
+objeto es una entidad formada por sus atributos y sus metodos.
+Con el afan de hacer las cosas ordenadamente, siempre 
+se separa la definicion de la clase en un fichero de 
+cabedeceras (extension .hpp, similar al .h de lenguaje 
+c) y la implementacion se especifica en un fichero cpp.
+Generalmente las clases c++ tienen el mismo aspecto: se 
+definen unos atributos y unos metodos. Entre los 
+metodos se pueden incluir metodos constructores y la 
+destructora. Ademas de eso se puede definir si los 
+atributos y clases son publicas, protegidas y privadas, 
+dependiendo del nivel de encapsulacion que le queramos 
+dar a la clase.
+
+Veamos la representacion del objeto coche en una clase c++:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN167"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Coche.hpp
+* Clase cabecera que define el objeto Coche
+*
+* Pello Xabier Altadill Izura
+*
+* No se compila.
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Coche {
+	
+public:
+	
+	Coche();
+		
+	Coche(char *m,int cil,int cab);
+	
+	~Coche();
+	
+	void arranca();
+		
+	void detiene();
+	
+	void acelera();
+
+private:
+
+	char *marca;
+
+	int cilindrada;
+
+	int caballos;
+
+};
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+Y este seria el fichero de implementacion (se puede 
+tener todo en un unico fichero)
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN169"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Coche.cpp
+* Fichero que implementa la cabecera de la clase Coche.
+* NO HACE NADA CONCRETO solo es una muestra
+*
+* Pello Xabier Altadill Izura
+* 
+* Compilar usando: g++ -c Coche.cpp
+*/
+
+// Hay que incluir el fichero de cabecera
+#include "Coche.hpp"
+
+// Implementacion de constructor
+Coche::Coche() {
+	
+	cout &#60;&#60; "Coche creado." &#60;&#60; endl;
+
+}
+
+
+// Implementacion de constructor (con SOBRECARGA)
+Coche::Coche (char *m,int cil,int cab) {}
+	
+
+// Implementacion de destructor. Util para liberar memoria.
+Coche::~Coche() {
+
+	cout &#60;&#60; "Coche destruido." &#60;&#60; endl;
+
+}
+
+
+// implementaciones de metodos...
+void Coche::arranca() {}
+
+void Coche::detiene() {}
+
+void Coche::acelera() {}
+
+/**
+* Podemos usar una clase main para hacer testeos con la clase
+* NOTA IMPORTANTE
+* Atencion : al usar esta clase en otra que ya tiene funcion
+* main, no se puede tener otra main.
+*/
+//int main () {
+//cout &#60;&#60; "Lo hise!!\n" &#60;&#60; endl;
+//return 1;
+//}
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Podemos usar clases dentro de otras clases? si claro. 
+Veamos la definicion de un Garaje.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN171"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Garaje.hpp
+* Cabecera del objeto Garaje
+*
+* En este caso invocamos otro objeto: Coche
+*
+* Pello Xabier Altadill Izura
+*
+* La cabecera como tal no se compila
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+#include "Coche.hpp"
+
+/*
+* Definicion de clase Garaje
+*/
+class Garaje {
+
+private:
+
+	int maxCoches;
+
+public:
+
+	Garaje();
+	
+	Garaje(int maxCoches);
+
+	~Garaje();
+	
+	int entra(Coche coche);
+
+	int sale(Coche coche);
+
+	bool estaLleno();
+
+};
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Y esta seria la implementacion:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN173"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Garaje.cpp
+* Implementacion de Clase Garaje
+*
+* Pello Xabier Altadill Izura
+* Atencion: necesitamos el archivo objeto de la clase Coche!!!
+* Compilar con: g++ -c Coche.cpp
+* g++ -Wall Garaje.cpp Coche.o -o Garaje
+*/
+
+#include "Garaje.hpp"
+
+/*
+* Implementacion de clase Garaje
+*/
+
+/**
+* Constructor por defecto
+*/
+Garaje::Garaje(){
+
+	cout &#60;&#60; "Garaje." &#60;&#60; endl;
+
+	maxCoches = 3;
+
+}
+
+
+/**
+* Constructor parametrizado
+*/
+Garaje::Garaje(int mx){
+	
+		maxCoches = mx;
+
+}
+
+
+/**
+* Destructor 
+*/ 
+Garaje::~Garaje(){}
+
+
+/**
+* entra: un coche entra en el garaje
+*/
+int Garaje::entra(Coche coche) {
+
+	cout &#60;&#60; " Entra un coche." &#60;&#60; endl;
+	return 0;
+
+}
+
+
+/**
+* sale: un objeto coche sale del garaje
+*/
+int Garaje::sale(Coche coche) {
+
+	cout &#60;&#60; " Sale un coche." &#60;&#60; endl;
+	return 0;
+
+}
+
+/**
+* estaLleno?: devuelve booleano con la respuesta
+*/
+bool Garaje::estaLleno() {
+
+	return false;
+
+}
+
+
+/**
+* y aqui la funcion main para hacer nuestras pruebillas
+*/
+int main () {
+	
+	cout &#60;&#60; " Creamos un garaje. " &#60;&#60; endl;
+	Garaje garaje = Garaje();
+
+	// Creamos un par de Coches
+	Coche cocheAzul = Coche();
+	Coche cocheRojo = Coche();
+
+	// Metemos y sacamos los coches
+	garaje.entra(cocheAzul);
+	garaje.entra(cocheRojo);
+	garaje.sale(cocheRojo);
+
+}
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Funciones o metodos Setter/Getter
+Por mania o por 
+costumbre o porque asi lo establecen los puristas mas 
+talibanes de la POO casi nunca se deja acceder 
+directamente a los atributos de una clase (se definen 
+como private) y para acceder a ellos se implementan 
+funciones set/get. Las herramientas de desarrollo 
+suelen incluir la opcion de generar ese codigo de forma 
+automatizada.&#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="YIHADPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/yihad.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+Figura: nunca tomes a broma a un desarrollador OO</P
+><P
+>&#13;Sin la menor intencion de alimentar la ya tradicional 
+Yihad entre desarrolladores, mostremos un ejemplo y 
+digamos de paso que no esta demas definir estas 
+funciones como inline; cumplimos como profesionales 
+pero no perdemos eficacia.
+
+El objeto PERRO
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN184"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Perro.hpp
+* Cabecera de la clase Perro con sus funciones get/set para el atributo edad
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Perro {
+
+public:
+	
+	Perro (int initialAge);
+	
+	~Perro();
+	
+	int GetAge() { return itsAge;} // inline?
+	
+	void SetAge (int age) { itsAge = age;} // inline?
+	
+	void Ladra() { cout &#60;&#60; "Guau Guau arrr...\n";} // inline?
+
+private:
+
+	int itsAge;
+
+};&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN186"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Perro.cpp
+* Clase que implementa la clase Perro
+*
+* Pello Xabier Altadill Izura
+*
+* Compilado: g++ Perro.cpp -o Perro
+*/
+
+#include "Perro.hpp" 
+
+Perro::Perro(int initialAge) //constructor
+{
+
+	itsAge = initialAge;
+
+}
+
+
+Perro::~Perro() //destructor
+{
+	cout &#60;&#60; " objeto destruido." &#60;&#60; endl;
+}
+
+
+/**
+* La funcion principal, crea un perro y le hace ladrar
+*/
+int main() {
+
+	bool test = false;
+
+	Perro Canelo(5);
+	
+	Canelo.Ladra();
+	
+	cout &#60;&#60; "Canelo es un perro cuya edad es: " ;
+	cout &#60;&#60; Canelo.GetAge() &#60;&#60; " a&#38;ntilde;os\n";
+
+	Canelo.Ladra();
+	
+	Canelo.SetAge(7);
+	
+	cout &#60;&#60; "Ahora Canelo es " ;
+	cout &#60;&#60; Canelo.GetAge() &#60;&#60; " a&#38;ntilde;os\n";
+
+	return 0;
+
+}
+&#13;</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="par-amb-sob.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="iteraciones.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Parametros, ambito, sobrecarga</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Iteraciones</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

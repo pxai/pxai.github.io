@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Funciones</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Hola nena"
+HREF="hola-nena.html"><LINK
+REL="NEXT"
+TITLE="Tipos de datos"
+HREF="tipos-de-datos.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="hola-nena.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="tipos-de-datos.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="FUNCIONES"
+></A
+>Capítulo 3. Funciones</H1
+><P
+>Vamos a ver como se declaran las funciones en c++. No 
+tiene ningun misterio, es igual que en c. Siempre hay 
+que especificar el tipo de retorno. 
+
+
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN60"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Funcion.cpp
+* Programa con llamada a una funcion
+* 
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Funcion.cpp -o Funcion
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Funcion: llamada
+int llamada (int x, int y) {
+	cout &#60;&#60; "Estamos en la funcion!!" &#60;&#60; endl;
+	return (x+y);
+}
+
+
+int main() {
+	// Estos comentarios son propios de C++
+	cout &#60;&#60; "Vamos a llamar a la funcion.." &#60;&#60; endl;
+
+	// Llamamos a la funcion
+	// Llamamos a una funcion y asignamos
+	int z = llamada(5,7);
+	cout &#60;&#60; "Resultado:" &#60;&#60; z &#60;&#60; endl;
+	
+	// Llamada desde el output
+	cout &#60;&#60; "Resultado:" &#60;&#60; llamada(6,7) &#60;&#60; endl;
+	cout &#60;&#60; "Programa terminado \n" &#60;&#60; endl;
+
+	return 0;
+}</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="FUNCIONESPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/funtzioak.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+Figura: Quiza llevemos encima un tarro de esencia de Fibonaci</P
+><P
+>&#13;Atencion, en este caso veremos como recoger datos de 
+stdin o entrada estandar. 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN71"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Funcion3.cpp
+* Programa con llamada a una funcion
+* El programa principal recoge datos de la entrada estandar
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Funcion3.cpp -o Funcion3
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Funcion: llamada
+int llamada (int x, int y) {
+
+	cout &#60;&#60; "Estamos en la funcion!!" &#60;&#60; endl;
+	return (x+y);
+}
+
+int main() {
+
+	// Estos comentarios son propios de C++
+	cout &#60;&#60; "Vamos a llamar a la funcion.." &#60;&#60; endl;
+
+	// Llamamos a la funcion
+	// Llamamos a una funcion y asignamos
+	int z = 0, x = 0, y = 0;
+
+	// Recogemos los parametros
+	cout &#60;&#60; "Dame el primer parametro:";
+	cin &#62;&#62; x;
+	cout &#60;&#60; "\nOK!\nDame el segundo parametro:";
+	cin &#62;&#62; y;
+	cout &#60;&#60; "\nOK vamos a calcular.";
+
+	// Efectuamos la funcion.
+	z = llamada(x,y);
+
+	// Mostramos el resultado
+	cout &#60;&#60; "Resultado:" &#60;&#60; z &#60;&#60; endl;
+
+	// Llamada desde el output
+	cout &#60;&#60; "Resultado:" &#60;&#60; llamada(6,7) &#60;&#60; endl;
+	cout &#60;&#60; "Programa terminado \n" &#60;&#60; endl;
+
+	return 0;
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Facil no?&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="hola-nena.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="tipos-de-datos.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Hola nena</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Tipos de datos</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

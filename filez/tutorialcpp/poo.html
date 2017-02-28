@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Principios de POO</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Preprocesador"
+HREF="preprocesador.html"><LINK
+REL="NEXT"
+TITLE="Templates"
+HREF="templates.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="preprocesador.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="templates.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="POO"
+></A
+>Capítulo 19. Principios de POO</H1
+><P
+>&#13;Programacion orientada a objetos
+Es probable que te toque hablar con amiguetes que 
+programan en la lengua de Mordor (visualbasic)
+o gente que programa en c ofuscado, o lo que es peor, 
+desconocidos que te dicen que "programan"
+en HTML; estos intercambios de experiencias, esas 
+afirmaciones sobre rendimientos de ejecucion
+pueden hacer tambalearse los cimientos de tu fe en la POO.
+Gracias a estas anotaciones rescatamos del olvido las 
+excelencias de la POO y nos armamos de argumentos
+ante los herejes que nos salgan al paso con listados de 
+codigo en ristre.
+<P
+></P
+><UL
+><LI
+><P
+>Encapsulacion: los detalles de implementacion estan 
+ocultos. Esto reduce que se reproduzcan errores
+cuando se hacen cambios. Se facilita enormementa la 
+interaccion entre otros objetos encapsulados ya
+que no tienen que conocer los detalles de uso.
+      </P
+></LI
+><LI
+><P
+>Herencia: este mecanismo es una de las claves de la 
+OOP. Todos los atributos, metodos, programaciones
+contenidas en una clase pueden heredarse y extenderse a 
+otras clases facilitando la reutilizacion de codigo.
+Cualquier cambio se propaga en toda la jerarquia de 
+clases y nos vuelve a ahorrar trabajo haciendo
+un sistema mas facil de mantener.
+      </P
+></LI
+><LI
+><P
+>Polimorfismo:gracias a el facilitamos la ampliacion 
+del sistema ya que en lugar de crear codigo
+por cada tipo de dato lo podemos agrupar todo en uno 
+utilizando la sobrecarga de funciones.
+El copy-paste puede parecer lo mismo, pero a la hora de 
+cambiar/mantener un sistema
+se acaban metiendo muchas horas, cosa que con la POO evitas.
+      </P
+></LI
+></UL
+>
+
+Bueno, imaginemos que queremos desarrollar un sistema 
+utilizando la orientacion a objetos.
+Â¿Por donde se empieza?
+Esta ser&iacute;a una aproximaci&oacute;n:
+Todo proyecto comienza con una descripcion que encierra 
+entre sus lineas los requerimientos del sistema.
+Es el momento de tomar un subrayador y abrir el tercer ojo;
+lo primero que debemos hacer es identificar objetos 
+potenciales que formaran el dise&ntilde;o y es tan facil
+como buscar sustantivos (nombres, cosas). A veces no 
+resulta tan obvio ya que los objetos pueden manifestarse
+de diversas maneras:
+
+<P
+></P
+><UL
+><LI
+><P
+>Cosas      
+      </P
+></LI
+><LI
+><P
+>Entidades externas (personas, maquinas o incluso otros desarrollos)
+      </P
+></LI
+><LI
+><P
+>Eventos (Cazo o zuzezo :&#62;)
+      </P
+></LI
+><LI
+><P
+>Roles
+      </P
+></LI
+><LI
+><P
+>Lugares
+      </P
+></LI
+><LI
+><P
+>Organizaciones (dpto, division)      
+      </P
+></LI
+></UL
+>
+
+Debemos acotar los objetos en un dominio cerrado y ser 
+capaces de identificar lo que esos objetos
+son, saben y hacen.
+Partiendo de la identificacion de objetos se puede ir 
+desarrollando un dise&ntilde;o de clases usando simbolos
+o lenguajes unificados tales como UML.
+Aunque realmente no hay que forzarse, la POO no es mas 
+que otra forma mas de abordar un problema;
+puede que el dise&ntilde;o OO te salga por instinto. No es de 
+extra&ntilde;ar que un programador con a&ntilde;os de experiencia
+acaba recurriendo a desacoplar cada vez mas sus modulos 
+y a recurrir a patrones de software sin darse cuenta.
+Lo que no se puede negar es el auge de la POO viendo la 
+proliferacion de lenguajes OO, o su adaptacion
+para tener las ventajas de su punto de vista (Java, 
+php, python, perl,... son lenguajes "recientes")</P
+><P
+>A veces puedes liarte al tratar de distinguir clase y 
+objeto; esta cita del profeta resuelve las dudas:</P
+><P
+>Mientras que un objeto es una entidad que existe en el 
+tiempo y en el espacio, una clase representa solo una 
+abstraccion,"la esencia" del objeto si se puede decir asi.
+Grady Booch</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="AEN391"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/excalibur.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+  Figura: la incesante busqueda del santo grial...
+  </P
+><P
+>En fin, estas anotaciones (eufemismo de TXAPA) sirven 
+para acordarse de porque c++ puede ser una herramienta util.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="preprocesador.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="templates.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Preprocesador</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Templates</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

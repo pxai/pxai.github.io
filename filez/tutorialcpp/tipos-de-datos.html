@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Tipos de datos</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Funciones"
+HREF="funciones.html"><LINK
+REL="NEXT"
+TITLE="Operadores"
+HREF="operadores.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="funciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="operadores.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="TIPOS-DE-DATOS"
+></A
+>Cap�tulo 4. Tipos de datos</H1
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="TIPOSPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/koma.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+Figura: al principio puede hacerse un poco complejo</P
+><P
+>&#13;Los tipos de datos de c++ no varian mucho respecto a c 
+y son bastante evidentes, tal y como se puede apreciar 
+en este codigo. 
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN84"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Tipos.cpp
+* Programa para sacar el tamaño de cada tipo de datos
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Tipos.cpp -o Tipos
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos el tamaño de cada tipo 
+	cout &#60;&#60; "El tamaño del int es:\t\t" &#60;&#60; sizeof(int) &#60;&#60; " bytes.\n";
+	cout &#60;&#60; "El tamaño del short es:\t" &#60;&#60; sizeof(short) &#60;&#60; " bytes.\n";
+	cout &#60;&#60; "El tamaño del long es:\t" &#60;&#60; sizeof(long) &#60;&#60; " bytes.\n";
+	cout &#60;&#60; "El tamaño del char es:\t\t" &#60;&#60; sizeof(char) &#60;&#60; " bytes.\n";
+	cout &#60;&#60; "El tamaño del float es:\t\t" &#60;&#60; sizeof(float) &#60;&#60; " bytes.\n";
+	cout &#60;&#60; "El tamaño del double es:\t" &#60;&#60; sizeof(double) &#60;&#60; " bytes.\n";
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Termino el programa\n";
+	
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Tambien se pueden definir constantes: 
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN86"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Constante.cpp
+* Programa en el que definimos un valor constante
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Constante.cpp -o Constante
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+#define MEMOLA 25
+
+int main () {
+
+	int y = 0;
+
+	// Definimos el valor constante
+	const float PI = 3.1416;
+	
+	cout &#60;&#60; "Ten fe en el caos: " &#60;&#60; PI &#60;&#60; endl;
+	
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "\nTermino el programa : " &#60;&#60; MEMOLA &#60;&#60; endl;
+	
+	return 0;
+}</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+><P
+>&#13;<DIV
+CLASS="TABLE"
+><A
+NAME="AEN89"
+></A
+><P
+><B
+>Tabla 4-1. Tipos basicos de datos</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><THEAD
+><TR
+><TH
+>Tipo</TH
+><TH
+>Descripcion</TH
+><TH
+>Modificadores</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>void</TD
+><TD
+>Vacio</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>char</TD
+><TD
+>Caracter (8 bits)</TD
+><TD
+>signed char(8 bits), unsigned char(8 bits)</TD
+></TR
+><TR
+><TD
+>int</TD
+><TD
+>Entero simple (16 bits)</TD
+><TD
+>signed int(16 bits), unsigned int(16 bits), long int (32 bits), 
+            			unsigned long int(32 bits), signed long int(32 bits),
+            			short int(16 bits), unsigned short int(16 bits), signed short int(16 bit)</TD
+></TR
+><TR
+><TD
+>float</TD
+><TD
+>Coma flotante (32 bits)</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>double</TD
+><TD
+>Coma flotante mas grande (64 bits)</TD
+><TD
+>long double (80 bits)</TD
+></TR
+><TR
+><TD
+>bool</TD
+><TD
+>Valor booleano: true o false</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>wchar_t</TD
+><TD
+>Caracteres anchos, para determinado juegos de caracteres</TD
+><TD
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+>&#13;</P
+><P
+>Sin animo de extenderse mucho mas, en c++ tambien disponemos de struct, union y enum.
+Veamos unos ejemplos:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN127"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>struct ficha {
+	char nombre[50];
+	int edad;
+	char dni[9];
+
+} ficha1, ficha2;
+
+strcpy(ficha1.nombre,"Marujita Diaz");
+ficha1.edad = 
+Segmentation fault - value out of range! please use double type
+core dumped&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Las union son parecidos a los structs con la gran diferencia de que sus campos
+comparten el mismo espacio de memoria. Podemos meter elementos de distintos tipo
+y la union tendra el tama&ntilde;o del elemento mas grande.
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN129"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>// cuando guardemos un valor en alguna de los campos, tambien se guardara
+// en los demas. Podremos tratar el mismo dato de distintas formas.
+union valor {
+	int numero;
+	double numerazo;
+	char caracter[2];
+} mi_valor;</PRE
+><P
+></P
+></DIV
+>  
+
+Y mas adelante saldra algun ejemplo de enumeracion...</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="funciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="operadores.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Funciones</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Operadores</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Preprocesador</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Entrada/Salida "
+HREF="entrada-salida.html"><LINK
+REL="NEXT"
+TITLE="Principios de POO"
+HREF="poo.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="entrada-salida.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="poo.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="PREPROCESADOR"
+></A
+>Capítulo 18. Preprocesador</H1
+><P
+>&#13;El preprocesador
+Cuando se compila un programa de c++ previamente se 
+hace un preprocesamiento en el que se revisan 
+determinadas variables de preprocesador. Con ellas lo 
+que se consigue es que el compilador modifique el 
+codigo fuente del programa antes de crear el ejecutable.
+Vamos varios usos utiles.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN361"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Preprocesador.cpp
+* Programa c++ que muestra el uso del preprocesador. 
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o Preprocesador Preprocesador.cpp
+*
+*/
+
+// include se utiliza para poder utilizar codigo externo,
+// generalmente las librerias standar o nuestras propias librerias
+using namespace std;
+#include &#60;iostream&#62;
+
+
+// Las variables de preprocesador sirven para que el compilador haga ciertas
+// modificaciones en el codigo fuente
+#define PI 3.1415
+
+#define BATMAN "Bruce Wayne"
+
+#define MISTERX "Felipe Gonzalez"
+
+#define REVELAR
+
+#define BUFFER 255
+
+// podemos definir FUNCIONES, aunque sin complicarlas ya que dificulta
+// la depuracion y se pasa el tipado de variables por el arcoltriunfo
+#define PORCENTAJE(a,b) (a*b)/100
+
+// Guardias de inclusion
+// Estructura condicional para evitar multiples inclusiones 
+// La siguiente structura comprueba si NO se ha definido la variable FSTREAM
+#ifndef FSTREAM
+
+// si no se ha definido, la definimos
+#define FSTREAM
+#include &#60;fstream&#62;
+#endif // fin de condicion
+
+// macro de comillas:
+#define write(x) cout &#60;&#60; #x &#60;&#60; endl;
+
+
+int main () {
+
+	int i = 345;
+
+	float var = 4.67;
+
+	char buffer[BUFFER]; // automaticamente el compilador traduce: buffer[255]
+
+	
+	#ifdef PI
+		cout &#60;&#60; "El valor PI es: " &#60;&#60; PI &#60;&#60; ": ten fe en el caos" &#60;&#60; endl;
+
+	#else
+		cout &#60;&#60; "PI no esta definido..." &#60;&#60; endl;
+
+	#endif
+
+	// ahora miramos una variable de preprocesador que no esta:
+	// y asi en este caso no se revelamos quien es BATMAN...
+
+	#ifdef REVELAR
+	cout &#60;&#60; "Batman realmente se trata de: " &#60;&#60; BATMAN &#60;&#60; endl;
+
+	#endif
+	// con esta orden eliminamos la variable:
+
+	#undef REVELAR
+
+	// y este es el efecto:
+	#ifdef REVELAR
+
+
+	cout &#60;&#60; "MisterX realmente es: " &#60;&#60; MISTERX &#60;&#60; endl;
+	
+	#endif
+
+	cout &#60;&#60; "var * PI = " &#60;&#60; (var * PI) &#60;&#60; endl;
+
+	// mostramos la llamada a la funcion
+	cout &#60;&#60; "Porcentaje 15% de "&#60;&#60; i &#60;&#60; " es: " &#60;&#60; PORCENTAJE(i,15) &#60;&#60; endl;
+
+	// llamada a la macro. Atencion, convertira MISTERX?
+	write(Hay que ver que lujo verdad MISTERX);
+
+	
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Macros para depuracion
+Disponemos de algunas variables de macro que facilitan 
+la depuracion asi como de la funcion assert. Veamos el uso
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN363"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Depurador.cpp
+* Programa c++ que muestra el uso del preprocesador para depurar
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o Depurador Depurador.cpp
+*
+*/
+
+// include se utiliza para poder utilizar codigo externo,
+// generalmente las librerias standar o nuestras propias librerias
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Disponemos de estas variables de macro predefinidas, muy utiles para depurar.
+// __DATE__ : sustituye esa variable por la fecha 
+// __TIME__ : sustituye esa variable por la hora
+// __LINE__ : sustituye esa variable por la linea de programa
+// __FILE__ : sustituye esa variable por el nombre del fichero del programa
+
+// definimos la variable DEBUG para activar la depuracion
+#define DEBUG
+
+// y mostramos el uso de assert(), su disponibilidad dependera del compilador.
+// cuando invocamos la funcion assert, si lo que tiene como parametro es TRUE
+// no habra problema pero si es false saltara un codigo de depuracion que le digamos
+#ifndef DEBUG
+
+#define ASSERT(x)
+
+#else
+
+#define ASSERT(x) \
+
+if (! (x)) { \
+cout &#60;&#60; "error detectado, fallo: " &#60;&#60; #x &#60;&#60; "\n"; \
+cout &#60;&#60; " linea" &#60;&#60; __LINE__ &#60;&#60; " del fichero " &#60;&#60; 
+__FILE__ &#60;&#60; "\n"; \
+}
+#endif
+
+
+// funcion principal para las pruebas:
+int main () {
+
+	int i = 345;
+
+	float var = 4.67;
+	cout &#60;&#60; "hola hoy es: " &#60;&#60; __DATE__ &#60;&#60; endl;
+	
+	ASSERT(i&#62;5);
+	
+	cout &#60;&#60; "Este es el fichero: " &#60;&#60; __FILE__ &#60;&#60; endl;
+	cout &#60;&#60; "Estamos en la linea: " &#60;&#60; __LINE__ &#60;&#60; endl; 
+	
+	ASSERT(i==0);
+	
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="entrada-salida.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="poo.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Entrada/Salida</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Principios de POO</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

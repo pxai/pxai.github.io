@@ -1,0 +1,462 @@
+<html>
+<head>
+<title>IPTables en 21 Segundos :: manual de iptables netfilter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+p {  font-family: Arial, Helvetica, sans-serif; font-size: 12px}
+body {  font-family: Arial, Helvetica, sans-serif; font-size: 12px}
+.title {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold}
+.code {  font-family: "Courier New", Courier, mono; font-size: 10px}
+-->
+</style>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="pello altadill,pello xabier, peio altadill, peio, pello xabier altadill izura, manual de iptables, manual de firewall, iptables en castellano, iptables netfilter tutorial, firewall linux">
+<meta name="description" content="Pagina personal de Pello Xabier Altadill Izura, Sendmailizer Home, Manuales de de ingenieria de software, uml, xml, phpframework, phpstruts, comics, manual de struts, manual de uml,guia referencia linux unix,sendmail log analysis, qmail log analysis,smail log analysis, ">
+<meta name="Abstract" content="Pello Altadill homepage"/>
+<meta name="Owner" content="pello@pello.info"/>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p><font size="+4">IPTABLES en 21 segundos</font><br>
+  <font size="+3"><br>
+  <font size="+2">Gu&iacute;a para impacientes y gente con poco tiempo en general,<br>
+  </font></font><font size="+3"><font size="+2">o como pasarse de ipchains a Iptables/netfilter</font></font><br>
+</p>
+<p><a href="http://www.pello.info/filez/firewall/iptables.html">Y SI TIENES TIEMPO 
+  PASATE A ESTE OTRO TUTORIAL</a><br>
+</p>
+<table border="0" cellspacing="0" cellpadding="0" width="531">
+  <tr align="left" valign="top"> 
+    <td> 
+      <p><font size="4">Por Pello Xabier Altadill Izura,<br>
+<a href="https://plus.google.com/100254626944368870944?rel=author">Pello Altadill</a>
+        Ingeniero en Inform&aacute;tica por la <a href="http:%5C%5Cwww.ehu.es">UPV 
+        &#150; EHU</a></font></p>
+      <p><br>
+        <font size="2">Mira que guantes, CAMPEON!<br>
+        Que soy un CAMPEON!</font></p>
+      </td>
+    <td> <img src="/filez/images/image002.jpg" width="253" height="393" alt="Alguien tiene que fregar"></td>
+  </tr>
+</table>
+<p><br>
+  <br>
+  <br>
+  <br>
+  Actualizaciones de este documento en:<br>
+  <a href="http://www.pello.info">http://www.pello.info</a><br>
+  <br>
+</p>
+<ol>
+  <li class="title">&iquest;Qu&eacute; es IPTABLES ?</li>
+  <li class="title">Diferencias respecto a IPCHAINS</li>
+  <li class="title">Elementos b&aacute;sicos</li>
+  <li class="title">Ejemplos de configuraci&oacute;n.</li>
+  <li class="title">Reglas de protecci&oacute;n</li>
+  <li class="title">Notas, enlaces, a&ntilde;adidos.</li>
+</ol>
+<p><span class="title">1. &iquest; Qu&eacute; es IPTABLES ?</span><br>
+  <br>
+  En linux, el filtrado de paquetes se controla a nivel del kernel.<br>
+  Existen modulos para el kernel que permiten definir un sistema de reglas para 
+  aceptar o rechazar los paquetes<br>
+  o las comunicaciones que pasan por el sistema. Estos sistemas de reglas conforman 
+  lo que se conoce como firewall o cortafuegos; en otros sistemas los firewall 
+  pueden estar implementados en software y estar desvinculados del sistema operativo, 
+  pero en el caso de linux, el firewall se puede montar a nivel de kernel y no 
+  es necesario instalar un software adicional que para mas INRI a veces tiene 
+  agujeros.<br>
+  <br>
+  En versiones de Kernel anteriores a la 2.4 se dispon&iacute;a de los m&oacute;dulos 
+  IPCHAINS para montar firewalls, as&iacute; como de otros m&oacute;dulos de soporte 
+  para comunicaciones concretas (enmascaramiento de FTP, de IRC, Real Audio etc.).<br>
+  <br>
+  Gracias a IPCHAINS, adem&aacute;s de poder definir normas de firewall muy precisas, 
+  tambi&eacute;n pod&iacute;a hacer que un linux funcionara como gateway enmascarando 
+  todas las peticiones de una LAN.<br>
+  <br>
+  IPCHAINS ha muerto, viva IPCHAINS. A partir del kernel 2.4 se esta dando soporte 
+  a otro modulo para filtrado de paquetes mucho m&aacute;s potente que IPCHAINS, 
+  llamado IPTABLES.<br>
+  <br>
+  Para acceder a ciertos sites ftp tendremos problemas usando IPCHAINS con el 
+  kernel 2.4. A pesar de que IPCHAINS siga funcionando, ya no tendremos los antiguos 
+  m&oacute;dulos para solventar los problemas de acceso a servicios especiales,<br>
+  Y se recomienda pasarse a IPTABLES.<br>
+  <br>
+  En el siguiente gr&aacute;fico se distingue el camino que siguen los paquetes 
+  al pasar por un firewall con IPTables, y nos gu&iacute;a sobre la forma de aplicar 
+  las reglas.<br>
+  (En general, a lo que se ruta a trav&eacute;s del firewall se le aplica FORWARD 
+  y a lo que va al firewall se le aplica INPUT).<br>
+  <img src="/filez/images/image004.jpg" width="576" height="220" alt="El camino que sigue el paquete" border="0"> 
+</p>
+<p><span class="title">2. Diferencias respecto a IPCHAINS</span><br>
+  <br>
+  IPTABLES es m&aacute;s completo que IPCHAINS, permite un control a&uacute;n 
+  m&aacute;s preciso, aunque tambi&eacute;n es m&aacute;s<br>
+  complejo.<br>
+  <br>
+  En principio el sistema sigue siendo el mismo. Hay que cargar un modulo del 
+  kernel (se puede hacer en el propio script de firewall), y ejecutar un script 
+  de shell convencional que tiene el aspecto de un conjunto de reglas. Un script 
+  de este tipo se podr&iacute;a complicar y sofisticar tanto como se deseara, 
+  eso ya es cuesti&oacute;n de cada cual.<br>
+  <br>
+  El script generalmente: &middot; Comienza cargando los modulos necesarios (los 
+  imprescindibles y los auxiliares, como el de ftp masquerading), &middot; Establece 
+  alg&uacute;n bit como por ejemplo el de forwarding. &middot; Luego borra todas 
+  las reglas actuales (flush). &middot; Establece las pol&iacute;ticas por defecto 
+  para la aceptaci&oacute;n, reenv&iacute;o y salida. &middot; Y finalmente va 
+  aplicando todas las reglas de firewall, que var&iacute;an enormente dependiendo 
+  de las necesidades de cada red. El orden de algunos puntos no tiene por que 
+  ser siempre as&iacute;.. Por lo general, una aproximaci&oacute;n buena suele 
+  ser CERRAR todo por defecto, e ir abriendo lo que se necesite. Aunque esta &uacute;ltima 
+  aproximaci&oacute;n da mucho m&aacute;s quebraderos de cabeza.<br>
+  <br>
+  A lo que &iacute;bamos, diferencias respecto a IPCHAINS.<br>
+  <br>
+  La sintaxis, obviamente, aunque no mucho.<br>
+  DENY no existe, ahora ser&iacute;a DROP.<br>
+  MASQ y REDIRECT no existen como destinos de paquetes.<br>
+  REJECT extendidos con mas opciones<br>
+  LOG con m&aacute;s opciones, muy &uacute;til para monitorizar y depurar<br>
+  &#133; y m&aacute;s que se pueden ver en el Howto y en otras p&aacute;ginas.</p>
+<p> <br>
+</p>
+<p> <span class="title"><br>
+  3. Elementos b&aacute;sicos</span><br>
+  <br>
+  -Ordenes b&aacute;sicas:<br>
+  iptables &#150;F : efectivamente, flush de reglas<br>
+  iptables &#150;L : si, listado de reglas que se estan aplicando<br>
+  iptables &#150;A : append, a&ntilde;adir regla<br>
+  iptables &#150;D : borrar una reglas, etc&#133;<br>
+  <br>
+  -Ejemplo de regla:<br>
+  <br>
+  #Regla que acepta conexiones al puerto 80<br>
+  iptables -A INPUT -i eth0 -s 0.0.0.0/0 -p TCP --dport www -j ACCEPT<br>
+  <br>
+  ANATOMIA DE LA REGLA:<br>
+  iptables: commando iptables (no hay que olvidar que las reglas son un shell 
+  script)<br>
+  -A: append, opci&oacute;n para a&ntilde;adir la regal<br>
+  INPUT: estado del paquete (al entrar es input).</p>
+<p>-i eth0: interfaz de red eth0<br>
+  -s 0.0.0.0/0: direcci&oacute;n de acceso (cualquiera en este caso)<br>
+  -p TCP: tipo de puerto<br>
+  --dport: puerto de destino<br>
+  -j ACCEPT: destino del paquete (se acepta, podr&iacute;a ser DROP, LOG, REJECT,..)<br>
+  <br>
+  <br>
+  -Gu&iacute;a r&aacute;pida de flags:<br>
+  -s : source address. Ej: -s 192.168.1.0/24<br>
+  -d : destino. Ej: -d 84.56.73.3<br>
+  -p : tipo de protocolo(TCP,UDP,ICMP). Ej: -p TCP <br>
+  --sport : puerto de origen</p>
+<p> --dport: puerto de destino<br>
+  -i = &#150;in-interface : el interfaz por el que se entra (eth0,eth1, ppp0,&#133;)<br>
+  -o = --out-interface: el interfaz por el que se sale (eth0,eth1, ppp0,&#133;)<br>
+  -Notas:<br>
+  -i se usa con reglas INPUT y FORWARD<br>
+  -o se usa con reglas FORWARD y OUTPUT<br>
+  <br>
+  A partir de estas normas b&aacute;sicas, conociendo la anatom&iacute;a b&aacute;sica 
+  de una regla, y viendo ejemplos ya tenemos<br>
+  suficiente material para hacernos con el dominio de IPTABLES.<br>
+  4. Ejemplos de configuraci&oacute;n.<br>
+  <br>
+  Ejemplo de firewall simple.<br>
+  <br>
+  Hala, ah&iacute; va volcado:<br>
+  <br>
+  <span class="code">#!/bin/sh</span></p>
+<p class="code"><br>
+  ###################################################<br>
+  ## SCRIPT de IPTABLES ##<br>
+  ## Pello Xabier Altadill Izura ##<br>
+  ## I+D+I+I en tiempo record ##<br>
+  ## Investigacion, Desarrollo, ##<br>
+  ## Innovacion e IMPLANTACION ##<br>
+  ## ##<br>
+  ## Este script es de ejemplo ##<br>
+  ## y no es el mejor ejemplo, ##<br>
+  ## pero funciona en RedHat 7.2 ##<br>
+  ## y es muy pedagogico ##<br>
+  ###################################################</p>
+<p class="code">## Notas para usuarios de IPCHAINS:<br>
+  # ipchains e iptables son modulos del kernel que<br>
+  # NO pueden convivir juntos<br>
+  # DENY ahora es DROP<br>
+  # Los LOG se guardan de otra forma</p>
+<p class="code"><br>
+  echo -n Aplicando Reglas de Firewall...</p>
+<p class="code">## Instalando modulos<br>
+  modprobe ip_tables<br>
+  modprobe ip_nat_ftp<br>
+  modprobe ip_conntrack_ftp</p>
+<p></p>
+<p class="code">## Variables<br>
+  EXTIF=&quot;eth0&quot; # La que va al router<br>
+  INTIF=&quot;eth1&quot; # La que va a la LAN</p>
+<p class="code">## Primeras reglas<br>
+  /sbin/iptables -P INPUT ACCEPT # INPUT se acepta por defecto MAL HECHO<br>
+  /sbin/iptables -F INPUT<br>
+  /sbin/iptables -P OUTPUT ACCEPT # OUTPUT se acepta por defecto, weno..<br>
+  /sbin/iptables -F OUTPUT<br>
+  /sbin/iptables -P FORWARD ACCEPT # FORWARD se acepta por defecto buf<br>
+  /sbin/iptables -F FORWARD<br>
+  /sbin/iptables -t nat -F</p>
+<p class="code"><br>
+  ## se deniega 80 y se guarda log (ejemplo)<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 0.0.0.0/0 -p TCP --dport www -j LOG --log-prefix 
+  &quot;IPTablesFW&gt; &quot;<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 0.0.0.0/0 -p TCP --dport www -j DROP</p>
+<p class="code">## Acceso al 3128 (proxy squid) desde LAN<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.1.0/24 -p TCP --dport 3128 -j ACCEPT<br>
+  # El resto se tira<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 0.0.0.0/0 -p TCP --dport 3128 -j DROP</p>
+<p></p>
+<p class="code"><br>
+  ## Acceso al 143 desde LAN<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.1.0/24 -p TCP --dport 143 -j ACCEPT</p>
+<p class="code">## Acceso al ssh desde la LAN<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 213.195.64.0/24 -p TCP --dport 22 -j ACCEPT</p>
+<p class="code">## Acceso al ssh un rango externo<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 213.195.64.0/24 -p TCP --dport 22 -j ACCEPT<br>
+  # el resto se tira<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p TCP --dport 22 -j DROP</p>
+<p class="code">## Acceso al puerto 25<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 213.191.89.0/24 -p TCP --dport 25 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.1.0/24 -p TCP --dport 25 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p TCP --dport 25 -j DROP</p>
+<p class="code">## FORWARD<br>
+  # Que me haga log de todo el forward<br>
+  /sbin/iptables -A FORWARD -j LOG</p>
+<p><span class="code">## He aqui el forward para la LAN, una regla m&aacute;gica<br>
+  iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE<br>
+  # Ese peazo de bit que hay que habilitar<br>
+  echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br>
+</p>
+<p> <br>
+  Ejemplo de firewall m&aacute;s completo<br>
+  <br>
+  Este ejemplo es algo m&aacute;s serio, ya que la regla de input por defecto 
+  es DROP. Esta pol&iacute;tica de reglas es la<br>
+  m&aacute;s segura, ya que por defecto se denegar&aacute; TODO, y poco a poco 
+  se van habilitando las entradas precisas.<br>
+  <br>
+  <span class="code">#!/bin/sh</span></p>
+<p class="code">## SCRIPT de IPTABLES<br>
+  ## Pello Xabier Altadill Izura</p>
+<p class="code">echo -n Aplicando Reglas de Firewall...</p>
+<p class="code">## Paramos el ipchains y quitamos el modulo<br>
+  /etc/rc.d/init.d/firewall stop<br>
+  rmmod ipchains</p>
+<p class="code">## Instalando modulos<br>
+  modprobe ip_tables<br>
+  modprobe ip_nat_ftp<br>
+  modprobe ip_conntrack_ftp</p>
+<p class="code"><br>
+  ## Variables<br>
+  IPTABLES=iptables<br>
+  EXTIF=&quot;eth1&quot;<br>
+  INTIF=&quot;eth0&quot;</p>
+<p class="code">## En este caso,<br>
+  ## la tarjeta eth1 es la que va al ROUTER y la eth0 la de la LAN</p>
+<p class="code">## Primeras reglas<br>
+  /sbin/iptables -P INPUT DROP<br>
+  /sbin/iptables -F INPUT<br>
+  /sbin/iptables -P OUTPUT ACCEPT<br>
+  /sbin/iptables -F OUTPUT<br>
+  /sbin/iptables -P FORWARD ACCEPT<br>
+  /sbin/iptables -F FORWARD<br>
+  /sbin/iptables -t nat -F</p>
+<p></p>
+<p class="code">### En principio, si las reglas INPUT por defecto hacen DROP, 
+  no haria falta<br>
+  ### meter mas reglas, pero si temporalmente se pasa a ACCEPT no esta de mas.</p>
+<p class="code">## Todo lo que viene de cierta IP se deja pasar (administradores 
+  remotos&#133;)<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 203.175.34.0/24 -d 0.0.0.0/0 -j ACCEPT</p>
+<p class="code">## El localhost se deja<br>
+  /sbin/iptables -A INPUT -i lo -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o lo -j ACCEPT</p>
+<p class="code">## Aceptar al exterior al 80 y al 443</p>
+<p class="code"># Permitir salida al 80<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 80 -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --dport 80 -j ACCEPT<br>
+  # Permitir salida al 443<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 443 -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --dport 443 -j ACCEPT<br>
+  <br>
+  ## SALIDA SMTP - Para que el servidor se pueda conectar a otros MTA<br>
+  # Permitir salida SMTP<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 25 -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --dport 25 -j ACCEPT</p>
+<p class="code">## SALIDA FTP - Para que el servidor se pueda conectar a FTPs<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 21 -m state --state ESTABLISHED 
+  -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --dport 21 -m state --state NEW,ESTABLISHED 
+  -j ACCEPT<br>
+  # ftp activo<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 20 -m state --state ESTABLISHED,RELATED 
+  -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --dport 20 -m state --state ESTABLISHED 
+  -j ACCEPT<br>
+  # ftp pasivo<br>
+  /sbin/iptables -A INPUT -i $EXTIF -p tcp --sport 1024:65535 --dport 1024:65535 
+  -m state --state ESTABLISHED -j ACCEPT<br>
+  /sbin/iptables -A OUTPUT -o $EXTIF -p tcp --sport 1024:65535 --dport 1024:65535 
+  -m state --state ESTABLISHED,RELATED -j ACCEPT</p>
+<p class="code"><br>
+  ## El acceso al 19720 desde fuera, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -d 0.0.0.0/0 -p tcp --dport 19720 
+  -j DROP</p>
+<p class="code">## El acceso al 19720 desde dentro, ACEPTADO<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.0/24 -p tcp --dport 19720 -j 
+  ACCEPT</p>
+<p class="code">## El acceso al 19721 desde fuera, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -d 0.0.0.0/0 -p tcp --dport 19721 
+  -j DROP</p>
+<p class="code">## El acceso al SSH desde fuera, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -d 0.0.0.0/0 -p tcp --dport 1972 
+  -j DROP</p>
+<p class="code">## El acceso al SMTP desde dentro, permitido.<br>
+  /sbin/iptables -A INPUT -i $INTIF -p tcp --dport 25 -j ACCEPT<br>
+  ## El acceso al SMTP desde fuera, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -d 0.0.0.0/0 -p tcp --dport 25 
+  -j DROP</p>
+<p class="code"><br>
+  ## Acceso al 80 desde el interior ACCEPTADO PARA DOS IPs<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.11/32 -p tcp --dport 80 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.54/32 -p tcp --dport 80 -j ACCEPT<br>
+  ## Acceso al 80 desde el interior DENEGADO PARA EL RESTO<br>
+  #/sbin/iptables -A INPUT -i $INTIF -s 192.168.9.0/24 -p tcp --dport 80 -j DROP</p>
+<p class="code"><br>
+  ## Acceso al PROXY<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.0/24 -p tcp --dport 8082 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.10.0/24 -p tcp --dport 8082 -j 
+  ACCEPT<br>
+  /sbin/iptables -A INPUT -s 127.0.0.0/8 -p tcp --dport 8082 -j ACCEPT</p>
+<p class="code"># Desde el exterior denegado<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p tcp --dport 8082 -j DROP</p>
+<p class="code">## Acceso a POP3 e IMAP desde el EXTERIOR, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.0/24 -p tcp --dport 110 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.9.0/24 -p tcp --dport 143 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.10.0/24 -p tcp --dport 110 -j ACCEPT<br>
+  /sbin/iptables -A INPUT -i $INTIF -s 192.168.10.0/24 -p tcp --dport 143 -j ACCEPT</p>
+<p class="code"><br>
+  ## Acceso a POP3 e IMAP desde el EXTERIOR, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p tcp --dport 110 -j DROP<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p tcp --dport 143 -j DROP<br>
+  ## Acceso al 8082 desde fuera, DENEGADO<br>
+  /sbin/iptables -A INPUT -i $EXTIF -s 0.0.0.0/0 -p tcp --dport 8082 -j DROP</p>
+<p><br>
+  <span class="code">## FORWARD<br>
+  # Que me haga log de todo el forward<br>
+  #/sbin/iptables -A FORWARD -j LOG</span></p>
+<p class="code"># He aqui el forward</p>
+<p class="code">## Norma general<br>
+  ##iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE</p>
+<p class="code">iptables -t nat -A POSTROUTING -o eth1 -s 192.168.9.11/32 -j MASQUERADE<br>
+  iptables -t nat -A POSTROUTING -o eth1 -s 192.168.9.16 -j MASQUERADE<br>
+  iptables -t nat -A POSTROUTING -o eth1 -s 192.168.9.54/32 -j MASQUERADE<br>
+  iptables -t nat -A POSTROUTING -o eth1 -s 192.168.9.0/24 -j MASQUERADE<br>
+  iptables -t nat -A POSTROUTING -o eth1 -s 192.168.10.0/24 -j MASQUERADE</p>
+<p class="code"># Habilitar el forwarding<br>
+  echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+<p> <br>
+  5. Reglas de protecci&oacute;n<br>
+  <br>
+  Tranquilos , aqu&iacute; no vamos a hablar de la &uacute;ltima maza de cartas 
+  Magic que me he comprado, ni de formulas<br>
+  para salir airosos jugando a La Llamada de Cthulhu, entre otras cosas porque 
+  no juego a esas cosas raras.<br>
+  <br>
+  En esta breve secci&oacute;n listamos algunas reglas para proteger nuestro equipo 
+  y por extensi&oacute;n la red, de ciertos ataques muy habituales en las redes 
+  como el smurf y otras formas de inundaci&oacute;n y DoS.<br>
+  &iquest;Es recomendable usar todas estas normas? Seg&uacute;n como administremos 
+  el nivel de paranoia.<br>
+  Nota: hay que dar valores concretos a las variables $<br>
+  <br>
+  <span class="code"># Deshabilitar broadcast<br>
+  /bin/echo &quot;1&quot; &gt; /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts<br>
+  <br>
+  # Deshabilitar el ping&#133; quiz&aacute; discutible.<br>
+  /bin/echo &quot;1&quot; &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all<br>
+  &nbsp;<br>
+  # Deshabilitar la redirecci&oacute;n del ping<br>
+  /bin/echo &quot;0&quot; &gt; /proc/sys/net/ipv4/conf/all/accept_redirects<br>
+  <br>
+  # Registrar los accesos extra&ntilde;os, paquetes falseados, etc..<br>
+  /bin/echo &quot;1&quot; &gt; /proc/sys/net/ipv4/conf/all/log_martians<br>
+  <br>
+  # Anti-flooding o inundaci&oacute;n de tramas SYN.<br>
+  iptables -N syn-flood<br>
+  iptables -A INPUT -i $IFACE -p tcp --syn -j syn-flood<br>
+  iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN<br>
+  iptables -A syn-flood -j DROP<br>
+  &nbsp;<br>
+  # Guardar los accesos con paquetes fragmentados, recurso utilizado para tirar<br>
+  # servidores y otras maldades (bug en Apache por ejemplo)<br>
+  iptables -A INPUT -i $IFACE -f -j LOG --log-prefix &quot;Fragmento! &quot;<br>
+  iptables -A INPUT -i $IFACE -f -j DROP<br>
+  &nbsp;<br>
+  # Anti-spoofing (falseo de ip origen)<br>
+  iptables -A INPUT&nbsp; -i $IFACE -s $IPADDR -j DROP<br>
+  iptables -A INPUT&nbsp; -i $IFACE -s $CLASS_A -j DROP<br>
+  iptables -A INPUT&nbsp; -i $IFACE -s $CLASS_B -j DROP<br>
+  iptables -A INPUT&nbsp; -i $IFACE -s $CLASS_C -j DROP<br>
+  iptables -A INPUT -i $IFACE -s $CLASS_D_MULTICAST -j DROP<br>
+  iptables -A INPUT -i $IFACE -s $CLASS_E_RESERVED_NET -j DROP<br>
+  iptables -A INPUT&nbsp; -i $IFACE -d $LOOPBACK -j DROP<br>
+  iptables -A INPUT -i $IFACE -d $BROADCAST -j DROP</span><br>
+  (bien explicado en el script de linuxguruz)<br>
+  <br>
+  <span class="code"># Proxy Transparent: peticiones al puerto 80 redirigir al 
+  SQUID(3128)<br>
+  iptables -t nat -A PREROUTING -p tcp -s 0.0.0.0/0 --dport 80 -j REDIRECT --to 
+  3128</span><br>
+</p>
+<p>&nbsp;</p>
+<p><span class="title">6. Notas, enlaces, a&ntilde;adidos.</span><br>
+  <br>
+  URL<br>
+  <br>
+  P&aacute;gina oficial<br>
+  <a href="http://www.netfilter.org">http://www.netfilter.org</a><br>
+</p>
+<p>Para ejemplo ca&ntilde;ero y profesional:<br>
+  <a href="http://www.linuxguruz.org/iptables/scripts/rc.firewall_010.txt">http://www.linuxguruz.org/iptables/scripts/rc.firewall_010.txt</a><br>
+</p>
+<p>Comparativa de configuraci&oacute;n ipfwadm,ipchains,iptables:<br>
+  <a href="http://www.tldp.org/LDP/nag2/x-087-2-firewall.example.html">http://www.tldp.org/LDP/nag2/x-087-2-firewall.example.html</a><br>
+</p>
+<p>Otro Script ca&ntilde;ero, con condicionales..<br>
+  <a href="http://www.malibyte.net/iptables/scripts/firewall.iptables-generic">http://www.malibyte.net/iptables/scripts/firewall.iptables-generic</a><br>
+</p>
+<p>Y por ultimo, como no , el JOUTU -q es mu flojo-<br>
+  <a href="http://www.linuxguruz.org/iptables/howto/iptables-HOWTO.html">http://www.linuxguruz.org/iptables/howto/iptables-HOWTO.html</a><br>
+  <br>
+  El resto, recomiendo buscar mas en <a href="http://www.google.com">www.google.com</a><br>
+  <br>
+  <br>
+  <br>
+  Notas<br>
+  <br>
+  Este manual se ha escrito demasiado r&aacute;pido y puede contener erratas y 
+  algunas imprecisiones te&oacute;ricas. Para aportar cualquier sugerencia, no 
+  dudar el escribir a<br>
+  <br>
+  <a href="mailto:pello@pello.info">pello@pello.info</a><br>
+  <br>
+  Versiones actualizadas en:<br>
+  <a href="http://www.pello.info">http://pello.info</a><br>
+  <br>
+</p>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Punteros</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Iteraciones"
+HREF="iteraciones.html"><LINK
+REL="NEXT"
+TITLE="Referencias"
+HREF="referencias.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="iteraciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="referencias.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="PUNTEROS"
+></A
+>Capítulo 9. Punteros</H1
+><P
+>Los punteros
+Acaso creiais que en c++ no habia punteros? eso solo 
+ocurre en Java. Los punteros no contienen datos, 
+contienen direcciones de memoria. Para cada tipo de 
+dato hay que definir un puntero.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN212"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Puntero.cpp
+* 
+* Clase que muestra las direcciones de variables
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero.cpp -o Puntero
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Creamos varias variables:
+	int pruebaInt = 99, prueba2Int;
+
+	short pruebaShort = 34;
+	char carac = 'a';
+	int *puntero = 0;
+	int *punteroNuevo;
+
+	// Ahora las mostramos por pantalla:
+	cout &#60;&#60; "Variable pruebaInt: " &#60;&#60; pruebaInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaInt: " &#60;&#60; &#38;pruebaInt &#60;&#60; endl &#60;&#60; endl;
+	
+	cout &#60;&#60; "Variable prueba2Int: " &#60;&#60; prueba2Int &#60;&#60; endl;
+	cout &#60;&#60; "Direccion prueba2Int: " &#60;&#60; &#38;prueba2Int &#60;&#60; endl &#60;&#60; endl;
+	
+	cout &#60;&#60; "Variable pruebaShort: " &#60;&#60; pruebaShort &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaShort: " &#60;&#60; &#38;pruebaShort &#60;&#60; endl &#60;&#60; endl;
+
+	cout &#60;&#60; "Variable carac: " &#60;&#60; carac &#60;&#60; endl;
+	cout &#60;&#60; "Direccion carac: " &#60;&#60; &#38;carac &#60;&#60; endl &#60;&#60; endl;
+	
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; puntero &#60;&#60; endl;
+	
+	// ATENCION, si el puntero no tiene valor dara
+	// SEGMENTATION FAULT y la CAGAREMOS de gordo
+	//cout &#60;&#60; "Variable puntero: " &#60;&#60; *puntero &#60;&#60; endl;
+	
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;puntero &#60;&#60; endl &#60;&#60; endl;
+
+	puntero = &#38;pruebaInt;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; puntero &#60;&#60; endl;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; *puntero &#60;&#60; endl;
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;puntero &#60;&#60; endl &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Veamos otro ejemplo...
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN214"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Puntero2.cpp
+* 
+* Clase que muestra mas usos de los punteros
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero2.cpp -o Puntero2
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// prototipo de funciones que implementamos luego
+int devuelve(int *punteroInt, int entero);
+
+
+int main () {
+
+	// Creamos varias variables:
+	int pruebaInt = 99, prueba2Int;
+	short pruebaShort = 34;
+	char carac = 'a';
+	int *puntero = 0;
+	int *punteroNuevo;
+	
+	// Ahora las mostramos por pantalla:
+	cout &#60;&#60; "Variable pruebaInt: " &#60;&#60; pruebaInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaInt: " &#60;&#60; &#38;pruebaInt &#60;&#60; endl &#60;&#60; endl;
+	
+	cout &#60;&#60; "Variable prueba2Int: " &#60;&#60; prueba2Int &#60;&#60; endl;
+	cout &#60;&#60; "Direccion prueba2Int: " &#60;&#60; &#38;prueba2Int &#60;&#60; endl &#60;&#60; endl;
+
+	cout &#60;&#60; "Variable pruebaShort: " &#60;&#60; pruebaShort &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaShort: " &#60;&#60; &#38;pruebaShort &#60;&#60; endl &#60;&#60; endl;
+
+	cout &#60;&#60; "Variable carac: " &#60;&#60; carac &#60;&#60; endl;
+	cout &#60;&#60; "Direccion carac: " &#60;&#60; &#38;carac &#60;&#60; endl &#60;&#60; endl;
+
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; puntero &#60;&#60; endl;
+
+	// ATENCION, si el puntero no tiene valor dara
+	// SEGMENTATION FAULT y la CAGAREMOS
+	//cout &#60;&#60; "Variable puntero: " &#60;&#60; *puntero &#60;&#60; endl;
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;puntero &#60;&#60; endl &#60;&#60; endl;
+	puntero = &#38;pruebaInt;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; puntero &#60;&#60; endl;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; *puntero &#60;&#60; endl;
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;puntero &#60;&#60; endl &#60;&#60; endl;
+	
+	*puntero = 345;
+
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; puntero &#60;&#60; endl;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; *puntero &#60;&#60; endl;
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;puntero &#60;&#60; endl &#60;&#60; endl;
+	
+	// Ahora las mostramos por pantalla:
+	cout &#60;&#60; "Variable pruebaInt: " &#60;&#60; pruebaInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaInt: " &#60;&#60; &#38;pruebaInt &#60;&#60; endl &#60;&#60; endl;
+
+	*punteroNuevo = devuelve(puntero,34);
+	
+	cout &#60;&#60; " Tras llamada: " &#60;&#60; endl;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; punteroNuevo &#60;&#60; endl;
+	cout &#60;&#60; "Variable puntero: " &#60;&#60; *punteroNuevo &#60;&#60; endl;
+	cout &#60;&#60; "Direccion puntero: " &#60;&#60; &#38;punteroNuevo &#60;&#60; endl &#60;&#60; endl;
+
+	return 0;
+
+}
+
+
+int devuelve (int *punteroInt, int entero) {
+	
+	cout &#60;&#60; "Variable param. puntero: " &#60;&#60; punteroInt &#60;&#60; endl;
+	cout &#60;&#60; "Variable param. puntero: " &#60;&#60; *punteroInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion param. puntero: " &#60;&#60; &#38;punteroInt &#60;&#60; endl &#60;&#60; endl;
+	
+	return (*punteroInt) + entero;
+
+} </PRE
+><P
+></P
+></DIV
+>  
+
+new y delete
+Con las instrucciones new y delete podemos reservar y 
+liberar espacio libre de memoria. Se utilizan con los 
+punteros (ademas de los objetos) y es muy necesario 
+liberar siempre la memoria con la instruccion delete 
+para evitar memory leaks: espacio de memoria marcados 
+como okupados pero que ya no se usan porque el puntero 
+que les correspondia ahora apunta a otro lado.
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN216"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Puntero.cpp
+* 
+* Clase que muestra la okupacion/liberacion de memoria 
+con new y delete
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero.cpp -o Puntero
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Creamos varias variables:
+	int *pruebaInt = new int;
+	short *pruebaShort = new short;
+	pruebaInt = 777;
+	pruebaShort = 23;
+	
+	// Ahora las mostramos por pantalla:
+	cout &#60;&#60; "Variable pruebaInt: " &#60;&#60; pruebaInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaInt: " &#60;&#60; &#38;pruebaInt &#60;&#60; endl &#60;&#60; endl;
+	cout &#60;&#60; "Variable pruebaShort: " &#60;&#60; pruebaShort &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaShort: " &#60;&#60; &#38;pruebaShort &#60;&#60; endl &#60;&#60; endl;
+	
+	// Liberamos la memoria
+	delete pruebaInt;
+	delete pruebaShort;
+
+	// Contra la especulacion del sistema (operativo)
+	// volvemos a oKupar un espacio de memoria
+	int *pruebaInt = new int;
+	short *pruebaShort = new short;
+	pruebaInt = 666;
+	pruebaShort = 21;
+	
+	// quiza tengamos un error, pero se puede comprobar:
+	if ( pruebaInt == NULL || pruebaShort == NULL ) {
+
+		cout &#60;&#60; "Error al reservar memoria" &#60;&#60; endl;
+		return 0;
+	
+	}
+
+	// Ahora las mostramos por pantalla:
+	cout &#60;&#60; "Variable pruebaInt: " &#60;&#60; pruebaInt &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaInt: " &#60;&#60; &#38;pruebaInt &#60;&#60; endl &#60;&#60; endl;
+	cout &#60;&#60; "Variable pruebaShort: " &#60;&#60; pruebaShort &#60;&#60; endl;
+	cout &#60;&#60; "Direccion pruebaShort: " &#60;&#60; &#38;pruebaShort &#60;&#60; endl &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Objetos y punteros Se pueden crear punteros a objetos y 
+atributos que son punteros. Veamos este ejemplo de una 
+clase llamada Objeto:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN218"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Objeto.hpp
+* 
+* Clase que muestra distintos tipos de punteros
+* que se usan con los objetos
+*
+* Pello Xabier Altadill Izura
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Inicio de la clase
+class Objeto {
+
+private:
+
+	int *privado;
+
+public:
+
+	int atributo;
+
+	// Constructor
+	Objeto();
+
+	// Constructor
+	Objeto(int atributo);
+
+	// Destructor
+	~Objeto();
+
+	// Menu tipo case
+	int devuelveAlgo();
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN220"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Objeto.cpp
+* 
+* Clase que muestra distintos tipos de punteros
+* que se usan con los objetos
+* Pello Xabier Altadill Izura
+* Compilar: g++ Objeto.cpp -o Objeto
+*/
+
+#include "Objeto.hpp"
+
+// Constructor
+Objeto::Objeto(){
+
+	atributo = 666;
+
+}
+
+
+// Constructor
+Objeto::Objeto(int atributo){
+
+	this-&#62;atributo = atributo;
+
+}
+
+
+// Destructor
+Objeto::~Objeto(){}
+
+
+// Menu tipo case
+int Objeto::devuelveAlgo(){
+
+	int temp = 0;
+
+	return temp;
+
+}
+
+
+int main () {
+
+	// Aqui guardaremos el resultado
+	int resultado = 0;
+
+	cout &#60;&#60; " Vamos a jugar con los objetos." &#60;&#60; endl;
+
+	// Creamos la instancia del objeto puntero
+	Objeto objeto = Objeto();
+
+	//Creamos un puntero a ese objeto,
+	// pero cuidado, no asignarle un constructor directamente
+	Objeto *objetopuntero;
+	
+	// esto si...
+	objetopuntero = &#38;objeto;
+	
+	// Invocamos los metodos
+	resultado = objeto.devuelveAlgo();
+	
+	// Observese la diferencia al acceder al atributo publico:
+	cout &#60;&#60; " El valor de atributo con Objeto es: " &#60;&#60; objeto.atributo &#60;&#60; endl;
+	cout &#60;&#60; " El valor de atributo con Objeto es: " &#60;&#60; objetopuntero-&#62;atributo &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  </P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="SEXTOPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/pointers.png"></P
+></DIV
+><P
+></P
+></DIV
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="iteraciones.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="referencias.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Iteraciones</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Referencias</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,744 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Funciones avanzadas</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Referencias"
+HREF="referencias.html"><LINK
+REL="NEXT"
+TITLE="Arrays"
+HREF="arrays.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="referencias.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="arrays.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="FUNCIONES-AVANZADAS"
+></A
+>Capítulo 11. Funciones avanzadas</H1
+><P
+>&#13;Sobrecarga y valores por defecto
+En un clase se pueden sobrecargar los metodos y los 
+constructores, e incluso se pueden asignar valores por 
+defecto a los parametros (como en php). Veamos el 
+ejemplo del coche un poco mas desarrollado.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN259"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Coche.hpp
+* Clase que representa un coche
+* 
+* Pello Xabier Altadill Izura 
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Coche {
+	
+private:
+	
+	char *marca;
+
+	int cilindrada;
+
+	int caballos;
+
+	enum marcha { Primera, Segunda, Tercera, Cuarta, Quinta, Pto_Muerto};
+	
+public:
+
+	Coche();
+	
+	Coche(int cilindrada,int caballos);
+	
+	Coche(char *marca,int cilindrada,int caballos);
+	
+	~Coche();
+
+	void arranca();
+
+	void avanza(int metros = 5); // Con valor por defecto
+
+	void cambiaMarcha(marcha mar);
+
+	void cambiaMarcha();
+
+	void detiene();
+
+	void acelera();
+
+
+	char * getMarca ();
+	
+	int getCilindrada ();
+	
+	int getCaballos ();
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y esta su implementacion observense las funciones 
+sobrecargadas y los posibles errores que se pueden cometer.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN261"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Coche.cpp
+* Fichero que implementa la clase coche
+* 
+* Pello Xabier Altadill Izura 
+*
+*/
+
+#include "Coche.hpp";
+
+// Constructor por defecto
+Coche::Coche() {
+
+	cout &#60;&#60; "Coche creado." &#60;&#60; endl;
+
+}
+
+
+// Constructor sobrecargado CON VALORES POR DEFECTO
+// si no se establece otra cosa se asignan esos valores
+Coche::Coche (int cilindrada = 1000, int caballos = 100) {
+	
+	this-&#62;marca = "Cualquiera";
+	this-&#62;cilindrada = cilindrada;
+	this-&#62;caballos = caballos;
+
+}
+
+
+// Constructor sobrecargado
+Coche::Coche (char *marca,int cilindrada,int caballos) {
+
+	this-&#62;marca = marca;
+	this-&#62;cilindrada = cilindrada;
+	this-&#62;caballos = caballos;
+
+}
+
+
+// Destructor
+Coche::~Coche() {
+	
+	cout &#60;&#60; "Coche destruido." &#60;&#60; endl;
+
+}
+
+
+void Coche::arranca() {}
+
+
+void Coche::detiene() {}
+
+
+void Coche::acelera() {}
+
+
+// Metodo para que el coche avance. Esta definico con un valor
+// por defecto (5) por tanto podria invocarse SIN parametro alguno
+void Coche::avanza(int metros) {
+
+	cout &#60;&#60; this-&#62;marca &#60;&#60; " ha avanzado " &#60;&#60; metros &#60;&#60; metros &#60;&#60; endl; 
+
+}
+
+// Metodo para que el coche cambie de marcha
+void Coche::cambiaMarcha() {}
+
+// Metodo -sobrecargado- para que el coche cambie de marcha 
+void Coche::cambiaMarcha(marcha mar) {}
+
+// Muestra la marca
+char * Coche::getMarca () {
+
+	return this-&#62;marca;
+
+}
+
+
+// Muestra la cilindrada
+int Coche::getCilindrada () {
+
+	return this-&#62;cilindrada;
+
+}
+
+
+// Muestra los caballos
+int Coche::getCaballos (){
+
+	return this-&#62;caballos;
+
+}
+
+
+/**
+* NOTA IMPORTANTE
+* Atencion : al usar esta clase en otra que ya tiene funcion
+* main, no se puede tener otra main.
+*/
+int main () {
+
+	int test = 0;
+
+	Coche vehiculo = Coche("Skoda", 1050, 250);
+	
+	cout &#60;&#60; "Lo hice, tengo un: "&#60;&#60; vehiculo.getMarca() &#60;&#60; endl;
+
+	vehiculo.arranca();
+	vehiculo.cambiaMarcha();
+	vehiculo.avanza();
+	
+	// ATENCION!! esto seria una llamada ambigua, ya que existe otro constructor
+	// que se puede asignar sin parametros pq tiene valores por defecto que es esta:
+	// Coche::Coche (int cilindrada = 1000, int caballos = 100) y choca con el constructor
+	// por defecto. Boludos! el compilador nos rompera el ORTO sin compasion
+	//Coche segundoCoche = Coche();
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Se puede implementar el constructor de otra manera 
+(sirve para tirarte el rollete guru, aunque te seguiran 
+pagando igual de mal), atencion a la sintaxis.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN263"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;Coche::Coche(): marca("Seat"), cilindrada(120) {
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Copy constructor
+Este es un constructor que se puede a&ntilde;adir a nuestras 
+clases y que sirve para hacer una copia de un objeto de 
+esa clase. Existe uno por defecto pero es recomendable 
+preocuparse en implementarlo nosotros mismos ya que 
+pueden producirse errores con atributos que son punteros.
+Veamos el copy de la clase Perro.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN265"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Perro.hpp
+* Clase de cabecera de Perro
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Perro {
+
+public:
+
+	Perro (int initialAge);
+	
+	// constructor COPY 
+	Perro (const Perro &#38;);
+
+	~Perro();
+
+	// metodos YA implementados
+	int GetAge() { return itsAge;} // automaticamente inline!
+
+	void SetAge (int age) { itsAge = age;} // automaticamente inline!
+	
+	int * GetPeso() { return peso;} // automaticamente inline!
+	
+	void SetPeso (int * peso) { this-&#62;peso = peso;} // automaticamente inline!
+	
+	char * GetRaza() { return raza;} // automaticamente inline!
+	
+	void SetRaza (char * raza) { this-&#62;raza = raza;} // automaticamente inline!
+
+	char * GetColor() { return color;} // automaticamente inline!
+
+	void SetColor (char *color) { this-&#62;color = color;} // automaticamente inline!
+
+	void Ladra() { cout &#60;&#60; "Guau Guau arrr...\n";} // automaticamente inline!
+
+private:
+	
+	int itsAge;
+	
+	int *peso;
+	
+	char *raza;
+
+	char *color;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN267"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Perro.cpp
+* Clase que implementa la clase Perro con constructor copy
+*
+* Pello Xabier Altadill Izura
+*
+* Compilado: g++ Perro.cpp -o Perro
+*/
+
+#include "Perro.hpp" 
+
+//constructor
+Perro::Perro(int initialAge) {
+	
+	itsAge = initialAge;
+
+	cout &#60;&#60; "Creado chucho." &#60;&#60; endl;
+
+}
+
+//copy-constructor. Atencion
+Perro::Perro(const Perro &#38; perroOrigen) {
+
+	itsAge = perroOrigen.itsAge;
+	peso = new int;
+	raza = new char;
+	color = new char;
+	color = perroOrigen.color;
+	raza = perroOrigen.raza;
+	peso = perroOrigen.peso;
+	cout &#60;&#60; "Creado chucho con copia" &#60;&#60; endl;
+
+}
+
+//destructor
+Perro::~Perro() {
+	
+	cout &#60;&#60; " objeto destruido." &#60;&#60; endl;
+
+}
+
+
+/**
+* La funcion principal, crea un perro y le hace ladrar
+*/
+int main()
+{
+	
+	int t = 0;
+	bool test = false;
+	
+	Perro Canelo(5);
+	
+	Canelo.SetRaza("Pastor vasco");
+	
+	// Creamos a Laika haciendo una copia de canelo
+	Perro Laika(Canelo);
+
+	cout &#60;&#60; "Laika es de raza " ;
+	cout &#60;&#60; Laika.GetRaza() &#60;&#60; endl;
+	
+	Laika.SetRaza("Sovietica");
+	Canelo.Ladra();
+	
+	cout &#60;&#60; "Canelo es un perro cuya edad es: " ;
+	cout &#60;&#60; Canelo.GetAge() &#60;&#60; " a&#38;ntilde;os\n";
+
+	Canelo.Ladra();
+
+	Canelo.SetAge(7);
+	
+	cout &#60;&#60; "Ahora Canelo es " ;
+	
+	cout &#60;&#60; Canelo.GetAge() &#60;&#60; " a&#38;ntilde;os\n";
+
+	cout &#60;&#60; "Laika es de raza " ;
+	cout &#60;&#60; Laika.GetRaza() &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Sobrecargando operadores
+Todo un clasico de c++. Podemos sobrecargar operadores 
+matematicos para nuestras clases. La sintaxis seria 
+algo asi:
+retorno operator++ (parametros)
+retorno operator- (parametros)
+Veamos un ejemplo con la clase Contador en la que 
+sobrecargamos operadores de prefijo.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN269"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Contador.hpp
+* Clase que muestra la sobrecarga de operadores matematicos
+*
+* Pello Xabier Altadill Izura
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Contador {
+
+private:
+
+	int valor;
+	
+public:
+	
+	Contador();
+	
+	Contador(int valor);
+	
+	~Contador();
+
+	Contador(const Contador &#38;);
+
+	int getContador () const { return valor;} // inline
+
+	void setContador (int valor) { this-&#62;valor = valor;} // inline
+
+	void operator++ (); // operador PREFIJO ++contador
+
+	void operator-- (); // operador PREFIJO --contador
+
+	void operator++(int); // operador SUFIJO (postfix) contador++
+
+	void operator--(int); // operador SUFIJO (postfix) contador--
+
+	Contador operator+(const Contador &#38;); // operador + 
+
+	bool esCero() { return (valor == 0);} // inline
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN271"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Contador.cpp
+* fichero que implementa la clase contador
+*
+* Pello Xabier Altadill Izura
+*/
+
+#include "Contador.hpp"
+
+// Constructor
+Contador::Contador() {
+
+	valor = 0;
+
+	cout &#60;&#60; "Contador creado!" &#60;&#60; endl;
+
+}
+
+
+// Constructor con valor
+Contador::Contador(int valor) {
+
+	this-&#62;valor = valor;
+
+	cout &#60;&#60; "Contador creado con valor inicial: " &#60;&#60; valor &#60;&#60; endl;
+	
+}
+
+Contador::~Contador() {
+	
+	cout &#60;&#60; "Contador destruido!" &#60;&#60; endl;
+
+}
+
+
+Contador::Contador(const Contador &#38; original) {
+	
+	valor = original.valor;
+
+}
+
+
+// Sobrecarga de operador unario ++ PREFIJO ++operador
+void Contador::operator++ () { 
+	
+	cout &#60;&#60; "incrementando valor de contador : " &#60;&#60; valor &#60;&#60; endl;
+
+	++valor;
+
+}
+
+
+// Sobrecarga de operador unario -- PREFIJO --operador
+void Contador::operator-- () { 
+	
+	cout &#60;&#60; "decrementando valor de contador : " &#60;&#60; valor &#60;&#60; endl;
+	
+	--valor;
+
+}
+
+
+// Sobrecarga de operador unario ++ SUFIJO operador++
+void Contador::operator++ (int) { 
+
+	cout &#60;&#60; "incrementando valor de contador : " &#60;&#60; valor &#60;&#60; endl;
+	
+	valor++;
+
+}
+
+
+// Sobrecarga de operador unario -- SUFIJO operador--
+void Contador::operator-- (int) { 
+	
+	cout &#60;&#60; "decrementando valor de contador : " &#60;&#60; valor &#60;&#60; endl;
+	
+	valor--;
+
+}
+
+
+// operador +
+Contador Contador::operator+(const Contador &#38; tmp) {
+	
+	return Contador(valor + tmp.getContador());
+
+} 
+
+
+int main () {
+
+	int i;
+
+	// Definimos un contador
+	Contador contador;
+
+	Contador MegaContador(1687);
+	Contador resultado;
+
+	cout &#60;&#60; "Valor de contador: " &#60;&#60; contador.getContador() &#60;&#60; endl;
+
+	// Establecemos un valor inicial
+	contador.setContador(15);
+	
+	cout &#60;&#60; "Valor de contador: " &#60;&#60; contador.getContador() &#60;&#60; endl;
+	cout &#60;&#60; "Valor de megacontador: " &#60;&#60; MegaContador.getContador() &#60;&#60; endl;
+
+	// y lo usamos como controlador de un while
+	while (!contador.esCero()) {
+		--contador;
+	}
+
+	contador.setContador(1000);
+
+	cout &#60;&#60; "Valor actual de contador: " &#60;&#60; contador.getContador() &#60;&#60; endl;
+	cout &#60;&#60; "Valor actual de megacontador: " &#60;&#60; MegaContador.getContador() &#60;&#60; endl;
+
+	resultado = contador + MegaContador;
+	cout &#60;&#60; "Valor de resultado de la suma: " &#60;&#60; resultado.getContador() &#60;&#60; endl;
+		
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="referencias.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="arrays.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Referencias</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Arrays</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

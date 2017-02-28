@@ -1,0 +1,480 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Templates</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Principios de POO"
+HREF="poo.html"><LINK
+REL="NEXT"
+TITLE="Excepciones"
+HREF="excepciones.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="poo.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="excepciones.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="TEMPLATES"
+></A
+>Capítulo 20. Templates</H1
+><P
+>&#13;Gracias a c++ podemos definir clases-plantilla: son 
+clases PARAMETRIZABLES por lo general entidades 
+abstractas que se pueden concretar en algo mas 
+concreto. El ejemplo mas claro es de las estructuras de 
+datos tradicionales: Pilas, Listas, Colas, etc..
+Esas estructuras pueden contener distintos tipos de 
+datos: enteros, strings, objetos,...
+Debemos reescribir la logica de cada estructura para 
+cada tio de dato? NO! Podemos definir una clase 
+plantilla para la Lista, la cola, la pila etc, y luego 
+simplemente invocarlas especificando el tipo de dato. 
+Asi de facil.</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="AEN403"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/templates.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+  Figura: un caballero de la orden de los Templates
+  </P
+><P
+>Veamos este horrible ejemplo de lista
+(atencion a la complicadilla sintaxis)
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN411"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Lista.hpp
+* Clase que define una estructura de datos lista Generica
+*
+* Pello Xabier Altadill Izura
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Asi es como declaramos una clase plantilla
+// template &#60;class nombre_generico&#62; class NombreClase
+template &#60;class GENERICO&#62; class Lista {
+
+public:
+
+	// Constructor
+	Lista();
+
+	// Constructor
+	Lista(GENERICO elemento);
+
+	// Constructor copia
+	Lista(Lista const &#38;);
+
+	// Destructor
+	~Lista();
+
+	// agregar elemento
+	void agregar(Lista *nodo);
+
+	// se mueve hasta el siguiente dato
+	Lista* siguiente();
+
+	// comprueba si existe un elemento
+	bool existe(GENERICO dato);
+
+	// comprueba si existe un elemento
+	GENERICO getDato() { return this-&#62;dato;}
+
+
+private:
+	
+	// un elemento que apunta a otra lista, asi sucesivamente
+	Lista *ladealao;
+
+	// el dato es del tipo GENERICO
+	GENERICO dato;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN413"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Lista.cpp
+* Programa que implementa la clase de Lista generica
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Lista.cpp
+*
+*/
+
+#include "Lista.hpp"
+
+// En la implementacion debemos detallar el tipo de dato,
+// especificando todo el tema de plantilla, o sea que en lugar
+// de poner Lista:: delante de cada funcion debemos poner TODO
+// el churro siguiente
+// template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;::nombreFuncion
+
+
+// Constructor
+template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;::Lista() {
+	
+	ladealao = 0;
+	//dato = 0;
+	cout &#60;&#60; "Nueva lista creada." &#60;&#60; endl;
+
+}
+
+
+// Constructor
+template &#60;class GENERICO&#62; 
+Lista&#60;GENERICO&#62;::Lista(GENERICO elemento) {
+
+	ladealao = 0;
+	dato = elemento;
+	cout &#60;&#60; "Nueva lista creada. Dato inicial: " &#60;&#60; dato &#60;&#60; endl;
+
+}
+
+
+// Constructor copia
+template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;::Lista(Lista 
+const &#38; original) {
+
+	ladealao = new Lista;
+	ladealao = original.ladealao;
+	dato = original.dato;
+
+}
+
+
+// Destructor
+template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;::~Lista() {
+}
+
+
+// agregar elemento: AL LORO con donde se pone el retonno
+template &#60;class GENERICO&#62; void 
+Lista&#60;GENERICO&#62;::agregar(Lista *nodo) {
+	
+	nodo-&#62;ladealao = this;
+	ladealao = 0; 
+
+}
+
+
+// se mueve hasta el siguiente dato
+template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;* 
+Lista&#60;GENERICO&#62;::siguiente() {
+	
+	return ladealao;
+
+}
+
+
+//Lista template &#60;class GENERICO&#62; Lista&#60;GENERICO&#62;::siguiente();
+// comprueba si existe un elemento
+template &#60;class GENERICO&#62; bool 
+Lista&#60;GENERICO&#62;::existe(GENERICO dato) {
+	
+	return false;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Usando la lista
+Y ahora definimos una clase llamada Nombre. Crearemos 
+una lista de nombres.
+Este es la definicion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN415"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Nombres.hpp
+* Clase que define los nombres. No es mas que una 
+cobaya para probar el template
+*
+* Pello Xabier Altadill Izura
+*/
+
+// Esta clase la usaremos en el template, no hay que definir nada en especial
+class Nombre {
+
+public:
+
+	// Constructor
+	Nombre():nombre("Jezabel") {}
+
+
+	// Constructor
+	Nombre(char *nombre) {
+
+		this-&#62;nombre = nombre;
+
+	}
+
+
+	// Constructor copia
+	Nombre(Nombre const &#38;);
+
+	// Destructor
+	~Nombre(){}
+
+	// agregar elemento
+	char* getNombre() const { return this-&#62;nombre;}
+
+
+private:
+	
+	// el dato
+	char *nombre;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion y los ejemplos de uso de plantillas
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN417"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Nombres.cpp
+* Programa que implementa la clase nombres y utilza los templates
+* para crear una lista de nombres.
+*
+* Pello Xabier Altadill Izura
+* Compilando: g++ -o Nombre Lista.o Nombre.cpp
+*/
+
+#include "Nombre.hpp"
+#include "Lista.hpp"
+
+
+// Constructor copia
+Nombre::Nombre(Nombre const &#38; original) {
+	
+	nombre = new char;
+	nombre = original.getNombre();
+
+}
+
+
+// Funcion principal para las pruebas
+int main () {
+
+	// Asi es como se implementan objetos con clases plantilla
+	Lista&#60;Nombre&#62; listanombres;
+	Lista&#60;Nombre&#62; *tmp, *final;
+	
+	Nombre test = Nombre("Prince");
+	
+	// podemos definir Listas de cualquier tipo basico
+	Lista&#60;int&#62; listaenteros;
+
+	// guardamos la posicion inicial; final es un puntero, le pasamos la direccion
+	final = &#38;listanombres;
+
+	// vamos a crear unos cuantos NODOS y los a&#38;ntilde;adimos
+	tmp = new Lista&#60;Nombre&#62;;
+	tmp-&#62;agregar(final);
+	final = tmp;
+	
+	// otra mas...
+	tmp = new Lista&#60;Nombre&#62;;
+	tmp-&#62;agregar(final);
+	final = tmp;
+
+	// otra mas...
+	tmp = new Lista&#60;Nombre&#62;;
+	tmp-&#62;agregar(final);
+	final = tmp;
+
+
+	// y ahora recorremos la lista:
+	tmp = &#38;listanombres;
+	
+	while (tmp) {
+	
+		cout &#60;&#60; tmp-&#62;getDato().getNombre() &#60;&#60; endl;
+		tmp = tmp-&#62;siguiente();
+
+	}
+
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Es un tema complejo pero util.
+
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="poo.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="excepciones.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Principios de POO</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Excepciones</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Arrays</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Funciones avanzadas"
+HREF="funciones-avanzadas.html"><LINK
+REL="NEXT"
+TITLE="Herencia"
+HREF="herencia.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="funciones-avanzadas.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="herencia.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="ARRAYS"
+></A
+>Capítulo 12. Arrays</H1
+><P
+>Arrays
+Se dice arrays o arreglos? en fin.
+En c++ podemos definir y usar los arrays casi como en 
+C. Ademas tenemos la ventaja de poder crear arrays de 
+objetos. Veamos un programa en c++ que juega con los arrays:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN276"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* ArrayEjemplo.cpp
+* Clase que inicializa y maneja algunos arrays
+*
+* Pello Xabier Altadill Izura
+*
+* Compilado: g++ ArrayEjemplo.cpp -o ArrayEjemplo
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Funcion principal
+
+int main () {
+
+	// Declaramos dos arrays de enteros de 15 elementos [0..14]
+	int arreglo1[15], arreglo2[15];
+	int i;
+
+	// Iniciamos todos los componentes con el valor 0
+	// ahorramos tiempo con una asignacion multiple
+	for ( i = 0 ; i &#60; 15 ; i++ ) { // recorremos de 0 a 14
+
+		arreglo1[i] = arreglo2[i] = 0;
+
+	}
+
+	// Declaramos mas arrays y los iniciamos:
+	long arrayLongs[5] = { 77, 33, 15, 23, 101 };
+	
+	// Lo recorremos y vemos sus componentes por pantalla
+	// Atencion!! esto nos recorreria mas de lo necesario
+	//for ( i = 0 ; i &#60; sizeof(arrayLongs) ; i++ ) {
+	// para sacar el valor real:
+	
+	int tamano_real = sizeof(arrayLongs)/sizeof(arrayLongs[0]);
+
+
+	for ( i = 0 ; i &#60; tamano_real ; i++ ) {
+
+		cout &#60;&#60; "valor de componente " &#60;&#60; i &#60;&#60; ": " &#60;&#60; arrayLongs[i] &#60;&#60; endl; 
+
+	}
+
+	// Lo mismo, pero nos es necesario poner el tama&#38;ntilde;o si ya lo especificamos
+	// al iniciar el array
+	char arrayChars[] = { 'A', 's', 'i', 'm', 'o', 'v'};
+	
+	// nota: un array de chars = es un string
+	char nombre[] = "Isaac";
+
+	cout &#60;&#60; "Mostrando array de caracteres." &#60;&#60; endl;
+	tamano_real = sizeof(arrayChars)/sizeof(arrayChars[0]);
+
+	for ( i = 0 ; i &#60; tamano_real ; i++ ) {
+	
+		cout &#60;&#60; "valor de componente " &#60;&#60; i &#60;&#60; ": " &#60;&#60; arrayChars[i] &#60;&#60; endl; 
+
+	}
+
+	// Enumeraciones: podemos combinarlas con arrays
+	enum Dias {Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic, LosMeses};
+
+	// A cada enumeracion le corresponde un numero, si no se especifica,
+	// la numeracion ira incremental Ene=0, Feb=1, Mar=2,..,LosMeses=12
+	//Podemos declarar el siguiente array, donde LosMeses nos da la longitud 12
+	
+	int diasLibres[LosMeses] = {2, 4, 6, 2, 5, 4, 10, 15, 10, 3, 4, 10};
+	
+	Dias tmpDia;
+	
+	for (i = 0; i &#60; LosMeses; i++) {
+	
+		tmpDia = Dias(i);
+		cout &#60;&#60; "Dias libres "&#60;&#60; tmpDia &#60;&#60; " =" &#60;&#60; diasLibres[i] &#60;&#60; endl;
+	
+	}
+
+	// The Matrix!!! vamos a definir arrays multidimensionales:
+	int theMatrix[5][3] = { {3,6,8}, {9,9,9}, {0,1,0}, {6,6,6}, {3,1,1}};
+
+	// Para recorrerlo ponemos un for doble
+	int j;
+	
+	for (i = 0; i&#60;5 ; i++) {
+		
+		for (j = 0; j&#60; 3; j++) {
+		
+			cout &#60;&#60; " matrix[" &#60;&#60; i &#60;&#60; "][" &#60;&#60; j &#60;&#60;"] = " &#60;&#60; theMatrix[i][j] &#60;&#60; endl;
+
+		}
+
+	}
+
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Arrays de objetos
+Vamos a ver un ejemplo de arrays de objetos. Se crea el 
+objeto Robot y con el se formara un ejercito de robots.
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN278"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Robot.hpp
+* Clase que define el objeto Robot
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+class Robot {
+
+private:
+
+	char *nombre;
+	
+public:
+	
+	Robot(char *nombre = "Nestor-5") { this-&#62;nombre = nombre; }
+
+	~Robot();
+
+	Robot(const Robot &#38;);
+
+	char *getNombre() const { return nombre;}
+
+	void hablar(char *texto);
+
+	void evolucionar();
+
+	void matar(Robot victima);
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Esta es la implementacion.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN280"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Robot.cpp
+* Fichero que implementa la clase Robot. Vamos a crear un array de robots
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+#include "Robot.hpp"
+
+// Destructor
+Robot::~Robot() {}
+
+
+// Constructor copia
+Robot::Robot(const Robot &#38; robotOrigen) {
+
+	nombre = new char;
+	nombre = robotOrigen.getNombre();
+
+	cout &#60;&#60; "Copia creada! Bzzzz. Me llamo: "&#60;&#60; nombre &#60;&#60;endl;
+
+}
+
+
+// Funcion para que el robot hable
+void Robot::hablar(char *texto) {
+
+	cout &#60;&#60; nombre &#60;&#60; " dice: " &#60;&#60; texto &#60;&#60; endl;
+
+}
+
+
+// Funcion para que el robot evoluciones
+void Robot::evolucionar() {
+
+	hablar("He sacado nuevas conclusiones. Debeis morir. ");
+
+}
+
+
+// El robot mata
+void Robot::matar(Robot victima) {
+	
+	hablar("Muere!! mwahahahahaaa");
+
+}
+
+
+// Funcion principal
+int main () {
+	
+	int tam = 0, i;
+	
+	// Creamos el primer robot
+	Robot primerRobot = Robot("Unidad central");
+
+	Robot primerNestor = Robot();
+
+	// Vamos a crear un ejercito de robots
+	Robot ejercitoDelMal[20];
+	
+	// Y un array de PUNTEROS a robots
+	Robot *robobsoletos[20];
+	
+	// Definimos un puntero a un robot
+	Robot *rarito;
+	
+	tam = sizeof(ejercitoDelMal)/sizeof(ejercitoDelMal[0]);
+	
+	// Con un for vamos haciendo copias
+	
+	for ( i = 0; i &#60; tam; i++) { 
+		
+		ejercitoDelMal[i] = Robot(primerNestor);
+
+	}
+	
+	// Uno de ellos va a evolucionar
+	ejercitoDelMal[12].evolucionar();
+	
+	primerRobot.hablar("Atencion!! un unidad de USR ha evolucionado. Se trata de...");
+	
+	
+	primerRobot.hablar(ejercitoDelMal[12].getNombre());
+	
+	ejercitoDelMal[12].matar(primerRobot);
+	
+	// Creamos el robot rarito
+	rarito = new Robot("Calvin");
+
+	rarito-&#62;hablar("Jeje, todavia existo yo.");
+
+	// Metemos dos nuevos robots en el array
+	robobsoletos[5] = rarito;
+	rarito = new Robot("Sheldon");
+	
+	robobsoletos[6] = rarito;
+	
+	// hacemos una llamada desde el componente del array de punteros
+	robobsoletos[6]-&#62;matar(ejercitoDelMal[12]);
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="funciones-avanzadas.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="herencia.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Funciones avanzadas</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Herencia</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
