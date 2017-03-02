@@ -1,0 +1,84 @@
+---
+layout: post
+title: "Listas enlazadas" 
+date: 2003-04-09 13:15:00 
+categories: coding
+---
+<p>Ejemplo de listas enlazadas usando punteros.</p>
+<p>&nbsp;</p>
+<pre>/**
+* lista.c
+* Muestra el uso de estructuras
+* Compilacion: gcc -o lista lista.c
+* curso de C
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Declaramos la estructura */
+struct lista {
+ char *nombre;
+ struct lista *siguiente;
+};
+
+/* Funciones para manejar lista */
+void print_lista (struct lista *l);
+void add_lista (struct lista *l, char * nombre);
+
+
+
+main ()
+{
+ struct lista miLista;
+ printf("Vamos a usar la lista. 
+");
+ miLista.nombre = "Primero";
+ miLista.siguiente = NULL;
+
+ print_lista(&amp;miLista);
+
+ add_lista(&amp;miLista,"Segundo");
+ print_lista(&amp;miLista);
+
+ add_lista(&amp;miLista,"Tercero");
+ print_lista(&amp;miLista); 
+}
+
+/* Implementaci&Atilde;&sup3;n de print_lista */
+void print_lista (struct lista *l)
+{
+
+
+ printf("
+LISTA=[");
+
+ /* Recorre la lista */
+ while (l != NULL)
+ {
+ printf(" %s,",l-&gt;nombre);
+ l = l-&gt;siguiente;
+ }
+
+ printf("]
+");
+}
+
+/* Implmentacion add_lista */
+void add_lista (struct lista *l, char * nombre)
+{
+ struct lista *tmp;
+
+ /* Creamos el nuevo espacio*/
+ tmp = (struct lista *) malloc(sizeof(struct lista));
+ tmp-&gt;nombre = nombre;
+ tmp-&gt;siguiente = NULL;
+
+ /* Nos vamos al final */
+ while (l-&gt;siguiente != NULL)
+ l = l-&gt;siguiente;
+
+ l-&gt;siguiente = tmp;
+}
+
+</pre>
