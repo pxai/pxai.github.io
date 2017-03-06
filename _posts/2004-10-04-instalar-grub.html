@@ -1,0 +1,42 @@
+---
+layout: post
+title: "Instalar GRUB" 
+date: 2004-10-04 10:23:00 
+categories: coding
+---
+El grub no es un corredor de fondo marroqui, es un gestor de arranque que esta <br>sustituyendo a lilo en muchas distribuciones.
+<br>
+Hay veces que grub se desinstala o no esta del todo bien.<br>
+En el arranque podemos usar el shell de grub para reinstalar el gestor de arranque. <br>Se trata de decirle cual es el disco y cual es la imagen concreta de kernel que se quiere arrancar.
+<br>
+Alternativamente se puede usar un diskette de arranque grub para hacer lo mismo, pero<br> eso si, hay que conocer el fichero concreto del kernel para establecerlo.
+<br>
+En este ejemplo instalamos un arranque concreto y lo guardamos con la opcion setup.
+
+
+<pre>
+grub> root (hd0,0)
+
+grub> kernel=/boot/kernel-2.6.4.img root=/dev/hda1 ro
+
+grub> setup (hd0)
+
+grub> exit
+</pre>
+
+En este otro ejemplo lo que hacemos es decirle que arranque
+
+<pre>
+grub> root (hd0,0)
+
+grub> kernel=/boot/kernel-2.6.4.img root=/dev/hda1 ro
+
+grub> boot
+
+grub> exit
+</pre>
+
+NOTA: hd no se corresponde con un disco IDE, se refiere a un disco de arranque en general.
+En el caso de grub se empieza a contar desde 0, como los programadores, asi que 0 seria el primer disco y 0 seria la primera particion.
+<br>
+No esta hacer un diskette de arranque de nuestro sistema para evitar sustos. Tambien una distribucion live nos puede salvar el pellejo si se estropea el arranque.

@@ -1,0 +1,111 @@
+---
+layout: post
+title: "2. Funciones c++" 
+date: 2004-08-04 22:14:00 
+categories: coding
+---
+Vamos a ver como se declaran las funciones en c++.
+No tiene ningun misterio, es igual que en c. Siempre hay que especificar el tipo de retorno.
+
+<pre>
+/**
+* Funcion.cpp
+* Programa con llamada a una funcion
+* 
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Funcion.cpp -o Funcion
+*/
+
+#include &lt;iostream.h&gt;
+
+// Funcion: llamada
+int llamada (int x, int y) {
+	cout << "Estamos en la funcion!!" << endl;
+	return (x+y);
+}
+
+int main() {
+
+	// Estos comentarios son propios de C++
+
+	cout << "Vamos a llamar a la funcion.." << endl;
+	// Llamamos a la funcion
+
+	// Llamamos a una funcion y asignamos
+	int z = llamada(5,7);
+
+	cout << "Resultado:" << z << endl;
+
+	// Llamada desde el output
+	cout << "Resultado:" << llamada(6,7) << endl;
+
+	cout << "Programa terminado 
+" << endl;
+
+        return 0;
+}
+</pre>
+
+Atencion, en este caso veremos como recoger datos de stdin o entrada standard.
+<pre>
+/**
+* Funcion3.cpp
+* Programa con llamada a una funcion
+* El programa principal recoge datos de la entrada standard
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Funcion3.cpp -o Funcion3
+*/
+
+#include &lt;iostream.h&gt;
+
+
+// Funcion: llamada
+int llamada (int x, int y) {
+	cout << "Estamos en la funcion!!" << endl;
+	return (x+y);
+}
+
+int main() {
+
+	// Estos comentarios son propios de C++
+
+	cout << "Vamos a llamar a la funcion.." << endl;
+	// Llamamos a la funcion
+
+	// Llamamos a una funcion y asignamos
+	int z = 0, x = 0, y = 0;
+
+	// Recogemos los parametros
+	cout << "Dame el primer parametro:";
+	cin >> x;
+	cout << "
+OK!
+Dame el segundo parametro:";
+	cin >> y;
+
+	cout << "
+OK vamos a calcular.";
+
+	// Efectuamos la funcion.
+	z = llamada(x,y);
+
+	// Mostramos el resultado
+	cout << "Resultado:" << z << endl;
+
+	// Llamada desde el output
+	cout << "Resultado:" << llamada(6,7) << endl;
+
+	cout << "Programa terminado 
+" << endl;
+
+        return 0;
+}
+
+</pre>
+
+Facil no?
+
+
