@@ -1,0 +1,78 @@
+---
+layout: post
+title: "Listas en python" 
+date: 2008-04-09 10:20:00 
+categories: coding
+---
+<p><strong>Listas en python</strong> Las listas son como arrays, permiten toda clase de tipos, anidaciÃ³n, etc.. el manejo es peculiar. Este es un ejemplo muy simple.</p>
+<pre>#!/usr/bin/python
+# coding=utf-8
+
+# programa mÃ­nimo de python que introduce las listas
+# La definiciÃ³n de coding nos sirve para poder tildes y demÃ¡s,
+# es necesario al menos para los comentarios
+
+# Pello Xabier Altadill Izura - http://www.pello.info
+
+
+# Vamos a definir una listas
+numeros=[15,33,42,69,666]
+heroes=["Ricewind","Haplo","Boromir","Gaunt"]
+mezcla=["Frodo",11,"Merrin",-6 ,0]
+
+#Se empieza contando desde 0, como debe ser.
+print "Heroe de mundodisco: " , heroes[0]
+print "Otro heroe: " , heroes[-2]
+
+# Podemos sacar todo o parte
+print mezcla , " y " , numeros[:]
+
+print "[2:4]->", mezcla[2:4] , " y [:3]->", numeros[:3]
+
+# Longitud con len
+print "Longitud de mezcla: ", len(mezcla)
+
+# Listas con sublistas
+valores=[2,[4,7,1],[4,5,6],8]
+
+print "Vamos a ver: " , valores[3], " y dentro:" , valores[2][1]
+
+## Operaciones
+
+# AÃ±adir elementos
+print "Inicial ->",heroes
+
+heroes[3:1] = ["Gandalf","Gimli"]
+print "[3:1] ->", heroes
+
+heroes[1:1] = ["Trancos","Sam","Pippin"]
+print "[1:1] ->",heroes
+
+# El remplazo [desdedonde:cuantos]
+heroes[2:1] = ["Legolas"]
+print "Reemplazar [2:1] ->",heroes
+
+# EliminaciÃ³n de elementos
+heroes[2:4] = []
+print "Eliminar [2:4] ->",heroes
+
+# Probando la asignaciÃ³n mÃºltiple
+x,y,z = 0,0,0
+
+</pre>
+<p>Y este serÃ­a el output:</p>
+<pre>pello@localhost:~/python$ ./listas.py
+Heroe de mundodisco:  Ricewind
+Otro heroe:  Boromir
+['Frodo', 11, 'Merrin', -6, 0]  y  [15, 33, 42, 69, 666]
+[2:4]-> ['Merrin', -6]  y [:3]-> [15, 33, 42]
+Longitud de mezcla:  5
+Vamos a ver:  8  y dentro: 5
+Inicial -> ['Ricewind', 'Haplo', 'Boromir', 'Gaunt']
+[3:1] -> ['Ricewind', 'Haplo', 'Boromir', 'Gandalf', 'Gimli', 'Gaunt']
+[1:1] -> ['Ricewind', 'Trancos', 'Sam', 'Pippin', 'Haplo', 'Boromir', 'Gandalf', 'Gimli', 'Gaunt']
+Reemplazar [2:1] -> ['Ricewind', 'Trancos', 'Legolas', 'Sam', 'Pippin', 'Haplo', 'Boromir', 'Gandalf', 'Gimli', 'Gaunt']
+Eliminar [2:4] -> ['Ricewind', 'Trancos', 'Pippin', 'Haplo', 'Boromir', 'Gandalf', 'Gimli', 'Gaunt']
+pello@localhost:~/python$
+
+</pre>
