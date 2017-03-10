@@ -7,3 +7,5 @@ layout: default
 <div class="post">
   {{ content }}
 </div>
+
+{% include disqus.html %}
