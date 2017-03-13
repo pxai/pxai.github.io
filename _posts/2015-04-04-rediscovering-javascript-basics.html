@@ -1,0 +1,468 @@
+---
+layout: post
+title: "Rediscovering Javascript basics" 
+date: 2015-04-04 23:42:36 
+categories: coding
+---
+<img src="http://s14.postimg.org/uwmqswvs1/i07_06.jpg" title="NaN" alt="NaN wtf" />
+<p>This will be just another quick reveiw of the Javascript language basics. For any seasoned developer this may seem a pointless effort but perhaps you find something useful, at least to become a js nitpicker or a soon-to-be guru :D.
+
+<h3>Javascript properties</h3>
+<p>Javascript is a weakly typed, interpreted and multi-paradigm (functional,object oriented,..) language in its own way. It is case-sensitive and its basic sintax looks like C. But in a nutshell, its a c without explicit types, where you can store different kind of values in a variable and resize an array with ease.
+
+<h3>Comments</h3>
+<p>the classic C style comments, both single line
+<pre class="brush: js;">
+// this is a comment
+</pre>
+
+<p>and multiline</p>
+<pre class="brush: js;">
+/*
+This is
+a multiline 
+comment
+*/
+
+</pre>
+<p>For comments and doc generation check <a href="http://usejsdoc.org/" title="jsdoc home">jsdoc</a></p>
+
+<h3>Instructions</h3>
+<p>In javascript, you don't need to end a sentence with a semicolon, unless you want to execute more than one sentence in the same line.
+<pre class="brush: js;">
+var a = 42
+</pre>
+<p>Anyway, people always use to end sentences with a semicolon.
+By the way, when declaring variables, it is recommended to do it using var because <b>if you omit var your variable will become global!</b>
+</p>
+
+<h4>Deleting elements</h4>
+<p>There is a delete operator in javascript, which converts any variable to undefined:
+<pre class="brush: js;">
+var beast = 666;
+typeof beast;
+"number"
+delete beast;
+typeof beast;
+undefined
+</pre>
+
+
+<h3>Data types</h3>
+<p>Numbers, Strings and booleans are the primitive data types in Javascript.
+<h4>Numbers</h4>
+<pre>
+0
+42
+-15
+3.1415
+23e3
+Infinity
+-Infinity
+</pre>
+
+<h4>Strings</h4>
+<p>A string can be made of single or doble quotes:
+<pre>
+"These aren't the droids you're looking for"
+'Hello world'
+"We'll be \"friends\""
+</pre>
+<p>The scape character here is \, and we can use it for special values such as newline, tab, etc..:
+
+<h4>Booleans</h4>
+<p>Two values, as usual</b>
+<ul><li>true</li>
+<li>false</li>
+</ul>
+
+<h5><b>Falsy values:</b> some values are interpreted as false:</h5>
+<ul>
+<li>null</li>
+<li>empty string ""</li>
+<li>undefined</li>
+<li>number 0</li>
+<li>NaN</li>
+</ul>
+
+<h4>Other values</h4>
+<p>There are three other  possible data types</p>
+<p>Javascript distinguishes between a variables without any value or null value. There is a subtle difference:
+<ul>
+<li>undefined: this is when a variable does not exist or it is declared but no value has been assigned.</li>
+<li>Null: a variable exists but its value is simply null.</li>
+<li>NaN: Not a Number, you get this value when trying to convert something to a number and you fail.</li>
+</ul>
+<pre class="brush: js;">
+var number = 'example';
+typeof number * 666:
+NaN
+</pre>
+
+<p>Some curious things about NaN</p>
+<pre>
+typeof NaN
+number
+
+NaN == NaN
+false
+
+2 * undefined
+NaN
+
+but
+2*null
+0
+
+2+null
+2
+</pre>
+
+<h4>Declaring and initializing variables</h4>
+<p>Always use var word to declare variables:</p>
+<pre class="brush: js;">
+var number;
+var counter = 0;
+var a, b=42, c = 4;
+var x,y,z;
+x = y = z = 0;
+</pre>
+
+<h3>Operators</h3>
+<h4>Arithmetic</h4>
+<p>No surprises here, operators are the same as C</p>
+<ul>
+<li>+,-,*,/,%</li>
+<li>++,--</li>
+<li>+=,-=,*=,/=,%=</li>
+</ul>
+
+<h4>Comparison</h4>
+<p>These are the usual operators we find in C, with some additions:
+<, >, <=, =>
+<p>equals</p>
+<pre>
+2==2
+true
+2=='2'
+true
+</pre>
+
+<p>not equals</p>
+<pre>
+2!=4
+true
+2!=2
+false
+</pre>
+
+<p>equals in value and type:</p>
+<pre>
+2==='2'
+false
+42===42
+true
+</pre>
+
+<p>Non-equality</p>
+<p>True when values or types are different</p>
+<pre>
+2 !== '2'
+true
+2 !== 2
+false
+</pre>
+
+<h4>Boolean</h4>
+<p>The usual stuff as in C:</p>
+<p>&& and operator</p>
+<pre>
+true && true
+true
+</pre>
+<p>|| or operator</p>
+
+<pre>
+true || false
+true
+</pre>
+<p>! not operator</p>
+<pre>
+!true
+false
+!false
+true
+</pre>
+
+<h3>Arrays</h3>
+<p>These are indeed much more flexible than C, C++, etc.. we are not stuck to a fixed size and we can resize and reference new indexes of the array as needed.
+</p>
+<pre class="brush: js;">
+var numbers = [4,8,2];
+console.log(numbers[0]);
+4
+</pre>
+
+<pre class="brush: js;">
+numbers[2] = 42;
+numbers[5] = 666;
+console.log(numbers);
+[4,8,42,undefined, undefined,666]
+</pre>
+
+<p>They can hold any kind of values:</p>
+<pre class="brush: js;">
+var festival = [4, true, 'Jon', null, undefined, 666];
+</pre>
+
+<p>Even arrays containing arrays:</p>
+<pre class="brush: js;">
+var matrix = [[0,5,1],[7,3,2],[3,7,4]];
+matrix[0][1];
+5
+</pre>
+<pre class="brush: js;">
+var empty= [];
+</pre>
+
+<h3>Control Structures</h3>
+<p>Same as usual two, condition with parentheses and blocks with curly brackets. </p>
+
+<h4>Conditional</h4>
+<h5>if</h5>
+
+<pre class="brush: js;">
+if (a > 0) {
+	console.log('a is greater than 0');
+}
+</pre>
+
+<p>For example, test if a variable is defined and has any value different from undefined:</p>
+<pre class="brush: js;">
+if (typeof someVar !== 'undefined') {
+	console.log('someVar is defined ');
+}
+</pre>
+
+<h5>if-else</h5>
+<p>Nothing to write home about:</p>
+<pre class="brush: js;">
+if (a > 0) {
+	console.log('a is greater than 0');
+} else {
+	console.log('a is not greater than 0');
+}
+</pre>
+
+<h5>Ternary operator</h5>
+<p>This is the well-known brief formula to code if-else, also known as elvis operator:</p>
+<pre class="brush: js;">
+var number = (a > 0)?a:42;
+</pre>
+
+<p>is the same as:</p>
+<pre class="brush: js;">
+if (a &gt; 0) {
+	number = a;
+} else {
+	number = 42;
+}
+</pre>
+
+<h5>if-else-if</h5>
+<p>There is no elseif or elsif keyword but you can build it that way:</p>
+<pre class="brush: js;">
+if (a &gt; 0) {
+	console.log('a is greater than 0');
+} else if (a &lt; 0) {
+	console.log('a is less than 0');
+} else {
+	console.log('a is 0');
+}
+</pre>
+
+<h5>switch-case</h5>
+<p>The same as C but better: we can switch on Strings!</p>
+<pre class="brush: js;">
+switch (name) {
+	case 'Bilbo':
+		console.log('You are a hobbit');
+		break;
+	case 'Legolas':
+		console.log('You are an elf');
+		break;
+	default:
+		console.log('Unknown race');
+		break;
+}
+</pre>
+
+<h4>Loops</h4>
+<p>We find the same structures with some useful  variations in for statements</p>
+<h5>while</h5>
+<pre class="brush: js;">
+while (a &gt; 0) {
+	a--;
+	console.log('printing a ' + a);
+}
+</pre>
+
+<h5>do-while</h5>
+<p>The loop that is executed at least once</p>
+<pre class="brush: js;">
+do {
+	console.log('A printed at least once:' + a);
+	a--;
+} while (a > 0);
+</pre>
+
+<h5>for</h5>
+<p>The good old for</p>
+<pre class="brush: js;">
+for (var i = 0;i &lt; 10; i++) {
+	console.log('This is i: ' + i);
+}
+</pre>
+
+<h5>for in</h5>
+<p>This is some kind of foreach that iterates using the index:</p>
+<pre class="brush: js;">
+var values = [5,42,666,15];
+
+for (v in values) {
+	console.log("index: "+ v + ", value:" + values[v]);
+}
+
+</pre>
+
+<h5>Break or continue the loop</h5>
+<p>Inside a loop instruction we can use two statements:</p>
+<ol>
+<li><b>break:</b> exits current loop inmediately.</li>
+<li><b>continue:</b> ends current iteration and continues to next.</li>
+</ol>
+<p>
+What happens when we try to break from double or even triple loops. We must use tags. If we break to a defined tag, we break the execution and we continue in the same level that the tag resides.
+Try this:
+</p>
+<pre class="brush: js;">
+var i = 0;
+var j = 0;
+jump:
+for ( i = 0;i&lt; 10;i++) {
+inside:
+    for ( j = 0;j&lt; 10;j++) {
+        if (j == 5) {
+           continue;
+        } else if (i==0 && j==2) {
+            continue jump;
+        } else if (i==1 && j==6) {
+            break;
+        } else if (i==2 && j==2) {
+            break jump;
+        }
+        console.log( i + ":" + j);          
+    }
+}
+console.log("out: " + i + ":" + j);
+Output:
+"0:0"
+"0:1"
+"1:0"
+"1:1"
+"1:2"
+"1:3"
+"1:4"
+"2:0"
+"2:1"
+"out: 2:2"
+</pre>
+
+<h3>Functions</h3>
+<p>
+Javascript does not distinguish between procedures and functions. There are only functions and all of them must return a value. If no value is returned explicitly, undefined is returned by default
+</p>
+
+<pre class="brush: js;">
+function sayHello() {
+	return 'hello';
+}
+</pre>
+
+<p>
+We call to this function by just writing its name with parenthesis:
+</p>
+<pre class="brush: js;">
+sayHello();
+</pre>
+
+<p>
+We can pass parameters to our function:
+</p>
+<pre class="brush: js;">
+function sayHelloRepeatedly (repeat) {
+	var result = '';
+	for (var i = 0;i&lt;repeat;i++) {
+		result = result + 'hello';
+	}
+}
+
+sayHelloRepeatedly(5);
+hellohellohellohellohello
+</pre>
+
+<p>
+If we don't pass a parameter when the function is called, the parameter's value becomes undefined.
+</p>
+<p>
+We can have more than one parameter:
+</p>
+<pre class="brush: js;">
+function saySomethingRepeatedly (repeat, what) {
+	var result = '';
+	for (var i = 0;i&lt;repeat;i++) {
+		result = result +  what;
+	}
+}
+
+saySomethingRepeatedly('3','Cheese');
+CheeseCheeseCheese
+</pre>
+
+<p>
+Parameter number can be dynamic. We can deal with them using the special arguments variable.
+</p>
+<pre class="brush: js;">
+function average () {
+    var result = 0;
+    var size = 0;
+    
+    for (var i = 0; i &lt; arguments.length; i++) {
+        result = result + arguments[i];
+    }
+    if (result) {
+        result = result / arguments.length;
+    }
+    
+    return result;
+    
+}
+
+console.log(average());
+0
+console.log(average(1,4));
+2.5
+console.log(average(3,3,7,2));
+3.75
+</pre>
+
+<h3>To sum up.</h3>
+<ul>
+<li><b>Types:</b> number, String, boolean, null, undefined, NaN, arrays, functions</li>
+<li><b>Operators:</b> +,-,*,/,%,=,++,--,+=,-=,*=,/=,%=</li>
+<li><b>Comparison:</b> &lt;,==,>,&lt;=,!=,=>,===,!==</li>
+<li><b>booleans:</b> &&,||,!</li>
+<li><b>others:</b> typeof, instanceof, delete</li>
+</ul>
+<h4>Code conventions</h4>
+<p>The general rule is always to be consistent. If you want to follow some rules <a href="https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">these by google</a> have proper explanations</p>
