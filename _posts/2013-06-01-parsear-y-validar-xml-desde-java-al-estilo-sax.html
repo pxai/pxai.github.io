@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Parsear y validar XML desde java al estilo SAX" 
-date: 2013-06-01 23:21:59 
+title: "Parsear y validar XML desde java al estilo SAX"
+date: 2013-06-01 23:21:59
 categories: coding
 ---
 <h2>
@@ -43,6 +43,7 @@ categories: coding
 <p>
 	En este caso he hecho un parser de SAX usando las librer&iacute;as m&aacute;s simples y menos ex&oacute;ticas posible. Ojo!! para que valida el tema del uso del DTD hay que meter los m&eacute;todos de error (error, fatalError, warning), porque si no es as&iacute; no nos empanaremos.</p>
 <p>
+  {% highlight java %}
 	import java.io.File;<br />
 	import java.io.IOException;<br />
 	<br />
@@ -213,5 +214,6 @@ categories: coding
 	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;xmlSaxParser.parse();<br />
 	&nbsp;&nbsp;&nbsp; }<br />
 	}</p>
+{% endhighlight %}
 <p>
 	&nbsp;</p>
