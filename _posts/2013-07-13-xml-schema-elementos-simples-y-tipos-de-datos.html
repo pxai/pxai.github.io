@@ -1,0 +1,424 @@
+---
+layout: post
+title: "XML Schema elementos simples y tipos de datos"
+date: 2013-07-13 00:47:26
+categories: coding, xml, xmlschema, xsd
+---
+<p>
+	&nbsp;</p>
+<h2>
+	XML Schema, elementos simples</h2>
+<div>
+	&nbsp;</div>
+<div>
+	Los ficheros XSD pueden estar formados por elementos simples o complejos.&nbsp;Los elementos simples son aquellos que solamente pueden contener un valor concreto (un texto, un n&uacute;mero)&nbsp;<strong>y nada m&aacute;s</strong>. Si necesitamos un elemento que a su vez contenga otros elementos o atributos eso ser&iacute;a&nbsp;un elemento complejo.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Para definir un elemento simple basta con poner algo as&iacute;:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;nombrecliente&quot; type=&quot;xs:string&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Est&aacute; claro que ese elemento contendr&aacute; un texto.</div>
+<div>
+	&nbsp;</div>
+<h2>
+	Los tipos</h2>
+<div>
+	Los tipos se pueden aplicar tanto a elementos como a atributos. Los atributos personalizados</div>
+<div>
+	se aplican a elementos complejos. Pero ahora lo que nos ocupa es ver qu&eacute; tipos tenemos.</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	Los tipos de los que disponemos son los habituales: string, integer, decimal, date, time, boolean,... cada uno</div>
+<div>
+	con sus peculiaridades y opciones.</div>
+<div>
+	&nbsp;</div>
+<h3>
+	El tipo boolean</h3>
+<div>
+	Es de los m&aacute;s simples, puede contener cuatro posibles valores: true, false, 1, 0</div>
+<div>
+	&nbsp;</div>
+<h3>
+	El tipo string y sus derivados</h3>
+<div>
+	Es un tipo bastante simple del que se pueden crear tipos simples con ciertas restricciones</div>
+<div>
+	como whitespace, length,minLength,maxLength,pattern,enumeration,assertions</div>
+<div>
+	Por ejemplo el DNI:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;dni&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:restriction base=&#39;string&#39;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;xs:length value=&#39;9&#39; fixed=&#39;true&#39; /&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span class="Apple-tab-span" style="white-space: pre; "> </span>&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	O una enumeraci&oacute;n:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;sistema&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:enumeration value=&quot;Windows&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:enumeration value=&quot;Linux&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:enumeration value=&quot;OS2&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:enumeration value=&quot;MSDOS&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Los patrones permiten expresiones regulares. El dni se puede hacer as&iacute; tambi&eacute;n:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;dni&quot; type=&quot;tipoDni&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:simpleType name=&quot;tipoDni&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&lt;xs:pattern value=&quot;[0-9]{8}[A-Z]{1}&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:simpleType&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Con el whitespace podemos indicar c&oacute;mo queremos que se traten los espacios en blanco.</div>
+<div>
+	Podemos indicar estos valores:</div>
+<ul>
+	<li>
+		preserve: mantiene los espacios blancos o caracteres no visibles.</li>
+	<li>
+		collapse: quita cualquier caracter no visible (espacios, saltos, etc..)</li>
+	<li>
+		replace: sustituye saltos de l&iacute;nea etc por espacios en blanco.</li>
+</ul>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;nombreLimpio&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:whiteSpace value=&quot;collapse&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Las longitudes tambi&eacute;n dan juego:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;contrasena&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;xs:restriction base=&quot;xs:string&quot;&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:minLength value=&quot;8&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &lt;xs:maxLength value=&quot;15&quot;/&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;/xs:restriction&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/xs:simpleType&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;/xs:element&gt;</span></div>
+<div>
+	&nbsp;</div>
+<h3>
+	Tipos num&eacute;ricos</h3>
+<div>
+	Aparte de los cl&aacute;sicos interger y decimal, disponemos de los siguientes:</div>
+<ul>
+	<li>
+		byte, unsignedByte</li>
+	<li>
+		decimal,&nbsp;</li>
+	<li>
+		int, unsignedInt,&nbsp;</li>
+	<li>
+		integer, negativeInteger (-1,-2,-3,..), nonPositiveInteger (0,-1,-2,...), nonNegativeInteger (0,1,2,...), positiveInteger (1,2,3,...)</li>
+	<li>
+		long,unsignedLong&nbsp;</li>
+	<li>
+		short,unsignedShort</li>
+</ul>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;Si cremos tipos propios como con los Strings podemos aplicar estas resitrcciones:</div>
+<ul>
+	<li>
+		&nbsp;enumeration: un conjunto de n&uacute;meros</li>
+	<li>
+		&nbsp;fractionDigits: total de decimales a mostrar</li>
+	<li>
+		&nbsp;maxExclusive: valor m&aacute;ximo EXcluyendo el indicado</li>
+	<li>
+		&nbsp;maxInclusive: valor m&aacute;ximo incluyendo el indicado</li>
+	<li>
+		&nbsp;minExclusive: valor m&iacute;nimo EXcluyendo el indicado</li>
+	<li>
+		&nbsp;minInclusive: &nbsp;valor m&iacute;nimo incluyendo el indicado</li>
+	<li>
+		&nbsp;pattern: aplicar patr&oacute;n regex</li>
+	<li>
+		&nbsp;totalDigits: total de d&iacute;gitos a mostrar</li>
+	<li>
+		&nbsp;whiteSpace: tratamiendo de espacios en blanco</li>
+</ul>
+<h3>
+	Las fechas.</h3>
+<div>
+	Hay varios tipos.&nbsp;</div>
+<h4>
+	Date</h4>
+<div>
+	El date de toda la vida</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;nacimiento&quot; type=&quot;xs:date&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Por ejemplo (es <em>A&ntilde;o-Mes-D&iacute;a</em>)</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;nacimiento&gt;1983-02-28&lt;/nacimiento&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Podemos indicar la zona horaria en la fecha. A&ntilde;adir una Z para zona UTC o bien</div>
+<div>
+	a&ntilde;adir diferencia de zona en positivo o negativo.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;nacimiento&gt;1985-12-23-03:00&lt;/nacimiento&gt;</span></div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;nacimiento&gt;1985-12-23+03:00&lt;/nacimiento&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&iexcl;Ojo!! no es la hora, es la diferencia horaria.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Luego est&aacute; el time para indicar una hora en formato hh:mm:ss</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;inicio&quot; type=&quot;xs:time&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Por ejemplo:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;inicio&gt;09:15:00&lt;/inicio&gt; &nbsp;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Tambi&eacute;n podemos indicar la zona horaria.</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;inicio&gt;09:15:00+01:00&lt;/inicio&gt; &nbsp;</span></div>
+<div>
+	&nbsp;</div>
+<h4>
+	&nbsp;El dateTime</h4>
+<div>
+	&nbsp;Une fecha y hora con formato: <em>YYYY-MM-DDThh:mm:ss</em></div>
+<div>
+	&nbsp;Ojo con la T.</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&nbsp;&lt;xs:element name=&quot;instalacion&quot; type=&quot;xs:dateTime&quot; /&gt;</span></div>
+<div>
+	Por ejemplo:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;instalacion&gt;2012-10-23T09:34:23&lt;/instalacion&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Y se puede a&ntilde;adir la zona horaria tambi&eacute;n.&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;instalacion&gt;2012-10-23T09:34:23-07:00&lt;/instalacion&gt;</span></div>
+<div>
+	&nbsp;</div>
+<h4>
+	Duration, la duraci&oacute;n en tiempo</h4>
+<div>
+	Este tipo nos permite indicar la duraci&oacute;n del tiempo.</div>
+<div>
+	El formato es el siguiente:<em> PnYnMnDTnHnMnS</em></div>
+<div>
+	La P hay que ponerla s&iacute; o s&iacute; el resto:</div>
+<ul>
+	<li>
+		nY indica n a&ntilde;os</li>
+	<li>
+		nM n meses</li>
+	<li>
+		nD n d&iacute;as</li>
+	<li>
+		T En el caso de que vayamos indicar un tiempo ponemos la T primero</li>
+	<li>
+		nH n horas</li>
+	<li>
+		nM n minutos</li>
+	<li>
+		nS n segundos</li>
+</ul>
+<div>
+	&nbsp;</div>
+<div>
+	Por ejemplo</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;condena&quot; type=&quot;duration&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	y un valor:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;condena&gt;P5Y2M1D&lt;/condena&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Ser&iacute;a una condena de cinco a&ntilde;os dos meses y un d&iacute;a.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Luego tenemos los tipos m&aacute;s b&aacute;sicos</div>
+<ul>
+	<li>
+		type=&quot;xs:gDay&quot; para representar un d&iacute;a en formato DD</li>
+	<li>
+		type=&quot;xs:gMonth&quot; para representar un mes en formato MM</li>
+	<li>
+		type=&quot;xs:gMonthDay&quot; para representar un mes-d&iacute;a en formato MM-DD</li>
+	<li>
+		type=&quot;xs:gYear&quot; para representar un a&ntilde;o en formato YYYY&nbsp;</li>
+	<li>
+		type=&quot;xs:gYearMonth&quot; para representar un a&ntilde;o-mes en formato YYYY-MM</li>
+</ul>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;Si cremos tipos propios como con los Strings y n&uacute;meros podemos aplicar estas resitrcciones:</div>
+<ul>
+	<li>
+		enumeration</li>
+	<li>
+		maxExclusive</li>
+	<li>
+		maxInclusive</li>
+	<li>
+		minExclusive</li>
+	<li>
+		minInclusive</li>
+	<li>
+		pattern</li>
+	<li>
+		whiteSpace</li>
+</ul>
+<div>
+	&nbsp;</div>
+<h2>
+	Otros tipos raros</h2>
+<h3>
+	El binario:</h3>
+<div>
+	puede ser en formato base64 o hexadecimal. Esto nos puede servir para meter un churro</div>
+<div>
+	en alguno de esos formatos dentro del document XML.</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;binario&quot; type=&quot;xs:hexBinary&quot;/&gt;</span></div>
+<div>
+	Luego</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;binario&gt;DEAD0663245345ABDDEAD2346562&lt;/binario&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Otro:</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;adjunto&quot; type=&quot;xs:base64Binary&quot;/&gt;</span></div>
+<div>
+	&nbsp;</div>
+<h3>
+	AnyURI</h3>
+<div>
+	Es un tipo muy interesante para indicar una URL</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;web&quot; type=&quot;xs:anyURI&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	Luego</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;web&gt;http://www.pello.info&lt;/web&gt;&nbsp;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	---</div>
+<div>
+	&nbsp;</div>
+<h3>
+	Aplicable para todos&nbsp;</h3>
+<div>
+	&nbsp;Aparte del tipo podemos especificar un valor por defecto:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;bote&quot; type=&quot;xs:int&quot; default=&quot;20&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	O incluso un valor fijo con el atributo fixed:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<span style="font-family:courier new,courier,monospace;">&lt;xs:element name=&quot;pi&quot; type=&quot;xs:decimal&quot; fixed=&quot;3.1415&quot; /&gt;</span></div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>

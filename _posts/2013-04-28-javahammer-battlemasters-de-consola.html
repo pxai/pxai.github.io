@@ -1,0 +1,88 @@
+---
+layout: post
+title: "JavaHammer, battlemasters de consola" 
+date: 2013-04-28 20:57:07 
+categories: coding
+---
+<h1>
+	JavaHammer</h1>
+<p>
+	&nbsp;</p>
+<p>
+	JavaHammer es una versi&oacute;n simplificada del juego BattleMasters de MB. El BattleMasters era una versi&oacute;n simplificada de Warhammer en la que &nbsp;dos ej&eacute;rcitos se enfre ellos hasta la aniquilaci&oacute;n de uno de los dos.</p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="https://code.google.com/p/entornos-1dam-4vientos-team/source/browse/trunk/JavaHammer/" title="ver JavaHammer">Repositorio subversion con el c&oacute;digo</a>.</p>
+<p>
+	Cada ejercito est&aacute; formado por distintas unidades. Cada unidad tiene un nombre, un valor de ataque, un valor de defensa, un valor de movimiento que suele ser 1, un rango de ataque que suele ser 1 y los puntos de vida que suelen ser tres.</p>
+<p>
+	&nbsp;</p>
+<p>
+	Hay varias clases de unidades: infanter&iacute;a, arqueros y caballer&iacute;a.</p>
+<p>
+	&nbsp;</p>
+<p>
+	El escenario es un mapa de 10x10 terrenos. En cada terreno solo cabe una unidad de un ejercito cada vez y tienen que tener un nombre ominoso tipo &quot;llanura del mal innominado&quot;</p>
+<p>
+	&nbsp;</p>
+<p>
+	En el juego debe haber un inicio en el que se genera el mapa de forma aleatoria.</p>
+<p>
+	&nbsp;</p>
+<p>
+	El programa est&aacute; lleno de CodeSmells debe mejorarse un mont&oacute;n, aunque en todo momento se ha intentado desacoplar, cohersionar, etc...</p>
+<p>
+	&nbsp;</p>
+<p>
+	Este es el aspecto de JavaHammer en consola.</p>
+<p>
+	&nbsp;</p>
+<div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">-=-=-=-=-=-=-=-[ JavaHammer ]-=-=-=-=-=-=-=-</span></div>
+	<div>
+		&nbsp;</div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;0 &nbsp; &nbsp;1 &nbsp; &nbsp;2 &nbsp; &nbsp;3 &nbsp; &nbsp;4 &nbsp; &nbsp;5 &nbsp; &nbsp;6 &nbsp; &nbsp;7 &nbsp; &nbsp;8 &nbsp; &nbsp;9 &nbsp;</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">0[ &nbsp; ][2B1][2I1][2B2][2I2][2B3][2I3][2C1][2C2][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">1[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">2[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">3[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">4[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">5[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">6[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">7[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">8[ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">9[ &nbsp; ][1B1][1I1][1B2][1I2][1B3][1I3][1C1][1C2][ &nbsp; ]</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;0 &nbsp; &nbsp;1 &nbsp; &nbsp;2 &nbsp; &nbsp;3 &nbsp; &nbsp;4 &nbsp; &nbsp;5 &nbsp; &nbsp;6 &nbsp; &nbsp;7 &nbsp; &nbsp;8 &nbsp; &nbsp;9 &nbsp;</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">Demons&#39;s turn&nbsp;</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">Please choose:</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">m. Move</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">a. Attack</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">s. Show Map</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">t. Show Army Status</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">p. Pass</span></div>
+	<div>
+		<span style="font-family:courier new,courier,monospace;">Option:&nbsp;</span></div>
+</div>
+<div>
+	&nbsp;</div>
