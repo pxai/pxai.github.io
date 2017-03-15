@@ -1,0 +1,306 @@
+---
+layout: post
+title: "8. Punteros c++" 
+date: 2010-08-04 10:32:00 
+categories: coding
+---
+<b>Los punteros</b>
+<br>
+Acaso creiais que en c++ no habia punteros?  eso solo ocurre en Java.
+Los punteros no contienen datos, contienen direcciones de memoria. Para cada
+tipo de dato hay que definir un puntero.
+
+<pre>
+/**
+* Puntero.cpp
+* 
+* Clase que muestra las direcciones de variables
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero.cpp -o Puntero
+*/
+
+#include &lt;iostream.h&gt;
+
+int main () {
+
+// Creamos varias variables:
+int pruebaInt = 99, prueba2Int;
+short pruebaShort = 34;
+char carac = 'a';
+int *puntero = 0;
+int *punteroNuevo;
+
+
+// Ahora las mostramos por pantalla:
+cout << "Variable pruebaInt: " << pruebaInt << endl;
+cout << "Direccion pruebaInt: " << &pruebaInt << endl << endl;
+
+cout << "Variable prueba2Int: " << prueba2Int << endl;
+cout << "Direccion prueba2Int: " << &prueba2Int << endl << endl;
+
+cout << "Variable pruebaShort: " << pruebaShort << endl;
+cout << "Direccion pruebaShort: " << &pruebaShort << endl << endl;
+
+cout << "Variable carac: " << carac << endl;
+cout << "Direccion carac: " << &carac << endl << endl;
+
+cout << "Variable puntero: " << puntero << endl;
+// ATENCION, si el puntero no tiene valor dara
+// SEGMENTATION FAULT y la CAGAREMOS de gordo
+//cout << "Variable puntero: " << *puntero << endl;
+cout << "Direccion puntero: " << &puntero << endl << endl;
+
+puntero = &pruebaInt;
+
+cout << "Variable puntero: " << puntero << endl;
+cout << "Variable puntero: " << *puntero << endl;
+cout << "Direccion puntero: " << &puntero << endl << endl;
+
+
+return 0;
+}
+</pre>
+
+Veamos otro ejemplo...
+<pre>
+/**
+* Puntero2.cpp
+* 
+* Clase que muestra mas usos de los punteros
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero2.cpp -o Puntero2
+*/
+
+#include &lt;iostream.h&gt;
+
+// prototipo de funciones que implementamos luego
+int devuelve(int *punteroInt, int entero);
+
+int main () {
+
+// Creamos varias variables:
+int pruebaInt = 99, prueba2Int;
+short pruebaShort = 34;
+char carac = 'a';
+int *puntero = 0;
+int *punteroNuevo;
+
+
+// Ahora las mostramos por pantalla:
+cout << "Variable pruebaInt: " << pruebaInt << endl;
+cout << "Direccion pruebaInt: " << &pruebaInt << endl << endl;
+
+cout << "Variable prueba2Int: " << prueba2Int << endl;
+cout << "Direccion prueba2Int: " << &prueba2Int << endl << endl;
+
+cout << "Variable pruebaShort: " << pruebaShort << endl;
+cout << "Direccion pruebaShort: " << &pruebaShort << endl << endl;
+
+cout << "Variable carac: " << carac << endl;
+cout << "Direccion carac: " << &carac << endl << endl;
+
+cout << "Variable puntero: " << puntero << endl;
+// ATENCION, si el puntero no tiene valor dara
+// SEGMENTATION FAULT y la CAGAREMOS
+//cout << "Variable puntero: " << *puntero << endl;
+cout << "Direccion puntero: " << &puntero << endl << endl;
+
+puntero = &pruebaInt;
+
+cout << "Variable puntero: " << puntero << endl;
+cout << "Variable puntero: " << *puntero << endl;
+cout << "Direccion puntero: " << &puntero << endl << endl;
+
+*puntero = 345;
+
+cout << "Variable puntero: " << puntero << endl;
+cout << "Variable puntero: " << *puntero << endl;
+cout << "Direccion puntero: " << &puntero << endl << endl;
+
+// Ahora las mostramos por pantalla:
+cout << "Variable pruebaInt: " << pruebaInt << endl;
+cout << "Direccion pruebaInt: " << &pruebaInt << endl << endl;
+
+*punteroNuevo = devuelve(puntero,34);
+
+cout << " Tras llamada: " << endl;
+cout << "Variable puntero: " << punteroNuevo << endl;
+cout << "Variable puntero: " << *punteroNuevo << endl;
+cout << "Direccion puntero: " << &punteroNuevo << endl << endl;
+
+return 0;
+}
+
+int devuelve (int *punteroInt, int entero) {
+cout << "Variable param. puntero: " << punteroInt << endl;
+cout << "Variable param. puntero: " << *punteroInt << endl;
+cout << "Direccion param. puntero: " << &punteroInt << endl << endl;
+
+return (*punteroInt) + entero;
+} 
+</pre>
+
+<b>new y delete</b><br>
+Con las instrucciones new y delete podemos reservar y liberar espacio libre de memoria.
+Se utilizan con los punteros (ademas de los objetos) y es muy necesario liberar siempre
+la memoria con la instruccion delete para evitar memory leaks: espacio de memoria marcados
+como okupados pero que ya no se usan porque el puntero que les correspondia ahora apunta a otro
+lado.
+
+<pre>
+/**
+* Puntero.cpp
+* 
+* Clase que muestra la okupacion/liberacion de memoria con new y delete
+* Pello Xabier Altadill Izura
+* Compilar: g++ Puntero.cpp -o Puntero
+*/
+
+#include &lt;iostream.h&gt;
+
+int main () {
+
+// Creamos varias variables:
+int *pruebaInt = new int;
+short *pruebaShort = new short;
+
+pruebaInt = 777;
+pruebaShort = 23;
+
+// Ahora las mostramos por pantalla:
+cout << "Variable pruebaInt: " << pruebaInt << endl;
+cout << "Direccion pruebaInt: " << &pruebaInt << endl << endl;
+
+cout << "Variable pruebaShort: " << pruebaShort << endl;
+cout << "Direccion pruebaShort: " << &pruebaShort << endl << endl;
+
+// Liberamos la memoria
+delete pruebaInt;
+delete pruebaShort;
+
+// Contra la especulacion del sistema (operativo)
+// volvemos a oKupar un espacio de memoria
+int *pruebaInt = new int;
+short *pruebaShort = new short;
+
+pruebaInt = 666;
+pruebaShort = 21;
+
+// quiza tengamos un error, pero se puede comprobar:
+if ( pruebaInt == NULL || pruebaShort == NULL ) {
+ cout << "Error al reservar memoria" << endl;
+ return 0;
+}
+
+// Ahora las mostramos por pantalla:
+cout << "Variable pruebaInt: " << pruebaInt << endl;
+cout << "Direccion pruebaInt: " << &pruebaInt << endl << endl;
+
+cout << "Variable pruebaShort: " << pruebaShort << endl;
+cout << "Direccion pruebaShort: " << &pruebaShort << endl << endl;
+
+return 0;
+}
+
+
+</pre>
+
+<b>Objetos y punteros</b>
+Se pueden crear punteros a objetos y atributos que son punteros. Veamos este ejemplo
+de una clase llamada Objeto:
+
+<pre>
+/**
+* Objeto.hpp
+* 
+* Clase que muestra distintos tipos de punteros
+* que se usan con los objetos
+*
+* Pello Xabier Altadill Izura
+*/
+
+#include &lt;iostream.h&gt;
+
+// Inicio de la clase
+class Objeto {
+private:
+	int *privado;
+public:
+	int atributo;
+
+	// Constructor
+	Objeto();
+
+        // Constructor
+        Objeto(int atributo);
+
+	// Destructor
+	~Objeto();
+
+	// Menu tipo case
+	int devuelveAlgo();
+
+};
+</pre>
+
+Y su implementacion:
+<pre>
+/**
+* Objeto.cpp
+* 
+* Clase que muestra distintos tipos de punteros
+* que se usan con los objetos
+* Pello Xabier Altadill Izura
+* Compilar: g++ Objeto.cpp -o Objeto
+*/
+
+#include "Objeto.hpp"
+
+	// Constructor
+	Objeto::Objeto(){
+		atributo = 666;
+	}
+
+	// Constructor
+	Objeto::Objeto(int atributo){
+		this->atributo = atributo;
+	}
+
+	// Destructor
+	Objeto::~Objeto(){}
+
+	// Menu tipo case
+	int Objeto::devuelveAlgo(){
+		int temp = 0;
+		return temp;
+	}
+
+int main () {
+
+// Aqui guardaremos el resultado
+int resultado = 0;
+
+cout << " Vamos a jugar con los objetos." << endl;
+
+// Creamos la instancia del objeto puntero
+Objeto objeto = Objeto();
+
+//Creamos un puntero a ese objeto,
+// pero cuidado, no asignarle un constructor directamente
+Objeto *objetopuntero;
+
+// esto si...
+objetopuntero = &objeto;
+
+// Invocamos los metodos
+resultado = objeto.devuelveAlgo();
+
+// Observese la diferencia al acceder al atributo publico:
+cout << " El valor de atributo con Objeto es: " << objeto.atributo << endl;
+cout << " El valor de atributo con Objeto es: " << objetopuntero->atributo << endl;
+
+//return 0;
+}
+
+
+</pre>
