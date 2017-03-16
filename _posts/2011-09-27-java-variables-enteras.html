@@ -1,0 +1,72 @@
+---
+layout: post
+title: "Java: variables enteras" 
+date: 2011-09-27 10:16:36 
+categories: coding
+---
+<h1>
+	Variables Num&eacute;ricas enteras</h1>
+<p>
+	Este es un ejemplo de declaraci&oacute;n de variables num&eacute;ricas</p>
+<p>
+	/**<br />
+	* ValoresEnteros<br />
+	* Clase que muestra la declaraci&oacute;n de variables num&eacute;ricas <b>enteras</b><br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ValoresEnteros.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ValoresEnteros<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ValoresEnteros<br />
+	* Muestra la declaraci&oacute;n de tipos num&eacute;ricos enteros b&aacute;sicos:<br />
+	*&nbsp; byte&nbsp;&nbsp; : 1 byte<br />
+	*&nbsp; short&nbsp; : entero corto, 2 bytes<br />
+	*&nbsp; int&nbsp;&nbsp;&nbsp; : enter, 4 bytes<br />
+	*&nbsp; long&nbsp;&nbsp; : entero largo, 8 bytes<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ValoresEnteros {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n de variables: tipo nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;byte dias;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;short contador;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n y asignaci&oacute;n de valor<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// tipo nombre = valor inicial;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;short resultado = 42;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n de varias variables del mismo tipo<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;short codigo, edad, media;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaraci&oacute;n y asignaci&oacute;n a varias a la vez:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int i, j, k;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;i = j = k = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// El tipo long<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;long sueldoFutbolista = 23489343;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;long valorGoogle = 666000666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a probar a mostrarlos por pantalla: concatenamos con +<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El sentido de la vida es: &quot; + resultado);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El sueldo de un futbolista medio es: &quot; + sueldoFutbolista);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+<p>
+	&nbsp;</p>
