@@ -1,0 +1,105 @@
+---
+layout: post
+title: "Sacar información de sistema del móvil"
+date: 2011-05-25 13:58:48
+categories: coding
+---
+<p>
+	Un peque&ntilde;o midlet que saca informaci&oacute;n b&aacute;sica del entorno de ejecuci&oacute;n.</p>
+<p class="brush: js">
+	/*<br />
+	&nbsp;* SysInfo<br />
+	&nbsp;* Utilidad de ejemplo que aparece en libros viejos.<br />
+	&nbsp;* La hora no la saca bien.<br />
+	&nbsp;*/<br />
+	<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.util.*;<br />
+	<br />
+	public class SysInfo extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private Form formulario;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * SysInfo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public SysInfo() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Tomamos la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el formulario principal<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario = new Form(&quot;SysInfo&quot;);<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos la fecha actual<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Calendar calendar = Calendar.getInstance();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Un string con la fecha. La fecha del m&oacute;vil sera 1.1.1970<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String fecha = calendar.getTime().toString();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos memoria total y disponible<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Runtime runtime = Runtime.getRuntime();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String totalMem = Long.toString(runtime.totalMemory());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String freeMem = Long.toString(runtime.freeMemory());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //String alturaImagen = Integer.toString(pantalla.getBestImageHeight(0));<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // M&aacute;s propiedades de pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String isColor = pantalla.isColor() ? &quot;S&iacute;&quot; : &quot;No&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String numColors = Integer.toString(pantalla.numColors());<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos los StringItem y los metemos en el formulario<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Hora: &quot; + fecha));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Memoria total: &quot; + totalMem));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Memoria libre: &quot; + freeMem));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Color: &quot; + isColor));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;n&ordm; de colores: &quot; + numColors));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //formulario.append(new StringItem(&quot;&quot;, &quot;altura de imagen: &quot; + alturaImagen));<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el comando de salida<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.setCommandListener(this);<br />
+	}<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() throws MIDletStateChangeException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formulario);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.vibrate(5);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura los comandos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}</p>
