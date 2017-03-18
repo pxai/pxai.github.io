@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Persistent session control in Node.js with express 4" 
+date: 2014-08-03 00:08:50 
+categories: coding
+---
+<p>In this series of posts I'm trying to show, in the simplest way possible, how to develop a web application in Node.js adding all the features that in other environments we take for granted: database access, form validation, i18n, and of course session management. Express is the framework of choice for this purpose, the problem is that maybe many information you find out there may be deprecated or useless since express 4 was released. Here I'm trying to use the latest (express4) and the coolest, but in any case in the months to come this information may be crappy. As some dear friend of mine says <i>talk is cheap, show me the code</i>, so let's get down to the nitty-gritty details.</p>
+
+<h5>Session control in Express4</h5>
+<img src="http://www.pello.info/images/YouShallNotPass.jpg" title="Your session never expires for me"  alt="You shall not pass today, tomorrow who knows.">
+<p>If we want to control the access to certain functions of our application or if we need multiuser support to distinguish the activities of those users we need some kind of session control. Node.js based web servers behave as any other web server so we don't have a permanent connection to establish such mechanism. But, as many other platforms do, express can deal with cookies and as you should know, these are commonly used to to simulate a permanent state which is, finally, a session.</p>
+
+<p>Beware code samples from a year ago, unless you are using older versions of express. Since version 4 there are many modules that now are not included in express (almost all but static file server) and you have to grab them independently: <code>express-session</code> is the one we need to be able to access session variables with <code>req.session</code>. It has many, many options, expiration, security, e.a. </p>
+
+<h6>Session persistence</h6>
+<p>Cookie based sessions will depend on Node.js server process. If we need them to persist without any dependency on Node we can store session information in a database. This is very easy to apply, and in this case as we are using express and mongoose the package named mongoose-session becomes the perfect candidate to do the job. Just require it and apply as a parameter to the session system.</p>
+
+<p>This is how it looks our app.js</p>
+
+<script src="https://gist.github.com/pello-io/93c699e75b67ccc83001.js"></script>
+
+<h6>Exposing session variables in jade templates</h6>
+<p>Something that many posts and tutorials tend to omit is that, if you need to expose session values in the view (jade in our case), you need to add this middleware:</p>
+
+<script src="https://gist.github.com/pello-io/f3e499543294eb3d5d70.js"></script>
+
+<p>That will allow us now to use <code>session.login</code> in our template, something that will come in handy when we want to add a 'hello -yourname-' in our web page when the user is logged or if we want to show different links depending on the session status.</p>
+
+<h5>Login and session start</h5>
+<p>Ok, our web server now is ready to support sessions, so it's time to create a login or sign in view and the routes for session management. This is how the view looks like, is but a simple login form.</p>
+
+<script src="https://gist.github.com/pello-io/eb17c196eea1b9ff8730.js"></script>
+
+<p>In the route is where we check the login. To keep this code simple we are using a hardcoded account to check if login is correct or not. When it is successful, we simply store a session variable that will be later used to check with a middleware if the session is valid or not. Mongoose-session package will save session information automagically in a collection that by default is called session. After that, the flow is redirected to the guestbook page. If login is not correct, we simply redirect to sign in page again.</p>
+
+<script src="https://gist.github.com/pello-io/3d194937bcb4478442ee.js"></script>
+
+<h5>Protecting pages and checking session status</h5>
+<p>All of this session stuff is intended to control the access to our guestbook, something that we can do in a very simple and easy way that suits perfectly in an express application. We create a middleware that simply checks if session is started or not. These few lines of code will do the trick:</p>
+
+<script src="https://gist.github.com/pello-io/fe743f3f7a8cd382cc79.js"></script>
+
+<p>And now, in any page, or more accurately, in any express route that we want to protect, we just add this middleware as a parameter for that route.</p>
+
+<script src="https://gist.github.com/pello-io/d3631d6d10440a26657f.js"></script>
+
+<p>Is that simple. Now we can imagine other middlewares to apply ACL depending on user roles for example.</p>
+
+<h5>Keep the guestbook clean</h5>
+<p>In every web application we need to prevent any dangerous data to be persisted in our database, because it could go back to everybody as a XSS attack. Here I'm simply using an html sanitizer inside a helper that could be used on demand to clean user input. The helper concept is common among many web frameworks, and it is not unusual to see such utilities in Node.js applications.</p>
+
+<p>As you can see in the last piece of code, now before we save data into MongoDB we can guarantee that no html shall pass.</p>
