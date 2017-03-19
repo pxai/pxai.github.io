@@ -1,0 +1,119 @@
+---
+layout: post
+title: "Eventos en nodejs" 
+date: 2013-08-13 10:37:21 
+categories: coding
+---
+<p>NodeJS está orientado a eventos por tanto disponer de mecanismos para
+definir nuestros propios eventos es algo fundamental. Como vamos a ver no tenemos
+más que importar el módulo events y a partir de ahí ya podremos trabajar con instancias
+de EventEmitter. Y como disponemos de herencia, podemos agregar la emisión de eventos
+a nuestras clases.</p>
+
+<h5>Un ejemplo sencillo de eventos</h5>
+<p>Este programa lee datos por consola y puede generar tres eventos
+<ul>
+<li>Si el usuario escribe algo</li>
+<li>Si el usuario escribe espacios</li>
+<li>Si el usuario escribe 666</li>
+</ul>
+Cada evento se ha creado de una forma distinta y uno de ellos tiene un parámetro, más que
+nada como muestra.
+</p>
+<pre class="brush: js">
+/**
+* events.js
+* Playing with events and eventEmitter in nodejs.
+* @author Pello Xabier Altadill
+* @greetz for u
+*/
+
+events = require('events');
+// We'll use this to create our own events
+var em = new events.EventEmitter();
+
+// We need this to get stdin
+process.stdin.resume();
+
+console.log("write something to create events ");
+
+// EVENT: thebeast, emitted when user writes 666
+em.on('thebeast',function () {
+					console.log("EVENT: thebeast> The number of the beast appeared.");
+				});
+
+// EVENT: datareaded, emitted when user writes on console
+// First we define function Another way to define an event:
+var myeventfunction = function (param) {
+						console.log("EVENT: datareaded> something readed on console: ");
+						console.log(param+"");
+					};
+// ... and now we set the function to the event
+em.on('datareaded', myeventfunction);
+
+// EVENT: thebeast, emitted when user writes 666
+em.on('nulldata',function () {
+					console.log("EVENT: nulldata> nothing was entered.");
+				});
+
+/**
+* on data event
+* fired when data is entered in stdin
+* We'll fire events depending on input data
+*/
+process.stdin.on('data', function (readedData) {
+	// We can emit events with parameters
+	em.emit('datareaded', readedData);
+
+	readedData = fulltrim(readedData+"");
+	process.stdout.write('You wrote: ' + readedData + "\n");
+
+	// In case we find a 666 we 'emit' an event
+	if (readedData == 666) {
+		em.emit('thebeast');
+	}
+
+	// In case of empty string
+	if (readedData == '') {
+		em.emit('nulldata');
+	}
+});
+
+
+// We can add event support with inheritance
+// so we can do inside the class: this.emit()
+// util.inherits(myobject, EventEmitter);
+// myoject.prototype.newfunction = function () { this.emit() };
+
+
+/**
+* Fulltrim oneliner, thnx stackoverflow
+* needed to remove trailing newline char,
+* whitespaces and such...
+*/
+function fulltrim (wordToTrim){return wordToTrim.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+</pre>
+
+<p>Esta sería la salida por consola:</p>
+<pre class="brush: bash">
+linux# node events.js 
+write something to create events 
+ñañaña
+EVENT: datareaded> something readed on console: 
+ñañaña
+
+You wrote: ñañaña
+666
+EVENT: datareaded> something readed on console: 
+666
+
+You wrote: 666
+EVENT: thebeast> The number of the beast appeared.
+
+EVENT: datareaded> something readed on console: 
+
+
+You wrote: 
+EVENT: nulldata> nothing was entered.
+
+</pre>

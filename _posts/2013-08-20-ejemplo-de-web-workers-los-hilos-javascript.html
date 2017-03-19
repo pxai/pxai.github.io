@@ -1,0 +1,209 @@
+---
+layout: post
+title: "Ejemplo de Web Workers, los hilos javascript" 
+date: 2013-08-20 12:51:28 
+categories: coding
+---
+<p>Desde que los navegadores tenían soporte para Javascript, su código siempre se ha ejecutado
+en un único hilo. Los scripts que se desarrollan para el navegador están orientados a eventos y
+estos se van ejecutando en una especie de cola. Es decir, conforme se van generando los eventos
+estos van a una cola de tareas y Javascript los va procesando de uno en uno en un bucle.</p>
+
+<h5>Web Workers, hilos en tu navegador</h5>
+<p>HTML5 trae como novedad los Web Workers, que son procesos de javascript separados. Por lo tanto
+cada Worker tiene su propio bucle de procesamiento de tareas/eventos. El Worker se inicia desde
+el hilo principal del navegador y puede comunicarse con este y otros Workers mediante el envío de
+mensajes.</p>
+
+<p>¿Son realmente necesarios? Bueno, hasta ahora con el asincronismo rampante como por ejemplo
+el de Ajax nos ha ido bien y ya llevamos unos años moviendo datos y soportando eventos. Peeero HTML5 viene con una serie de novedades que pueden agradecer ese tipo de mecanismos: por ejemplo el canvas (canvas es un lienzo), ese panel donde podemos pintar gráficos, la geolocalización, o las propias bases de datos indexedDB pueden beneficiarse de los hilos.</p>
+
+<h5>Limitaciones</h5>
+<p>Los Web Workers tienen su propio hilo a su disposición pero curiosamente tienen <b>limitaciones muy considerables</b>. ¿Te puedes creer que no puedes hacer un alert desde un worker? Tal cual, no tienes acceso al objeto predefinido window y a algunos otros solo puedes acceder en modo solo-lectura. Estas 
+serían algunas de las limitaciones más importantes (a la velocidad que se transforma la web puede que todo
+esto vaya cambiando, revisa la fecha estelar de este post):
+<ul>
+<li><b>Solo pueden comunicarse mediante mensajes</b>: no existen estados compartidos ni variables/estructuras compartidas.</li>
+<li><b>Son pesados</b>: no están pensados para levantar 100 workers, se habla de 10 como mucho.</li>
+<li><b>No se pueden depurar ni testear</b>: lo que ocurre en el Worker es una caja negra a día de hoy</li>
+<li><b>Solo tipos simples en contenido de mensajes</b>: esto puede variar pero no todos los navegadores soportan tipos complejos así que debes usar int, String,... pero ahora es cuando te ajustas tus gafas de pasta y piensas: mmmm JSON.stringify y serializo lo que quiera.</li>
+<li><b>Sin acceso a console</b>: al menos lo que he podido comprobar con mis medios</li>
+<li><b>Sin acceso al DOM</b>: olvídate de getElementById(), podrás usar un jquery limitado</li>
+<li><b>Sin acceso a window</b>: olvídate de los dialogs tipo alert, confirm,...</li>
+<li><b>No hay localStorage ni sessionStorage</b>: aunque sí tendrás acceso a IndexedDB</li>
+</ul> 
+</p>
+
+<p>Según se mire, esas limitaciones pueden tener sus ventajas ya que en cierto modo orientan a los Workers a hacer un tipo de tareas no vínculadas al interfaz sino centradas en una tarea concreta. Además el hecho de que no haya estado compartido nos quita de un plumazo todas la necesidades de sincronización y los problemas de bloqueo commo el deadlock. También abre un inmenso campo abonado para que la gente proporcione sus propios mecanismos de sincronización.</p>
+
+<p>Para poder contar con alguna ayuda, tenemos por ejemplo <i>Jquery Hive</i> que aparte de interfaces para crear Workers también nos facilita un subconjunto de jquery en el worker ($.get() , $.post() ,...)</p>
+
+<h5>Un ejemplo simple de Web Worker</h5>
+<p>Vamos a ver cómo crear un de Worker. Es tan simple como instanciar un objeto de la clase Worker pasándole como parámetro un fichero de código .js. Esto se haría en la página html (la que contiene el hilo principal); creamos la instancia, mandamos mensajes y establecemos un callback para procesar los mensajes del Worker.
+</p>
+<pre class="brush: js">
+
+
+            // This is how we create a Worker instance
+			var worker = new Worker('helloWorker.js');
+
+            // We send a message to worker
+            console.log('Sending a message to Worker from main thread:');
+			worker.postMessage('World' );
+
+            // We set a callback for every message received from Worker
+            worker.onmessage = function (event){
+                // event.target: this is the worker object
+                console.log("Sender object: " + event.target);
+                // event.data: the message content
+                console.log("Received message: " + event.data);
+            };
+    
+
+</pre>
+<p>Y este sería el contenido del Worker, del fichero helloWorker.js
+</p>
+<pre class="brush: js">
+/**
+* helloWorker.js
+* a simple worker sending/receiving messages 
+* @author Pello Xabier
+*/
+
+var workerName = 'Anhell';
+
+self.postMessage('Hello');
+self.postMessage('I am ' + workerName +' the Worker');
+
+// We set this callback to receive messages from main thread
+self.onmessage = function (event) {
+	self.postMessage('Worker thread> Message received: ' + event.data);
+};
+</pre>
+
+<p>Así lo vemos en la consola web de un firefox en linux:</p>
+<img src="http://www.pello.info/images/webworkers1.png" title="Logs de ejemplo simple de web workers" alt="Logs de ejemplo simple de web workers" />
+
+<h5>No todo son limitaciones</h5>
+<p>Bueno, al menos algunas cosillas sí que se pueden hacer oficialmente desde un Worker. Se supone,
+y digo supone porque con los navegadores nunca se sabe, que en un Worker disponemos de:
+<ul>
+	<li><b>.self</b>: como se ve en el ejemplo anterior, es una referencia a sí mismo en el Worker</li>
+	<li><b>.close()</b>: un interesante método para terminar el worker.</li>
+	<li><b>importScripts('js/miscript.js')</b>: un método para cargar scripts, puede resultar muy útil pero ojo, si cargas jquery te fallará porque jquery hacce referencia a window.</li>
+	<li><b>Objetos predefinidos navigator y location</b>: en modo solo lectura</li>
+	<li><b>XMLHttpRequest</b>: para ajax a pelo, pero teniendo el jQuery Hive igual no compensa.</li>
+	<li><b>setTimeout y setInterval</b>: lás míticas funciones para ejecutar cosas en un determinado tiempo</li>
+</ul>
+Las dos últimas son muy interesantes si vamos a trabajar con Workers. Para refrescar tu memoria, <i>setInterval(func,miliseg)</i> nos permite ejecutar una función una y otra vez con determinados intervalos de tiempo mientras que <i>setTimeout(func,miliseg)</i> ejecuta una función una vez pasado un determinado tiempo.
+</p>
+<h5>Un par de Workers</h5>
+<p>Vamos a ver un par de Workers compitiendo, Se trata de una Worker llamado Spaceship que va avanzando posiciones en un intervalo de tiempo. Para que no vaya a saco se usa la función setTimeout. En la página se van actualizando dos barras de progreso conforme los SpaceShips avanzan. Si todo va bien igual puedes probarlo en este propio post.</p>
+<pre class="brush: js">
+/**
+* Web worker that simulates a spacheShip flying
+* It sends a message to main thread to notify the distance travelled
+* spacheShip.js
+* @author Pello Xabier Altadill Izura
+* @greetz Han Solo fans
+*/
+
+var distance = 0;
+var total = 400;
+var randomDistance = 0;
+var speed = 10;
+var ship = "spaceship1";
+
+importScripts('js/randomLib.js');
+
+/**
+* sets space ship name
+*/
+function setSpaceship (name) {
+	ship = name;
+}
+
+/**
+* movesSpaceship in intervals
+* untils distance is 0 or negative
+*/
+function moveSpaceship () {
+		setTimeout("move()",100);
+}
+
+/**
+* moves the spaceship and notifies the main thread
+*/
+function move () {
+	randomDistance = -1;
+	
+	if (distance < total) {
+		randomDistance = random(speed);
+		// We send a message informing about ship name and distance moved and the remaining distance
+		self.postMessage(ship + ":" + randomDistance+":"+distance);
+		distance += randomDistance;
+		moveSpaceship();
+	}
+	
+}
+
+// We set this callback to receive messages from main thread
+// If we receive move now, the movement begins
+self.onmessage = function (event) {
+	self.postMessage('Spaceship thread> Message received: ' + event.data);
+	if (event.data == "move")
+		moveSpaceship();
+};
+</pre>
+
+<p>Bien, el código es bastante mejorable y me gustaría poder darle más forma de POO pero bueno,
+es una primera aproximación. Si no te funciona pues al menos puedes ver el código fuente de este post.</p>
+
+        <script>
+        $(document).ready(function() {
+            var spaceship1 = new Worker('http://www.pello.info/js/labs/spaceShip.js');
+            var spaceship2 = new Worker('http://www.pello.info/js/labs/spaceShip.js');
+
+
+            $("#startShips").click(function(event) {
+                // We tell the ship to move...
+                spaceship1.postMessage("move");
+                spaceship2.postMessage("move");
+            });
+
+
+            // We set a callback for every message received from Worker
+            spaceship1.onmessage = function (event){
+                // event.target: this is the worker object
+                console.log("Sender object: " + event.target);
+                // event.data: the message content
+                console.log("Received message from spaceship1: " + event.data);
+                values = event.data.split(":");
+
+                distance = parseInt(values[2]);
+                console.log("name: " + values[0] + ", distance: " + values[2]);
+
+                $("#spaceship1").css("width",distance+"px")
+            };
+
+            // We set a callback for every message received from Worker
+            spaceship2.onmessage = function (event){
+                // event.target: this is the worker object
+                console.log("Sender object: " + event.target);
+                // event.data: the message content
+                console.log("Received message from spaceship2: " + event.data);
+                values = event.data.split(":");
+
+                distance = parseInt(values[2]);
+                console.log("name: " + values[0] + ", distance: " + values[2]);
+
+                $("#spaceship2").css("width",distance+"px")
+            };
+    });
+        </script>
+	<h5>WebWorkers sample</h5>
+ 
+<input type="button" name="startShips" id="startShips" value="Start Race" />
+<div id="spaceship1" style="width: 10px;background-color: blue;">Spaceship1</div>
+<br />
+<div id="spaceship2" style="width: 10px;background-color: green;">Spaceship2</div>
