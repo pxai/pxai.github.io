@@ -1,0 +1,66 @@
+---
+layout: post
+title: "Java, operadores de bits" 
+date: 2011-10-27 11:46:08 
+categories: coding
+---
+<p>
+	JavaJutsu: operadores de bits</p>
+<p>
+	&iquest;Te interesan los operadores a nivel de bits en Java? Algo malo debes estar haciendo ;)</p>
+<p>
+	Los operadores haberlos haylos, otra cosa es que se usen con frecuencia.</p>
+<p>
+	/**<br />
+	* OperadoresBits<br />
+	* Clase que muestra el uso de operadores de bits<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac OperadoresBits.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java OperadoresBits<br />
+	*/<br />
+	&nbsp;<br />
+	<br />
+	/**<br />
+	* clase OperadoresBits<br />
+	* Muestra el uso de operadores de bits. Su uso no es que sea muy frecuente<br />
+	* pero suele estar presente en todos los lenguajes tipo c.<br />
+	*<br />
+	* &amp; : AND Conjunci&oacute;n de bits:&nbsp; 1011 &amp; 1001 = 1001<br />
+	* | : OR disjunci&oacute;n de bits:&nbsp;&nbsp; 1011 | 1001 = 1011<br />
+	* ^ : XOR disjunci&oacute;n excluyente de bits:&nbsp;&nbsp; 1011 ^ 1001 = 0010<br />
+	* &lt;&lt;: desplazamiento de bits a la izquierda<br />
+	* &gt;&gt;: desplazamiento de bits a la derecha<br />
+	* &nbsp;<br />
+	*<br />
+	* &nbsp;<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class OperadoresBits {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero1, numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero1 = 0x0010;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero2 = 0x1101;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Resultado: \n&quot; + (numero1 &amp; numero2));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Resultado: \n&quot; + (numero1 | numero2));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// se puede abreviar:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// numero1 = numero1 &amp; numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero1 &amp;= numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Para operaciones en las que el resultado vaya a una de los propios<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// operandos (numero1 = numero1 &amp; 0x1111) podemos usar una operadores de asignaci&oacute;n especial:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// &amp;=, |=, ^=, &gt;&gt;=, &gt;&gt;&gt;=, &lt;&lt;= &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

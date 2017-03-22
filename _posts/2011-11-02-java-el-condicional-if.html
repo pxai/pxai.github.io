@@ -1,0 +1,85 @@
+---
+layout: post
+title: "Java, el condicional if" 
+date: 2011-11-02 14:24:05 
+categories: coding
+---
+<h1>
+	Javajutsu: estructura condicinal if</h1>
+<p>
+	El if se hace como en c, aunque no todo es igual. Ver c&oacute;digo comentado.</p>
+<p>
+	/**<br />
+	* If<br />
+	* Clase que muestra el uso de un bloque condicional if<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac If.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java If<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase If<br />
+	* Muestra el uso de un bloque condicional if, cuyo interior solo<br />
+	* se ejecuta si la condici&oacute;n del if es verdadera<br />
+	*&nbsp; if (condici&oacute;n)<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_if;<br />
+	*&nbsp; }<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class If {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaramos una variable.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int x = 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int y = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x == 666)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x lleva la marca de la bestia&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// La condic&oacute;n del If puede ser cualquier expresi&oacute;n compleja siempre que devuelva un<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// valor booleano<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x &gt; 0 &amp;&amp; y &lt; 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x es positivo e y negativo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n: JAVA NO considera los enteros como booleanos!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tradicionalmente en c y otros lenguajes similares cualquier valor que sea distinto de 0 se considera como un true booleano<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// mientras que el 0 se considera como false.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;/*<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x es distinto de 0&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (y) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;y es distinto de 0&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por tanto !y es como preguntar si y es igual a 0<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// esta forma de escribir es muy kewl pero se considera poco clara<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (!y) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;y es 0!!&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}*/<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
