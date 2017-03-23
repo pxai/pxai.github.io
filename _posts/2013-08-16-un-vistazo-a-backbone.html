@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Un vistazo a Backbone" 
-date: 2013-08-16 01:37:50 
+title: "Un vistazo a Backbone"
+date: 2013-08-16 01:37:50
 categories: coding
 ---
-<img src="http://www.pello.info/images/backbone.png" alt="Backbone logo" title="Backbone logo" />
+<img src="http://pello.io/images/backbone.png" alt="Backbone logo" title="Backbone logo" />
 <p><a href="http://backbonejs.org/">Backbone</a> es un framework MVC de javascript para clientes web
 que facilita el desarrollo de aplicaciones de una sola página. El hecho de aplicar MVC permite separar
 los datos de la presentación y Backbone lo hace sin invadir la página y con una serie de funciones que permiten la persistencia de datos en el servidor. Dicho de otro modo, podemos hacer páginas web que manejen
@@ -14,7 +14,7 @@ de validación, antes se hacía por defecto) y te puedes encontrar por ahí blog
 te confundirán. Si juegas con Backbone que no se te olvide incluir en la página el jquery, el <b>underscore</b> (backbone se apoya mucho en él) y por supuesto el backbone. Y en ese orden.
 </p>
 
-<p>Y como todo framework MVC, Backbone nos obliga amablemente a separar el modelo, la vista y el 
+<p>Y como todo framework MVC, Backbone nos obliga amablemente a separar el modelo, la vista y el
 controlador. Vamos a ver qué pinta tiene cada uno:</p>
 
 <h5>Model: El Modelo</h5>
@@ -36,7 +36,7 @@ al resto es una clase feliz que representa algo y que es ajena a las vistas y ru
 			name: 'Frontend Warrior',
 			strength: 6,
 			agility: 6,
-			intelligence: 6 
+			intelligence: 6
 		},
 
 		/*
@@ -74,10 +74,10 @@ al resto es una clase feliz que representa algo y que es ajena a las vistas y ru
 		* dumps all warrior attributes
 		*/
 		toString: function () {
-			return 'Name: ' + this.get('name') + 
-				   ', Str: ' + this.get('strength') + 
-				   ', Agl: ' + this.get('agility') + 
-				   ', Int: ' + this.get('intelligence'); 
+			return 'Name: ' + this.get('name') +
+				   ', Str: ' + this.get('strength') +
+				   ', Agl: ' + this.get('agility') +
+				   ', Int: ' + this.get('intelligence');
 		}
 
 });
@@ -148,7 +148,7 @@ var WarriorView = Backbone.View.extend({
 Esto sería lo que viene llamándose el controlador, aunque en los libros sobre Backbone se le da muchas vueltas a si esto eso MVC o MVP, en fin... básicamente es donde se hace el mapa de acciones. Backbone se
 queda con las peticiones que llegan a la propia página a través del... ¡¡¡hash!!! es lógico ya que es una
 forma muy simple de cambiar la url sin recargar la página, y ya se sabe, ahora lo que mola es NO cambiar
-de página (ay espera, que me ajuste las gafas de pasta y la camiseta de Naranjito que me pille en el FNAC). Es decir, si metemos un enlace en la página como: <code>pagina.html#cliente/1</code> lo que recibe el router de backbone es #cliente/1 y con eso decide a qué función llama. 
+de página (ay espera, que me ajuste las gafas de pasta y la camiseta de Naranjito que me pille en el FNAC). Es decir, si metemos un enlace en la página como: <code>pagina.html#cliente/1</code> lo que recibe el router de backbone es #cliente/1 y con eso decide a qué función llama.
 </p>
 <pre class="brush: js">
 /**
@@ -193,4 +193,4 @@ Backbone.history.start();
 </pre>
 
 <p>Bueno, otra pieza más en el puzzle, ya solo falta el pegamento con las otras.</p>
-<p>Tienes <a href="http://www.pello.info/filez/labs/backbone/webcraft/webcraft.html" title="Ejemplo de backbone">este FEO (y escasamente funcional) ejemplo completo en está página</a>, abre la consola de javascript para ver los logs.</p>
+<p>Tienes <a href="http://pello.io/filez/labs/backbone/webcraft/webcraft.html" title="Ejemplo de backbone">este FEO (y escasamente funcional) ejemplo completo en está página</a>, abre la consola de javascript para ver los logs.</p>

@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Persistent session control in Node.js with express 4" 
-date: 2014-08-03 00:08:50 
+title: "Persistent session control in Node.js with express 4"
+date: 2014-08-03 00:08:50
 categories: coding
 ---
 <p>In this series of posts I'm trying to show, in the simplest way possible, how to develop a web application in Node.js adding all the features that in other environments we take for granted: database access, form validation, i18n, and of course session management. Express is the framework of choice for this purpose, the problem is that maybe many information you find out there may be deprecated or useless since express 4 was released. Here I'm trying to use the latest (express4) and the coolest, but in any case in the months to come this information may be crappy. As some dear friend of mine says <i>talk is cheap, show me the code</i>, so let's get down to the nitty-gritty details.</p>
 
 <h5>Session control in Express4</h5>
-<img src="http://www.pello.info/images/YouShallNotPass.jpg" title="Your session never expires for me"  alt="You shall not pass today, tomorrow who knows.">
+<img src="http://pello.io/images/YouShallNotPass.jpg" title="Your session never expires for me"  alt="You shall not pass today, tomorrow who knows.">
 <p>If we want to control the access to certain functions of our application or if we need multiuser support to distinguish the activities of those users we need some kind of session control. Node.js based web servers behave as any other web server so we don't have a permanent connection to establish such mechanism. But, as many other platforms do, express can deal with cookies and as you should know, these are commonly used to to simulate a permanent state which is, finally, a session.</p>
 
 <p>Beware code samples from a year ago, unless you are using older versions of express. Since version 4 there are many modules that now are not included in express (almost all but static file server) and you have to grab them independently: <code>express-session</code> is the one we need to be able to access session variables with <code>req.session</code>. It has many, many options, expiration, security, e.a. </p>

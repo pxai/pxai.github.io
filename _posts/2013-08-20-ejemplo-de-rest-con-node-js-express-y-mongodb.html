@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ejemplo de REST con Node.js + express y MongoDB" 
-date: 2013-08-20 23:15:49 
+title: "Ejemplo de REST con Node.js + express y MongoDB"
+date: 2013-08-20 23:15:49
 categories: coding
 ---
 <p>Alrededor de Node.js existen infinidad de proyectos en plena ebullición, y prueba de ello
@@ -59,14 +59,14 @@ linux:~/nodejs/express# express music_chart
    run the app:
      $ node app
 
-linux:~/nodejs/express# 
+linux:~/nodejs/express#
 
 </pre>
 <p>Sí, como ya habrás adivinado la aplicación nos servirá para mantener una lista de canciones,
 como la de los cuarenta aborrecibles pero con música algo mejor. Si te lo instalas todo puedes probarlo con una página web de pruebas llamada rest.html que realiza las 4 operaciones básicas con recursos REST. Para el PUT y el DELETE se utiliza un POST con un parámetro oculto llamado _method. Node.js los interpretará como peticiones PUT y DELETE y se sentirá super RESTful y tú un <a href="http://restafari.blogspot.com.es/" title="REST tiene su propia tribu urbana o más bien logia">RESTafari</a>.</p>
 
 <h5>contenidos del proyecto</h5>
-<p>Puedes <a href="http://www.pello.info/filez/music_chart.tgz" title="Descargar proyecto de ejemplo Node.js y MongoDB">descargarte el proyecto aquí</a>
+<p>Puedes <a href="http://pello.io/filez/music_chart.tgz" title="Descargar proyecto de ejemplo Node.js y MongoDB">descargarte el proyecto aquí</a>
 Aparte de las carpetas generadas por express he creado alguna más y algún que otro fichero.
 Esto sería lo más reseñable:
 <ul>
@@ -81,7 +81,7 @@ Esto sería lo más reseñable:
 <h5>music_chart.js: el servidor</h5>
 <p>Este es un servidor Web que por un lado puede servir contenido estático que se encuentre dentro
 de la carpeta public y por otro tiene definidas una serie de rutas para poder ofrecer recursos REST.
-Por no volver a explicar que era REST <a href="http://www.pello.info/index.php/blog/rest-in-spring" title="Explicación de recursos REST">echa un ojo a esto</a>. Bueno, el servidor está comentado. Lo crucial está al final, cuando se definen las rutas.</p>
+Por no volver a explicar que era REST <a href="http://pello.io/index.php/blog/rest-in-spring" title="Explicación de recursos REST">echa un ojo a esto</a>. Bueno, el servidor está comentado. Lo crucial está al final, cuando se definen las rutas.</p>
 <pre class="brush: js">
 
 /**
@@ -98,10 +98,10 @@ Por no volver a explicar que era REST <a href="http://www.pello.info/index.php/b
 // Requires modules
 var express = require('express');
 var http = require('http');
-var path = require('path'); 
+var path = require('path');
 
 // my configuration
-var config = require('./config'); 
+var config = require('./config');
 
 var routes = require('./routes');
 
@@ -185,7 +185,7 @@ app.del('/song/:id',songRoutes.delete);
 </pre>
 
 <h5>models/song.js: el modelo</h5>
-<p>A ver, en un principio tenía la idea de crear una especie de DAO por aquello de las viejas costumbres. Pero es que esto es algo distinto. Hay que retorcer mucho las librerías existentes e incluso hay quien sugiere módulos para forzar la ejecución en serie (<a href="http://www.pello.info/index.php/blog/callbacks-y-funciones-asincronas-el-estilo-node-js">ya hablé aquí</a>), pero al final me queda
+<p>A ver, en un principio tenía la idea de crear una especie de DAO por aquello de las viejas costumbres. Pero es que esto es algo distinto. Hay que retorcer mucho las librerías existentes e incluso hay quien sugiere módulos para forzar la ejecución en serie (<a href="http://pello.io/index.php/blog/callbacks-y-funciones-asincronas-el-estilo-node-js">ya hablé aquí</a>), pero al final me queda
 la sensación de no estar haciendo las cosas al <i>estilo Node.js</i>. Así que le modelo básicamente proporciona (digamos) un Datasource y una instancia para poder mapear el schema de un array a la BD. Luego, cuando utilizo el modelo en el routes/song.js no queda mucho churro, por cada petición solamente hay una llamada con callback, relativamente corta y no sale un <i>callback spaghetti</i> de esos.</p>
 <pre class="brush: js">
 /**
@@ -207,7 +207,7 @@ exports.songModel = function (config) {
 	this.songs;
 	this.songSchema;
 	var db;
-	
+
   	/**
   	* init
   	*/
@@ -215,9 +215,9 @@ exports.songModel = function (config) {
 
   		mongodb.connect('mongodb://localhost/musicdb');
   		db = mongodb.connection;
-		this.songSchema = new mongodb.Schema({ artist: {type: String}, 
-										  song: {type: String}, 
-										  album: {type: String}, 
+		this.songSchema = new mongodb.Schema({ artist: {type: String},
+										  song: {type: String},
+										  album: {type: String},
 										  rating: {type: Number}  });
 
 		this.songs = mongodb.model('songs', this.songSchema);
@@ -234,9 +234,9 @@ exports.songModel = function (config) {
 * routes/song.js
 * Here we define the routes for each REST request to /song/ url
 * We define the handlers for every request mapped in express server.
-* 
+*
 * list:    mapped from GET /songs/  : read all from db.
-* listOne: mapped from GET /song/id : read one record from db 
+* listOne: mapped from GET /song/id : read one record from db
 * add:     mapped from POST /song/  : adds a new record
 * update:  mapped from PUT /song/id : updates existing record
 * delete:  mapped from DELETE /song/id : deletes existing record
@@ -376,9 +376,9 @@ exports.delete = function(req, res){
         res.send('Song deleted ' + songId);
       }
     });
-  
+
 };
 </pre>
 
-<img src="http://www.pello.info/images/noderest.jpg" alt="Probando nuestro server Node.js" title="Probando nuestro server Node.js" />
+<img src="http://pello.io/images/noderest.jpg" alt="Probando nuestro server Node.js" title="Probando nuestro server Node.js" />
 <p>Ahí tienes la página en acción solicitando recursos REST, con el server de fondo escupiendo logs informativos y vomitando JSONes. El server necesita miles y miles de mejoras: comprobación de campos, pruebas, internacionalización, etc... todo se andará. Bien, ahora sí que sí, falta la última pieza del puzzle: hacer que el cliente sea una página html con Backbone. Y entonces ya, el círculo se cerrará, la fiesta del Javascript será total y nuestra dicha completa.</p>

@@ -1,0 +1,106 @@
+---
+layout: post
+title: "Java, arrays o arreglos" 
+date: 2011-11-21 12:27:20 
+categories: coding
+---
+<h1>
+	JavaJutsu: arrays</h1>
+<p>
+	En java los arrays se declaran m&aacute;s o menos como en c. Tenemos estructuras mejores dentro de las utilidades de java.util.*, pero si queremos algo b&aacute;sico y no nos importa que sea r&iacute;gido podemos declarar arrays as&iacute;:</p>
+<p>
+	/**<br />
+	* Arrays<br />
+	* Clase que muestra la declaraci&oacute;n y uso de arrays<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Arrays.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Arrays<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Arrays<br />
+	* Clase que muestra la declaraci&oacute;n y uso de arrays. Los arrays<br />
+	* o arreglos son variables que contienen un conjunto de datos del mismo tipo<br />
+	* indexados num&eacute;ricamente desde el 0 en adelante.<br />
+	*<br />
+	* NOTA: pueden crearse arrays de elementos del tipo b&aacute;sico: int, float,...<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y tambi&eacute;n pueden crearse de clases.<br />
+	* NOTA2: los arrays en java se definen con un tama&ntilde;o concreto y no puede<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alterarse. Si necesitamos elasticidad entonces debemos usar clases<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; como por ejemplo Vector.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Arrays {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a definir un array de enteros, todav&iacute;a sin especificar el tama&ntilde;o.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lo podemos hacer de dos formas:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int valores[];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [] dorsales;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos establecer el tama&ntilde;o mediante new:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En este caso definimos un array de DIEZ elementos, &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// pero ATENCI&Oacute;N, los &iacute;ndices ir&aacute;n del 0 al 9.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [] puntos = new int[10];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Si quisieramos crear un array de caracteres que contenga el abecedario<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo hariamos as&iacute;. El abecedario espa&ntilde;ol tiene 28 letras, en el array ser&aacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// del 0 al 27.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char abecedario[] = new char[28];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;boolean&nbsp; verdades[] = new boolean[5];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos inicializar los arreglos con valores concretos,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo cual ser&iacute;a una forma de impl&iacute;cita de especificar su tama&ntilde;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numeros[] = {7,15,42,69,666};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char letras [] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos crear arrays de Strings<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String heroes[] = {&quot;Gandalf&quot;, &quot;Haplo&quot;, &quot;Jon Nieve&quot;, &quot;Vader&quot;, &quot;Trancos&quot;};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para acceder a un elemento del array debemos indicar su &iacute;ndice.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// el &iacute;ndice es un n&uacute;mero entero que va de 0 al tama&ntilde;o-1 del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;The number of the beast: &quot; + numeros[4]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos alterar valores de un elemento del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;verdades[0] = false;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[2] = 23;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y por supuesto operar con ellos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al elemento 0 del array heroes le concatenamos algo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[0] = heroes[0] + &quot; el gris&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[3] = numeros[2] + 8;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vale, &iquest;que hacemos con el array? Podemos recorrerlo con un for<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Todo array tiene una propiedad que es length, la cual no da su tama&ntilde;o<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Por ejemplo, los elementos del array puntos los podemos inicializar &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// con un valor concreto:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i&lt; puntos.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;puntos[i] = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Estos son los mayores heroes: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i &lt; heroes.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;En el &iacute;ndice &quot; + i + &quot;: &quot; + heroes[i]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

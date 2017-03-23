@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Theme de wordpress" 
-date: 2004-07-06 17:39:00 
+title: "Theme de wordpress"
+date: 2004-07-06 17:39:00
 categories: coding
 ---
 Bueno, para variar un poco que mejor que hacerse un theme de Wordpress. Puede resultar algo contradictorio hablar de eso en un blog tan descaradamente drupaliano como este, pero lo cierto es que hacer ese theme no es mÃƒÂ¡s que una excusa para poner en prÃƒÂ¡ctica (mÃƒÂ¡s bien en tela de juicio) los conocimientos de css, y mÃƒÂ¡s en concreto del posicionamiento de bloques.
@@ -40,26 +40,26 @@ Por otro lado tiene el tÃƒÂ­pico mecanismo para que la imagen de cabecera ca
  	* todaysRandomImage
  	* Displays random image in header, one per day
  	*/
- 	function todaysRandomImage () 
+ 	function todaysRandomImage ()
  	{
  		$imagepath = "images/random/";
  		$images;
 		$d = dir(dirname(__FILE__)."/images/random");
-	
-		while (false !== ($entrada = $d->read())) 
+
+		while (false !== ($entrada = $d->read()))
 		{
-			if ($entrada != "." && $entrada!="..") 
+			if ($entrada != "." && $entrada!="..")
 			{
 				$images[] = $imagepath.$entrada;
 			}
 		}
 		$d->close();
-		
+
 		// we take the total amount of files
 		$total = count($images);
 		// take day of the year
 		$today = date("z");
-		// select one index 
+		// select one index
 		$selected = $today % $total;
 		// and return images array element: image path
 		return $images[$selected];
@@ -68,5 +68,5 @@ Por otro lado tiene el tÃƒÂ­pico mecanismo para que la imagen de cabecera ca
 </pre>
 
 Ã‚Â¿El resultado?<br>
-<a href="http://www.pello.info/?q=node/view/116">AQUÃ¯Â¿Â½? LO TIENES</a>
+<a href="http://pello.io/?q=node/view/116">AQUÃ¯Â¿Â½? LO TIENES</a>
 <br><br>

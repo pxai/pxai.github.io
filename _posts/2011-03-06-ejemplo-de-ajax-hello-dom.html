@@ -1,7 +1,7 @@
 ﻿---
 layout: post
-title: "Ejemplo de AJAX: Hello Dom" 
-date: 2011-03-06 16:45:00 
+title: "Ejemplo de AJAX: Hello Dom"
+date: 2011-03-06 16:45:00
 categories: coding
 ---
 Bueno al menos habia que probar este combinado de tecnologias.<br>
@@ -19,7 +19,7 @@ del cliente.<br> Un ejemplo:<br>
 Hasta ahora en cualquier aplicacion web, si se producian cambios en la BBDD no se veian
 reflejados en el navegador hasta que no se recargaba la pagina. Con AJAX eso ha cambiado,
 ya que el navegador puede hacer consultas al margen de que se recargue o no la pagina
-y puede reflejar los cambios de forma en el navegador  por ejemplo haciendo aparecer un 
+y puede reflejar los cambios de forma en el navegador  por ejemplo haciendo aparecer un
 bloque div.
 <br><br>
 <b>Vale, dame un ejemplo simple</b>
@@ -27,13 +27,13 @@ bloque div.
 Ok, aqui van un par de ejemplos de peticiones AJAX dentro de un fichero llamado ajax.html
 1. En el primero, helloDom, se hace una peticion GET y simplemente se muestra
 el resultado con un alert.
-2. En el segundo, conversor, se hace una peticion POST mandando parametros y 
+2. En el segundo, conversor, se hace una peticion POST mandando parametros y
 se muestra la respuesta en un alert.
 <br>
 En los dos casos la respuesta viene en formato XML, pero no se procesa ni nada,
 simplemente se vuelca el resultado.<br>
-Puedes descargar los ficheros <a href="http://www.pello.info/filez/ajax.tgz">aqui</a><br>
-O probar la ejecucion <a href="http://www.pello.info/filez/ajax/ajax.html">aqui</a>
+Puedes descargar los ficheros <a href="http://pello.io/filez/ajax.tgz">aqui</a><br>
+O probar la ejecucion <a href="http://pello.io/filez/ajax/ajax.html">aqui</a>
 <hr>
 Este es el contenido de <b>ajax.html</b>:
 <pre>
@@ -52,7 +52,7 @@ Este es el contenido de <b>ajax.html</b>:
  * Esta funcion invoca un objeto capaz de hacer peticiones a una pagina
  * sin que se recargue la pagina. Funciona en explorer 6 sp2 y Firefox 1.0.6
  * En este caso simplemente se solicita una pagina y se muestra el texto
- * www.pello.info
+ * pello.io
  */
  function helloDom () {
 	 // Creamos el objeto, segun el navegador
@@ -60,28 +60,28 @@ Este es el contenido de <b>ajax.html</b>:
  	   xmlhttprequest = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // Para Mordorsoft Exploiter
 	    xmlhttprequest = new ActiveXObject("Microsoft.XMLHTTP");
-	} 
-	
+	}
+
 	// PREPARANDOSE PARA LA RESPUESTA
 	// establecemos un handler para cuando llegue la respuesta,
 	// es decir, le decimos que funcion procesara el XML
 	//	xmlhttprequest.onreadystatechange = procesaXML;
 	// Mejor declararla asi para especificar el parametro
 	xmlhttprequest.onreadystatechange = function() { procesaXML(xmlhttprequest); };
-	
+
 	// HACIENDO LA PETICION
 	// Open(metodo, url, y si queremos la peticion asincrona o no)
 	xmlhttprequest.open('GET', 'saludo.xml', true);
-	 
+
 	 // No tiene por que ser XML, podria ser texto normal
 	 //xmlhttprequest.open('GET','texto.txt',true);
-	 
-	 // Send es necesario para que se procese la peticion 
+
+	 // Send es necesario para que se procese la peticion
 	 // pero es optativo pasar parametros para la URL remota
 	 xmlhttprequest.send(null);
-	 
+
  }
- 
+
  /**
  * procesaXML
  * parametros: el objeto xmlhttprequest
@@ -108,45 +108,45 @@ Este es el contenido de <b>ajax.html</b>:
 	    // Todavia no hay respuesta...
 	  }
  }
- 
+
 
  /**
  * conversor :  Ejemplo basico de AJAX (2)
- * Invocado desde el boton de conversion, prepara el objeto de peticion 
+ * Invocado desde el boton de conversion, prepara el objeto de peticion
  * e invoca una pagina php remota
  */
   function conversor () {
- 
+
  		var cantidad = document.getElementById("conversor").value;
- 		
+
  // 		alert("La cantidad es " + cantidad);
- 
+
 	 // Creamos el objeto, segun el navegador
 	 if (window.XMLHttpRequest) { // Para los mozilla y los basados en gecko
  	   xmlhttprequest = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // Para Mordorsoft Exploiter
 	    xmlhttprequest = new ActiveXObject("Microsoft.XMLHTTP");
-	} 
-	
+	}
+
 	// PREPARANDOSE PARA LA RESPUESTA
 	// establecemos un handler para cuando llegue la respuesta,
 	xmlhttprequest.onreadystatechange = function() { procesaConversor(xmlhttprequest); };
-	
-	
+
+
 	// HACIENDO LA PETICION
 	// Open(metodo, url, y si queremos la peticion asincrona o no)
 	xmlhttprequest.open('POST', 'procesa.php', true);
-	 
+
 	// Preparamos el POST. Hay que establecer esta cabecera
 // para poder enviar variables por post
 xmlhttprequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
- 
+
 	 // Send es necesario si queremos pasar variables por POST
  // asi que construimos una especie de query string con variables=valores
 	 xmlhttprequest.send("conversor="+cantidad);
-	 
+
  }
- 
+
  /**
  * procesaConversor
  * parametros: el objeto xmlhttprequest
@@ -173,11 +173,11 @@ xmlhttprequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencod
  }
 
 
- 
+
  /*]]&gt;*/
  &lt;/script&gt;
 &lt;/head&gt;
-&lt;body&gt; 
+&lt;body&gt;
 &lt;p&gt;
 Es es un ejemplo muy simple de Ajax. Si pinchas en el enlace se hace una peticion para cargar un contenido
 sin que se recargue la pagina.
@@ -200,7 +200,7 @@ en la propia caja de texto. Todo ello sin que se recargue la pagina.
         src="http://www.w3.org/Icons/valid-xhtml10"
         alt="Valid XHTML 1.0 Transitional" height="31" width="88" /&gt;&lt;/a&gt;
   &lt;/p&gt;
-  
+
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>

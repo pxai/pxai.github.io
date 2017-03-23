@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Keeping Node.js app.js clean + custom middleware for express" 
-date: 2014-07-26 23:03:41 
+title: "Keeping Node.js app.js clean + custom middleware for express"
+date: 2014-07-26 23:03:41
 categories: coding
 ---
 <img src="http://chicagouncommon.com/photography/neat_stuff.jpg" alt="neat stuff" title="Neat stuff" />
 <p>
-This post has two purposes: to continue <a href="http://www.pello.info/index.php/blog/node-js-express-routes-mongoose-simple-and-separated">the previous one</a> showing ways to improve the organization of routes and secondly to see how to add your own middleware to an express application.
+This post has two purposes: to continue <a href="http://pello.io/index.php/blog/node-js-express-routes-mongoose-simple-and-separated">the previous one</a> showing ways to improve the organization of routes and secondly to see how to add your own middleware to an express application.
 </p>
 <p>The previous version have a problem when it comes to the routes. We require all of them with a single require command but we were applying them one by one.</p>
 <pre class="brush:js">
