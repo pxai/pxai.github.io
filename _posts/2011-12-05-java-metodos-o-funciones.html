@@ -1,0 +1,126 @@
+---
+layout: post
+title: "Java, métodos o funciones"
+date: 2011-12-05 12:19:22
+categories: coding
+---
+<h1>
+	JavaJutsu: m&eacute;todos o funciones</h1>
+<p>
+	En las funciones podemos tener un retorno y pueden lanzar excepciones.</p>
+<p>
+	/**<br />
+	* Metodos<br />
+	* Clase que muestra la declaraci&oacute;n de todo tipo de m&eacute;todos<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Metodos.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Metodos<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Metodos<br />
+	* Muestra la declaraci&oacute;n dedistintos tipos de m&eacute;todos: constructores,<br />
+	* m&eacute;todos con distintos tipos de retorno, m&eacute;todos que lanzan excepciones,<br />
+	* m&eacute;todos est&aacute;ticos, m&eacute;todos privados, protegidos y p&uacute;blicos<br />
+	*<br />
+	* La clase es un poco absurda pero simplemente trata de mostrar distintos<br />
+	* tipos de m&eacute;todos<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Metodos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Metodos<br />
+	&nbsp;&nbsp; &nbsp;* Constructor sin par&aacute;metros<br />
+	&nbsp;&nbsp; &nbsp;* estos m&eacute;todos son los &uacute;nicos que no devuelven algo explicitamente<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Metodos () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado instancia&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Metodos<br />
+	&nbsp;&nbsp; &nbsp;* Constructor con par&aacute;metros<br />
+	&nbsp;&nbsp; &nbsp;* estos m&eacute;todos son los &uacute;nicos que no devuelven algo explicitamente<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Metodos (String opcion) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Opci&oacute;n pasada: &quot; + opcion);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* estatico<br />
+	&nbsp;&nbsp; &nbsp;* Aquellos que tienen la palabra static se consideran M&eacute;todo de clase, &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;* puede ser invocado sin que se cree una instancia<br />
+	&nbsp;&nbsp; &nbsp;* de la clase. ver main.<br />
+	&nbsp;&nbsp; &nbsp;* De estos m&eacute;todos solo se crea una copia en memoria, al igual que pasa<br />
+	&nbsp;&nbsp; &nbsp;* con los atributos que se declaran static.<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void estatico (int veces) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0; i &lt; veces;i++) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Est&aacute;tico&gt; &quot; + i);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saludar<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo publico que devuelve un String<br />
+	&nbsp;&nbsp; &nbsp;* Si no ponemos nada, se considera p&uacute;blico<br />
+	&nbsp;&nbsp; &nbsp;* @return String<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;String saludar () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;saludoPrivado();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return &quot;Hola yo te saludo.&quot;;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saludoPrivado<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que saca un mensaje por consola.<br />
+	&nbsp;&nbsp; &nbsp;* Solo se puede invocar desde dentro de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;private void saludoPrivado () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Java rulez&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* tomarDato<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo publico lee un valor por consola y devuelve un entero<br />
+	&nbsp;&nbsp; &nbsp;* Puede lanzar dos excepciones<br />
+	&nbsp;&nbsp; &nbsp;* @return String<br />
+	&nbsp;&nbsp; &nbsp;* @throws IOException, NumberFormatException<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public int tomarDato () throws IOException, NumberFormatException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Console c = System.console();<br />
+	&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String linea = c.readLine(&quot;Dame un n&uacute;mero: &quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Integer.parseInt(linea);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;* @throw IOException<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[]) throws IOException<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Probamos el m&eacute;todo est&aacute;tico. No necesitamos crear instancia!!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Metodos.estatico(5);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Metodos pruebaMetodos = new Metodos(&quot;hola&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;pruebaMetodos.saludar();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int entero = pruebaMetodos.tomarDato();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>

@@ -1,0 +1,134 @@
+---
+layout: post
+title: "Java, herencia de clases" 
+date: 2011-12-07 13:34:26 
+categories: coding
+---
+<h1>
+	JavaJutsu, herencia entre clases</h1>
+<p>
+	Este es un ejemplo de herencia, la clase ClienteVip que hereda de Cliente:</p>
+<p>
+	/**<br />
+	* ClienteVip<br />
+	* Clase que muestra la declaraci&oacute;n de una clase que extiende a otra:<br />
+	* es decir muestra la HERENCIA<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ClienteVip.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ClienteVip<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	// Liber&iacute;a necesaria para la clase Date<br />
+	import java.util.Date;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ClienteVip<br />
+	* Muestra la declaraci&oacute;n de ClienteVip, una extensi&oacute;n de la clase Cliente. &nbsp;<br />
+	* Es un ejemplo simple de herencia, donde creamos una clase especializada<br />
+	* que hereda todos los atributos y m&eacute;todos de la clase padre.<br />
+	* Para lograrlo debemos a&ntilde;adir la clausula extends en la declaraci&oacute;n<br />
+	* de la clase.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ClienteVip extends Cliente {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// ATRIBUTOS o PROPIEDADES DE LA CLASE extendida:<br />
+	&nbsp;&nbsp; &nbsp;public float descuento;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// M&Eacute;TODOS DE LA CLASE: Constructores, y otras funciones<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;* este es el m&eacute;todo constructor, al que se invoca<br />
+	&nbsp;&nbsp; &nbsp;* al crear una instancia de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;ClienteVip ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lamamos al constructor de la clase padre<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de ClienteVip&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;* Otro constructor con par&aacute;metros.<br />
+	&nbsp;&nbsp; &nbsp;* Nos sirve para crear una instancia<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;ClienteVip (String nombre, String apellidos, Date nacimiento, int codigo, float descuento)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lamamos al constructor de la clase padre<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super(nombre,apellidos,nacimiento,codigo);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Establecemos el atributo descuento<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.descuento = descuento;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de ClienteVip&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* aplicarDescuento<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que aplica el descuento del cliente a un determinado total<br />
+	&nbsp;&nbsp; &nbsp;* @return resultado<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public float aplicarDescuento (float precioTotal)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float resultado = precioTotal * (1-descuento);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* quitarIVA<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que le quita el IVA al cliente de un total<br />
+	&nbsp;&nbsp; &nbsp;*<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public float quitarIVA (float precioTotal)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float resultado = precioTotal * (0.82F);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* fichaCliente<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que sobrescribe al de la clase padre Cliente,<br />
+	&nbsp;&nbsp; &nbsp;* a&ntilde;adiendo un dato m&aacute;s.<br />
+	&nbsp;&nbsp; &nbsp;*<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void fichaCliente ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al principio hace los mismo que la clase padre.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super.fichaCliente();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;CLIENTE VIP&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Descuento: &quot; + descuento);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;* Y desde ella vamos a crear una instancia de ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos un par de instancias<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ClienteVip unClienteVip = new ClienteVip();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ClienteVip otroClienteVip = new ClienteVip(&quot;Frodo&quot;,&quot;Bolson&quot;, new Date(), 19, 0.10F);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unClienteVip.codigo = 89;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;otroClienteVip.fichaCliente();<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Total 109.56 euros, con descuento del &quot; + otroClienteVip.descuento + &quot;%: &quot; + otroClienteVip.aplicarDescuento(109.56F));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unClienteVip.saluda();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
