@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Convertir DBF a CVS con perl"
-date: 2004-11-05 10:21:00
+title: "Convertir DBF a CVS con perl" 
+date: 2004-11-05 10:21:00 
 categories: coding
 ---
 <p>Hay muchas aplicaciones viejas que guardan celosamente sus datos en el vetusto formato DBF.</p>
@@ -16,12 +16,12 @@ codigo. Es necesaria la libreria xbase.
 <pre>
 #!/usr/bin/perl
 
-# dbf2csv.pl
+# dbf2csv.pl 
 # programita perl para convertir un grupo de ficheros en formato dbf
 # a formato cvs. Se requierea la libreria xbase para la lectura de dbf.
 # De cada fichero DBF se genera otro en formato CVS con la extension CVS,
 # y se guarda donde se le indique al ejecutar. Por defecto va al mismo directorio
-# Pello Xabier Altadill Izura - http://pello.io
+# Pello Xabier Altadill Izura - http://www.pello.info
 
 use XBase;
 
@@ -33,7 +33,7 @@ use XBase;
 # 5: si queremos que muestre por pantalla los datos que se van sacando
 
 print "
-DBF2CSV.PL - Conversor de DBF a CVS  - pello.io
+DBF2CSV.PL - Conversor de DBF a CVS  - www.pello.info 
 ";
 print "uso: ./dbf2cvs.pl [separador] [path] [cabecera 0,1] [outputdir] [verboso 0,1]
 ";
@@ -47,19 +47,19 @@ my $verboso = ($ARGV[4] eq "")?0:$ARGV[4];
 print "Separador: $separador, path: $path, cabeceras: $cabeceras, outputdir: $output
 ";
 
-# Ficheros
+# Ficheros 
 my @ficheros = &lt;${path}/*.DBF&gt;;
 
 
 
 foreach $fichero (@ficheros) {
-	print "Generando $fichero...
+	print "Generando $fichero... 
 ";
 
 	my $table = new XBase "$fichero" or die XBase-&gt;errstr;
 
 	my $ficherocvs = "$output/$fichero.cvs";
-	open DATA, "&gt;$ficherocvs" or die "Error, no se pudo crear fichero de resultado $ficherocvs $!
+	open DATA, "&gt;$ficherocvs" or die "Error, no se pudo crear fichero de resultado $ficherocvs $! 
 ";
 
 	my @campos = $table-&gt;field_names;
@@ -73,7 +73,7 @@ foreach $fichero (@ficheros) {
 		foreach $item  (@campos) {
 			escribe("$item$separador");
 		}
-
+	
 		escribe("
 ");
 
@@ -81,7 +81,7 @@ foreach $fichero (@ficheros) {
 		foreach $item  (@tipos) {
 			escribe("$item$separador");
 		}
-
+	
 		escribe("
 ");
 
@@ -89,7 +89,7 @@ foreach $fichero (@ficheros) {
 
 	# Sacamos los datos
 	 my $cursor = $table-&gt;prepare_select();
-
+	
 	 while (my @datos = $cursor-&gt;fetch) {
 		foreach $registro (@datos) {
 	       		escribe("$registro$separador");
@@ -109,7 +109,7 @@ OK, gracias por utilizar dbf2cvs.pl
 ";
 
 
-# Escribe en el fichero de resultado
+# Escribe en el fichero de resultado 
 # y en salida estandar a menos que verbose este desactivado
 sub escribe {
 	my ($contenido) = @_;
