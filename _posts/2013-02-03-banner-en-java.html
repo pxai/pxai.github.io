@@ -1,0 +1,314 @@
+---
+layout: post
+title: "Banner en java" 
+date: 2013-02-03 00:44:51 
+categories: coding
+---
+<p>
+	Banner es el cl&aacute;sico programa de unix para sacar por consola un texto en tama&ntilde;o grande. Hab&iacute;a planteado esto y me mandaron una soluciones efectivas pero algo choriceras. Yo planteo esta. Lo hago pensando orientado a objetos, por tanto divido el problema en cosas, no en funciones. Las cosas que salen son: caracteres, pantalla, y alguien que escribe. En java me quedar&iacute;an 4 clases, una a&ntilde;adida para hacer el main.</p>
+<p>
+	<strong>Letter</strong></p>
+<p>
+	Este es un hashtable que contiene las letras en un hashtable. No he metido todas, porque al igual que a Carlos esto es algo denigrante.</p>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package org.cuatrovientos.banner;<br />
+	<br />
+	import java.util.Hashtable;<br />
+	<br />
+	/**<br />
+	&nbsp;* Letters<br />
+	&nbsp;* singleton hashtable that holds all letters<br />
+	&nbsp;* @author Pello Xabier<br />
+	&nbsp;* note: from now on I&#39;ll not forget the private constructor, I swear ;)<br />
+	&nbsp;*/<br />
+	public class Letters extends Hashtable&lt;String, String[][]&gt;{<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; private static Letters letters = null;<br />
+	&nbsp;&nbsp;&nbsp; private static final int LETTER_WIDTH = 4;<br />
+	&nbsp;&nbsp;&nbsp; private static final int LETTER_HEIGHT = 5;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * private constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; private Letters () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialize();<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * getLetters<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static Letters getLetters () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (letters == null) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; letters = new Letters();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return letters;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * initialize<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * puts letters into the hashtable<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Note: I&#39;ll NOT put all letters, It&#39;s too late for this,<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * and I know that this font is horrid, but gimme a break.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; private void initialize () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.put(&quot;A&quot;,new String[][]{{&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;A&quot;,&quot; &quot;,&quot; &quot;,&quot;A&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;A&quot;,&quot; &quot;,&quot; &quot;,&quot;A&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;A&quot;,&quot; &quot;,&quot; &quot;,&quot;A&quot;}});<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.put(&quot;B&quot;,new String[][]{{&quot;B&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;B&quot;,&quot; &quot;,&quot; &quot;,&quot;B&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;B&quot;,&quot;B&quot;,&quot;B&quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;B&quot;,&quot; &quot;,&quot; &quot;,&quot;B&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;B&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;}});<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.put(&quot;C&quot;,new String[][]{{&quot;C&quot;,&quot;C&quot;,&quot;C&quot;,&quot;C&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;C&quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;C&quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;C&quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;C&quot;,&quot;C&quot;,&quot;C&quot;,&quot;C&quot;}});<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.put(&quot;D&quot;,new String[][]{{&quot;D&quot;,&quot;D&quot;,&quot;D&quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;D&quot;,&quot; &quot;,&quot; &quot;,&quot;D&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;D&quot;,&quot; &quot;,&quot; &quot;,&quot;D&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;D&quot;,&quot; &quot;,&quot; &quot;,&quot;D&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;D&quot;,&quot;D&quot;,&quot;D&quot;,&quot; &quot;}});<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.put(&quot;E&quot;,new String[][]{{&quot;E&quot;,&quot;E&quot;,&quot;E&quot;,&quot;E&quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;E&quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;E&quot;,&quot;E&quot;,&quot;E&quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;E&quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;},<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&quot;E&quot;,&quot;E&quot;,&quot;E&quot;,&quot;E&quot;}});<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * getHeight<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return hegith of letters<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public int getHeight () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return LETTER_HEIGHT;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; getWidth<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return width of letters<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public int getWidth () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return LETTER_WIDTH;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	}<br />
+	&nbsp;</p>
+<p>
+	<strong>Screen</strong></p>
+<p>
+	Representa la pantalla, es una especie de lienzo en forma de array de Strings. La funci&oacute;n fill es la que nos permite pintar un caracter en unas coordenadas. Y finalmente la funci&oacute;n draw vuelca todo el lienzo en pantalla.</p>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package org.cuatrovientos.banner;<br />
+	<br />
+	/**<br />
+	&nbsp;* Screen<br />
+	&nbsp;* The class where we paint the Letters<br />
+	&nbsp;* @author Pello Xabier<br />
+	&nbsp;* note: from now on I&#39;ll not forget the private constructor, I swear ;)<br />
+	&nbsp;*/<br />
+	public class Screen {<br />
+	&nbsp;&nbsp;&nbsp; private final static int WIDTH = 80;<br />
+	&nbsp;&nbsp;&nbsp; private final static int HEIGHT = 24;<br />
+	&nbsp;&nbsp;&nbsp; private final static String WHITESPACE = &quot; &quot;;<br />
+	&nbsp;&nbsp;&nbsp; private final static char NEWLINE = &#39;\n&#39;;<br />
+	&nbsp;&nbsp;&nbsp; private String[][] canvas = new String[HEIGHT][WIDTH];<br />
+	&nbsp;&nbsp;&nbsp; private static Screen theScreen = null;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; // private constructor<br />
+	&nbsp;&nbsp;&nbsp; private Screen () { clear(); }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * clears the screen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; private void clear () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int h = 0;h&lt; HEIGHT; h++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int w=0;w&lt;WIDTH; w++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; canvas[h][w] = WHITESPACE;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * getScreen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return the one and only screen instance<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static Screen getScreen() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (theScreen == null) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; theScreen = new Screen();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return theScreen;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * fill<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * fills&nbsp; the screen with a matrix at given coords<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param what<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param x<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param y<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void fill (String[][] what, int x, int y) {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (boundsOk(x,y)) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i = 0, j = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //go on and fill the canvas<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int h = y;h&lt; y+what.length; h++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int w=x;w&lt;x+what[0].length; w++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; canvas[h][w] = what[i][j++];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i++;j=0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }//for<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }//if<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * draw<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * paints contents on console<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void draw () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int h = 0;h&lt; HEIGHT; h++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int w=0;w&lt;WIDTH; w++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(canvas[h][w]);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print(NEWLINE);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * boundsOk<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * tell us if given coords are inside Screen margins<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param x<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param y<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return true if coords are ok.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public boolean boundsOk (int x, int y) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (y &gt;= 0 &amp;&amp; y &lt; HEIGHT &amp;&amp; x &gt;= 0 &amp;&amp; x &lt; WIDTH);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+<p>
+	<strong>Writer</strong></p>
+<p>
+	Usando la pantalla va escribiendo caracteres y avanzando el cursor.</p>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package org.cuatrovientos.banner;<br />
+	<br />
+	/**<br />
+	&nbsp;* Writer<br />
+	&nbsp;* Gets the Screen and writes a word on It.<br />
+	&nbsp;* @author Pello Xabier<br />
+	&nbsp;*/<br />
+	public class Writer {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; private int initialX;<br />
+	&nbsp;&nbsp;&nbsp; private int initialY;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Writer<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * initializes positions at 0<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public Writer () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialX = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialY = 0;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Writer<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * initializes positions at x,y<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public Writer (int x , int y) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (Screen.getScreen().boundsOk(x, y)) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialX = x;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialY = y;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else { // bajeril stylo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialX = initialY = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * writes the string<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param messageToWrite<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void write (String messageToWrite) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int x = initialX;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int y = initialY;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (messageDoesNotFitScreen(messageToWrite)) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;Sorry. Message does not fit the screen&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // It&#39;s ok, we took each letter, we write on the screen and we move the cursor forward<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 0; i&lt; messageToWrite.length();i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // TODO next line: choose btw coolness and refactoring<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Screen.getScreen().fill(Letters.getLetters().get(messageToWrite.substring(i, i+1).toUpperCase()), x, y);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = x + Letters.getLetters().getWidth() + 1;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Finally, we draw the screen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Screen.getScreen().draw();<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * messageDoesNotFitScreen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param message<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return true if message is longer than screen width<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; private boolean messageDoesNotFitScreen (String message) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (((message.length()+1) * Letters.getLetters().getWidth()) &gt; 80);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+<p>
+	<strong>Main</strong></p>
+<p>
+	Instancia writer y escribe,&nbsp; no m&aacute;s.</p>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package org.cuatrovientos.banner;<br />
+	<br />
+	/**<br />
+	&nbsp;*<br />
+	&nbsp;* @author pello xabier<br />
+	&nbsp;* @greetz 1&ordm; DAM @cuatrovientos<br />
+	&nbsp;*/<br />
+	public class Main {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param args the command line arguments<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Writer writer = new Writer(5,7);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; writer.write(&quot;ABC&quot;);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	}<br />
+	&nbsp;</p>
