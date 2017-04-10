@@ -1,0 +1,87 @@
+---
+layout: post
+title: "Consejos para programar Android"
+date: 2013-08-13 09:40:38
+categories: coding
+---
+<p>
+Desarrollar aplicaciones para Android no es tan ágil como con otras tecnologías.
+Montar la aplicación configurando cada uno de los ficheros XML (cosa que está bien pensada y tal) es un poco pesado y lo peor
+es que cuando lo quieres probar para ver el resultado tienes que esperar mucho y encima
+lo más seguro es que casque y que <i>la aplicación se pare de forma inesperada</i>.
+Voy a dejar aquí algunos consejillos que espero resulten útiles.
+</p>
+<img src="http://pello.io/images/prefu.jpg" alt="Ya la hemos liado" title="Ya la hemos liado" />
+<p>Sin ánimo de entrar en polémicas sobre si es mejor usar un IDE u otro. IMHO (no, no es un entorno
+ni un dios egipcio, es una forma de decir que esto no es más que una opinión nada autorizada) todos
+los entornos se te harán igual de lentos. Eclipse, Netbeans, Intelijidea, están hechos en java y ya se
+sabe, java... chupa. Que sí, que igual alguno va algo mejor en no sé qué sistema con no sé qué configuración, pero al final... poco
+puedes hacer. En mi caso, en eclipse suelo crear un workspace totalmente vacío para asegurarme que toda
+la atención de eclipse se centre en un proyecto (seguramente se puede configurar para eso pero en fin).
+</p>
+<h5>Eclipse ftw, pero sin más</h5>
+<p>
+En cuanto al entorno, por mucho que netbeans lo puedas configurar para programar en android, francamente
+no es nada personal, pero eclipse fue <em>el elegido</em> y el que te trae todo montado. Y últimamente soy más partidario de <i>mira, déjame dedicarme a programar aplicaciones, no a trabajar para netbeans</i>. Esto
+es como usar Gentoo, pues sí, mola mucho pero al final yo prefiero un sistema operativo que trabaje para
+mí y no al revés. El ordenador siempre a mi servicio, que con el colega y el familiar al que le arreglas el XP ya tenemos bastante.
+</p>
+
+<p>Y será lento, y tarda en arrancarse, vale. Una vez que eclipse ya está iniciado y se ha instalado en tu memoria RAM como un cuñado gorrón ni tan mal. Ahora mismo desde Android y desde el último google I/O
+proponen el otro entorno basado en inteliJIDEA, pero a día de hoy el entorno que tiene más experiencia
+de uso es eclipse (plugins, experiencia de la gente, etc...) y eso es un hecho. También otro hecho
+es que el InteliJIDEA es de pago, lo cual siempre hace que haya disponibilidad de plugins.</p>
+
+<h5>El depurador es tu mejor amigo</h5>
+<p>Tu aplicación va a cascar por mucho que se haya compilado correctamente. Hay muchas cosas,
+cosas de ellas que son clave que se activarán en el momento de ejecución (como los Intents, que no garantizan nada). Por ejemplo el uso de elementos del interfaz que igual no has iniciado correctamente (dará un NUllPointerException). Lo de depurar parece obvio, pero en el caso de Android resulta imprescindible para saber porqué casca tu programa.</p>
+<p>Así que una vez ejecutes tu programa, pásate a la perspectiva DDMS mientras se abre el emulador. Aparte
+de simular llamadas, meter mano en el sistema de ficheros, etc... ṕodrás seguir la consola y sobretodo
+el <b>logcat</b>. En cuanto Android te vomite la pila a la cara al menos sabrás en qué línea de
+tu activity ha petado la cosa. Acostúmbrate.</p>
+
+<h5>No se actualiza el R.java</h5>
+<img src="http://www.pello.info/images/fuuuu.jpg" alt="Falla el R.java" title="Falla el R.java" />
+
+<p>Error mítico y muy muy frustrante en Android. El fichero R.java es un fichero que Android genera
+de forma automática conforme metemos elementos identificados con un ID en las resources (los ficheros
+xml que contienen interfaces, colores, dimensiones, ...). <b>NO HAY QUE METERLE MANO</b>, y si lo haces
+mal vamos. No hace falta importarlo, y si te ves intentándolo es que tu proyecto tiene algo mal. Lo cierto
+es que este problema provoca que las activities no compiles porque no reconocen nada del R. Y ni el eclipse ni el depurador te dice nada. Estas son dos razones muy típicas para que esto ocurra:
+<ul>
+<li><b>Haz un Build Project</b>: en Eclipse, al principio del proyecto puede que no tengas tu fichero R creado, incluso con el proyecto recién creado por el asistente. Sobre el proyecto, botón derecho del ratón y <i>Build Project</i></li>
+<li><b>Has metido la pata en un fichero XML</b>. Sí jambo, así de simple y tiene toda la lógcia ya que el fichero R.java se autogenera según lo que metas en los XML. Revisa bien los ficheros en los que has metido mano, el eclipse igual no te indica correctamente que tienes un error en uno de ellos.</li>
+<li><b>Te faltan las buildtools</b>. Con el SDK Manager de android te instalas un montón de cosas, pues
+precisamente algo que no tiene que faltar son las buildtoos del API para el que estás programando. Sin ese
+buildtool el R.java ni se crea, así que asegúrate de que lo tienes instalado.</li>
+</ul>
+<img src="http://pello.io/images/buildtools.png" alt="Buildtools en el SDK manager" title="Buildtools en el SDK manager" /><br />
+Una vez hayas revisado y corregido <i>Project > Build</i>.
+</p>
+
+<h5>Deja el emulador siempre encendido</h5>
+
+<p>Ejecutar un programa Android es un peñazo, no es algo inmediato como con otros lenguajes ya que
+Android tiene que levantar un emulador. Todo es java, a tu cuñado gorrón se le acoplan más familiares
+pesados. Tarda una eternidad y claro no es plan que para cada cambio que hagas en tu programa tengas que
+esperar 5 minutos para verificar que todo está correcto (¡y lo peor es que cascará!!).
+</p>
+
+<p>No estaría de más recuperar la vieja costumbre de nuestros abuelos cuando programaban con tarjetas perforadas. Ahí cada ejecución te costaba pasta y no te podías permitir el lujo de ensayo/error. Eso
+te obligaba a <b>programar con mucho más cuidado</b>, a revisar, a ser más fino en definitiva. Hoy día
+estamos mal acostumbrados al play y al F5.
+</p>
+<img src="http://pello.io/images/happy.jpg" alt="Así de simple" title="Así de simple" />
+<p>Bueno, en cualquier caso, para acelerar las pruebas en un emulador yo recomendaría:
+<ul>
+<li>Usar el emulador del SDK, y <b>simplemente dejarlo encendido</b>. Crea un Run Configuration en el que siempre
+te pregunte en que dispositivo quieres ejecutar y elegir el que ya tienes en ON. Incluso habilitar el Snapshot al definir el dispositivo</li>
+<li>Usar un móvil físico, como es obvio. Pedirle al cuñao ese móvil roto, adquirir uno de desarrollador
+o usar el propio</li>
+<li>Usar un emulador externo, por ejemplo un VirtualBOX con una imagen de Androidx86.</li>
+</ul>
+</p>
+
+<p>Y eso es todo amijos. Espero que alguno de estos briconsejos, que ya estarán desfasados o
+lo estarán en unos meses, te sean útiles sobre todo si andas con un netbook con 1GB de ram como ando ahora. Por desgracia aún no he habilitado los comentarios para que los talibanes del Netbeans vengan
+a impartir doctrina, lo siento peña.</p>
