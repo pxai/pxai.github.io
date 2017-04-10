@@ -1,7 +1,7 @@
-﻿---
+---
 layout: post
-title: "Maven proyectos multim�dulo" 
-date: 2013-08-02 15:59:19 
+title: "Maven proyectos multimódulo"
+date: 2013-08-02 15:59:19
 categories: coding
 ---
 <p>Crear un proyecto con Maven es relativamente fácil, una vez que lo inicias, te ajustas a su manera de organizar
@@ -14,7 +14,7 @@ de ellos, el main o principal, hará uso de los otros dos. No tiene que ver con 
 archetype:create con los parámetros donde indicamos los indentificadores de proyecto. Si no pusieramos esos parámetros
 los podriamos meter a posteriori en el pom.xml</p>
 <pre class="brush: bash">
-linux:~/java/maven/multimodule# mvn archetype:create -DgroupId=info.pello.maven.inputoutput -DartifactId=inputoutput -DpackageName=info.pello.maven 
+linux:~/java/maven/multimodule# mvn archetype:create -DgroupId=info.pello.maven.inputoutput -DartifactId=inputoutput -DpackageName=info.pello.maven
 
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
@@ -46,12 +46,12 @@ Downloading: http://repo1.maven.org/maven2/org/apache/maven/wagon/wagon-file/1.0
 [INFO] Finished at: Fri Aug 02 15:00:20 CEST 2013
 [INFO] Final Memory: 10M/25M
 [INFO] ------------------------------------------------------------------------
-linux:~/java/maven/multimodule# 
+linux:~/java/maven/multimodule#
 </pre>
 <i>(archetype:generate se me estaba quedando colgado...)</i>
 <p>Con los otros podemos hacemos lo mismo, aunque el main habrá que hacerlo después de los demás:</p>
 <pre class="brush: bash">
- mvn archetype:create -DgroupId=info.pello.maven.utils -DartifactId=utils -DpackageName=info.pello.maven 
+ mvn archetype:create -DgroupId=info.pello.maven.utils -DartifactId=utils -DpackageName=info.pello.maven
 ...
 mvn archetype:create -DgroupId=info.pello.maven.main -DartifactId=main -DpackageName=info.pello.maven
 ...
@@ -102,15 +102,15 @@ public class InputOutput {
 	public int readInt () {
 		return reader.nextInt();
 	}
-	
+
 	/**
 	* writes a String to output
 	* @param String to be printed
 	*/
 	public void write (String msg) {
-		System.out.println(msg);	
+		System.out.println(msg);
 	}
-}	
+}
 </pre>
 
 <p>Y este sería el aspecto del método main del módulo principal. Está importanto clases de otros módulos.</p>
@@ -159,11 +159,11 @@ Using input output lib
 [INFO] Finished at: Fri Aug 02 17:11:56 CEST 2013
 [INFO] Final Memory: 7M/18M
 [INFO] ------------------------------------------------------------------------
-linux:~/java/maven/multimodule/main# 
+linux:~/java/maven/multimodule/main#
 </pre>
 
 <p>Vale funciona pero ¿Qué pasa si ejecutamos ese fichero jar lejos de ese contexto y sin Maven?
-<pre class="brush: bash"> 
+<pre class="brush: bash">
 linux:/tmp# java -cp supermain.jar info.pello.maven.main.Main
 Exception in thread "main" java.lang.NoClassDefFoundError: info/pello/maven/inputoutput/InputOutput
 	at info.pello.maven.main.Main.main(Main.java:14)
@@ -175,7 +175,7 @@ Caused by: java.lang.ClassNotFoundException: info.pello.maven.inputoutput.InputO
 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:294)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:266)
 	... 1 more
-linux:/tmp# 
+linux:/tmp#
 
 </pre>
 
@@ -195,7 +195,7 @@ ya podremos ejecutar directamente:</p>
 linux:/tmp# java -cp supermain-jar-with-dependencies.jar info.pello.maven.main.Main
 Does it work, really?
 Using input output lib
-linux:/tmp# 
+linux:/tmp#
 </pre>
 
 <p>Otra cosa que podemos hacer es meter mano en el ciclo package para que
@@ -220,7 +220,7 @@ otros módulos no tienen nada en especial.</p>
   <url>http://www.pello.info</url>
 
   <!-- Info about the license -->
-  <licenses>	
+  <licenses>
 	<license>
 		<name>GPL v3</name>
 		<url>http://www.gnu.org/licenses/gpl/gpl3.txt</url>
@@ -311,7 +311,7 @@ lleva a cabo entre otros:</p>
 <li><b>surefire:test</b>: ejecuta los test unitarios</li>
 <li><b>jar:jar</b>: ejecuta a jar-jar binks. Broma. Genera el jar.</li>
 </ul>
-<p>Hay más fases que esas, por ejemplo la última es <em>install:install</em> y esa es importante ya 
+<p>Hay más fases que esas, por ejemplo la última es <em>install:install</em> y esa es importante ya
 que toma el fichero jar generado y <b>lo guarda en nuestro repositorio Maven</b>. De esa forma podremos
 hacer uso de ese jar desde otros proyectos Maven. ¿Y cómo lo localizaremos? mediante las coordenadas!! es
 decir mediante el grupo, artifactId, etc...</p>
@@ -320,9 +320,9 @@ decir mediante el grupo, artifactId, etc...</p>
 oculta .m2, podré encontrar el proyecto</p>
 <pre class="brush: bash">
 linux# ls /root/.m2/repository/info/pello/maven/inputoutput/inputoutput/1.0-SNAPSHOT/
-inputoutput-1.0-SNAPSHOT.jar  
+inputoutput-1.0-SNAPSHOT.jar
 maven-metadata-local.xml
-inputoutput-1.0-SNAPSHOT.pom  
+inputoutput-1.0-SNAPSHOT.pom
 linux#
 </pre>
 <b>Otros ciclos, o ciclos parciales</b>
