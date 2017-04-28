@@ -1,0 +1,94 @@
+---
+layout: post
+title: "Matar muchos procesos"
+date: 2005-08-04 16:33:00
+categories: coding
+---
+<b>Matando procesos a mansalva!!</b>
+
+En ocasiones nos encontramos con un huevo de procesos que queremos matar, y se puede
+probar con el comando <b>killall</b> pero no siempre cuela. <br>
+<br>Este seria el tipico panorama para matar:
+<pre>
+[root@linuz]# ps -axf
+  PID TTY      STAT   TIME COMMAND
+    1 ?        S      0:25 init [3]
+    2 ?        SW     0:01 [keventd]
+    3 ?        SW     0:00 [kapmd]
+    4 ?        SWN    0:00 [ksoftirqd/0]
+    6 ?        SW     0:00 [bdflush]
+    5 ?        SW    29:26 [kswapd]
+    7 ?        SW     0:00 [kupdated]
+    8 ?        SW     0:00 [mdrecoveryd]
+   12 ?        SW    12:51 [kjournald]
+  768 ?        S      0:08 /usr/sbin/sshd
+23390 ?        S      0:00  _ sshd: root@pts/1
+23392 pts/1    S      0:00      _ -bash
+ 1839 pts/1    R      0:00          _ ps -axf
+  895 ?        S      0:01 /usr/sbin/httpd
+16655 ?        S      2:07  _ /usr/sbin/httpd
+21568 ?        S      2:03  _ /usr/sbin/httpd
+ 1206 ?        S      1:58  _ /usr/sbin/httpd
+ 1244 ?        S      2:00  _ /usr/sbin/httpd
+ 1452 ?        S      1:58  _ /usr/sbin/httpd
+ 1736 ?        S      1:56  _ /usr/sbin/httpd
+  938 ?        S      0:03 /usr/bin/perl proceso.pl
+  965 ?        Z      0:03  _ /usr/bin/perl proceso.pl <defunct>
+  966 ?        Z      0:03    _ /usr/bin/perl proceso.pl <defunct>
+  957 ?        S      0:06 /usr/bin/perl proceso.pl
+  969 ?        Z      0:03  _ /usr/bin/perl proceso.pl<defunct>
+</pre>
+
+Vale, existen una serie de procesos <defunct> que esan mas acabados que las maracas de machin.
+Un proceso esta en estado Z (zombie) intenta morirse pero no puede, aunque ya se sabe
+no esta muerto lo que yace eternamente y con el paso de los evos bueno dejemoslo.
+
+Va, queremos masacrar esos procesos de forma precisa. Hacemos un
+
+<pre>
+[root@linuz]# ps axf | grep proceso
+  938 ?        S      0:03 /usr/bin/perl proceso.pl
+  965 ?        Z      0:03  _ /usr/bin/perl proceso.pl <defunct>
+  966 ?        Z      0:03    _ /usr/bin/perl proceso.pl <defunct>
+  957 ?        S      0:06 /usr/bin/perl proceso.pl
+  969 ?        Z      0:03  _ /usr/bin/perl proceso.pl<defunct>
+[root@linuz]#
+</pre>
+
+Con lo que aislamos los procesos chungos en un listado. Pero si queremos sacar los
+ids? podemos usar cut -d" " -f1 o usar awk.
+
+<pre>
+[root@linuz]# ps axf | grep proceso | awk {'print $1'}
+938
+965
+966
+957
+969
+[root@linuz]#
+</pre>
+
+OK, ya tenemos aislados los ID de procesos que queremos matar.Ahora como les pasamos la seÃƒÂ±al
+de la muelte? hacemos un for de bash:
+
+<pre>
+[root@linuz]# for i in `ps axf | grep proceso | awk {'print $1'}`
+>do
+>echo matando ID $i
+>kill -9 $i
+>done
+
+matando ID 938
+matando ID 965
+matando ID 966
+matando ID 957
+matando ID 969
+[root@linuz]#
+</pre>
+
+Bueno, se puede poner todo de tiron con puntos y comas.
+<pre>
+for i in `ps axf | grep proceso | awk {'print $1'}`; do echo matando ID $i; kill -9 $i; done
+</pre>
+
+Aunque seguro que hay formas mas directas y elegantes...
