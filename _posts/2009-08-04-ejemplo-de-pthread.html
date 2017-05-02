@@ -1,0 +1,74 @@
+---
+layout: post
+title: "Ejemplo de pthread"
+date: 2009-08-04 22:11:00
+categories: coding
+---
+Un ejemplo simple de pthread. Un hilo debe ir asociado a una funcion. Una funcion c se puede pasar como un parametro mas.
+
+<pre>
+/**
+* hilos.c
+* Pello Xabier Altadill Izura
+*  un ejemplo simplon de hilos linux
+*/
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;pthread.h&gt;
+
+void haz_algo(int *);
+void haz_algo_simple(int *);
+
+int h1 = 0, h2 = 0;
+
+extern int
+main(void)
+{
+  pthread_t thread1, thread2;
+
+printf("vamos a ver...
+");
+
+// creamos el primer
+  if (pthread_create(&thread1, NULL, (void *) haz_algo, (void *) &h1) != 0)
+	perror("pthread_create"), exit(1);
+
+// creamos el segundo hilo
+  if (pthread_create(&thread2, NULL,(void *) haz_algo_simple, (void *) &h2) != 0)
+	perror("pthread_create"), exit(1);
+
+// esperamos que acabe
+  if (pthread_join(thread1, NULL) != 0)
+	perror("pthread_join"),exit(1);
+
+printf("
+OK!a
+");
+
+  return 0;
+}
+
+// funcion haz_algo
+void haz_algo(int *veces)
+{
+  int i;
+
+  for (i = 0;  i < veces; i++)
+    printf("Aqui, haciendo algo: %d
+",i);
+
+}
+
+//funcion haz_algo_simple
+void haz_algo_simple(int *veces)
+{
+  int i;
+
+  for (i = 0;  i < veces; i++)
+    printf("Aqui, haciendo algo simple: %d
+",i);
+
+}
+
+</pre>
