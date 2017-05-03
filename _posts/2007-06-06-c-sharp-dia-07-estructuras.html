@@ -20,46 +20,46 @@ using System;
 * en memoria de otra forma. Veamo un ejemplo.
 */
 public struct Casa
-{
+&#123
 	// Para que sean accesibles, hay que declararlos public
 	// y no se pueden inicializar.
 	public string calle;
 	public int pisos;
 	public int fechaConstruccion;
-}
+&#125;
 
 // AquÃƒÂ­ vemos una estructura con su constructor, sus mÃƒÂ©todos, etc..
 // pero OJO no puede tener mÃƒÂ©todos destructores
 struct Manzana
-{
+&#123
 	public string nombre;
 	public Casa casa;
 
 	// La estructura debe tener constructor CON PARAMETROS
 	public Manzana (string nombre)
-	{
+	&#123
 		// Establecemos algunos valores
 		this.nombre = nombre;
 		casa.calle = "Castellana";
 		casa.pisos = 14;
 		casa.fechaConstruccion = 1900;
-	}
+	&#125;
 
 	// Un mÃƒÂ©todo para aumentar el numero de pisos
 	// de una manzana
 	public void aumenta(int pisos)
-	{
+	&#123
 		casa.pisos += pisos;
-	}
+	&#125;
 
-}
+&#125;
 
 // Definimos la clase Ciudad para usar la estructura de calles
 public class Ciudad
-{
+&#123
 
 	public static void Main()
-	{
+	&#123
 		// La estructura se puede instanciar o no
 		Casa singular = new Casa();
 
@@ -70,17 +70,17 @@ public class Ciudad
 		singular.calle = "Gran VÃƒÂ­a";
 		singular.fechaConstruccion = 1989;
 
-		System.Console.WriteLine("Una casa de {0} pisos en {1}", singular.pisos, singular.calle);
+		System.Console.WriteLine("Una casa de &#1230&#125; pisos en &#1231&#125;", singular.pisos, singular.calle);
 
 		particular.calle = "Leganitos";
 		particular.pisos = 40;
 
 		// Lo mostramos a ver
-		System.Console.WriteLine("Una casa de {0} pisos en {1}", particular.pisos, particular.calle);
-		System.Console.WriteLine("Esta manzana es {0}", manzanaCara.nombre);
+		System.Console.WriteLine("Una casa de &#1230&#125; pisos en &#1231&#125;", particular.pisos, particular.calle);
+		System.Console.WriteLine("Esta manzana es &#1230&#125;", manzanaCara.nombre);
 
-	}
-}
+	&#125;
+&#125;
 </pre>
 Las enumeraciones:
 <pre>
@@ -94,7 +94,7 @@ Las enumeraciones:
 // Los enumeradores son como una lista de posibles valores
 // que implicitamente llevan asociado un nÃƒÂºmero entero
 public enum Dias
-{
+&#123
 	Lunes,        // = 0
 	Martes,       // = 1,
 	Miercoles,    // = 2,...
@@ -102,45 +102,45 @@ public enum Dias
 	Viernes,
 	SÃƒÂ¡bado,
 	Domingo
-}
+&#125;
 
 
 // El nÃƒÂºmero entero puede ser establecido por nosotros
 // Para que no empiece contando desde 0, le asignamos valores
 public enum Mes
-{
+&#123
 	Enero = 1,
 	Febrero = 2,
 	Marzo = 3,
 	Abril = 4,
 	Mayo = 5,
 	Junio = 6
-}
+&#125;
 
 // Podemos especificar un tipo distinto a int
 public enum Boton : byte
-{
+&#123
 	Arranque,
 	Parada
-}
+&#125;
 
 public class Usalas
-{
+&#123
 
 	public static void Main()
-	{
+	&#123
 		// La estructura se puede instanciar o no
 		Dias diaSemana;
 
 		// Establecemos el dÃƒÂ­a de la semana, hay que hacer Cast
 		diaSemana = (Dias) 3;
 
-		System.Console.WriteLine("El dÃƒÂ­a de la semana es {0} o {1}", diaSemana, (int)diaSemana);
+		System.Console.WriteLine("El dÃƒÂ­a de la semana es &#1230&#125; o &#1231&#125;", diaSemana, (int)diaSemana);
 
 		diaSemana = (Dias) 6;
 
 		switch (diaSemana)
-		{
+		&#123
 			case Dias.Lunes :
 				System.Console.WriteLine("Hoy es Lunes");
 				break;
@@ -159,12 +159,12 @@ public class Usalas
 			default:
 				System.Console.WriteLine("Ã‚Â¡Estamos en finde!");
 				break;
-		}
+		&#125;
 
-		System.Console.WriteLine("El dÃƒÂ­a de la semana es {0}", diaSemana);
+		System.Console.WriteLine("El dÃƒÂ­a de la semana es &#1230&#125;", diaSemana);
 
-	}
-}
+	&#125;
+&#125;
 </pre>
 Y los arrays. Se crean con la palabra new. Al final simplemente se menciona lo de arrays multidimensionales y los arrays anidados.
 <pre>
@@ -175,21 +175,21 @@ Y los arrays. Se crean con la palabra new. Al final simplemente se menciona lo d
 
 // Definimos una clase que contiene los datos de un equipo de futbol
 public class Equipo
-{
+&#123
 	public string[] jugadores;
 	public int[] edades;
 
 	public Equipo ()
-	{
+	&#123
 		// Se crea el array usando new y estableciendo el tamaÃƒÂ±o
 		jugadores = new string[11];
 		// Se crea e inicializa
-		edades = new int[11]{23,24,23,24,25,26,21,23,23,34,21};
+		edades = new int[11]&#12323,24,23,24,25,26,21,23,23,34,21&#125;;
 
-	}
+	&#125;
 
 	public void inicializar()
-	{
+	&#123
 		jugadores[0] = "Casillas";
 		jugadores[1] = "Puyol";
 		jugadores[2] = "Pablo";
@@ -201,10 +201,10 @@ public class Equipo
 		jugadores[8] = "Pernia";
 		jugadores[9] = "Torres";
 		jugadores[10] = "Villa";
-	}
+	&#125;
 
 	public static void Main ()
-	{
+	&#123
 		int i = 0;
 
 		Equipo seleccion = new Equipo();
@@ -216,15 +216,15 @@ public class Equipo
 		// Recorremos el array con un for convencional
 		// Usando la propiedad Length para controlar la longitud
 		for (i = 0; i &lt; seleccion.edades.Length; i++)
-		{
-			System.Console.WriteLine("Edad de jugador nÃ‚Âº{0}: {1}", i,seleccion.edades[i]);
-		}
+		&#123
+			System.Console.WriteLine("Edad de jugador nÃ‚Âº&#1230&#125;: &#1231&#125;", i,seleccion.edades[i]);
+		&#125;
 
 		// Recorriendo el array con un foreach
 		foreach (string nombre in seleccion.jugadores)
-		{
-			System.Console.WriteLine("Jugador: {0}", nombre);
-		}
+		&#123
+			System.Console.WriteLine("Jugador: &#1230&#125;", nombre);
+		&#125;
 
 
 		// Arrays MULTIDIMENSIONALES, se definen de forma curiosa
@@ -237,7 +237,7 @@ public class Equipo
 		ligaDeFutbol[1,1] = "Eto'o";
 
 		// DefiniciÃƒÂ³n con inicializaciÃƒÂ³n
-		int[,] valores = new int[,]{{2,7,3},{2,5,3}};
+		int[,] valores = new int[,]&#123&#1232,7,3&#125;,&#1232,5,3&#125;&#125;;
 
 		// Arrays anidados, permiten meter arrays dentro de otros
 		// con tamaÃƒÂ±o distinto: se crean arrays de arrays
@@ -245,6 +245,6 @@ public class Equipo
 		masValores[0] = new int[3];
 		masValores[1] = new int[8];
 		masValores[2] = new int[1];
-	}
-}
+	&#125;
+&#125;
 </pre>
