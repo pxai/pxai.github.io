@@ -1,0 +1,306 @@
+---
+layout: post
+title: "16. Entrada/salida c++"
+date: 2004-08-04 14:56:00
+categories: coding
+---
+<b>Entrada y salida</b><br>
+A vueltas con el flujo (cin cout), vamos a ver un uso mas extendido del habitual.
+<br>
+De paso conoceremos algunas de las trampas que nos esperan con los flujos, sobre
+todo por el tema de buffers.<br>
+Veamos este ejemplo comentado
+<pre>
+/**
+* Flujos.cpp
+* Programa para mostrar el uso de flujos
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o Flujos Flujos.cpp
+*/
+
+#include &lt;iostream.h&gt;
+
+// Disponemos de varios flujos:
+// cin : para la entrada de distintis tipos de datos (std input)
+// cout : para la salida de distintos tipos de datos (std output)
+// cer: para la salida de errores (std error)
+// clo: para la salida de errores y redireccion a ficheros tipo log
+
+// cin utiliza buffers y nos podemos llevar sorpresas al recoger datos
+// si el usuario no los mete bien. Por ejemplo si se pide una palabra y se meten
+// dos, la siguiente vez que se pida otro dato se tomara el que se habia metido!
+// lo podemos evitar con cin.ignore
+
+// Funcion principal
+int main () {
+
+unsigned int i;
+char nombre_apellidos[25];
+char linea[80];
+int entero;
+char caracter;
+
+// ATENCION
+// hay que tener cuidado con los strings. prueba a meter nombre y apellido
+// y veras que el string solo se llena hasta el primer espacio en blanco,
+// o incluso para a la siguiente variable i y el programa casca.
+cout &lt;&lt; "Mete tu nombre y tu apellido resalao: " &lt;&lt; endl;
+cin &gt;&gt; nombre_apellidos;
+cout &lt;&lt; "Tu nombre y apellidos: " &lt;&lt; nombre_apellidos &lt;&lt; endl;
+
+// con esta llamada evitamos que se tome en cuenta las sobras
+cin.ignore(255,'
+');
+
+// Entrada multiple!
+cout &lt;&lt; "Mete una palabra y un numero entero" &lt;&lt; endl;
+cin &gt;&gt; nombre_apellidos &gt;&gt; entero;
+cout &lt;&lt; "El texto: " &lt;&lt; nombre_apellidos  &lt;&lt; " y el entero: " &lt;&lt; entero &lt;&lt; endl;
+// explicacion: &gt;&gt; es un operador que se puede sobrecargar como hemos visto
+// anteriormente: la expresion cin &gt;&gt; nombre_apellidos devuelve otro objeto iostream
+// y se podria reescribir asi: (cin &gt;&gt; nombre_apellidos) &gt;&gt; entero;
+
+
+// cin.get(string,tamaÃƒÂ±o) para recoger string completos
+cout &lt;&lt; " Mete un string largo con espacios. " &lt;&lt; endl;
+cin.getline(linea,80);
+cout &lt;&lt; "resultado: " &lt;&lt; linea &lt;&lt; endl;
+// hay veces que puede interesar ignorar un numero de caracteres hasta llegar al final
+// de la linea, para eso podemos usar la funcion cin.ignore(70,'
+'); en lugar de
+
+// podemos usar cualquier caracter de terminacion que nos interese.
+
+// no hay que olvidar que cin es un buffer. Que pasa si solo queremos leer un caracter
+// sin tener que 'sacarlo' del buffer? podemos usar cin.peek() y si queremos meter
+// un caracter podemos usar cin.putback('.') -meteria un . en el buffer de cin
+
+// cin.get() tomando un unico caracter. Si metemos mas imprimira todos
+// puede usarse parametrizado: cin.get(caracter)
+cout &lt;&lt; "Vete metiendo caracteres. termina con un ." &lt;&lt; endl;
+while ( (caracter = cin.get()) != EOF) {
+    if ( cin.peek() == '.' ) {
+        cout &lt;&lt; "nos vamos" &lt;&lt; endl;
+        break;
+    }
+    cout &lt;&lt; caracter;
+}
+cin.ignore(255,'
+');
+cin &gt;&gt; i;
+}
+</pre>
+En este otro se habla mas de cout
+<pre>
+/**
+* FlujosOut.cpp
+* Programa para mostrar el uso de flujos de SALIDA
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o FlujosOut FlujosOut.cpp
+*/
+
+#include &lt;iostream.h&gt;
+
+// cout  tambien utiliza buffers y nos podemos llevar sorpresas al recoger datos
+// aunque si queremos tirar de la cadena ejecutamos: cout &lt;&lt; flush;
+
+// Funcion principal
+int main () {
+
+unsigned int i;
+char nombre_apellidos[25];
+char linea[80];
+int entero;
+char caracter;
+char frase[] = "Clatu verata nictu
+";
+
+
+// si en cin teniamos get aqui tenemos: put
+// mandamos un saludo
+cout.put('K').put('a').put('i').put('x').put('o').put('
+');
+// vamos a mostrar una linea:
+entero = strlen(frase);
+// con esto la mostramos entera
+cout.write(frase,entero);
+// con esto... no
+cout.write(frase, (entero-5));
+cout &lt;&lt; " ahora con formato: " &lt;&lt; endl;
+
+// vamos a ponerla con cierto formato: width y fill
+cout.width(30); // esto mete espacios en blanco equivalente = setw(30)
+cout &lt;&lt; frase &lt;&lt; endl;
+
+cout.width(50); // esto vuelve a meter espacios
+cout.fill('>'); // y esto RELLENA los ESPACIOS
+cout &lt;&lt; frase &lt;&lt; endl;
+
+// Estableciendo el estado de cout con setf
+// alineacion: setf(ios::left)  y setf(ios::right)
+// hay mas, para investigar: ios::showbase, ios::internal, etc...
+cout.setf(ios::right);
+entero = 666;
+// podemos alterar la base con dec, oct y hex
+cout &lt;&lt; "entero hexadecimal alineado a la derecha: " &lt;&lt;  hex &lt;&lt; entero &lt;&lt; endl;
+
+
+cin &gt;&gt; i;
+}
+</pre>
+<b>Ficheros en c++</b>
+Oh si, podemos manejar ficheros de entrada/salida con las clases mas std.
+veamos unos ejemplos, metidos dentro de un objeto. Es bastante mejorable.
+<pre>
+/**
+* Fichero.hpp
+* Clase que define el objeto Fichero, un objeto que sirve gestionar un fichero
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include &lt;iostream.h&gt;
+#include &lt;fstream.h&gt;  // atencion hay que incluir esto
+
+enum tipo_fichero { ENTRADA, SALIDA, APPEND };
+
+class Fichero {
+    public:
+        Fichero();
+        Fichero(char *nombre, tipo_fichero tipo);
+        ~Fichero();
+        Fichero(Fichero const &);
+
+        char *getNombre() const { return this->nombre;}
+
+        // operaciones sobre ficheros
+        int cerrar () const; // cierra el fichero
+        char  leer() const; // lee del fichero
+        void escribir (char linea[255]) const; // escribe linea
+
+    private:
+        // esta funcion decide que tipo de fichero iniciar
+        void inicializaFichero();
+        tipo_fichero tipo;
+        char *nombre;
+        ofstream *saliente;
+        ifstream *entrante;
+};
+</pre>
+Y su implementacion.
+<pre>
+/**
+* Fichero.cpp
+* Programa que implementa la clase Fichero
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o Fichero Fichero.cpp
+*
+*/
+
+#include "Fichero.hpp"
+
+        // Constructor
+        Fichero::Fichero(): nombre("test.txt"), tipo(ENTRADA) {
+                inicializaFichero();
+                cout &lt;&lt; "Fichero construido." &lt;&lt; endl;
+        }
+
+        // Constructor
+        Fichero::Fichero(char *nombre, tipo_fichero tipo) {
+                this->nombre = nombre;
+                this->tipo = tipo;
+                inicializaFichero();
+                cout &lt;&lt; "Fichero construido con nombre: " &lt;&lt; nombre &lt;&lt; endl;
+        }
+
+        // Destructor
+        Fichero::~Fichero() {
+                cout &lt;&lt; "Fichero destruido." &lt;&lt; endl;
+        }
+
+        // Constructor copia
+        Fichero::Fichero(Fichero const & original) {
+                nombre = new char;
+                nombre = original.nombre;
+        }
+
+        // cierra el fichero
+        int Fichero::cerrar () const {
+                if (this->tipo == 0) {
+                    entrante->close();
+                } else {
+                    saliente->close();
+                }
+                return 0;
+        }
+
+        // lee linea del fichero
+        char Fichero::leer () const {
+                return entrante->get();
+        }
+
+        // escribir sobre el fichero
+        void Fichero::escribir (char linea[255]) const {
+                saliente->write(linea,255);
+        }
+
+        // esta funcion decide que tipo de fichero iniciar
+        void Fichero::inicializaFichero() {
+                switch (this->tipo) {
+                   case 0  : cout &lt;&lt; "tipo ENTRADA" &lt;&lt; endl;
+                             entrante = new ifstream(this->nombre);
+                             break;
+                   case 1  : cout &lt;&lt; "tipo SALIDA" &lt;&lt; endl;
+                             saliente = new ofstream(this->nombre);
+                             break;
+                   case 2  : cout &lt;&lt; "tipo APPEND" &lt;&lt; endl;
+                             saliente = new ofstream(this->nombre,ios::app);
+                             break;
+                   default : cout &lt;&lt; "nada" &lt;&lt; endl;
+                             break;
+                }
+
+        }
+
+// funcion principal, en la que de paso vemos
+// PARAMETROS de linea de comandos
+int main (int argc, char **argv) {
+int i;
+char temp;
+char linea[255];
+// vamos a revisar los argumentos que se han pasado al programa
+for (i=0; i&lt;argc; i++) {
+           cout &lt;&lt; "argumento (" &lt;&lt; i &lt;&lt; "): " &lt;&lt; argv[i] &lt;&lt; endl;
+}
+
+Fichero fichero = Fichero("prueba.txt",APPEND);
+
+cout &lt;&lt; "escribe algo par aÃƒÂ±adir al fichero: ";
+cin.getline(linea,255);
+cout &lt;&lt; "has puesto: " &lt;&lt; linea &lt;&lt; endl;
+fichero.escribir(linea);
+fichero.cerrar();
+
+// leyendo de forma directa. Leemos el parametro que hayamos pasado
+ifstream leer("prueba.txt");
+
+// abrimos el fichero
+leer.open("prueba.txt");
+
+// recorremos el fichero y mostramos contenido
+while ( leer.get(temp) ) { // esto indica el final
+cout &lt;&lt; temp;
+}
+
+// cerramos el fichero
+leer.close();
+
+return 0;
+}
+
+
+</pre>
