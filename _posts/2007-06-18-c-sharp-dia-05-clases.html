@@ -1,0 +1,164 @@
+---
+layout: post
+title: "C# día 05: clases!"
+date: 2007-06-18 12:17:00
+categories: coding
+---
+Veamos como se definen las clases. La cosa no cambia salvo alguna cosa curiosa; si no se especifica otra cosa, los atributos y mÃƒÂ©todos NO son accesibles, vamos que NO son public por defecto.
+Veamos la clase Punto, y luego una clase que le crea un instancia y lo usa.
+<pre>
+
+using System;
+
+
+// Definimos la clase punto,
+// que se refiere a un punto en una coordenadas
+public class Punto {
+
+	// ATENCION: SI NO SE ESPECIFICA NADA,
+	// los atributos y metodos NO SON accesibles
+	public int x;
+	public int y;
+
+	// Constructora: siempre con el mismo nombre que la clase
+	public Punto ()
+	{
+		// Aprovechamos para inicializar atributos
+		this.x = 0;
+		this.y = 0;
+	}
+
+	// Una funcion llamada posicion
+	// Devuelve por consola la posicion actual de X
+	public int posicionX ()
+	{
+		return x;
+	}
+
+	// Una funcion llamada posicion
+	// Devuelve por consola la posicion actual de Y
+	public int posicionY ()
+	{
+		return y;
+	}
+
+	// Una funcion llamada mueveX
+	// Cambia la posicion de X
+	public void mueveX (int cuanto)
+	{
+		this.x += cuanto;
+	}
+
+	// Una funcion llamada mueveY
+	// Cambia la posicion de Y
+	public void mueveY (int cuanto)
+	{
+		this.y += cuanto;
+	}
+}
+</pre>
+Y esta es la clase que lo usa
+<pre>
+/**
+UsaPunto.cs
+ Una muestra de los UsaPunto de c#
+ Para compilar con MS: csc UsaPunto.cs Punto.cs, ejecucion: UsaPunto.exe
+ Para compilar con Mono: mcs UsaPunto.cs , ejecucion: mono UsaPunto.exe
+*/
+
+// Definicion de la clase UsaPunto
+// donde creamos una instancia de la clase punto y la usamos
+
+public class UsaPunto
+{
+	// Directamente metemos la funcion principal
+	// para probar el objeto punto
+	public static void Main ()
+	{
+		// Aqui creamos la instancia de Punto.
+		Punto miPunto = new Punto();
+		System.Console.WriteLine("Ok, punto creado");
+
+		// Probamos algunas funciones...
+		miPunto.mueveX(6);
+		miPunto.mueveY(45);
+
+		System.Console.Write("Posicion de X: {0}, ", miPunto.posicionX());
+		System.Console.WriteLine("posicion de Y: {0}", miPunto.posicionY());
+	}
+
+}
+</pre>
+
+TambiÃƒÂ©n podemos definir una clase dentro de otra. Por ejemplo, la clase Circulo y su Color.
+<pre>
+
+/**
+Circulo.cs
+ Una muestra de los Circulo de c#
+ Para compilar con MS: csc Circulo.cs, ejecucion: Circulo.exe
+ Para compilar con Mono: mcs Circulo.cs , ejecucion: mono Circulo.exe
+*/
+
+// Una clase definida dentro de otra
+// El circulo y su clase color
+public class Circulo
+{
+	int diametro;
+	public Color miColor;
+
+	// Clase Color
+	public class Color
+	{
+		string color;
+
+		public Color(string inicial)
+		{
+			this.color = inicial;
+		}
+
+		// Un mÃƒÂ©todo para cambiar el atributo color
+		public void cambiaColor(string otro)
+		{
+			this.color = otro;
+		}
+
+		// Un mÃƒÂ©todo para que devuelva el color
+		public string dameColor()
+		{
+			return this.color;
+		}
+
+	}// fin de clase color
+
+	// Constructor de Circulo
+	public Circulo (int diametroInicial, string colorInicial)
+	{
+		this.diametro  = diametroInicial;
+		this.miColor = new Color(colorInicial);
+	}
+
+	// MÃƒÂ©todo que devuelve el diametro
+	public int dameDiametro ()
+	{
+		return this.diametro;
+	}
+
+	// Funcion o mÃƒÂ©todo principal para las pruebas
+	public static void Main ()
+	{
+		// Creamos una instancia
+		Circulo circulo = new Circulo(66, "verde");
+
+		System.Console.WriteLine("Hemos creado un circulo");
+		System.Console.WriteLine("Su diametro es: {0}", circulo.dameDiametro());
+
+		// Vamos a cambiarle el color
+		circulo.miColor.cambiaColor("negro");
+
+	System.Console.WriteLine("OK, color cambiado: {0}", circulo.miColor.dameColor());
+
+		}
+
+}
+</pre>
