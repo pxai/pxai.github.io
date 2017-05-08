@@ -1,0 +1,206 @@
+﻿---
+layout: post
+title: "14. Miembros estaticos c++"
+date: 2007-08-04 23:40:00
+categories: coding
+---
+<b>Variables/Funciones estaticas</b>
+Dentro de las clases podemos definir atributos y metodos estaticos.
+Tienen de particular que son accesibles sin necesidad de definir una clase
+y que su valor es EL MISMO en todas los objetos que se vayan creando de una clase.
+Es como una variable global de una clase.
+<br>
+Con este ejemplo se ve su uso, y de paso se revisa el tema de <b>punteros a funciones</b>.
+<br>(si, has leido bien).
+<pre>
+/**
+* Soldado.hpp
+* Clase que define el objeto soldado muestra el uso de variables estaticas
+* y metodos estaticos. Todo lo estatico escapa del ambito de la clase y puede
+* ser invocado desde el exterior
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include &lt;iostream.h&gt;
+
+
+class Soldado {
+    public:
+        // constructores
+        Soldado();
+        Soldado(char *nombre, int unidad);
+        // destructor
+        ~Soldado();
+        // copia
+        Soldado(Soldado const &);
+
+        // get/set
+        char *getNombre () const { return this->nombre; }
+        void setNombre (char *nombre) { this->nombre = nombre; }
+        int getUnidad () const { return this->unidad; }
+        void setUnidad (int unidad) { this->unidad = unidad; }
+
+        void matar() const;
+        void darOrden (char *orden) const;
+        // metodo que toma como parametro una funcion
+        void ejecutaAccion ( void (*accion) (int,int));
+
+        static int TotalSoldados; // variable estatica!
+        static int TotalBalas; // variable estatica!
+        // Funciones estaticas
+        static int getTotalSoldados () { return TotalSoldados; }
+        static int getTotalBalas () { return TotalBalas; }
+
+    private:
+        char *nombre;
+        int unidad;
+};
+</pre>
+Y su implementacion. <br>
+Se recomienda probar y ejecutar para comprobar el funcionamiento
+de las variables estaticas.
+<pre>
+/**
+* Soldado.cpp
+* Programa que implementa la clase Soldado
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ Soldado.cpp -o Soldado
+*/
+
+#include "Soldado.hpp"
+
+        // Constructor
+        Soldado::Soldado(): nombre("Ryan"), unidad(101) {
+                TotalSoldados += 1;
+                TotalBalas++;
+                cout &lt;&lt; "Soldado " &lt;&lt; nombre &lt;&lt; " construido. Unidad: " &lt;&lt; unidad &lt;&lt; endl;
+        }
+
+        // Constructor parametrizado
+        Soldado::Soldado(char *nombre, int unidad) {
+                TotalSoldados++;
+                TotalBalas++;
+                this->nombre = nombre;
+                this->unidad = unidad;
+                cout &lt;&lt; "Soldado " &lt;&lt; nombre &lt;&lt; " :Soldado construido." &lt;&lt; endl;
+        }
+
+        // Destructor
+        Soldado::~Soldado() {
+                TotalSoldados--;
+                cout &lt;&lt; "Soldado "&lt;&lt; this->getNombre() &lt;&lt; " destruido."&lt;&lt; endl;
+        }
+
+        // constructor copia
+        Soldado::Soldado(const Soldado & original) {
+                nombre = new char;
+                nombre = original.getNombre();
+                cout &lt;&lt; "-clase Soldado- Soldado copia creada."&lt;&lt; endl;
+        }
+
+        // metodo matar
+        void Soldado::matar() const {
+                TotalBalas--;
+                cout &lt;&lt; this->getNombre() &lt;&lt; " Matar es lo mio " &lt;&lt; endl;
+                cout &lt;&lt; "Born to kill. paz. Es por la dualidad de Kant" &lt;&lt; endl;
+        }
+
+        // metodo darOrden
+        void Soldado::darOrden(char *orden) const {
+                cout &lt;&lt; "Recluta patoso!" &lt;&lt; endl;
+                cout &lt;&lt; this->getNombre() &lt;&lt; " unidad " &lt;&lt; this->getUnidad() &lt;&lt; " ordena: ";
+                cout &lt;&lt; orden &lt;&lt; endl;
+        }
+
+        // metodo ejecutaAccion: ejecuta la funcion que se le pasa como parametro
+        void Soldado::ejecutaAccion ( void (*accion) (int,int)) {
+                accion(5,7);
+                cout &lt;&lt; "Recluta patoso!" &lt;&lt; endl;
+        }
+
+        // ATENCION IMPORTANTE: HAY QUE DEFINIR E INICIAR LAS VARIABLES ESTATICA SI NO
+        // el compilador nos puede poner pegas
+        int Soldado::TotalSoldados = 0;
+        int Soldado::TotalBalas = 0;
+
+// Definimos una funcion ajena a la clase desde la cual accederemos
+// a la variable estatica, con lo que se demuestra que la variable estatica
+// esta fuera de la "capsula" de la clase.
+void recuentoSoldados(void);
+
+// definimos otra funcion esta para pasarsela como parametro a un metodo de la clase
+void carga (int balas, int granadas);
+
+// funcion principal
+// Aqui haremos multiples pruebas...
+int main () {
+
+int i, resp;
+
+// creamos los soldados
+Soldado peloton[10];
+Soldado Hanks = Soldado("Hanks",105);
+
+// definicion de puntero de funcion:
+void (*funcion) (int, int) = carga;
+// Si hay mas de una funcion carga sera la que tenga los mismos parametros
+// y el mismo tipo de retorno
+
+// llamamos a la funcion recuento
+recuentoSoldados();
+
+peloton[0].darOrden("Todos en formacion.");
+peloton[2].darOrden("Canta el colacao!");
+
+// recorremos los 10 soldados y hacemos algo dependiendo de la entrada
+// Si matamos unos cuantos modificaremos la variable de TotalSoldados
+for (i = 0; i &lt; 10 ; i++) {
+    cout &lt;&lt; "Elije 0 o cualquier otro numero: " &lt;&lt; endl;
+    cin &gt;&gt; resp;
+    if (resp == 0) {
+        // matamos al soldado
+        peloton[i].~Soldado();
+    } else {
+        peloton[i].matar(); // tiramos una bala
+    }
+
+    // Invocamos el metodo estatico?
+    // es un acceso DIRECTO sin necesitar un objeto definido
+    resp = Soldado::getTotalSoldados();
+    cout &lt;&lt; "Cuantos quedan? " &lt;&lt; resp &lt;&lt; endl;
+}//for
+
+// accedemos directamente a variable estatica
+cout &lt;&lt; "Total balas antes de recarga: " &lt;&lt; Soldado::TotalBalas &lt;&lt; endl;
+
+// hacemos una recarga:
+Hanks.ejecutaAccion(funcion);
+
+// llamamos a la funcion recuento
+recuentoSoldados();
+
+cin &gt;&gt; i;
+return 0;
+}
+
+// implementacion de la funcion recuento
+// muestra el numero de soldados. Podemos acceder DIRECTAMENTE a la variable statica
+void recuentoSoldados () {
+    cout &lt;&lt; "Cuantos soldados quedan vivos? " &lt;&lt; endl;
+    cout &lt;&lt; "En total: " &lt;&lt; Soldado::TotalSoldados &lt;&lt; " soldados"&lt;&lt; endl;
+    cout &lt;&lt; "Municion? " &lt;&lt; endl;
+    cout &lt;&lt; "En total: " &lt;&lt; Soldado::getTotalBalas()  &lt;&lt; " balas" &lt;&lt; endl;
+}
+
+// funcion que carga municion del peloton
+void carga (int balas, int granadas) {
+    cout &lt;&lt; "Cargando balas: " &lt;&lt; balas &lt;&lt; endl;
+    Soldado::TotalBalas += balas ;
+    cout &lt;&lt; "Cargando granadas: " &lt;&lt; granadas &lt;&lt; endl;
+}
+
+</pre>
+Bueno, y con esto ya son dos semanas dandole al c++ y aprendiendo su abc...
