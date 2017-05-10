@@ -132,11 +132,11 @@ public class Elementos : Form
 }
 </pre>
 
-Y ahora veamos como meter menÃƒÂºs y un messageBox clásico. Existen muchos dialogs predefinidos, pero no es el objetivo profundizar en loa programación visual. Habiendo gtk...
+Y ahora veamos como meter menús y un messageBox clásico. Existen muchos dialogs predefinidos, pero no es el objetivo profundizar en loa programación visual. Habiendo gtk...
 <pre>
 /**
 * Menus.cs
-* Ejemplo de uso de MenÃƒÂºs en ventanas
+* Ejemplo de uso de Menús en ventanas
 * A la hora de compilar, para ejecutar como aplicación de windows
 * y para que no salga una ventana de DOS, hay que usar estas opciones
 * csc /t:winexe Formularios.cs  o en su defecto
@@ -195,21 +195,21 @@ public class Menus : Form
 
 	}
 
-	// Evento para el menÃƒÂº
+	// Evento para el menú
 	private void Saluda_Selection (object objeto, System.EventArgs e)
 	{
 		// Termina la aplicación
 		MessageBox.Show( "Hola que tal!", "Saludo");
 	}
 
-	// Evento para el menÃƒÂº
+	// Evento para el menú
 	private void Salir_Selection (object objeto, System.EventArgs e)
 	{
 		// Otra forma de salir en lugar de Exit
 		this.Close();
 	}
 
-	// Evento para el menÃƒÂº
+	// Evento para el menú
 	private void FileAyuda_Selection (object objeto, System.EventArgs e)
 	{
 		// Termina la aplicación

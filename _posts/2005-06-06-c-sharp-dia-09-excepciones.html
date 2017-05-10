@@ -26,31 +26,31 @@ public class Excepcion
 		string entrada;
 		int[] vector = new int[4]{4,7,1,0};
 
-		System.Console.WriteLine("Introduce un nÃƒÂºmero");
+		System.Console.WriteLine("Introduce un número");
 
 		// Vamos a tomar un valor de la entrada standar
 		entrada = System.Console.ReadLine();
 
 		// Y ahora trataremos de convertirlo a entero.
-		// Pero Ã‚Â¿que pasa si no nos han pasado un nÃƒÂºmero? Hay que controlarlo con try-catch
+		// Pero Ã‚Â¿que pasa si no nos han pasado un número? Hay que controlarlo con try-catch
 		try
 		{
 			valor = Convert.ToInt32(entrada);
 
 			// Si todo va OK seguirá la ejecución por aquí
 			// en caso contrario saltara al bloque catch
-			System.Console.WriteLine("El nÃƒÂºmero introducido es: {0}", valor);
+			System.Console.WriteLine("El número introducido es: {0}", valor);
 		}
 		catch (Exception e)
 		{
-			System.Console.WriteLine("Lo que has metido NO es un nÃƒÂºmero: {0}", entrada);
+			System.Console.WriteLine("Lo que has metido NO es un número: {0}", entrada);
 			// Podemos volcar el error
 			System.Console.WriteLine("Error devuelto: {0}", e);
 		}
 
 		// Existen distintos tipos predefinidos de excepciones, e incluso se pueden
 		// definir excepciones propias. También se puede encadenar la captura de excepciones
-		// segÃƒÂºn el error que ocurra. Lo lógico es empezar con las excexpciones más concretas
+		// según el error que ocurra. Lo lógico es empezar con las excexpciones más concretas
 		// Veamos que pasa cuando nos pasamos  de rango en un arreglo
 		try
 		{
@@ -67,7 +67,7 @@ public class Excepcion
 		{
 			System.Console.WriteLine("Ocurrió otra excepción, error {1}", e);
 		}
-		// Podemos meter la claÃƒÂºsula finally que se ejecutará para terminar el trato
+		// Podemos meter la claúsula finally que se ejecutará para terminar el trato
 		// de la excepcion
 		finally
 		{
