@@ -4,7 +4,7 @@ title: "C# día 05: clases!"
 date: 2007-06-18 12:17:00
 categories: coding
 ---
-Veamos como se definen las clases. La cosa no cambia salvo alguna cosa curiosa; si no se especifica otra cosa, los atributos y mÃƒÂ©todos NO son accesibles, vamos que NO son public por defecto.
+Veamos como se definen las clases. La cosa no cambia salvo alguna cosa curiosa; si no se especifica otra cosa, los atributos y métodos NO son accesibles, vamos que NO son public por defecto.
 Veamos la clase Punto, y luego una clase que le crea un instancia y lo usa.
 <pre>
 
@@ -90,7 +90,7 @@ public class UsaPunto
 }
 </pre>
 
-TambiÃƒÂ©n podemos definir una clase dentro de otra. Por ejemplo, la clase Circulo y su Color.
+También podemos definir una clase dentro de otra. Por ejemplo, la clase Circulo y su Color.
 <pre>
 
 /**
@@ -117,13 +117,13 @@ public class Circulo
 			this.color = inicial;
 		}
 
-		// Un mÃƒÂ©todo para cambiar el atributo color
+		// Un método para cambiar el atributo color
 		public void cambiaColor(string otro)
 		{
 			this.color = otro;
 		}
 
-		// Un mÃƒÂ©todo para que devuelva el color
+		// Un método para que devuelva el color
 		public string dameColor()
 		{
 			return this.color;
@@ -138,13 +138,13 @@ public class Circulo
 		this.miColor = new Color(colorInicial);
 	}
 
-	// MÃƒÂ©todo que devuelve el diametro
+	// Método que devuelve el diametro
 	public int dameDiametro ()
 	{
 		return this.diametro;
 	}
 
-	// Funcion o mÃƒÂ©todo principal para las pruebas
+	// Funcion o método principal para las pruebas
 	public static void Main ()
 	{
 		// Creamos una instancia

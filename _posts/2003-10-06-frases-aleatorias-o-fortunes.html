@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Frases aleatorias o Fortunes" 
-date: 2003-10-06 14:45:00 
+title: "Frases aleatorias o Fortunes"
+date: 2003-10-06 14:45:00
 categories: coding
 ---
- Un elemento simpÃƒÂ¡tico del mundillo unix era cuando te logeabas en el sistema y te salÃƒÂ­a una frase ingeniosa aleatoria, 
+ Un elemento simpático del mundillo unix era cuando te logeabas en el sistema y te salía una frase ingeniosa aleatoria,
  cosa que se puede hacer con el juego fortune. Fortune es un programa que simplemente muestra una frase sacada de un fichero cargado de frases y proverbios.
 Puede ocurrir que al instalarlo no funcione, por ejemplo en un debian. Es un problema
 de PATH, ya que el programa fortune se guarda en el clasico directorio /usr/games
@@ -15,10 +15,10 @@ pello~$ /usr/games/fortune
 Klatu barada nikto.
 pello~$
 </pre>
-AdemÃƒÂ¡s de otros refranes, proverbios y frases lapidarias:
+Además de otros refranes, proverbios y frases lapidarias:
 <pre>
 pello~$ /usr/games/fortune
-Eres mÃƒÂ¡s falso que Windows 95 a prueba de fallos.
+Eres más falso que Windows 95 a prueba de fallos.
                 -- Yo.
 pello~$
 </pre>
@@ -34,10 +34,10 @@ pello@~$
 </pre>
 
 
-Ã‚Â¿Y para meter fortunes a una pÃƒÂ¡gina php?
-Seguramente habrÃƒÂ¡ formas mÃƒÂ¡s elegantes de hacerlo, pero puede hacerse
-usando un comando de sistema (Cosa que nos funcionarÃƒÂ¡ en caso de que
-su uso estÃƒÂ© restringido en el servidor). BastarÃƒÂ­a con este cÃƒÂ³digo:
+Ã‚Â¿Y para meter fortunes a una página php?
+Seguramente habrá formas más elegantes de hacerlo, pero puede hacerse
+usando un comando de sistema (Cosa que nos funcionará en caso de que
+su uso esté restringido en el servidor). Bastaría con este código:
 <code>
 <pre>
 &lt;?php
@@ -49,7 +49,7 @@ $salida = "";
 exec($comando, $salida);
 
 // Recogemos el output en $salida
-// y vamos sacando cada linea convirtiendo los acentos a su cÃƒÂ³digo HTML
+// y vamos sacando cada linea convirtiendo los acentos a su código HTML
 foreach ($salida as $linea) {
    echo htmlentities($linea) ."&lt;br&gt;";
 }

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "5 Funciones, ambito c++" 
-date: 2007-08-04 15:06:00 
+title: "5 Funciones, ambito c++"
+date: 2007-08-04 15:06:00
 categories: coding
 ---
 El camnio de c++ es largo, pero se sigue avanzando.
@@ -17,7 +17,7 @@ Veamos las funciones <b>inline</b>, un recurso interesante para mejorar el rendi
 * donde se se invoca. Con lo que es mucho mas rapido de ejecutar
 * y ademas nos da la limpieza de separar el codigo.
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Inline.cpp -o Inline
 */
@@ -45,7 +45,7 @@ int main () {
 	double a = 23, b = 21, c = 34;
 
 	// Tomamos el valor a
-	Log("Dame valores. 
+	Log("Dame valores.
 a=");
 	cin >> a;
 
@@ -53,7 +53,7 @@ a=");
 	cout << "b=";
 	cin >> b;
 
-	cout << "Y ahora son estos: b=" << b << " a=" 
+	cout << "Y ahora son estos: b=" << b << " a="
 << a << " global:" << variable <<endl;
 
 	c = Calcula(a,b);
@@ -61,7 +61,7 @@ a=");
 	cout << "Y el resultado de la funcion c=" << c << endl;
 
 	// Probamos la funcion
-	Log("Venga va vamos");	
+	Log("Venga va vamos");
 
 	return 0;
 }
@@ -99,7 +99,7 @@ Vamos a ver formas de pasar parametros.
 * Programa para probar los parametros de las funciones y
 * la forma de aplicar valores por defecto
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Parametros.cpp -o Parametros
 */
@@ -139,7 +139,7 @@ int main () {
 	cout << "Y el resultado de la funcion Suma :" << d << endl;
 
 	// Probamos la funcion
-	Log("Venga va vamos");	
+	Log("Venga va vamos");
 
 	return 0;
 }
@@ -171,14 +171,14 @@ void Log (char *mensaje) {
 int Suma (int a = 0, int b = 0, int c = 0) {
 
 	Log("Vamos a ver. Estamos en suma. ");
-	
+
 	// Devolvemos un valor
 	return (a + b + c);
 }
 </pre>
 
 <b>Sobrecarga de funciones</b>
-La sobrecarga es otro concepto bÃƒÂ¡sico en la POO. Aqui se muestra un boton.
+La sobrecarga es otro concepto básico en la POO. Aqui se muestra un boton.
 
 <pre>
 /**
@@ -187,7 +187,7 @@ La sobrecarga es otro concepto bÃƒÂ¡sico en la POO. Aqui se muestra un boton
 * La sobrecarga es una misma funcion con distintos parametros
 * Con la sobrecarga logramos el POLIMORFISMO de clases y funciones
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Sobrecarga.cpp -o Sobrecarga
 */
@@ -236,7 +236,7 @@ int main () {
 	cout << "Y el resultado de la funcion Suma :" << d << endl;
 
 	// Probamos la funcion
-	Log("Venga va vamos");	
+	Log("Venga va vamos");
 
 	return 0;
 }
@@ -285,7 +285,7 @@ void Log (char *mensaje) {
 int Suma (int a = 0, int b = 0, int c = 0) {
 
 	Log("Vamos a ver. Estamos en suma. ");
-	
+
 	// Devolvemos un valor
 	return (a + b + c);
 }
@@ -303,7 +303,7 @@ No conviene abusar de este tipo de variables.
 * Globales.cpp
 * Programa para probar variables y su scope
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Globales.cpp -o Globales
 */
@@ -329,7 +329,7 @@ int main () {
 	double a = 23, b = 21, c = 34;
 
 	// Tomamos el valor a
-	Log("Dame valores. 
+	Log("Dame valores.
 a=");
 	cin >> a;
 
@@ -337,7 +337,7 @@ a=");
 	cout << "b=";
 	cin >> b;
 
-	cout << "Y ahora son estos: b=" << b 
+	cout << "Y ahora son estos: b=" << b
 << " a=" << a << " global:" << variable <<endl;
 
 	c = Calcula(a,b);
@@ -345,7 +345,7 @@ a=");
 	cout << "Y el resultado de la funcion c=" << c << endl;
 
 	// Probamos la funcion
-	Log("Venga va vamos");	
+	Log("Venga va vamos");
 
 	return 0;
 }

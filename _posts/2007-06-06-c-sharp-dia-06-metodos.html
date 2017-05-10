@@ -4,9 +4,9 @@ title: "C# día 06: métodos"
 date: 2007-06-06 11:09:00
 categories: coding
 ---
-Este dÃƒÂ­a a merecido la pena y a los que no conozcan este lenguaje les sugiero echar un ojo al cÃƒÂ³digo ya que en los tipos de mÃƒÂ©todos ya se ve alguna peculiaridad de c# (respecto a java o c).
+Este día a merecido la pena y a los que no conozcan este lenguaje les sugiero echar un ojo al código ya que en los tipos de métodos ya se ve alguna peculiaridad de c# (respecto a java o c).
 
-Veamos algunos ejemplos de metodo a travÃƒÂ©s de la clase Pajaro:
+Veamos algunos ejemplos de metodo a través de la clase Pajaro:
 <pre>
 using System;
 
@@ -80,7 +80,7 @@ public class Pajaro {
 
 		System.Console.WriteLine("Ahora cuanto pesa {0}", loco.damePeso());
 
-		// Invocamos el mÃƒÂ©todo estÃƒÂ¡tico
+		// Invocamos el método estático
 		System.Console.WriteLine("Cuantas instancias hay: {0}", cuantosPajarosHay());
 
 	}
@@ -89,7 +89,7 @@ public class Pajaro {
 
 </pre>
 
-Ahora veamos algunas formas de pasar parÃƒÂ¡metros, atenciÃƒÂ³n al tipo out.
+Ahora veamos algunas formas de pasar parámetros, atención al tipo out.
 <pre>
 
 using System;
@@ -117,7 +117,7 @@ public class Parametros
 	public void porReferencia(ref int a, ref string b)
 	{
 		a = 666;
-		b = "Ahora sÃƒÂ­";
+		b = "Ahora sí";
 	}
 
 	// porOut
@@ -130,7 +130,7 @@ public class Parametros
 		B = b + "? Ahora solo cambia la out";
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main()
 	{
 		Parametros parametros = new Parametros();
@@ -142,7 +142,7 @@ public class Parametros
 
 
 
-		System.Console.WriteLine("Vamos a probar los mÃƒÂ©todos");
+		System.Console.WriteLine("Vamos a probar los métodos");
 
 		// Paso por valor
 		parametros.porValor(a, b);
@@ -162,7 +162,7 @@ public class Parametros
 </pre>
 
 Por ÃƒÂºltimo veremos distintos metodos constructores y destructores,
-con especial atenciÃƒÂ³n al constructor estÃƒÂ¡tico.
+con especial atención al constructor estático.
 <pre>
 
 using System;
@@ -188,7 +188,7 @@ public class Metodos
 
 	// Metodo constructor estatico
 	// Este se invoca UNA UNICA VEZ antes de crear la instancia
-	// es decir, aunque hagamos 100 instancias solo se ejecutarÃƒÂ¡ una vez
+	// es decir, aunque hagamos 100 instancias solo se ejecutará una vez
 	// Puede venir bien para inicializaciones o para patrones singleton
 	static Metodos()
 	{
@@ -216,9 +216,9 @@ public class Metodos
 	}
 
 	// Metodos SET Y GET
-	// Es una costumbre de las clases, mÃƒÂ¡s allÃƒÂ¡ del lenguaje
+	// Es una costumbre de las clases, más allá del lenguaje
 	// en el que se implementen. Se usan para manejar los atributos de la clase
-	// sin acceder a ellos directamente. Hay entornos que los generan automÃƒÂ¡ticamente
+	// sin acceder a ellos directamente. Hay entornos que los generan automáticamente
 
 	// get Numero
 	public int getNumero()
@@ -244,17 +244,17 @@ public class Metodos
 		cadena = nueva;
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main()
 	{
 		Metodos metodos = new Metodos();
 		Metodos otrosMetodos = new Metodos(666, "Share your software");
-		Metodos masMetodos = new Metodos(29, "Ã‚Â¿CÃƒÂ³mo estan ustedes?");
+		Metodos masMetodos = new Metodos(29, "Ã‚Â¿Cómo estan ustedes?");
 
 		int x = 47;
 		string y = "Como hemos cambiado";
 
-		System.Console.WriteLine("Vamos a probar los mÃƒÂ©todos");
+		System.Console.WriteLine("Vamos a probar los métodos");
 
 		// Cambiamos la cadena del objeto metodos
 		metodos.setCadena(y);

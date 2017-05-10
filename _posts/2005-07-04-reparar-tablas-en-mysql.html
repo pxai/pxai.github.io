@@ -22,19 +22,19 @@ Data records:   21991   Deleted blocks:       0
 
 
 Ademas de eso puede estar estropeada la tabla de datos, un fichero con extension MYD. Eso se refleja en que nos dara un mensaje de error como este:
-CÃƒÂ³digo:
+Código:
 Can't open file: mi_tabla.MYD (errno: 145)
 
 
 Esto tiene arreglo. DEbemos iniciar una sesion mysql en la bd afectada y ejecutamos los siguientes comandos:
 
-CÃƒÂ³digo:
+Código:
 mysql> REPAIR TABLE mi_tabla;
 
 
 Lo que mostrara algo asi:
 
-CÃƒÂ³digo:
+Código:
 +----------+--------+----------+----------+
 | Table    | Op     | Msg_type | Msg_text |
 +----------+--------+----------+----------+
@@ -45,13 +45,13 @@ CÃƒÂ³digo:
 
 
 
-CÃƒÂ³digo:
+Código:
 mysql> OPTIMIZE TABLE mi_tabla;
 
 
 Lo que mostrara algo asi:
 
-CÃƒÂ³digo:
+Código:
 +----------+----------+----------+----------+
 | Table    | Op       | Msg_type | Msg_text |
 +----------+----------+----------+----------+

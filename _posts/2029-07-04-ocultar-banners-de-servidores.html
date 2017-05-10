@@ -8,10 +8,10 @@ Ocultar o modificar banners de servidores en linux. Cuando hacemos por ejemplo u
 
 <b>Banner de sendmail</b>
 Dentro de sendmail.cf
-CÃƒÂ³digo:
+Código:
 O SmtpGreetingMessage=$j Sendmail $v/$Z; $b
 Es la directiva que podemos cambiar poniendo un mensaje molon:
-CÃƒÂ³digo:
+Código:
 O SmtpGreetingMessage=Your activity is being logged
 
 Que es un saludo que acojona mas.
@@ -20,11 +20,11 @@ Tambien podemos cambiar el fichero HELP. (/etc/mail/help)
 
 <b>Banner de apache</b>
 AÃƒÂ±adir la directiva:
-CÃƒÂ³digo:
+Código:
 ServerTokens ProductOnly
 
 o en su defecto
-CÃƒÂ³digo:
+Código:
 ServerTokens Prod
 
 y solo se mostrara: "Apache",sin versiones de php,mod_ssl, ni nada.
@@ -38,17 +38,17 @@ y le indicamos la ruta de un fichero que es donde pondremos el mensaje.
 
 <b>Banner en proftpd</b>
 Podemos cambiar el identificador con
-CÃƒÂ³digo:
+Código:
 ServerIdent                     on "FTP Server ready."
 
 Y aÃƒÂ±adir un mensajillo con
-CÃƒÂ³digo:
+Código:
 ServerName                      "ProFTPD server"
 
 
 <b>Banner de wuftpd</b>
 Dentro de /etc/ftpaccess
-CÃƒÂ³digo:
+Código:
 banner  /home/usuario/conectando
 (es un fichero) Aunque casi mejor NO usar wuftpd
 

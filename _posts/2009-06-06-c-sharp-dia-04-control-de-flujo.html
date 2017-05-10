@@ -4,7 +4,7 @@ title: "C# día 04: control de flujo"
 date: 2009-06-06 18:37:00
 categories: coding
 ---
-Veamos las herramientas bÃƒÂ¡sicas para control de flujo, empezando por las condicionales.
+Veamos las herramientas básicas para control de flujo, empezando por las condicionales.
 
 <pre>
 /**
@@ -14,13 +14,13 @@ Condicionales.cs
  Para compilar con Mono: mcs Condicionales.cs , ejecucion: mono Condicionales.exe
 */
 
-// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+// Importamos la libreria de utilidades básicas de sistema
 using System;
 
 // Definicion de la clase Condicionales, que muestra tipos de Condicionales.
 public class Condicionales {
 
-	// Y aquÃƒÂ­ la funciÃƒÂ³n principal
+	// Y aquí la función principal
 	public static void Main () {
 
 		// Variables
@@ -56,7 +56,7 @@ public class Condicionales {
 		}
 		else
 		{
-			System.Console.WriteLine("AquÃƒÂ­ no se cumple nada");
+			System.Console.WriteLine("Aquí no se cumple nada");
 		}
 
 		// SWITCH CASE: lo mismo de siempre
@@ -73,7 +73,7 @@ public class Condicionales {
 			case 'c' :
 			case 'd' :
 			case 'e' :
-						System.Console.WriteLine("Puede ser mÃƒÂ¡s de uno");
+						System.Console.WriteLine("Puede ser más de uno");
 						break;
 
 			default  :	System.Console.WriteLine("No cumple ninguna");
@@ -97,13 +97,13 @@ Iteraciones.cs
  Para compilar con Mono: mcs Iteraciones.cs , ejecucion: mono Iteraciones.exe
 */
 
-// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+// Importamos la libreria de utilidades básicas de sistema
 using System;
 
 // Definicion de la clase Iteraciones, que muestra tipos de Iteraciones.
 public class Iteraciones {
 
-	// Y aquÃƒÂ­ la funciÃƒÂ³n principal
+	// Y aquí la función principal
 	public static void Main () {
 
 		// Variables
@@ -141,7 +141,7 @@ public class Iteraciones {
 
 		// Dentro de las iteraciones podemos meter: break y continue
 		// break: para salir de la iteracion
-		// continue: para detener la ejecuciÃƒÂ³n de la iteracion actual y pasar a la siguiente.
+		// continue: para detener la ejecución de la iteracion actual y pasar a la siguiente.
 		j = 0;
 		while (j &lt; 15)
 		{
@@ -157,7 +157,7 @@ public class Iteraciones {
 
 		goto aqui;
 		// GOTOs: pueden usarse gotos, pero lo cierto es que su abuso puede
-		// producir que la depuraciÃƒÂ³n del cÃƒÂ³digo se dificulte mucho
+		// producir que la depuración del código se dificulte mucho
 		// Se usan etiquetas seguidas de 2 puntos
 		// Y para llegar a ellas se pone goto etiqueta;
 

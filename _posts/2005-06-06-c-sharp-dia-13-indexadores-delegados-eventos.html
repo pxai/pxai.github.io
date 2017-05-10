@@ -4,7 +4,7 @@ title: "C# día 13: indexadores, delegados, eventos"
 date: 2005-06-06 10:00:00
 categories: coding
 ---
-Hoy vamos a ver unos objetos y mÃƒÂ©todos algo especiales. Todo esta explicado en el cÃƒÂ³digo.
+Hoy vamos a ver unos objetos y métodos algo especiales. Todo esta explicado en el código.
 Por un lado, los indexadores
 <pre>
 /**
@@ -12,7 +12,7 @@ Por un lado, los indexadores
 * Los indexadores sirven para acceder a un array que puede haber dentro
 * de la clase de forma directa. Supongamos que tenemos un atributo que es un
 * array de nombres: protected string[] nombres;
-* Con el indexador o indexer accederiamos a ese array asÃƒÂ­:
+* Con el indexador o indexer accederiamos a ese array así:
 *   MiClase clase = new MiClase();
 *   clase[0] = "Nuevo valor";
 * Y para eso hay que definir un indexer.
@@ -32,7 +32,7 @@ public class Equipo
 		nombreEquipo = nombre;
 	}
 
-	// mÃƒÂ©todo que devuelve tamaÃƒÂ±o
+	// método que devuelve tamaÃƒÂ±o
 	public int getSize()
 	{
 		return jugadores.Length;
@@ -58,7 +58,7 @@ public class Equipo
 
 	  set // Mediante el set podemos establecer un valor en el array de jugadores
  	  {
-	 	  // Comprobamos los lÃƒÂ­mites
+	 	  // Comprobamos los límites
 		  if( indice >= 0 && indice <= 4 )
 		  {
 			jugadores[indice] = value;
@@ -66,7 +66,7 @@ public class Equipo
 	  }
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 		// Vamos a crear un gran equipo
@@ -78,7 +78,7 @@ public class Equipo
 		osasuna[1] = "Krutxi";
 		osasuna[2] = "Josetxo";
 		osasuna[3] = "IÃƒÂ±aki MuÃƒÂ±oz";
-		osasuna[4] = "RaÃƒÂºl GarcÃƒÂ­a";
+		osasuna[4] = "RaÃƒÂºl García";
 
 		// Y ahora ya podemos recorrer el array
 		for(int i = 0; i < osasuna.getSize(); i++)
@@ -89,13 +89,13 @@ public class Equipo
 
 }
 </pre>
-Por otro los mÃƒÂ©todos delegados, similares a los de las interfaces
+Por otro los métodos delegados, similares a los de las interfaces
 <pre>
 /**
 * Delegados.cs
-* Los mÃƒÂ©todos delegados son similares a los interfaces: definen
-* una forma de mÃƒÂ©todo (con su nombre, su return y sus parÃƒÂ¡metros)
-* pero sin implementaciÃƒÂ³n.
+* Los métodos delegados son similares a los interfaces: definen
+* una forma de método (con su nombre, su return y sus parámetros)
+* pero sin implementación.
 */
 
 using System;
@@ -105,11 +105,11 @@ using System;
 public class Aritmetica
 {
 
-	// AquÃƒÂ­ definimos el mÃƒÂ©todo delegado
-	// Que deberÃƒÂ¡n implementar otras clases
+	// Aquí definimos el método delegado
+	// Que deberán implementar otras clases
 	public delegate int Operacion(int a, int b);
 
-	// Fijate en el parÃƒÂ¡metro
+	// Fijate en el parámetro
 	public int HacerOperacion (Operacion op, int x, int y)
 	{
 		return (op(x, y));
@@ -118,19 +118,19 @@ public class Aritmetica
 
 public class UsarAritmetica
 {
-	// Un mÃƒÂ©todo que implementa OperaciÃƒÂ³n
+	// Un método que implementa Operación
 	public static int OperacionSumar(int a, int b)
 	{
 		return (a+b);
 	}
 
-	// Un mÃƒÂ©todo que implementa OperaciÃƒÂ³n
+	// Un método que implementa Operación
 	public static int OperacionRestar(int a, int b)
 	{
 		return (a-b);
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main()
 	{
 		// ATENCION. Se crea una instancia del MÃƒâ€°TODO DELEGADO
@@ -140,7 +140,7 @@ public class UsarAritmetica
 		// Y ahora creamos una instancia de la clase que contiene el delegado
 		Aritmetica aritmetica = new Aritmetica();
 
-		// Y ahora usamos los mÃƒÂ©todos delegados
+		// Y ahora usamos los métodos delegados
 		int resultado = aritmetica.HacerOperacion(sumar, 665, 1);
 
 		System.Console.WriteLine("Que fuerte, ha salido {0}", resultado);
@@ -155,10 +155,10 @@ Vamos a ver, como implementar nuestros propios eventos. Es algo complejo, y hay 
 <pre>
 /**
 * Eventos.cs
-* Programas que muestran la definiciÃƒÂ³n y uso de Eventos.
-* Los eventos som situaciones en la ejecuciÃƒÂ³n de un programa
+* Programas que muestran la definición y uso de Eventos.
+* Los eventos som situaciones en la ejecución de un programa
 * que pueden ser controlados para cambiar el comportamiento del mismo.
-* El ejemplo mÃƒÂ¡s claro es el entorno de ventanas: el evento de pinchar en un botÃƒÂ³n
+* El ejemplo más claro es el entorno de ventanas: el evento de pinchar en un botón
 * puede provocar el cierre de una ventana.
 */
 
@@ -167,9 +167,9 @@ using System;
 // En esta caso vamos a crear un evento para controlar que el usuario
 // ha escrito la palabra viagra en la consola. El evento se va a disparar
 // cuando se asigne lo que se ha metido por pantalla a una variable: en ese
-// momento se comprobarÃƒÂ¡ si esa palabra es "viagra" y de ser asÃƒÂ­, avisarÃƒÂ¡
+// momento se comprobará si esa palabra es "viagra" y de ser así, avisará
 
-// Definimos el mÃƒÂ©todo delegado
+// Definimos el método delegado
 // Los parametros son:
 // 1. un objeto: el que genera el evento
 // 2. argumento del evento: una clase especifica para ese evento
@@ -194,7 +194,7 @@ public class CompruebaSpam
 	string palabraspam;
 	public event capturaPalabraSpam EventoSpam;
 
-	// Atencion cuando hagamos el set (la asignaciÃƒÂ³n) se dispararÃƒÂ¡ el evento!
+	// Atencion cuando hagamos el set (la asignación) se disparará el evento!
 	public string PalabraSpam
 	{
 		get { return palabraspam; }
@@ -223,7 +223,7 @@ public class PruebaEvento
 		}
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 

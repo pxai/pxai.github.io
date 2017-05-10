@@ -11,7 +11,7 @@ Para ello podemos utilizar el comando dd, de la siguiente manera:
 
 Vamos a crear un swap de 128 megas en el fichero /var/swap
 
-CÃƒÂ³digo:
+Código:
 dd if=/dev/zero of=/var/swap bs=1000000 count=128
 
 
@@ -19,14 +19,14 @@ Con eso hemos creado un fichero de 128 megas en bloques de 1 mega,
 relleno de 0s.
 Ahora debemos dar permisos a ese fichero y convertirlo en un fichero swap:
 
-CÃƒÂ³digo:
+Código:
 chmod 600 /var/swap
 
 mkswap /var/swap
 
 
 Con esto ya empezariamos a usar el fichero como swap.
-CÃƒÂ³digo:
+Código:
 swapon /var/swap
 
 
@@ -36,5 +36,5 @@ se puede ejecutar "free" para comprobar el tamaÃƒÂ±o de swap, que habra crec
 Podemos hacer que sea un fichero fijo aÃƒÂ±adiendo en /etc/fstab la siguiente
 linea(para que se inicie al rearrancar):
 
-CÃƒÂ³digo:
+Código:
 /var/swap swap swap defaults 0 0

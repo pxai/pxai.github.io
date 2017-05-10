@@ -4,14 +4,14 @@ title: "C# día 10: herencia"
 date: 2006-06-06 12:54:00
 categories: coding
 ---
-En un solo ejemplo de código vamos a ver como crear herencia de una clase a otra, en este caso de la clase Dispositivo a la clase Movil. AquÃƒÂ­ entrarÃƒÂ¡ en juego el polimorfismo, es decir, un mismo mÃƒÂ©todo en la clase hija y clase padre con distinto efecto.
-Merece la pena comentar que disponemos de clases abstractas y tambiÃƒÂ©n de clases que NO se puede heredar (sealed).
+En un solo ejemplo de código vamos a ver como crear herencia de una clase a otra, en este caso de la clase Dispositivo a la clase Movil. Aquí entrará en juego el polimorfismo, es decir, un mismo método en la clase hija y clase padre con distinto efecto.
+Merece la pena comentar que disponemos de clases abstractas y también de clases que NO se puede heredar (sealed).
 Vamos a ver:
 <pre>
 /**
 * Dispositivo.cs
 * Superclase o clase padre para definir los dispositivos,
-* de esta heredarÃƒÂ¡n dispositivos mÃƒÂ¡s concretos como Ordenador, MÃƒÂ³vil,..
+* de esta heredarán dispositivos más concretos como Ordenador, Móvil,..
 */
 
 using System;
@@ -34,7 +34,7 @@ public class Dispositivo
 			set { voltaje = value; }
 		}
 
-	// Constructor sin parÃƒÂ¡metros
+	// Constructor sin parámetros
 	public Dispositivo ()
 	{
 		nombre = "Dispositivo";
@@ -56,7 +56,7 @@ public class Dispositivo
 		this.voltaje = voltaje;
 	}
 
-	// MÃƒÂ©todo destuctor
+	// Método destuctor
 	 ~Dispositivo()
 	{
 		System.Console.WriteLine("Dispositivo eliminado {0}", nombre);
@@ -72,16 +72,16 @@ public class Dispositivo
 		System.Console.WriteLine("Voltaje: {0}", voltaje);
 	}
 
-	// MÃƒÂ©todo VIRTUAL. Lo sobreescribimos en el hijo
+	// Método VIRTUAL. Lo sobreescribimos en el hijo
 	// Enciende el dispositivo
 	public virtual void encender()
 	{
 		System.Console.WriteLine("Dispositivo {0} encendido", nombre);
 	}
 
-	// MÃƒÂ©todo ABSTRACT. No se puede invocar el del padre,
+	// Método ABSTRACT. No se puede invocar el del padre,
 	// pero si el que implementa el hijo. Para usarlo la
-	// clase tambiÃƒÂ©n debe ser abstracta: public abstract class Dispositivo
+	// clase también debe ser abstracta: public abstract class Dispositivo
 	// apagar. Apaga el dispositivo
 	/*public abstract void apagar()
 	{
@@ -92,7 +92,7 @@ public class Dispositivo
 
 
 // Clase Movil, que hereda de la clase dispositivo
-// por lo que se hace con sus atributos y mÃƒÂ©todos
+// por lo que se hace con sus atributos y métodos
 public class Movil : Dispositivo
 {
 	// Metemos un atributo propio
@@ -101,23 +101,23 @@ public class Movil : Dispositivo
 	// Constructor, que invoca a la base
 	public Movil() : base()
 	{
-			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+			System.Console.WriteLine("Móvil creado {0}", nombre);
 	}
 
 	// Constructor, que invoca a la base
 	public Movil(string nombre, int voltaje) : base(nombre, voltaje)
 	{
-			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+			System.Console.WriteLine("Móvil creado {0}", nombre);
 	}
 
 	// Constructor, que invoca a la base en parte
 	public Movil(string marca, string nombre, int voltaje) : base(nombre, voltaje)
 	{
 			this.marca = marca;
-			System.Console.WriteLine("MÃƒÂ³vil creado {0}", nombre);
+			System.Console.WriteLine("Móvil creado {0}", nombre);
 	}
 
-	// Llamada POLIMÃƒâ€œRFICA. Invoca el mismo mÃƒÂ©todo pero hace algo distinto
+	// Llamada POLIMÃƒâ€œRFICA. Invoca el mismo método pero hace algo distinto
 	// Hay que poner la palabra new para indicarlo!!!
 	// toString : Muestra todo Por pantalla
 	public new void muestra()
@@ -125,11 +125,11 @@ public class Movil : Dispositivo
 		// Que haga lo mismo que la superclase...
 		base.muestra();
 
-		// .. y ademÃƒÂ¡s
+		// .. y además
 		System.Console.WriteLine("Marca: {0}", marca);
 	}
 
-	// MÃƒÂ©todo VIRTUAL. Para asegurarnos que al invocar "encender"
+	// Método VIRTUAL. Para asegurarnos que al invocar "encender"
 	// se llama al hijo y no al padre debemos meter la palabra override
 	public override void encender ()
 	{

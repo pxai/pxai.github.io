@@ -1,23 +1,23 @@
 ---
 layout: post
-title: "Debian virtual con qemu" 
-date: 2003-03-07 20:51:00 
+title: "Debian virtual con qemu"
+date: 2003-03-07 20:51:00
 categories: coding
 ---
-Supongamos que nos hace falta una mÃƒÂ¡quina linux virtual dentro del propio linux.
+Supongamos que nos hace falta una máquina linux virtual dentro del propio linux.
 Podemos descargarnos alguna imagen que ya este hecha o hacerla nosotros mismos.
-Lo primero de todo, debemos crear un disco duro para la mÃƒÂ¡quina virtual,
+Lo primero de todo, debemos crear un disco duro para la máquina virtual,
 y para eso se crea un fichero especial con un tamaÃƒÂ±o determinado:
 <br><pre>
 qemu-img create -f qcow midisco.img 0.5G
 </pre>
 Con eso creamos un disco de 500 megas. Se supone que podemos poner 500M.
 
-Vale. Tenemos la mÃƒÂ¡quina, con un disco duro. Ahora como instalamos un debian
-sobre esta mÃƒÂ¡quina? fÃƒÂ¡cil. Basta con tener una imagen iso de un cd de instalaciÃƒÂ³n
+Vale. Tenemos la máquina, con un disco duro. Ahora como instalamos un debian
+sobre esta máquina? fácil. Basta con tener una imagen iso de un cd de instalación
 y le decimos a qemu que arranque esa iso.
-Podemos buscar en esta direcciÃƒÂ³n, http://www.debian.org/CD/netinst/, 
-y un fichero pequeÃƒÂ±o para instalaciones por red serÃƒÂ­a este:http://cdimage.debian.org/debian-cd/3.1_r5/i386/iso-cd/debian-31r5-i386-businesscard.iso
+Podemos buscar en esta dirección, http://www.debian.org/CD/netinst/,
+y un fichero pequeÃƒÂ±o para instalaciones por red sería este:http://cdimage.debian.org/debian-cd/3.1_r5/i386/iso-cd/debian-31r5-i386-businesscard.iso
 
 Ok, Ahora podemos iniciar qemu con el cdrom metido (-cdrom ..iso y -boot d ), 256 de ram (-m 256) y la red activada (-user-net).
 
@@ -25,15 +25,15 @@ Ok, Ahora podemos iniciar qemu con el cdrom metido (-cdrom ..iso y -boot d ), 25
 qemu -cdrom debian-31r5-i386-businesscard.iso -hda midisco.img -m 256 -user-net -boot d
 </pre>
 
-La instalaciÃƒÂ³n ira normal. Si el pc estÃƒÂ¡ conectado a internet, la
-tarjeta de red de qemu, una ne2000, topara con un dhcp y serÃƒÂ¡ capaz
-de salir a internet. Haremos las particiones, se harÃƒÂ¡ la instalaciÃƒÂ³n 
-base, y tendremos que reiniciar la mÃƒÂ¡quina. En este caso arrancamos 
+La instalación ira normal. Si el pc está conectado a internet, la
+tarjeta de red de qemu, una ne2000, topara con un dhcp y será capaz
+de salir a internet. Haremos las particiones, se hará la instalación
+base, y tendremos que reiniciar la máquina. En este caso arrancamos
 sin cd:
 <br>
 <pre>
 qemu -hda midisco.img -m 256 -user-net
 </pre>
 
-Terminamos la instalaciÃƒÂ³n y ya tenemos un debian virtual sobre
+Terminamos la instalación y ya tenemos un debian virtual sobre
 nuestro linux.

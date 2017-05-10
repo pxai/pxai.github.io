@@ -4,19 +4,19 @@ title: "C# día 17: aplicaciones windows"
 date: 2004-07-06 00:07:00
 categories: coding
 ---
-Solo por encima vamos a ver algunos elementos mÃƒÂ¡s que podemos meter en las aplicaciones visuales con c#. Veamos algunos elementos nuevos
+Solo por encima vamos a ver algunos elementos más que podemos meter en las aplicaciones visuales con c#. Veamos algunos elementos nuevos
 <pre>
 /**
 * Elementos.cs
 * Ejemplo de uso de elementos de windows.
-* A la hora de compilar, para ejecutar como aplicaciÃƒÂ³n de windows
+* A la hora de compilar, para ejecutar como aplicación de windows
 * y para que no salga una ventana de DOS, hay que usar estas opciones
 * csc /t:winexe Formularios.cs  o en su defecto
 * csc /r:System.Windows.Forms.dll /t:winexe Formularios.cs
 *
 */
 
-// Usamos esta librerÃƒÂ­a para los formularios de windows
+// Usamos esta librería para los formularios de windows
 using System.Windows.Forms;
 using System.Drawing; // Para posicionamiento
 
@@ -25,7 +25,7 @@ public class Elementos : Form
 {
 
 	// Los controles hay que definirlos como atributos
-	// para manejarlos desde cualquier mÃƒÂ©todo o handler de eventos
+	// para manejarlos desde cualquier método o handler de eventos
 	private Label etiqueta;
 	private Button boton;
 	private RadioButton opcionA;
@@ -44,8 +44,8 @@ public class Elementos : Form
 	private void inicializar ()
 	{
 
-		// Vamos a establecer un tÃƒÂ­tulo
-		this.Text = "AplicaciÃƒÂ³n con controles";
+		// Vamos a establecer un título
+		this.Text = "Aplicación con controles";
 
 		// TAMAÃƒâ€˜O
 		this.Width = 600;
@@ -70,17 +70,17 @@ public class Elementos : Form
 
 		// Creamos instancia y la damos propiedades
 		this.opcionA = new System.Windows.Forms.RadioButton();
-		this.opcionA.Location = new System.Drawing.Point(20, 65); // PosiciÃƒÂ³n relativa a su contenedor
+		this.opcionA.Location = new System.Drawing.Point(20, 65); // Posición relativa a su contenedor
 		this.opcionA.Size = new Size(90, 15); // TamaÃƒÂ±o
 		this.opcionA.Text = "Plan A"; // Texto
-		this.opcionA.TabIndex = 0; // Orden en la tabulaciÃƒÂ³n
+		this.opcionA.TabIndex = 0; // Orden en la tabulación
 
 
 		this.opcionB = new System.Windows.Forms.RadioButton();
-		this.opcionB.Location = new System.Drawing.Point(20, 90); // PosiciÃƒÂ³n relativa a su contenedor
+		this.opcionB.Location = new System.Drawing.Point(20, 90); // Posición relativa a su contenedor
 		this.opcionB.Size = new System.Drawing.Size(90, 15); // TamaÃƒÂ±o
 		this.opcionB.Text = "Plan B"; // Texto
-		this.opcionB.TabIndex = 1; // Orden en la tabulaciÃƒÂ³n
+		this.opcionB.TabIndex = 1; // Orden en la tabulación
 
 		this.agrupador.Controls.Add(opcionA);
 		this.agrupador.Controls.Add(opcionB);
@@ -89,7 +89,7 @@ public class Elementos : Form
 
 		// LISTA ///////////////////////////////
 		superLista = new ListBox();
-		this.superLista.Location = new System.Drawing.Point(20, 90); // PosiciÃƒÂ³n
+		this.superLista.Location = new System.Drawing.Point(20, 90); // Posición
 		this.superLista.Size = new System.Drawing.Size(90, 35); // TamaÃƒÂ±o
 
 		// AÃƒÂ±adimos elementos a la lista
@@ -104,25 +104,25 @@ public class Elementos : Form
 		// BUTTON o botones
 		boton = new Button();
 
-		boton.Text = "BotÃƒÂ³n de acciÃƒÂ³n";
+		boton.Text = "Botón de acción";
 		boton.Left = 200;
 		boton.Top = 300;
 
-		// Asociamos un evento al botÃƒÂ³n
+		// Asociamos un evento al botón
 		boton.Click += new System.EventHandler(this.boton_Click);
 
 		this.Controls.Add(boton);
 	}
 
-	// Evento para el botÃƒÂ³n
+	// Evento para el botón
 	private void boton_Click (object objeto, System.EventArgs e)
 	{
-		// Termina la aplicaciÃƒÂ³n
+		// Termina la aplicación
 		Application.Exit();
 	}
 
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 
@@ -132,19 +132,19 @@ public class Elementos : Form
 }
 </pre>
 
-Y ahora veamos como meter menÃƒÂºs y un messageBox clÃƒÂ¡sico. Existen muchos dialogs predefinidos, pero no es el objetivo profundizar en loa programaciÃƒÂ³n visual. Habiendo gtk...
+Y ahora veamos como meter menÃƒÂºs y un messageBox clásico. Existen muchos dialogs predefinidos, pero no es el objetivo profundizar en loa programación visual. Habiendo gtk...
 <pre>
 /**
 * Menus.cs
 * Ejemplo de uso de MenÃƒÂºs en ventanas
-* A la hora de compilar, para ejecutar como aplicaciÃƒÂ³n de windows
+* A la hora de compilar, para ejecutar como aplicación de windows
 * y para que no salga una ventana de DOS, hay que usar estas opciones
 * csc /t:winexe Formularios.cs  o en su defecto
 * csc /r:System.Windows.Forms.dll /t:winexe Formularios.cs
 *
 */
 
-// Usamos esta librerÃƒÂ­a para los formularios de windows
+// Usamos esta librería para los formularios de windows
 using System;
 using System.Windows.Forms;
 using System.Drawing; // Para posicionamiento
@@ -154,7 +154,7 @@ public class Menus : Form
 {
 
 	// Los controles hay que definirlos como atributos
-	// para manejarlos desde cualquier mÃƒÂ©todo o handler de eventos
+	// para manejarlos desde cualquier método o handler de eventos
 	private Label etiqueta;
 	private MainMenu menuFichero;
 
@@ -168,8 +168,8 @@ public class Menus : Form
 	private void inicializar ()
 	{
 
-		// Vamos a establecer un tÃƒÂ­tulo
-		this.Text = "AplicaciÃƒÂ³n con controles";
+		// Vamos a establecer un título
+		this.Text = "Aplicación con controles";
 
 		// TAMAÃƒâ€˜O
 		this.Width = 600;
@@ -198,7 +198,7 @@ public class Menus : Form
 	// Evento para el menÃƒÂº
 	private void Saluda_Selection (object objeto, System.EventArgs e)
 	{
-		// Termina la aplicaciÃƒÂ³n
+		// Termina la aplicación
 		MessageBox.Show( "Hola que tal!", "Saludo");
 	}
 
@@ -212,11 +212,11 @@ public class Menus : Form
 	// Evento para el menÃƒÂº
 	private void FileAyuda_Selection (object objeto, System.EventArgs e)
 	{
-		// Termina la aplicaciÃƒÂ³n
+		// Termina la aplicación
 		MessageBox.Show( "Ayuda? rtfm o stfg", "Acerca de");
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 

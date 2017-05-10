@@ -19,7 +19,7 @@ using System;
 using System.Timers;
 
 
-// Vamos a usar El timer a travÃƒÂ©s de nuestra clase temporizador
+// Vamos a usar El timer a través de nuestra clase temporizador
 public class Temporizador
 {
 	private Timer miTimer;
@@ -39,15 +39,15 @@ public class Temporizador
 
 	 }
 
-	// Este serÃƒÂ¡ el evento que se ejecutarÃƒÂ¡ al pasar el tiempo
+	// Este será el evento que se ejecutará al pasar el tiempo
 	public static void EventoTemporizador( object objeto, ElapsedEventArgs e )
 	{
-		System.Console.WriteLine("Salto el temporizador: Campaaana y se acabÃƒÂ³");
+		System.Console.WriteLine("Salto el temporizador: Campaaana y se acabó");
 		//exit(0);
 	}
 
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 		// Un  temporizador que salte cada 3 segundos...
@@ -56,16 +56,16 @@ public class Temporizador
 
 		// Creamos un bucle infinito y a ver que ocurre
 		for(;;);
-			// Pues aquÃƒÂ­, a verlas venir...
+			// Pues aquí, a verlas venir...
 
 	}
 }
 </code> </pre>
-Vamos a ver algunas funciones matemÃƒÂ¡ticas con <b>Math</b>
+Vamos a ver algunas funciones matemáticas con <b>Math</b>
 <pre><code>
 /**
 * Mates.cs
-* Muestra el uso de la clase Math, para las operaciones matemÃƒÂ¡ticas habituales
+* Muestra el uso de la clase Math, para las operaciones matemáticas habituales
 */
 
 using System;
@@ -76,12 +76,12 @@ using System.Timers;
 public class Mates
 {
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 		double valor = 0.0;
 
-		// Vamos a coger un nÃƒÂºmero con comas y a jugar con ÃƒÂ©l
+		// Vamos a coger un nÃƒÂºmero con comas y a jugar con él
 		System.Console.WriteLine("Anda resalao mete un numero con comillas");
 		string entrada = System.Console.ReadLine();
 
@@ -101,7 +101,7 @@ public class Mates
 
 		} catch (Exception)
 		{
-			System.Console.WriteLine("Es probable que no metieras un nÃƒÂºmero vÃƒÂ¡lida. Adios.");
+			System.Console.WriteLine("Es probable que no metieras un nÃƒÂºmero válida. Adios.");
 		}
 
 		// Si buscas nÃƒÂºmeros aleatorios usa Random, no Math
@@ -115,9 +115,9 @@ Vamos a ver como manejar el entorno con <b>Environment</b>
 <pre><code>
 /**
 * Entorno.cs
-* Muestra el uso de la clase Enviroment que nos da informaciÃƒÂ³n sobre el
+* Muestra el uso de la clase Enviroment que nos da información sobre el
 * entorno en que se ejecuta el programa. Siendo c# multiplataforma, puede
-* ser una clase de gran interÃƒÂ©s
+* ser una clase de gran interés
 */
 
 using System;
@@ -128,7 +128,7 @@ using System;
 public class Entorno
 {
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 		int i = 0;
@@ -140,10 +140,10 @@ public class Entorno
 		string quienSoy = "";
 		string dondeEstoy = "";
 
-		// Sacamos los datos de mÃƒÂ¡quina ///////////////////////////////
+		// Sacamos los datos de máquina ///////////////////////////////
 		maquina += "Sistema operativo: " + Environment.OSVersion + "
 ";
-		maquina += "VersiÃƒÂ³n: " + Environment.Version + "
+		maquina += "Versión: " + Environment.Version + "
 ";
 		maquina += "Hostname: " + Environment.MachineName + "
 ";
@@ -205,7 +205,7 @@ Vamos a ver como manejar los ficheros con <b>System.IO</b>
 */
 
 using System;
-using System.IO; // HabrÃƒÂ¡ que importar esta claro..
+using System.IO; // Habrá que importar esta claro..
 
 
 // Clase Ficheros para manipular archivos
@@ -218,7 +218,7 @@ public class Ficheros
 		fichero = nombre;
 	}
 
-	// MÃƒÂ©todo para sacar las propiedades de un fichero
+	// Método para sacar las propiedades de un fichero
 	// devuelve true si el fichero existe
 	public bool propiedades()
 	{
@@ -236,7 +236,7 @@ public class Ficheros
 ";
 				prop += "TamaÃƒÂ±a: " + info.Length +"
 ";
-				prop += "Fecha CreaciÃƒÂ³n: " + info.CreationTime +"
+				prop += "Fecha Creación: " + info.CreationTime +"
 ";
 				prop += "ÃƒÅ¡ltimo acceso: " + info.LastAccessTime +"
 ";
@@ -249,16 +249,16 @@ public class Ficheros
 			}
 		}
 		catch (Exception e)
-		// Otra excepciÃƒÂ³n podrÃƒÂ­a ser System.IO.FileNotFoundException
+		// Otra excepción podría ser System.IO.FileNotFoundException
 		{
-			System.Console.WriteLine("OcurriÃƒÂ³ una excepciÃƒÂ³n: {0}", e);
+			System.Console.WriteLine("Ocurrió una excepción: {0}", e);
 			return false;
 		}
 
 		return true;
 	}
 
-	// MÃƒÂ©todo para leer de un fichero
+	// Método para leer de un fichero
 	public void leer()
 	{
 		// Definimos un StreamReader
@@ -281,12 +281,12 @@ public class Ficheros
 		}
 		catch (Exception e)
 		{
-			System.Console.WriteLine("OcurriÃƒÂ³ una excepciÃƒÂ³n: {0}", e);
+			System.Console.WriteLine("Ocurrió una excepción: {0}", e);
 		}
 
 	}
 
-	// MÃƒÂ©todo para escribir un fichero, al final de ÃƒÂ©l
+	// Método para escribir un fichero, al final de él
 	// Para escribir desde el inicio, usa WriteText
 	public void escribir()
 	{
@@ -298,7 +298,7 @@ public class Ficheros
 		{
 			escribe = File.AppendText(fichero);
 			// podria ser CreateText para crear uno nuevo
-			// o tambiÃƒÂ©n WriteText para machacar el texto
+			// o también WriteText para machacar el texto
 
 			while (linea != "##")
 			{
@@ -313,14 +313,14 @@ public class Ficheros
 		}
 		catch (Exception e)
 		{
-			System.Console.WriteLine("OcurriÃƒÂ³ una excepciÃƒÂ³n: {0}", e);
+			System.Console.WriteLine("Ocurrió una excepción: {0}", e);
 		}
 	}
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main (string[] args)
 	{
-		// Vamos a requerir un parÃƒÂ¡metro
+		// Vamos a requerir un parámetro
 		if (args.Length != 1)
 		{
 			System.Console.WriteLine("Pasame un nombre de fichero como parametro");

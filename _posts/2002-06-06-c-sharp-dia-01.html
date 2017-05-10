@@ -4,14 +4,14 @@ title: "C# día 01"
 date: 2002-06-06 12:10:00
 categories: coding
 ---
-Pues eso, hay que currarse los 21 dÃƒÂ­as. Antes de San FermÃƒÂ­n. Ã‚Â¿Lo lograrÃƒÂ©?
+Pues eso, hay que currarse los 21 días. Antes de San Fermín. Ã‚Â¿Lo lograré?
 <pre>
 // Hola.cs
 // El ejemplo clasico para iniciarse en un lenguaje
 // Para compilar con MS: csc Hola.cs , ejecucion: Hola.exe
 // Para compilar con Mono: mcs Hola.cs , ejecucion: mono Hola.exe
 
-// Importamos la libreria de utilidades bÃƒÂ¡sicas de sistema
+// Importamos la libreria de utilidades básicas de sistema
 using System;
 
 // Todo debe ir dentro de clases. En este caso
@@ -39,10 +39,10 @@ using System.Windows.Forms;
 	public class HolaWindows : Form
 	{
 		// Definimos algunos atributos del formulario
-		private Button btnOk;		// Un botÃƒÂ³n
+		private Button btnOk;		// Un botón
 		private Label lblMostrar;	// Una etiqueta
 
-		// AquÃƒÂ­ va el mÃƒÂ©todo constructor, con el mismo nombre
+		// Aquí va el método constructor, con el mismo nombre
 		// que la clase.
 		public HolaWindows()
 		{
@@ -51,13 +51,13 @@ using System.Windows.Forms;
 			this.btnOk = new Button();
 
 			// Ponemos un titulo a la ventana
-			this.Text = "Mi aplicaciÃƒÂ³n C# para W1ND0W5";
+			this.Text = "Mi aplicación C# para W1ND0W5";
 
 			// Posicionamos y damos tamaÃƒÂ±o al label lblDisplay
 			this.lblMostrar.Location = new System.Drawing.Point(20, 50);
 			this.lblMostrar.Size = new System.Drawing.Size(100, 120);
 
-			// Posicionamos, asignamos texto y damos tamaÃƒÂ±o al botÃƒÂ³n btnOk
+			// Posicionamos, asignamos texto y damos tamaÃƒÂ±o al botón btnOk
 			this.btnOk.Location = new System.Drawing.Point(60, 200);
 			this.btnOk.Text = "OK";
 			this.btnOk.Click += new System.EventHandler(this.btnOK_Click);
@@ -66,7 +66,7 @@ using System.Windows.Forms;
 			this.Controls.AddRange(new Control[] {this.lblMostrar, this.btnOk});
 		}
 
-		// MÃƒÂ©todo especÃƒÂ­fico para el evento de pulsar el boton
+		// Método específico para el evento de pulsar el boton
 		private void btnOK_Click(object sender, System.EventArgs e)
 		{
 			lblMostrar.Text = "Hola nena!";

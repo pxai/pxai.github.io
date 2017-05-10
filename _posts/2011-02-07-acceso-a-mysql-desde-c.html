@@ -1,12 +1,12 @@
 ﻿---
 layout: post
-title: "Acceso a MySQL desde C#" 
-date: 2011-02-07 21:29:00 
+title: "Acceso a MySQL desde C#"
+date: 2011-02-07 21:29:00
 categories: coding
 ---
-Este es un ejemplo simple de acceso a una BBDD Mysql con el driver 3, el 5 es beta y no estÃƒÂ¡ documentada la forma de conectar (o al menos no la encuentro).
+Este es un ejemplo simple de acceso a una BBDD Mysql con el driver 3, el 5 es beta y no está documentada la forma de conectar (o al menos no la encuentro).
 
-Esta serÃƒÂ­a la clase:
+Esta sería la clase:
 <pre>
 using System;
 using System.Data;
@@ -38,7 +38,7 @@ public partial class Default2 : System.Web.UI.Page
         {
             lblResultado.Text = "<b>OK</b>. Login correcto";
         }
-        else 
+        else
         {
             lblResultado.Text = "<b>Error!</b>. Login incorrecto";
         }
@@ -57,7 +57,7 @@ public partial class Default2 : System.Web.UI.Page
 
         lblQuery.Text = consulta;
 
-        // Creamos la instancia del objeto pasÃƒÂ¡ndole el string de conexion
+        // Creamos la instancia del objeto pasándole el string de conexion
         conexion = new OdbcConnection(cadenaConexion);
 
         // Abrimos la conexion
@@ -83,7 +83,7 @@ public partial class Default2 : System.Web.UI.Page
 
 </pre>
 
-Y por su parte, la pÃƒÂ¡gina ASP.NET asociada:
+Y por su parte, la página ASP.NET asociada:
 <pre>
 
 &lt;%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default2.aspx.cs" Inherits="Default2" %&gt;
@@ -92,7 +92,7 @@ Y por su parte, la pÃƒÂ¡gina ASP.NET asociada:
 
 &lt;html xmlns="http://www.w3.org/1999/xhtml" &gt;
 &lt;head runat="server"&gt;
-    &lt;title&gt;PÃƒÂ¡gina sin tÃƒÂ­tulo&lt;/title&gt;
+    &lt;title&gt;Página sin título&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;form id="form1" runat="server"&gt;

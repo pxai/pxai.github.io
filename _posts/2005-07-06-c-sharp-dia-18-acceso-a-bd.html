@@ -4,7 +4,7 @@ title: "C# día 18: acceso a BD"
 date: 2005-07-06 01:07:00
 categories: coding
 ---
-Acceso a BBDD con ADO.NET. Para ejemplos simples se puede usar un ficherillo de access o una conexiÃƒÂ³n odbc cualquiera.
+Acceso a BBDD con ADO.NET. Para ejemplos simples se puede usar un ficherillo de access o una conexión odbc cualquiera.
 La cosa no cambia mucho;
 <pre>
 /**
@@ -24,7 +24,7 @@ using System.Data.OleDb;
 public class AccesoBD
 {
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main ()
 	{
 
@@ -46,14 +46,14 @@ public class AccesoBD
 
 		try { // metemos control de excepciones, por si las moscas
 
-			// Abrimos la conexiÃƒÂ³n
+			// Abrimos la conexión
 			conexion.Open();
 
 			// Ejecutamos la sentencia y mostramos el resultado
 			resultSet = sentencia.ExecuteReader();
 
-			// NOTA: si fuera un INSERT, UPDATE o DELETE se harÃƒÂ­a asÃƒÂ­:
-			// int registros = sentencia.ExecuteNonQuery(); // registros serÃƒÂ­an los reg afectados
+			// NOTA: si fuera un INSERT, UPDATE o DELETE se haría así:
+			// int registros = sentencia.ExecuteNonQuery(); // registros serían los reg afectados
 
 			System.Console.WriteLine("Estos datos hay en la tabla
 ");
@@ -64,13 +64,13 @@ public class AccesoBD
 				// Para tomar una columna de cada registro usamos funciones de este pelo
 				// segun el tipo de dato: getString, getBoolean, getDouble,...
 				// nombre, estilo , precio
-				System.Console.Write("IntÃƒÂ©rprete: {0} ", resultSet.GetString(2));
+				System.Console.Write("Intérprete: {0} ", resultSet.GetString(2));
 				System.Console.Write("Estilo: {0} ", resultSet.GetString(3));
 				System.Console.WriteLine("Precio: {0} ", resultSet.GetDouble(4));
 			}
 
 			// IMPORTANTE, al final de la consulta hay que cerrar
-			// tanto el datareader como la conexiÃƒÂ³n!!!
+			// tanto el datareader como la conexión!!!
 			resultSet.Close();
 			conexion.Close();
 		}
@@ -88,4 +88,4 @@ public class AccesoBD
 }
 </pre>
 
-En .NET hay unos objetos que recuperan datos y se puede manipular para luego actualizar la BBDD con ese conjunto de datos. Personalmente me parece una animalada, a no ser que seas el usuario ÃƒÂºnico de la aplicaciÃƒÂ³n o no te importe bloquear tablas.
+En .NET hay unos objetos que recuperan datos y se puede manipular para luego actualizar la BBDD con ese conjunto de datos. Personalmente me parece una animalada, a no ser que seas el usuario ÃƒÂºnico de la aplicación o no te importe bloquear tablas.

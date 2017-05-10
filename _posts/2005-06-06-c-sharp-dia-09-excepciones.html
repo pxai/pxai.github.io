@@ -4,7 +4,7 @@ title: "C# día 09: excepciones"
 date: 2005-06-06 00:26:00
 categories: coding
 ---
-C# tambiÃƒÂ©n dispone de control de excepciones, y al igual que C++ o Java podemos crear y lanzar nuestras propias excepciones.
+C# también dispone de control de excepciones, y al igual que C++ o Java podemos crear y lanzar nuestras propias excepciones.
 Primero veamos como se capturan:
 <pre>
 /**
@@ -19,7 +19,7 @@ using System;
 public class Excepcion
 {
 
-	// MÃƒÂ©todo principal
+	// Método principal
 	public static void Main()
 	{
 		int valor;
@@ -37,7 +37,7 @@ public class Excepcion
 		{
 			valor = Convert.ToInt32(entrada);
 
-			// Si todo va OK seguirÃƒÂ¡ la ejecuciÃƒÂ³n por aquÃƒÂ­
+			// Si todo va OK seguirá la ejecución por aquí
 			// en caso contrario saltara al bloque catch
 			System.Console.WriteLine("El nÃƒÂºmero introducido es: {0}", valor);
 		}
@@ -49,8 +49,8 @@ public class Excepcion
 		}
 
 		// Existen distintos tipos predefinidos de excepciones, e incluso se pueden
-		// definir excepciones propias. TambiÃƒÂ©n se puede encadenar la captura de excepciones
-		// segÃƒÂºn el error que ocurra. Lo lÃƒÂ³gico es empezar con las excexpciones mÃƒÂ¡s concretas
+		// definir excepciones propias. También se puede encadenar la captura de excepciones
+		// segÃƒÂºn el error que ocurra. Lo lógico es empezar con las excexpciones más concretas
 		// Veamos que pasa cuando nos pasamos  de rango en un arreglo
 		try
 		{
@@ -61,17 +61,17 @@ public class Excepcion
 		}
 		catch (IndexOutOfRangeException e)
 		{
-			System.Console.WriteLine("El array no da para mÃƒÂ¡s {0}, error {1}", vector.Length, e);
+			System.Console.WriteLine("El array no da para más {0}, error {1}", vector.Length, e);
 		}
-		catch (Exception e) // Al final tratamos de capturar la excepciÃƒÂ³n  genÃƒÂ©rica.
+		catch (Exception e) // Al final tratamos de capturar la excepción  genérica.
 		{
-			System.Console.WriteLine("OcurriÃƒÂ³ otra excepciÃƒÂ³n, error {1}", e);
+			System.Console.WriteLine("Ocurrió otra excepción, error {1}", e);
 		}
-		// Podemos meter la claÃƒÂºsula finally que se ejecutarÃƒÂ¡ para terminar el trato
+		// Podemos meter la claÃƒÂºsula finally que se ejecutará para terminar el trato
 		// de la excepcion
 		finally
 		{
-			System.Console.WriteLine("Ya pasÃƒÂ³ todo");
+			System.Console.WriteLine("Ya pasó todo");
 		}
 
 	}
@@ -97,24 +97,24 @@ public class MayorQueDiez : Exception {}
 // menores que 0. Implementamos sus constructores
 public class MenorQueCero : Exception
 {
-	// Constructor mÃƒÂ­nimo
+	// Constructor mínimo
 	public MenorQueCero ()
 	{
 	}
 
-	// Constructor con parÃƒÂ¡metro
+	// Constructor con parámetro
 	public MenorQueCero( string e ) : base (e)
 	{
-		System.Console.WriteLine("Estamos dentro de nuestra excepciÃƒÂ³n: {0}",e);
+		System.Console.WriteLine("Estamos dentro de nuestra excepción: {0}",e);
 	}
 
-	// Constructor con parÃƒÂ¡metros
+	// Constructor con parámetros
 	public MenorQueCero( string e, Exception inner ) : base ( e, inner )
 	{
 	}
 }
 
-// AquÃƒÂ­ creamos una clase para probar las excepciones
+// Aquí creamos una clase para probar las excepciones
 public class Numeros
 {
 	// Constructor
@@ -123,7 +123,7 @@ public class Numeros
 	}
 
 	// Recoge un valor, en caso de no cumplir condiciones
-	// hacemos saltar la excepciÃƒÂ³n
+	// hacemos saltar la excepción
 	public void recogeValor ()
 	{
 		string linea;
@@ -133,13 +133,13 @@ public class Numeros
 		linea = System.Console.ReadLine();
 		valor = Convert.ToInt32(linea);
 
-		// En este caso lanzamos la excepciÃƒÂ³n
+		// En este caso lanzamos la excepción
 		if (valor < 0)
 		{
 			throw ( new MenorQueCero("Que cagada!") );
 		}
 
-		// En este otro caso tambiÃƒÂ©n
+		// En este otro caso también
 		if (valor > 10)
 		{
 			throw ( new MayorQueDiez() );
@@ -153,7 +153,7 @@ public class Numeros
 		Numeros numeros = new Numeros();
 		int valor = 0;
 
-		// Recogemos un valor y si salta nuestra excepciÃƒÂ³n la capturamos
+		// Recogemos un valor y si salta nuestra excepción la capturamos
 		System.Console.Write("Escribe un numero reina: ");
 		try
 		{
@@ -179,13 +179,13 @@ public class Numeros
 		// comenta los bloques y prueba a ver que pasa
 		try
 		{
-			// Esto harÃƒÂ¡ que la excepciÃƒÂ³n salte
+			// Esto hará que la excepción salte
 			checked
 			{
 				valor = Convert.ToInt32(argumentos[0]);
 			}
 
-			// Pero esto en cambio tratarÃƒÂ¡ de ajustar el valor
+			// Pero esto en cambio tratará de ajustar el valor
 			unchecked
 			{
 				valor = (int)4354243353523;
@@ -194,7 +194,7 @@ public class Numeros
 		}
 		catch (Exception e)
 		{
-			System.Console.WriteLine("Has evacuado fino en la asignaciÃƒÂ³n {0}", e);
+			System.Console.WriteLine("Has evacuado fino en la asignación {0}", e);
 		}
 		finally
 		{

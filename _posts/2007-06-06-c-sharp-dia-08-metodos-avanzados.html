@@ -4,14 +4,14 @@ title: "C# día 08: métodos avanzados"
 date: 2024-06-06 19:25:00
 categories: coding
 ---
-Vamos a ver algunas opciones interesantes que tienen los mÃƒÂ©todos en C#.
-Para empezar, no podÃƒÂ­a faltar la sobrecarga:
+Vamos a ver algunas opciones interesantes que tienen los métodos en C#.
+Para empezar, no podía faltar la sobrecarga:
 <pre>
 /**
 * Sobrecarga.cs
-* Clase que muestra como aplicar sobrecarga en mÃƒÂ©todos
-* de una clase. La sobrecarga consiste en crear varios mÃƒÂ©todos con el mismo
-* nombre pero con distintos parÃƒÂ¡metros.
+* Clase que muestra como aplicar sobrecarga en métodos
+* de una clase. La sobrecarga consiste en crear varios métodos con el mismo
+* nombre pero con distintos parámetros.
 */
 
 using System;
@@ -25,37 +25,37 @@ namespace Calculadoras
 
 	string nombre;
 
-	// MÃƒÂ©todo constructor
+	// Método constructor
 	public Calculadora ()
 	{
 	}
 
-	// MÃƒÂ©todo constructor SOBRECARGADO
+	// Método constructor SOBRECARGADO
 	public Calculadora (string nombre)
 	{
 		this.nombre = nombre;
 	}
 
-	// MÃƒÂ©todo para sumar dos valores, enteros
+	// Método para sumar dos valores, enteros
 	public int sumar(int x, int y)
 	{
 		return (x + y);
 	}
 
-	// El mismo mÃƒÂ©todo, SOBRECARGADO con otros parÃƒÂ¡metros
+	// El mismo método, SOBRECARGADO con otros parámetros
 	public double sumar(double x, double y)
 	{
 		return (x + y);
 	}
 
-	// El mismo mÃƒÂ©todo, SOBRECARGADO con otros parÃƒÂ¡metros
+	// El mismo método, SOBRECARGADO con otros parámetros
 	public decimal sumar(decimal x, decimal y)
 	{
 		return (x + y);
 	}
 
 
-	// FunciÃƒÂ³n principal, para hacer pruebas
+	// Función principal, para hacer pruebas
 	public static void Main ()
 	{
 		int a, b;
@@ -75,19 +75,19 @@ namespace Calculadoras
 
 } // fin de namespace
 </pre>
-TambiÃƒÂ©n podemos pasar un nÃƒÂºmero variable de argumentos, y si se declaran de tipo object pueden contener cualquier cosa.
+También podemos pasar un nÃƒÂºmero variable de argumentos, y si se declaran de tipo object pueden contener cualquier cosa.
 <pre>
 /**
 * ParametrosVariables.cs
-* Clase que muestra la forma de poder pasar un nÃƒÂºmero variable de parÃƒÂ¡metros
-* a una funciÃƒÂ³n
+* Clase que muestra la forma de poder pasar un nÃƒÂºmero variable de parámetros
+* a una función
 */
 
 using System;
 
 
 // Vamos a declarar esto dentro del mismo espacio de nombres
-// para importar la SuperCalculadora en otra clase tendrÃƒÂ­amos que usar using Calculadoras
+// para importar la SuperCalculadora en otra clase tendríamos que usar using Calculadoras
 namespace Calculadoras
 {
 
@@ -95,7 +95,7 @@ namespace Calculadoras
  {
 		string nombre;
 
-	// MÃƒÂ©todo constructor
+	// Método constructor
 	public SuperCalculadora (string nombre)
 	{
 		this.nombre = nombre;
@@ -129,7 +129,7 @@ namespace Calculadoras
 	}
 
 
-	// FunciÃƒÂ³n principal, para hacer pruebas
+	// Función principal, para hacer pruebas
 	public static void Main (string[] argumentos)
 	{
 		int i;
@@ -137,7 +137,7 @@ namespace Calculadoras
 		// Vamos a controlar que al menos se pasa un parametro
 		if (argumentos.Length < 1)
 		{
-			System.Console.WriteLine("Pasa algÃƒÂºn parÃƒÂ¡metro por favor");
+			System.Console.WriteLine("Pasa algÃƒÂºn parámetro por favor");
 			return;
 		}
 
@@ -160,26 +160,26 @@ namespace Calculadoras
 
 } // fin de namespace
 </pre>
-Y por ÃƒÂºtlimo, vemos otra vez los mÃƒÂ©todos estÃƒÂ¡ticos y el uso de otros espacios de nombres. Para que este ejemplo funcione hay que comentar el mÃƒÂ©todo Main de los cÃƒÂ³digos anteriores.
+Y por ÃƒÂºtlimo, vemos otra vez los métodos estáticos y el uso de otros espacios de nombres. Para que este ejemplo funcione hay que comentar el método Main de los códigos anteriores.
 <pre>
 /**
 * Estatico.cs
 * Vemos el uso de una clase que se usa directamente, sin necesidad
 * de crear instancias, como Console.
-* Para conseguirlo se usan mÃƒÂ©todos static
+* Para conseguirlo se usan métodos static
 * De paso vemos como invocar el namespace de las calculadoras
 * Para compilar: csc Estatico.cs ParametrosVariables.cs, para ejecutar: Estatico.exe
 */
 
 using System;
-// Podemos  incluir otra librerÃƒÂ­a con using, pero si sus clases
-// tienen funciones  Main no nos dejarÃƒÂ¡
+// Podemos  incluir otra librería con using, pero si sus clases
+// tienen funciones  Main no nos dejará
 using Calculadoras;
 
 
 public class Estatico
 {
-	// AquÃƒÂ­ vemos una Ã‚Â´mÃƒÂ©todo estatico que para usarse no
+	// Aquí vemos una Ã‚Â´método estatico que para usarse no
 	// precisa que se instancie un objeto
 	public static void saluda()
 	{
@@ -190,14 +190,14 @@ public class Estatico
 	{
 		SuperCalculadora sCalculadora = new SuperCalculadora("Desde Estatico");
 
-		// Invocamos el mÃƒÂ©todo que nos ofrece SuperCalculadora
+		// Invocamos el método que nos ofrece SuperCalculadora
 		return sCalculadora.sumar(valores);
 	}
 
 	// Clase principal
 	public static void Main ()
 	{
-		// Invocamos el mÃƒÂ©todo directamente
+		// Invocamos el método directamente
 		Estatico.saluda();
 
 		System.Console.WriteLine("Si sumamos sale {0}", Estatico.sumar(15,69,33));

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Parsear XML con PHP" 
-date: 2007-02-06 10:53:00 
+title: "Parsear XML con PHP"
+date: 2007-02-06 10:53:00
 categories: coding
 ---
 Este es un ejemplo muy simple para parsear ficheros XML con PHP usando <b>libexpat</b>, es decir<br>
@@ -13,7 +13,7 @@ El modelo de parseo es tipo SAX, algo asi como un recorrido del fichero orientad
 <br>
 El mecanismo consiste en crear una clase parseadora con funciones handler para esos eventos.
 <br><br>
-Veamos el cÃƒÂ³digo:
+Veamos el código:
 
 <pre>
 &lt;?php
@@ -33,8 +33,8 @@ Veamos el cÃƒÂ³digo:
 //  7. xml_get_current_line_number(parser): linea actual de trabajo
 //  8. xml_parser_free(parser) : liberamos el parser
 
-// Hay mas funciones, ver en el manual oficial "Funciones de intÃƒÂ©rprete XML"
-// TambiÃƒÂ©n hay otras librerÃƒÂ­as, por ejemplo para cargar XML con DOM
+// Hay mas funciones, ver en el manual oficial "Funciones de intérprete XML"
+// También hay otras librerías, por ejemplo para cargar XML con DOM
 
 
 // Bien, para el parser lo primero es crear nuestra clase
@@ -45,18 +45,18 @@ class MiParserXML {
    var $ficheroxml;
    var $datos;
 
-	// Constructora  
+	// Constructora
    function MiParserXML($fichero)
    {
        $this-&gt;ficheroxml = $fichero;
-   
-   	// creamos el parser    
+
+   	// creamos el parser
       $this-&gt;parser = xml_parser_create();
 
 		// Iniciamos...
 		$this-&gt;inicializar();
     }
-   
+
    // Inicializamos valores y funciones
    function inicializar() {
      // Establecemos el objeto parseador: this, o sea esta clase
@@ -64,9 +64,9 @@ class MiParserXML {
      // Establecemos los handlers para elementos y contenido
      xml_set_element_handler($this-&gt;parser, 'handlerInicial', 'handlerFinal');
      xml_set_character_data_handler($this-&gt;parser, 'handlerDatos');
-     
+
    }
-  
+
    function parseame() {
 
 		// Abrimos el fichero XML en modo lectura
@@ -90,7 +90,7 @@ class MiParserXML {
 
        return true;
    }
-  
+
 	/**
 	* handlerDatos
 	* Esta funcion se invoca automaticamente al encontrar una etiqueta
@@ -98,9 +98,9 @@ class MiParserXML {
    function handlerInicial($parser, $nombre, $atributos) {
        echo "Iniciando elemento: " . $nombre . "&lt;br&gt;";
 			foreach ($atributos as $clave =&gt; $valor) {
-				echo "&nbsp;&nbsp;atributos: " . $clave . ": " . $valor . "&lt;br&gt;";		
+				echo "&nbsp;&nbsp;atributos: " . $clave . ": " . $valor . "&lt;br&gt;";
 			}
-       
+
    }
 
 	/**
@@ -115,7 +115,7 @@ class MiParserXML {
 	        echo "&nbsp;Dato: " . $dato . "&lt;br&gt;";
        }
    }
-   
+
       /**
 	* handlerFinal
 	* Esta funcion se invoca automaticamente al llegar al
@@ -136,7 +136,7 @@ $miparser-&gt;parseame();
 </pre>
 
 <br>
-Y este podrÃƒÂ­a ser un fichero XML de ejemplo:
+Y este podría ser un fichero XML de ejemplo:
 <pre>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;libro&gt;
@@ -148,4 +148,4 @@ Y este podrÃƒÂ­a ser un fichero XML de ejemplo:
 &lt;/libro&gt;
 </pre>
 
-Como se puede ver el parser no hace mas que recorrer el fichero. <br>Para casos en los que ya sabemos las etiquetas que esperamos,<br> por ejemplo un rss es mÃƒÂ¡s que suficiente.
+Como se puede ver el parser no hace mas que recorrer el fichero. <br>Para casos en los que ya sabemos las etiquetas que esperamos,<br> por ejemplo un rss es más que suficiente.

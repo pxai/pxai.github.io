@@ -4,7 +4,7 @@ title: "C# día 07: estructuras"
 date: 2007-06-06 13:52:00
 categories: coding
 ---
-Vamos a ver algunas estructuras bÃƒÂ¡sicas de c#. Hay alguna cosa curiosa en la forma de definir los arrays y las propiedades de las estructuras.
+Vamos a ver algunas estructuras básicas de c#. Hay alguna cosa curiosa en la forma de definir los arrays y las propiedades de las estructuras.
 Veamos la struct:
 <pre>
 /**
@@ -28,8 +28,8 @@ public struct Casa
 	public int fechaConstruccion;
 &#125;
 
-// AquÃƒÂ­ vemos una estructura con su constructor, sus mÃƒÂ©todos, etc..
-// pero OJO no puede tener mÃƒÂ©todos destructores
+// Aquí vemos una estructura con su constructor, sus métodos, etc..
+// pero OJO no puede tener métodos destructores
 struct Manzana
 &#123
 	public string nombre;
@@ -45,7 +45,7 @@ struct Manzana
 		casa.fechaConstruccion = 1900;
 	&#125;
 
-	// Un mÃƒÂ©todo para aumentar el numero de pisos
+	// Un método para aumentar el numero de pisos
 	// de una manzana
 	public void aumenta(int pisos)
 	&#123
@@ -64,10 +64,10 @@ public class Ciudad
 		Casa singular = new Casa();
 
 		Casa particular; // Esta la usamos sin instanciar
-		Manzana manzanaCara = new Manzana("La mÃƒÂ¡s cara de todas");
+		Manzana manzanaCara = new Manzana("La más cara de todas");
 
 		singular.pisos = 5;
-		singular.calle = "Gran VÃƒÂ­a";
+		singular.calle = "Gran Vía";
 		singular.fechaConstruccion = 1989;
 
 		System.Console.WriteLine("Una casa de &#1230&#125; pisos en &#1231&#125;", singular.pisos, singular.calle);
@@ -100,7 +100,7 @@ public enum Dias
 	Miercoles,    // = 2,...
 	Jueves,
 	Viernes,
-	SÃƒÂ¡bado,
+	Sábado,
 	Domingo
 &#125;
 
@@ -132,10 +132,10 @@ public class Usalas
 		// La estructura se puede instanciar o no
 		Dias diaSemana;
 
-		// Establecemos el dÃƒÂ­a de la semana, hay que hacer Cast
+		// Establecemos el día de la semana, hay que hacer Cast
 		diaSemana = (Dias) 3;
 
-		System.Console.WriteLine("El dÃƒÂ­a de la semana es &#1230&#125; o &#1231&#125;", diaSemana, (int)diaSemana);
+		System.Console.WriteLine("El día de la semana es &#1230&#125; o &#1231&#125;", diaSemana, (int)diaSemana);
 
 		diaSemana = (Dias) 6;
 
@@ -161,7 +161,7 @@ public class Usalas
 				break;
 		&#125;
 
-		System.Console.WriteLine("El dÃƒÂ­a de la semana es &#1230&#125;", diaSemana);
+		System.Console.WriteLine("El día de la semana es &#1230&#125;", diaSemana);
 
 	&#125;
 &#125;
@@ -231,12 +231,12 @@ public class Equipo
 		// con un [,]
 		string[,] ligaDeFutbol = new string[2,5];
 		ligaDeFutbol[0,0] = "Ricardo";
-		ligaDeFutbol[0,1] = "RaÃƒÂºl GarcÃƒÂ­a";
+		ligaDeFutbol[0,1] = "RaÃƒÂºl García";
 		ligaDeFutbol[0,2] = "Milosevic";
 		ligaDeFutbol[1,0] = "Ronaldinho";
 		ligaDeFutbol[1,1] = "Eto'o";
 
-		// DefiniciÃƒÂ³n con inicializaciÃƒÂ³n
+		// Definición con inicialización
 		int[,] valores = new int[,]&#123&#1232,7,3&#125;,&#1232,5,3&#125;&#125;;
 
 		// Arrays anidados, permiten meter arrays dentro de otros
