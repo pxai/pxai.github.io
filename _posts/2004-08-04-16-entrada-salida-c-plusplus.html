@@ -62,7 +62,7 @@ cout &lt;&lt; "El texto: " &lt;&lt; nombre_apellidos  &lt;&lt; " y el entero: " 
 // y se podria reescribir asi: (cin &gt;&gt; nombre_apellidos) &gt;&gt; entero;
 
 
-// cin.get(string,tamaÃƒÂ±o) para recoger string completos
+// cin.get(string,tamaño) para recoger string completos
 cout &lt;&lt; " Mete un string largo con espacios. " &lt;&lt; endl;
 cin.getline(linea,80);
 cout &lt;&lt; "resultado: " &lt;&lt; linea &lt;&lt; endl;
@@ -279,7 +279,7 @@ for (i=0; i&lt;argc; i++) {
 
 Fichero fichero = Fichero("prueba.txt",APPEND);
 
-cout &lt;&lt; "escribe algo par aÃƒÂ±adir al fichero: ";
+cout &lt;&lt; "escribe algo par añadir al fichero: ";
 cin.getline(linea,255);
 cout &lt;&lt; "has puesto: " &lt;&lt; linea &lt;&lt; endl;
 fichero.escribir(linea);

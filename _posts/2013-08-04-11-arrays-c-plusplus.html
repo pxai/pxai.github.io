@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "11. Arrays c++" 
-date: 2013-08-04 12:13:00 
+title: "11. Arrays c++"
+date: 2013-08-04 12:13:00
 categories: coding
 ---
 <b>Arrays</b>
@@ -45,10 +45,10 @@ long arrayLongs[5] = { 77, 33, 15, 23, 101 };
 // para sacar el valor real:
 int tamano_real = sizeof(arrayLongs)/sizeof(arrayLongs[0]);
 for ( i = 0 ; i < tamano_real ; i++ ) {
-    cout << "valor de componente " << i << ": " << arrayLongs[i] << endl;        
+    cout << "valor de componente " << i << ": " << arrayLongs[i] << endl;
 }
 
-// Lo mismo, pero nos es necesario poner el tamaÃƒÂ±o si ya lo especificamos
+// Lo mismo, pero nos es necesario poner el tamaño si ya lo especificamos
 // al iniciar el array
 char arrayChars[] = { 'A', 's', 'i', 'm', 'o', 'v'};
 // nota: un array de chars = es un string
@@ -59,7 +59,7 @@ cout << "Mostrando array de caracteres." << endl;
 tamano_real = sizeof(arrayChars)/sizeof(arrayChars[0]);
 
 for ( i = 0 ; i < tamano_real ; i++ ) {
-    cout << "valor de componente " << i << ": " << arrayChars[i] << endl;        
+    cout << "valor de componente " << i << ": " << arrayChars[i] << endl;
 }
 
 
@@ -96,7 +96,7 @@ return 0;
 
 <b>Arrays de objetos</b>
 <br>
-Vamos a ver un ejemplo de arrays de objetos. Se crea el objeto Robot y con el 
+Vamos a ver un ejemplo de arrays de objetos. Se crea el objeto Robot y con el
 se formara un ejercito de robots.
 <pre>
 /**
@@ -137,24 +137,24 @@ Esta es la implementacion.
         // Destructor
         Robot::~Robot() {
         }
-        
+
         // Constructor copia
         Robot::Robot(const Robot & robotOrigen) {
                 nombre = new char;
                 nombre = robotOrigen.getNombre();
                 cout &lt;&lt; "Copia creada! Bzzzz. Me llamo: "&lt;&lt; nombre &lt;&lt;endl;
         }
-        
+
         // Funcion para que el robot hable
         void Robot::hablar(char *texto) {
                 cout &lt;&lt; nombre &lt;&lt; " dice: " &lt;&lt; texto &lt;&lt; endl;
         }
-        
+
         // Funcion para que el robot evoluciones
         void Robot::evolucionar() {
                 hablar("He sacado nuevas conclusiones. Debeis morir. ");
         }
-        
+
         // El robot mata
         void Robot::matar(Robot victima) {
                 hablar("Muere!! mwahahahahaaa");
@@ -180,7 +180,7 @@ Robot *rarito;
 tam = sizeof(ejercitoDelMal)/sizeof(ejercitoDelMal[0]);
 
 // Con un for vamos haciendo copias
-for ( i = 0; i < tam; i++) { 
+for ( i = 0; i < tam; i++) {
     ejercitoDelMal[i] = Robot(primerNestor);
 }
 // Uno de ellos va a evolucionar

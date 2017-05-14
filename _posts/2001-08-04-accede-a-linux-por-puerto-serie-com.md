@@ -31,7 +31,7 @@ Esto puede variar, quiza en lugar de agetty tengamos otro programa por el estilo
 El resto de s2, s3, s4,.. s8 lo dejamos tal 
 cual. 
 
-En /etc/lilo.conf  aÃƒÂ±adimos: 
+En /etc/lilo.conf  añadimos: 
 Código: 
 serial=1,9660n8 
 append="console=ttyS0,9660" 
@@ -44,7 +44,7 @@ Por
 ultimo: 
 
 /etc/securetty es donde decimos desde 
-que terminales puede acceder root de forma directa. Hay que aÃƒÂ±adir el terminal de puerto serie. Si no podriamos accceder con un usuario corriente y luego hacer sudo. 
+que terminales puede acceder root de forma directa. Hay que añadir el terminal de puerto serie. Si no podriamos accceder con un usuario corriente y luego hacer sudo. 
 Código: 
 
 /dev/ttyS0 

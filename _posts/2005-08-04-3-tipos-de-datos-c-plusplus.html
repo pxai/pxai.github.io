@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "3. Tipos de datos c++" 
-date: 2005-08-04 10:25:00 
+title: "3. Tipos de datos c++"
+date: 2005-08-04 10:25:00
 categories: coding
 ---
 Los tipos de datos de c++ no varian mucho respecto a c y son bastante evidentes, tal y como se puede apreciar en este codigo.
@@ -9,8 +9,8 @@ Los tipos de datos de c++ no varian mucho respecto a c y son bastante evidentes,
 <pre>
 /**
 * Tipos.cpp
-* Programa para sacar el tamaÃƒÂ±o de cada tipo de datos
-* Pello Xabier Altadill Izura 
+* Programa para sacar el tamaño de cada tipo de datos
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Tipos.cpp -o Tipos
 */
@@ -19,18 +19,18 @@ Los tipos de datos de c++ no varian mucho respecto a c y son bastante evidentes,
 
 int main () {
 
-	// Sacamos el tamaÃƒÂ±o de cada tipo	
-     cout << "El tamaÃƒÂ±o del int es:		"    << sizeof(int)    << " bytes.
+	// Sacamos el tamaño de cada tipo
+     cout << "El tamaño del int es:		"    << sizeof(int)    << " bytes.
 ";
-     cout << "El tamaÃƒÂ±o del short es:	" << sizeof(short)  << " bytes.
+     cout << "El tamaño del short es:	" << sizeof(short)  << " bytes.
 ";
-     cout << "El tamaÃƒÂ±o del long es:	"  << sizeof(long)   << " bytes.
+     cout << "El tamaño del long es:	"  << sizeof(long)   << " bytes.
 ";
-     cout << "El tamaÃƒÂ±o del char es:		"    << sizeof(char)   << " bytes.
+     cout << "El tamaño del char es:		"    << sizeof(char)   << " bytes.
 ";
-     cout << "El tamaÃƒÂ±o del float es:		"   << sizeof(float)  << " bytes.
+     cout << "El tamaño del float es:		"   << sizeof(float)  << " bytes.
 ";
-    cout << "El tamaÃƒÂ±o del double es:	"    << sizeof(double) << "  bytes.
+    cout << "El tamaño del double es:	"    << sizeof(double) << "  bytes.
 ";
 
 
@@ -48,7 +48,7 @@ Tambien se pueden definir constantes:
 /**
 * Constante.cpp
 * Programa en el que definimos un valor constante
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Constante.cpp -o Constante
 */
@@ -81,7 +81,7 @@ Echemos ahora un vistazo a los caracteres con este codigo que recorre los 200y p
 /**
 * Caracteres.cpp
 * Programa para sacar cada caracter del sistema
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Caracteres.cpp -o Caracteres
 */
@@ -96,7 +96,7 @@ int main () {
 
 	// Limpiamos pantalla
 	cout << "Limpiamos?";
-	
+
 	// Atencion!! hasta que no pongamos algo no lograremos
 	// que el programa siga adelante, aunque sea INTRO
 	cin >> y;
@@ -128,7 +128,7 @@ Si amigos! tenemos la instruccion <b>typedef</b> para que podamos definir tipos 
 * y en especial el uso de typedef, que sirve para no escribir mucho
 * o para definir nuestros propios tipos
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Typedef.cpp -o Typedef
 */
@@ -140,16 +140,16 @@ typedef unsigned short int USHORT;
 
 int main () {
 	// Vamos a definir variables
-	
+
 	// Un entero de 2 bytes
 	short int x = 34;
 
 	//Aqui va el que viene de typedef
 	USHORT y = 4;
-	
+
 	// Usando notacion HUNGARA
 	int i_contador = 45;
-	float f_contador = 0.0;	
+	float f_contador = 0.0;
 
 	//Usando CAMEL-notation
 	float variableQueMola = 4.5;
@@ -174,7 +174,7 @@ Tambien disponemos de las clasicas enumeraciones.
 * Programa para aprender a usar los tipos de dato llamados enum
 * que son enumeraciones de datos
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Enumeracion.cpp -o Enumeracion
 */
@@ -211,8 +211,8 @@ int main () {
 
 	//Aqui va el que viene de typedef
 	USHORT y = 4;
-	
-	float f_contador = 0.0;	
+
+	float f_contador = 0.0;
 
 	//Usando CAMEL-notation
 	float variableQueMola = 4.5;

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "10. Funciones avanzadas c++" 
-date: 2012-08-04 12:42:00 
+title: "10. Funciones avanzadas c++"
+date: 2012-08-04 12:42:00
 categories: coding
 ---
 <b>Sobrecarga y valores por defecto</b>
@@ -14,8 +14,8 @@ Veamos el ejemplo del coche un poco mas desarrollado.
 /**
 * Coche.hpp
 * Clase que representa un coche
-* 
-* Pello Xabier Altadill Izura 
+*
+* Pello Xabier Altadill Izura
 *
 */
 #include &lt;iostream.h&gt;
@@ -51,8 +51,8 @@ errores que se pueden cometer.
 /**
 * Coche.cpp
 * Fichero que implementa la clase coche
-* 
-* Pello Xabier Altadill Izura 
+*
+* Pello Xabier Altadill Izura
 *
 */
 include "Coche.hpp";
@@ -89,14 +89,14 @@ void Coche::acelera() {}
 // Metodo para que el coche avance. Esta definico con un valor
 // por defecto (5) por tanto podria invocarse SIN parametro alguno
 void Coche::avanza(int metros) {
-    cout << this->marca << " ha avanzado " << metros << metros << endl; 
+    cout << this->marca << " ha avanzado " << metros << metros << endl;
 }
 
 // Metodo para que el coche cambie de marcha
 void Coche::cambiaMarcha() {
 }
 
-// Metodo -sobrecargado- para que el coche cambie de marcha 
+// Metodo -sobrecargado- para que el coche cambie de marcha
 void Coche::cambiaMarcha(marcha mar) {
 }
 
@@ -153,10 +153,10 @@ Coche::Coche():
    {
    };
 </pre>
-   
+
 <b>Copy constructor</b>
 <br>
-Este es un constructor que se puede aÃƒÂ±adir a nuestras clases y que sirve para hacer una copia de un objeto 
+Este es un constructor que se puede añadir a nuestras clases y que sirve para hacer una copia de un objeto
 de esa clase. Existe uno por defecto pero es recomendable preocuparse en implementarlo nosotros mismos ya que
 pueden producirse errores con atributos que son punteros.
 <br>Veamos el copy de la clase Perro.
@@ -174,7 +174,7 @@ pueden producirse errores con atributos que son punteros.
   class Perro {
   public:
    Perro (int initialAge);
-    // constructor COPY 
+    // constructor COPY
    Perro (const Perro &);
    ~Perro();
    // metodos YA implementados
@@ -207,7 +207,7 @@ Y su implementacion
 * Compilado: g++ Perro.cpp -o Perro
 */
 
-#include "Perro.hpp" 
+#include "Perro.hpp"
 
 //constructor
 Perro::Perro(int initialAge)   {
@@ -232,7 +232,7 @@ Perro::Perro(const Perro & perroOrigen) {
 Perro::~Perro() {
 	cout << " objeto destruido." << endl;
 }
- 
+
   /**
   * La funcion principal, crea un perro y le hace ladrar
   */
@@ -251,14 +251,14 @@ Perro::~Perro() {
 
      Laika.SetRaza("Sovietica");
      Canelo.Ladra();
-     
+
      cout << "Canelo es un perro cuya edad es: " ;
-     cout << Canelo.GetAge() << " aÃƒÂ±os
+     cout << Canelo.GetAge() << " años
 ";
      Canelo.Ladra();
      Canelo.SetAge(7);
      cout << "Ahora Canelo es " ;
-     cout << Canelo.GetAge() << " aÃƒÂ±os
+     cout << Canelo.GetAge() << " años
 ";
 
      cout << "Laika es de raza " ;
@@ -301,7 +301,7 @@ public:
     void operator-- (); // operador PREFIJO --contador
     void operator++(int); // operador SUFIJO (postfix) contador++
     void operator--(int); // operador SUFIJO (postfix) contador--
-    Contador operator+(const Contador &); // operador + 
+    Contador operator+(const Contador &); // operador +
     bool esCero() { return (valor == 0);} // inline
 };
 </pre>
@@ -321,49 +321,49 @@ Y su implementacion
         valor = 0;
         cout << "Contador creado!" << endl;
     }
-    
+
     // Constructor con valor
     Contador::Contador(int valor) {
         this->valor = valor;
         cout << "Contador creado con valor inicial: " << valor << endl;
     }
-    
+
     Contador::~Contador() {
         cout << "Contador destruido!" << endl;
     }
-    
+
     Contador::Contador(const Contador & original) {
         valor = original.valor;
     }
-    
+
     // Sobrecarga de operador unario ++ PREFIJO ++operador
-    void Contador::operator++ () { 
+    void Contador::operator++ () {
         cout << "incrementando valor de contador : " << valor << endl;
         ++valor;
     }
-    
+
     // Sobrecarga de operador unario -- PREFIJO --operador
-    void Contador::operator-- () { 
+    void Contador::operator-- () {
         cout << "decrementando valor de contador : " << valor << endl;
         --valor;
     }
-    
+
     // Sobrecarga de operador unario ++ SUFIJO operador++
-    void Contador::operator++ (int) { 
+    void Contador::operator++ (int) {
         cout << "incrementando valor de contador : " << valor << endl;
         valor++;
     }
-    
+
     // Sobrecarga de operador unario -- SUFIJO operador--
-    void Contador::operator-- (int) { 
+    void Contador::operator-- (int) {
         cout << "decrementando valor de contador : " << valor << endl;
         valor--;
     }
-    
+
     // operador +
     Contador Contador::operator+(const Contador & tmp) {
         return Contador(valor + tmp.getContador());
-    }  
+    }
 
 int main () {
 

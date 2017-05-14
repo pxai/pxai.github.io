@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "12. Herencia c++" 
-date: 2014-08-04 13:50:00 
+title: "12. Herencia c++"
+date: 2014-08-04 13:50:00
 categories: coding
 ---
 <b>La herencia</b>
@@ -41,12 +41,12 @@ class Vehiculo {
         Vehiculo(const Vehiculo &);
         void arrancar();
         void mover(int metros);
-        
+
         // metodo tipo virtual, util cuando definamos PUNTEROS Y REFERENCIAS a vehiculo
         virtual void claxon() const {
                 cout &lt;&lt; "&lt;clase vehiculo&gt; Mec-meeec!!  Que? meeec! Que de que? meec!" &lt;&lt; endl;
         }
-        
+
         char *getMarca() const  {return this->marca;}
         tipo_combustible getCombustible() const {return this->combustible;}
         int getCilindrada() const {return this->cilindrada;}
@@ -88,21 +88,21 @@ Y su implementacion...
         cout &lt;&lt; "&lt;clase vehiculo&gt; combustible: " &lt;&lt; combustible &lt;&lt; endl;
         cout &lt;&lt; "&lt;clase vehiculo&gt; marca: " &lt;&lt; marca &lt;&lt; endl;
     }
-    
-    // Destructor 
+
+    // Destructor
     Vehiculo::~Vehiculo() {
         cout &lt;&lt; "&lt;clase vehiculo&gt; Vehiculo destruido" &lt;&lt; endl;
     }
-    
+
     // Constructor copia de vehiculo
     Vehiculo::Vehiculo(const Vehiculo & vehiculoOrigen) {
     }
-    
+
     // Arrancamos el vehiculo
     void Vehiculo::arrancar() {
         cout &lt;&lt; "&lt;clase vehiculo&gt; arrancando vehiculo. Brruum!!" &lt;&lt; endl;
     }
-    
+
     // Movemos el vehiculo unos metros
     void Vehiculo::mover(int metros) {
         cout &lt;&lt; "&lt;clase vehiculo&gt; moviendo vehiculo " &lt;&lt; metros &lt;&lt; " metros" &lt;&lt; endl;
@@ -113,7 +113,7 @@ El <b>coche</b>, herencia de Vehiculo
 <pre>
 /**
 * Coche.hpp
-* Clase que define el objeto Coche, hijo de vehiculo, seÃƒÂ±or del capitalismo
+* Clase que define el objeto Coche, hijo de vehiculo, señor del capitalismo
 *
 * Pello Xabier Altadill Izura
 *
@@ -124,9 +124,9 @@ class Coche : public Vehiculo {
     protected:
         int caballos;
         char *motor;
-        
+
     public:
-        
+
         // Atencion: constructor pasando parametros por defecto estilo guru
         // pero invocando a su clase padre
         Coche():Vehiculo("Audi") {
@@ -138,17 +138,17 @@ class Coche : public Vehiculo {
 
         // Constructor
         Coche(int cilindrada, tipo_combustible combustible, char *marca);
-        
+
         // Constructor
         Coche(int caballos, char *motor) {
              this->caballos = caballos;
              this->motor = motor;
               cout &lt;&lt; "&lt;clase coche&gt; Coche construido con caballos y motor" &lt;&lt; endl;
         }
-        
+
         // Destructor
         ~Coche();
-        
+
         // Constructor copia
         Coche(const Coche &);
 
@@ -160,7 +160,7 @@ class Coche : public Vehiculo {
 
         // getter/setter
         int getCaballos() const {return this->caballos;} // inline
-        char *getMotor() const {return this->motor;}      // inline 
+        char *getMotor() const {return this->motor;}      // inline
 };
 </pre>
 Y su implementacion
@@ -175,7 +175,7 @@ Y su implementacion
 *               g++ Coche.cpp Vehiculo.o -o Coche
 */
 #include "Coche.hpp"
-        
+
         // Constructor de coche que sobreescribe
         Coche::Coche(char *marca) {
                 cout &lt;&lt; "&lt;clase coche&gt; Coche construido con marca: " &lt;&lt; marca &lt;&lt; endl;
@@ -185,19 +185,19 @@ Y su implementacion
         Coche::Coche(int cilindrada, tipo_combustible combustible, char *marca) {
                 cout &lt;&lt; "&lt;clase coche&gt; Coche construido con parametros" &lt;&lt; endl;
         }
-        
-        // Destructor de coche        
+
+        // Destructor de coche
         Coche::~Coche() {
                 cout &lt;&lt; "&lt;clase coche&gt; Coche destruido" &lt;&lt; endl;
         }
-        
-        // Constructor copia de Coche       
+
+        // Constructor copia de Coche
         Coche::Coche(const Coche & cocheOriginal) {
                 marca = new char;
                 marca = cocheOriginal.getMarca();
                 cout &lt;&lt; "&lt;clase coche&gt; Copia de coche" &lt;&lt; endl;
         }
-        
+
         // metodo sobreescrito
         void Coche::arrancar () {
                 cout &lt;&lt; "&lt;clase coche&gt; BOOM! pam! pam! pret pret pret... pam! pret pret" &lt;&lt; endl;
@@ -206,7 +206,7 @@ Y su implementacion
         // metodo que sobreescribe al virtual
         void Coche::claxon() const {
                 cout &lt;&lt; "&lt;clase coche&gt; MOOOOOC!! Mecagon tus muelas MOC-MOOOC!!" &lt;&lt; endl;
-        }        
+        }
 
 // Funcion principal
 int main () {

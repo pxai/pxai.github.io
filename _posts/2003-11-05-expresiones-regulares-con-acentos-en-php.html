@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Expresiones regulares con acentos en php" 
-date: 2003-11-05 08:50:00 
+title: "Expresiones regulares con acentos en php"
+date: 2003-11-05 08:50:00
 categories: coding
 ---
 <p>A estas alturas de la existencia de las aplicaciones web sabido es que la validacion de datos es un requisito fundamental para que un usuario malicioso no nos la meta doblada.
@@ -12,12 +12,12 @@ Practicamente todos los lenguajes disponen de un sistema de expresiones regulare
 La validacion en el lado cliente SIEMPRE se la puede saltar un usuario malicioso, aunque puede ser util para no marear al usuario bienintencionado.</p>
 
 <p>
-Supongamos que en un campo de formulario el usuario debe meter su nombre y apellidos. Ã‚Â¿Con que expresion regular podriamos validar ese campo? Es sencillo: permitiendo SOLO caracteres y espacios en blanco [a-zA-Zs]. Se puede ir mas alla y meter guiones. Pero aqui llega el problema, en castellano tenemos la ÃƒÂ±, las acentuaciones, etc.. entonces que pasa con [a-z] ??
+Supongamos que en un campo de formulario el usuario debe meter su nombre y apellidos. Ã‚Â¿Con que expresion regular podriamos validar ese campo? Es sencillo: permitiendo SOLO caracteres y espacios en blanco [a-zA-Zs]. Se puede ir mas alla y meter guiones. Pero aqui llega el problema, en castellano tenemos la ñ, las acentuaciones, etc.. entonces que pasa con [a-z] ??
 no sirve. Podemos usar el valor w (word) pero puede que tampoco funcione.
 </p>
 
 <p>Ã‚Â¿Por que?</p>
-<p>En el momento de usar la expresion regular PHP no sabe que tiene que usar las locales espaÃƒÂ±olas.
+<p>En el momento de usar la expresion regular PHP no sabe que tiene que usar las locales españolas.
 En fin, para poder validar campos con acentuaciones o en definitiva textos en castellano necesitamos tener las locales instaladas e invocarlas en php.</p>
 
 <p>Un solucion para Debian</p>

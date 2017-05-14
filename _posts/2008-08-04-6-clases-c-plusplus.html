@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "6 Clases c++" 
-date: 2008-08-04 21:50:00 
+title: "6 Clases c++"
+date: 2008-08-04 21:50:00
 categories: coding
 ---
 Tu primera clase c++
@@ -50,7 +50,7 @@ Y este seria el fichero de implementacion (se puede tener todo en un unico fiche
 * NO HACE NADA CONCRETO solo es una muestra
 *
 * Pello Xabier Altadill Izura
-* 
+*
 * Compilar usando: g++ -c Coche.cpp
 */
 
@@ -161,8 +161,8 @@ Y esta seria la implementacion:
 	}
 
 	/**
-	* Destructor 
-	*/	
+	* Destructor
+	*/
 	Garaje::~Garaje(){}
 
 	/**
@@ -190,7 +190,7 @@ Y esta seria la implementacion:
 		return false;
 	}
 
-	
+
 /**
 * y aqui la funcion main para hacer nuestras pruebillas
 */
@@ -214,7 +214,7 @@ int main () {
 <b>Funciones o metodos Setter/Getter</b>
 Por mania o por costumbre o porque asi lo establecen los puristas mas talibanes de la POO
 casi nunca se deja acceder directamente a los atributos de una clase (se definen como private)
-y para acceder a ellos se implementan funciones set/get. Las herramientas de desarrollo suelen incluir la opcion de generar ese codigo de forma automatizada. 
+y para acceder a ellos se implementan funciones set/get. Las herramientas de desarrollo suelen incluir la opcion de generar ese codigo de forma automatizada.
 <br>
 Sin la menor intencion de alimentar la ya tradicional Yihad entre desarrolladores, mostremos un ejemplo y digamos de paso que no esta demas definir estas funciones como inline; cumplimos como profesionales pero no perdemos eficacia.
 <br>
@@ -242,7 +242,7 @@ El objeto PERRO
  int itsAge;
  };
  </pre>
- 
+
  Y su implementacion
 <pre>
 /**
@@ -254,7 +254,7 @@ El objeto PERRO
 * Compilado: g++ Perro.cpp -o Perro
 */
 
-#include "Perro.hpp"  
+#include "Perro.hpp"
 
 Perro::Perro(int initialAge)   //constructor
  {
@@ -275,12 +275,12 @@ Perro::Perro(int initialAge)   //constructor
      Perro Canelo(5);
      Canelo.Ladra();
      cout << "Canelo es un perro cuya edad es: " ;
-     cout << Canelo.GetAge() << " aÃƒÂ±os
+     cout << Canelo.GetAge() << " años
 ";
      Canelo.Ladra();
      Canelo.SetAge(7);
      cout << "Ahora Canelo es " ;
-     cout << Canelo.GetAge() << " aÃƒÂ±os
+     cout << Canelo.GetAge() << " años
 ";
       return 0;
  }

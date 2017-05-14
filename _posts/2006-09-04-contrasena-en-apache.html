@@ -8,8 +8,8 @@ categories: coding
 Tipica tonteria que siempre se olvida.<br>
 
 Para proteger un directorio en apache hay distintas formas y miles de opciones.
-Si simplemente queremos que un directorio este protegido por usuario y contraseÃƒÂ±a
-basta con crear un fichero de usuarios y aÃƒÂ±adir una directiva en apache.<br>
+Si simplemente queremos que un directorio este protegido por usuario y contraseña
+basta con crear un fichero de usuarios y añadir una directiva en apache.<br>
 Hay 345820982 opciones, el tema de allow, deny, ... pero esto es lo simple.<br>
 
 <pre>
@@ -20,7 +20,7 @@ New password: ******
 Retype password: ******
 
 
-Si el fichero ya esta creado y queremos aÃƒÂ±adir un nuevo usuario y modificar un password
+Si el fichero ya esta creado y queremos añadir un nuevo usuario y modificar un password
 ponemos:
 root@linuz# htpasswd ficheropass usuario
 
@@ -29,7 +29,7 @@ es crucial que ese fichero tenga permisos de lectura por parte del usuario apach
 root@linuz# chmod 755 ficheropass
 root@linuz# chown root:apache ficheropass
 
-Y ahora aÃƒÂ±adimos unas lineas en la configuracion del virtualhost:
+Y ahora añadimos unas lineas en la configuracion del virtualhost:
 &lt;VirtualHost 103.95.215.53&gt;
 
 DocumentRoot /home/httpd/html/www.miweb.com

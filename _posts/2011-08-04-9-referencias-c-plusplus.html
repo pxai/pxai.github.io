@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "9. &Referencias c++" 
-date: 2011-08-04 13:24:00 
+title: "9. &Referencias c++"
+date: 2011-08-04 13:24:00
 categories: coding
 ---
 
@@ -15,8 +15,8 @@ Veamos un ejemplo simple:
 /**
 * Referencias.cpp
 * Programa que muestra el uso de referencias
-* 
-* Pello Xabier Altadill Izura 
+*
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Referencias.cpp -o Referencias
 */
@@ -28,20 +28,20 @@ int main() {
 	// Definimos un dato y su referencia
 	int numero;
 	int &referenciaNumero = numero; // Ahi se crea la referencia
-	
+
 	cout << "Vamos a ver que pasa si le asignamos un dato: " << endl;
 
 	numero = 31337;
-	
+
 	// Los dos mostraran el mismo valor
 	cout << "Valor de numero: " << numero << endl;
 	cout << "Valor de referenciaNumero: " << referenciaNumero << endl;
-	
+
 	// y a donde apuntan? AL MISMO SITIO
 	cout << "Posicion de numero: " << &numero << endl;
 	cout << "Posicion de referenciaNumero: " << &referenciaNumero << endl;
-	
-	cout << "Programa terminado 
+
+	cout << "Programa terminado
 " << endl;
 
         return 0;
@@ -57,13 +57,13 @@ Objeto &refObjeto = miObjeto;
 <br>
 Vamos a ver distintas formas de pasar referencias a una funcion.<br>
 Como en c, podemos pasar parametros por referencia y hacer que esos parametros contengan resultados
-de una funcion. 
+de una funcion.
 <pre>
 /**
 * ReferenciaFunciones.cpp
 * Programa que muestra el uso de referencias en las funciones
-* 
-* Pello Xabier Altadill Izura 
+*
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ ReferenciaFunciones.cpp -o ReferenciaFunciones
 */
@@ -80,7 +80,7 @@ int main() {
 
 	// Definimos un dato y su referencia
 	int a, b;
-	
+
 	cout << "Asignamos valores: " << endl;
 
 	a = 45;
@@ -90,13 +90,13 @@ int main() {
 	cout << "Hacemos intercambio con exchange(int *refa, int *refb): " << endl;
 	exchange(&a, &b);  // Con esta llamada invocamos la primera funcion!!
 	cout << "Valores: a=" << a << " b=" << b << endl;
-	
+
 
 	cout << "Hacemos intercambio con exchange(int &refa, int &refb): " << endl;
 	exchange(a, b);  // Con esta llamada invocamos la segunda funcion!!
 	cout << "Valores: a=" << a << " b=" << b << endl;
-	
-	cout << "Programa terminado 
+
+	cout << "Programa terminado
 " << endl;
 
         return 0;
@@ -107,7 +107,7 @@ void exchange (int *refa, int *refb) {
     int tmp;
     tmp = *refa;
     *refa = *refb;
-    *refa = tmp;    
+    *refa = tmp;
 }
 
 // 2Ã‚Âº funcion -sobrecargada- que intercambia dos valores
@@ -127,7 +127,7 @@ void exchange (int &refa, int &refb) {
 *
 * Clase que representa el objeto Gremlin.
 * Observese el 3Ã‚Âº metodo constructor
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 */
 
@@ -156,7 +156,7 @@ Y su implementacion:
 * Gremlin.cpp
 *
 * Clase que implementa el objeto Gremlin.
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 */
 
@@ -190,7 +190,7 @@ void dormir() {
 
 // El gremlin muerde
 void morder() {
- cout << "roaar ÃƒÂ±am ÃƒÂ±am" << endl; 
+ cout << "roaar ñam ñam" << endl;
 }
 
 // Definimos esta funcion aparte de la clase
@@ -211,16 +211,16 @@ int main () {
     // y lo movemos por la ciudad
     tbautista.correr();
     tbautista.morder();
-    
+
     // Mostramos su peso
     cout << "El gremlin pesa: " << tbautista.peso << endl;
-    
+
     // Le hacemos comer:
     comer(&tbautista);
-    
+
     // Mostramos su peso otra vez
     cout << "El gremlin pesa ahora: " << tbautista.peso << endl;
-    
+
     cout << "Finalizando programa
  " << endl;
     return 0;
@@ -230,7 +230,7 @@ La ventaja que logramos al pasar parametros por referencia es que ahorramos espa
 cada llamada a una funcion se hacen copias de los parametros. Esto tambien tiene una desventaja: si le pasamos
 a una funcion el ORIGINAL de un objeto (con una referencia) en lugar de una copia corremos el riesgo de que la
 funciona haga trizas nuestro objeto y perder el "original" (supongamos que la funcion esta hecha por terceros
-y no sabemos lo que hace). 
+y no sabemos lo que hace).
 <br>
 Que se puede hacer para salvaguardar nuestros objetos?
 <br>
@@ -244,7 +244,7 @@ los metodos constantes de la clase. SE cambia un poco la clase gremlin para most
 *
 * Clase que representa el objeto Gremlin.
 * Con un metodo definido como const!!
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 */
 
@@ -276,7 +276,7 @@ en la funcion comer() gracias al uso de punteros constantes.
 * Gremlin2.cpp
 *
 * Clase que implementa el objeto Gremlin.
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 */
 
@@ -310,7 +310,7 @@ void dormir() {
 
 // El gremlin muerde
 void morder() {
- cout << "roaar ÃƒÂ±am ÃƒÂ±am" << endl; 
+ cout << "roaar ñam ñam" << endl;
 }
 
 // FUNCION CONST!!!
@@ -325,7 +325,7 @@ void comer (const Gremlin const *g) {
     // Invocamos la mordedura para que coma??
 //    g->morder(); ERROR no podemos invocar una funcion NO CONSTANTE!!!
 // en cambio si podemos invocar getNombre
-    cout << "Nombre" << g->getNombre() << endl;    
+    cout << "Nombre" << g->getNombre() << endl;
 }
 
 // Funcion main
@@ -337,16 +337,16 @@ int main () {
     // y lo movemos por la ciudad
     tbautista.correr();
     tbautista.morder();
-    
+
     // Mostramos su peso
     cout << "El gremlin pesa: " << tbautista.peso << endl;
-    
+
     // Le hacemos comer:
     comer(&tbautista);
-    
+
     // Mostramos su peso otra vez
     cout << "El gremlin pesa ahora: " << tbautista.peso << endl;
-    
+
     cout << "Finalizando programa
  " << endl;
     return 0;
