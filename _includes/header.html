@@ -21,6 +21,12 @@
         </label>
 
         <div class="trigger">
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            GitHub
+          </a>
           {% for path in page_paths %}
             {% assign my_page = site.pages | where: "path", path | first %}
             {% if my_page.title %}
@@ -29,6 +35,7 @@
             </a>
             {% endif %}
           {% endfor %}
+
         </div>
       </nav>
     {% endif %}
