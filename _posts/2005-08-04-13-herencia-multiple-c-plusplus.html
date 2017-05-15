@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "13. Herencia multiple c++" 
-date: 2015-08-04 14:11:00 
+title: "13. Herencia multiple c++"
+date: 2005-08-04 14:11:00
 categories: coding
 ---
 <b>La herencia multiple</b>
@@ -26,7 +26,7 @@ Nota el codigo necesita revision y testeo
 /**
 * Habitante.hpp
 * Clase que define el objeto habitante
-* 
+*
 * Pello Xabier Altadill Izura
 *
 */
@@ -37,13 +37,13 @@ class Habitante {
     private:
         char *nombre;
         int edad;
-    public:    
+    public:
         Habitante();
         virtual ~Habitante();
         Habitante(const Habitante &);
-        
+
         virtual void dormir();
-        
+
         // setter/getter o accessors
         virtual char *getNombre() const { return this->nombre;} // inline
         virtual void setNombre(char *nombre) { this->nombre = nombre; } // inline
@@ -56,10 +56,10 @@ Y su implementacion
 /**
 * Habitante.cpp
 * Programa que implementa la clase habitante
-* 
+*
 * Pello Xabier Altadill Izura
 * Compilacion: g++ -c Habitante.cpp
-* 
+*
 */
 
 #include "Habitante.hpp"
@@ -68,18 +68,18 @@ Y su implementacion
         Habitante::Habitante() {
                 cout &lt;&lt; "-clase habitante- Habitante construido."&lt;&lt; endl;
         }
-        
+
         // Destructor
         Habitante::~Habitante() {
                 cout &lt;&lt; "-clase habitante- Habitante "&lt;&lt; this->getNombre() &lt;&lt; " destruido."&lt;&lt; endl;
         }
-        
+
         // constructor copia
         Habitante::Habitante(const Habitante & original) {
                 nombre = new char;
                 original.getNombre();
         }
-        
+
         // metodo dormir
         void Habitante::dormir() {
                 cout &lt;&lt; "-clase habitante- zzzzzZZZZzzzzz zzz" &lt;&lt; endl;
@@ -93,18 +93,18 @@ La clase Humano, que hereda de Habitante
 /**
 * Humano.hpp
 * Clase que define el objeto humano
-* 
+*
 * Pello Xabier Altadill Izura
 *
 */
 
 #include "Habitante.hpp"
 
-// hereda atributos y metodos de la superclase Habitante 
+// hereda atributos y metodos de la superclase Habitante
 class Humano : public Habitante {
     private:
         char *idioma;
-    public:    
+    public:
         Humano();
         virtual ~Humano();
         Humano(const Humano &);
@@ -121,18 +121,18 @@ Y su implementacion
         Humano::Humano() {
                 cout &lt;&lt; "-clase Humano- Humano construido."&lt;&lt; endl;
         }
-        
+
         // Destructor
         Humano::~Humano() {
                 cout &lt;&lt; "-clase Humano- Humano "&lt;&lt; this->getNombre() &lt;&lt; " destruido."&lt;&lt; endl;
         }
-        
+
         // constructor copia
         Humano::Humano(const Humano & original) {
                 idioma = new char;
                 idioma = original.getIdioma();
         }
-        
+
         // metodo hablar
         void Humano::hablar(char *bla) const {
                 cout &lt;&lt; "-clase Humano-" &lt;&lt; this->getNombre() &lt;&lt; " dice: " &lt;&lt; bla &lt;&lt; endl;
@@ -146,24 +146,24 @@ La clase Animal, que hereda de Habitante
 /**
 * Animal.hpp
 * Clase que define el objeto Animal
-* 
+*
 * Pello Xabier Altadill Izura
 *
 */
 
 #include "Habitante.hpp"
 
-// hereda atributos y metodos de la superclase Habitante 
-class Animal : public Habitante { 
+// hereda atributos y metodos de la superclase Habitante
+class Animal : public Habitante {
     private:
         int patas;
-    public:    
+    public:
         Animal();
         virtual ~Animal();
         Animal(const Animal &);
-        
+
         virtual void matar() const;
-        
+
         // setter/getter o accessors
         virtual int getPatas() const { return this->patas;} // inline
         virtual void setPatas(int patas) { this->patas = patas; } // inline
@@ -174,10 +174,10 @@ Y su implementacion
 /**
 * Animal.cpp
 * Programa que implementa la clase Animal
-* 
+*
 * Pello Xabier Altadill Izura
 * Compilacion: g++ -c Animal.cpp
-* 
+*
 */
 
 #include "Animal.hpp"
@@ -186,21 +186,21 @@ Y su implementacion
         Animal::Animal() {
                 cout &lt;&lt; "-clase Animal- Animal construido."&lt;&lt; endl;
         }
-        
+
         // Destructor
         Animal::~Animal() {
                 cout &lt;&lt; "-clase Animal- Animal "&lt;&lt; this->getNombre() &lt;&lt; " destruido."&lt;&lt; endl;
         }
-        
+
         // constructor copia
         Animal::Animal(const Animal & original) {
         }
-        
+
         // metodo matar
         void Animal::matar() const {
                 cout &lt;&lt; "-clase Animal-" &lt;&lt; this->getNombre() &lt;&lt; " Matar! Matar! Matar! " &lt;&lt; endl;
         }
-        
+
 
 </pre>
 
@@ -211,9 +211,9 @@ Aqui esta la clase Militar, que hereda de Humano y Animal.
 /**
 * Militar.hpp
 * Clase que define el objeto Militar
-* 
+*
 * Pello Xabier Altadill Izura
-* 
+*
 */
 
 // Herencia multiple de Humano y Animal
@@ -224,14 +224,14 @@ class Militar : public Animal { //, public Humano {
         Militar();
         ~Militar();
         Militar(const Militar &);
-        
+
         // sobrescribe metodos
         void matar() const;
         void hablar(char *bla) const;
-        
+
         // un metodo poco probable entre cualquier uniformado...
         void razonar() const;
-        
+
         // setter/getter o accessors
         char *getRango() const { return this->rango;}
         void setRango(char *rango) { this->rango = rango;}
@@ -243,7 +243,7 @@ Y su implementacion
 /**
 * Militar.cpp
 * Programa que implementa la clase Militar
-* 
+*
 * Pello Xabier Altadill Izura
 * Compilacion: g++ -c Habitante.cpp
 *              g++ -c Humano.cpp
@@ -256,22 +256,22 @@ Y su implementacion
         Militar::Militar() {
                 cout &lt;&lt; "-clase Militar- Militar construido."&lt;&lt; endl;
         }
-        
+
         // Destructor
         Militar::~Militar() {
                 cout &lt;&lt; "-clase Militar- Militar "&lt;&lt; this->getNombre() &lt;&lt; " destruido."&lt;&lt; endl;
         }
-        
+
         // constructor copia
         Militar::Militar(const Militar & original) {
                 cout &lt;&lt; "-clase Militar- Militar copia creada."&lt;&lt; endl;
         }
-        
+
         // metodo razonar
         void Militar::razonar() const {
                 cout &lt;&lt; "-clase Militar-" &lt;&lt; this->getNombre() &lt;&lt; " Error: OVERFLOW " &lt;&lt; endl;
         }
-        
+
         // metodo hablar
         void Militar::hablar(char *bla) const {
                 cout &lt;&lt; "-clase Militar-" &lt;&lt; this->getRango() &lt;&lt; " " &lt;&lt; this->getNombre() &lt;&lt; " dice: ";
@@ -283,9 +283,9 @@ Y su implementacion
                 cout &lt;&lt; "-clase Militar-" &lt;&lt; this->getRango() &lt;&lt; " Matar! " &lt;&lt; endl;
                 cout &lt;&lt; "-clase Militar- Somos... agresores por la paz " &lt;&lt; endl;
         }
-        
+
 // Aqui haremos multiples pruebas...
-int main () { 
+int main () {
 
 return 0;
 }
