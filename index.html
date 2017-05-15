@@ -1,8 +1,49 @@
 ---
 layout: default
-title: pello.io
 ---
-<div>
-	<h1>Hello World</h1>
-	<p> Just trying to make this work. Check out <a href="/blog" title="Awesome blog">my blog</a></p>
-</div><!-- /.blurb -->
+
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+    {% for post in paginator.posts %}
+    <div class="col-xs-12">
+      {% if post.url %}
+      <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+      {% else %}
+      <h2>{{ post.title }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="col-xs-8">
+      <p>
+        {% if post.date %}
+        <span class="label label-info">
+          <i class="fa fa-calendar-o"></i>
+          {{ post.date | date_to_string }}
+        </span>
+        {% if post.tags %}&nbsp;{% endif %}
+        {% endif %}
+        {% for tag in post.categories %}
+        <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          {{ tag }}
+        </span>
+        {% unless forloop.last %}&nbsp;{% endunless %}
+        {% endfor %}
+      </p>
+      {{ post.excerpt }}
+    </div>
+    <div class="clearfix"></div>
+    {% unless forloop.last %}
+    <div class="col-xs-12"><hr /></div>
+    {% endunless %}
+    {% endfor %}
+
+  <!-- Pagination links -->
+  {% include nav_paginator.html %}
+
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+
+</div>

@@ -1,7 +1,7 @@
-language: node_js
-node_js:
-  - "4"
-  - "5"
-  - "node"
-
+language: ruby
+cache: bundler
 sudo: false
+rvm: 2.2
+
+install: script/bootstrap
+script: script/cibuild
