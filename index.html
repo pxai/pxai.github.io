@@ -19,14 +19,17 @@ layout: default
       <p>
         {% if post.date %}
         <span class="label label-info">
-          {% octicon calendar %}
-          {{ post.date | date_to_string }}
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+            {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+            {{ post.date | date: date_format }}
+          </time>
         </span>
         {% if post.tags %}&nbsp;{% endif %}
         {% endif %}
 
         {% for tag in post.categories %}
-        {% octicon tag %} <span class="label label-default">
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
           <i class="fa fa-fw fa-tag"></i>
           {{ tag }}
         </span>

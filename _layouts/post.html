@@ -6,20 +6,21 @@ layout: default
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
-      {% octicon calendar %}
+      <span class="octicon octicon-calendar"></span>
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
         {{ page.date | date: date_format }}
       </time>
       {% for tag in post.categories %}
-      {% octicon tag %} <span class="label label-default">
+      <span class="octicon octicon-tag"></span>
+       <span class="label label-default">
           <i class="fa fa-fw fa-tag"></i>
           {{ tag }}
         </span>
       {% unless forloop.last %}&nbsp;{% endunless %}
       {% endfor %}
       {% if page.author %}
-      {% octicon person %}
+      <span class="octicon octicon-person"></span>
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
       {% endif %}</p>
   </header>
