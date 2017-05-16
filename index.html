@@ -19,13 +19,14 @@ layout: default
       <p>
         {% if post.date %}
         <span class="label label-info">
-          <i class="fa fa-calendar-o"></i>
+          {% octicon calendar %}
           {{ post.date | date_to_string }}
         </span>
         {% if post.tags %}&nbsp;{% endif %}
         {% endif %}
+
         {% for tag in post.categories %}
-        <span class="label label-default">
+        {% octicon tag %} <span class="label label-default">
           <i class="fa fa-fw fa-tag"></i>
           {{ tag }}
         </span>

@@ -9,12 +9,14 @@
         <ul class="contact-list">
           <li>
             {% if site.author %}
+              {% octicon person %}
               {{ site.author | escape }}
             {% else %}
               {{ site.title | escape }}
             {% endif %}
             </li>
             {% if site.email %}
+          {% octicon mail %}
             <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
             {% endif %}
         </ul>
@@ -35,7 +37,7 @@
       </div>
 
       <div class="footer-col footer-col-2">
-        <h3>Projects</h3>
+        <h3>{% octicon beaker %} Projects</h3>
         <ul class="social-media-list">
           <li>
             <a href="http://eta.bar" title="">eta.bar</a>
@@ -62,7 +64,7 @@
 
       <div class="footer-col footer-col-3">
 
-        <h3>Repositories</h3>
+        <h3>{% octicon git-branch %} Repositories</h3>
         <ul class="social-media-list">
           <li>
             <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
@@ -82,7 +84,17 @@
         </ul>
       </div>
     </div>
-
+    <div class="tags">
+      {% assign tags = site.categories | sort %}
+      {% for tag in tags %}
+      <span class="site-tag">{% octicon tag %}
+    <a href="/tag/{{ tag | first | slugify }}/"
+       style="">
+            {{ tag[0] | replace:'-', ' ' }} ({{ tag | last | size }})
+    </a>
+</span>
+      {% endfor %}
+    </div>
   </div>
   {% include google-analytics.html %}
 </footer>
