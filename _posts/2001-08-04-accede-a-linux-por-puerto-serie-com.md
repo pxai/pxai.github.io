@@ -2,7 +2,7 @@
 layout: post
 title: "Accede a linux por puerto serie (COM)" 
 date: 2001-08-04 20:45:00 
-categories: coding
+categories: devops, linux
 ---
 
 Muchas veces puede resultar interesante 
