@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Iniciar postgres 8.3 en debian lenny" 
-date: 2005-06-09 11:48:00 
-categories: coding
+title: "Iniciar postgres 8.3 en debian lenny"
+date: 2005-06-09 11:48:00
+categories: postgresql, linux, devops
 ---
 <p>Resulta que el postgres no funciona solito en el lenny y hay que hacer algún apaño después del apt-get.</p>
 <p>Bueno esta es una solución, la primera parte con una explicación <a href="http://www.esdebian.org/foro/26836/inicializacion-postresql-83-debian-lenny">encontrada en internet</a> de la mano de Alvarus, pero no bastaba.</p>
@@ -45,7 +45,7 @@ Completado. Puede iniciar el servidor de bases de datos usando:
 o
     /usr/lib/postgresql/8.3/bin/pg_ctl -D /var/pgsql/data -l archivo_de_registro start
 
-postgres@gandalf:~$ 
+postgres@gandalf:~$
 </pre>
 <p>Con eso no basta, luego hay que inicializar. Inicializar:</p>
 <pre>postgres@gandalf:~$ /usr/lib/postgresql/8.3/bin/postgres -D /var/pgsql/data

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Transaccion VB .NET" 
-date: 2004-03-05 20:17:00 
-categories: coding
+title: "Transaccion VB .NET"
+date: 2004-03-05 20:17:00
+categories: vb.net, transactions
 ---
 Ejemplo simple de transaccion de BD con una <br>conexion simple de oleDB.
 <pre>
@@ -28,12 +28,12 @@ Private Sub modificar()
   contador = 0
 
   'String de conexion para una bd access
-  conString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" 
+  conString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source="
 & Server.MapPath("Colegio.mdb")
 
   'establecemos la sentencia
-   sentencia = "update estudiantes set nom_est='" & Request.Params("txtNombre") & 
-"' , dir_est='" & Request.Params("txtDireccion") & "' , f_n_est='" & 
+   sentencia = "update estudiantes set nom_est='" & Request.Params("txtNombre") &
+"' , dir_est='" & Request.Params("txtDireccion") & "' , f_n_est='" &
 Request.Params("txtFechanacimiento") & "' where exp_est=" & Request.Params("txtExpediente")
 
   'creamos el objeto conexion
@@ -44,7 +44,7 @@ Request.Params("txtFechanacimiento") & "' where exp_est=" & Request.Params("txtE
 
      Response.Write("Valor seleccionado: " & Request.Params("ddlEmpresa") & "&lt;br&gt;")
      Response.Write("Sentencia: " & sentencia & "&lt;br&gt;")
-  
+
    'establecemos conexion
      conexion.Open()
 
@@ -57,7 +57,7 @@ Request.Params("txtFechanacimiento") & "' where exp_est=" & Request.Params("txtE
      Response.Write("OK comando creado &lt;br&gt;")
 
     transaccion = conexion.BeginTransaction()
-   ' esto es necesario 
+   ' esto es necesario
    comando.Transaction = transaccion
     comando.Connection = conexion
 
