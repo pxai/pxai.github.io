@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "4. Operadores c++" 
-date: 2006-08-04 10:17:00 
-categories: coding
+title: "4. Operadores c++"
+date: 2006-08-04 10:17:00
+categories: c++, operators
 ---
 Bueno, conociendo los tipos de datos ya podemos empezar a operar con ellos.
 Dentro de c++ tenemos los tipicos operadores matematicos + - * /
@@ -14,7 +14,7 @@ En este primer ejemplo vemos operadores unarios y la asignacion multiple.
 /**
 * Operadores.cpp
 * Programa para probar algunos operadores
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Operadores.cpp -o Operadores
 */
@@ -57,7 +57,7 @@ En el siguiente codigo vamos un poco mas alla y se muestra algunas operaciones a
 /**
 * Operadores2.cpp
 * Programa para probar algunos operadores segunda parte
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Operadores2.cpp -o Operadores2
 */
@@ -86,7 +86,7 @@ int main () {
 	cout << "Y ahora son estos: c=" << c << " b=" << b << " a=" << a << endl;
 
 	// Tomamos el valor a
-	cout << "Dame valores. 
+	cout << "Dame valores.
 a=";
 	cin >> a;
 
@@ -126,7 +126,7 @@ Operadores logicos. A continuacion vemos algunos ejemplos de operadores logicos 
 * Logicos.cpp
 * Programa para probar operadores Logicos
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Logicos.cpp -o Logicos
 */
@@ -146,7 +146,7 @@ int main () {
 	cout << "Valores: " << c << " " << b << " " << a << endl;
 
 	// Tomamos el valor a
-	cout << "Dame valores. 
+	cout << "Dame valores.
 a=";
 	cin >> a;
 
@@ -160,15 +160,15 @@ a=";
 
 	cout << "Y ahora son estos: c=" << c << " b=" << b << " a=" << a << endl;
 
-	
+
 	// Veamos una sentencia if-else sencilla
-	if (!(a == b)) 
+	if (!(a == b))
 		cout << "a y b no son iguales" << endl;
 	else
 		cout << "a y b son iguales" << endl;
 
 	// Veamos otra sentencia if-else sencilla
-	if ((a == b) || (b == c)) 
+	if ((a == b) || (b == c))
 		cout << "A y B son iguales o B y C son iguales" << endl;
 	else
 		cout << "ni A y B son iguales ni B y C son iguales" << endl;
@@ -190,7 +190,7 @@ Tambien introducimos el operador ()?: que simplifica las expresiones pero las ha
 * Logicos2.cpp
 * Programa para probar operadores Logicos 2
 *
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ Logicos2.cpp -o Logicos2
 */
@@ -210,7 +210,7 @@ int main () {
 	cout << "Valores: " << c << " " << b << " " << a << endl;
 
 	// Tomamos el valor a
-	cout << "Dame valores. 
+	cout << "Dame valores.
 a=";
 	cin >> a;
 
@@ -224,21 +224,21 @@ a=";
 
 	cout << "Y ahora son estos: c=" << c << " b=" << b << " a=" << a << endl;
 
-	
+
 	// Veamos una sentencia if-else sencilla
-	if (!a) 
+	if (!a)
 		cout << "A es false (igual 0)" << endl;
 	else
 		cout << "A es true (distinto de 0)" << endl;
 
 	// Veamos una sentencia if-else sencilla
-	if (!b) 
+	if (!b)
 		cout << "B es false (igual 0)" << endl;
 	else
 		cout << "B es true (distinto de 0)" << endl;
 
 	// Veamos una sentencia if-else sencilla
-	if (!c) 
+	if (!c)
 		cout << "C es false (igual 0)" << endl;
 	else
 		cout << "C es true (distinto de 0)" << endl;
@@ -262,7 +262,7 @@ Introduciendo esta simple estructura de control:
 * IfElse.cpp
 * Programa para probar If Else anindados
 * En c++ no existe la estructura if-elsif-else
-* Pello Xabier Altadill Izura 
+* Pello Xabier Altadill Izura
 *
 * Compilado: g++ IfElse.cpp -o IfElse
 */
@@ -282,7 +282,7 @@ int main () {
 	cout << "Valores: " << c << " " << b << " " << a << endl;
 
 	// Veamos una sentencia if-else sencilla
-	if (a >= b) 
+	if (a >= b)
 		cout << "a mayor o igual que b" << endl;
 	else
 		cout << "a menor que b" << endl;
@@ -294,7 +294,7 @@ int main () {
 		cout << "a mayor o igual que b" << endl;
 		if (a == 23) {
 			cout << "a igual que 23" << endl;
-			cout << "terminamos." << endl;		
+			cout << "terminamos." << endl;
 		}
 	} else {
 		cout << "a menor que b" << endl;

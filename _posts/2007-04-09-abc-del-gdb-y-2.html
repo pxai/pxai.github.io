@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "ABC del GDB (y II)" 
-date: 2007-04-09 13:24:00 
-categories: coding
+title: "ABC del GDB (y II)"
+date: 2007-04-09 13:24:00
+categories: gdb, debug
 ---
 <p><strong>Conociendo el depurador o debugger</strong></p>
 <p>Vamos a revisar algunas ordenes &uacute;tiles del depurador gdb. Supongamos que tenemos este programa:</p>
@@ -85,7 +85,7 @@ Dump of assembler code for function main:
 0&times;08048426 : add $0&times;4,%eax
 0&times;08048429 : mov (%eax),%eax
 0&times;0804842b : mov %eax,(%esp)
-0&times;0804842e : call 0&times;80483a4 
+0&times;0804842e : call 0&times;80483a4
 0&times;08048433 : movl $0&times;1,0xfffffffc(%ebp)
 0&times;0804843a : mov 0xfffffffc(%ebp),%eax
 0&times;0804843d : mov %eax,0&times;4(%esp)
