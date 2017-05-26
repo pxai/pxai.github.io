@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Eventos en nodejs" 
-date: 2013-08-13 10:37:21 
-categories: coding
+title: "Eventos en nodejs"
+date: 2013-08-13 10:37:21
+categories: node.js, events
 ---
 <p>NodeJS está orientado a eventos por tanto disponer de mecanismos para
 definir nuestros propios eventos es algo fundamental. Como vamos a ver no tenemos
@@ -96,24 +96,24 @@ function fulltrim (wordToTrim){return wordToTrim.replace(/(?:(?:^|\n)\s+|\s+(?:$
 
 <p>Esta sería la salida por consola:</p>
 <pre class="brush: bash">
-linux# node events.js 
-write something to create events 
+linux# node events.js
+write something to create events
 ñañaña
-EVENT: datareaded> something readed on console: 
+EVENT: datareaded> something readed on console:
 ñañaña
 
 You wrote: ñañaña
 666
-EVENT: datareaded> something readed on console: 
+EVENT: datareaded> something readed on console:
 666
 
 You wrote: 666
 EVENT: thebeast> The number of the beast appeared.
 
-EVENT: datareaded> something readed on console: 
+EVENT: datareaded> something readed on console:
 
 
-You wrote: 
+You wrote:
 EVENT: nulldata> nothing was entered.
 
 </pre>

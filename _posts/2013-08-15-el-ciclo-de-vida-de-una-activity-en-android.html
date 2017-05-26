@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "El ciclo de vida de una Activity en Android" 
-date: 2013-08-15 13:55:06 
-categories: coding
+title: "El ciclo de vida de una Activity en Android"
+date: 2013-08-15 13:55:06
+categories: android, activity
 ---
 
 <p>
@@ -41,7 +41,7 @@ lo debes agregar en sus opciones de hardware.</p>
 <h5>Probando el ciclo de vida</h5>
 <p>Esta es un App para obvservar el ciclo de vida. En su día ya la hice pero esta es algo más decente, es la clásica Activity y sobreescribe todos los handlers vinculados al ciclo de vida de una App de android. Y de paso también prueba el tema de guardar contenidos un Bundle (lo que viene a ser un saco para guardar el estado de la aplicación), que luego se pueden recuperar en el Create. La aplicación hay que probarla con
 el DDMS ya que lo único que hace es mandar mensajes al logcat. Probándolo en un 2.2 y un 4.0 me ha chocado
-que el botón <i>Back</i> para la App y finalmente Android destruye la App. En cambio con el <i>Home</i> siempre 
+que el botón <i>Back</i> para la App y finalmente Android destruye la App. En cambio con el <i>Home</i> siempre
 se pausa y sí que activa el método para guardar el estado. En un Activity se supone que hacer un this.finish es equivalente al botón <i>Back</i>, pero
 como decía no hay un botón de matar. A través de la configuración de Android, dentro de aplicaciones
 sí que tenemos un botón para matar y cargarnos la memoria que esté utilizando cualquier App.</p>
@@ -60,7 +60,7 @@ import android.view.View;
  * @greetz 4 u as always
  */
 public class MainActivity extends Activity {
-	
+
 	private static int counter = 0;
 
 	@Override
@@ -81,9 +81,9 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	/**
-	 * called from the button and tells Android that 
+	 * called from the button and tells Android that
 	 * this should be closed.
 	 * @param v
 	 */
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 	 * 2. App was killed by android
 	 * But:
 	 *     "Most implementations will simply use onCreate(Bundle) to restore their state, but it is sometimes convenient to do it here after all of the initialization has been done or to allow subclasses to decide whether to use your default implementation. The default implementation of this method performs a restore of any view state that had previously been frozen by onSaveInstanceState(Bundle)."
-	 * There is no reason to override onRestoreInstanceState() unless you are subclassing Activity and it is expected that someone will subclass your subclass. 
+	 * There is no reason to override onRestoreInstanceState() unless you are subclassing Activity and it is expected that someone will subclass your subclass.
 	 * @param bundle data to restore app state
 	 */
 	@Override
@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 		log("Restoring Instance State");
 		Log.d("Restored value1: " + bundle.getString("Something") , "PELLODEBUG");
 		Log.d("Restored value2: " + bundle.getString("Another") , "PELLODEBUG");
-	} 
+	}
 
 	/**
 	 * when user press home button this is
@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
 		bundle.putString("Something", "Saved for later");
 		bundle.putString("Another", "Another Saved for later");
 		log("Saving instance State...");
-	} 
+	}
 
 	/**
 	 * called after the app is Created
@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
 		super.onStart();
 		log("App Started");
 	}
-	
+
 	/**
 	 * called when app is resumed (from paused) and also
 	 * the first time is executed (after start)
@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
 		super.onResume();
 		log("App Resumed");
 	}
-	
+
 	/**
 	 * called when app is paused
 	 */
@@ -153,10 +153,10 @@ public class MainActivity extends Activity {
 		} else {
 			log("App is NOT finishing");
 		}
-		
+
 		log("App paused");
 	}
-	
+
 	/**
 	 * called when app is restarted from stop state
 	 */
@@ -165,7 +165,7 @@ public class MainActivity extends Activity {
 		super.onRestart();
 		log("App Restarted");
 	}
-	
+
 	/**
 	 * called when app is stoped
 	 */
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 		super.onStop();
 		log("App Stopped");
 	}
-	
+
 	/**
 	 * called when app is stoped is destroyed by Android
 	 */
@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		log("APP DESTROYED");
 	}
-	
+
 	/**
 	 * logs messages using Android log
 	 * @param msg

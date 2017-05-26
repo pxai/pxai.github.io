@@ -1,24 +1,24 @@
 ---
 layout: post
-title: "Hilos en Android con Threads java" 
-date: 2013-08-17 10:50:52 
-categories: coding
+title: "Hilos en Android con Threads java"
+date: 2013-08-17 10:50:52
+categories: android, thread
 ---
 <p>
 Toda aplicación de Android tiene al menos un hilo o thread de ejecución. Ese thread es el encargado
 de la pantalla que tienes ante ti y es imprescindible por la manera en la que Android gestiona los
-cambios en el interfaz: a través de una cola de mensajes. Es decir, cada vez que aplicamos algún cambio 
+cambios en el interfaz: a través de una cola de mensajes. Es decir, cada vez que aplicamos algún cambio
 en algún View no se aplica directamente sino que se deja la petición en una cola. Y ese hilo, el UI thread
 o el hilo principal de la aplicación es quien precisamente se encarga de procesar esa cola y aplicar los
-cambios solicitados. 
+cambios solicitados.
 </p>
 
-<p>También desde ese hilo es de donde se llama a los callbacks de los eventos y es por eso por lo 
-que hay que tener ojo con determinadas acciones si no queremos que la aplicación se ralentice 
+<p>También desde ese hilo es de donde se llama a los callbacks de los eventos y es por eso por lo
+que hay que tener ojo con determinadas acciones si no queremos que la aplicación se ralentice
 y deje de responder. El ejemplo más típico es un acceso a la red. Para que la aplicación siga respondiendo
 resulta imprescindible por tanto dejar determinadas tareas a nuevos hilos. Android soporta los hilos
 básicos de java más todo el API de concurrencia, y aparte trae sus propios superhilos llamados AsyncTask.
-Entre uno y otro quizá habrá que decantarse por el último porque a Android me da la sensación que 
+Entre uno y otro quizá habrá que decantarse por el último porque a Android me da la sensación que
 siempre le gusta más que se hagan las cosas a su peculiar manera. ¿Tú también Android? joder, esto es la fiesta de los callbacks y el asincronísmo generalizado.</p>
 
 <p>En este post veremos los hilos tradicionales utilizados desde un Activity de Android. Es una App
@@ -33,13 +33,13 @@ Este último punto es interesante. ¿Cómo podemos hacer que desde un hilo Java 
 //08-12 19:54:46.882: E/AndroidRuntime(1372): android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
 </code> Android NO permite que se altere el interfaz más que desde la propia Activity. Así que establecemos
 un mecanismo de comunicación (propio de android) a través de una instancia de la clase Handler. Esta nos
-permite mandar mensajes del hilo al Activity y esta ya puede tocar lo que quiera y como en este caso, 
+permite mandar mensajes del hilo al Activity y esta ya puede tocar lo que quiera y como en este caso,
 actualizar una ProgressBar que siempre queda muy aparentón.
 </p>
 
 <h5>NameGenerator</h5>
-<p>Empezamos por el hilo feliz, ajeno al entorno que le rodea. Genera un número concreto 
-de nombres y los va metiendo en una estructura compartida con un consumidor. Él sabrá para que 
+<p>Empezamos por el hilo feliz, ajeno al entorno que le rodea. Genera un número concreto
+de nombres y los va metiendo en una estructura compartida con un consumidor. Él sabrá para que
 lo quiere, esta clase es una machaca en modo mononeurona, hace su tarea y punto.</p>
 <pre class="brush: java">
 package info.pello.android.threads;
@@ -58,22 +58,22 @@ import java.util.concurrent.BlockingQueue;
  */
 public class NameGenerator extends Thread {
 	private int size = 2;
-	private String [] vowels = {"a","e","i","o","u","y","ee","oo"}; 
+	private String [] vowels = {"a","e","i","o","u","y","ee","oo"};
 	private String [] consonants = {"b","c","d","f","g","h","j","k","l",
 									"m","n","p","q","r","s","t","v","w","x","y","z"};
 	private String [][] alternate = {vowels,consonants};
 	private int [] sizes = {vowels.length, consonants.length};
-	
+
 	private BlockingQueue<String> generatedNames;
-	
+
 	private int isVowel = 0;
 	private Random random = new Random();
 	private int total = 100;
 	private static final int DUPLICATION_POSSIBILITY = 20;
 	private static final int SLEEP_TIME = 2000;
-	
-	
-	
+
+
+
 	/**
 	 * default constructor
 	 * @param thread name
@@ -81,7 +81,7 @@ public class NameGenerator extends Thread {
 	public NameGenerator (String name) {
 		super(name);
 	}
-	
+
 	/**
 	 * Constructor with size parameter
 	 * @param size
@@ -101,7 +101,7 @@ public class NameGenerator extends Thread {
 		while (true) {
 			if (total == 0) {
 				System.err.println(this.getName() + " > Our work is done here. Bye!");
-				return; 
+				return;
 			}
 			name = generate();
 			System.out.println("Generated name: " + name);
@@ -114,7 +114,7 @@ public class NameGenerator extends Thread {
 			}
 		}
 	}
-	
+
 	/**
 	 * generates a name
 	 * @return
@@ -124,17 +124,17 @@ public class NameGenerator extends Thread {
 		int counter = 0;
 		String lastChar = "";
 		isVowel = counter = random.nextInt(2);
-		
+
 		for (int i = 0; i < this.size; i++) {
 			lastChar = generateChar();
 			lastChar = duplicateOrNot(lastChar);
 			result += lastChar;
-			
+
 			// We prepare next round
 			counter++;
 			isVowel = counter % 2;
 		}
-		
+
 		return result;
 	}
 
@@ -157,7 +157,7 @@ public class NameGenerator extends Thread {
 		lastChar += (random.nextInt(100)< DUPLICATION_POSSIBILITY)?lastChar:"";
 		return lastChar;
 	}
-	
+
 	/**
 	 * @return the size
 	 */
@@ -199,11 +199,11 @@ import android.os.Message;
  * @author Pello Xabier Altadill Izura
  */
 public class NameFetcher extends Thread {
-	private BlockingQueue<String> generatedNames;	
+	private BlockingQueue<String> generatedNames;
 	private static final int SLEEP_TIME = 2000;
 	private Handler handler;
 	private int total = 100;
-	
+
 	/**
 	 * default constructor
 	 * @param thread name
@@ -211,7 +211,7 @@ public class NameFetcher extends Thread {
 	public NameFetcher (String name) {
 		super(name);
 	}
-	
+
 	/**
 	 * Constructor with size parameter
 	 * @param size
@@ -229,12 +229,12 @@ public class NameFetcher extends Thread {
 		String name = "";
 		Message msg = null;
 		Bundle bundle = null;
-		
+
 		while (true) {
 			try {
 				if (total == 0) {
 					System.err.println(this.getName() + " > My work is done here. Bye!");
-					return; 
+					return;
 				}
 				name = generatedNames.take().toString();
 				System.out.println("Fetching name: " + name);
@@ -261,11 +261,11 @@ public class NameFetcher extends Thread {
 	public void setHandler(Handler handler) {
 		// TODO Auto-generated method stub
 		this.handler = handler;
-		
+
 	}
 
 
-	
+
 }
 
 </pre>
@@ -297,7 +297,7 @@ import java.util.concurrent.SynchronousQueue;
  * @greetz bizgen project
  */
 public class MainActivity extends Activity {
-	
+
 	private TextView generatedResult;
 	private NameGenerator nameGenerator;
 	private NameFetcher nameFetcher;
@@ -306,7 +306,7 @@ public class MainActivity extends Activity {
     private static final int NAMES_TO_GENERATE = 10;
     ProgressBar progressBar;
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -314,7 +314,7 @@ public class MainActivity extends Activity {
 		generatedResult = (TextView) findViewById(R.id.generatedResult);
 		progressBar = (ProgressBar) findViewById(R.id.progressBarThreads);
 		progressBar.setMax(NAMES_TO_GENERATE);
-		
+
 		// The handler used to communicate between Activity and a Thread
 		handler =new Handler() {
 	    				@Override
@@ -327,7 +327,7 @@ public class MainActivity extends Activity {
 	    					progressBar.incrementProgressBy(1);
 	    				}
 	    		};
-	    		
+
 		nameGenerator = new NameGenerator("Generator", 3, generatedNames,NAMES_TO_GENERATE);
 		nameFetcher = new NameFetcher("Fetcher", generatedNames, NAMES_TO_GENERATE);
 		// We set a handler to comunicate with android activity
@@ -354,12 +354,12 @@ public class MainActivity extends Activity {
 		// This thread generates names and puts them
 		// in a queue
 		nameGenerator.start();
-		
+
 		// This one will get freshly created names from
 		// the queue
 		nameFetcher.start();
 	}
-	
+
 }
 
 </pre>

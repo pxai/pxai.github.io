@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "AsyncTask en Android" 
-date: 2013-08-18 11:06:08 
-categories: coding
+title: "AsyncTask en Android"
+date: 2013-08-18 11:06:08
+categories: android, asynctask
 ---
 <p>Los AsyncTask están recomendados para tareas concretas y finitas, como por ejemplo descargar el contenido
 de una URL. Si lo que necesitas es una especie de Hilo que esté ejecutándose contínuamente tendrías que usar los Thread convencionales (no se detienen ni al pulsar home ni al pulsar Back) o directamente crear
@@ -22,7 +22,7 @@ barras de progreso o mostrar datos que vamos generando.</li>
 
 <h5>La MainActivity con una inner class para el AsyncTask</h5>
 <p>Esta activity llama a dos AsyncTask. La primera está definida dentro de la propia Activity como una inner class. Lo único que hace es contar hasta cierto número (se le pasa como parámetro) y va actualizando
-una barra de progreso. La otra AsyncTask está definida en una clase externa y se verá a continuación de este código: 
+una barra de progreso. La otra AsyncTask está definida en una clase externa y se verá a continuación de este código:
 </p>
 <pre class="brush: java">
 package info.pello.android.asynctask;
@@ -45,7 +45,7 @@ import android.widget.Toast;
 * @greetz my async friends
 */
 public class MainActivity extends Activity {
-	
+
 	private JsonGetterTask jsonGetterTask;
 	private EditText editText1;
 	private ProgressBar progressBarInnerTask;
@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
 		progressBarInnerTask = (ProgressBar) findViewById(R.id.progressBarInnerTask);
 		progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
 		resultTextView = (TextView) findViewById(R.id.resultTextView);
-			
+
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	/**
 	 * @return the progressBar1
 	 */
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 		jsonGetterTask = new JsonGetterTask(this);
 		jsonGetterTask.execute(editText1.getText().toString());
 	}
-	
+
 	/**
 	 * this method is called when first button is clicked
 	 * It starts an inner AsyncTask defined here
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
 		// this param will go to doInBackground
 		new InnerTask().execute(20);
 	}
-	
+
 	/**
 	 * Inner class for a symple AsyncTask
 	 * @author Pello Xabier Altadill Izura
@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, "Let's start task", Toast.LENGTH_SHORT).show();
 			progressBarInnerTask.setProgress(0);
 		};
-		
+
 		/**
 		 * This is where the task begins and runs
 		 */
@@ -136,16 +136,16 @@ public class MainActivity extends Activity {
 			progressBarInnerTask.setMax(work[0]);
 
 			Log.d("InnerTask doInBackground " + work[0] + ":"+ progressBarInnerTask.getMax(),"PELLODEBUG");
-			
+
 			// We just sleep and publish progress
 			for (int i = 0; i<work[0]; i++) {
 				SystemClock.sleep(1000);
 				this.publishProgress();
 			}
-			
+
 			return null;
 		}
-		
+
 		/**
 		 * This method is called when we call this.publishProgress
 		 * and can be used to update contents,progress bars,... in the Activity
@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
 			Log.d("InnerTask> onProgressUpdate was called: ","PELLODEBUG");
 			progressBarInnerTask.incrementProgressBy(1);
 		}
-		
+
 		/**
 		 * called when task is finished.
 		 */
@@ -209,7 +209,7 @@ import android.widget.Toast;
  * @greetz any
  */
 public class JsonGetterTask extends AsyncTask<String,String,Void> {
-	
+
 	// We well keep a reference to our caller activity
 	// so we can attach/detach in case of activity is destroyed in a rotation
 	private MainActivity mainActivity;
@@ -221,7 +221,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 	public JsonGetterTask (MainActivity mainActivity) {
 		attach(mainActivity);
 	}
-	
+
 	/**
 	 * sets mainActivity reference
 	 * @param mainActivity
@@ -236,7 +236,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 	public void detach () {
 		this.mainActivity = null;
 	}
-	
+
 	/**
 	 * This is called before doInBackground and is a perfect place
 	 * to prepare the progress Bar.
@@ -247,7 +247,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 		this.mainActivity.getProgressBar1().setVisibility(1);
 		this.mainActivity.getResultTextView().setText("");
 	}
-	
+
 	/**
 	 * This is where the task begins and runs
 	 * String... url declares variable arguments list,
@@ -270,7 +270,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
 	 * This method is called when we call this.publishProgress
 	 * and can be used to update contents,progress bars,... in the Activity
@@ -280,7 +280,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 		Log.d("onProgressUpdate> json data: " + item[0] + " and " + item[1],"PELLODEBUG");
 		this.mainActivity.getResultTextView().append(item[0] + " and " + item[1]+"\n");
 	}
-	
+
 	/**
 	 * called when task is finished.
 	 */
@@ -293,7 +293,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cadenaJSON
 	 * @return
 	 * @throws IllegalStateException
@@ -325,7 +325,7 @@ public class JsonGetterTask extends AsyncTask<String,String,Void> {
 		 // We get name and description
 		 name = registros.getJSONObject(i).getString("name");
 		 description = registros.getJSONObject(i).getString("description");
-		 
+
 		 this.publishProgress(name, description);
 
 	 }

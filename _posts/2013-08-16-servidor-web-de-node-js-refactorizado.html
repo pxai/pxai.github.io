@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Servidor web de Node.js refactorizado" 
-date: 2013-08-16 23:18:31 
-categories: coding
+title: "Servidor web de Node.js refactorizado"
+date: 2013-08-16 23:18:31
+categories: node.js, backend
 ---
 <h5></h5>
 <p>
@@ -18,7 +18,7 @@ de un libro:
 * httpserver.js
 * simple web server from O'Reilly Learning Node, Chp 6.
 */
-var http = require('http'), 
+var http = require('http'),
 	path = require('path'),
 	fs = require('fs'),
 
@@ -39,11 +39,11 @@ http.createServer(function (req, res) {
 			res.statusCode = 200;
 			// create and pipe readable stream
 			var file = fs.createReadStream(pathname);
-	
+
 			file.on("open", function() {
 				file.pipe(res);
 			});
-	
+
 			file.on("error", function(err) {
 				console.log(err);
 			});
@@ -66,7 +66,7 @@ de 5cm y por mucho que uses el sublime y vayas de programador hipster. A molar t
 <p>Bueno al lío. Lo que hago en este caso es darle al servidor web forma de clase y cambiar
 la forma de crear el servidor para que todo se maneje con métodos separados. De hecho una de
 las recomendaciones de la guía no oficial de estilo de Node.js es que un método debe caber en una
-diapositiva proyectada en pantalla y debe ser legible desde la última fila de la sala, y no 
+diapositiva proyectada en pantalla y debe ser legible desde la última fila de la sala, y no
  son lo únicos que dicen que los métodos deben ser escuetos. Venga va, la clase MyWebServer y una clase auxiliar para los logs.</p>
 
 <pre class="brush: js">
@@ -91,7 +91,7 @@ var PATHMODULE = require('path');
 var MyWebServer = function (port, serverpath) {
 	// this reference comes in handy in cases like this*
 	var self = this;
-	
+
 	this.port = port;             // web server port
 	this.serverpath = serverpath; // public folder
 	this.http = httpServer;       // instance of http server
@@ -112,7 +112,7 @@ var MyWebServer = function (port, serverpath) {
 		this.server = this.http.createServer().listen(this.port);
 		// we set a handler function on request event.
 		this.server.on('request', this.handleRequest);
-		
+
 		this.logger.log('MyWebServer > initialized');
 	};
 
@@ -144,13 +144,13 @@ var MyWebServer = function (port, serverpath) {
 	this.handleOk = function (response) {
 				self.logger.log("200:" + pathname);
 				response.setHeader('Content-Type', 'text/html');
-				
+
 				// We set status code to 200 status, file is found, no errors
 				response.statusCode = 200;
 
 				// We open the file and serve it as a stream
 				var file = self.filesystem.createReadStream(pathname);
-				
+
 				file.on("open", function() {
 					file.pipe(response);
 				});
@@ -162,7 +162,7 @@ var MyWebServer = function (port, serverpath) {
 			};
 
 	/**
-	* in case of bad request we send a 404 response 
+	* in case of bad request we send a 404 response
 	*/
 	this.handleBadRequest = function (response) {
 				self.logger.log("404: BAD Request:" + pathname);
@@ -212,7 +212,7 @@ clases en Node.js sí que debe ser algo habitual en la comunidad, y en este caso
 
 <p>Esto se vería en los logs:</p>
 <pre class="brush: bash">
-linux:~/nodejs/static_web_server# node static_web_server.js 
+linux:~/nodejs/static_web_server# node static_web_server.js
 http_server[Sat Aug 17 2013 01:07:17 GMT+0200 (CEST)]> MyWebServer > initialized
 http_server[Sat Aug 17 2013 01:07:17 GMT+0200 (CEST)]> Server initialized on port:8666
 http_server[Sat Aug 17 2013 01:07:34 GMT+0200 (CEST)]> Request:/root/nodejs/static_web_server/public_html/
