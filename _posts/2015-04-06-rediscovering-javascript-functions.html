@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Rediscovering Javascript functions" 
-date: 2015-04-06 00:28:43 
-categories: coding
+title: "Rediscovering Javascript functions"
+date: 2015-04-06 00:28:43
+categories: JavaScript, functions
 ---
 <img src="http://s24.postimg.org/d6m5kxqm9/sir_13.jpg" title="Javascript like a sir" alt="Javascript like a sir" />
 <p>Javascript functions are apparently simple yet very flexible. Functions are data. Functions
@@ -11,19 +11,19 @@ can be anonymous. Functions can even be shape shifters. And of course, closures 
 <h3>Simple function</h3>
 <p>This is a simple sample functions that generates a String, an excuse to introduce the most basic jsdoc notation.</p>
 <pre class="brush: js;">
-/** 
+/**
  * Repeats a word
  * @author Pello Altadill
  * @param {string} word
  * @param {number} repeat
- * @returns {string} the word repeated 
+ * @returns {string} the word repeated
  */
 function printWord (word, times) {
     var printed = '';
     for (var i=0;i&lt;times;i++) {
         printed = printed + word;
     }
-    
+
     return printed;
 }
 
@@ -103,7 +103,7 @@ function (something) { console.log(something); }
 * @param {number} b - second operand
 * @return {number} - result of addition
 */
-function add (a,b) { 
+function add (a,b) {
     return a+b;
 }
 
@@ -124,13 +124,13 @@ add(40,2);
 * function with callback, to apply different operations to array values
 * @author Pello Altadill
 * @param {array} - numbers
-* @param {function} - callback function 
+* @param {function} - callback function
 * @return {array} - the resulting array
 */
 function convert (numbers, convertCallback) {
     for (var i = 0;i&gt;numbers.length;i++) {
         numbers[i] = convertCallback(numbers[i]);
-    }    
+    }
     return numbers;
 }
 
@@ -139,7 +139,7 @@ function convert (numbers, convertCallback) {
 /**
 * Multiplies a number with itself
 * @param {number} - number in decimal base
-* @return {number} 
+* @return {number}
 */
 function power (number) {
     return number * number;
@@ -199,7 +199,7 @@ convert(someNumbers,power);
 <p>This may sound weird or somehow related to virus development, but in fact is one of the niceties of Javascript. The mechanism is easy as pie.</p>
 <pre class="brush: js;">
 /**
-* mighty morphing powerfunction 
+* mighty morphing powerfunction
 * every time you invoke morphing it code changes..
 * @author Pello Altadill
 * @param {string} - name to be shown
@@ -244,7 +244,7 @@ function scopeChain (someParam) {
         function chain2 () {
             var third = 666;
             console.log('Inside third level: ' + top + ", " +  second + ", " + third);
-        }        
+        }
         chain2();
     }
     chain1();
@@ -282,10 +282,10 @@ function generatePassword () {
         var result = '';
         for (var i = 0;i&lt;totalLetters;i++) {
             result += letters[Math.round(Math.random()*(letters.length-1))];
-        }        
+        }
         return result;
     }
-    
+
     return generate();
 }
 
@@ -322,7 +322,7 @@ function generatePassword () {
         var result = '';
         for (var i = 0;i&lt;totalLetters;i++) {
             result += letters[Math.round(Math.random()*(letters.length-1))];
-        }        
+        }
         return result;
     }
 }
@@ -358,10 +358,10 @@ function generatePassword () {
         var result = '';
         for (var i = 0;i&lt;totalLetters;i++) {
             result += letters[Math.round(Math.random()*(letters.length-1))];
-        }        
+        }
         return result;
     }
-    
+
     return genFunction;
 }
 
@@ -387,7 +387,7 @@ generate()
 * @return {result}
 * @greetz any
 */
-var generatePassword = ( 
+var generatePassword = (
     function  () {
         var totalLetters = 8;
         var letters = 'abcdef23456789';
@@ -396,7 +396,7 @@ var generatePassword = (
             var result = '';
             for (var i = 0;i&lt;totalLetters;i++) {
                 result += letters[Math.round(Math.random()*(letters.length-1))];
-            }        
+            }
             return result;
         }
     }
@@ -426,34 +426,34 @@ var getLetters, setLetters;
 * @return {result}
 * @greetz any
 */
-var generatePassword = ( 
+var generatePassword = (
     function  () {
         var totalLetters = 8;
         var letters = 'abcdef23456789';
         console.log('Ok, initiliazed only once.');
-        
+
         // We define get/set methods
         getTotalLetters = function () {
-                        return totalLetters; 
+                        return totalLetters;
                    };
         setTotalLetters = function (value) {
                         totalLetters = value;
                    };
         getLetters = function () {
-                        return letters; 
+                        return letters;
                    };
         setLetters = function (value) {
                         letters = value;
                    };
-                   
+
         return function () {
             var result = '';
             for (var i = 0;i&lt;totalLetters;i++) {
                 result += letters[Math.round(Math.random()*(letters.length-1))];
-            }        
+            }
             return result;
         }
-    
+
     }
 )();
 

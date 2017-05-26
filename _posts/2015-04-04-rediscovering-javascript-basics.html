@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Rediscovering Javascript basics" 
-date: 2015-04-04 23:42:36 
-categories: coding
+title: "Rediscovering Javascript basics"
+date: 2015-04-04 23:42:36
+categories: JavaScript, basics
 ---
 <img src="http://s14.postimg.org/uwmqswvs1/i07_06.jpg" title="NaN" alt="NaN wtf" />
 <p>This will be just another quick reveiw of the Javascript language basics. For any seasoned developer this may seem a pointless effort but perhaps you find something useful, at least to become a js nitpicker or a soon-to-be guru :D.
@@ -20,7 +20,7 @@ categories: coding
 <pre class="brush: js;">
 /*
 This is
-a multiline 
+a multiline
 comment
 */
 
@@ -361,7 +361,7 @@ inside:
         } else if (i==2 && j==2) {
             break jump;
         }
-        console.log( i + ":" + j);          
+        console.log( i + ":" + j);
     }
 }
 console.log("out: " + i + ":" + j);
@@ -436,16 +436,16 @@ Parameter number can be dynamic. We can deal with them using the special argumen
 function average () {
     var result = 0;
     var size = 0;
-    
+
     for (var i = 0; i &lt; arguments.length; i++) {
         result = result + arguments[i];
     }
     if (result) {
         result = result / arguments.length;
     }
-    
+
     return result;
-    
+
 }
 
 console.log(average());

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Tunning de acceso a disco" 
-date: 2015-03-05 17:51:00 
-categories: coding
+title: "Tunning de acceso a disco"
+date: 2015-03-05 17:51:00
+categories: linux, optimization
 ---
 En el acceso a discos parece ser que el Kernel usa una configuracion bastante floja
 y conservadora y se puede mejorar. Gracias al comando hdparm podemos mejorar el rendimiento
@@ -38,7 +38,7 @@ a habilitar/modificar.
 Vamos a tunar el disco:
 -Para empezar le podemos hacer que use los 32 bits de E/S sobre el bus pci.
 <pre>
-[root@firewall root]#  hdparm -c1 /dev/hda 
+[root@firewall root]#  hdparm -c1 /dev/hda
 </pre>
 
 -Podemos habilitarle el DMA

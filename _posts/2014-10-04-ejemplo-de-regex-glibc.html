@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Ejemplo de regex glibc" 
-date: 2014-10-04 18:52:00 
-categories: coding
+title: "Ejemplo de regex glibc"
+date: 2014-10-04 18:52:00
+categories: glibc, regexp
 ---
 Un ejemplo de uso de la libreria de regex de glibc, que trae
 herramientas basicas para las expresiones regulares.
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 
 
   if (argc != 3) {
-        printf("Uso: %s expresion texto 
+        printf("Uso: %s expresion texto
 ",argv[0]);
         exit(1);
   }
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
       printf("%s &lt;=&gt; %s MATCH!!
 ",argv[1],argv[2]);
    } else {
-      printf("%s &lt;=&gt; %s ? NO HAY MATCH 
+      printf("%s &lt;=&gt; %s ? NO HAY MATCH
 ",argv[1],argv[2]);
    }
 
