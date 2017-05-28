@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "A night out with Jasmine" 
-date: 2014-04-23 00:37:18 
-categories: coding
+title: "A night out with Jasmine"
+date: 2014-04-23 00:37:18
+categories: jasmine, tdd, node.js
 ---
 <h5>A night out with Jasmine</h5>
 <p>
@@ -15,7 +15,7 @@ Unit testing is much more than a tool for ensuring that a program behaves as exp
 
 <p>Jasmine is a BDD framework for javascript code. In a nutshell, BDD it's an evolution of TDD where unit tests look like user stories, and so tests are defined in the same terms of the expected behaviour of the software units. When you discover functions names in Jasmine tests these simple definitions will make more sense.</p>
 <p>Let's get our hands dirty, while you take a look at Jasmine's site
-http://jasmine.github.io/2.0/introduction.html you can get the master from the github site 
+http://jasmine.github.io/2.0/introduction.html you can get the master from the github site
 https://github.com/pivotal/jasmine/archive/master.zip</p>
 <p>
 Or, if you are using node then just sigh, coff slightly, adjust your spectacles and simply try with this: npm -g install jasmine-node
@@ -65,7 +65,7 @@ linux$ jasmine-node specs/
 
 Finished in 0.020 seconds
 1 tests, 1 assertions, 0 failures, 0 skipped
-linux$ 
+linux$
 </pre>
 
 <p>
@@ -98,7 +98,7 @@ linux$ jasmine-node specs/
 
 Finished in 0.029 seconds
 2 tests, 2 assertions, 0 failures, 0 skipped
-linux$ 
+linux$
 </pre>
 
 <p>Maybe you've noticed that in the second test instead of toEqual we're using .toContain. These are different matchers with different effects as indicated by their obvious names. As you can see, Jasmine drives us to write tests that apart from being 'extracool' can be read as natural language.
@@ -201,8 +201,8 @@ describe('Test to ensure username is created', function () {
 	});
 
 	it('throws error if name is empty', function () {
-		expect(function() { 
-					username.create(''); 
+		expect(function() {
+					username.create('');
 			   }).toThrow('Person name is empty');
 	});
 });
@@ -432,7 +432,7 @@ Some examples:</p>
 
 <h6>toMatch</h6>
 <p>This is great, we can check if the value matches a regular expression. Some examples:
-</p>		
+</p>
 <pre class="brush: jscript">
 		expect('Thorin Kili Gloin').toMatch(/gloin/i);
 		expect('Jasmine').toMatch(/[a-z]+/i);
@@ -454,7 +454,7 @@ We'll try with this dumb function:
 </pre>
 
 <h6>Creating our own matchers</h6>
-<p>Maybe you need a more specific matcher to be able to test something that Jasmine's default matchers are not capable of. Well, you can define your own matchers. 
+<p>Maybe you need a more specific matcher to be able to test something that Jasmine's default matchers are not capable of. Well, you can define your own matchers.
 Inside the describe block we can define our own matcher, in this case is one matcher to test if a String is complex enough to be a secure password.
 </p>
 
@@ -471,7 +471,7 @@ Inside the describe block we can define our own matcher, in this case is one mat
 				this.message = function() {
 					return "Expected " + this.actual + " to be complex";
 				};
-					return this.actual.match(/[a-z]{1,}/) 
+					return this.actual.match(/[a-z]{1,}/)
 						&& this.actual.match(/[A-Z]{1,}/)
 						&& this.actual.match(/[0-9]{1,}/)
 						&& this.actual.match(/[\.\,\;\:\-\!\?\_]{1,}/)
@@ -483,7 +483,7 @@ Inside the describe block we can define our own matcher, in this case is one mat
 </pre>
 
 <p>And now we can use our tester just like the others:
-</p>	
+</p>
 <pre class="brush: jscript">
 	// toBeComplex
 	// Checks if a String is valid to be a password
@@ -504,7 +504,7 @@ Inside the describe block we can define our own matcher, in this case is one mat
 				this.message = function() {
 					return "Expected " + this.actual + " to be complex and longer than " + length;
 				};
-					return this.actual.match(/[a-z]{1,}/) 
+					return this.actual.match(/[a-z]{1,}/)
 						&& this.actual.match(/[A-Z]{1,}/)
 						&& this.actual.match(/[0-9]{1,}/)
 						&& this.actual.match(/[\.\,\;\:\-\!\?\_]{1,}/)
@@ -530,7 +530,7 @@ First I'll show how to use the spies in a very simple problem, and after that we
 <pre class="brush: jscript">
 /**
 * stringutils.js
-* Some String utils 
+* Some String utils
 */
 exports.StringUtils = function () {
 
@@ -573,7 +573,7 @@ describe("testing stringutils", function() {
 	var myStringUtils;
 
 	beforeEach(function() {
-		myStringUtils = new stringutils.StringUtils();			
+		myStringUtils = new stringutils.StringUtils();
 		spyOn(myStringUtils,'len');
 		spyOn(myStringUtils,'vowels');
 		spyOn(myStringUtils,'reverse');
@@ -607,7 +607,7 @@ describe("testing stringutils", function() {
 </pre>
 
 <p>
-To set spies, we have to call spyOn method. Then we can check if any method has been called and even we can test if they where called with certain parameters. 
+To set spies, we have to call spyOn method. Then we can check if any method has been called and even we can test if they where called with certain parameters.
 </p>
 <ul>
 <li>toHaveBeenCalled()</li>
@@ -658,7 +658,7 @@ exports.EchoServer = function (port, host) {
 	this.connection = function(socket) {
 		self.clientSockets.push(socket);
 		console.log('Server> Connected to server, total clients: ' + self.clientSockets.length);
-		
+
 		// console.log(socket);
 		if (this.keepAlive) {
 			socket.setKeepAlive(this.keepAliveTime);
@@ -691,15 +691,15 @@ exports.EchoServer = function (port, host) {
 	this.error = function(err) {
 		console.log('Server> Error on server ' + err);
 	};
-	
+
 	this.close = function () {
 		this.server.close();
 		this.server.unref();
 	};
-	
+
 	this.server.on('listening',this.listening);
 
-	this.server.on('connection', this.connection); 
+	this.server.on('connection', this.connection);
 
 	this.server.on('close', this.close);
 
@@ -722,7 +722,7 @@ describe("server", function() {
 	var successCallBack;
 
 	 beforeEach(function() {
-  	
+
 		successCallBack = jasmine.createSpy();
 
 		myServer = new server.EchoServer(1666,'0.0.0.0');
@@ -730,7 +730,7 @@ describe("server", function() {
 		spyOn(myServer.server, 'listen').andCallThrough();
 		spyOn(myServer, 'connection').andCallThrough();
 		myServer.init();
-			
+
     });
 
 	it('Check server port', function() {
@@ -748,7 +748,7 @@ describe("server", function() {
 	it('Check server listen was called', function() {
 		expect(myServer.server.listen).toHaveBeenCalled();
 	});
-	
+
 	it('Check server connection was called', function() {
 		var client = net.connect({ port: 1666 },
             	function() {
@@ -785,7 +785,7 @@ describe("server", function() {
 <p>The last test is testing the result of an asynchronous call and it needs to use done() callback. This is valid for Jasmine >= 2.0 versions now. Maybe you've read something about run/waitFor but now this seems to be the official way to do this.
 </p>
 
-Some references: 
+Some references:
 <ul>
 <li>Jasmine introduction: http://jasmine.github.io/2.0/introduction.html</li>
 <li>Jasmine wiki: https://github.com/pivotal/jasmine/wiki/Spies</li>

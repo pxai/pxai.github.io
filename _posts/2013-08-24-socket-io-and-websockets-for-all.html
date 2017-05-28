@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "socket.io ...and websockets for all." 
-date: 2013-08-24 23:11:46 
-categories: coding
+title: "socket.io ...and websockets for all."
+date: 2013-08-24 23:11:46
+categories: websockets, socket.io, lab
 ---
 <p>Otra de las novedades que trae HTML5 es la de los famosos websockets. El protocolo HTTP funciona de tal manera que no existe una conexión fija entre el cliente y el servidor; el navegador y el servidor se están continuamente lanzando <i>piedras</i> con mensajes, y a veces para simular que la conexión es permanente (una sesión) se acompaña de alguna marca como una cookie. Los websockets nos dan la posiblidad de establecer una conexión fija entre cliente y servidor como la que hay en un IRC o en los servicios de juegos; en el navegador podemos conectarnos a un servidor de websockets con una especie de Sockets ultrasimplificados y por supuesto orientados a eventos.
 </p>
@@ -50,8 +50,8 @@ $( document ).ready(function() {
     $('#usertext').keypress(function (event) {
         var dataToSend = $('#usertext').val();
         if (event.which == 13) {
-            $('#chattext').append(dataToSend + '\n');           
-            $('#usertext').val(""); 
+            $('#chattext').append(dataToSend + '\n');
+            $('#usertext').val("");
             console.log('Sending to server: ' + dataToSend);
             webSocket.send(JSON.stringify({data: dataToSend}));
         }
@@ -66,7 +66,7 @@ $( document ).ready(function() {
         $('#chattext').html(msg.data);
     }
 
-          
+
 });
         </script>
 	<h5>Pure Web Sockets sample</h5>
@@ -114,7 +114,7 @@ function handler (req, res) {
 * when client send emit('event666') the handler will be socket.on('event666')
 */
 io.sockets.on('connection', function (socket) {
-  
+
   socket.on('myname', function (data) {
     console.log('Received from client:' + data.name);
     socket.emit('fromserver', { msg: 'ok, hello ' + data.name });
@@ -177,14 +177,14 @@ $( document ).ready(function() {
     $('#usertext').keypress(function (event) {
         var dataToSend = $('#usertext').val();
         if (event.which == 13) {
-            $('#chattext').append('(' + dataToSend +' sent)\n');          
+            $('#chattext').append('(' + dataToSend +' sent)\n');
 
             console.log('Sending to server: ' + dataToSend);
             webSocket.emit('fromclient', { msg: dataToSend });
-            $('#usertext').val(""); 
+            $('#usertext').val("");
         }
     });
-          
+
 });
         </script>
 	<h5>Web Sockets sample</h5>
@@ -194,7 +194,7 @@ $( document ).ready(function() {
 <input type="text" name="usertext" id="usertext" value="" placeholder="Write and press enter" />
 
 
-	
+
   </body>
 </html>
 

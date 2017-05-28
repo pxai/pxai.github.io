@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Calcular el IBAN con php" 
-date: 2014-01-18 00:01:21 
-categories: coding
+title: "Calcular el IBAN con php"
+date: 2014-01-18 00:01:21
+categories: php, iban
 ---
 <p>
 Los organismos internaciones se han vuelto a poner de acuerdo para poner unificar los números de
@@ -15,8 +15,8 @@ la forma de esa cuenta de tal forma que sea validable. <a href='http://en.wikipe
 bastante bien, incluyendo los pasos tanto para generar un IBAN a partir de una CC como para validarlo</p>
 
 <p>Hay una pequeña pega, la validación exige una operación mod sobre un número tan grande que es probable
-que muchos lenguajes no puedan llevarla a cabo. En la red existen ya muchas soluciones, esta es una. 
-Ojo, aparte de que este ejemplo solo se ha probado con cuentas en el formato de 20 dígitos 
+que muchos lenguajes no puedan llevarla a cabo. En la red existen ya muchas soluciones, esta es una.
+Ojo, aparte de que este ejemplo solo se ha probado con cuentas en el formato de 20 dígitos
 esto no ha sido más que una diversión. Tienes implementaciones mejores como <a herf='https://code.google.com/p/php-iban/' title='Bueno, un poco... en fin'>php-iban</a> </p>
 <p>
 <b>NOTA:</b>Para evitar problemas con el copy paste o posibles fallos con algún caracter, puedes <a href="https://github.com/pelloxabier/sourcecode/tree/master/iban-php" title="ejemplo php cáculo y validación de IBAN">descargarte esto del repositorio de git</a></p>
@@ -35,18 +35,18 @@ esto no ha sido más que una diversión. Tienes implementaciones mejores como <a
 */
 
 class Iban {
-   
+
    private static $LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private static $COUNTRIES = array("DE","EN","IT","NO","FR","PL","RO","SR","BG","SL","NL","RU","HU","LT","TR","CA","SV","ZH","EL","ES","SQ","PT","CS","FI","SK","DA","HR","LV","ET","JA","KA","MN");
 
-   
+
    /**
-   * Given a 20 digit account number, 
+   * Given a 20 digit account number,
    * generates and returns IBAN account
    * needs refactoring
    */
 	public static function generate ($accountNumber, $countryCode, $ibanPrefix=false,$spaces=true) {
-		
+
 		$longAccount = "";
 		$remainder = 0;
 		$prefix = ($ibanPrefix)?'IBAN':'';
@@ -56,12 +56,12 @@ class Iban {
 
 		if (self::invalidCountryCode($countryCode)) {
 			return 'Invalid country code: ' . $countryCode;
-		}		
-		
+		}
+
 		if (self::invalidAccountNumber($accountNumber)) {
 			return 'Invalid account Number: ' . $accountNumber;
 		}
-		
+
 
 		$longAccount =  self::rearrangeAccount($accountNumber,$countryCode);
 
@@ -73,25 +73,25 @@ class Iban {
 	   	return $prefix . $countryCode . sprintf('&#37;02d',(98-$remainder)) . $accountNumber;
 	   }
 	}
-	
+
 	/**
 	* validates an IBAN account
 	*
 	*/
 	public static function validate ($ibanAccount) {
 		$longAccount = '';
-		
+
 		$longAccount = self::clearIban($ibanAccount);
 
 		$longAccount = self::rearrangeIban($longAccount);
-		                        
+
 		$longAccount =	substr($longAccount,2,strlen($longAccount) -2) . substr($longAccount,0, 2) ;
-		
-     
+
+
      	return (self::calculateRemainder($longAccount) == 1);
 	}
-	
-	
+
+
 	/**
 	* checks for invalid countryCode in format or existence
 	*/
@@ -105,7 +105,7 @@ class Iban {
 		if (!in_array($countryCode,self::$COUNTRIES)) {
 			return true;
 		}
-	
+
 		return false;
 	}
 
@@ -113,8 +113,8 @@ class Iban {
 	* rearrangeAccount
 	*/
 	private function rearrangeAccount ($accountNumber,$countryCode) {
-					return $accountNumber . 
-								self::letterPosition(substr($countryCode,0, 1)) . 
+					return $accountNumber .
+								self::letterPosition(substr($countryCode,0, 1)) .
                            self::letterPosition(substr($countryCode,1, 1)). "00";
 	}
 
@@ -126,29 +126,29 @@ class Iban {
 		                         self::letterPosition(substr($ibanAccount,0, 1)) .
 		                         	self::letterPosition(substr($ibanAccount,1, 1));
 	}
-	
+
 	/**
 	* workaround to perform mod operation with a big number.
 	*/
 	private function calculateRemainder($longNumber) {
 		$division = 0;
 		$remainder = 0;
-		
+
      for ($i=0;$i<strlen($longNumber);$i++) {
 		$division = $remainder . substr($longNumber, $i, 1);
       $remainder = $division % 97;
      }
-     
+
      return $remainder;
 	}
-		
+
 	/**
 	* checks for invalid accountNumber in format and validation
 	*/
 	private function invalidAccountNumber () {
 		return false;
 	}
-	
+
 	/**
 	* adds a space characters to format IBAN account
 	*/
@@ -160,7 +160,7 @@ class Iban {
 			}
 			$result .= substr($ibanAccount,$i,1);
 		}
-		
+
 		return $result;
 	}
 
@@ -179,19 +179,19 @@ class Iban {
 	private function clear($accountNumber) {
 		return (preg_replace("/[^0-9]/","",$accountNumber));
 	}
-	
+
 	/**
 	* Clears IBAN and space characters
 	*/
 	private function clearIban($accountNumber) {
-		
+
 		$accountNumber = preg_replace("/IBAN/i", "", $accountNumber);
 		$accountNumber = preg_replace("/\s+/", "", $accountNumber);
 		$accountNumber = preg_replace("/\-/", "", $accountNumber);
-		
+
 		return $accountNumber;
 	}
-	
+
 }
 
 </pre>
@@ -212,7 +212,7 @@ include_once 'Iban.php';
 
 $example='2100 0813 61 0123456789';
 $expected_iban = 'ES79 2100 0813 6101 2345 6789';
- 
+
 echo Iban::generate($example,'ES') . ' == ';
 echo $expected_iban;
 

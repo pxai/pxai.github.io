@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Maneras de integrar Struts2 con Hibernate" 
-date: 2013-11-17 15:26:23 
-categories: coding
+title: "Maneras de integrar Struts2 con Hibernate"
+date: 2013-11-17 15:26:23
+categories: struts2, hibernate
 ---
 <p>
 Struts2 sigue siendo uno de los frameworks web para java más populares. Lo del número 2
@@ -15,8 +15,8 @@ de Hibernate, una pareja de baile ideal para Struts.
 <img src="http://upload.wikimedia.org/wikipedia/en/9/96/Hibernate.png" title="Hibernate logo" alt="Hibernate logo" />
 <h5>La sesión de Hibernate</h5>
 <p>Hibernate permite a nuestra aplicación abstraerse de la base de datos, hasta el punto siempre deseable
-en el que podemos cambiar la Base de datos tocando un fichero de configuración ajeno al código. 
-Para que nuestra aplicación pueda acceder a los datos lo debe hacer a través de Hibernate y TODOS los accesos 
+en el que podemos cambiar la Base de datos tocando un fichero de configuración ajeno al código.
+Para que nuestra aplicación pueda acceder a los datos lo debe hacer a través de Hibernate y TODOS los accesos
 de Hibernate deben hacerse a través de una instancia de la clase Session. En una aplicación de consola por ejemplo,
 la clase java que pretenda acceder a los datos primero deberá conseguir una instancia de Session.
 Eso se suele hacer a través de una clase como esta
@@ -27,17 +27,17 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-  
+
 /**
  * provide Hibernate Session factory
  * @author Pello Xabier Altadill Izura
  * @greetz blue mug
  */
 public class HibernateSession {
-  
+
     private static final SessionFactory sessionFactory = buildSessionFactory();
     private static Session session;
-  
+
     /**
      * Based on hibernate.cfg.xml configuration creates
      * a SessionFactory
@@ -46,11 +46,11 @@ public class HibernateSession {
     private static SessionFactory buildSessionFactory() {
             Configuration configuration = new Configuration();
             configuration.configure();
-            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();        
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             return sessionFactory;
     }
-  
+
     /**
      * this gives the desired session factory
      * @return hibernate Session Factory instance
@@ -58,7 +58,7 @@ public class HibernateSession {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-    
+
     /**
      * gives the current Session
      * @return Hibernate Session
@@ -67,7 +67,7 @@ public class HibernateSession {
         if (null == session) {
                 session = sessionFactory.openSession();
         }
-        
+
         return session;
     }
 }
@@ -86,12 +86,12 @@ la clase java que utilizar Hibernate accedemos y usamos la sesión de esta maner
             SessionFactory sessionFactory = HibernateSession.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-         
+
             Integer id = (Integer) session.save(seller);
             seller.setId(id);
-                 
+
             session.getTransaction().commit();
-                 
+
             session.close();
 
         }
@@ -100,12 +100,12 @@ la clase java que utilizar Hibernate accedemos y usamos la sesión de esta maner
 
 <p>Hasta aquí todo ok, y en una aplicación de consola no hay problemas. Pero...
 ¿Cómo nos lo montamos en Struts2 para que nuestrar clases puedan sacar una instancia de Session de Hibernate?
-A continuación muestro tres maneras que se mencionan con frecuencia: 
+A continuación muestro tres maneras que se mencionan con frecuencia:
 </p>
 
 <h5>1. Usando el contexto de Servlet</h5>
 <p><a href="http://www.mkyong.com/" title="Mykong web site">Mykong</a>, un habitual de las recetas J2EE
-indica que ya que no existe una forma oficial de integrar los dos frameworks, se pueden utilizar el 
+indica que ya que no existe una forma oficial de integrar los dos frameworks, se pueden utilizar el
 contexto. ¿cuál es el contexto en Struts2? No estamos en consola, estamos en un contexto de Servlet.
 Así que lo que hace es una clase que genera la Session que implementa ServletContextListener, lo cual
 nos va a permitir conseguir la sesión en cualquier clase dentro de la aplicación Struts2. Se puede
@@ -131,10 +131,10 @@ import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 * @greetz again and again
 */
 public class UserDAOImpl implements UserDAO {
-	
+
 	@SessionTarget
 	Session session;
-	
+
 	@TransactionTarget
 	Transaction transaction;
 
@@ -162,5 +162,5 @@ Para la Session crea una clase llamada HibernateUtil que es la que provee la Ses
 Utilizamos la clase previa de HibernateSession y la utilizamos en las clases DAO.</p>
 <img src="http://www.pello.info/images/struts2hibernate.png" alt="Proyecto en acción" title="Proyecto en acción" />
 <p>Como muestra de esta integración en <a href="http://erps-2dam-4vientos.googlecode.com/files/Struts2HibernateTemplate.zip" title="descargar proyecto struts2 hibernate">esta url tienes un proyecto</a> de Eclipse listo desarrollado
-en Struts2 e Hibernate. Esta hecho desde 0 mano, sin Maven ni nada ya que hay gente a mi alrededor que 
+en Struts2 e Hibernate. Esta hecho desde 0 mano, sin Maven ni nada ya que hay gente a mi alrededor que
 con su Windows8 Maven le explota en la cara.</p>

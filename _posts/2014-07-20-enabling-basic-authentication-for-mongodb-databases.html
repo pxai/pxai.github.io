@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Enabling basic authentication for MongoDB databases" 
-date: 2014-07-20 00:37:15 
-categories: coding
+title: "Enabling basic authentication for MongoDB databases"
+date: 2014-07-20 00:37:15
+categories: mongodb, auth, devops
 ---
 <img src="http://info.mongodb.com/rs/mongodb/images/MongoDB_Logo_Full.png" alt="MongoDB logo" title="MongoDB logo">
  <p>MongoDB is extremely easy to install and run. If you are not able to make it work maybe you could feel more confortable using Access or even excel. Well, sorry for that. This short article is but a quick and dirty guide to enable basic authentication in mongodb, and how to create one database with its own user (not a superadmin) with just read/write permissions.
@@ -34,7 +34,7 @@ db.createUser(
     user: "admin",
     pwd: "KeepASecret",
     roles: [ "root" ]
-    
+
   }
 )
 Successfully added user: { "user" : "admin", "roles" : [ "root" ] }
@@ -82,7 +82,7 @@ MongoDB shell version: 2.6.1
 connecting to: admin
 2014-07-18T01:32:04.702+0200 Error: 18 { ok: 0.0, errmsg: "auth failed", code: 18 } at src/mongo/shell/db.js:1210
 exception: login failed
-root@linux:# 
+root@linux:#
 </pre>
 
 <p>We could also log without any user and authenticate from the mongo shell</p>

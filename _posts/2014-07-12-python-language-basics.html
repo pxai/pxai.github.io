@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Python language basics" 
-date: 2014-07-12 23:51:05 
-categories: coding
+title: "Python language basics"
+date: 2014-07-12 23:51:05
+categories: python, basics
 ---
 <h5>Python in 21 minutes (or so)</h5>
 <p>For a developer is not enough to know one programming language, it is often said that is good to know many of them. After all the language is but a mere tool to build programs. Python has been around for many years and one of my pending task was to take a look at it. Some friends (<a href="http://twitter.com/Eugenia4v">@Eugenia4v</a>,<a href="http://twitter.com/Claw_Shadow">@Claw_Shadow</a>,<a href="http://twitter.com/@D00m3dr4v3n">@D00m3dr4v3n</a>) are always telling me about the benefits of Python not to mention plenty of papers where Python is even recommended as the language of choice to get into programming. I guess that when Google itself has been using Python from the beginning, and when this language is a requirement for many job offers there is something about it. Despite the title of this post, I spent more than 21 minutes coding around and trying the basics so don't expect a deep dive into Python. This is just a quick guide</p>
-<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/320px-Python_logo_and_wordmark.svg.png" alt="python logo" title="python logo" /> 
-<p>Python is: interpreted, weakly typed, (could be compilated), case sensitive, supports oop, functional, imperative programming,...   
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/320px-Python_logo_and_wordmark.svg.png" alt="python logo" title="python logo" />
+<p>Python is: interpreted, weakly typed, (could be compilated), case sensitive, supports oop, functional, imperative programming,...
 apart from the classic definition, if you come from c style languages at first glance you'll notice the lack of semicolons. But the real change in Python is the use of indentation to create code blocks. So instead using  brackets for if-else-loops-functions you have to use indents or tabs properly. This at least, somehow leads to mandatory code convention (<a href="https://www.python.org/dev/peps/pep-0008">they exists too</a>), here there is no room for discussion about the most clear way to write an if-else structure; there is only "one style" so follow it or your code will not run at all. But to sum up, and above all, python was designed to be easy to read</p>
 
 <p>All the sample code used in this post is included in one single file.</p>
@@ -54,7 +54,7 @@ letterA = 'a'
 letterB = "b"
 godExists = True
 itsMe = False
-# multiline string, 
+# multiline string,
 prayer = """Gods of war I call you,
 my sword is by my side,
 I seek a life of honor,
@@ -74,7 +74,7 @@ c = 42
 
 
 <h5>Operators</h5>
-<p>Comparing with other languages we have some extra operators here. Bit operators are omitted, but you've them all. 
+<p>Comparing with other languages we have some extra operators here. Bit operators are omitted, but you've them all.
 </p>
 <pre class="brush: js">
 # expressions ##########
@@ -102,7 +102,7 @@ theTruth = not godExists
 # comparison operators
 areEqual = a == b
 areNotEqual = a!= b   # a &lt;&gt; b works, but obsolete
-isBigger = a &gt; b 
+isBigger = a &gt; b
 isLess = a &lt; b
 biggerOrEqual = a &gt;= b
 lessOrEqual = a &lt;= b
@@ -156,9 +156,9 @@ if a &gt; b:
 else:
 	print "a is NOT bigger than b"
 
-# elif 
+# elif
 if a &gt; b:
-	print "a is bigger than b"	
+	print "a is bigger than b"
 elif a &lt; b:
 	print "a is less than b"
 elif a == b:
@@ -184,7 +184,7 @@ while c&gt;0 :
 	print "a loop with c" , c
 	c-=1
 
-# for loop 
+# for loop
 # for i in range(begin,end), does not reach end
 for x in range(0,5):
 	print "for loop with x " , x
@@ -205,7 +205,7 @@ name = 'Python'
 for x in name:
 	print "for loop with string: " , x
 
-# break and continue works in python as well 
+# break and continue works in python as well
 # applied to while and for
 # with break we stop and exit the loop
 findTheX = 'sdfXsaf'
@@ -348,7 +348,7 @@ hello
 hello()
 a = add(600,66)
 print "Result of addition: " , add(a,b)
-b = isEven(a) 
+b = isEven(a)
 print "Result of isEven for " , a , ": " , b
 
 withDefaultValues(5)
@@ -361,7 +361,7 @@ Of course, apart from OOP, there are other options to package and reuse code mor
 </p>
 <p>This is our super module, which has one super function</p>
 <pre class="brush: js">
-# hello.py 
+# hello.py
 def sayHello(name=""):
 	return "Hello " , name
 </pre>
