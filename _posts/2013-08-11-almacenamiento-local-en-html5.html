@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Almacenamiento local en HTML5" 
-date: 2013-08-11 22:51:12 
-categories: coding
+title: "Almacenamiento local en HTML5"
+date: 2013-08-11 22:51:12
+categories: html5, JavaScript, localstorage
 ---
 <h5>Local Storage</h5>
 <p>
@@ -30,7 +30,7 @@ La diferencia entre los dos es que lo que guardamos en localStorage está dispon
 a pesar de cerrar el navegador mientras que en el caso de sessionStorage no.
 </p>
 <pre class="brush: js">
-// para guardar datos 
+// para guardar datos
 localStorage['usuario'] = 'Juan Pardo';
 sessionStorage['clave'] = '606601';
 
@@ -84,17 +84,17 @@ console.log("Valor de session storage: " + sessionStorage['ejemplo']);
 
 /**
 * save value in localStorage
-*/ 
+*/
 function saveLocal () {
 	var localKey = document.getElementById("localkey").value;
 	var localValue = document.getElementById("localvalue").value;
-	
+
 	localStorage[localKey] = localValue;
 }
 
 /**
 * save value in sessionStorage
-*/ 
+*/
 function saveSession () {
 	var sessionKey = document.getElementById("sessionkey").value;
 	var sessionValue = document.getElementById("sessionvalue").value;
@@ -104,19 +104,19 @@ function saveSession () {
 
 /**
 * shows all key/values from storages
-*/ 
+*/
 function showAll () {
 	var storage = document.getElementById("storage");
 	storage.innerHTML = "<h5>Local Storage</h5>";
-	
+
 	// We use keys and forEach to see all
-	Object.keys(localStorage).forEach(function (k) { 
+	Object.keys(localStorage).forEach(function (k) {
 										storage.innerHTML += k + " = " + localStorage[k] + "<br />";
 										});
 
 	storage.innerHTML += "<h5>Session Storage</h5>";
 	// We use keys and forEach to see all
-	Object.keys(sessionStorage).forEach(function (k) { 
+	Object.keys(sessionStorage).forEach(function (k) {
 										storage.innerHTML += k + " = " + sessionStorage[k] + "<br />";
 										});
 }
@@ -124,7 +124,7 @@ function showAll () {
 
 /**
 * removes all key/values from storages
-*/ 
+*/
 function removeAll () {
 	localStorage.clear();
 	sessionStorage.clear();

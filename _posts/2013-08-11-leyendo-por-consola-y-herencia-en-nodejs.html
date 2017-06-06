@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Leyendo por consola y herencia en nodejs" 
-date: 2013-08-11 00:17:05 
-categories: coding
+title: "Leyendo por consola y herencia en nodejs"
+date: 2013-08-11 00:17:05
+categories: nodejs, io, oop
 ---
 <p>Para poder hacer cosas básicas en la consola con node tenemos un objeto predefinido llamado <em>process</em> que nos provee de todo los necesario, desde jugar con la stdin, stdout, stderr hasta terminar la ejecución. En un alarde de originalidad, aquí tienes una calculadora muy simple en la que se deben introducir dos números y un operador.
 </p>
@@ -13,9 +13,9 @@ categories: coding
 * @author Pello Xabier Altadill Izura
 * @greetz for you
 * An easy/obvious/quick way to discover what comes in an object (events, props):
-* console.log(process);  console.log(process.stdin); ... 
+* console.log(process);  console.log(process.stdin); ...
 * Or just check the api online
-* http://nodejs.org/api/process.html 
+* http://nodejs.org/api/process.html
 */
 
 
@@ -50,7 +50,7 @@ function calc () {
 
 	for (i=0;i< parameters.length;i++)
 		console.log(i + ': ' + parameters[i]);
-	
+
 	switch(parameters[2]) {
 		case '+' :	result = parseInt(parameters[0]) + parseInt(parameters[1]);
 				break;
@@ -108,7 +108,7 @@ function Character (newName,race) {
 	this.race = race;
 	this.weapon = null;
 	this.dateOfBirth = new Date();
-	
+
 	// Methods ////////////////
 	/**
 	* greet, says something -what-
@@ -135,7 +135,7 @@ function Character (newName,race) {
 var Weapon = {
 	name : 'Anduril',
 	type : 'Sword',
-	powers : [4,3,1],  // Attack, defense, magic 
+	powers : [4,3,1],  // Attack, defense, magic
 	attack: function () {
 			return this.powers[0] * Math.random();
 		},
@@ -165,7 +165,7 @@ console.log(otherCharacter.name + ' attacks:' + otherCharacter.weapon.attack());
 * Mage class
 * We must set school
 */
-function Mage (school) { 
+function Mage (school) {
 	Mage.super_.call(this);
 	this.school = school;
 	this.mana = 100;
@@ -205,7 +205,7 @@ console.log(mage.kiss());
 La salida sería:
 </p>
 <pre class="brush: bash">
-linux# node inheritance.js 
+linux# node inheritance.js
 Name: Legolas Race: Elf Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
 Name: Aragorn Race: Dunedain Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
 Name: Anduril Type: Sword Powers: 4,3,1
@@ -215,5 +215,5 @@ Cast freeze spell: 0.47500331955961883
 Name: Gandalf Race: undefined Date of birth: Thu Aug 08 2013 02:32:06 GMT+0200 (CEST)
 Gandalf kisses you with -4
 
-linux# 
+linux#
 </pre>
