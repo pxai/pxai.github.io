@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Descubriendo juegos de caracteres" 
-date: 2010-03-24 00:00:00 
-categories: coding
+title: "Descubriendo juegos de caracteres"
+date: 2010-03-24 00:00:00
+categories: linux, charset
 ---
 Puede que alguna vez hayas tenido que pasar datos de un fichero en algún formato extraño a una BD u otro tipo de repositorio. En el proceso de exportación/importación de los datos puede haber problemas con los juegos de caracteres ya que en aplicaciones del mundo antiguo (vease DOS etc) en lenguajes tenebrosos (COBOL, Pascal, etc...) vete a saber los juegos de caracteres que se usaban.
 
@@ -38,7 +38,7 @@ Y ahora vamos a lo bruto. En un bucle for sacamos las 10 primeras líneas del fi
 
 <code>
 linux$ for i in `cat juegos.txt`
-do 
+do
 echo -n Convirtiendo ${i}
 head fichero.csv | iconv --from=$i --to=UTF-8 > fichero.${i}.csv
 echo done

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "7. Iteraciones c++" 
-date: 2009-08-04 11:10:00 
-categories: coding
+title: "7. Iteraciones c++"
+date: 2009-08-04 11:10:00
+categories: c++, iterations
 ---
 
 
@@ -15,7 +15,7 @@ A ser posible hay que evitarlas.
 <pre>
 /**
 * Loop.cpp
-* 
+*
 * Programa que muestra como usar iteraciones
 * Pello Xabier Altadill Izura
 * Compilar: g++ Loop.cpp -o Loop
@@ -57,7 +57,7 @@ se implementan como en c, php, perl, java, ...
 <pre>
 /**
 * Bucles.hpp
-* 
+*
 * Clase que muestra distintos tipos de iteraciones
 * Pello Xabier Altadill Izura
 */
@@ -93,7 +93,7 @@ Y aqui la implementacion
 <pre>
 /**
 * Bucles.cpp
-* 
+*
 * Clase que muestra distintos tipos de iteraciones
 * Pello Xabier Altadill Izura
 * Compilar: g++ Bucles.cpp -o Bucles
@@ -171,7 +171,7 @@ En este ejemplo creamos una clase para mostrar el funcionamiento de un menu de s
 
 /**
 * Menu.hpp
-* 
+*
 * Clase que especifica un menu de seleccion de opciones
 * que implementaremos con un case
 * Pello Xabier Altadill Izura
@@ -189,7 +189,7 @@ public:
 	// Destructor
 	~Menu();
 
-	// Menu tipo case 
+	// Menu tipo case
 	int menu();
 };
 </pre>
@@ -198,7 +198,7 @@ Y su implementacion
 <pre>
 /**
 * Menu.cpp
-* 
+*
 * Clase que implementa Menu.hpp
 * Pello Xabier Altadill Izura
 * Compilar: g++ Menu.cpp -o Menu
@@ -216,7 +216,7 @@ Y su implementacion
 	int Menu::menu(){
 		int temp = 0;
 
-		// Iniciamos un bucle que no para hasta que se seleccione 
+		// Iniciamos un bucle que no para hasta que se seleccione
 		// algo distinto de 0.
 		do {
 			cout << " MENU Seleccion." << endl;
@@ -227,22 +227,22 @@ Y su implementacion
 
 			cout << " Elije algo: ";
 			cin >> temp;
-			
+
 			// Segun lo elegido sacamos algo.
 			switch (temp) {
-				case 0 : 
+				case 0 :
 					cout << " Nos vamos " << endl;
 					break;
-				case 1 : 
+				case 1 :
 					cout << " Estas a dieta? " << endl;
 					break;
-				case 2 : 
+				case 2 :
 					cout << " Vaya digestion... " << endl;
 					break;
-				case 3 : 
+				case 3 :
 					cout << " Que sano eres " << endl;
 					break;
-				case 4 : 
+				case 4 :
 					cout << " Vaya finolis esta hecho " << endl;
 					break;
 				default :
