@@ -37,6 +37,15 @@ You can get these effects
 
 ## Titles
 Titles have different sizes
+```
+# H1-like title
+## H2-like title
+### H3-like title
+#### H4-like title
+##### H5-like title
+###### H6-like title
+```
+
 # H1-like title
 ## H2-like title
 ### H3-like title
@@ -45,16 +54,31 @@ Titles have different sizes
 ###### H6-like title
 
 Other ways to create H1 and H2-like titles:
+```
+H1-like title
+=============
+```
 
 H1-like title
 =============
 and
+```
+H2-like title
+-------------
+```
+
 H2-like title
 -------------
 
 ## Lists
 Lists have different modes
 ### Ordered
+```
+1. Ordered 
+2. With
+3. Numbers
+⋅1. Even with sublists ⋅2. Like this using dots
+```
 1. Ordered 
 2. With
 3. Numbers
@@ -62,11 +86,25 @@ Lists have different modes
 
 
 ### Unorderded list with
+```
+- Minuses -
+- Plus sign +
+- Asterisk *
+```
+
 - Minuses -
 - Plus sign +
 - Asterisk *
 
 ### Sublists
+```
+* Ordered or unordered
+* Just use dots ··
+··* Like this
+··* Or this
+* Use dots for indenting
+···Just like this
+```
 * Ordered or unordered
 * Just use dots ··
 ··* Like this
@@ -75,14 +113,36 @@ Lists have different modes
 ···Just like this
 
 ## Horizontal rules
+
 You can make the using three or more
 - Minuses, dashes or hyphens -
 - Underscores _
 - Asterisk *
+```
+
+```
+
+With hyphens
+--
+
+With underscores
+________
 
 ## Links
 Links can be made around text or any other element
+```
+[Simple link to my page](http://pello.io)
+[Simple link to my page](http://pello.io "My homepage")
+[Link to reference][Sample Reference]
+[Link to repository file](2017-02-21-markdown-template.md)
+[Go to this reference][1]
+[Go to another reference][2]
+We can just use angle brackets with urls like <http://pello.io> 
 
+[Sample Reference]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[1]: https://github.com
+[2]: http://reddit.com
+```
 ### Simple link
 [Simple link to my page](http://pello.io)
 
@@ -90,7 +150,7 @@ Links can be made around text or any other element
 [Simple link to my page](http://pello.io "My homepage")
 
 ### Link to reference
-[Link to reference][Reference text]
+[Link to reference][Sample Reference]
 
 ### Link to reference
 [Link to repository file](2017-02-21-markdown-template.md)
@@ -108,6 +168,13 @@ We can just use angle brackets with urls like <http://pello.io>
 
 ## Images
 Images must be available online
+```
+![alt text](http://pello.io/images/logo.png "This is the logo")
+
+With reference
+![alt text][pellologo]
+[pellologo]: (http://pello.io/images/logo.png "This is the logo")
+```
 ### Inline images
 ![alt text](http://pello.io/images/logo.png "This is the logo")
 
@@ -116,6 +183,9 @@ Images must be available online
 [pellologo]: (http://pello.io/images/logo.png "This is the logo")
 
 ## Youtube videos
+```
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg)](http://www.youtube.com/watch?v=v0MkJtI3FvU)
+```
 We can't embbed but we could add a video link with a caption. You need to specify the video id
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg)](http://www.youtube.com/watch?v=v0MkJtI3FvU)
 
@@ -124,6 +194,14 @@ Tables are a bit tricky, they are made using pipes and dashes. Each header must 
 of separation. Outer pipes are optional.
 Notice that tables must not be perfectly aligned with the same number of spaces. 
 ### Simple table
+```
+| Id     | Name         | Description    |
+| ------ | ------------ | -------------- |
+| 42     | Answer       | The answer     |
+| 15     | Pretty       | Means pretty   |
+| 666    | Evil         | Evil number    |
+```
+
 | Id     | Name         | Description    |
 | ------ | ------------ | -------------- |
 | 42     | Answer       | The answer     |
@@ -132,7 +210,9 @@ Notice that tables must not be perfectly aligned with the same number of spaces.
 
 ### Alignment
 Using special headers we can set content alignment in tables. Don't forget the spaces.
+```
 
+```
 | Left     | Center       | Right  |
 |:------ |:------------:| --------------:|
 | 42     | Answer     | The answer   |
@@ -140,6 +220,9 @@ Using special headers we can set content alignment in tables. Don't forget the s
 | 666    | Evil       | Evil number  |
 
 ### Nested markdown 
+```
+
+```
 Inside the cells we can still use markdown. 
 | Id     | Name         | Description    |
 | ------ | ------------ | -------------- |
@@ -148,15 +231,19 @@ Inside the cells we can still use markdown.
 | 666    | **Evil**         | Evil number    |
 
 
-
 ## Code
 Using triple back-ticks , we can somehow get the code style
 
 ### Simple word
+```
+We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
+just `like this`, looking good?
+```
 We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
 just `like this`, looking good?
 
 ### Code listing
+
 ```
 Just using triple quotes
 We get this effect of highlighted code
@@ -175,10 +262,19 @@ function sample (parameter) {
 }
 ```
 ### Inline HTML
+```
+You can just use HTML tags in your code, and it will work in most cases
+with simple tags <strong>like this</strong>
+```
 You can just use HTML tags in your code, and it will work in most cases
 with simple tags <strong>like this</strong>
 
 ## Blockquotes
+```
+> Hi there
+> This is a replay of an email
+> and it looks great
+```
 Looks like a reply
 > Hi there
 > This is a replay of an email
