@@ -224,6 +224,8 @@ Using special headers we can set content alignment in tables. Don't forget the s
 
 ```
 Inside the cells we can still use markdown. 
+
+
 | Id     | Name         | Description    |
 | ------ | ------------ | -------------- |
 | 42     | Answer       | The answer     |
