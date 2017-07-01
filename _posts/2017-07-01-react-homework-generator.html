@@ -1,0 +1,243 @@
+---
+layout: post
+title: "React Homework Generator"
+date: 2017-07-01 21:35:00
+categories: [coding, frameworks, react]
+---
+<p>This is a simple sample React App that shows the basic usage of this framework. It generetas simple arythmetic problems</p>
+<p>The Apps has just a form where you can choose options like Student Name, difficulty,...</p>
+<img src="/images/react-homework-generator-form.png" tile="App in execution" />
+<p>And then, React generates some random operators, each of them is a Component</p>
+<img src="/images/react-homework-generator.png" tile="App in execution" />
+<h3>How was it made</h3>
+<p>The App was started using Facebook's tool, which takes care of project scaffolding</p>
+<p><pre >
+  npm install -g create-react-app
+</pre></p>
+
+<p>And then</p>
+<p><pre >
+  create-react-app homework-generator
+</pre></p>
+<p>This creates a ready to edit,transpile, test and run your react code, in watch mode.</p>
+<h3>Components</h3>
+<h4>index.js</h4>
+<pre class="brush: js;">
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+</pre>
+
+<h4>App.js</h4>
+<pre class="brush: js;">
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import FormGenerate from './FormGenerate';
+import ExerciseGroup from './ExerciseGroup';
+
+var App = React.createClass({
+  getDefaultProps: function () {
+      return {
+        title: 'React Homework Generator',
+        name: 'June'
+      };
+  },
+  // State can be changed
+  getInitialState: function () {
+    return {
+        title: 'React Homework Generator',
+        name: 'June'
+    };
+  },
+  handleNewName: function (name) { // Called from the child component
+      this.setState({
+            name : name
+      });
+      console.log('Called from child: ' + name);
+  },
+  render: function () {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>React HomeWork Generator {this.state.name}</h2>
+        </div>
+        <FormGenerate onNewName={this.handleNewName}/>
+        <p className="App-intro">
+        <ExerciseGroup  />
+        </p>
+      </div>
+    );
+  }
+
+});
+
+export default App;
+
+</pre>
+
+<h4>FormGenerate.js</h4>
+<pre class="brush: js;">
+import React from 'react';
+
+
+var FormGenerate = React.createClass({
+// Props are set once
+getDefaultProps: function () {
+return {
+who: 'Student',
+pages: 1,
+difficulty: 2
+};
+},
+
+// State can be changed
+getInitialState: function () {
+return {
+who: this.props.who,
+pages: this.props.pages,
+difficulty: this.props.difficulty
+};
+},
+onButtonClick: function (e) {
+e.preventDefault();
+// We do this way to update and to force re-rendering
+if (typeof this.refs.pages.value === 'string' && this.refs.pages.value !== '') {
+this.setState({
+who: this.refs.who.value,
+pages : this.refs.pages.value,
+difficulty : this.refs.difficulty.value
+});
+this.props.onNewName(this.refs.who.value,);
+}
+this.refs.who.value = '';
+this.refs.pages.value = '';
+this.refs.difficulty.value = '';
+},
+
+render: function () {
+return (
+<div className="FormGenerate">
+  <form onSubmit={this.onButtonClick}>
+    <label>Who</label><br />
+    <input type="text" ref="who"  /><br />
+    <label>Pages</label><br />
+    <input type="text" ref="pages"  /><br />
+    <label>Difficulty</label><br />
+    <input type="text" ref="difficulty"  /><br />
+    <button>Generate</button>
+  </form>
+  <div><span>Pages:</span> {this.state.pages}</div>
+  <div><span>Difficulty:</span> {this.state.difficulty}</div>
+</div>
+
+);
+}
+
+});
+
+export default FormGenerate;
+</pre>
+
+<h4>ExerciseGroup.js</h4>
+<pre class="brush: js;">
+import React from 'react';
+import Exercise from './Exercise';
+
+var ExerciseGroup = React.createClass( {
+  getDefaultProps: function () {
+      return {
+        title: 'React Homework Generator',
+        operations: [0,0,0,0,0,0,0,0]
+      };
+  },
+
+  getInitialState: function () {
+    return {};
+  },
+  generateExercises : function () {
+
+  },
+  render: function () {
+    return (
+      <div className="ExerciseGroup">
+        <div className="ExerciseGroup-header">
+          <h3>Exercise Group</h3>
+        </div>
+        <div>
+          {this.props.operations.map(function(operation) {
+            return <Exercise operator="+" />
+            })
+          }
+        </div>
+      </div>
+    );
+  }
+
+});
+
+export default ExerciseGroup;
+
+</pre>
+
+<h4>Exercise.js</h4>
+<pre class="brush: js;">
+import React from 'react';
+
+var Exercise = React.createClass( {
+  getDefaultProps: function () {
+      return {
+        title: 'React Homework Generator',
+        operator: '+'
+      };
+  },
+
+  getInitialState: function () {
+    return {};
+  },
+
+  render: function () {
+    return (
+      <div className="Exercise">
+        <div className="Exercise-header">
+        </div>
+        <div className="result">
+            {this.randomNumber(1,20)} {this.props.operator} {this.randomNumber(1,20)} =
+        </div>
+      </div>
+    );
+  },
+  randomNumber: function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
+  randomOperator: function () {
+    var operators = ['+','-','x'];
+    return operators[this.randomNumber(0,operators.length-1)];
+  }
+
+});
+
+export default Exercise;
+
+</pre>
+
+<h4>Testing App.js</h4>
+<p>Just checks wether App.js crashes or not</p>
+<pre class="brush: js;">
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+});
+
+</pre>
