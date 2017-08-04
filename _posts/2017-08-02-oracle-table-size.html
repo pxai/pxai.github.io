@@ -7,16 +7,3 @@ categories: [oracle, db, relational]
 <p>You may need this to list all the tables from an Oracle tablespace with the record or row count
 The list of tables comes from a SQL, but the rest must be done with PL/SQL</p>
 <script src="https://gist.github.com/pxai/b606ccde1a2af61c39fbc0f5dc9afb9e.js"></script>
-<pre class="brush: js">
-DECLARE 
-    val NUMBER;
-BEGIN
-    FOR I IN (select table_name from all_tables where owner = 'TABLESPACE') 
-    LOOP
-
-        EXECUTE IMMEDIATE 'SELECT count(*) FROM  TABLESPACE.' || i.table_name  INTO val;
-        DBMS_OUTPUT.PUT_LINE(i.table_name || ' ==> ' || val );
-
-    END LOOP;
-END;
-</pre>
