@@ -1,0 +1,47 @@
+﻿---
+layout: post
+title: "Ejemplo build.xml de Ant"
+date: 2011-05-20 11:13:22
+categories: ant, xml, build
+---
+<p>
+	<strong>ANT, automatizando la compilaci&oacute;n y empaquetado de aplicaciones</strong></p>
+<p>
+	Ant ser&iacute;a el equivalente java para el make de c.</p>
+<p>
+<pre class='brush: js'>
+	&lt;?xml version=&quot;1.0&quot;?&gt;<br />
+	&lt;!-- NOTA: Aseg&uacute;rate de que el fichero lo editas en utf-8 --&gt;<br />
+	&lt;!-- NOTA: conviene hacer clean y luego compilar --&gt;<br />
+	&lt;!-- Para generar: ant [tarea] o ant -buildfile [fichero.xml] [tarea] --&gt;<br />
+	&lt;project name=&quot;build.xml de ejemplo&quot; default=&quot;compilar&quot; basedir=&quot;.&quot;&gt;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.src&quot; value=&quot;src&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.build&quot; value=&quot;build&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.dist&quot; value=&quot;dist&quot;/&gt;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Genera los directorios de salida: ant preparar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;preparar&quot; description=&quot;Crea los directorios&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;mkdir dir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;mkdir dir=&quot;${dir.dist}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Elimina todo lo creado: ant clean --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;clean&quot; description=&quot;Elimina todos los ficheros generados&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;delete dir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;delete dir=&quot;${dir.dist}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Compilaci&oacute;n, primero hace la tarea preparar: ant compilar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;compilar&quot; depends=&quot;preparar&quot; description=&quot;Compilar todo.&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;javac srcdir=&quot;${dir.src}&quot; destdir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Genera un fichero jar, depende de la tarea compile: ant jar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;jar&quot; depends=&quot;compilar&quot; description=&quot;Genera un fichero jar en el directorio &#39;dist&#39;.&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;jar jarfile=&quot;${dir.dist}/proyecto.jar&quot; basedir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&lt;/project&gt;
+</pre>
+</p>

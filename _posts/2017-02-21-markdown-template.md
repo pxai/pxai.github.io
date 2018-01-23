@@ -4,12 +4,12 @@ title: "Markdown template"
 date: 2017-02-21 12:15:00
 categories: [markdown, template]
 ---
-# Markdown template
+## Markdown template
 
 Based on [Adams reference](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 I made this on my own just for fun and learning and further improvement.
 
-## Contents
+#### Contents
 This is the list of contents described in this template
 - Special emphasis
 - Titles
@@ -22,7 +22,7 @@ This is the list of contents described in this template
 - Code
 - Blockquotes
 
-## Special emphasis
+#### Special emphasis
 You can get these effects
 ```
 1. Italics with *asterisks* or _underscores_
@@ -35,23 +35,23 @@ You can get these effects
 3. Both italic and bold **_with double asterisk and underscore_** or *__asterisk and double underscore__*
 4. Strike or delete with using ~~tildes~~ 
 
-## Titles
+#### Titles
 Titles have different sizes
 ```
-# H1-like title
-## H2-like title
-### H3-like title
-#### H4-like title
-##### H5-like title
-###### H6-like title
+## H1-like title
+#### H2-like title
+####H3-like title
+#####H4-like title
+######H5-like title
+#######H6-like title
 ```
 
-# H1-like title
-## H2-like title
-### H3-like title
-#### H4-like title
-##### H5-like title
-###### H6-like title
+## H1-like title
+#### H2-like title
+####H3-like title
+#####H4-like title
+######H5-like title
+#######H6-like title
 
 Other ways to create H1 and H2-like titles:
 ```
@@ -70,9 +70,9 @@ H2-like title
 H2-like title
 -------------
 
-## Lists
+#### Lists
 Lists have different modes
-### Ordered
+####Ordered
 ```
 1. Ordered 
 2. With
@@ -85,7 +85,7 @@ Lists have different modes
 ⋅1. Even with sublists ⋅2. Like this using dots
 
 
-### Unorderded list with
+####Unorderded list with
 ```
 - Minuses -
 - Plus sign +
@@ -96,7 +96,7 @@ Lists have different modes
 - Plus sign +
 - Asterisk *
 
-### Sublists
+####Sublists
 ```
 * Ordered or unordered
 * Just use dots ··
@@ -112,7 +112,7 @@ Lists have different modes
 * Use dots for indenting
 ···Just like this
 
-## Horizontal rules
+#### Horizontal rules
 
 You can make the using three or more
 - Minuses, dashes or hyphens -
@@ -128,7 +128,7 @@ With hyphens
 With underscores
 ________
 
-## Links
+#### Links
 Links can be made around text or any other element
 ```
 [Simple link to my page](http://pello.io)
@@ -143,19 +143,19 @@ We can just use angle brackets with urls like <http://pello.io>
 [1]: https://github.com
 [2]: http://reddit.com
 ```
-### Simple link
+####Simple link
 [Simple link to my page](http://pello.io)
 
-### Simple with title
+####Simple with title
 [Simple link to my page](http://pello.io "My homepage")
 
-### Link to reference
+####Link to reference
 [Link to reference][Sample Reference]
 
-### Link to reference
+####Link to reference
 [Link to repository file](2017-02-21-markdown-template.md)
 
-### Link to numbered reference
+####Link to numbered reference
 [Go to this reference][1]
 [Go to another reference][2]
 
@@ -163,10 +163,10 @@ We can just use angle brackets with urls like <http://pello.io>
 [1]: https://github.com
 [2]: http://reddit.com
 
-### Links with angle brackets
+####Links with angle brackets
 We can just use angle brackets with urls like <http://pello.io> 
 
-## Images
+#### Images
 Images must be available online
 ```
 ![alt text](http://pello.io/images/logo.png "This is the logo")
@@ -175,25 +175,25 @@ With reference
 ![alt text][pellologo]
 [pellologo]: (http://pello.io/images/logo.png "This is the logo")
 ```
-### Inline images
+####Inline images
 ![alt text](http://pello.io/images/logo.png "This is the logo")
 
-### Reference like images
+####Reference like images
 ![alt text][pellologo]
 [pellologo]: (http://pello.io/images/logo.png "This is the logo")
 
-## Youtube videos
+#### Youtube videos
 ```
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg)](http://www.youtube.com/watch?v=v0MkJtI3FvU)
 ```
 We can't embbed but we could add a video link with a caption. You need to specify the video id
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg)](http://www.youtube.com/watch?v=v0MkJtI3FvU)
 
-## Tables
+#### Tables
 Tables are a bit tricky, they are made using pipes and dashes. Each header must have at least three dashes
 of separation. Outer pipes are optional.
 Notice that tables must not be perfectly aligned with the same number of spaces. 
-### Simple table
+####Simple table
 ```
 | Id     | Name         | Description    |
 | ------ | ------------ | -------------- |
@@ -208,7 +208,7 @@ Notice that tables must not be perfectly aligned with the same number of spaces.
 | 15     | Pretty       | Means pretty   |
 | 666    | Evil         | Evil number    |
 
-### Alignment
+####Alignment
 Using special headers we can set content alignment in tables. Don't forget the spaces.
 ```
 
@@ -219,7 +219,7 @@ Using special headers we can set content alignment in tables. Don't forget the s
 | 15     | Pretty     | Means pretty |
 | 666    | Evil       | Evil number  |
 
-### Nested markdown 
+####Nested markdown 
 ```
 
 ```
@@ -233,10 +233,10 @@ Inside the cells we can still use markdown.
 | 666    | **Evil**         | Evil number    |
 
 
-## Code
+#### Code
 Using triple back-ticks , we can somehow get the code style
 
-### Simple word
+####Simple word
 ```
 We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
 just `like this`, looking good?
@@ -244,14 +244,14 @@ just `like this`, looking good?
 We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
 just `like this`, looking good?
 
-### Code listing
+####Code listing
 
 ```
 Just using triple quotes
 We get this effect of highlighted code
 ```
 
-### Syntax highlighting
+####Syntax highlighting
 For sites like GitHub, we add the language after the first back-ticks
 ```javascript
 const number = 666;
@@ -263,7 +263,7 @@ function sample (parameter) {
     }
 }
 ```
-### Inline HTML
+####Inline HTML
 ```
 You can just use HTML tags in your code, and it will work in most cases
 with simple tags <strong>like this</strong>
@@ -271,7 +271,7 @@ with simple tags <strong>like this</strong>
 You can just use HTML tags in your code, and it will work in most cases
 with simple tags <strong>like this</strong>
 
-## Blockquotes
+#### Blockquotes
 ```
 > Hi there
 > This is a replay of an email

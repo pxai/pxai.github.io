@@ -1,0 +1,429 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Miembros estaticos</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Herencia multiple"
+HREF="herencia-multiple.html"><LINK
+REL="NEXT"
+TITLE="Clases y sus amigas"
+HREF="clases-amigas.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="herencia-multiple.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clases-amigas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="MIEMBROS-ESTATICOS"
+></A
+>Capítulo 15. Miembros estaticos</H1
+><P
+>&#13;
+Quereis ver un miembro no estatico?
+(&lt; !-- nota docbook: quitar chorradas antes de publicar --&gt;)
+Variables/Funciones estaticas Dentro de las clases 
+podemos definir atributos y metodos estaticos. Tienen 
+de particular que son accesibles sin necesidad de 
+definir una clase y que su valor es EL MISMO en todas 
+los objetos que se vayan creando de una clase. Es como 
+una variable global de una clase.
+Con este ejemplo se ve su uso, y de paso se revisa el 
+tema de punteros a funciones.
+(si, has leido bien).
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN326"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Soldado.hpp
+* Clase que define el objeto soldado muestra el uso de variables estaticas
+* y metodos estaticos. Todo lo estatico escapa del ambito de la clase y puede
+* ser invocado desde el exterior
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Soldado {
+
+public:
+
+	// constructores
+	Soldado();
+
+	Soldado(char *nombre, int unidad);
+
+	// destructor
+	~Soldado();
+
+	// copia
+	Soldado(Soldado const &#38;);
+
+	// get/set
+	char *getNombre () const { return this-&#62;nombre; }
+
+	void setNombre (char *nombre) { this-&#62;nombre = nombre; }
+
+	int getUnidad () const { return this-&#62;unidad; }
+
+	void setUnidad (int unidad) { this-&#62;unidad = unidad; }
+
+	void matar() const;
+
+	void darOrden (char *orden) const;
+
+	// metodo que toma como parametro una funcion
+	void ejecutaAccion ( void (*accion) (int,int));
+
+	static int TotalSoldados; // variable estatica!
+
+	static int TotalBalas; // variable estatica!
+	
+
+	// Funciones estaticas
+	static int getTotalSoldados () { return TotalSoldados; }
+	
+	static int getTotalBalas () { return TotalBalas; }
+
+
+private:
+	
+	char *nombre;
+	
+	int unidad;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion.
+Se recomienda probar y ejecutar para comprobar el 
+funcionamiento de las variables estaticas.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN328"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Soldado.cpp
+* Programa que implementa la clase Soldado
+* 
+* Pello Xabier Altadill Izura
+* Compilacion: g++ Soldado.cpp -o Soldado
+*/
+
+#include "Soldado.hpp"
+
+// Constructor
+Soldado::Soldado(): nombre("Ryan"), unidad(101) {
+
+	TotalSoldados += 1;
+	TotalBalas++;
+	cout &#60;&#60; "Soldado " &#60;&#60; nombre &#60;&#60; " construido. Unidad: " &#60;&#60; unidad &#60;&#60; endl;
+
+}
+
+
+// Constructor parametrizado
+Soldado::Soldado(char *nombre, int unidad) {
+	
+	TotalSoldados++;
+	TotalBalas++;
+	this-&#62;nombre = nombre;
+	this-&#62;unidad = unidad;
+	cout &#60;&#60; "Soldado " &#60;&#60; nombre &#60;&#60; " :Soldado construido." &#60;&#60; endl;
+
+}
+
+
+// Destructor
+Soldado::~Soldado() {
+	
+	TotalSoldados--;
+	cout &#60;&#60; "Soldado "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+
+// constructor copia
+Soldado::Soldado(const Soldado &#38; original) {
+	
+	nombre = new char;
+	nombre = original.getNombre();
+	cout &#60;&#60; "-clase Soldado- Soldado copia creada."&#60;&#60; endl;
+
+}
+
+
+// metodo matar
+void Soldado::matar() const {
+	
+	TotalBalas--;
+	cout &#60;&#60; this-&#62;getNombre() &#60;&#60; " Matar es lo mio " &#60;&#60; endl;
+	cout &#60;&#60; "Born to kill. paz. Es por la dualidad de Kant" &#60;&#60; endl;
+
+}
+
+// metodo darOrden
+void Soldado::darOrden(char *orden) const {
+
+	cout &#60;&#60; "Recluta patoso!" &#60;&#60; endl; 
+	cout &#60;&#60; this-&#62;getNombre() &#60;&#60; " unidad " &#60;&#60; this-&#62;getUnidad() &#60;&#60; " ordena: ";
+	cout &#60;&#60; orden &#60;&#60; endl;
+
+}
+
+
+// metodo ejecutaAccion: ejecuta la funcion que se le pasa como parametro
+void Soldado::ejecutaAccion ( void (*accion) (int,int)) {
+	
+	accion(5,7);
+	
+	cout &#60;&#60; "Recluta patoso!" &#60;&#60; endl; 
+
+} 
+
+
+// ATENCION IMPORTANTE: HAY QUE DEFINIR E INICIAR LAS VARIABLES ESTATICA SI NO
+// el compilador nos puede poner pegas
+int Soldado::TotalSoldados = 0;
+int Soldado::TotalBalas = 0;
+
+// Definimos una funcion ajena a la clase desde la cual accederemos
+// a la variable estatica, con lo que se demuestra que la variable estatica
+// esta fuera de la "capsula" de la clase.
+void recuentoSoldados(void);
+
+// definimos otra funcion esta para pasarsela como parametro a un metodo de la clase
+void carga (int balas, int granadas);
+
+
+// funcion principal
+// Aqui haremos multiples pruebas...
+int main () { 
+
+	int i, resp;
+
+	// creamos los soldados
+	Soldado peloton[10];
+	Soldado Hanks = Soldado("Hanks",105);
+
+	// definicion de puntero de funcion:
+	void (*funcion) (int, int) = carga; 
+	
+	// Si hay mas de una funcion carga sera la que tenga los mismos parametros
+	// y el mismo tipo de retorno
+
+	// llamamos a la funcion recuento
+	recuentoSoldados();
+	
+	peloton[0].darOrden("Todos en formacion.");
+	
+	peloton[2].darOrden("Canta el colacao!");
+	
+	// recorremos los 10 soldados y hacemos algo dependiendo de la entrada
+	// Si matamos unos cuantos modificaremos la variable de TotalSoldados
+	
+	for (i = 0; i &#60; 10 ; i++) {
+	
+		cout &#60;&#60; "Elije 0 o cualquier otro numero: " &#60;&#60; endl;
+		cin &#62;&#62; resp;
+		
+		if (resp == 0) {
+			
+			// matamos al soldado
+			peloton[i].~Soldado();
+
+		} else {
+			
+			peloton[i].matar(); // tiramos una bala
+		}
+		
+		// Invocamos el metodo estatico?
+		// es un acceso DIRECTO sin necesitar un objeto definido
+		resp = Soldado::getTotalSoldados();
+		cout &#60;&#60; "Cuantos quedan? " &#60;&#60; resp &#60;&#60; endl;
+
+	}//for
+
+	// accedemos directamente a variable estatica
+	cout &#60;&#60; "Total balas antes de recarga: " &#60;&#60; 
+
+	Soldado::TotalBalas &#60;&#60; endl;
+	
+	// hacemos una recarga:
+	Hanks.ejecutaAccion(funcion);
+	
+	// llamamos a la funcion recuento
+	recuentoSoldados();
+
+
+	return 0;
+
+}
+
+
+// implementacion de la funcion recuento
+// muestra el numero de soldados. Podemos acceder DIRECTAMENTE a la variable statica
+void recuentoSoldados () {
+	
+	cout &#60;&#60; "Cuantos soldados quedan vivos? " &#60;&#60; endl;
+	cout &#60;&#60; "En total: " &#60;&#60; Soldado::TotalSoldados &#60;&#60; " soldados"&#60;&#60; endl;
+	
+	cout &#60;&#60; "Municion? " &#60;&#60; endl;
+	cout &#60;&#60; "En total: " &#60;&#60; Soldado::getTotalBalas() &#60;&#60; " balas" &#60;&#60; endl;
+
+}
+
+
+// funcion que carga municion del peloton
+void carga (int balas, int granadas) {
+	
+	cout &#60;&#60; "Cargando balas: " &#60;&#60; balas &#60;&#60; endl;
+	
+	Soldado::TotalBalas += balas ;
+	
+	cout &#60;&#60; "Cargando granadas: " &#60;&#60; granadas &#60;&#60; endl;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Bueno, y con esto ya son dos semanas dandole al c++ y 
+aprendiendo su abc...
+
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="herencia-multiple.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clases-amigas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Herencia multiple</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Clases y sus amigas</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

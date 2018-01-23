@@ -1,0 +1,205 @@
+/**
+ * 	hipstered.css
+ *  Stylesheet
+ * Pello Xabier Altadill Izura
+ * http://pello.info
+ * background-color: #272822;
+ * darker-back: #171814;
+ inactive-tab: #3e3e3c;
+ white font: #f0f8f2;
+ gray-font: #90908f;
+ */
+
+body, html {
+		background-color: #171814;	
+}
+
+header {
+		display: none;
+		background-color: #171814;
+}
+
+#deleteconfig {
+	display: none;
+}
+
+#splash {
+	width: 100%;
+	height: 300px;
+	background-image: url('../img/logobig.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#config {
+	/*visibility: hidden;*/
+	width: 80%;
+	margin: 0 auto 0 auto;
+	display: none;
+}
+
+
+#editor {
+	/*visibility: hidden;*/
+	clear: both;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: #171814;
+ /*inactive-tab: #3e3e3c;
+ white font: #f0f8f2;
+ gray-font: #90908f;*/
+}
+
+#logo {
+	float: left;
+	min-width: 200px;
+	width: 200px;
+}
+
+#editbuttons {
+	margin-top: 2em;
+	min-width: 200px;
+	max-width: 500px;
+	float: left;
+	margin-left: 5em;
+}
+
+#editarea {
+	width: 100%;
+	height: 15em;
+	background-color: #272822;
+	color: #90908f;
+}
+
+
+#status {
+	font-size: 0.8em;
+	color: #3e3e3c;
+	
+}
+
+.title3 {
+	font-size: 18pt;
+	color: #3e3e3c;
+}
+
+#previewzone {
+	background-color: white;
+}
+
+#editbuttons {
+	margin-bottom: 0em;
+}
+
+
+
+#editbuttons a {
+	text-decoration: none;
+	font-size: 0.7em;
+	text-align: center;
+	color: #3e3e3c;
+}
+
+#editbuttons img {
+	boder: 0;
+}
+
+#editbuttons ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#editbuttons ul li {
+	display: inline-block;
+	margin-right: 2em;
+}
+
+#openedfiles {
+	margin-bottom: -0.5em;
+}
+
+#openedfiles ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#openedfiles ul li {
+	display: inline-block;
+	margin-right: 0.2em;
+	padding: 0.5em;
+	background-color: #3e3e3c;
+	border-radius: 0.4em;
+}
+
+
+#openedfiles a {
+	text-decoration: none;
+	color: #f0f8f2;
+}
+
+a.openfile {
+	padding-right: 1em;
+}
+
+a.close {
+	color: #3e3e3c;
+	font-size: 0.7em;
+}
+
+a.close:hover {
+	text-shadow: 3px 3px 4px green;
+}
+
+#openedfiles ul li.active {
+	background-color: #262626;/*#272822;*/
+}
+
+#editzone textarea {
+	border: 0;
+}
+
+.dialog {
+	display: none;
+	position: absolute;
+	margin: 10em auto 0 auto;
+	width: 40%;
+	height: 10em;
+	z-index: 10;
+	border-radius: 0.4em;
+	border: 2px solid #3e3e3c;
+	background-color: #272822;
+}
+
+.dialog input {
+	border: 0;
+	border: 2px solid #3e3e3c;
+}
+
+.dialogtitle {
+	height: 2em;
+	margin: 0.2em;
+	border-radius: 0.4em;
+	background-color: #3e3e3c;	
+}
+
+.dialogtitletext{
+ float: left;
+  padding: 0.5em;
+ width: 80%;
+}
+
+.dialogtitle .close {
+ float: right;
+ text-align: right;
+ padding: 0.5em;
+ width: 10%;
+}
+
+.dialogcontent {
+	clear: both;
+	width: 80%;
+	margin: 0 auto 0 auto;
+}

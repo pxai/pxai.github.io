@@ -1,0 +1,1523 @@
+<html>
+<head>
+<title>IPTABLES manual practico, tutorial de iptables con ejemplos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+body {  font-family: Arial, Helvetica, sans-serif; font-size: 9px}
+.code {  font-family: "Courier New", Courier, mono; font-size: 10px}
+.titulo {  font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold}
+.nota {  font-family: Arial, Helvetica, sans-serif; font-size: 9px}
+-->
+</style>
+<meta name="description" content="IPTABLES manual practico, tutorial de iptables con ejemplos de firewall en red local, firewall en red local con dmz, firewall entre redes, depuracion de iptables, etc.">
+<meta name="keywords" content="iptables, firewall, iptables tutorial, iptables manual, iptables ejemplos, pello, pello altadill, peio, peio altadill">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35803210-1']);
+  _gaq.push(['_setDomainName', 'pello.info']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <div align="center"><font size="6">IPTABLES<span class="titulo"><a name="top"></a></span><br>
+        Manual pr&aacute;ctico<br>
+        </font>(1.2)</div>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p>&nbsp;</p>
+      <p><abstract><i>En este manual se muestran las habituales arquitecturas 
+        de redes con firewall y la forma de montar iptables para cada caso, con 
+        distintas opciones para cada ejemplo.</i></abstract></p>
+      <p><abstract><i>1.2 Revision: a&ntilde;adidos los mismos casos pero con 
+        DROP por defecto.</i></abstract></p>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p><br>
+        Por Pello Xabier Altadill Izura<br>
+        Ingeniero Inform&aacute;tico por la UPV-EHU<br>
+        pello@pello.info</p>
+      <p> (Actualizaciones y ejemplos en <a href="http://www.pello.info">http://www.pello.info</a> 
+        - <a href="IPTABLES.pdf">VERSI&Oacute;N PDF</a>)</p>
+      <p><span class="titulo"><a href="#1">1. Qu&eacute; es un firewall</a><br>
+        <a href="#2">2. Qu&eacute; es iptables</a><br>
+        <a href="#3">3. Al grano: creando un firewall con iptables</a><br>
+        <a href="#31">3.1 Proteger la propia m&aacute;quina</a><br>
+        <a href="#32">3.2 Firewall de una LAN con salida a internet</a><br>
+        <a href="#33">3.3 Firewall de una LAN con salida a internet con DMZ<br>
+        </a></span><span class="titulo"><a href="#34">3.4 Firewall de una LAN 
+        con salida a internet y VPNS</a><br>
+        <a href="#35">3.5 Firewall puro y duro entre redes</a><br>
+        <a href="#36">3.6 Firewall con pol&iacute;tica por defecto DROP</a><br>
+        <a href="#4">4. C&oacute;mo depurar el funcionamiento del firewall</a><br>
+        <a href="#fin">Enlaces, notas, autor</a></span></p>
+      <hr size="1">
+      <p><br>
+        <br>
+        <span class="titulo">1. Qu&eacute; es un firewall<a name="1"></a></span></p>
+      <p>Un firewall es un dispositivo que filtra el tr&aacute;fico entre redes, 
+        como m&iacute;nimo dos. El firewall puede ser un dispositivo f&iacute;sico 
+        o un software sobre un sistema operativo. En general debemos verlo como 
+        una caja con DOS o mas interfaces de red en la que se establecen una reglas 
+        de filtrado con las que se decide si una conexi&oacute;n determinada puede 
+        establecerse o no. Incluso puede ir m&aacute;s all&aacute; y realizar 
+        modificaciones sobre las comunicaciones, como el NAT.</p>
+      <p>Esa ser&iacute;a la definici&oacute;n gen&eacute;rica, hoy en dia un 
+        firewall es un hardware especifico con un sistema operativo o una IOS 
+        que filtra el tr&aacute;fico TCP/UDP/ICMP/../IP y decide si un paquete 
+        pasa, se modifica, se convierte o se descarta. Para que un firewall entre 
+        redes funcione como tal debe tener al menos dos tarjetas de red. Esta 
+        ser&iacute;a la tipolog&iacute;a cl&aacute;sica de un firewall:<br>
+        <img src="Firewall1.jpg" width="679" height="111"><br>
+        <span class="nota">Figura 1: esquema de firewall t&iacute;pico entre red 
+        local e internet</span><br>
+        <br>
+        Esquema t&iacute;pico de firewall para proteger una red local conectada 
+        a internet a trav&eacute;s de un router. El firewall debe colocarse entre 
+        el router (con un &uacute;nico cable) y la red local (conectado al switch 
+        o al hub de la LAN)</p>
+      <p>Dependiendo de las necesidades de cada red, puede ponerse uno o m&aacute;s 
+        firewalls para establecer distintos per&iacute;metros de seguridad en 
+        torno a un sistema. Es frecuente tambi&eacute;n que se necesite exponer 
+        alg&uacute;n servidor a internet (como es el caso de un servidor web, 
+        un servidor de correo, etc..), y en esos casos obviamente en principio 
+        se debe aceptar cualquier conexi&oacute;n a ellos. Lo que se recomienda 
+        en esa situaci&oacute;n es situar ese servidor en lugar aparte de la red, 
+        el que denominamos DMZ o zona desmilitarizada. El firewall tiene entonces 
+        tres entradas:<br>
+        <img src="Firewall2.jpg" width="679" height="234"> <br>
+        <span class="nota">Figura 2: esquema de firewall entre red local e internet 
+        con zona DMZ para servidores expuestos</span> <br>
+        <br>
+        En la zona desmilitarizada se pueden poner tantos servidores como se necesiten. 
+        Con esta arquitectura, permitimos que el servidor sea accesible desde 
+        internet de tal forma que si es atacado y se gana acceso a &eacute;l, 
+        la red local sigue protegida por el firewall. Esta estructura de DMZ puede 
+        hacerse tambi&eacute;n con un doble firewall (aunque como se ve se puede 
+        usar un &uacute;nico dispositivo con al menos tres interfaces de red). 
+        Ser&iacute;a un esquema como este:<br>
+        <img src="Firewall3.jpg" width="744" height="255"> <br>
+        <span class="nota">Figura 3: esquema de firewall entre red local e internet 
+        con zona DMZ para servidores expuestos creado con doble firewall(per&iacute;metro)</span><br>
+      </p>
+      <p><br>
+        Los firewalls se pueden usar en cualquier red. Es habitual tenerlos como 
+        protecci&oacute;n de internet en las empresas, aunque ah&iacute; tambi&eacute;n 
+        suelen tener una doble funci&oacute;n: controlar los accesos externos 
+        hacia dentro y tambi&eacute;n los internos hacia el exterior; esto &uacute;ltimo 
+        se hace con el firewall o frecuentemente con un proxy (que tambi&eacute;n 
+        utilizan reglas, aunque de m&aacute;s alto nivel).<br>
+        Tambi&eacute;n, en empresas de hosting con muchos servidores alojados 
+        lo normal es encontrarnos uno o m&aacute;s firewalls ya sea filtrando 
+        toda la instalaci&oacute;n o parte de ella:<br>
+        <img src="Firewall4.jpg" width="672" height="492"><br>
+        <span class="nota">Figura 4: esquema de firewall entre redes, en la que 
+        solo se filtra y no se hace NAT</span><br>
+        <br>
+      </p>
+      <p> </p>
+      <p></p>
+      <p>Sea el tipo de firewall que sea, generalmente no tendr&aacute; mas que 
+        un conjunto de reglas en las que se examina el origen y destino de los 
+        paquetes del protocolo tcp/ip. En cuanto a protocolos es probable que 
+        sean capaces de filtrar muchos tipos de ellos, no solo los tcp, tambi&eacute;n 
+        los udp, los icmp, los gre y otros protocolos vinculados a vpns. Este 
+        podr&iacute;a ser (en pseudo-lenguaje) un el conjunto de reglas de un 
+        firewall del primer gr&aacute;fico:</p>
+      <p class="code">Politica por defecto ACEPTAR.<br>
+        Todo lo que venga de la red local al firewall ACEPTAR<br>
+        Todo lo que venga de la ip de mi casa al puerto tcp 22 ACEPTAR<br>
+        Todo lo que venga de la ip de casa del jefe al puerto tcp 1723 ACEPTAR<br>
+        Todo lo que venga de hora.rediris.es al puerto udo 123 ACEPTAR<br>
+        Todo lo que venga de la red local y vaya al exterior ENMASCARAR<br>
+        Todo lo que venga del exterior al puerto tcp 1 al 1024 DENEGAR<br>
+        Todo lo que venga del exterior al puerto tcp 3389 DENEGAR<br>
+        Todo lo que venga del exterior al puerto udp 1 al 1024 DENEGAR</p>
+      <p>En definitiva lo que se hace es: <br>
+        - Habilita el acceso a puertos de administraci&oacute;n a determinadas 
+        IPs privilegiadas<br>
+        - Enmascara el trafico de la red local hacia el exterior (NAT, una petici&oacute;n 
+        de un pc de la LAN sale al exterior con la ip p&uacute;blica), para poder 
+        salir a internet<br>
+        - Deniega el acceso desde el exterior a puertos de administraci&oacute;n 
+        y a todo lo que este entre 1 y 1024.</p>
+      <p></p>
+      <p>Hay dos maneras de implementar un firewall:<br>
+        1) Pol&iacute;tica por defecto ACEPTAR: en principio todo lo que entra 
+        y sale por el firewall se acepta y solo se denegar&aacute; lo que se diga 
+        expl&iacute;citamente.<br>
+        2) Pol&iacute;tica por defecto DENEGAR: todo esta denegado, y solo se 
+        permitir&aacute; pasar por el firewall aquellos que se permita expl&iacute;citamente.</p>
+      <p>Como es obvio imaginar, la primera pol&iacute;tica facilita mucho la 
+        gesti&oacute;n del firewall, ya que simplemente nos tenemos que preocupar 
+        de proteger aquellos puertos o direcciones que sabemos que nos interesa; 
+        el resto no importa tanto y se deja pasar. Por ejemplo, si queremos proteger 
+        una m&aacute;quina linux, podemos hacer un netstat -ln (o netstat -an, 
+        o netstat -puta | grep LISTEN), saber que puertos est&aacute;n abiertos, 
+        poner reglas para proteger esos puertos y ya est&aacute;. &iquest;Para 
+        qu&eacute; vamos a proteger un puerto que realmente nunca se va a abrir?<br>
+        El &uacute;nico problema que podemos tener es que no controlemos que es 
+        lo que esta abierto, o que en un momento dado se instale un software nuevo 
+        que abra un puerto determinado, o que no sepamos que determinados paquetes 
+        ICMP son peligrosos. Si la pol&iacute;tica por defecto es ACEPTAR y no 
+        se protege expl&iacute;citamente, nos la estamos jugando un poco.</p>
+      <p>En cambio, si la pol&iacute;tica por defecto es DENEGAR, a no ser que 
+        lo permitamos expl&iacute;citamente, el firewall se convierte en un aut&eacute;ntico 
+        MURO infranqueable. El problema es que es mucho m&aacute;s dif&iacute;cil 
+        preparar un firewall as&iacute;, y hay que tener muy claro como funciona 
+        el sistema (sea iptables o el que sea) y que es lo que se tiene que abrir 
+        sin caer en la tentaci&oacute;n de empezar a meter reglas super-permisivas. 
+        <br>
+        Esta configuraci&oacute;n de firewall es la recomendada, aunque no es 
+        aconsejable usarla si no se domina m&iacute;nimamente el sistema. Uno 
+        de los objetos principales de este documento es mostrar la forma de crear 
+        este tipo de firewalls.</p>
+      <p><b>IMPORTANTE</b><br>
+        El orden en el que se ponen las reglas de firewall es determinante. Normalmente 
+        cuando hay que decidir que se hace con un paquete se va comparando con 
+        cada regla del firewall hasta que se encuentra una que le afecta (match), 
+        y se hace lo que dicte esta regla (aceptar o denegar); despu&eacute;s 
+        de eso NO SE MIRAR&Aacute;N M&Aacute;S REGLAS para ese paquete. &iquest;Cu&aacute;l 
+        es el peligro? Si ponemos reglas muy permisivas entre las primeras del 
+        firewall, puede que las siguientes no se apliquen y no sirvan de nada. 
+      </p>
+      <hr size="1">
+      <p>&nbsp; </p>
+      <p class="titulo">2. Qu&eacute; es iptables<a name="2"></a></p>
+      <p>IPtables es un sistema de firewall vinculado al kernel de linux que se 
+        ha extendido enormemente a partir del kernel 2.4 de este sistema operativo. 
+        Al igual que el anterior sistema ipchains, un firewall de iptables no 
+        es como un servidor que lo iniciamos o detenemos o que se pueda caer por 
+        un error de programaci&oacute;n(esto es una peque&ntilde;a mentira, ha 
+        tenido alguna vulnerabilidad que permite DoS, pero nunca tendr&aacute; 
+        tanto peligro como las aplicaciones que escuchan en determinado puerto 
+        TCP): iptables esta integrado con el kernel, es parte del sistema operativo. 
+        &iquest;C&oacute;mo se pone en marcha? Realmente lo que se hace es aplicar 
+        reglas. Para ellos se ejecuta el comando iptables, con el que a&ntilde;adimos, 
+        borramos, o creamos reglas. Por ello un firewall de iptables no es sino 
+        un simple script de shell en el que se van ejecutando las reglas de firewall.</p>
+      <p>Notas: bueno, para los m&aacute;s geeks y tocapelotas. Vale, se puede 
+        implementar un script de inicio en /etc/rc.d/INIT.d (o /etc/INIT.d ) con 
+        el que hagamos que iptables se &quot;inicie o pare&quot; como un servidor 
+        m&aacute;s. Lo podemos hacer nosotros o es probable que venga en la distribuci&oacute;n 
+        (como en redhat por ejemplo). Tambi&eacute;n se pueden salvar las reglas 
+        aplicadas con el comando iptables-save en un fichero y gestionar ese fichero 
+        con una aplicaci&oacute;n o front-end desde la X o desde webmin.</p>
+      <p>Vale, tenemos una m&aacute;quina linux con soporte para iptables, tiene 
+        reglas aplicadas y empiezan a llegar/salir/pasar paquetes. No nos liemos: 
+        olvidemos cuantas tarjetas de red hay, que direcciones ip tiene la m&aacute;quina 
+        y olvidemos si el paquete entra o sale. Las reglas de firewall est&aacute;n 
+        a nivel de kernel, y al kernel lo que le llega es un paquete (digamos, 
+        un marr&oacute;n ;) ) y tiene que decidir que hacer con &eacute;l. El 
+        kernel lo que hace es, dependiendo si el paquete es para la propia maquina 
+        o para otra maquina, consultar las reglas de firewall y decidir que hacer 
+        con el paquete seg&uacute;n mande el firewall. Este es el camino que seguir&iacute;a 
+        un paquete en el kernel:<br>
+        <img src="image004.jpg" width="576" height="220"><br>
+        <span class="nota">Figura 5: cuando un paquete u otra comunicaci&oacute;n 
+        llega al kernel con iptables se sigue este camino</span><br>
+        <br>
+        <br>
+        Como se ve en el gr&aacute;fico, b&aacute;sicamente se mira si el paquete 
+        esta destinado a la propia maquina o si va a otra. Para los paquetes (o 
+        datagramas, seg&uacute;n el protocolo) que van a la propia maquina se 
+        aplican las reglas INPUT y OUTPUT, y para filtrar paquetes que van a otras 
+        redes o maquinas se aplican simplemente reglas FORWARD.<br>
+        INPUT,OUTPUT y FORWARD son los tres tipos de reglas de filtrado. Pero 
+        antes de aplicar esas reglas es posible aplicar reglas de NAT: estas se 
+        usan para hacer redirecciones de puertos o cambios en las IPs de origen 
+        y destino. Veremos ejemplos. <br>
+        E incluso antes de las reglas de NAT se pueden meter reglas de tipo MANGLE, 
+        destinadas a modificar los paquetes; son reglas poco conocidas y es probable 
+        que no las usen.<br>
+        Por tanto tenemos tres tipos de reglas en iptables:<br>
+        - MANGLE<br>
+        - NAT: reglas PREROUTING, POSTROUTING <br>
+        - FILTER: reglas INPUT, OUTPUT, FORWARD.</p>
+      <hr size="1">
+      <p><br>
+      </p>
+      <p class="titulo">3. Al grano: creando un firewall con iptables<a name="3"></a></p>
+      <p>En este tutorial se ha intentado dar una breve introducci&oacute;n sobre 
+        lo que es un firewall, sus tipolog&iacute;as b&aacute;sicas y en concreto 
+        se presenta el sistema iptables. Pero vamos al grano y empezamos a ver 
+        configuraciones de firewall con iptables, empezando desde la m&aacute;s 
+        b&aacute;sica a las m&aacute;s complejas, en las que se establece la denegaci&oacute;n 
+        como pol&iacute;tica por defecto.</p>
+      <p>Nota: se recomienda encarecidamente ir practicando estas reglas en alguna 
+        maquina linux disponible, y especialmente hacer uso de la herramienta 
+        iptraf para depurar y comprobar el funcionamiento de iptables. Con iptraf 
+        podemos comprobar si las conexiones TCP/IP se llegan a establecer o no. 
+        Una conexi&oacute;n tcp/ip empieza con el three-way-handshake:<br>
+        - La maquina que desea conectarse a otra envia un paquete con flan SYN<br>
+        - Si la otra maquina acepta, envia un SYN/ACK<br>
+        - Entonces la m&aacute;quina establece la conexi&oacute;n.</p>
+      <p>Si el firewall esta denegando la conexi&oacute;n, con iptraf veremos 
+        que la maquina origen solo manda paquetes con el flan S (de SYN), y que 
+        del otro lado no sale nada. Saber usar iptraf nos ayudar&aacute; mucho.</p>
+      <hr size="1">
+      <p>&nbsp;</p>
+      <p><span class="titulo">3.1 Proteger la propia m&aacute;quina</span><a name="31"></a><br>
+        Muy bien, tenemos una m&aacute;quina linux pinchada en internet y queremos 
+        protegerla con su propio firewall. Lo &uacute;nico que tenemos que hacer 
+        es crear un script de shell en el que se van aplicando las reglas.<br>
+        Los scripts de iptables pueden tener este aspecto:</p>
+      <p class="code">Saludo a la afici&oacute;n (echo)<br>
+        Borrado de las reglas aplicadas actualmente (flush)<br>
+        Aplicaci&oacute;n de pol&iacute;ticas por defecto para INPUT, OUPUT, FORWARD 
+        <br>
+        Listado de reglas iptables.</p>
+      <p>Ojo con el orden de las reglas!</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para proteger la propia m&aacute;quina<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar</p>
+      <p class="code"># El localhost se deja (por ejemplo conexiones locales a 
+        mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># A nuestra IP le dejamos todo<br>
+        iptables -A INPUT -s 195.65.34.234 -j ACCEPT</p>
+      <p class="code"># A un colega le dejamos entrar al mysql para que mantenga 
+        la BBDD<br>
+        iptables -A INPUT -s 231.45.134.23 -p tcp --dport 3306 -j ACCEPT</p>
+      <p class="code"># A un dise&ntilde;ador le dejamos usar el FTP<br>
+        iptables -A INPUT -s 80.37.45.194 -p tcp -dport 20:21 -j ACCEPT</p>
+      <p class="code"># El puerto 80 de www debe estar abierto, es un servidor 
+        web.<br>
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT</p>
+      <p class="code"># Y el resto, lo cerramos<br>
+        iptables -A INPUT -p tcp --dport 20:21 -j DROP<br>
+        iptables -A INPUT -p tcp --dport 3306 -j DROP<br>
+        iptables -A INPUT -p tcp --dport 22 -j DROP<br>
+        iptables -A INPUT -p tcp --dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p><br>
+        Nota para freaks y geeks: siiii, que ya lo se, se puede mejorar este script 
+        usando variables, se puede poner el comando con el path completo, pero 
+        lim&iacute;tense a hacer copy-paste. Para el resto de mortales, no olvidarse 
+        de ponerle flags de ejecuci&oacute;n: chmod +x firewall1.sh o chmod 750 
+        firewall1.sh</p>
+      <p>En fin, ya se ve, un script de los m&aacute;s simple, con unas pocas 
+        reglas con las que cerramos puertos al p&uacute;blico a los que no tienen 
+        porque tener acceso, salvo el 80. Pero cualquiera con algo de ojo se habr&aacute; 
+        dado cuenta de que ni se filtra el UDP ni el ICMP. Apostar&iacute;a cualquier 
+        cosa a que el sistema tiene alg&uacute;n puerto udp abierto, y adem&aacute;s 
+        peligroso como el SNMP. Como he dicho anteriormente, en este tipo de firewall 
+        es recordable hacer un netstat para ver que puertos est&aacute;n en estado 
+        de escucha (abiertos), y salve que un rootkit nos haya modificado los 
+        binarios, netstat nos dar&aacute; la informaci&oacute;n precisa que necesitamos. 
+        Hay gente que se decanta por hacerse un nmap as&iacute; mismos. Cuidado: 
+        dependiendo de c&oacute;mo lo ejecutemos quiz&aacute; no nos muestre todos 
+        los puertos, ya que suele mirar los bien conocidos.<br>
+        Imaginemos que hemos dado un repaso a nuestro sistema, y ahora si que 
+        tenemos mejor identificados los puertos tcp y udp abiertos. Pero por si 
+        acaso nos curamos en salud y al final del script cerraremos el rango de 
+        puertos del 1 al 1024, los reservados tanto para tcp como udp.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para proteger la propia m&aacute;quina<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar</p>
+      <p class="code"># El localhost se deja (por ejemplo conexiones locales a 
+        mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># A nuestra IP le dejamos todo<br>
+        iptables -A INPUT -s 195.65.34.234 -j ACCEPT</p>
+      <p class="code"># A un colega le dejamos entrar al mysql para que mantenga 
+        la BBDD<br>
+        iptables -A INPUT -s 231.45.134.23 -p tcp --dport 3306 -j ACCEPT</p>
+      <p class="code"># A un dise&ntilde;ador le dejamos usar el FTP<br>
+        iptables -A INPUT -s 80.37.45.194 -p tcp -dport 20:21 -j ACCEPT</p>
+      <p class="code"># El puerto 80 de www debe estar abierto, es un servidor 
+        web.<br>
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT</p>
+      <p class="code"># Cerramos rango de los puertos privilegiados. Cuidado con 
+        este tipo de <br>
+        # barreras, antes hay que abrir a los que si tienen acceso.<br>
+        iptables -A INPUT -p tcp --dport 1:1024 -j DROP<br>
+        iptables -A INPUT -p udp --dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos otros puertos que estan abiertos<br>
+        iptables -A INPUT -p tcp --dport 3306 -j DROP<br>
+        iptables -A INPUT -p tcp --dport 10000 -j DROP<br>
+        iptables -A INPUT -p udp --dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>&iquest;Sencillo, no? Ahora basta con hacer copy-paste de estas reglas 
+        y aplicarlas y ajustarlas en su sistema (quiz&aacute;s uses PostgreSQL). 
+        Si tiene miedo de perder el control de una m&aacute;quina remota, pruebe 
+        el script en una m&aacute;quina local y aseg&uacute;rese de que aplica 
+        lo que usted quiere. Funcionar va a funcionar seguro. </p>
+      <p><b>- Versi&oacute;n con DROP por defecto</b></p>
+      <p>Vale, queremos que nuestra maquina sea inexcrutable y que solo tenga 
+        abierto un puerto imprescindible para dar determinado servicio. Con DROP 
+        por defecto se protege la maquina perfectamente, aunque hay que a&ntilde;adir 
+        algunas reglas para que la propia m&aacute;quina sea capaz de salir a 
+        internet.&iquest; Para qu&eacute;? hombre, porque la maquina necesita 
+        actualizaciones, consultar DNS por udp, sacar correo etc.</p>
+      <p>Veamos un posible script:</p>
+      <p>&nbsp;</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para proteger la propia m&aacute;quina con DROP por 
+        defecto <br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto: DROP<br>
+        iptables -P INPUT DROP<br>
+        iptables -P OUTPUT DROP<br>
+        iptables -P FORWARD DROP<br>
+      </p>
+      <p class="code">## Empezamos a filtrar? no! empezamos a abrir! porque ahora 
+        esta TODO denegado.<br>
+        ## Debemos decir de manera explicita qu&eacute; es lo que queremos abrir</p>
+      <p class="code"># Operar en localhost sin limitaciones<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -o lo -j ACCEPT</p>
+      <p class="code"># A nuestra IP le dejamos todo<br>
+        iptables -A INPUT -s 195.65.34.234 -j ACCEPT<br>
+        iptables -A OUTPUT -d 195.65.34.234 -j ACCEPT</p>
+      <p class="code"># Este es el servicio que DA la maquina a internet, por 
+        tanto todo paquete entrante se acepta para<br>
+        # ese puerto y los salientes vinculados se aceptan.<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -p tcp -m tcp --sport 80 -m state --state RELATED,ESTABLISHED 
+        -j ACCEPT</p>
+      <p class="code"># Permitimos que la maquina pueda salir a la web<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --sport 80 -m state --state RELATED,ESTABLISHED 
+        -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT</p>
+      <p class="code"># Ya tambien a webs seguras<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --sport 443 -m state --state RELATED,ESTABLISHED 
+        -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT</p>
+      <p class="code"># Reglas necesarias para FTP pasivo y activo. Se permiten 
+        conexiones entrantes YA establecidas<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --sport 20:21 -m state --state RELATED,ESTABLISHED 
+        -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -p tcp -m tcp --dport 20:21 -j ACCEPT<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --sport 1024:65535 --dport 1024:65535 
+        -m state --state ESTABLISHED -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -p tcp -m tcp --dport 1024:65535 -m state --state 
+        NEW,RELATED,ESTABLISHED -j ACCEPT</p>
+      <p class="code"># Permitimos la consulta a un primer DNS<br>
+        /sbin/iptables -A INPUT -s 211.95.64.39 -p udp -m udp --sport 53 -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -d 211.95.64.39 -p udp -m udp --dport 53 -j ACCEPT</p>
+      <p class="code"># Permitimos la consulta a un segundo DNS<br>
+        /sbin/iptables -A INPUT -s 211.95.79.109 -p udp -m udp --sport 53 -j ACCEPT<br>
+        /sbin/iptables -A OUTPUT -d 211.95.79.109 -p udp -m udp --dport 53 -j 
+        ACCEPT</p>
+      <p class="code"># Permitimos consultar el reloj de hora.rediris.es (un pentium166) 
+        para sincronizarse<br>
+        /sbin/iptables -A INPUT -s 130.206.3.166 -p udp -m udp --dport 123 -j 
+        ACCEPT<br>
+        /sbin/iptables -A OUTPUT -d 130.206.3.166 -p udp -m udp --sport 123 -j 
+        ACCEPT</p>
+      <p><span class="code"># Barrera de backup por si cambiamos a modo ACCEPT 
+        temporalmente<br>
+        # Con esto protegemos los puertos reservados y otros well-known<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --dport 1:1024 -j DROP<br>
+        /sbin/iptables -A INPUT -p udp -m udp --dport 1:1024 -j DROP<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --dport 1723 -j DROP<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --dport 3306 -j DROP<br>
+        /sbin/iptables -A INPUT -p tcp -m tcp --dport 5432 -j DROP</span><br>
+      </p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <hr size="1">
+      <p><br>
+        <span class="titulo">3.2 Firewall de una LAN con salida a internet</span><a name="32"></a><br>
+        Ahora vamos a ver una configuraci&oacute;n de firewall iptables para el 
+        t&iacute;pico caso de red local que necesita salida a internet.<br>
+        <img src="Firewall1.jpg" width="679" height="111"> <br>
+        <span class="nota">Figura 6: esquema de firewall t&iacute;pico entre red 
+        local e internet</span> <br>
+      </p>
+      <p>&iquest;Qu&eacute; es lo que hace falta? Obviamente, una regla que haga 
+        NAT hacia fuera (enmascaramiento en iptables), con lo que se har&iacute;a 
+        dos veces NAT en el firewall y en el router. Entre el router y el firewall 
+        lo normal es que haya una red privada (192.168.1.1 y 192.168.1.2 por ejemplo), 
+        aunque dependiendo de las necesidades puede que los dos tengan IP p&uacute;blica. 
+        El router se supone que hace un NAT completo hacia dentro (quiz&aacute; 
+        salvo puerto 23), o sea que desde el exterior no se llega al router si 
+        no que de forma transparente se &quot;choca&quot; contra el firewall. 
+        Lo normal en este tipo de firewalls es poner la pol&iacute;tica por defecto 
+        de FORWARD en denegar (DROP), pero eso lo vemos m&aacute;s adelante.<br>
+        Veamos como ser&iacute;a este firewall-gateway:</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet<br>
+        ##<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # El localhost se deja (por ejemplo conexiones locales a mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p><br>
+        Pero como somos muy malvados queremos que los empleados solamente puedan 
+        navegar por internet, denegando el acceso a Kazaa o edonkey. Esta ser&iacute;a 
+        una configuraci&oacute;n simple pero efectiva.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet<br>
+        ## con filtro para que solo se pueda navegar.<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # El localhost se deja (por ejemplo conexiones locales a mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code">## Ahora con regla FORWARD filtramos el acceso de la red 
+        local<br>
+        ## al exterior. Como se explica antes, a los paquetes que no van dirigidos 
+        al <br>
+        ## propio firewall se les aplican reglas de FORWARD</p>
+      <p class="code"># Aceptamos que vayan a puertos 80<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT<br>
+        # Aceptamos que vayan a puertos https<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT</p>
+      <p class="code"># Aceptamos que consulten los DNS<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p udp --dport 53 -j ACCEPT</p>
+      <p class="code"># Y denegamos el resto. Si se necesita alguno, ya avisaran<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -j DROP</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p></p>
+      <p>Supongamos que este firewall tiene alguna funci&oacute;n adicional: es 
+        un servidor proxy y adem&aacute;s es un servidor de correo. Darle funcionalidades 
+        de este tipo a un firewall no es recomendable, porque si no se protegen 
+        bien esos puertos o si no est&aacute; actualizado el software pueden entrar 
+        en el firewall a base de xploits comprometiendo TODA la red local. De 
+        todas formas muchas empresas no se pueden permitir o no quieren tener 
+        una m&aacute;quina para cada cosa, bastante les cuesta a muchas poner 
+        un firewall. Por tanto: si se a&ntilde;aden servicios que deben estar 
+        abiertos al p&uacute;blico en el propio firewall, nos la estamos jugando, 
+        y se recomienda pasar el servicio a otra m&aacute;quina y ponerla en la 
+        DMZ. <br>
+        Supongamos tambi&eacute;n que la empresa tiene comerciales en ruta y que 
+        se conectan a internet desde su port&aacute;til y con una ip din&aacute;mica. 
+        Supongamos tambi&eacute;n que el jefe de la empresa quiere acceder a la 
+        red local desde casa con una conexi&oacute;n ADSL. Ahora en el firewall 
+        debieramos tener instalado un servidor SMTP, pop3, y un PPTPD.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet<br>
+        ## con servicios abiertos de puerto 25, 110, y 1723<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # El localhost se deja (por ejemplo conexiones locales a mysql)<br>
+        iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code">## Abrimos el acceso a puertos de correo</p>
+      <p class="code"># Abrimos el puerto 25, hay que configurar bien el relay 
+        del servidor SMTP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 25 -j ACCEPT<br>
+        # Abrimos el pop3<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 110 -j ACCEPT</p>
+      <p class="code"># Y abrimos el puerto pptpd para la ip del adsl de casa 
+        del jefe<br>
+        iptables -A INPUT -s 211.45.176.24 -p tcp --dport 1723 -j ACCEPT </p>
+      <p class="code">## Ahora con regla FORWARD filtramos el acceso de la red 
+        local<br>
+        ## al exterior. Como se explica antes, a los paquetes que no van dirigidos 
+        al <br>
+        ## propio firewall se les aplican reglas de FORWARD</p>
+      <p class="code"># Aceptamos que vayan a puertos 80<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT<br>
+        # Aceptamos que vayan a puertos https<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT</p>
+      <p class="code"># Aceptamos que consulten los DNS<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p udp --dport 53 -j ACCEPT</p>
+      <p class="code"># Y denegamos el resto. Si se necesita alguno, ya avisaran<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -j DROP</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 10000 -j DROP</p>
+      <p class="code"># Y cerramos el puerto del servicio PPTPD, solo abierto 
+        para el jefe.<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1723 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p></p>
+      <p><br>
+        &iexcl;M&aacute;s dif&iacute;cil todav&iacute;a! <br>
+        Ahora queremos compartir alg&uacute;n servicio pero de un servidor que 
+        tenemos dentro de la red local, por ejemplo el IIS de un servidor windows2000, 
+        y adem&aacute;s permitir la gesti&oacute;n remota por terminal server 
+        para esta m&aacute;quina para una empresa externa. En este caso lo que 
+        hay que hacer es un redirecci&oacute;n de puerto. Antes de iptables esto 
+        se pod&iacute;a hacer f&aacute;cilmente con un servidor como rinet. Rinet 
+        lo que hace es simplemente abrir un puerto en el firewall y al conectarse 
+        a &eacute;l te lleva hasta el puerto de otra m&aacute;quina, como una 
+        tuber&iacute;a. Con Iptables podemos hacer redirecciones con una ventaja: 
+        no perdemos la informaci&oacute;n de IP origen, cosa que con rinet s&iacute; 
+        ocurr&iacute;a. En fin, veamos la configuraci&oacute;n, con las nuevas 
+        reglas de DNAT:</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet<br>
+        ## con servicios abiertos de puerto 25, 110, y 1723<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar</p>
+      <p class="code">## REDIRECCIONES</p>
+      <p class="code"># Todo lo que venga por el exterior y vaya al puerto 80 
+        lo redirigimos <br>
+        # a una maquina interna<br>
+        iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 
+        192.168.10.12:80</p>
+      <p class="code"># Los accesos de un ip determinada a Terminal server se 
+        redirigen e esa <br>
+        # maquina<br>
+        iptables -t nat -A PREROUTING -s 221.23.124.181 -i eth0 -p tcp --dport 
+        3389 -j DNAT --to 192.168.10.12:3389</p>
+      <p class="code"><br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # El localhost se deja (por ejemplo conexiones locales a mysql)<br>
+        iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code">## Abrimos el acceso a puertos de correo</p>
+      <p class="code"># Abrimos el puerto 25, hay que configurar bien el relay 
+        del servidor SMTP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 25 -j ACCEPT<br>
+        # Abrimos el pop3<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 110 -j ACCEPT</p>
+      <p class="code"># Y abrimos el puerto pptpd para la ip del adsl de casa 
+        del jefe<br>
+        iptables -A INPUT -s 211.45.176.24 -p tcp --dport 1723 -j ACCEPT </p>
+      <p class="code">## Ahora con regla FORWARD filtramos el acceso de la red 
+        local<br>
+        ## al exterior. Como se explica antes, a los paquetes que no van dirigidos 
+        al <br>
+        ## propio firewall se les aplican reglas de FORWARD</p>
+      <p class="code"># Aceptamos que vayan a puertos 80<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT<br>
+        # Aceptamos que vayan a puertos https<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT</p>
+      <p class="code"># Aceptamos que consulten los DNS<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p udp --dport 53 -j ACCEPT</p>
+      <p class="code"># Y denegamos el resto. Si se necesita alguno, ya avisaran<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -j DROP</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 10000 -j DROP</p>
+      <p class="code"># Y cerramos el puerto del servicio PPTPD, solo abierto 
+        para el jefe.<br>
+        iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1723 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>Bueno ya tenemos montada la red, pero conviene insistir en que esta &uacute;ltima 
+        configuraci&oacute;n, con las redirecciones y los servicios de correo 
+        funcionando en el firewall es bastante insegura. &iquest;Qu&eacute; ocurre 
+        si hackean el servidor IIS de la red local? Pues que el firewall no sirve 
+        de gran cosa, lo poco que podr&iacute;a hacer una vez se ha entrado en 
+        la red local es evitar escaneos hacia el exterior desde la m&aacute;quina 
+        atacada, aunque para ello el firewall debiera tener una buena configuraci&oacute;n 
+        con denegaci&oacute;n por defecto. Si necesitamos ese servidor IIS, basta 
+        con comprar una tarjeta de red por 6&euro; o dolares y crear una DMZ.<br>
+      </p>
+      <hr size="1">
+      <p><br>
+        <span class="titulo">3.3 Firewall de una LAN con salida a internet con 
+        DMZ<a name="33"></a></span></p>
+      <p>Bueno, esto se va complicando. Imaginemos que tenemos una red parecida 
+        a la anterior pero ahora hacemos las cosas bien y colocamos ese servidor 
+        IIS en una DMZ:<br>
+        <img src="Firewall5.jpg" width="721" height="254"> <br>
+        <span class="nota">Figura 7: esquema de firewall entre red local e internet 
+        con zona DMZ para servidores expuestos</span> <br>
+      </p>
+      <p>En este tipo de firewall hay que permitir:<br>
+        - Acceso de la red local a internet.<br>
+        - Acceso p&uacute;blico al puerto tcp/80 y tcp/443 del servidor de la 
+        DMZ<br>
+        - Acceso del servidor de la DMZ a una BBDD de la LAN<br>
+        - Obviamente bloquear el resto de acceso de la DMZ hacia la LAN.<br>
+        &iquest;Qu&eacute; tipo de reglas son las que hay que usar para filtrar 
+        el tr&aacute;fico entre la DMZ y la LAN? Solo pueden ser las FORWARD, 
+        ya que estamos filtrando entre distintas redes, no son paquetes destinados 
+        al propio firewall.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet con DMZ<br>
+        ##<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # Todo lo que venga por el exterior y vaya al puerto 80 lo redirigimos 
+        <br>
+        # a una maquina interna<br>
+        iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 192.168.3.2:80</p>
+      <p class="code"># Los accesos de un ip determinada HTTPS se redirigen e 
+        esa <br>
+        # maquina<br>
+        iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j DNAT --to 
+        192.168.3.2:443</p>
+      <p class="code"># El localhost se deja (por ejemplo conexiones locales a 
+        mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local y de la 
+        DMZ<br>
+        # para que puedan salir haca fuera<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE<br>
+        iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Permitimos el paso de la DMZ a una BBDD de la LAN:<br>
+        iptables -A FORWARD -s 192.168.3.2 -d 192.168.10.5 -p tcp --dport 5432 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 192.168.10.5 -d 192.168.3.2 -p tcp 
+        --sport 5432 -j ACCEPT</p>
+      <p class="code">## permitimos abrir el Terminal server de la DMZ desde la 
+        LAN<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.3.2 -p tcp --sport 1024:65535 
+        --dport 3389 -j ACCEPT</p>
+      <p class="code"># &#133; hay que hacerlo en uno y otro sentido &#133;<br>
+        iptables -A FORWARD -s 192.168.3.2 -d 192.168.10.0/24 -p tcp --sport 3389 
+        --dport 1024:65535 -j ACCEPT</p>
+      <p class="code"># &#133; por que luego:<br>
+        # Cerramos el acceso de la DMZ a la LAN<br>
+        iptables -A FORWARD -s 192.168.3.0/24 -d 192.168.10.0/24 -j DROP</p>
+      <p class="code">## Cerramos el acceso de la DMZ al propio firewall<br>
+        iptables -A INPUT -s 192.168.3.0/24 -i eth2 -j DROP</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>Vamos a ver: si las m&aacute;quinas de la DMZ tienen una ip p&uacute;blica 
+        hay que tener much&iacute;simo cuidado de no permitir el FORWARD por defecto. 
+        Si en la DMZ hay ip p&uacute;blica NO ES NECESARIO HACER REDIRECCIONES 
+        de puerto, sino que basta con rutar los paquetes para llegar hasta la 
+        DMZ. Este tipo de necesidades surgen cuando por ejemplo tenemos dos m&aacute;quinas 
+        con servidor web (un apache y un IIS); &iquest;A cu&aacute;l de las dos 
+        le redirigimos el puerto 80? No hay manera de saberlo (No, con servidores 
+        virtuales tampoco, pi&eacute;nsalo), por eso se deben asignar IPs p&uacute;blicas 
+        o en su defecto usar puertos distintos.<br>
+        Por tanto hay que proteger convenientemente toda la DMZ. Tampoco har&iacute;a 
+        falta enmascarar la salida hacia el exterior de la DMZ, si tiene una ip 
+        p&uacute;blica ya tiene una pata puesta en internet; obviamente hay que 
+        decirle al router como llegar hasta esa ip p&uacute;blica. As&iacute; 
+        podr&iacute;a ser esta red: <br>
+        <img src="Firewalls6.jpg" width="720" height="304"> <br>
+        <span class="nota">Figura 8: esquema de firewall entre red local e internet 
+        con zona DMZ para servidores expuestos usando IPs p&uacute;blicas</span></p>
+      <p>&nbsp; </p>
+      <p class="code">Y este podr&iacute;a ser un firewall adecuado:<br>
+        #!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet con DMZ<br>
+        ## pero con IPs p&uacute;blicas.<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN</p>
+      <p class="code"># El localhost se deja (por ejemplo conexiones locales a 
+        mysql)<br>
+        /sbin/iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local y de la 
+        DMZ<br>
+        # para que puedan salir haca fuera<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code">## Permitimos el acceso desde el exterior a los puertos 
+        80 y 443 de DMZ<br>
+        iptables -A FORWARD -d 212.194.89.152 -p tcp -dport 80 -j ACCEPT<br>
+        iptables -A FORWARD -d 212.194.89.152 -p tcp -dport 443 -j ACCEPT<br>
+        iptables -A FORWARD -d 212.194.89.150/30 -j DROP</p>
+      <p class="code"><br>
+        ## Permitimos el paso de la DMZ a una BBDD de la LAN:<br>
+        iptables -A FORWARD -s 212.194.89.152 -d 192.168.10.5 -p tcp --dport 5432 
+        -j ACCEPT</p>
+      <p class="code"># en el otro sentido lo mismo<br>
+        iptables -A FORWARD -s 192.168.10.5 -d 212.194.89.152 -p tcp --sport 5432 
+        -j ACCEPT</p>
+      <p class="code">## permitimos abrir el Terminal server de la DMZ desde la 
+        LAN<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -d 212.194.89.152 -p tcp --sport 
+        1024:65535 --dport 3389 -j ACCEPT</p>
+      <p class="code"># &#133; hay que hacerlo en uno y otro sentido &#133;<br>
+        iptables -A FORWARD -s 212.194.89.152 -d 192.168.10.0/24 -p tcp --sport 
+        3389 --dport 1024:65535 -j ACCEPT</p>
+      <p class="code"># &#133; por que luego:<br>
+        # Cerramos el acceso de la DMZ a la LAN<br>
+        iptables -A FORWARD -s 212.194.89.152 -d 192.168.10.0/24 -j DROP</p>
+      <p class="code">## Cerramos el acceso de la DMZ al propio firewall<br>
+        iptables -A INPUT -s 212.194.89.152 -i eth2 -j DROP</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>ATENCI&Oacute;N<br>
+        Merece la pena pararse a explicar esta parte del firewall:</p>
+      <p class="code">## permitimos abrir el Terminal server de la DMZ desde la 
+        LAN<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -d 212.194.89.152 -p tcp -sport 
+        1024:65535 --dport 3389 -j ACCEPT</p>
+      <p class="code"># &#133; hay que hacerlo en uno y otro sentido &#133;<br>
+        iptables -A FORWARD -s 212.194.89.152 -d 192.168.10.0/24 -p tcp --sport 
+        3389 --dport 1024:65535 -j ACCEPT</p>
+      <p class="code"># &#133; por que luego:<br>
+        # Cerramos el acceso de la DMZ a la LAN<br>
+        iptables -A FORWARD -s 212.194.89.152 -d 192.168.10.0/24 -j DROP</p>
+      <p>Lo que nos lleva a dos cuestiones:<br>
+        &iquest;Por qu&eacute; hay que explicitar la abertura en uno y otro sentido? 
+        Porque la tercera regla cierra todo lo que va de la DMZ a la red local. 
+        Para abrir el puerto 3389 de tcp es imprescindible que un paquete de ida 
+        sea capaz de llegar hasta la DMZ y que a su vez pueda volver a la LAN. 
+        Esto de tener que especificar la abertura en uno y otro sentido ser&aacute; 
+        el pan de cada d&iacute;a en un iptables con pol&iacute;tica DROP por 
+        defecto: mejor protecci&oacute;n pero m&aacute;s trabajo.</p>
+      <p>&iquest;Por qu&eacute; se explicita el puerto de origen/destino 1024:65535 
+        en la primera y segunda regla? Imaginemos que un hacker logra acceso a 
+        la m&aacute;quina de la DMZ. Si no especificamos el puerto de destino 
+        en esas dos reglas, el hacker puede abrir CUALQUIER puerto de la LAN siempre 
+        que pueda establecer como puerto origen suyo el tcp/3389, cosa f&aacute;cil 
+        para un hacker que sepa algo de C o que tenga el programa pertinente a 
+        mano. De todas formas el hacker tendr&iacute;a que saber que existe ese 
+        tipo de reglas, si es listo probara con puertos de gesti&oacute;n o con 
+        puertos netbios. El problema es que se deja un v&iacute;nculo con la LAN 
+        bien para administrarlo remotamente o para establecer relaciones de confianza 
+        y ah&iacute; es donde reside el peligro.</p>
+      <p>En las conexiones &quot;legales&quot; no se usa como puerto origen nada 
+        por debajo del 1024; cuando alguien se conecta a otro puerto en su extremo 
+        abre un puerto por encima del 1024. Especific&aacute;ndolo en la regla 
+        de firewall protegeremos un poco mejor la LAN, aunque los puertos por 
+        encima de 1024 estar&aacute;n en peligro.</p>
+      <hr size="1">
+      <p><span class="titulo">3.4 Firewall de una LAN con salida a internet y 
+        VPNS<a name="34"></a></span></p>
+      <p>En principio este caso no nos tendr&iacute;a que dar mayor problema, 
+        aunque la primera vez que lo montemos, el enmascaramiento nos jugar&aacute; 
+        una mala pasada. Por eso conviene echar un vistazo en este caso.<br>
+        <img src="Firewall8.jpg" width="755" height="437"> <br>
+        <span class="nota">Figura 9: esquema de firewall entre red local e internet 
+        con zona DMZ y delegaciones que acceden a DMZ</span></p>
+      <p>Supongamos que entre los routers ya se ha establecido un tunel (con Ciscos 
+        se haria creando un interfaz Tunnel), y que si el firewall nos deja podr&iacute;amos 
+        llegar de la central a las delegaciones y viceversa usando las IPs privadas. 
+        Vaya que se puede hacer un ping desde la central a 192.168.30.x y nos 
+        responde. Para ello es imprescindible que el router de la central tenga 
+        una ruta metida para llegar a 192.168.10.0/24 y por supuesto cada una 
+        ruta para cada delegaci&oacute;n. Antes de meterse en el firewall hay 
+        que asegurar la visibilidad entre los routers y poder llegar a sus IPs 
+        privadas haciendo ping.</p>
+      <p>Supongamos tambi&eacute;n que en la central esta el servidor de correo 
+        que l&oacute;gicamente debe tener el puerto 25 accesible desde internet, 
+        y debe ser accesible desde las delegaciones para puerto 25, 110 (pop3) 
+        o 143(imap). La salida a internet (web, ftp, etc..) cada uno la hace por 
+        su lado.</p>
+      <p>Veamos una posible configuraci&oacute;n para este caso.</p>
+      <p><br>
+        <span class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre red-local e internet con DMZ<br>
+        ## y delegaciones. Las delegaciones deben tener acceso al correo de la 
+        DMZ<br>
+        ##<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</span></p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT<br>
+        iptables -t nat -P PREROUTING ACCEPT<br>
+        iptables -t nat -P POSTROUTING ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN<br>
+        # Todo lo que venga por el exterior y vaya al puerto 25 lo redirigimos 
+        <br>
+        # a la maquina de la DMZ<br>
+        iptables -t nat -A PREROUTING -i eth0 \<br>
+        -p tcp --dport 25 -j DNAT --to 192.168.3.2:25</p>
+      <p class="code"># Todo lo que venga por el interfaz del router(eth0) y vaya 
+        al 110<br>
+        # siempre que sea una delegacion se acepta y redirije<br>
+        iptables -t nat -A PREROUTING -s 192.168.20.0/24 -i eth0 \<br>
+        -p tcp --dport 110 -j DNAT --to 192.168.3.2:110</p>
+      <p class="code">iptables -t nat -A PREROUTING -s 192.168.30.0/24 -i eth0 
+        \<br>
+        -p tcp --dport 110 -j DNAT --to 192.168.3.2:110</p>
+      <p class="code"># Todo lo que venga por el interfaz del router(eth0) y vaya 
+        al 110<br>
+        # siempre que sea una delegacion se acepta y redirije<br>
+        iptables -t nat -A PREROUTING -s 192.168.20.0/24 -i eth0 \<br>
+        -p tcp --dport 143 -j DNAT --to 192.168.3.2:143</p>
+      <p class="code">iptables -t nat -A PREROUTING -s 192.168.30.0/24 -i eth0 
+        \<br>
+        -p tcp --dport 143 -j DNAT --to 192.168.3.2:143</p>
+      <p class="code"><br>
+        # El localhost se deja (por ejemplo conexiones locales a mysql)<br>
+        iptables -A INPUT -i lo -j ACCEPT</p>
+      <p class="code"># Al firewall tenemos acceso desde la red local<br>
+        iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT</p>
+      <p class="code"># Ahora hacemos enmascaramiento de la red local y de la 
+        DMZ<br>
+        # para que puedan salir haca fuera<br>
+        # y activamos el BIT DE FORWARDING (imprescindible!!!!!)<br>
+        # Cuidado con este enmascaramiento.<br>
+        iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE<br>
+        iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -o eth0 -j MASQUERADE</p>
+      <p class="code"># Con esto permitimos hacer forward de paquetes en el firewall, 
+        o sea<br>
+        # que otras m&aacute;quinas puedan salir a traves del firewall.<br>
+        echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
+      <p class="code"># Para que desde la red local se salga hacia fuera hay que 
+        ENMASCARAR<br>
+        # pero que pasa con las delegaciones tambien estan fuera Y NO HAY QUE 
+        <br>
+        # ENMASCARAR, debemos meter una regla FORWARD explicita para que no enmascare<br>
+        # porque si no una petici&oacute;n de la LAN a otra delegacion no se meteria<br>
+        # en el tunel.<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.20.0/24 -j ACCEPT<br>
+        iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.10.0/24 -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.30.0/24 
+        -j ACCEPT<br>
+        iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.10.0/24 -j ACCEPT</p>
+      <p class="code"><br>
+        # Abrimos el acceso para que se pueda aceder a la DMZ desde la LAN<br>
+        # a puertos de correo</p>
+      <p class="code"># En principio lo que va de LAN -&gt; DMZ se acepta<br>
+        iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.3.0/24 -j ACCEPT</p>
+      <p class="code"># Luedo desde la DMZ a la LAN solo se acepta 25,110,143<br>
+        iptables -A FORWARD -s 192.168.3.0/24 -p tcp --sport 25 \<br>
+        -d 192.168.10.0/24 -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 192.168.3.0/24 -p tcp --sport 143 
+        \<br>
+        -d 192.168.10.0/24 -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 192.168.3.0/24 -p tcp --sport 143 
+        \<br>
+        -d 192.168.10.0/24 -j ACCEPT</p>
+      <p class="code"># Cerramos el acceso de la DMZ a la LAN<br>
+        iptables -A FORWARD -s 192.168.3.0/24 -d 192.168.10.0/24 -j DROP</p>
+      <p class="code">## Cerramos el acceso de la DMZ al propio firewall<br>
+        iptables -A INPUT -s 192.168.3.0/24 -i eth2 -j DROP</p>
+      <p class="code">## Y ahora cerramos los accesos indeseados del exterior:<br>
+        # Nota: 0.0.0.0/0 significa: cualquier red</p>
+      <p class="code"># Cerramos el rango de puerto bien conocido<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 1:1024 -j DROP<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p udp -dport 1:1024 -j DROP</p>
+      <p class="code"># Cerramos un puerto de gesti&oacute;n: webmin<br>
+        iptables -A INPUT -s 0.0.0.0/0 -p tcp -dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>Se han remarcado en negrita las reglas FORWARD entre IPs privadas de 
+        delegaciones, ya que sin esas reglas y con el enmascaramiento de por medio 
+        no se podr&iacute;a acceder a las delegaciones. Cabe resaltar que entre 
+        delegaciones no hay visibilidad total, solamente la central ver&iacute;a 
+        a todas las dem&aacute;s, y las delegaciones solamente la central.<br>
+        La delegaciones acceder&iacute;an al servidor de correo con una redirecci&oacute;n, 
+        o sea que ellos se configurar&iacute;an el servidor de correo como 192.168.10.1, 
+        mientras que desde la LAN se acceder&iacute;a directamente. Se puede hacer 
+        de distintas maneras.</p>
+      <p>Lo interesante ser&iacute;a poner ese firewall con DROP por defecto, 
+        se tratar&aacute; de mostrar esa configuraci&oacute;n al final.</p>
+      <p></p>
+      <hr size="1">
+      <p>&nbsp;</p>
+      <p></p>
+      <p class="titulo">3.5 Firewall puro y duro entre redes<a name="35"></a></p>
+      <p>En este caso olvid&eacute;monos de redes locales y de NAT. Aqu&iacute; 
+        solo tendremos reglas de filtrado INPUT y FORWARD. Pongamos que tenemos 
+        el siguiente escenario:<br>
+        <img src="Firewall7.jpg" width="672" height="492"> <br>
+        <span class="nota">Figura 10: esquema de firewall entre redes, en la que 
+        solo se filtra y no se hace NAT</span> <br>
+      </p>
+      <p>En el firewall debemos indicar una serie de reglas para proteger los 
+        equipos que est&aacute;n al otro lado de este dispositivo, todos ellos 
+        de la red 211.34.149.0/24<br>
+        Cada uno de ellos da un servicio determinado, y puede estar gestionado 
+        desde distintas IPs, lo que significa que habr&aacute; que dar acceso 
+        a determinados puertos de gesti&oacute;n (22, 3389, etc..).<br>
+        Este podr&iacute;a ser el aspecto del script del firewall:</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre redes.<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT ACCEPT<br>
+        iptables -P OUTPUT ACCEPT<br>
+        iptables -P FORWARD ACCEPT</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN</p>
+      <p class="code"># A nuestro firewall tenemos acceso total desde la nuestra 
+        IP<br>
+        iptables -A INPUT -s 210.195.55.15 -j ACCEPT</p>
+      <p class="code"># Para el resto no hay acceso al firewall<br>
+        iptables -A INPUT -s 0.0.0.0/0 -j DROP</p>
+      <p class="code">## Ahora podemos ir metiendo las reglas para cada servidor<br>
+        ## Como ser&aacute;n paquetes con destino a otras m&aacute;quinas se aplica 
+        FORWARD</p>
+      <p class="code">## Servidor WEB 211.34.149.2<br>
+        # Acceso a puerto 80<br>
+        iptables -A FORWARD -d 211.34.149.2 -p tcp --dport 80 -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.2 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.2 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor MAIL 211.34.149.3<br>
+        # Acceso a puerto 25, 110 y 143<br>
+        iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 25 -j ACCEPT<br>
+        iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 110 -j ACCEPT<br>
+        iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 143 -j ACCEPT</p>
+      <p class="code"># Acceso a gestion SNMP<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p udp --dport 169 
+        -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.3 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor IRC 211.34.149.4<br>
+        # Acceso a puertos IRC<br>
+        iptables -A FORWARD -d 211.34.149.4 -p tcp --dport 6666:6668 -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.4 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.4 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor NEWS 211.34.149.5<br>
+        # Acceso a puerto news<br>
+        iptables -A FORWARD -d 211.34.149.5 -p tcp --dport news -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 213.194.68.115 -d 211.34.149.5 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.5 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor B2B 211.34.149.6<br>
+        # Acceso a puerto 443<br>
+        iptables -A FORWARD -d 211.34.149.6 -p tcp --dport 443 -j ACCEPT</p>
+      <p class="code"># Acceso a una ip para gestionarlo<br>
+        iptables -A FORWARD -s 81.34.129.56 -d 211.34.149.6 -p tcp --dport 3389 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.6 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor CITRIX 211.34.149.7<br>
+        # Acceso a puerto 1494<br>
+        iptables -A FORWARD -d 211.34.149.7 -p tcp --dport 1494 -j ACCEPT</p>
+      <p class="code"># Acceso a una ip para gestionarlo<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p tcp --dport 3389 
+        -j ACCEPT</p>
+      <p class="code"># acceso a otro puerto quiza de BBDD<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p tcp --dport 1434 
+        -j ACCEPT</p>
+      <p class="code"># acceso a otro puerto quiza de BBDD<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p udp --dport 1433 
+        -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.7 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p><br>
+        Con esta firewall y sobretodo gracias a las reglas de DROP que metemos 
+        tras especificar lo que dejamos abiertos, protegeremos de manera eficaz 
+        todos lo puertos abiertos de las m&aacute;quinas.</p>
+      <p></p>
+      <hr size="1">
+      <p><br>
+        <span class="titulo">3.6 Firewall con pol&iacute;tica por defecto DROP<a name="36"></a></span></p>
+      <p>Aqu&iacute; llega la secci&oacute;n para los aut&eacute;nticos administradores 
+        de pelo en pecho. <br>
+        &iquest;Qu&eacute; supone el hecho de establecer como pol&iacute;tica 
+        por defecto la denegaci&oacute;n?<br>
+        &quot; Se debe explicitar cada conexi&oacute;n permitida en los dos sentidos.<br>
+        &quot; Se debe conocer perfectamente qu&eacute; debe estar abierto y qu&eacute; 
+        no.<br>
+        &quot; Es muchos m&aacute;s dif&iacute;cil de mantener y si se hace conviene 
+        hacerlo desde el principio.<br>
+        &quot; No todo es m&aacute;s trabajo: tambi&eacute;n supone un firewall 
+        mucho m&aacute;s seguro.</p>
+      <p>En el ejemplo de la DMZ ya se presentaba esta situaci&oacute;n en las 
+        reglas forward de una a otra red. Para ilustrar el DROP por defecto, vamos 
+        a mostrar la configuraci&oacute;n del ejemplo anterior de firewall entre 
+        redes pero con pol&iacute;tica por defecto DROP.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para firewall entre redes con DROP por defecto<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto: DROP!!!<br>
+        iptables -P INPUT DROP<br>
+        iptables -P OUTPUT DROP<br>
+        iptables -P FORWARD DROP</p>
+      <p class="code">## Empezamos a filtrar<br>
+        ## Nota: eth0 es el interfaz conectado al router y eth1 a la LAN</p>
+      <p class="code"># A nuestro firewall tenemos acceso total desde la nuestra 
+        IP<br>
+        iptables -A INPUT -s 210.195.55.15 -j ACCEPT<br>
+        iptables -A OUTPUT -d 210.195.55.15 -j ACCEPT</p>
+      <p class="code"># Para el resto no hay acceso al firewall<br>
+        # En principio esta de m&aacute;s, pero si rebajamos los permisos temporalmente<br>
+        # nos cubre las espaldas<br>
+        iptables -A INPUT -s 0.0.0.0/0 -j DROP</p>
+      <p class="code">## Ahora podemos ir metiendo las reglas para cada servidor<br>
+        ## Como ser&aacute;n paquetes con destino a otras m&aacute;quinas se aplica 
+        FORWARD</p>
+      <p class="code">## Servidor WEB 211.34.149.2<br>
+        # Acceso a puerto 80<br>
+        iptables -A FORWARD -d 211.34.149.2 -p tcp --dport 80 -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.2 -p tcp --sport 80 -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.2 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.2 -d 210.195.55.15 -p 
+        tcp --sport 22 -j ACCEPT</p>
+      <p></p>
+      <p class="code">## Servidor MAIL 211.34.149.3<br>
+        # Acceso a puerto 25, 110 y 143<br>
+        iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 25 -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 25 -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 110 -j 
+        ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 110 -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 143 -j 
+        ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 143 -j ACCEPT</p>
+      <p class="code"># Acceso a gestion SNMP<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p udp --dport 169 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.3 -d 210.195.55.15 -p 
+        udp --sport 169 -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.3 -d 210.195.55.15 -p 
+        tcp --sport 22 -j ACCEPT</p>
+      <p class="code"><br>
+        ## Servidor IRC 211.34.149.4<br>
+        # Acceso a puertos IRC<br>
+        iptables -A FORWARD -d 211.34.149.4 -p tcp --dport 6666:6668 -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.4 -p tcp --sport 6666:6668 -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.4 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.4 -d 210.195.55.15 -p 
+        tcp --sport 22 -j ACCEPT</p>
+      <p class="code"><br>
+        ## Servidor NEWS 211.34.149.5<br>
+        # Acceso a puerto news<br>
+        iptables -A FORWARD -d 211.34.149.5 -p tcp --dport news -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.5 -p tcp --sport news -j ACCEPT</p>
+      <p class="code"># Acceso a nuestra ip para gestionarlo<br>
+        iptables -A FORWARD -s 213.194.68.115 -d 211.34.149.5 -p tcp --dport 22 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.5 -d 213.194.68.115 -p 
+        tcp --sport 22 -j ACCEPT</p>
+      <p class="code"># El resto, cerrar<br>
+        iptables -A FORWARD -d 211.34.149.5 -j DROP</p>
+      <p class="code"><br>
+        ## Servidor B2B 211.34.149.6<br>
+        # Acceso a puerto 443<br>
+        iptables -A FORWARD -d 211.34.149.6 -p tcp --dport 443 -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.6 -p tcp --sport 443 -j ACCEPT</p>
+      <p class="code"># Acceso a una ip para gestionarlo<br>
+        iptables -A FORWARD -s 81.34.129.56 -d 211.34.149.6 -p tcp --dport 3389 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.6 -d 81.34.129.56 -p tcp 
+        --sport 3389 -j ACCEPT</p>
+      <p class="code"><br>
+        ## Servidor CITRIX 211.34.149.7<br>
+        # Acceso a puerto 1494<br>
+        iptables -A FORWARD -d 211.34.149.7 -p tcp --dport 1494 -j ACCEPT<br>
+        iptables -A FORWARD -s 211.34.149.7 -p tcp --sport 1494 -j ACCEPT</p>
+      <p class="code"># Acceso a una ip para gestionarlo<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p tcp --dport 3389 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.7 -d 195.55.234.2 -p tcp 
+        --sport 3389 -j ACCEPT</p>
+      <p class="code"># acceso a otro puerto quiza de BBDD<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p tcp --dport 1434 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.7 -d 195.55.234.2 -p tcp 
+        --sport 1434 -j ACCEPT</p>
+      <p class="code"># acceso a otro puerto quiza de BBDD<br>
+        iptables -A FORWARD -s 195.55.234.2 -d 211.34.149.7 -p udp --dport 1433 
+        -j ACCEPT</p>
+      <p class="code">iptables -A FORWARD -s 211.34.149.7 -d 195.55.234.2 -p udp 
+        --sport 1433 -j ACCEPT</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <p>Ya esta, hemos levantado un verdadero muro entre internet y el conjunto 
+        de servidores que esta<br>
+        Tras el firewall. No se puede ni hacer un ping a las m&aacute;quinas, 
+        salvo que se haya dado acceso total a una ip. Si quisieramos dar acceso 
+        al ping, pondr&iacute;amos algo as&iacute;:<br>
+      </p>
+      <p>Es m&aacute;s llevadero aplicar el DROP por defecto cuando el firewall 
+        es para la propia m&aacute;quina. El primer escenario de esta manual trataba 
+        sobre este caso, ahora lo revisamos con la pol&iacute;tica por defecto 
+        drop.</p>
+      <p class="code">#!/bin/sh<br>
+        ## SCRIPT de IPTABLES - ejemplo del manual de iptables<br>
+        ## Ejemplo de script para proteger la propia m&aacute;quina<br>
+        ## con pol&iacute;tica por defecto DROP<br>
+        ## Pello Xabier Altadill Izura<br>
+        ## www.pello.info - pello@pello.info</p>
+      <p class="code">echo -n Aplicando Reglas de Firewall...</p>
+      <p class="code">## FLUSH de reglas<br>
+        iptables -F<br>
+        iptables -X<br>
+        iptables -Z<br>
+        iptables -t nat -F</p>
+      <p class="code">## Establecemos politica por defecto<br>
+        iptables -P INPUT DROP<br>
+        iptables -P OUTPUT DROP<br>
+        iptables -P FORWARD DROP</p>
+      <p class="code">## Empezamos a filtrar</p>
+      <p class="code"># El localhost se deja (por ejemplo conexiones locales a 
+        mysql)<br>
+        iptables -A INPUT -i lo -j ACCEPT<br>
+        iptables -A OUTPUT -o lo -j ACCEPT</p>
+      <p class="code"># A nuestra IP le dejamos todo<br>
+        iptables -A INPUT -s 195.65.34.234 -j ACCEPT<br>
+        iptables -A OUTPUT -d 195.65.34.234 -j ACCEPT</p>
+      <p class="code"># A un colega le dejamos entrar al mysql para que mantenga 
+        la BBDD<br>
+        iptables -A INPUT -s 231.45.134.23 -p tcp --dport 3306 -j ACCEPT<br>
+        iptables -A OUTPUT -d 231.45.134.23 -p tcp --sport 3306 -j ACCEPT</p>
+      <p class="code"># A un dise&ntilde;ador le dejamos usar el FTP<br>
+        iptables -A INPUT -s 80.37.45.194 -p tcp --dport 20:21 -j ACCEPT<br>
+        iptables -A OUTPUT -d 80.37.45.194 -p tcp --sport 20:21 -j ACCEPT</p>
+      <p class="code"># El puerto 80 de www debe estar abierto, es un servidor 
+        web.<br>
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
+        iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT</p>
+      <p class="code"><br>
+        # Aqu&iacute; est&aacute;n las reglas de cerrar. Como hemos comentado 
+        en la configuraci&oacute;n <br>
+        # anterior conviene tener esto escrito por si en alg&uacute;n momento 
+        se relaja el <br>
+        # firewall y s cambia a de DROP a ACCEPT por defecto<br>
+        # Cerramos rango de los puertos privilegiados. Cuidado con este tipo de 
+        <br>
+        # barreras, antes hay que abrir a los que si tienen acceso.<br>
+        iptables -A INPUT -p tcp --dport 1:1024 <br>
+        iptables -A INPUT -p udp --dport 1:1024 </p>
+      <p class="code"># Cerramos otros puertos que estan abiertos<br>
+        iptables -A INPUT -p tcp --dport 3306 -j DROP<br>
+        iptables -A INPUT -p tcp --dport 10000 -j DROP<br>
+        iptables -A INPUT -p udp --dport 10000 -j DROP</p>
+      <p class="code">echo &quot; OK . Verifique que lo que se aplica con: iptables 
+        -L -n&quot;</p>
+      <p class="code"># Fin del script</p>
+      <hr size="1">
+      <p><br>
+        <span class="titulo">4. C&oacute;mo depurar el funcionamiento del firewall<a name="4"></a></span></p>
+      <p>Programas &uacute;tiles<br>
+        IPTRAF. Sin duda alguna uno de los programas m&aacute;s pr&aacute;cticos 
+        para depurar el firewall es iptables, ya que con el podemos observar si 
+        la conexiones se establecen o no; es un programa de consola que es aconsejable 
+        controlar ya que muestra en tiempo real el tr&aacute;fico que atraviesa 
+        nuestra m&aacute;quina con todo lujo de detalles: origen/destino de ips 
+        y puertos, tr&aacute;fico total o tr&aacute;fico total seg&uacute;n el 
+        interfaz de red, etc&#133; Si vemos muchas conexiones simultaneas y nos 
+        perdemos, existe la posibilidad de aplicar filtros para captar solo aquello 
+        que nos interesa.</p>
+      <p>NMAP. La herramienta para escanear puertos por excelencia, rechace imitaciones. 
+        Es una herramienta de consola r&aacute;pida, efectiva y con multitud de 
+        opciones. Podemos usarla desde m&aacute;quinas ajenas a nuestra red para 
+        comprobar si realmente el firewall esta filtrando correctamente y en cierta 
+        manera para hacernos una idea de que &quot;visi&oacute;n&quot; pueden 
+        tener los hackers de nuestro sistema.</p>
+      <p>SHELL. En el propio script del firewall podemos a&ntilde;adir algunas 
+        opciones para descubrir fallos de sintaxis en las reglas. Claro, imaginemos 
+        que tenemos un firewall de 40 lineas y una de ellas falla cuando ejecutamos 
+        el script. &iquest;Cu&aacute;l es? Es probable que el mensaje de error 
+        no aclare lo suficiente, por eso se puede a&ntilde;adir algo as&iacute; 
+        al final de cada regla:</p>
+      <p class="code">...<br>
+        iptables -A INPUT -s 195.55.234.2 -j ACCEPT &amp;&amp; echo &quot; regla-21 
+        ok&quot;<br>
+        iptables -A INPUT -s 213.62.89.145 -j ACCEPT &amp;&amp; echo &quot; regla-22 
+        ok&quot;<br>
+        ... </p>
+      <p>Si la regla se ejecuta bien mostrar&aacute; el mensajito de ok.<br>
+        Otra opci&oacute;n algo mas cutre ser&iacute;a ir eliminando o comentando 
+        reglas hasta dar con la regla que tiene la sintaxis incorrecta. Cabe rese&ntilde;ar 
+        que puede fallar una regla, pero a partir de ella el resto se ejecutan 
+        con normalidad. </p>
+      <p>&nbsp;</p>
+      <hr size="1">
+      <p><br>
+        <span class="titulo">Enlaces:</span><a name="fin"></a><br>
+        -P&aacute;gina oficial: <a href="http://www.netfilter.org">http://www.netfilter.org</a></p>
+      <p>-Bibliograf&iacute;a<br>
+        Building internet firewalls: todo un cl&aacute;sico <br>
+        -Otros tutoriales:<br>
+        En la propia web de netfilter-iptables tenemos el enlace a otros tutoriales, 
+        aunque todos ellos est&aacute;n en perfecto ingl&eacute;s.<br>
+        Ejem, <a href="../IPTABLES_en_21_segundos.html">iptables en 21 segundos</a>, 
+        del mismo autor que este.</p>
+      <p><span class="titulo">Notas:</span><br>
+        Este manual se ha desarrollado para mostrar el uso de iptables desde configuraciones 
+        simples a m&aacute;s complejas. Se ha elaborado con el conocimiento adquirido 
+        a base de tortas por tanto se basa en la experiencia propia. Necesita 
+        continua revisi&oacute;n.</p>
+      <p><span class="titulo">Autor:</span><br>
+        <img src="autor.jpg" width="409" height="305"><br>
+        Pello Xabier Altadill Izura<br>
+        Ingeniero en Inform&aacute;tica por la UPV-EHU (<a href="http://www.ehu.es">http://www.ehu.es</a>)<br>
+        Actualmente tiene entre sus manos el <b><font color="#996600">marr&oacute;n</font></b> 
+        de la seguridad en IBERCOM (<a href="http://www.ibercom.com%20">http://www.ibercom.com 
+        </a>), un isp que no solo sobrevive al temporal, sino que se permite el 
+        lujo de no parar de crecer.<br>
+        URL: <a href="http://www.pello.info">http://www.pello.info</a><br>
+        Emails: <a href="mailto:pello@pello.info">pello@pello.info</a>, <a href="mailto:pello.altadill@terra.com">pello.altadill@terra.com</a><br>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center"><a href="#top">Volver arriba</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td>&copy; Pello Xabier Altadill Izura . <a href="http://www.pello.info">www.pello.info</a></td>
+  </tr>
+</table>
+</body>
+</html>

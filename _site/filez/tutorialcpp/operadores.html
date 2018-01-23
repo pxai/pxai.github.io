@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Operadores</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Tipos de datos"
+HREF="tipos-de-datos.html"><LINK
+REL="NEXT"
+TITLE="Parametros, ambito, sobrecarga"
+HREF="par-amb-sob.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="tipos-de-datos.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="par-amb-sob.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="OPERADORES"
+></A
+>Capítulo 5. Operadores</H1
+><P
+>&#13;Bueno, conociendo los tipos de datos ya podemos empezar 
+a operar con ellos. Dentro de c++ tenemos los tipicos 
+operadores matematicos + - * / y tambien los operadores 
+unarios (++ --) En este primer ejemplo vemos operadores 
+unarios y la asignacion multiple. 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN134"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Operadores.cpp
+* Programa para probar algunos operadores
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Operadores.cpp -o Operadores
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+	
+	unsigned int test = 0;
+	unsigned int a = 0, b = 0, c;
+	
+	// Sacamos el valor por pantalla de test
+	cout &#60;&#60; "Valor de test: " &#60;&#60; test &#60;&#60; endl;
+
+	// Sacamos el valor por pantalla de test++
+	cout &#60;&#60; "Valor de test++: " &#60;&#60; (test++) &#60;&#60; endl;
+
+	// Sacamos el valor por pantalla de ++test
+	cout &#60;&#60; "Valor de ++test: " &#60;&#60; (++test) &#60;&#60; endl;
+
+	cout &#60;&#60; "Valor de test actual: " &#60;&#60; test &#60;&#60; endl;
+	
+	// asignacion multiple
+	c = b = a = test;
+	
+	// Veamos el resto de valores
+	cout &#60;&#60; "Y los demas: " &#60;&#60; c &#60;&#60; " " &#60;&#60; b &#60;&#60; " " &#60;&#60; a &#60;&#60; endl;
+	
+	return 0;
+
+}
+
+/**
+* Operadores.cpp
+* Programa para probar algunos operadores
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Operadores.cpp -o Operadores
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+
+	unsigned int test = 0;
+	unsigned int a = 0, b = 0, c;
+
+	// Sacamos el valor por pantalla de test
+	cout &#60;&#60; "Valor de test: " &#60;&#60; test &#60;&#60; endl;
+	
+	// Sacamos el valor por pantalla de test++
+	cout &#60;&#60; "Valor de test++: " &#60;&#60; (test++) &#60;&#60; endl;
+
+	// Sacamos el valor por pantalla de ++test
+	cout &#60;&#60; "Valor de ++test: " &#60;&#60; (++test) &#60;&#60; endl;
+
+	cout &#60;&#60; "Valor de test actual: " &#60;&#60; test &#60;&#60; endl;
+	// asignacion multiple
+	c = b = a = test;
+	
+	// Veamos el resto de valores
+	cout &#60;&#60; "Y los demas: " &#60;&#60; c &#60;&#60; " " &#60;&#60; b &#60;&#60; " " &#60;&#60; a &#60;&#60; endl;
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="AEN137"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/aurrerapena.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+  Figura: aprendiendo c++ puedes escalar socialmente. Aunque si lo que quieres es ganar dinero, quedate en el campo.
+  </P
+><P
+>&#13;En el siguiente codigo vamos un poco mas alla y se 
+muestra algunas operaciones abreviadas y algunas 
+comparaciones. 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN145"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Operadores2.cpp
+* Programa para probar algunos operadores segunda parte
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Operadores2.cpp -o Operadores2
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+
+	unsigned int test = 0;
+	unsigned int a = 0, b = 0, c;
+	
+	// asignacion multiple
+	c = b = a = ++test;
+
+	b += 3;
+	c++;
+	a -= 1;
+
+	// Veamos el resto de valores
+	cout &#60;&#60; "Son estos: c=" &#60;&#60; c &#60;&#60; " b=" &#60;&#60; b &#60;&#60; " a=" &#60;&#60; a &#60;&#60; endl;
+	
+	a += b + c;
+	
+	cout &#60;&#60; "Y ahora son estos: c=" &#60;&#60; c &#60;&#60; " b=" &#60;&#60; b &#60;&#60; " a=" &#60;&#60; a &#60;&#60; endl;
+	
+	// Tomamos el valor a
+	cout &#60;&#60; "Dame valores. \na=";
+	cin &#62;&#62; a;
+
+	// Tomamos el valor b
+	cout &#60;&#60; "b=";
+	cin &#62;&#62; b;
+
+	// Tomamos el valor c
+	cout &#60;&#60; "c=";
+	cin &#62;&#62; c;
+
+	cout &#60;&#60; "Y ahora son estos: c=" &#60;&#60; c &#60;&#60; " b=" &#60;&#60; b &#60;&#60; " a=" &#60;&#60; a &#60;&#60; endl;
+
+	//Probamos el if	
+	if (a &#62; b) {
+		cout &#60;&#60; "A es mayor que B" &#60;&#60; endl;
+	}
+	
+	//Probamos el if
+	if (a &#62;= b) {
+		cout &#60;&#60; "A es mayor o igual que B" &#60;&#60; endl;
+	}
+
+	//Probamos el if
+	if (a &#60;= b) {
+		cout &#60;&#60; "A es menor o igual que B" &#60;&#60; endl;
+	}
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Operadores logicos. A continuacion vemos algunos 
+ejemplos de operadores logicos (comparaciones) y la 
+combinacion de estos. 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN147"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Logicos.cpp
+* Programa para probar operadores Logicos
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Logicos.cpp -o Logicos
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+
+	unsigned int test = 0;
+	int a = 23, b = 21, c = 34;
+
+	// Veamos el resto de valores
+	cout &#60;&#60; "Valores: " &#60;&#60; c &#60;&#60; " " &#60;&#60; b &#60;&#60; " " &#60;&#60; a &#60;&#60; endl;
+
+	// Tomamos el valor a
+	cout &#60;&#60; "Dame valores. \na=";
+	cin &#62;&#62; a;
+
+	// Tomamos el valor b
+	cout &#60;&#60; "b=";
+	cin &#62;&#62; b;
+	
+	// Tomamos el valor c
+	cout &#60;&#60; "c=";
+	cin &#62;&#62; c;
+
+	cout &#60;&#60; "Y ahora son estos: c=" &#60;&#60; c &#60;&#60; " b=" &#60;&#60; b &#60;&#60; " a=" &#60;&#60; a &#60;&#60; endl;
+	
+	// Veamos una sentencia if-else sencilla
+	if (!(a == b)) 
+		cout &#60;&#60; "a y b no son iguales" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "a y b son iguales" &#60;&#60; endl;
+
+	// Veamos otra sentencia if-else sencilla
+	if ((a == b) || (b == c)) 
+		cout &#60;&#60; "A y B son iguales o B y C son iguales" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "ni A y B son iguales ni B y C son iguales" &#60;&#60; endl;
+
+	// Nota. Ley de De Morgan
+	// !(A &#38;&#38; B) == !A || !B
+	// !(A || B) == !A &#38;&#38; !B
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Mas operadores logicos. Tambien introducimos el 
+operador ()?: que simplifica las expresiones pero las 
+hace un poco ilegibles. 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN149"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Logicos2.cpp
+* Programa para probar operadores Logicos 2
+*
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Logicos2.cpp -o Logicos2
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+
+	unsigned int test = 0;
+	int a = 23, b = 21, c = 34;
+
+	// Veamos el resto de valores
+	cout &#60;&#60; "Valores: " &#60;&#60; c &#60;&#60; " " &#60;&#60; b &#60;&#60; " " &#60;&#60; a &#60;&#60; endl;
+	
+	// Tomamos el valor a
+	cout &#60;&#60; "Dame valores. \na=";
+	cin &#62;&#62; a;
+
+	// Tomamos el valor b
+	cout &#60;&#60; "b=";
+	cin &#62;&#62; b;
+	
+	// Tomamos el valor c
+	cout &#60;&#60; "c=";
+	cin &#62;&#62; c;
+
+	cout &#60;&#60; "Y ahora son estos: c=" &#60;&#60; c &#60;&#60; " b=" &#60;&#60; b &#60;&#60; " a=" &#60;&#60; a &#60;&#60; endl;
+	
+	// Veamos una sentencia if-else sencilla
+	if (!a) 
+		cout &#60;&#60; "A es false (igual 0)" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "A es true (distinto de 0)" &#60;&#60; endl;
+
+	// Veamos una sentencia if-else sencilla
+	if (!b) 
+		cout &#60;&#60; "B es false (igual 0)" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "B es true (distinto de 0)" &#60;&#60; endl;
+
+	// Veamos una sentencia if-else sencilla
+	if (!c) 
+		cout &#60;&#60; "C es false (igual 0)" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "C es true (distinto de 0)" &#60;&#60; endl;
+
+	// Sentencia con operador logico o TERNARIO ()?:
+	c = (a == b)?0:1;
+	
+	cout &#60;&#60; "C es : " &#60;&#60; c &#60;&#60; endl;
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+If-else Introduciendo esta simple estructura de 
+control: 
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN151"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* IfElse.cpp
+* Programa para probar If Else anindados
+* En c++ no existe la estructura if-elsif-else
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ IfElse.cpp -o IfElse
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main () {
+	
+	// Sacamos por salida standar un mensaje
+	cout &#60;&#60; "Vamos a probar los operadores\n";
+
+	unsigned int test = 0;
+	int a = 23, b = 21, c = 34;
+
+	// Veamos el resto de valores
+	cout &#60;&#60; "Valores: " &#60;&#60; c &#60;&#60; " " &#60;&#60; b &#60;&#60; " " &#60;&#60; a &#60;&#60; endl;
+	
+	// Veamos una sentencia if-else sencilla
+	if (a &#62;= b) 
+		cout &#60;&#60; "a mayor o igual que b" &#60;&#60; endl;
+	else
+		cout &#60;&#60; "a menor que b" &#60;&#60; endl;
+	
+	// Veamos una sentencia if-else compleja
+	// nota: si dentro de un if o un else metemos mas de una sentencia, hay que meter LLAVES
+	// y tambien conviene meter las llaves para hacer un codigo menos confuso
+	if (a &#62;= b) {
+		cout &#60;&#60; "a mayor o igual que b" &#60;&#60; endl;
+		if (a == 23) {
+			cout &#60;&#60; "a igual que 23" &#60;&#60; endl;
+			cout &#60;&#60; "terminamos." &#60;&#60; endl; 
+		}
+	} else {
+		cout &#60;&#60; "a menor que b" &#60;&#60; endl;
+	}
+
+return 0;
+
+}
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="tipos-de-datos.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="par-amb-sob.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Tipos de datos</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Parametros, ambito, sobrecarga</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

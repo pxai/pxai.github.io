@@ -1,0 +1,3770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>pello.io</title>
+  <meta name="description" content="Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/12/">
+  <link rel="alternate" type="application/rss+xml" title="pello.io" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">
+    <img src="/images/logo.png" title="Pello.io logo" />
+    pello.io</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" title="Projects" href="archive.html">
+            <span class="octicon octicon-calendar"></span> Archive
+          </a>
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            <span class="octicon octicon-beaker"></span> Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            <span class="octicon octicon-octoface"></span> GitHub
+          </a>
+          
+            
+            
+          
+            
+            
+          <span class="octicon octicon-person"></span><span class="octicon octicon-person"></span>
+            <a class="page-link" href="/about/">
+              About
+            </a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+
+        </div>
+      </nav>
+    
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/collections/2012/02/15/javajutsu-colecciones-java-el-hashset.html">JavaJutsu: colecciones java, el HashSet</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2012-02-15T15:16:04+01:00" itemprop="datePublished">
+            
+            Feb 15, 2012
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          collections
+        </span>
+        
+        
+      </p>
+      <h1>
+	HashSet</h1>
+<p>
+	La muchachada siempre se altera un poco cuando oye hablar de un tipo de estructura que se llama hash. HashSet es una implementaci&oacute;n del interfaz Set.</p>
+<p>
+	Veamos un ejemplo:</p>
+<p>
+	&nbsp;</p>
+<div>
+	/**</div>
+<div>
+	* HashSets</div>
+<div>
+	* Clase que muestra el uso de la estructura de datos HashSet</div>
+<div>
+	*</div>
+<div>
+	* Para compilar:</div>
+<div>
+	* &nbsp; javac HashSets.java</div>
+<div>
+	*</div>
+<div>
+	* Para ejecutarlo:</div>
+<div>
+	* &nbsp; java HashSets</div>
+<div>
+	*/</div>
+<div>
+	&nbsp;</div>
+<div>
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida</div>
+<div>
+	import java.io.*;</div>
+<div>
+	&nbsp;</div>
+<div>
+	// Librer&iacute;a necesaria para trabajar con HashSet</div>
+<div>
+	import java.util.*;</div>
+<div>
+	&nbsp;</div>
+<div>
+	/**</div>
+<div>
+	* clase HashSets</div>
+<div>
+	* Muestra el uso de la estructura de datos HashSet</div>
+<div>
+	* cuya peculiaridad es que forma listas en las que</div>
+<div>
+	* NO PUEDEN REPETIRSE LOS VALORES!!!</div>
+<div>
+	*</div>
+<div>
+	* @author Pello Altadill</div>
+<div>
+	*/</div>
+<div>
+	public class HashSets {</div>
+<div>
+	&nbsp;</div>
+<div>
+	/**</div>
+<div>
+	* main</div>
+<div>
+	* Funci&oacute;n principal</div>
+<div>
+	* Desde la funci&oacute;n principal probamos un HashSet</div>
+<div>
+	*/</div>
+<div>
+	public static void main (String args[])</div>
+<div>
+	{</div>
+<div>
+	HashSet mesesVascos = new HashSet();</div>
+<div>
+	&nbsp;</div>
+<div>
+	mesesVascos.add(&quot;Urtarrila&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Otsaila&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Martxoa&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Apirila&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Maiatza&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Ekaina&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Uztaila&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Abuztua&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Iraila&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Urria&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Azaroa&quot;);</div>
+<div>
+	mesesVascos.add(&quot;Abendua&quot;);</div>
+<div>
+	&nbsp;</div>
+<div>
+	// Vamos a quitar el odiado Septiembre...</div>
+<div>
+	mesesVascos.remove(&quot;Iraila&quot;);</div>
+<div>
+	&nbsp;</div>
+<div>
+	// Vamos a comprobar si Enero NO est&aacute; presente...</div>
+<div>
+	if (!mesesVascos.contains(&quot;Enero&quot;)) {</div>
+<div>
+	System.out.println(&quot;Efectivamente, no existe Enero&quot;);</div>
+<div>
+	}</div>
+<div>
+	&nbsp;</div>
+<div>
+	System.out.println(&quot;Volcado: &quot; + mesesVascos.toString());</div>
+<div>
+	}</div>
+<div>
+	}</div>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/collections/2012/02/14/javajutsu-colecciones-java-vector.html">JavaJutsu: colecciones java, Vector</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2012-02-14T14:23:02+01:00" itemprop="datePublished">
+            
+            Feb 14, 2012
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          collections
+        </span>
+        
+        
+      </p>
+      <h1>
+	Vector</h1>
+<p>
+	Java tiene un mont&oacute;n de clases &uacute;tiles para representar colecciones o estructuras de datos bien conocidas: listas, pilas,... Vamos a ver un Vector, una especie de array din&aacute;mico en el que no hace falta indicar el tama&ntilde;o.</p>
+<p>
+	/**<br />
+	* Vectores<br />
+	* Clase que muestra el uso de la estructura de datos Vector<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Vectores.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Vectores<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con Vector<br />
+	import java.util.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Vectores<br />
+	* Muestra el uso de la estructura de datos Vector<br />
+	* El Vector es un super array que permite tama&ntilde;o din&aacute;mico<br />
+	* y a&ntilde;ade muchos m&eacute;todos para gestionar su contenido.<br />
+	* Los elementos pueden ser cualquier objeto y se pueden repetir.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Vectores {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* Desde la funci&oacute;n principal probamos un Vector<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador crack = new Jugador(&quot;Maradona&quot;,10);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador catacrack = new Jugador(&quot;Drenthe&quot;,13);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador cr7 = new Jugador(&quot;Ronaldo&quot;,7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos una instancia de Vector para guardar una plantilla<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Vector plantilla = new Vector();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Metemos unos elementos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(crack);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(catacrack);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(cr7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Recorrer la estructura con un for;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0; i &lt; plantilla.size();i++) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;((Jugador)plantilla.elementAt(i)).sacarDatos();&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Otra pasada con Iterator:&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a recorrer con un Iterator<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Iterator iterador = plantilla.iterator();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Nota : enumeration est&aacute; algo desfasado...<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// podemos usar un while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;while (iterador.hasNext()) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tenemos que forzar el tipo que devuelve lista a Jugador<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador jugadorTmp = (Jugador)iterador.next();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ahora ya podemos jugar con esa variable<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadorTmp.sacarDatos();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a quitar elementos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por referencia de objeto -el primero que encuentre-<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeElement(cr7);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por &iacute;ndice<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeElementAt(0);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// A&ntilde;adimos un elemento creado al vuelo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.addElement(new Jugador(&quot;Torres&quot;,9));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Otra pasada con Enumeration:&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Recorrer la estructura con el interfaz Enumeration<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Los elementos del Vector pasan a ser un Enumeration<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// con unas funciones a&ntilde;adidas: hasMoreElements y nextElement<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Nota : enumeration est&aacute; algo desfasado...<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// podemos usar un while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (Enumeration lista = plantilla.elements();lista.hasMoreElements();) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tenemos que forzar el tipo que devuelve lista a Jugador<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Jugador jugadorTmp = (Jugador)lista.nextElement();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ahora ya podemos jugar con esa variable<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadorTmp.sacarDatos();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos dejar el Vector vac&iacute;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;plantilla.removeAllElements();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}<br />
+	&nbsp;<br />
+	/**<br />
+	* Clase Jugador<br />
+	* la usamos como objeto para manejar con un vector<br />
+	*/<br />
+	class Jugador {<br />
+	&nbsp;&nbsp; &nbsp;public String nombre;<br />
+	&nbsp;&nbsp; &nbsp;public int dorsal;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Constructor<br />
+	&nbsp;&nbsp; &nbsp;* @param String nombre<br />
+	&nbsp;&nbsp; &nbsp;* @param int dorsal<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Jugador (String nombre, int dorsal) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.nombre = nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.dorsal = dorsal;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* sacarDatos<br />
+	&nbsp;&nbsp; &nbsp;* Muestra los datos de una jugador<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void sacarDatos () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;\nNombre: &quot; + nombre + &quot;\nDorsal: &quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/game/2012/02/09/javajutsu-piedra-papel-tijera.html">JavaJutsu: Piedra Papel Tijera</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2012-02-09T15:32:43+01:00" itemprop="datePublished">
+            
+            Feb 9, 2012
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          game
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: funciones est&aacute;ticas</h1>
+<p>
+	El programa para jugar a piedra papel tijera:</p>
+<p>
+	/**<br />
+	&nbsp;* @(#)PiedraPapelTijera.java<br />
+	&nbsp;*<br />
+	&nbsp;*<br />
+	&nbsp;* @author &nbsp;<br />
+	&nbsp;* @version 1.00 2012/1/30<br />
+	&nbsp;*/<br />
+	&nbsp;<br />
+	&nbsp;import java.util.Random;<br />
+	&nbsp;import java.io.*;<br />
+	&nbsp;<br />
+	public class PiedraPapelTijera {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * log<br />
+	&nbsp;&nbsp; &nbsp; * Muestra por consola un string<br />
+	&nbsp;&nbsp; &nbsp; * lo hacemos para simplificar la llamada a System.out.println<br />
+	&nbsp;&nbsp; &nbsp; * en el resto de funciones<br />
+	&nbsp;&nbsp; &nbsp; * @param String msg<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static void log(String msg) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(msg);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * solicitarUsuario<br />
+	&nbsp;&nbsp; &nbsp; * Solicita al usuario y n&uacute;mero y lo convierte a entero<br />
+	&nbsp;&nbsp; &nbsp; * @return int<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static int solicitarUsuario() {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Console consola = System.console();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String linea = &quot;&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;Dame algo:\n 1.Piedra\n 2.Papel\n 3.Tijera&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;linea = consola.readLine();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;resultado = Integer.parseInt(linea);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * maquinaDecideSigno<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Genera un n&uacute;mero aleatorio entre 1 y 3<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * muestra el nombre del signo escogido<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return int<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static int maquinaDecideSigno() {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Random random = new Random();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int signo = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos un array de nombres de signos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para poder mostrar qu&eacute; signo saca la m&aacute;quina<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String nombreSignos[] = {&quot;&quot;,&quot;Piedra&quot;,&quot;Papel&quot;,&quot;Tijera&quot;};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;signo = random.nextInt(3) + 1;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;La m&aacute;quina saca &quot;+ signo+ &quot; es decir: &quot; + nombreSignos[signo]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return signo;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp; * decidirGanardor<br />
+	&nbsp;&nbsp; &nbsp; * Decide qui&eacute;n gana:<br />
+	&nbsp;&nbsp; &nbsp; *&nbsp; 0: empate<br />
+	&nbsp;&nbsp; &nbsp; *&nbsp; 1: humano<br />
+	&nbsp;&nbsp; &nbsp; *&nbsp; 2: m&aacute;quina<br />
+	&nbsp;&nbsp; &nbsp; * @param int humano<br />
+	&nbsp;&nbsp; &nbsp; * @param int maquina<br />
+	&nbsp;&nbsp; &nbsp; * @return int<br />
+	&nbsp;&nbsp; &nbsp; */<br />
+	&nbsp;&nbsp; &nbsp;public static int decidirGanardor(int humano, int maquina) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (humano)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 1: log(&quot;T&uacute; has elegido Piedra&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (maquina)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 1: resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 2: resultado = 2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 3: resultado = 1;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 2: log(&quot;T&uacute; has elegido Papel&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (maquina)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 1: resultado = 1;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 2: resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 3: resultado = 2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 3: log(&quot;T&uacute; has elegido Tijera&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (maquina)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 1: resultado = 2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 2: resultado = 1;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 3: resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;public static void main(String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;String lectura = &quot;&quot;;<br />
+	&nbsp;&nbsp; &nbsp;int jugadah, jugadam, resultado;<br />
+	&nbsp;&nbsp; &nbsp;int jugador, maquina;<br />
+	&nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// Inicializo todos a la vez<br />
+	&nbsp;&nbsp; &nbsp;// qu&eacute; pro que soy<br />
+	&nbsp;&nbsp; &nbsp;jugador = maquina = jugadam = jugadah = resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;do {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadah = solicitarUsuario();<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugadam = maquinaDecideSigno();<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;resultado = decidirGanardor(jugadah, jugadam);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (resultado == 1 ) { &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;Ganas la ronda&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;jugador++;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} else if (resultado == 2) { &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;Pierdes la ronda&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;maquina++;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;T&uacute;: &quot; + jugador + &quot; Com:&quot; + maquina+&quot;\n\n&quot;);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;} while (jugador&lt;3 &amp;&amp; maquina&lt;3);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;if (jugador &gt; maquina) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;Excelent work&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;else {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;log(&quot;n0000000b&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;log(&quot;Winners don&#39;t use drugs&quot;);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}<br />
+	&nbsp;<br />
+	&nbsp;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/2012/02/08/cine-e-informatica-presentacion.html">Cine E Informatica Presentacion</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2012-02-08T00:00:00+01:00" itemprop="datePublished">
+            
+            Feb 8, 2012
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+      </p>
+      ﻿---
+layout: post
+title: "Cine e informática, presentación"
+date: 2012-02-08 14:22:10
+categories: coding
+---
+<h1>
+	La resistencia es f&uacute;til</h1>
+<div id="__ss_11479969" style="width: 425px;">
+	<strong style="margin: 12px 0pt 4px; display: block;"><a href="http://www.slideshare.net/pello/la-resistencia-es-ftil" target="_blank" title="La resistencia es fútil">La resistencia es f&uacute;til</a></strong><iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11479969" width="425"></iframe>
+	<div style="padding: 5px 0pt 12px;">
+		View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/pello" target="_blank">pello</a></div>
+</div>
+<p>
+	De un <a href="http://www.pello.info/blog/la-informatica-a-traves-del-cine">viejo post de este sitio</a> he llevado a cabo una presentaci&oacute;n en la que se habla de algunas pelis relacionadas con la inform&aacute;tica, los robots, la ia y el frikismo. En Slideshare se puede ver online.</p>
+<p>
+	<a href="http://www.slideshare.net/pello/la-resistencia-es-ftil" target="_blank">http://www.slideshare.net/<wbr>pello/la-resistencia-es-ftil</wbr></a></p>
+<p>
+	<wbr>
+<!--more-->
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/coding/2012/02/06/javajutsu-generador-quinielas-con-funciones.html">JavaJutsu: Generador Quinielas con funciones</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2012-02-06T13:23:46+01:00" itemprop="datePublished">
+            
+            Feb 6, 2012
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          coding
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: funciones est&aacute;ticas.</h1>
+<p>
+	Vamos a hacer un programa procedimental usando funciones est&aacute;ticas, es decir, nada de POO.</p>
+<p>
+	En esta caso el ejemplo es un generador de quinielas:</p>
+<p>
+	import java.util.Random;<br />
+	&nbsp;<br />
+	/**<br />
+	&nbsp;* @(#)Quinela.java<br />
+	&nbsp;*<br />
+	&nbsp;*<br />
+	&nbsp;* @author Pello Altadill<br />
+	&nbsp;* @version 0.1<br />
+	&nbsp;*/<br />
+	&nbsp;<br />
+	public class Quinela {<br />
+	&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * generarNumero<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * M&eacute;todo que genera un n&uacute;mero aleatorio entre 0 y 2<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return int<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static int generarNumero () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Random aleatorio = new Random();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int resultado = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;resultado = aleatorio.nextInt(3);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * determinarSigno<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Dado un n&uacute;mero entero determina un signo de la qui&ntilde;ela<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param int numero<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return char<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static char determinarSigno (int numero) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char resultado = &#39; &#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (numero) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 0: resultado = &#39;1&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 1: resultado = &#39;X&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 2: resultado = &#39;2&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;default:resultado = &#39;1&#39;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * mostrar<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Genera un String con el n&uacute;mero de casilla y el signo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param int casillo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param char signo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return String<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static String mostrar(int casilla, char signo) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String resultado = &quot;&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;resultado = casilla + &quot;.- &quot; + signo;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param args the command line arguments<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int tmp = 0;<br />
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int casillaTmp = 0;<br />
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char signoTmp = &#39; &#39;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 1; i&lt; 16; i++)&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 1. Generar un n&uacute;mero entre 0-2<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tmp = generarNumero();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// 2. Determinar el signo: 1, X, 2<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;signoTmp = determinarSigno(tmp);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// 3. Mostrarlo &nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(mostrar(i,signoTmp));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/coding/2011/12/07/java-herencia-de-clases.html">Java, herencia de clases</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-12-07T14:34:26+01:00" itemprop="datePublished">
+            
+            Dec 7, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          coding
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu, herencia entre clases</h1>
+<p>
+	Este es un ejemplo de herencia, la clase ClienteVip que hereda de Cliente:</p>
+<p>
+	/**<br />
+	* ClienteVip<br />
+	* Clase que muestra la declaraci&oacute;n de una clase que extiende a otra:<br />
+	* es decir muestra la HERENCIA<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac ClienteVip.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java ClienteVip<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	// Liber&iacute;a necesaria para la clase Date<br />
+	import java.util.Date;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase ClienteVip<br />
+	* Muestra la declaraci&oacute;n de ClienteVip, una extensi&oacute;n de la clase Cliente. &nbsp;<br />
+	* Es un ejemplo simple de herencia, donde creamos una clase especializada<br />
+	* que hereda todos los atributos y m&eacute;todos de la clase padre.<br />
+	* Para lograrlo debemos a&ntilde;adir la clausula extends en la declaraci&oacute;n<br />
+	* de la clase.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class ClienteVip extends Cliente {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// ATRIBUTOS o PROPIEDADES DE LA CLASE extendida:<br />
+	&nbsp;&nbsp; &nbsp;public float descuento;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// M&Eacute;TODOS DE LA CLASE: Constructores, y otras funciones<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;* este es el m&eacute;todo constructor, al que se invoca<br />
+	&nbsp;&nbsp; &nbsp;* al crear una instancia de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;ClienteVip ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lamamos al constructor de la clase padre<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de ClienteVip&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;* Otro constructor con par&aacute;metros.<br />
+	&nbsp;&nbsp; &nbsp;* Nos sirve para crear una instancia<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;ClienteVip (String nombre, String apellidos, Date nacimiento, int codigo, float descuento)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lamamos al constructor de la clase padre<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super(nombre,apellidos,nacimiento,codigo);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Establecemos el atributo descuento<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.descuento = descuento;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de ClienteVip&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* aplicarDescuento<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que aplica el descuento del cliente a un determinado total<br />
+	&nbsp;&nbsp; &nbsp;* @return resultado<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public float aplicarDescuento (float precioTotal)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float resultado = precioTotal * (1-descuento);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* quitarIVA<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que le quita el IVA al cliente de un total<br />
+	&nbsp;&nbsp; &nbsp;*<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public float quitarIVA (float precioTotal)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;float resultado = precioTotal * (0.82F);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* fichaCliente<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que sobrescribe al de la clase padre Cliente,<br />
+	&nbsp;&nbsp; &nbsp;* a&ntilde;adiendo un dato m&aacute;s.<br />
+	&nbsp;&nbsp; &nbsp;*<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void fichaCliente ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al principio hace los mismo que la clase padre.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super.fichaCliente();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;CLIENTE VIP&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Descuento: &quot; + descuento);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;* Y desde ella vamos a crear una instancia de ClienteVip<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos un par de instancias<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ClienteVip unClienteVip = new ClienteVip();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ClienteVip otroClienteVip = new ClienteVip(&quot;Frodo&quot;,&quot;Bolson&quot;, new Date(), 19, 0.10F);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unClienteVip.codigo = 89;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;otroClienteVip.fichaCliente();<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Total 109.56 euros, con descuento del &quot; + otroClienteVip.descuento + &quot;%: &quot; + otroClienteVip.aplicarDescuento(109.56F));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unClienteVip.saluda();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/coding/2011/12/05/java-metodos-o-funciones.html">Java, métodos o funciones</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-12-05T13:19:22+01:00" itemprop="datePublished">
+            
+            Dec 5, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          coding
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: m&eacute;todos o funciones</h1>
+<p>
+	En las funciones podemos tener un retorno y pueden lanzar excepciones.</p>
+<p>
+	/**<br />
+	* Metodos<br />
+	* Clase que muestra la declaraci&oacute;n de todo tipo de m&eacute;todos<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Metodos.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Metodos<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Metodos<br />
+	* Muestra la declaraci&oacute;n dedistintos tipos de m&eacute;todos: constructores,<br />
+	* m&eacute;todos con distintos tipos de retorno, m&eacute;todos que lanzan excepciones,<br />
+	* m&eacute;todos est&aacute;ticos, m&eacute;todos privados, protegidos y p&uacute;blicos<br />
+	*<br />
+	* La clase es un poco absurda pero simplemente trata de mostrar distintos<br />
+	* tipos de m&eacute;todos<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Metodos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Metodos<br />
+	&nbsp;&nbsp; &nbsp;* Constructor sin par&aacute;metros<br />
+	&nbsp;&nbsp; &nbsp;* estos m&eacute;todos son los &uacute;nicos que no devuelven algo explicitamente<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Metodos () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado instancia&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Metodos<br />
+	&nbsp;&nbsp; &nbsp;* Constructor con par&aacute;metros<br />
+	&nbsp;&nbsp; &nbsp;* estos m&eacute;todos son los &uacute;nicos que no devuelven algo explicitamente<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Metodos (String opcion) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;super();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Opci&oacute;n pasada: &quot; + opcion);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* estatico<br />
+	&nbsp;&nbsp; &nbsp;* Aquellos que tienen la palabra static se consideran M&eacute;todo de clase, &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;* puede ser invocado sin que se cree una instancia<br />
+	&nbsp;&nbsp; &nbsp;* de la clase. ver main.<br />
+	&nbsp;&nbsp; &nbsp;* De estos m&eacute;todos solo se crea una copia en memoria, al igual que pasa<br />
+	&nbsp;&nbsp; &nbsp;* con los atributos que se declaran static.<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void estatico (int veces) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0; i &lt; veces;i++) {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Est&aacute;tico&gt; &quot; + i);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saludar<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo publico que devuelve un String<br />
+	&nbsp;&nbsp; &nbsp;* Si no ponemos nada, se considera p&uacute;blico<br />
+	&nbsp;&nbsp; &nbsp;* @return String<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;String saludar () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;saludoPrivado();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return &quot;Hola yo te saludo.&quot;;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saludoPrivado<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que saca un mensaje por consola.<br />
+	&nbsp;&nbsp; &nbsp;* Solo se puede invocar desde dentro de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;private void saludoPrivado () {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Java rulez&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* tomarDato<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo publico lee un valor por consola y devuelve un entero<br />
+	&nbsp;&nbsp; &nbsp;* Puede lanzar dos excepciones<br />
+	&nbsp;&nbsp; &nbsp;* @return String<br />
+	&nbsp;&nbsp; &nbsp;* @throws IOException, NumberFormatException<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public int tomarDato () throws IOException, NumberFormatException {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Console c = System.console();<br />
+	&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String linea = c.readLine(&quot;Dame un n&uacute;mero: &quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Integer.parseInt(linea);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;* @throw IOException<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[]) throws IOException<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Probamos el m&eacute;todo est&aacute;tico. No necesitamos crear instancia!!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Metodos.estatico(5);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Metodos pruebaMetodos = new Metodos(&quot;hola&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;pruebaMetodos.saludar();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int entero = pruebaMetodos.tomarDato();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/oop/2011/11/24/java-declaracion-de-clases.html">Java, declaración de clases</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-24T13:36:51+01:00" itemprop="datePublished">
+            
+            Nov 24, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          OOP
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: clases</h1>
+<p>
+	Java es una especie de C++ simplificado al que le han quitado la herencia m&uacute;ltiple y los punteros. Como todo lenguaje orientado a objetos utiliza clases, con sus propiedades y m&eacute;todos. Veamos un par de ejemplos:</p>
+<p>
+	<strong>Clase Gen&eacute;rica:</strong></p>
+<p>
+	/**<br />
+	* Clases<br />
+	* Clase que muestra la declaraci&oacute;n de una clase<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Clases.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Clases<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Clases<br />
+	* Clase que muestra la declaraci&oacute;n de una clase<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Clases {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// ATRIBUTOS de CLASE<br />
+	&nbsp;&nbsp; &nbsp;String nombre;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo constructor, se ejecuta al crear una instancia de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Clases ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;nombre = &quot;Juan Solo&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de la clase&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saludo<br />
+	&nbsp;&nbsp; &nbsp;* Un m&eacute;todo de la clase que simplemente saca un mensaje<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;void saludo ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Hola Mundo, soy &quot; + nombre);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos una INSTANCIA de la clase:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// es como declarar una variable, pero el tipo es el<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// nombre de la clase<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Clases unaClase = new Clases();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Con la instancia llamamos a uno de sus m&eacute;todos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unaClase.saludo();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+<p>
+	<strong>Clase Cliente:</strong></p>
+<p>
+	/**<br />
+	* Cliente<br />
+	* Clase que muestra la declaraci&oacute;n de una clase<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Cliente.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Cliente<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	// Liber&iacute;a necesaria para la clase Date<br />
+	import java.util.Date;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Cliente<br />
+	* Muestra la declaraci&oacute;n de una clase que representa un cliente. &nbsp;<br />
+	* Una clase se compone de atributos (propiedades) y m&eacute;todos (funciones)<br />
+	* La clase representa una entidad y cuando definimos una variable de<br />
+	* de esa clase<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Cliente {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// ATRIBUTOS o PROPIEDADES DE LA CLASE<br />
+	&nbsp;&nbsp; &nbsp;public String nombre;<br />
+	&nbsp;&nbsp; &nbsp;public String apellidos;<br />
+	&nbsp;&nbsp; &nbsp;public Date nacimiento;<br />
+	&nbsp;&nbsp; &nbsp;public int codigo;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;// M&Eacute;TODOS DE LA CLASE: Constructores, y otras funciones<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Cliente<br />
+	&nbsp;&nbsp; &nbsp;* este es el m&eacute;todo constructor, al que se invoca<br />
+	&nbsp;&nbsp; &nbsp;* al crear una instancia de la clase<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Cliente ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de Cliente&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* Cliente<br />
+	&nbsp;&nbsp; &nbsp;* Otro constructor con par&aacute;metros.<br />
+	&nbsp;&nbsp; &nbsp;* Nos sirve para crear una instancia<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;Cliente (String nombre, String apellidos, Date nacimiento, int codigo)<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Has creado una instancia de Cliente&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.nombre = nombre;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.apellidos = apellidos;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.nacimiento = nacimiento;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.codigo = codigo;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* nombreCompleto<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que une el nombre y el apellido del Cliente<br />
+	&nbsp;&nbsp; &nbsp;* @return resultado<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public String nombreCompleto ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String resultado = nombre + &quot; &quot; + apellidos;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return resultado;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* fichaCliente<br />
+	&nbsp;&nbsp; &nbsp;* M&eacute;todo que muestra todos los datos del cliente<br />
+	&nbsp;&nbsp; &nbsp;*<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void fichaCliente ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;--Ficha del Cliente--&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;C&oacute;digo: &quot; + codigo);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Nombre completo: &quot; + nombreCompleto());<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Fecha nacimiento: &quot; + nacimiento);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* saluda<br />
+	&nbsp;&nbsp; &nbsp;* Un m&eacute;todo que nos muestra un saludo<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public void saluda ()<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Hola mundo desde la clase&quot;);<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;* Y desde ella vamos a crear una instancia de Cliente<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Creamos un par de instancias<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Cliente unCliente = new Cliente();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Cliente otroCliente = new Cliente(&quot;Darth&quot;,&quot;Vader&quot;, new Date(), 666);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unCliente.codigo = 89;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;otroCliente.fichaCliente();<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;unCliente.saluda();<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/loop,/arrays/2011/11/23/java-matrices-o-arrays-de-n-dimensiones.html">Java, matrices o arrays de n dimensiones</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-23T14:08:11+01:00" itemprop="datePublished">
+            
+            Nov 23, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          loop,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          arrays
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: matrices o arrays de varias dimensiones</h1>
+<p>
+	&iquest;C&oacute;mo creamos y accedemos a los elementos de un array de varias dimensiones? Muy f&aacute;cil. Como en c.</p>
+<p>
+	/**<br />
+	* Matrices<br />
+	* Clase que muestra la declaraci&oacute;n y uso de Arrays de varias dimensiones<br />
+	* le he llamado Matriz por distinguir, aunque formalmente puede ser los mismo.<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Matrices.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Matrices<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Matrices<br />
+	* Clase que muestra la declaraci&oacute;n y uso de Arrays de dos o m&aacute;s dimensiones<br />
+	*<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Matrices {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a definir un array de enteros de dos dimensiones y otro de tres<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int valores[][];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [][] dorsales;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos establecer el tama&ntilde;o mediante new, y puede ser distinto para cada dimensi&oacute;n:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En este caso definimos un array de DIEZ&nbsp; y TRES elementos &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [][] puntos = new int[10][3];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos inicializar los arreglos con valores concretos,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo cual ser&iacute;a una forma de impl&iacute;cita de especificar su tama&ntilde;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numeros[][] = %7B%7B7,15,42},{69,666,23},{5,87,1},{0,665,-1%7D%7D;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char letras [][] = %7B%7B&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;},{&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;%7D%7D;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos crear Matrices de Strings<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String heroes[][] = %7B%7B&quot;Gandalf&quot;,&quot;Trancos&quot;}, {&quot;Haplo&quot;,&quot;Alfred&quot;},{&quot;Jon Nieve&quot;, &quot;Brienne&quot;%7D%7D;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos alterar valores de un elemento del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[0][1] = &quot;Aragorn&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[1][2] = 24;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y por supuesto operar con ellos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al elemento 0 del array heroes le concatenamos algo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[2][0] = heroes[2][0] + &quot; lord Comandante&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[3][1]++;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para recorrer estos arrays con un for, hay que anidar tantos for<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// como dimensiones tenga el array:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// ATENCI&Oacute;N a la forma de acceder al subarray en el segundo FOR&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Estos son los mayores heroes, por sagas: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i &lt; heroes.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Saga &quot; + i);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int j = 0; j &lt; heroes[i].length; j++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;\tEn el &iacute;ndice &quot; + i + &quot;,&quot; + j +&quot;: &quot; + heroes[i][j]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/jee,/struts,/mvc/2011/11/22/aplicacion-struts-de-ejemplo-mecano.html">Aplicación struts de ejemplo: Mecano</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-22T18:03:26+01:00" itemprop="datePublished">
+            
+            Nov 22, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          JEE,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Struts,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          MVC
+        </span>
+        
+        
+      </p>
+      <p>
+	Mecano es una peque&ntilde;a aplicaci&oacute;n web hecha en java usando el framework Struts. Struts no es m&aacute;s que una librer&iacute;a que nos permite hacer la aplicaci&oacute;n con el patr&oacute;n MVC.</p>
+<p>
+	Tiene unos diez a&ntilde;os y dudo que pueda funcionar con el struts actual pero por si alguien quiere echarle un ojo, dejo el enlace:</p>
+<p>
+	<a href="http://pello.io/filez/mecano.zip">Bajarse aplicaci&oacute;n Struts Mecano</a></p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    
+
+  <!-- Pagination links -->
+  <ul class="pagination">
+  
+  <li>
+    <a href="/page/11">
+      &laquo;
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/index.html">
+      1
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/2">
+      2
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/3">
+      3
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/4">
+      4
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/5">
+      5
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/6">
+      6
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/7">
+      7
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/8">
+      8
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/9">
+      9
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/10">
+      10
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/11">
+      11
+    </a>
+  </li>
+  
+
+  
+  <li class="active">
+    <a>
+      12
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/13">
+      13
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/14">
+      14
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/15">
+      15
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/16">
+      16
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/17">
+      17
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/18">
+      18
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/19">
+      19
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/20">
+      20
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/21">
+      21
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/22">
+      22
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/23">
+      23
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/24">
+      24
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/25">
+      25
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/26">
+      26
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/27">
+      27
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/28">
+      28
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/13">
+      &raquo;
+    </a>
+  </li>
+  
+</ul>
+
+
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="pelloprojects">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pello.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+            <span class="octicon octicon-person"></span>
+              Pello Altadill
+            
+            </li>
+            
+          <span class="octicon octicon-mail"></span>
+            <li><a href="mailto:p_at_pello_dot_io">p_at_pello_dot_io</a></li>
+            
+        </ul>
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/pxai"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">pxai</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/pello_io"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">pello_io</span></a>
+
+          </li>
+          
+        </ul>
+        <p>Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3><span class="octicon octicon-beaker"></span> Projects</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="http://eta.bar" title="">eta.bar</a>
+            MEAN 2
+          </li>
+          <li>
+            <a href="https://github.com/pxai/jobtrends" title="">Jobtrends</a>
+            MEAN
+          </li>
+          <li>
+            <a href="https://github.com/pxai/seronoser" title="">SeronoSer</a>
+            Angular game
+          </li>
+          <li>
+            <a href="https://artean.cuatrovientos.org" title="">Artean</a>
+            Symfony3
+          </li>
+          <li>
+            <a href="https://github.com/pxai/4vientos" title="">4vientos</a>
+            Codeigniter
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-git-branch"></span> Repositories</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=typescript&type=&language=">TypeScript</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=android&type=&language=java">Android</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/gulp-optimized-web">Gulp optimization</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/grunt-optimized-web">Grunt optimization</a>
+          </li>
+        </ul>
+      </div>
+       <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-repo"></span> Books</h3>
+        <ul class="social-media-list">
+            <li>
+                <a href="books.html">Información</a>
+              </li>
+          <li>
+            <a href="https://www.amazon.es/Dise%C3%B1o-Interfaces-Eugenia-P%C3%A9rez-Martinez/dp/8416228620/">Diseño de interfaces Web</a>
+          </li>
+          <li>
+            <a href="https://www.amazon.es/Java-Limpio-Programaci%C3%B3n-pr%C3%A1cticas-desarrollo/dp/1546987916/">Java Limpio</a> | <a href="https://www.amazon.es/dp/B074W4D2NM">Versión Kindle</a> 
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/2012/"
+       style="">
+            2012, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dao/"
+       style="">
+            DAO, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jee/"
+       style="">
+            JEE, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java, (27)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mvc/"
+       style="">
+            MVC (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            OOP (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ruby/"
+       style="">
+            Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts/"
+       style="">
+            Struts, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/access/"
+       style="">
+            access, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/activity/"
+       style="">
+            activity (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ado-net/"
+       style="">
+            ado.net (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ant/"
+       style="">
+            ant, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/apache/"
+       style="">
+            apache, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/args/"
+       style="">
+            args (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arkapong/"
+       style="">
+            arkapong, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/array/"
+       style="">
+            array (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arrays/"
+       style="">
+            arrays (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp-net/"
+       style="">
+            asp.net, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp3/"
+       style="">
+            asp3, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asynctask/"
+       style="">
+            asynctask (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/audits/"
+       style="">
+            audits (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/auth/"
+       style="">
+            auth, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backbone/"
+       style="">
+            backbone, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backend/"
+       style="">
+            backend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/banner/"
+       style="">
+            banner (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bash/"
+       style="">
+            bash (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/basics/"
+       style="">
+            basics (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bit/"
+       style="">
+            bit, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boardgames/"
+       style="">
+            boardgames (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boolean/"
+       style="">
+            boolean, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/break/"
+       style="">
+            break (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/browser/"
+       style="">
+            browser, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c# (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c#, (17)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++ (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c0ders/"
+       style="">
+            c0ders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/callbacks/"
+       style="">
+            callbacks (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/charset/"
+       style="">
+            charset (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cinema/"
+       style="">
+            cinema, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/classes/"
+       style="">
+            classes (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/code/"
+       style="">
+            code (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coders/"
+       style="">
+            coders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding (29)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/collections/"
+       style="">
+            collections (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/comic/"
+       style="">
+            comic (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/computers/"
+       style="">
+            computers (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/content/"
+       style="">
+            content (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cooking/"
+       style="">
+            cooking (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cpan/"
+       style="">
+            cpan (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/css3/"
+       style="">
+            css3, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cvs/"
+       style="">
+            cvs (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dbf/"
+       style="">
+            dbf, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/debug/"
+       style="">
+            debug (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/delegate/"
+       style="">
+            delegate, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops (11)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops, (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/di/"
+       style="">
+            di, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dice/"
+       style="">
+            dice, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/docker/"
+       style="">
+            docker, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dtd/"
+       style="">
+            dtd (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/eclipse/"
+       style="">
+            eclipse, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/email/"
+       style="">
+            email (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/errors/"
+       style="">
+            errors (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/event/"
+       style="">
+            event (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/events/"
+       style="">
+            events (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/excel/"
+       style="">
+            excel (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/exceptions/"
+       style="">
+            exceptions (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/firewalls/"
+       style="">
+            firewalls (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/fortunes/"
+       style="">
+            fortunes (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frameworks/"
+       style="">
+            frameworks (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frontend/"
+       style="">
+            frontend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ftp/"
+       style="">
+            ftp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/functions/"
+       style="">
+            functions (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/games/"
+       style="">
+            games, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/gdb/"
+       style="">
+            gdb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/generator/"
+       style="">
+            generator, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/genpas/"
+       style="">
+            genpas, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getline/"
+       style="">
+            getline (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getopt/"
+       style="">
+            getopt (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/glibc/"
+       style="">
+            glibc, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/grub/"
+       style="">
+            grub (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hello/"
+       style="">
+            hello (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/helloworld/"
+       style="">
+            helloworld (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hibernate/"
+       style="">
+            hibernate (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hipstered/"
+       style="">
+            hipstered, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hsqldb/"
+       style="">
+            hsqldb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/html5/"
+       style="">
+            html5, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/i-o/"
+       style="">
+            i/o (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iban/"
+       style="">
+            iban (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ide/"
+       style="">
+            ide, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/if/"
+       style="">
+            if (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/indexer/"
+       style="">
+            indexer, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/inheritance/"
+       style="">
+            inheritance (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/intentss/"
+       style="">
+            intentss (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip/"
+       style="">
+            ip, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip-gre/"
+       style="">
+            ip_gre (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iptables/"
+       style="">
+            iptables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iterations/"
+       style="">
+            iterations (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/j2me/"
+       style="">
+            j2me, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jasmine/"
+       style="">
+            jasmine, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jdbc/"
+       style="">
+            jdbc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/joke/"
+       style="">
+            joke (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lab/"
+       style="">
+            lab (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/libgdx/"
+       style="">
+            libgdx (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linked/"
+       style="">
+            linked (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lists/"
+       style="">
+            lists (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/localstorage/"
+       style="">
+            localstorage (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mail/"
+       style="">
+            mail (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/markdown/"
+       style="">
+            markdown (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/maven/"
+       style="">
+            maven, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/methods/"
+       style="">
+            methods (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/metro/"
+       style="">
+            metro, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mobile/"
+       style="">
+            mobile (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mock/"
+       style="">
+            mock (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/modules/"
+       style="">
+            modules (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mongodb/"
+       style="">
+            mongodb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/monitoring/"
+       style="">
+            monitoring, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/music/"
+       style="">
+            music, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nessus/"
+       style="">
+            nessus, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/networking/"
+       style="">
+            networking (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nodejs/"
+       style="">
+            nodejs, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oem/"
+       style="">
+            oem, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oledb/"
+       style="">
+            oledb (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/openshift/"
+       style="">
+            openshift (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/operators/"
+       style="">
+            operators (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/optimization/"
+       style="">
+            optimization (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/overload/"
+       style="">
+            overload (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/paper/"
+       style="">
+            paper (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parser/"
+       style="">
+            parser (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parsing/"
+       style="">
+            parsing (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/password/"
+       style="">
+            password, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pattern/"
+       style="">
+            pattern (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/perl/"
+       style="">
+            perl, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postfix/"
+       style="">
+            postfix (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postgresql/"
+       style="">
+            postgresql, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pptp/"
+       style="">
+            pptp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/preprocessor/"
+       style="">
+            preprocessor (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/print/"
+       style="">
+            print (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/process/"
+       style="">
+            process, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/project/"
+       style="">
+            project (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/provider/"
+       style="">
+            provider (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pthread/"
+       style="">
+            pthread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/python/"
+       style="">
+            python, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/react/"
+       style="">
+            react (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/references/"
+       style="">
+            references, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/regexp/"
+       style="">
+            regexp (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/relational/"
+       style="">
+            relational (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/remote/"
+       style="">
+            remote (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scanf/"
+       style="">
+            scanf (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scrum/"
+       style="">
+            scrum, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/services/"
+       style="">
+            services (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shell/"
+       style="">
+            shell, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shortcuts/"
+       style="">
+            shortcuts (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/socket-io/"
+       style="">
+            socket.io, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sort/"
+       style="">
+            sort (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            spring (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sql/"
+       style="">
+            sql (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sqlite/"
+       style="">
+            sqlite (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/squid/"
+       style="">
+            squid, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/static/"
+       style="">
+            static (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/stdlib/"
+       style="">
+            stdlib (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strings/"
+       style="">
+            strings (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strtok/"
+       style="">
+            strtok, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/structures/"
+       style="">
+            structures (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts2/"
+       style="">
+            struts2, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/svg/"
+       style="">
+            svg (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/swap/"
+       style="">
+            swap, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/switch/"
+       style="">
+            switch (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sysadmin/"
+       style="">
+            sysadmin (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/syslog/"
+       style="">
+            syslog, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tdd/"
+       style="">
+            tdd, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/template/"
+       style="">
+            template (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/templates/"
+       style="">
+            templates, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/theme/"
+       style="">
+            theme (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/themes/"
+       style="">
+            themes, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tomcat/"
+       style="">
+            tomcat, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/transactions/"
+       style="">
+            transactions (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tutorial/"
+       style="">
+            tutorial (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/types/"
+       style="">
+            types (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vagrant/"
+       style="">
+            vagrant (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb/"
+       style="">
+            vb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/virtualization/"
+       style="">
+            virtualization, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vmware/"
+       style="">
+            vmware (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webmin/"
+       style="">
+            webmin, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webservices/"
+       style="">
+            webservices (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/websockets/"
+       style="">
+            websockets, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/wordpress/"
+       style="">
+            wordpress, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/world/"
+       style="">
+            world (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xml/"
+       style="">
+            xml, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xmlschema/"
+       style="">
+            xmlschema, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xsd/"
+       style="">
+            xsd (3)
+    </a>
+</span>
+      
+    </div>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93485415-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</footer>
+
+
+  </body>
+
+</html>

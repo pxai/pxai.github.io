@@ -1,0 +1,77 @@
+﻿---
+layout: post
+title: "Migrate from google code to github or bitbucket in easy steps"
+date: 2015-03-13 10:17:53
+categories: github, git
+---
+<img src="http://pello.info/images/migrategoogle.jpg" title="Migrate from google code to github or bitbucket" alt="Migrate from google code to github or bitbucket" />
+<h3>Google code disappears</h3>
+<p>Repent, the end is near. Google has just announced that they are shutting down google code project hosting. In the email of the announcement they make some suggestions to find a new house for your code such as bitbucket or github. I hope that they have been warned in order to be ready for a massive repository creation from the upcoming exodus of coder refugees. </p>
+
+<p>At the time of writing this, there is a button to automate the migration only to github but it is NOT working due to the high amount of traffic and workload that they are experiencing.</p>
+
+
+<p>But you can still move your stuff manually. Here are some easy-to-follow steps to move your code from google to github just using your command line.</p>
+
+
+<h3>0 .Go to google code</h3>
+
+<p>It is not as obvious as it may seem. Once you log in google is impossible to find a simple link to see your projects. Google is not specially good at usability, but hey, when your shares are valued at >500$ who gives a fuck. Nevermind, go to <a href="https://code.google.com/hosting/" title="don't forget to log">https://code.google.com/hosting/</a>
+and check My favorites</p>
+
+
+<h3>1. Checkout project</h3>
+
+<p>Enter into the project you want to migrate and select Source. Copy the command to checkout your code, with read-only is enough.</p>
+<p>
+For example for:
+<a href="http://code.google.com/p/erps-2dam-4vientos/">http://code.google.com/p/erps-2dam-4vientos/</a></p>
+</p>
+<p>Go to source and:</p>
+
+<p><code>
+svn checkout http://erps-2dam-4vientos.googlecode.com/svn/trunk/ erps-2dam-4vientos-read-only
+</code></p>
+
+
+<h3>2. Do some cleaning</h3>
+<p>Enter the directory and erase all svn files</p>
+
+<p><code>
+find . -type d -name .svn -exec rm -rf {} +
+</code></p>
+
+<p>Remove any other unnecessary stuff, binaries, jars,.. and the like.</p>
+
+<h3>3. Create repo on github or bitbucket</h3>
+<p>They both have free repository services, sign up and you can create repos.</p>
+
+<h3>4. Clone the repo</h3>
+<p>Once your repo is created they will provide you with a clone url or even the exact command you need to clone the repo locally.</p>
+
+<p><code>
+git clone http://clone...
+</code></p>
+
+<h3>5. Copy files to your local git project directory</h3>
+Move/copy files from your google-code local copy to git local copy.
+
+<p><code>
+mv google-code-dir/* git-project-dir/
+</code></p>
+
+<h3>6. Add and commit code</h3>
+<p>Now it's time to add to git the newly copied code files. You can achieve this with to easy commands, Bob Marley style:</p>
+<p><code>
+git add *<br />
+git commit -m 'Exodus: Movement of Jah people! Oh-oh-oh, yea-eah!'
+</code></p>
+
+<h3>7. Push to remote</h3>
+<p>Final step to have your code online again and safe for [hopefully] [some] years to come. You'll be prompted to enter your username and password.</p>
+
+<p><code>
+git push origin master
+</code></p>
+
+<p>Greets for you, lucky bitbucket user. Your <b>nice</b> arse is safe at the moment</p>

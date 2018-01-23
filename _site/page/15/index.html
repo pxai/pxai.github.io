@@ -1,0 +1,3711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>pello.io</title>
+  <meta name="description" content="Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/15/">
+  <link rel="alternate" type="application/rss+xml" title="pello.io" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">
+    <img src="/images/logo.png" title="Pello.io logo" />
+    pello.io</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" title="Projects" href="archive.html">
+            <span class="octicon octicon-calendar"></span> Archive
+          </a>
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            <span class="octicon octicon-beaker"></span> Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            <span class="octicon octicon-octoface"></span> GitHub
+          </a>
+          
+            
+            
+          
+            
+            
+          <span class="octicon octicon-person"></span><span class="octicon octicon-person"></span>
+            <a class="page-link" href="/about/">
+              About
+            </a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+
+        </div>
+      </nav>
+    
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/console,/args/2011/09/22/argumentos-por-consola-en-java.html">Argumentos por consola en java</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-09-22T13:25:00+02:00" itemprop="datePublished">
+            
+            Sep 22, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          console,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          args
+        </span>
+        
+        
+      </p>
+      <h1>
+	Javajutsu: Argumentos por consola en java</h1>
+<p>
+	Vamos a ver c&oacute;mo se recogen argumentos por la l&iacute;nea de comandos. Se hace igual que en c</p>
+<p>
+	/**<br />
+	* Argumentos<br />
+	* Clase que muestra c&oacute;mo recoger argumentos de la l&iacute;nea de comandos<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Argumentos.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Argumentos argumento<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Argumentos<br />
+	* Muestra c&oacute;mo recoger par&aacute;metros de la linea de comandos<br />
+	* es decir, cuando ejecutamos el programa:<br />
+	*&nbsp;&nbsp; java Argumentos ejemplo_de_argumento<br />
+	* tras el nombre del programa podemos poner lo que queramos como<br />
+	* par&aacute;metro. Para recoger los valores usaremos la variable args[]<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Argumentos {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a suponer que nos han pasado alg&uacute;n argumento,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Los argumentos los recoge autom&aacute;ticamente la variable<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// args[]. El primer argumento ser&iacute;a args[0], el segundo args[1], etc...<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;&iexcl;Hola Mundo! me has pasado: &quot; + args[0]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lo pasariamos as&iacute;:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//&nbsp;&nbsp; C:\jdk&gt;java Argumentos blablabla<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// ATENCI&Oacute;N, si NO le pasamos nada el programa casca con una excepci&oacute;n<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/helloworld/2011/09/21/holamundo-javajutsu.html">HolaMundo javajutsu</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-09-21T15:35:51+02:00" itemprop="datePublished">
+            
+            Sep 21, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          helloworld
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu</h1>
+<p>
+	Bueno, lleg&oacute; la hora de darle al java. A lo largo de las siguientes entradas iremos conociendo este lenguaje y algunas herramientas de desarrollo.</p>
+<p>
+	Empezaremos con los simple, con las manos desnudas, editor, compilador y l&iacute;nea de comandos. Y poco a poco iremos conociendo las herramientas de poder</p>
+<pre>
+/**
+* HolaMundo
+* Clase que simplemente muestra un mensaje por pantalla
+*
+* Para compilar:
+*   javac HolaMundo.java
+*
+* Para ejecutarlo:
+*   java HolaMundo
+*/
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/c++,/references,/pointers/2011/08/04/9-referencias-c-plusplus.html">9. &Referencias c++</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-08-04T15:24:00+02:00" itemprop="datePublished">
+            
+            Aug 4, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          c++,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          references,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          pointers
+        </span>
+        
+        
+      </p>
+      <b>Las referencias</b>
+<br>
+Una referencia es otra forma  de acceder a un dato, una especie de alias. Cualquier operacion
+sobre una referencia afectara a ese dato al que hace referencia.
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/ant,/test/2011/07/04/ejemplo-de-ant-que-ejecuta-test-junit.html">Ejemplo de ant que ejecuta test junit</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-07-04T02:50:33+02:00" itemprop="datePublished">
+            
+            Jul 4, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          ant,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          test
+        </span>
+        
+        
+      </p>
+      <p>
+	&lt;?xml version=&quot;1.0&quot;?&gt;<br />
+	&lt;!-- NOTA: Aseg&uacute;rate de que el fichero lo editas en utf-8 --&gt;<br />
+	&lt;!-- NOTA: conviene hacer clean y luego compilar --&gt;<br />
+	&lt;!-- Para generar: ant [tarea] o ant -buildfile [fichero.xml] [tarea] --&gt;<br />
+	&lt;project name=&quot;build.xml de ejemplo&quot; default=&quot;pasartest&quot; basedir=&quot;.&quot;&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.src&quot; value=&quot;src&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.build&quot; value=&quot;build&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;property name=&quot;dir.dist&quot; value=&quot;dist&quot;/&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Genera los directorios de salida: ant preparar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;preparar&quot; description=&quot;Crea los directorios&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;mkdir dir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;mkdir dir=&quot;${dir.dist}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Elimina todo lo creado: ant clean --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;clean&quot; description=&quot;Elimina todos los ficheros generados&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;delete dir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;delete dir=&quot;${dir.dist}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Compilaci&oacute;n, primero hace la tarea preparar: ant compilar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;compilar&quot; depends=&quot;preparar&quot; description=&quot;Compilar todo.&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;javac srcdir=&quot;${dir.src}&quot; destdir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Establece el classpath --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;path id=&quot;classpath.proyecto&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;pathelement path=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/path&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Ejecuta los test unitarios --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;pasartest&quot; depends=&quot;compilar&quot; description=&quot;Ejecutar test junit&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;junit printsummary=&quot;on&quot;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;fork=&quot;false&quot;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;haltonfailure=&quot;false&quot;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;failureproperty=&quot;tests.failed&quot;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;showoutput=&quot;true&quot;&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;classpath refid=&quot;classpath.proyecto&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;formatter type=&quot;brief&quot; usefile=&quot;false&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;batchtest&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;fileset dir=&quot;${dir.src}&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;include name=&quot;**/Test*.java&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/fileset&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/batchtest&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/junit&gt;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;fail if=&quot;tests.failed&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ATENCI&Oacute;N. HAN CASCADO ALGUNOS TESTS.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ECHA UN OJO A LOS RESULTADOS.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/fail&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	<br />
+	&nbsp;&nbsp; &nbsp;&lt;!-- Genera un fichero jar, depende de la tarea compile: ant jar --&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;target name=&quot;jar&quot; depends=&quot;compilar&quot; description=&quot;Genera un fichero jar en el directorio &#39;dist&#39;.&quot;&gt;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;jar jarfile=&quot;${dir.dist}/proyecto.jar&quot; basedir=&quot;${dir.build}&quot;/&gt;<br />
+	&nbsp;&nbsp; &nbsp;&lt;/target&gt;<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&lt;/project&gt;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/j2me,/midlet,/mobile/2011/06/17/midlet-j2me-generando-circulos-aleatorios.html">Midlet j2me: generando círculos aleatorios</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-06-17T15:16:07+02:00" itemprop="datePublished">
+            
+            Jun 17, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          j2me,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          midlet,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          mobile
+        </span>
+        
+        
+      </p>
+      <p>
+	Este midlet tiene varias partes:</p>
+<ol>
+	<li>
+		Por un lado est&aacute; el Midlet o aplicaci&oacute;n para el m&oacute;vil</li>
+	<li>
+		Una clase tipo Canvas para hacer los gr&aacute;ficos</li>
+	<li>
+		Una clase hilo que se utiliza para que el canvas pinte una y otra vez con pausas.</li>
+</ol>
+<p>
+	/*<br />
+	&nbsp;* RandomCircles<br />
+	&nbsp;* Midlet que usa una pantalla de tipo Canvas para crear gr&aacute;ficos<br />
+	&nbsp;*/<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.util.*;<br />
+	<br />
+	public class InfiniteCircles extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private CanvasForInfinite screen;<br />
+	&nbsp;&nbsp;&nbsp; private Repainter repintar;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public InfiniteCircles () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Tomamos la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Asociamos a Screen nuestro Canvas especial<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen = new CanvasForInfinite();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repintar = new Repainter(pantalla,screen);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() throws MIDletStateChangeException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(screen);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repintar.start();<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	<br />
+	class CanvasForInfinite extends Canvas&nbsp; {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; // Dentro de canvas debe existir esta funci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp; public void paint(Graphics g) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Declaramos variables para coordenadas, anchura, altura y radio<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int x,y,w,h,r,maxx, maxy;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Variable para generar n&uacute;meros aleatorios<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Random rnd = new Random();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maxx= maxy = x = y = w = h = r = 0;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maxx = this.getWidth();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maxy = this.getHeight();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //try {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 0;i&lt;5;i++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos color (r,g,b)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.setColor( rnd.nextInt(255),&nbsp; rnd.nextInt(255), rnd.nextInt(255));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.drawArc(rnd.nextInt(maxx), rnd.nextInt(maxy), maxx/2, maxy/2, 0, 360);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Para hacer estrellas<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.drawArc(rnd.nextInt(maxx), rnd.nextInt(maxy), 1, 1, 0, 360);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.drawArc(rnd.nextInt(maxx), rnd.nextInt(maxy), rnd.nextInt(4), rnd.nextInt(4), 0, 360);<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // dibujamos un arco, completo: 360<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.drawArc(rnd.nextInt(maxx), rnd.nextInt(maxy), rnd.nextInt(), rnd.nextInt(), 0, 360);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.drawString(&quot;Epa&quot;, 0, 0, Graphics.HCENTER | Graphics.TOP);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.drawString(&quot;Vamos&quot;,(getWidth() / 2),0 Graphics.HCENTER | Graphics.TOP);<br />
+	&nbsp; /*<br />
+	&nbsp;&nbsp; } catch (InterruptedException iex) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.drawString(&quot;Excepci&oacute;n: &quot; + iex.getMessage(), 0, 0, Graphics.HCENTER | Graphics.TOP);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	//<br />
+	// Y ahora la clase tipo runnable, es decir, un thread que se ejecuta en paralelo al midlet.<br />
+	// Sacada de las demos de sun</p>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.lcdui.Canvas;<br />
+	import javax.microedition.lcdui.Display;<br />
+	<br />
+	/**<br />
+	&nbsp;* Class periodically repainting the canvas with all the balls.<br />
+	&nbsp;*/<br />
+	public class Repainter implements Runnable {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /* target display */<br />
+	&nbsp;&nbsp;&nbsp; private Display display;<br />
+	&nbsp;&nbsp;&nbsp; /* canvas to repaint */<br />
+	&nbsp;&nbsp;&nbsp; private Canvas canvas;<br />
+	&nbsp;&nbsp;&nbsp; /* whether the repainting is stopped */<br />
+	&nbsp;&nbsp;&nbsp; private boolean stop;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a new instance of repainter.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; *<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param display Target display<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param canvas&nbsp; Canvas to repaint<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public Repainter (Display display, Canvas canvas) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.display = display;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.canvas = canvas;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Starts the repainter<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void start () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; stop = false;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; run ();<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Stops the repainter<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void stop () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; stop = true;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Actual repainting process being performed serially with actual display<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * updates.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void run () {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (stop) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // avoid insane repainting<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Thread.sleep (5);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; catch (InterruptedException e) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Never mind<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; canvas.repaint ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.callSerially (this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/j2me,/midlet,/mobile/2011/06/17/midlet-j2me-peticion-http.html">Midlet j2me: petición http</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-06-17T15:12:06+02:00" itemprop="datePublished">
+            
+            Jun 17, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          j2me,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          midlet,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          mobile
+        </span>
+        
+        
+      </p>
+      <p>
+	Ejemplo de un midlet que saca datos de la red, en concreto haciendo peticiones a una URL.</p>
+<p>
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.io.*;<br />
+	import javax.microedition.io.*;<br />
+	<br />
+	/**<br />
+	&nbsp;* @author luser<br />
+	&nbsp;*/<br />
+	public class HttpRequestTest extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand, goCommand, backCommand;<br />
+	private Display display;<br />
+	private Form locationScreen;<br />
+	private Form resultScreen;<br />
+	private TextField urlField;<br />
+	private StringItem itemResultado;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * HttpRequestTest<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public HttpRequestTest ()<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Pillamos la pantalla para el MIDlet<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display = Display.getDisplay(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos comandos esenciales<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goCommand = new Command(&quot;Go&quot;, Command.OK, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; backCommand = new Command(&quot;Back&quot;, Command.BACK, 2);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Formulario para tomar la URL<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen = new Form(&quot;Indica una URL destino&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; urlField = new TextField(&quot;url&quot;, &quot;http://localhost/Test.txt&quot;, 25, TextField.ANY);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.append(urlField);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Comandos salida y continuar<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.addCommand(goCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locationScreen.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos la pantalla de resultado<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen = new Form(&quot;URL data:&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; itemResultado = new StringItem(&quot;&quot;, &quot;&quot;);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.append(itemResultado);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Metemos los comandos para volver<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.addCommand(backCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultScreen.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(locationScreen);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura los comandos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String html = &quot;&quot;;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == goCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Llamamos a la funci&oacute;n que saca los datos<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html = getData(urlField.getString());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(resultScreen);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; itemResultado.setText(html);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }else if (c == backCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Volvemos al inicio<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(locationScreen);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * getData<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Solicita una URL y devuelve un String con el resultado<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private String getData(String url) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StreamConnection conn = null;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InputStream in = null;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringBuffer data = new StringBuffer();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Abrimos la conexi&oacute;n as&iacute; de f&aacute;cil<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conn = (StreamConnection)Connector.open(url);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos un InoutStream de la conexi&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in = conn.openInputStream();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Vamos leyendo caracteres y los metemos en un string<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int ch;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (((char)(ch = in.read()) != &#39;\003&#39;) &amp;&amp; (ch != -1) )<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data.append((char)ch);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Si est&aacute; vac&iacute;o, msg al canto con alert<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (data.toString().equals(&quot;&quot;))<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(new Alert(&quot;Url&quot;,&quot;En esa URL no retorn&oacute; nada.&quot;, null,AlertType.ERROR));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return data.toString();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (IOException e) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return &quot;La conexi&oacute;n no se pudo establecer:&quot; + e.getMessage();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/j2me,/midlet,/mobile/2011/06/01/midlet-j2me-conversor-mejorado.html">Midlet j2me: conversor mejorado</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-06-01T11:39:53+02:00" itemprop="datePublished">
+            
+            Jun 1, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          j2me,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          midlet,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          mobile
+        </span>
+        
+        
+      </p>
+      <p>
+	El conversor de ptas,euros y dolares algo mejorado. Campos que solo admiten n&uacute;meros,choices, alertas, dos formularios, etc..</p>
+<p>
+	*<br />
+	&nbsp;* Conversor<br />
+	&nbsp;* Midlet que convierte monedas en dos formularios<br />
+	&nbsp;*/<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.util.*;<br />
+	<br />
+	<br />
+	public class Conversor extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand, goCommand, backCommand;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private Form formDatos;<br />
+	&nbsp;&nbsp;&nbsp; private TextField cantidad;<br />
+	&nbsp;&nbsp;&nbsp; private ChoiceGroup tipoCambio;<br />
+	&nbsp;&nbsp;&nbsp; private Form formResultado;<br />
+	&nbsp;&nbsp;&nbsp; private StringItem resultado;<br />
+	&nbsp;&nbsp;&nbsp; private Alert errorMsg;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Conversor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Constructor del Midlet, inicializa todo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public Conversor() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get the Display object for the MIDlet<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos los tres comandos<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Salir&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goCommand = new Command(&quot;Convertir&quot;, Command.OK, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; backCommand = new Command(&quot;Atr&aacute;s&quot;, Command.BACK, 2);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el primer formulario<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos = new Form(&quot;Introducir cantidad&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // En la cantidad aceptamos solo enteros. Para cualquier<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // otra cosa pondriamos TextField.ANY<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cantidad = new TextField(&quot;Cantidad&quot;, &quot;&quot;, 15, TextField.NUMERIC);</p>
+<p>
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos.append(cantidad);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String[] cambios = { &quot;&euro; a pta&quot;,&quot;pta a &euro;&quot;,&quot;&euro; a $&quot;,&quot;$ a &euro;&quot; };<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tipoCambio = new ChoiceGroup(&quot;Tipo de cambio&quot;, List.EXCLUSIVE,cambios, null);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos.append(tipoCambio);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Ponemos los comandos para el primer formulario<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos.addCommand(goCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formDatos.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos la pantalla para el resultado<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formResultado = new Form(&quot;Resultado al cambio&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultado = new StringItem(&quot;Resultado:\n&quot;, &quot;&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formResultado.append(resultado);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos los comandos para volver atr&aacute;s y salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formResultado.addCommand(backCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formResultado.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formResultado.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * iniciop del Midlet<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() throws MIDletStateChangeException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formDatos);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se invoca si se hace una pausa en la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Se invoca al destruir la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * handler para todos los eventos<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == goCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // si no se han metido datos, sacamos un alert y ponemos el foco<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (cantidad.getString().trim().equals(&quot;&quot;))<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errorMsg = new Alert(&quot;Atenci&oacute;n&quot;,&quot;Introduce algo en el campo cantidad&quot;,null,AlertType.WARNING);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(errorMsg, formDatos);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Hacemos el c&aacute;lculo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resultado.setText((calcular(Double.parseDouble(cantidad.getString()),tipoCambio.getSelectedIndex()) )) ;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formResultado);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == backCommand)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Hacemos limpia de la pantalla inicial<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cantidad.setString(&quot;&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Volvemos al inicio<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formDatos);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; private String calcular (double cantidad, int tipo)<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String result = &quot;&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; switch (tipo)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 0 :<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = cantidad +&quot;&euro; = &quot;+ (cantidad*166.386) +&quot;ptas&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 1 :<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = cantidad +&quot;ptas = &quot;+ (cantidad/166.386) +&quot;&euro;&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 3 :<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = cantidad +&quot;&euro; = &quot;+ (cantidad*1.2) +&quot;$&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 4 :<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = cantidad +&quot;$ = &quot;+ (cantidad/1.2) +&quot;&euro;&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default:<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return result;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/midlet,/j2me,/mobile/2011/05/31/midlet-cargando-una-imagen.html">Midlet:  cargando una imagen</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-05-31T11:44:09+02:00" itemprop="datePublished">
+            
+            May 31, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          midlet,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          j2me,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          mobile
+        </span>
+        
+        
+      </p>
+      <p>
+	El archivo est&aacute; en formato jpg y se copia dentro de src. A partir de ah&iacute; el empaquetador lo guarda y desde el programa le hacemos referencia con una barra por delante.</p>
+<p>
+	/*<br />
+	&nbsp;* Spongebob<br />
+	&nbsp;* Midlet que muestra una imagen<br />
+	&nbsp;*/<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.io.*;<br />
+	<br />
+	public class Spongebob extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private ImageCanvas screen;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public Spongebob () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Tomamos la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Asociamos a Screen nuestro Canvas especial<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen = new ImageCanvas();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() throws MIDletStateChangeException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(screen);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	<br />
+	class ImageCanvas extends Canvas&nbsp; {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; // Dentro de canvas debe existir esta funci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp; public void paint(Graphics g) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Image img = null;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Pantalla blanca<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.setColor(255, 255, 255); // White<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //g.fillRect(0, 0, getWidth(), getHeight());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos la imagen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Atenci&oacute;n, el fichero de imagen est&aacute; en src<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // y as&iacute; se lo indico al interfaz del sdk<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; img = Image.createImage(&quot;/bob.jpg&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (IOException ioex) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println(&quot;Error loading image: &quot; + ioex.getMessage());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Metemos la imagen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.drawImage(img, getWidth() / 2, getHeight() / 2,<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Graphics.HCENTER | Graphics.VCENTER);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Preparamos la fuente<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Font f = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.setFont(f);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Las letras en blanco...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.setColor(255, 255, 255);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.drawString(&quot;Spongebob rulez&quot;, getWidth() / 2, 0,Graphics.HCENTER | Graphics.TOP);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/coding/2011/05/25/sacar-informacion-de-sistema-del-movil.html">Sacar información de sistema del móvil</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-05-25T15:58:48+02:00" itemprop="datePublished">
+            
+            May 25, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          coding
+        </span>
+        
+        
+      </p>
+      <p>
+	Un peque&ntilde;o midlet que saca informaci&oacute;n b&aacute;sica del entorno de ejecuci&oacute;n.</p>
+<p class="brush: js">
+	/*<br />
+	&nbsp;* SysInfo<br />
+	&nbsp;* Utilidad de ejemplo que aparece en libros viejos.<br />
+	&nbsp;* La hora no la saca bien.<br />
+	&nbsp;*/<br />
+	<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	import java.util.*;<br />
+	<br />
+	public class SysInfo extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private Form formulario;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * SysInfo<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Constructor<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public SysInfo() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Tomamos la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el comando para salir<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos el formulario principal<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario = new Form(&quot;SysInfo&quot;);<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos la fecha actual<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Calendar calendar = Calendar.getInstance();<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Un string con la fecha. La fecha del m&oacute;vil sera 1.1.1970<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String fecha = calendar.getTime().toString();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Sacamos memoria total y disponible<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Runtime runtime = Runtime.getRuntime();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String totalMem = Long.toString(runtime.totalMemory());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String freeMem = Long.toString(runtime.freeMemory());<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //String alturaImagen = Integer.toString(pantalla.getBestImageHeight(0));<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // M&aacute;s propiedades de pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String isColor = pantalla.isColor() ? &quot;S&iacute;&quot; : &quot;No&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String numColors = Integer.toString(pantalla.numColors());<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Creamos los StringItem y los metemos en el formulario<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Hora: &quot; + fecha));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Memoria total: &quot; + totalMem));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Memoria libre: &quot; + freeMem));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;Color: &quot; + isColor));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(new StringItem(&quot;&quot;, &quot;n&ordm; de colores: &quot; + numColors));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //formulario.append(new StringItem(&quot;&quot;, &quot;altura de imagen: &quot; + alturaImagen));<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el comando de salida<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.setCommandListener(this);<br />
+	}<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * startApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al inicio de la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() throws MIDletStateChangeException {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establecemos el formulario en la pantalla<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formulario);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * pauseApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta en caso de pausar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * destroyApp<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * se ejecuta al terminar la aplicaci&oacute;n<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.vibrate(5);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura los comandos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == exitCommand) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/j2me,/midlet/2011/05/23/plantilla-midlet-comentada-y-conversor.html">Plantilla Midlet comentada y conversor</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-05-23T16:26:12+02:00" itemprop="datePublished">
+            
+            May 23, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          j2me,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          midlet
+        </span>
+        
+        
+      </p>
+      <h3>
+	Plantilla Midlet</h3>
+<p>
+	/*<br />
+	&nbsp;* To change this template, choose Tools | Templates<br />
+	&nbsp;* and open the template in the editor.<br />
+	&nbsp;*/<br />
+	<br />
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	<br />
+	// lcdui lo necesitamos para Display y si usamos CommandListener<br />
+	import javax.microedition.lcdui.*;<br />
+	<br />
+	// Despu&eacute;s de tomar el Display (se coge no se crea) podemos<br />
+	// usar screens (m&uacute;ltiples). Form, TextBox y List son hijas de Screen<br />
+	<br />
+	// Canvas ser&iacute;a como los Screens pero para gr&aacute;ficos<br />
+	<br />
+	/**<br />
+	&nbsp;* @author luser<br />
+	&nbsp;* El CommandListener lo necesitamos para poder meter comandos<br />
+	&nbsp;* que interrumplan<br />
+	&nbsp;*/<br />
+	public class PrimerMidlet extends MIDlet implements CommandListener {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; private Command ordenSalida;<br />
+	&nbsp;&nbsp;&nbsp; private Display pantalla;<br />
+	&nbsp;&nbsp;&nbsp; private Form formulario;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public PrimerMidlet ()<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create the Exit command, la prioridad es 2, muy alta<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ordenSalida = new Command(&quot;Salir&quot;, Command.EXIT, 2);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create the main screen form<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario = new Form(&quot;El primero&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Create a string item and add it to the screen<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringItem strItem = new StringItem(&quot;T&iacute;tulo&quot;, &quot;pasa tron&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.append(strItem);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Esto ser&iacute;a usar un softbutton, es decir, una orden<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // que utilice botones concretos del dispositivo, que son pocos.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // este tipo de comandos deben ser los m&aacute;s cruciales.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set the Exit command<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.addCommand(ordenSalida);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario.setCommandListener(this);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pantalla.setCurrent(formulario);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp() {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * commandAction<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * captura ordenes<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction (Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == ordenSalida) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // el false significa que el Midlet puede cancelar la orden<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp (false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // este avisa al gestor de aplicaciones del dispositivo que ya est&aacute;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	}<br />
+	&nbsp;</p>
+<h3>
+	Conversor de euros</h3>
+<p>
+	package hello;<br />
+	<br />
+	import javax.microedition.midlet.*;<br />
+	import javax.microedition.lcdui.*;<br />
+	<br />
+	public class Conversor extends MIDlet implements CommandListener {<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; private Command exitCommand; // The exit command<br />
+	&nbsp;&nbsp;&nbsp; private Command convertCommand; // The exit command<br />
+	&nbsp;&nbsp;&nbsp; private Display display;&nbsp;&nbsp;&nbsp;&nbsp; // The display for this MIDlet<br />
+	&nbsp;&nbsp;&nbsp; private TextBox cajaTexto;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public Conversor() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display = Display.getDisplay(this);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exitCommand = new Command(&quot;Exit&quot;, Command.EXIT, 0);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; convertCommand = new Command(&quot;Convertir&quot;, Command.OK, 0);<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; /**<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; * Pause, discontinue with the http tests<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+	&nbsp;&nbsp;&nbsp; public void pauseApp () {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp;&nbsp; public void startApp() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto = new TextBox(&quot;Inserta euros&quot;,&quot;0&quot;,20,0);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.addCommand(exitCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.addCommand(convertCommand);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setCommandListener(this);<br />
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display.setCurrent(cajaTexto);<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void destroyApp(boolean unconditional) {<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; public void commandAction(Command c, Displayable s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double pesetas = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (c == convertCommand)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pesetas = Double.parseDouble(cajaTexto.getString()) * 166.386;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cajaTexto.setString(&quot;yeah: &quot; + pesetas);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (c == exitCommand)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destroyApp(false);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; notifyDestroyed();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	<br />
+	}<br />
+	&nbsp;</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    
+
+  <!-- Pagination links -->
+  <ul class="pagination">
+  
+  <li>
+    <a href="/page/14">
+      &laquo;
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/index.html">
+      1
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/2">
+      2
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/3">
+      3
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/4">
+      4
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/5">
+      5
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/6">
+      6
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/7">
+      7
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/8">
+      8
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/9">
+      9
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/10">
+      10
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/11">
+      11
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/12">
+      12
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/13">
+      13
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/14">
+      14
+    </a>
+  </li>
+  
+
+  
+  <li class="active">
+    <a>
+      15
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/16">
+      16
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/17">
+      17
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/18">
+      18
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/19">
+      19
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/20">
+      20
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/21">
+      21
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/22">
+      22
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/23">
+      23
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/24">
+      24
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/25">
+      25
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/26">
+      26
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/27">
+      27
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/28">
+      28
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/16">
+      &raquo;
+    </a>
+  </li>
+  
+</ul>
+
+
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="pelloprojects">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pello.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+            <span class="octicon octicon-person"></span>
+              Pello Altadill
+            
+            </li>
+            
+          <span class="octicon octicon-mail"></span>
+            <li><a href="mailto:p_at_pello_dot_io">p_at_pello_dot_io</a></li>
+            
+        </ul>
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/pxai"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">pxai</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/pello_io"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">pello_io</span></a>
+
+          </li>
+          
+        </ul>
+        <p>Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3><span class="octicon octicon-beaker"></span> Projects</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="http://eta.bar" title="">eta.bar</a>
+            MEAN 2
+          </li>
+          <li>
+            <a href="https://github.com/pxai/jobtrends" title="">Jobtrends</a>
+            MEAN
+          </li>
+          <li>
+            <a href="https://github.com/pxai/seronoser" title="">SeronoSer</a>
+            Angular game
+          </li>
+          <li>
+            <a href="https://artean.cuatrovientos.org" title="">Artean</a>
+            Symfony3
+          </li>
+          <li>
+            <a href="https://github.com/pxai/4vientos" title="">4vientos</a>
+            Codeigniter
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-git-branch"></span> Repositories</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=typescript&type=&language=">TypeScript</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=android&type=&language=java">Android</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/gulp-optimized-web">Gulp optimization</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/grunt-optimized-web">Grunt optimization</a>
+          </li>
+        </ul>
+      </div>
+       <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-repo"></span> Books</h3>
+        <ul class="social-media-list">
+            <li>
+                <a href="books.html">Información</a>
+              </li>
+          <li>
+            <a href="https://www.amazon.es/Dise%C3%B1o-Interfaces-Eugenia-P%C3%A9rez-Martinez/dp/8416228620/">Diseño de interfaces Web</a>
+          </li>
+          <li>
+            <a href="https://www.amazon.es/Java-Limpio-Programaci%C3%B3n-pr%C3%A1cticas-desarrollo/dp/1546987916/">Java Limpio</a> | <a href="https://www.amazon.es/dp/B074W4D2NM">Versión Kindle</a> 
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/2012/"
+       style="">
+            2012, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dao/"
+       style="">
+            DAO, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jee/"
+       style="">
+            JEE, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java, (27)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mvc/"
+       style="">
+            MVC (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            OOP (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ruby/"
+       style="">
+            Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts/"
+       style="">
+            Struts, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/access/"
+       style="">
+            access, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/activity/"
+       style="">
+            activity (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ado-net/"
+       style="">
+            ado.net (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ant/"
+       style="">
+            ant, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/apache/"
+       style="">
+            apache, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/args/"
+       style="">
+            args (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arkapong/"
+       style="">
+            arkapong, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/array/"
+       style="">
+            array (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arrays/"
+       style="">
+            arrays (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp-net/"
+       style="">
+            asp.net, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp3/"
+       style="">
+            asp3, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asynctask/"
+       style="">
+            asynctask (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/audits/"
+       style="">
+            audits (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/auth/"
+       style="">
+            auth, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backbone/"
+       style="">
+            backbone, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backend/"
+       style="">
+            backend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/banner/"
+       style="">
+            banner (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bash/"
+       style="">
+            bash (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/basics/"
+       style="">
+            basics (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bit/"
+       style="">
+            bit, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boardgames/"
+       style="">
+            boardgames (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boolean/"
+       style="">
+            boolean, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/break/"
+       style="">
+            break (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/browser/"
+       style="">
+            browser, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c# (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c#, (17)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++ (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c0ders/"
+       style="">
+            c0ders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/callbacks/"
+       style="">
+            callbacks (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/charset/"
+       style="">
+            charset (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cinema/"
+       style="">
+            cinema, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/classes/"
+       style="">
+            classes (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/code/"
+       style="">
+            code (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coders/"
+       style="">
+            coders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding (29)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/collections/"
+       style="">
+            collections (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/comic/"
+       style="">
+            comic (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/computers/"
+       style="">
+            computers (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/content/"
+       style="">
+            content (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cooking/"
+       style="">
+            cooking (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cpan/"
+       style="">
+            cpan (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/css3/"
+       style="">
+            css3, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cvs/"
+       style="">
+            cvs (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dbf/"
+       style="">
+            dbf, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/debug/"
+       style="">
+            debug (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/delegate/"
+       style="">
+            delegate, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops (11)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops, (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/di/"
+       style="">
+            di, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dice/"
+       style="">
+            dice, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/docker/"
+       style="">
+            docker, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dtd/"
+       style="">
+            dtd (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/eclipse/"
+       style="">
+            eclipse, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/email/"
+       style="">
+            email (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/errors/"
+       style="">
+            errors (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/event/"
+       style="">
+            event (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/events/"
+       style="">
+            events (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/excel/"
+       style="">
+            excel (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/exceptions/"
+       style="">
+            exceptions (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/firewalls/"
+       style="">
+            firewalls (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/fortunes/"
+       style="">
+            fortunes (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frameworks/"
+       style="">
+            frameworks (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frontend/"
+       style="">
+            frontend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ftp/"
+       style="">
+            ftp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/functions/"
+       style="">
+            functions (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/games/"
+       style="">
+            games, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/gdb/"
+       style="">
+            gdb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/generator/"
+       style="">
+            generator, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/genpas/"
+       style="">
+            genpas, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getline/"
+       style="">
+            getline (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getopt/"
+       style="">
+            getopt (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/glibc/"
+       style="">
+            glibc, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/grub/"
+       style="">
+            grub (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hello/"
+       style="">
+            hello (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/helloworld/"
+       style="">
+            helloworld (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hibernate/"
+       style="">
+            hibernate (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hipstered/"
+       style="">
+            hipstered, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hsqldb/"
+       style="">
+            hsqldb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/html5/"
+       style="">
+            html5, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/i-o/"
+       style="">
+            i/o (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iban/"
+       style="">
+            iban (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ide/"
+       style="">
+            ide, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/if/"
+       style="">
+            if (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/indexer/"
+       style="">
+            indexer, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/inheritance/"
+       style="">
+            inheritance (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/intentss/"
+       style="">
+            intentss (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip/"
+       style="">
+            ip, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip-gre/"
+       style="">
+            ip_gre (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iptables/"
+       style="">
+            iptables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iterations/"
+       style="">
+            iterations (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/j2me/"
+       style="">
+            j2me, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jasmine/"
+       style="">
+            jasmine, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jdbc/"
+       style="">
+            jdbc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/joke/"
+       style="">
+            joke (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lab/"
+       style="">
+            lab (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/libgdx/"
+       style="">
+            libgdx (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linked/"
+       style="">
+            linked (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lists/"
+       style="">
+            lists (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/localstorage/"
+       style="">
+            localstorage (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mail/"
+       style="">
+            mail (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/markdown/"
+       style="">
+            markdown (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/maven/"
+       style="">
+            maven, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/methods/"
+       style="">
+            methods (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/metro/"
+       style="">
+            metro, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mobile/"
+       style="">
+            mobile (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mock/"
+       style="">
+            mock (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/modules/"
+       style="">
+            modules (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mongodb/"
+       style="">
+            mongodb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/monitoring/"
+       style="">
+            monitoring, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/music/"
+       style="">
+            music, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nessus/"
+       style="">
+            nessus, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/networking/"
+       style="">
+            networking (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nodejs/"
+       style="">
+            nodejs, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oem/"
+       style="">
+            oem, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oledb/"
+       style="">
+            oledb (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/openshift/"
+       style="">
+            openshift (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/operators/"
+       style="">
+            operators (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/optimization/"
+       style="">
+            optimization (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/overload/"
+       style="">
+            overload (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/paper/"
+       style="">
+            paper (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parser/"
+       style="">
+            parser (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parsing/"
+       style="">
+            parsing (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/password/"
+       style="">
+            password, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pattern/"
+       style="">
+            pattern (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/perl/"
+       style="">
+            perl, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postfix/"
+       style="">
+            postfix (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postgresql/"
+       style="">
+            postgresql, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pptp/"
+       style="">
+            pptp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/preprocessor/"
+       style="">
+            preprocessor (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/print/"
+       style="">
+            print (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/process/"
+       style="">
+            process, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/project/"
+       style="">
+            project (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/provider/"
+       style="">
+            provider (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pthread/"
+       style="">
+            pthread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/python/"
+       style="">
+            python, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/react/"
+       style="">
+            react (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/references/"
+       style="">
+            references, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/regexp/"
+       style="">
+            regexp (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/relational/"
+       style="">
+            relational (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/remote/"
+       style="">
+            remote (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scanf/"
+       style="">
+            scanf (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scrum/"
+       style="">
+            scrum, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/services/"
+       style="">
+            services (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shell/"
+       style="">
+            shell, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shortcuts/"
+       style="">
+            shortcuts (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/socket-io/"
+       style="">
+            socket.io, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sort/"
+       style="">
+            sort (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            spring (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sql/"
+       style="">
+            sql (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sqlite/"
+       style="">
+            sqlite (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/squid/"
+       style="">
+            squid, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/static/"
+       style="">
+            static (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/stdlib/"
+       style="">
+            stdlib (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strings/"
+       style="">
+            strings (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strtok/"
+       style="">
+            strtok, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/structures/"
+       style="">
+            structures (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts2/"
+       style="">
+            struts2, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/svg/"
+       style="">
+            svg (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/swap/"
+       style="">
+            swap, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/switch/"
+       style="">
+            switch (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sysadmin/"
+       style="">
+            sysadmin (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/syslog/"
+       style="">
+            syslog, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tdd/"
+       style="">
+            tdd, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/template/"
+       style="">
+            template (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/templates/"
+       style="">
+            templates, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/theme/"
+       style="">
+            theme (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/themes/"
+       style="">
+            themes, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tomcat/"
+       style="">
+            tomcat, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/transactions/"
+       style="">
+            transactions (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tutorial/"
+       style="">
+            tutorial (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/types/"
+       style="">
+            types (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vagrant/"
+       style="">
+            vagrant (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb/"
+       style="">
+            vb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/virtualization/"
+       style="">
+            virtualization, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vmware/"
+       style="">
+            vmware (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webmin/"
+       style="">
+            webmin, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webservices/"
+       style="">
+            webservices (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/websockets/"
+       style="">
+            websockets, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/wordpress/"
+       style="">
+            wordpress, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/world/"
+       style="">
+            world (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xml/"
+       style="">
+            xml, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xmlschema/"
+       style="">
+            xmlschema, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xsd/"
+       style="">
+            xsd (3)
+    </a>
+</span>
+      
+    </div>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93485415-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</footer>
+
+
+  </body>
+
+</html>

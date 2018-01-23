@@ -1,0 +1,677 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Referencias</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Punteros"
+HREF="punteros.html"><LINK
+REL="NEXT"
+TITLE="Funciones avanzadas"
+HREF="funciones-avanzadas.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="punteros.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="funciones-avanzadas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="REFERENCIAS"
+></A
+>Cap�tulo 10. Referencias</H1
+><P
+>&#13;
+Las referencias
+Una referencia es otra forma de acceder a un dato, una 
+especie de alias. Cualquier operacion sobre una 
+referencia afectara a ese dato al que hace referencia. &#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="REFEREPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/punteros.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+ Figura: sin duda los punteros y las referencias fueron obra de los sarracenos.</P
+><P
+>Veamos un ejemplo simple:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN242"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Referencias.cpp
+* Programa que muestra el uso de referencias
+* 
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ Referencias.cpp -o Referencias
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+int main() {
+
+	// Definimos un dato y su referencia
+	int numero;
+	int &#38;referenciaNumero = numero; // Ahi se crea la referencia
+	
+	cout &#60;&#60; "Vamos a ver que pasa si le asignamos un dato: " &#60;&#60; endl;
+
+	numero = 31337;
+	
+	// Los dos mostraran el mismo valor
+	cout &#60;&#60; "Valor de numero: " &#60;&#60; numero &#60;&#60; endl;
+	cout &#60;&#60; "Valor de referenciaNumero: " &#60;&#60; referenciaNumero &#60;&#60; endl;
+	
+	// y a donde apuntan? AL MISMO SITIO
+	cout &#60;&#60; "Posicion de numero: " &#60;&#60; &#38;numero &#60;&#60; endl;
+	cout &#60;&#60; "Posicion de referenciaNumero: " &#60;&#60; &#38;referenciaNumero &#60;&#60; endl;
+	cout &#60;&#60; "Programa terminado \n" &#60;&#60; endl;
+	
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Con los objetos se pueden hacer referencias igualmente:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN244"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>Objeto miObjeto;
+Objeto &#38;refObjeto = miObjeto;</PRE
+><P
+></P
+></DIV
+>  
+
+Referencias y funciones
+Vamos a ver distintas formas de pasar referencias a una funcion.
+Como en c, podemos pasar parametros por referencia y 
+hacer que esos parametros contengan resultados de una funcion.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN246"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* ReferenciaFunciones.cpp
+* Programa que muestra el uso de referencias en las funciones
+* 
+* Pello Xabier Altadill Izura 
+*
+* Compilado: g++ ReferenciaFunciones.cpp -o ReferenciaFunciones
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// 1º funcion que intercambia dos valores
+void exchange (int *refa, int *refb);
+
+// 2º funcion -sobrecargada- que intercambia dos valores
+void exchange (int &#38;refa, int &#38;refb);
+
+
+int main() {
+	
+	// Definimos un dato y su referencia
+	int a, b;
+	
+	cout &#60;&#60; "Asignamos valores: " &#60;&#60; endl;
+	a = 45;
+	b = 21;
+	
+	cout &#60;&#60; "Valores: a=" &#60;&#60; a &#60;&#60; " b=" &#60;&#60; b &#60;&#60; endl;
+	cout &#60;&#60; "Hacemos intercambio con exchange(int *refa, int *refb): " &#60;&#60; endl;
+
+	exchange(&#38;a, &#38;b); // Con esta llamada invocamos la primera funcion!!
+	
+	cout &#60;&#60; "Valores: a=" &#60;&#60; a &#60;&#60; " b=" &#60;&#60; b &#60;&#60; endl;
+	cout &#60;&#60; "Hacemos intercambio con exchange(int &#38;refa, int &#38;refb): " &#60;&#60; endl;
+
+	xchange(a, b); // Con esta llamada invocamos la segunda funcion!!
+	
+	out &#60;&#60; "Valores: a=" &#60;&#60; a &#60;&#60; " b=" &#60;&#60; b &#60;&#60; endl;
+	out &#60;&#60; "Programa terminado \n" &#60;&#60; endl;
+
+	return 0;
+
+}
+
+// 1º funcion que intercambia dos valores
+void exchange (int *refa, int *refb) {
+
+	int tmp;
+
+	tmp = *refa;
+	*refa = *refb;
+	*refa = tmp; 
+
+}
+
+
+// 2º funcion -sobrecargada- que intercambia dos valores
+void exchange (int &#38;refa, int &#38;refb) {
+	
+	int tmp;
+	
+	tmp = refa;
+	refa = refb;
+	refa = tmp;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Pasando clases por referencia
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN248"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Gremlin.hpp
+*
+* Clase que representa el objeto Gremlin.
+* Observese el 3º metodo constructor
+* Pello Xabier Altadill Izura 
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Gremlin {
+
+public:
+
+	Gremlin();
+
+	Gremlin(char *nmb,int ed, int p);
+	
+	Gremlin(Gremlin&#38;); // atencion a este constructor
+	
+	~Gremlin();
+
+	void correr();
+
+	void dormir();
+
+	void morder();
+
+	int peso;
+
+private:
+	
+	char *nombre;
+	
+	int edad;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN250"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Gremlin.cpp
+*
+* Clase que implementa el objeto Gremlin.
+* Pello Xabier Altadill Izura 
+*
+*/
+
+#include "Gremlin.hpp"
+
+Gremlin::Gremlin() {
+
+	peso = 1;
+
+	cout &#60;&#60; "Gremlin creado." &#60;&#60; endl;
+
+}
+
+
+Gremlin::Gremlin (char *nmb,int ed, int p) {
+	
+	nombre = nmb;
+	edad = ed;
+	peso = p;
+}
+
+
+Gremlin::~Gremlin() {
+	
+	cout &#60;&#60; "Aaaargh!\nGremlin destruido." &#60;&#60; endl;
+
+}
+
+
+
+// El gremlin corre
+void correr() {
+	
+	cout &#60;&#60; "Jaja grrrr!! jajaja!" &#60;&#60; endl;
+
+}
+
+
+// El gremlin duerme
+void dormir() {
+
+	cout &#60;&#60; "zzzZZZZzzzzz" &#60;&#60; endl;
+
+}
+
+
+// El gremlin muerde
+void morder() {
+
+	cout &#60;&#60; "roaar &#38;ntilde;am &#38;ntilde;am" &#60;&#60; endl; 
+
+}
+
+
+// Definimos esta funcion aparte de la clase
+// Con ella el gremlin come y aumenta su atributo peso.
+void comer (Gremlin *g) {
+
+	// Invocamos la mordedura para que coma
+	g-&#62;morder();
+
+	// Le aumentamos 3 unidades por comer
+	g-&#62;peso += 3;
+
+}
+
+
+// Funcion main
+int main () {
+
+	cout &#60;&#60; "Iniciando programa. " &#60;&#60; endl;
+	
+	// Definimos un gremlin
+	Gremlin tbautista;
+
+	// y lo movemos por la ciudad
+	tbautista.correr();
+	tbautista.morder();
+
+	// Mostramos su peso
+	cout &#60;&#60; "El gremlin pesa: " &#60;&#60; tbautista.peso &#60;&#60; endl;
+
+	// Le hacemos comer:
+	comer(&#38;tbautista);
+
+	// Mostramos su peso otra vez
+	cout &#60;&#60; "El gremlin pesa ahora: " &#60;&#60; tbautista.peso &#60;&#60; endl;
+	cout &#60;&#60; "Finalizando programa\n " &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+La ventaja que logramos al pasar parametros por 
+referencia es que ahorramos espacio en memoria ya que 
+sino en cada llamada a una funcion se hacen copias de 
+los parametros. Esto tambien tiene una desventaja: si 
+le pasamos a una funcion el ORIGINAL de un objeto (con 
+una referencia) en lugar de una copia corremos el 
+riesgo de que la funciona haga trizas nuestro objeto y 
+perder el "original" (supongamos que la funcion esta 
+hecha por terceros y no sabemos lo que hace).
+Que se puede hacer para salvaguardar nuestros objetos?
+Punteros constantes
+Esta es la solucion: pasar punteros constantes. Eso 
+hara que la funcion solo tenga permiso para invocar los 
+metodos constantes de la clase. SE cambia un poco la 
+clase gremlin para mostrar esto.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN252"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Gremlin2.hpp
+*
+* Clase que representa el objeto Gremlin.
+* Con un metodo definido como const!!
+* Pello Xabier Altadill Izura 
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Gremlin {
+
+public:
+
+	Gremlin();
+
+	Gremlin(char *nmb,int ed, int p);
+
+	Gremlin(Gremlin&#38;); // atencion a este constructor
+
+	~Gremlin();
+
+	void correr();
+
+	void dormir();
+
+	void morder();
+
+	// Definimos una funcion constante
+	char * getNombre() const;
+
+	int peso;
+
+private:
+	
+	char *nombre;
+	
+	int edad;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y vemos la implementacion en la que simplemente se 
+puede observar como se protege el objeto en la funcion 
+comer() gracias al uso de punteros constantes.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN254"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Gremlin2.cpp
+*
+* Clase que implementa el objeto Gremlin.
+* Pello Xabier Altadill Izura 
+*
+*/
+
+#include "Gremlin2.hpp"
+
+Gremlin::Gremlin() {
+	
+	peso = 1;
+	
+	cout &#60;&#60; "Gremlin creado." &#60;&#60; endl;
+
+}
+
+
+Gremlin::Gremlin (char *nmb,int ed, int p) {
+	
+		nombre = nmb;
+		edad = ed;
+		peso = p;
+
+}
+
+
+Gremlin::~Gremlin() {
+	
+	cout &#60;&#60; "Aaaargh!\nGremlin destruido." &#60;&#60; endl;
+
+}
+
+
+// El gremlin corre
+void correr() {
+	
+	cout &#60;&#60; "Jaja grrrr!! jajaja!" &#60;&#60; endl;
+
+}
+
+
+// El gremlin duerme
+void dormir() {
+	
+	cout &#60;&#60; "zzzZZZZzzzzz" &#60;&#60; endl;
+
+}
+
+
+// El gremlin muerde
+void morder() {
+	
+		cout &#60;&#60; "roaar &#38;ntilde;am &#38;ntilde;am" &#60;&#60; endl; 
+
+}
+
+
+// FUNCION CONST!!!
+// Devuelve el nombre del gremlin
+char * getNombre() const {
+
+		return nombre;
+
+}
+
+
+// Definimos esta funcion aparte de la clase
+// Con ella el gremlin come y aumenta su atributo peso.
+void comer (const Gremlin const *g) {
+
+	// Invocamos la mordedura para que coma??
+	// g-&#62;morder(); ERROR no podemos invocar una funcion NO CONSTANTE!!!
+	// en cambio si podemos invocar getNombre
+	cout &#60;&#60; "Nombre" &#60;&#60; g-&#62;getNombre() &#60;&#60; endl; 
+
+}
+
+
+// Funcion main
+int main () {
+
+	cout &#60;&#60; "Iniciando programa. " &#60;&#60; endl;
+
+	// Definimos un gremlin
+	Gremlin tbautista;
+	
+	// y lo movemos por la ciudad
+	tbautista.correr();
+	tbautista.morder();
+	
+	// Mostramos su peso
+	cout &#60;&#60; "El gremlin pesa: " &#60;&#60; tbautista.peso &#60;&#60; endl;
+
+	// Le hacemos comer:
+	comer(&#38;tbautista);
+	
+	// Mostramos su peso otra vez
+	cout &#60;&#60; "El gremlin pesa ahora: " &#60;&#60; tbautista.peso &#60;&#60; endl;
+	cout &#60;&#60; "Finalizando programa\n " &#60;&#60; endl;
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="punteros.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="funciones-avanzadas.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Punteros</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Funciones avanzadas</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

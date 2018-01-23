@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>pello.io</title>
+  <meta name="description" content="Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/6/">
+  <link rel="alternate" type="application/rss+xml" title="pello.io" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">
+    <img src="/images/logo.png" title="Pello.io logo" />
+    pello.io</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" title="Projects" href="archive.html">
+            <span class="octicon octicon-calendar"></span> Archive
+          </a>
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            <span class="octicon octicon-beaker"></span> Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            <span class="octicon octicon-octoface"></span> GitHub
+          </a>
+          
+            
+            
+          
+            
+            
+          <span class="octicon octicon-person"></span><span class="octicon octicon-person"></span>
+            <a class="page-link" href="/about/">
+              About
+            </a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+
+        </div>
+      </nav>
+    
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/node.js,/backend/2013/08/17/servidor-web-de-node-js-refactorizado.html">Servidor web de Node.js refactorizado</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-17T01:18:31+02:00" itemprop="datePublished">
+            
+            Aug 17, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          node.js,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          backend
+        </span>
+        
+        
+      </p>
+      <h5></h5>
+<p>
+Sí, seguro que el primer código que has visto de Node.js es uno de esos milagrosos servidores web
+hechos con pocas líneas. Olvídese de aparatosos sockets, de punteros o de BufferedStreamsWriters, un módulo, unos callbacks, eliges un puerto y a dar servicio. Bueno, uno trata de ser un <i>good Node.js citizen</i> y este código se entiende y mola, pero a la larga, si lo queremos ir mejorando y añadiendo
+otras funcionalidades cada vez va a ser más complicado mantenerlo. Lo que propongo en este post
+es tomar este código y refactorizarlo a un estilo más POO. Igual es una herejía pero bueno, supongo
+que es un tema que habrá que hablar con los guruses. Veamos el ejemplo típico de servidor web, sacado
+de un libro:
+</p>
+<pre class="brush: js">
+/**
+* httpserver.js
+* simple web server from O'Reilly Learning Node, Chp 6.
+*/
+var http = require('http'),
+	path = require('path'),
+	fs = require('fs'),
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/backbone,/frontend/2013/08/16/un-vistazo-a-backbone.html">Un vistazo a Backbone</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-16T03:37:50+02:00" itemprop="datePublished">
+            
+            Aug 16, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          backbone,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          frontend
+        </span>
+        
+        
+      </p>
+      <img src="http://pello.io/images/backbone.png" alt="Backbone logo" title="Backbone logo" />
+<p><a href="http://backbonejs.org/">Backbone</a> es un framework MVC de javascript para clientes web
+que facilita el desarrollo de aplicaciones de una sola página. El hecho de aplicar MVC permite separar
+los datos de la presentación y Backbone lo hace sin invadir la página y con una serie de funciones que permiten la persistencia de datos en el servidor. Dicho de otro modo, podemos hacer páginas web que manejen
+registros de una BBDD sin estar recargando la página todo el rato, que es lo que ahora mola. También
+facilita las pruebas unitarias, permite aplicar distintos sistemas de plantillas, bla bla somos los mejores. Te recomiendo seguir la web oficial porque ha habido cambios (por ejemplo en el tema
+de validación, antes se hacía por defecto) y te puedes encontrar por ahí blogs desfasados (como este) que
+te confundirán. Si juegas con Backbone que no se te olvide incluir en la página el jquery, el <b>underscore</b> (backbone se apoya mucho en él) y por supuesto el backbone. Y en ese orden.
+</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/android,/activity/2013/08/15/el-ciclo-de-vida-de-una-activity-en-android.html">El ciclo de vida de una Activity en Android</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-15T15:55:06+02:00" itemprop="datePublished">
+            
+            Aug 15, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          android,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          activity
+        </span>
+        
+        
+      </p>
+      <p>
+Android tiene una forma peculiar de gestionar las aplicaciones que choca un poco con los
+sistemas operativos tradicionales. Pese a estar montado en un linux con el kernel 2.6, Android
+no tiene por costumbre matar las aplicaciones cuando las cerramos. La clave está en que igual lo hace
+o igual no, según las necesidades o lo que Android considere oportuno. La cosa es que no hay que empeñarse
+en tener un botón para matar la aplicación, oficialmente no se recomienda y se todo se resume a un
+<i>tranqui, Android se preocupa</i>.
+</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/node.js,/callbacks/2013/08/15/callbacks-y-funciones-asincronas-el-estilo-node-js.html">Callbacks y funciones asíncronas, el estilo Node.js</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-15T00:08:41+02:00" itemprop="datePublished">
+            
+            Aug 15, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          node.js,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          callbacks
+        </span>
+        
+        
+      </p>
+      <h5>El estilo nodejs</h5>
+<p>Yo pensaba que sabía <em>-algo-</em> de javascript hasta que descubrí Node.js :P. En fin, espero ser <b>siempre</b>
+un aprendiz. Conforme te vas asomando a nuevas tecnologías tratas de hacer las cosas correctamente y
+como recién llegado aplicas lo de <i>donde fueres haz lo que vieres</i>. ¿Existe algún documento con
+las convenciones de Node.js? Sí, <a href="http://nodeguide.com/style.html" title="guía de estilo de nodejs">Node.js tiene una guía de estilo</a> aunque no es oficial. Pero ojo porque como se suele decir <i>old habits are hard to break</i>, y habrá cosas que igual te cuesten un poco, cosas tan simples como eso, las comillas simples/dobles, en fin... supongo que mucho de esa guía es debatible pero es lo que hay.
+De lo que si se habla es del <i>preferred Node.js style</i> que supongo que se resume seguir a los pros y a la comunidad en general. Cómo dice Felix, el autor de esa guía algunos de estos temas son <i>religiosos</i>. Todavía me parto con el inicio de la guía:<br /> <i>
+Let's start with the religious problems first. Our <a href="http://nodeguide.com/community.html#ryan-dahl">benevolent dictator</a> (el pro de turno) has chosen 2 space indention for the node core, so you would do well to follow his choice.</i>. <br />Toda la guía se jaja de las discusiones y de los talibanes (también la guía tiene un tono ultra-ortodoxo) lo cual la hace muy simpática, a mi parecer. Otra perla:
+<br/><i>Do not extend the prototypes of any objects, especially native ones. There is a special place in hell waiting for you if you don't obey this rule.</i></p>
+<p>En fin, este tipo de polémicas entre programadores siempre han provocado oceanos de sangre...</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/android,/intentss/2013/08/14/intents-con-parametros-y-startactivityforresult.html">Intents con parámetros y startActivityForResult</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-14T14:57:24+02:00" itemprop="datePublished">
+            
+            Aug 14, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          android,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          intentss
+        </span>
+        
+        
+      </p>
+      <p>Cuando en Android queremos abrir una nueva pantalla o Activity se hace de una manera
+muy curiosa: se crea un Intent. Los Intent son eso, intentos. No garantizan que el resultado
+vaya a ser el correcto ni si quiera que alguien vaya a responder, y es que los intents se pueden
+usar tanto para abrir Activities como para solicitar cualquier cosa (iniciar una llamada, mandar
+un mensaje, etc... ). </p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/html5,/javascript,/db/2013/08/14/ejemplo-de-indexeddb-la-bd-de-html5.html">Ejemplo de IndexedDB la BD de HTML5</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-14T00:35:53+02:00" itemprop="datePublished">
+            
+            Aug 14, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          html5,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          JavaScript,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          db
+        </span>
+        
+        
+      </p>
+      <p>
+HTML5 trae un montón de nuevas posibilidades al navegador. Se ha hablado mucho del formato de vídeo,
+del canvas, los websockets, de los nuevos controles de formulario pero a mí en particular me ha interesado
+especialmente aquello de <i>una BD en el cliente</i>. Es un tema que no está tan documentado como el resto
+y que en muchos libros de HTML5 o ni se menciona o se hace de pasada. Y lo que es peor, hay información
+en blogs pero a nada que esté desfasada los ejemplos no funcionan como la llamada a <code>setVersion()</code>. Así que mucho ojo, si lees sobre este tema, procura que sea información reciente.
+</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/node.js,/events/2013/08/13/eventos-en-nodejs.html">Eventos en nodejs</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-13T12:37:21+02:00" itemprop="datePublished">
+            
+            Aug 13, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          node.js,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          events
+        </span>
+        
+        
+      </p>
+      <p>NodeJS está orientado a eventos por tanto disponer de mecanismos para
+definir nuestros propios eventos es algo fundamental. Como vamos a ver no tenemos
+más que importar el módulo events y a partir de ahí ya podremos trabajar con instancias
+de EventEmitter. Y como disponemos de herencia, podemos agregar la emisión de eventos
+a nuestras clases.</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/android,/debug/2013/08/13/consejos-para-programar-android.html">Consejos para programar Android</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-13T11:40:38+02:00" itemprop="datePublished">
+            
+            Aug 13, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          android,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          debug
+        </span>
+        
+        
+      </p>
+      <p>
+Desarrollar aplicaciones para Android no es tan ágil como con otras tecnologías.
+Montar la aplicación configurando cada uno de los ficheros XML (cosa que está bien pensada y tal) es un poco pesado y lo peor
+es que cuando lo quieres probar para ver el resultado tienes que esperar mucho y encima
+lo más seguro es que casque y que <i>la aplicación se pare de forma inesperada</i>.
+Voy a dejar aquí algunos consejillos que espero resulten útiles.
+</p>
+<img src="http://pello.io/images/prefu.jpg" alt="Ya la hemos liado" title="Ya la hemos liado" />
+<p>Sin ánimo de entrar en polémicas sobre si es mejor usar un IDE u otro. IMHO (no, no es un entorno
+ni un dios egipcio, es una forma de decir que esto no es más que una opinión nada autorizada) todos
+los entornos se te harán igual de lentos. Eclipse, Netbeans, Intelijidea, están hechos en java y ya se
+sabe, java... chupa. Que sí, que igual alguno va algo mejor en no sé qué sistema con no sé qué configuración, pero al final... poco
+puedes hacer. En mi caso, en eclipse suelo crear un workspace totalmente vacío para asegurarme que toda
+la atención de eclipse se centre en un proyecto (seguramente se puede configurar para eso pero en fin).
+</p>
+<h5>Eclipse ftw, pero sin más</h5>
+<p>
+En cuanto al entorno, por mucho que netbeans lo puedas configurar para programar en android, francamente
+no es nada personal, pero eclipse fue <em>el elegido</em> y el que te trae todo montado. Y últimamente soy más partidario de <i>mira, déjame dedicarme a programar aplicaciones, no a trabajar para netbeans</i>. Esto
+es como usar Gentoo, pues sí, mola mucho pero al final yo prefiero un sistema operativo que trabaje para
+mí y no al revés. El ordenador siempre a mi servicio, que con el colega y el familiar al que le arreglas el XP ya tenemos bastante.
+</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/html5,/javascript,/localstorage/2013/08/12/almacenamiento-local-en-html5.html">Almacenamiento local en HTML5</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-12T00:51:12+02:00" itemprop="datePublished">
+            
+            Aug 12, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          html5,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          JavaScript,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          localstorage
+        </span>
+        
+        
+      </p>
+      <h5>Local Storage</h5>
+<p>
+Los navegadores modernos van disfrutando de nuevas capacidades impulsadas por HTML5.
+Una de las más llamativas es la posibilidad del almacenamiento local, en el cliente, que
+viene en dos formas: por un lado en dos arrays relacionales que nos permiten guardar datos con un límite
+supuesto de 5Mb (al estilo del $_SESSION de php pero en el cliente) y por otra parte la posibilidad
+de tener una base de datos en el cliente. Está última, que un principio parecía iba a ser SQLite
+finalmente parece que será IndexedDB, puro JS. Otro día.
+</p>
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/nodejs,/io,/oop/2013/08/11/leyendo-por-consola-y-herencia-en-nodejs.html">Leyendo por consola y herencia en nodejs</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2013-08-11T02:17:05+02:00" itemprop="datePublished">
+            
+            Aug 11, 2013
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          nodejs,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          io,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          oop
+        </span>
+        
+        
+      </p>
+      <p>Para poder hacer cosas básicas en la consola con node tenemos un objeto predefinido llamado <em>process</em> que nos provee de todo los necesario, desde jugar con la stdin, stdout, stderr hasta terminar la ejecución. En un alarde de originalidad, aquí tienes una calculadora muy simple en la que se deben introducir dos números y un operador.
+</p>
+<pre class="brush: js">
+/**
+* calc.js
+* Trying to code the good ol' calc with node event driven way
+* @author Pello Xabier Altadill Izura
+* @greetz for you
+* An easy/obvious/quick way to discover what comes in an object (events, props):
+* console.log(process);  console.log(process.stdin); ...
+* Or just check the api online
+* http://nodejs.org/api/process.html
+*/
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    
+
+  <!-- Pagination links -->
+  <ul class="pagination">
+  
+  <li>
+    <a href="/page/5">
+      &laquo;
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/index.html">
+      1
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/2">
+      2
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/3">
+      3
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/4">
+      4
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/5">
+      5
+    </a>
+  </li>
+  
+
+  
+  <li class="active">
+    <a>
+      6
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/7">
+      7
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/8">
+      8
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/9">
+      9
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/10">
+      10
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/11">
+      11
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/12">
+      12
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/13">
+      13
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/14">
+      14
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/15">
+      15
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/16">
+      16
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/17">
+      17
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/18">
+      18
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/19">
+      19
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/20">
+      20
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/21">
+      21
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/22">
+      22
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/23">
+      23
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/24">
+      24
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/25">
+      25
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/26">
+      26
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/27">
+      27
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/28">
+      28
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/7">
+      &raquo;
+    </a>
+  </li>
+  
+</ul>
+
+
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="pelloprojects">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pello.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+            <span class="octicon octicon-person"></span>
+              Pello Altadill
+            
+            </li>
+            
+          <span class="octicon octicon-mail"></span>
+            <li><a href="mailto:p_at_pello_dot_io">p_at_pello_dot_io</a></li>
+            
+        </ul>
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/pxai"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">pxai</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/pello_io"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">pello_io</span></a>
+
+          </li>
+          
+        </ul>
+        <p>Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3><span class="octicon octicon-beaker"></span> Projects</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="http://eta.bar" title="">eta.bar</a>
+            MEAN 2
+          </li>
+          <li>
+            <a href="https://github.com/pxai/jobtrends" title="">Jobtrends</a>
+            MEAN
+          </li>
+          <li>
+            <a href="https://github.com/pxai/seronoser" title="">SeronoSer</a>
+            Angular game
+          </li>
+          <li>
+            <a href="https://artean.cuatrovientos.org" title="">Artean</a>
+            Symfony3
+          </li>
+          <li>
+            <a href="https://github.com/pxai/4vientos" title="">4vientos</a>
+            Codeigniter
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-git-branch"></span> Repositories</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=typescript&type=&language=">TypeScript</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=android&type=&language=java">Android</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/gulp-optimized-web">Gulp optimization</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/grunt-optimized-web">Grunt optimization</a>
+          </li>
+        </ul>
+      </div>
+       <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-repo"></span> Books</h3>
+        <ul class="social-media-list">
+            <li>
+                <a href="books.html">Información</a>
+              </li>
+          <li>
+            <a href="https://www.amazon.es/Dise%C3%B1o-Interfaces-Eugenia-P%C3%A9rez-Martinez/dp/8416228620/">Diseño de interfaces Web</a>
+          </li>
+          <li>
+            <a href="https://www.amazon.es/Java-Limpio-Programaci%C3%B3n-pr%C3%A1cticas-desarrollo/dp/1546987916/">Java Limpio</a> | <a href="https://www.amazon.es/dp/B074W4D2NM">Versión Kindle</a> 
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/2012/"
+       style="">
+            2012, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dao/"
+       style="">
+            DAO, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jee/"
+       style="">
+            JEE, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java, (27)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mvc/"
+       style="">
+            MVC (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            OOP (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ruby/"
+       style="">
+            Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts/"
+       style="">
+            Struts, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/access/"
+       style="">
+            access, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/activity/"
+       style="">
+            activity (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ado-net/"
+       style="">
+            ado.net (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ant/"
+       style="">
+            ant, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/apache/"
+       style="">
+            apache, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/args/"
+       style="">
+            args (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arkapong/"
+       style="">
+            arkapong, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/array/"
+       style="">
+            array (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arrays/"
+       style="">
+            arrays (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp-net/"
+       style="">
+            asp.net, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp3/"
+       style="">
+            asp3, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asynctask/"
+       style="">
+            asynctask (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/audits/"
+       style="">
+            audits (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/auth/"
+       style="">
+            auth, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backbone/"
+       style="">
+            backbone, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backend/"
+       style="">
+            backend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/banner/"
+       style="">
+            banner (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bash/"
+       style="">
+            bash (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/basics/"
+       style="">
+            basics (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bit/"
+       style="">
+            bit, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boardgames/"
+       style="">
+            boardgames (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boolean/"
+       style="">
+            boolean, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/break/"
+       style="">
+            break (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/browser/"
+       style="">
+            browser, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c# (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c#, (17)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++ (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c0ders/"
+       style="">
+            c0ders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/callbacks/"
+       style="">
+            callbacks (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/charset/"
+       style="">
+            charset (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cinema/"
+       style="">
+            cinema, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/classes/"
+       style="">
+            classes (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/code/"
+       style="">
+            code (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coders/"
+       style="">
+            coders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding (29)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/collections/"
+       style="">
+            collections (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/comic/"
+       style="">
+            comic (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/computers/"
+       style="">
+            computers (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/content/"
+       style="">
+            content (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cooking/"
+       style="">
+            cooking (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cpan/"
+       style="">
+            cpan (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/css3/"
+       style="">
+            css3, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cvs/"
+       style="">
+            cvs (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dbf/"
+       style="">
+            dbf, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/debug/"
+       style="">
+            debug (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/delegate/"
+       style="">
+            delegate, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops (11)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops, (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/di/"
+       style="">
+            di, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dice/"
+       style="">
+            dice, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/docker/"
+       style="">
+            docker, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dtd/"
+       style="">
+            dtd (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/eclipse/"
+       style="">
+            eclipse, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/email/"
+       style="">
+            email (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/errors/"
+       style="">
+            errors (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/event/"
+       style="">
+            event (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/events/"
+       style="">
+            events (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/excel/"
+       style="">
+            excel (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/exceptions/"
+       style="">
+            exceptions (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/firewalls/"
+       style="">
+            firewalls (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/fortunes/"
+       style="">
+            fortunes (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frameworks/"
+       style="">
+            frameworks (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frontend/"
+       style="">
+            frontend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ftp/"
+       style="">
+            ftp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/functions/"
+       style="">
+            functions (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/games/"
+       style="">
+            games, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/gdb/"
+       style="">
+            gdb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/generator/"
+       style="">
+            generator, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/genpas/"
+       style="">
+            genpas, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getline/"
+       style="">
+            getline (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getopt/"
+       style="">
+            getopt (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/glibc/"
+       style="">
+            glibc, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/grub/"
+       style="">
+            grub (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hello/"
+       style="">
+            hello (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/helloworld/"
+       style="">
+            helloworld (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hibernate/"
+       style="">
+            hibernate (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hipstered/"
+       style="">
+            hipstered, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hsqldb/"
+       style="">
+            hsqldb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/html5/"
+       style="">
+            html5, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/i-o/"
+       style="">
+            i/o (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iban/"
+       style="">
+            iban (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ide/"
+       style="">
+            ide, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/if/"
+       style="">
+            if (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/indexer/"
+       style="">
+            indexer, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/inheritance/"
+       style="">
+            inheritance (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/intentss/"
+       style="">
+            intentss (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip/"
+       style="">
+            ip, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip-gre/"
+       style="">
+            ip_gre (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iptables/"
+       style="">
+            iptables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iterations/"
+       style="">
+            iterations (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/j2me/"
+       style="">
+            j2me, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jasmine/"
+       style="">
+            jasmine, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jdbc/"
+       style="">
+            jdbc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/joke/"
+       style="">
+            joke (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lab/"
+       style="">
+            lab (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/libgdx/"
+       style="">
+            libgdx (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linked/"
+       style="">
+            linked (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lists/"
+       style="">
+            lists (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/localstorage/"
+       style="">
+            localstorage (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mail/"
+       style="">
+            mail (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/markdown/"
+       style="">
+            markdown (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/maven/"
+       style="">
+            maven, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/methods/"
+       style="">
+            methods (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/metro/"
+       style="">
+            metro, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mobile/"
+       style="">
+            mobile (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mock/"
+       style="">
+            mock (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/modules/"
+       style="">
+            modules (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mongodb/"
+       style="">
+            mongodb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/monitoring/"
+       style="">
+            monitoring, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/music/"
+       style="">
+            music, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nessus/"
+       style="">
+            nessus, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/networking/"
+       style="">
+            networking (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nodejs/"
+       style="">
+            nodejs, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oem/"
+       style="">
+            oem, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oledb/"
+       style="">
+            oledb (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/openshift/"
+       style="">
+            openshift (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/operators/"
+       style="">
+            operators (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/optimization/"
+       style="">
+            optimization (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/overload/"
+       style="">
+            overload (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/paper/"
+       style="">
+            paper (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parser/"
+       style="">
+            parser (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parsing/"
+       style="">
+            parsing (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/password/"
+       style="">
+            password, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pattern/"
+       style="">
+            pattern (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/perl/"
+       style="">
+            perl, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postfix/"
+       style="">
+            postfix (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postgresql/"
+       style="">
+            postgresql, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pptp/"
+       style="">
+            pptp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/preprocessor/"
+       style="">
+            preprocessor (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/print/"
+       style="">
+            print (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/process/"
+       style="">
+            process, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/project/"
+       style="">
+            project (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/provider/"
+       style="">
+            provider (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pthread/"
+       style="">
+            pthread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/python/"
+       style="">
+            python, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/react/"
+       style="">
+            react (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/references/"
+       style="">
+            references, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/regexp/"
+       style="">
+            regexp (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/relational/"
+       style="">
+            relational (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/remote/"
+       style="">
+            remote (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scanf/"
+       style="">
+            scanf (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scrum/"
+       style="">
+            scrum, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/services/"
+       style="">
+            services (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shell/"
+       style="">
+            shell, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shortcuts/"
+       style="">
+            shortcuts (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/socket-io/"
+       style="">
+            socket.io, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sort/"
+       style="">
+            sort (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            spring (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sql/"
+       style="">
+            sql (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sqlite/"
+       style="">
+            sqlite (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/squid/"
+       style="">
+            squid, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/static/"
+       style="">
+            static (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/stdlib/"
+       style="">
+            stdlib (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strings/"
+       style="">
+            strings (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strtok/"
+       style="">
+            strtok, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/structures/"
+       style="">
+            structures (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts2/"
+       style="">
+            struts2, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/svg/"
+       style="">
+            svg (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/swap/"
+       style="">
+            swap, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/switch/"
+       style="">
+            switch (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sysadmin/"
+       style="">
+            sysadmin (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/syslog/"
+       style="">
+            syslog, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tdd/"
+       style="">
+            tdd, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/template/"
+       style="">
+            template (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/templates/"
+       style="">
+            templates, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/theme/"
+       style="">
+            theme (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/themes/"
+       style="">
+            themes, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tomcat/"
+       style="">
+            tomcat, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/transactions/"
+       style="">
+            transactions (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tutorial/"
+       style="">
+            tutorial (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/types/"
+       style="">
+            types (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vagrant/"
+       style="">
+            vagrant (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb/"
+       style="">
+            vb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/virtualization/"
+       style="">
+            virtualization, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vmware/"
+       style="">
+            vmware (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webmin/"
+       style="">
+            webmin, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webservices/"
+       style="">
+            webservices (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/websockets/"
+       style="">
+            websockets, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/wordpress/"
+       style="">
+            wordpress, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/world/"
+       style="">
+            world (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xml/"
+       style="">
+            xml, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xmlschema/"
+       style="">
+            xmlschema, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xsd/"
+       style="">
+            xsd (3)
+    </a>
+</span>
+      
+    </div>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93485415-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Herencia multiple</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Herencia"
+HREF="herencia.html"><LINK
+REL="NEXT"
+TITLE="Miembros estaticos"
+HREF="miembros-estaticos.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="herencia.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="miembros-estaticos.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HERENCIA-MULTIPLE"
+></A
+>Capítulo 14. Herencia multiple</H1
+><P
+>&#13;La herencia multiple
+Una de las oportunidades que nos ofrece el lenguaje c++ 
+es la posibilidad de que un objeto tenga la herencia de 
+mas de una clase; esta ventaja fue considerada por los 
+desarrolladores de Java como una pega y la quitaron, e 
+incluso hay desarrolladores de c++ que prefieren evitar 
+este tipo de herencia ya que puede complicar mucho la 
+depuracion de programas
+Para ilustrar un caso de herencia multiple hemos 
+definido la superclase Habitante; de ella heredan dos 
+clases distintas: Humano (que hablan) y Animal (que 
+matan). Ahora queremos definir un ente que tiene 
+propiedades de esas dos clases:
+Militar, ya que el militar habla y ademas mata.
+Como podemos definirlo? con una herencia multiple.
+Vamos la definicion de la superclase o clase padre Habitante
+Notas de la logia POO
+Conviene definir todos los metodos de un clase como 
+const siempre que en el metodo no se modifiquen los 
+atributos. Tu resistencia es inutil. unete a nosotros o 
+muere. Definir metodos como const le facilitara el 
+trabajo al compilador y al programador.
+Nota el codigo necesita revision y testeo
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN298"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Habitante.hpp
+* Clase que define el objeto habitante
+* 
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Habitante {
+
+private:
+
+	char *nombre;
+	
+	int edad;
+
+public: 
+
+	Habitante();
+	
+	virtual ~Habitante();
+
+	Habitante(const Habitante &#38;);
+
+	virtual void dormir();
+
+	// setter/getter o accessors
+	virtual char *getNombre() const { return this-&#62;nombre;} 
+
+	// inline
+	virtual void setNombre(char *nombre) { this-&#62;nombre = nombre; } // inline
+
+	virtual int getEdad() const { return this-&#62;edad;} // inline
+
+	virtual void setEdad(int edad) { this-&#62;edad = edad; } // inline
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN300"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Habitante.cpp
+* Programa que implementa la clase habitante
+* 
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Habitante.cpp
+* 
+*/
+
+#include "Habitante.hpp"
+
+// Constructor
+Habitante::Habitante() {
+	
+	cout &#60;&#60; "-clase habitante- Habitante construido."&#60;&#60; endl;
+
+}
+
+// Destructor
+Habitante::~Habitante() {
+
+	cout &#60;&#60; "-clase habitante- Habitante "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+
+// constructor copia
+Habitante::Habitante(const Habitante &#38; original) {
+	
+	nombre = new char;
+	original.getNombre();
+
+}
+
+
+// metodo dormir
+void Habitante::dormir() {
+	
+	cout &#60;&#60; "-clase habitante- zzzzzZZZZzzzzz zzz" &#60;&#60; endl;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Humano La clase Humano, que hereda de Habitante
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN302"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Humano.hpp
+* Clase que define el objeto humano
+* 
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include "Habitante.hpp"
+
+// hereda atributos y metodos de la superclase Habitante 
+class Humano : public Habitante {
+
+private:
+
+	char *idioma;
+
+public: 
+
+	Humano();
+	
+	virtual ~Humano();
+
+	Humano(const Humano &#38;);
+
+	virtual void hablar(char *bla) const;
+
+	// setter/getter o accessors
+	virtual char *getIdioma() const { return this-&#62;idioma;} // inline
+
+	virtual void setIdioma(char *idioma) { this-&#62;idioma = idioma; } // inline
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion 
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN304"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Humano.cpp
+* Fichero que implementa el objeto humano
+* 
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include "Habitante.hpp"
+
+// Constructor
+Humano::Humano() {
+
+	cout &#60;&#60; "-clase Humano- Humano construido."&#60;&#60; endl;
+
+}
+
+// Destructor
+Humano::~Humano() {
+	
+	cout &#60;&#60; "-clase Humano- Humano "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+// constructor copia
+Humano::Humano(const Humano &#38; original) {
+
+	idioma = new char;
+	idioma = original.getIdioma();
+
+}
+
+
+// metodo hablar
+void Humano::hablar(char *bla) const {
+
+	cout &#60;&#60; "-clase Humano-" &#60;&#60; this-&#62;getNombre() &#60;&#60; " dice: " &#60;&#60; bla &#60;&#60; endl;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Animal La clase Animal, que hereda de Habitante
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN306"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Animal.hpp
+* Clase que define el objeto Animal
+* 
+* Pello Xabier Altadill Izura
+*
+*/
+
+#include "Habitante.hpp"
+
+// hereda atributos y metodos de la superclase Habitante 
+
+class Animal : public Habitante { 
+
+private:
+	
+	int patas;
+
+public: 
+	
+	Animal();
+	
+	virtual ~Animal();
+
+	Animal(const Animal &#38;);
+
+	virtual void matar() const;
+
+	// setter/getter o accessors
+	virtual int getPatas() const { return this-&#62;patas;} // inline
+
+	virtual void setPatas(int patas) { this-&#62;patas = patas; } // inline
+	
+	
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN308"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Animal.cpp
+* Programa que implementa la clase Animal
+* 
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Animal.cpp
+* 
+*/
+
+#include "Animal.hpp"
+
+// Constructor
+Animal::Animal() {
+
+	cout &#60;&#60; "-clase Animal- Animal construido."&#60;&#60; endl;
+
+}
+
+// Destructor
+Animal::~Animal() {
+
+	cout &#60;&#60; "-clase Animal- Animal "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+
+// constructor copia
+Animal::Animal(const Animal &#38; original) {}
+
+// metodo matar
+void Animal::matar() const {
+
+	cout &#60;&#60; "-clase Animal-" &#60;&#60; this-&#62;getNombre() &#60;&#60; " Matar! Matar! Matar! " &#60;&#60; endl;
+
+}</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="CABAPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/caballero2.png"></P
+></DIV
+><P
+></P
+></DIV
+></P
+><P
+>La herencia multiple!
+Aqui esta la clase Militar, que hereda de Humano y Animal.
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN319"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Militar.hpp
+* Clase que define el objeto Militar
+* 
+* Pello Xabier Altadill Izura
+* 
+*/
+// Herencia multiple de Humano y Animal
+class Militar : public Animal { //, public Humano {
+
+private:
+
+	char *rango;
+
+public:
+	
+	Militar();
+	
+	~Militar();
+	
+	Militar(const Militar &#38;);
+	
+	// sobrescribe metodos
+	void matar() const;
+	
+	void hablar(char *bla) const;
+
+	// un metodo poco probable entre cualquier uniformado...
+	void razonar() const;
+
+	// setter/getter o accessors
+	char *getRango() const { return this-&#62;rango;}
+
+	void setRango(char *rango) { this-&#62;rango = rango;}
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN321"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Militar.cpp
+* Programa que implementa la clase Militar
+* 
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Habitante.cpp
+* g++ -c Humano.cpp
+* g++ -c Animal.cpp
+* g++ Militar.cpp Habitante.o Humano.o Animal.o -o Militar
+*/
+
+#include "Militar.hpp"
+
+// Constructor
+Militar::Militar() {
+
+	cout &#60;&#60; "-clase Militar- Militar construido."&#60;&#60; endl;
+
+}
+
+
+// Destructor
+Militar::~Militar() {
+
+	cout &#60;&#60; "-clase Militar- Militar "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+
+// constructor copia
+Militar::Militar(const Militar &#38; original) {
+	
+	cout &#60;&#60; "-clase Militar- Militar copia creada."&#60;&#60; endl;
+
+}
+
+
+// metodo razonar
+void Militar::razonar() const {
+	
+	cout &#60;&#60; "-clase Militar-" &#60;&#60; this-&#62;getNombre() &#60;&#60; " Error: OVERFLOW " &#60;&#60; endl;
+
+}
+
+
+// metodo hablar
+void Militar::hablar(char *bla) const {
+
+	cout &#60;&#60; "-clase Militar-" &#60;&#60; this-&#62;getRango() &#60;&#60; " " &#60;&#60; this-&#62;getNombre() &#60;&#60; " dice: ";
+	cout &#60;&#60; bla &#60;&#60; endl;
+
+}
+
+
+// metodo matar
+void Militar::matar() const {
+
+	cout &#60;&#60; "-clase Militar-" &#60;&#60; this-&#62;getRango() &#60;&#60; " Matar! " &#60;&#60; endl;
+	cout &#60;&#60; "-clase Militar- Somos... agresores por la paz " &#60;&#60; endl;
+
+}
+
+
+// Aqui haremos multiples pruebas...
+int main () { 
+	
+	return 0;
+
+}
+&#13;</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="herencia.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="miembros-estaticos.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Herencia</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Miembros estaticos</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

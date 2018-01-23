@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>pello.io</title>
+  <meta name="description" content="Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/13/">
+  <link rel="alternate" type="application/rss+xml" title="pello.io" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">
+    <img src="/images/logo.png" title="Pello.io logo" />
+    pello.io</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" title="Projects" href="archive.html">
+            <span class="octicon octicon-calendar"></span> Archive
+          </a>
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            <span class="octicon octicon-beaker"></span> Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            <span class="octicon octicon-octoface"></span> GitHub
+          </a>
+          
+            
+            
+          
+            
+            
+          <span class="octicon octicon-person"></span><span class="octicon octicon-person"></span>
+            <a class="page-link" href="/about/">
+              About
+            </a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+
+        </div>
+      </nav>
+    
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/loop,/array/2011/11/21/java-arrays-o-arreglos.html">Java, arrays o arreglos</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-21T13:27:20+01:00" itemprop="datePublished">
+            
+            Nov 21, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          loop,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          array
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: arrays</h1>
+<p>
+	En java los arrays se declaran m&aacute;s o menos como en c. Tenemos estructuras mejores dentro de las utilidades de java.util.*, pero si queremos algo b&aacute;sico y no nos importa que sea r&iacute;gido podemos declarar arrays as&iacute;:</p>
+<p>
+	/**<br />
+	* Arrays<br />
+	* Clase que muestra la declaraci&oacute;n y uso de arrays<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac Arrays.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java Arrays<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase Arrays<br />
+	* Clase que muestra la declaraci&oacute;n y uso de arrays. Los arrays<br />
+	* o arreglos son variables que contienen un conjunto de datos del mismo tipo<br />
+	* indexados num&eacute;ricamente desde el 0 en adelante.<br />
+	*<br />
+	* NOTA: pueden crearse arrays de elementos del tipo b&aacute;sico: int, float,...<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y tambi&eacute;n pueden crearse de clases.<br />
+	* NOTA2: los arrays en java se definen con un tama&ntilde;o concreto y no puede<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alterarse. Si necesitamos elasticidad entonces debemos usar clases<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; como por ejemplo Vector.<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class Arrays {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a definir un array de enteros, todav&iacute;a sin especificar el tama&ntilde;o.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Lo podemos hacer de dos formas:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int valores[];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [] dorsales;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos establecer el tama&ntilde;o mediante new:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En este caso definimos un array de DIEZ elementos, &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// pero ATENCI&Oacute;N, los &iacute;ndices ir&aacute;n del 0 al 9.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int [] puntos = new int[10];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Si quisieramos crear un array de caracteres que contenga el abecedario<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo hariamos as&iacute;. El abecedario espa&ntilde;ol tiene 28 letras, en el array ser&aacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// del 0 al 27.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char abecedario[] = new char[28];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;boolean&nbsp; verdades[] = new boolean[5];<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos inicializar los arreglos con valores concretos,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// lo cual ser&iacute;a una forma de impl&iacute;cita de especificar su tama&ntilde;o:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numeros[] = {7,15,42,69,666};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;char letras [] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos crear arrays de Strings<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;String heroes[] = {&quot;Gandalf&quot;, &quot;Haplo&quot;, &quot;Jon Nieve&quot;, &quot;Vader&quot;, &quot;Trancos&quot;};<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para acceder a un elemento del array debemos indicar su &iacute;ndice.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// el &iacute;ndice es un n&uacute;mero entero que va de 0 al tama&ntilde;o-1 del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;The number of the beast: &quot; + numeros[4]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos alterar valores de un elemento del array<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;verdades[0] = false;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[2] = 23;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Y por supuesto operar con ellos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// al elemento 0 del array heroes le concatenamos algo:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;heroes[0] = heroes[0] + &quot; el gris&quot;;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numeros[3] = numeros[2] + 8;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vale, &iquest;que hacemos con el array? Podemos recorrerlo con un for<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Todo array tiene una propiedad que es length, la cual no da su tama&ntilde;o<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Por ejemplo, los elementos del array puntos los podemos inicializar &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// con un valor concreto:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i&lt; puntos.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;puntos[i] = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Estos son los mayores heroes: &quot;);<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int i = 0;i &lt; heroes.length; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;En el &iacute;ndice &quot; + i + &quot;: &quot; + heroes[i]);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/loop,/break/2011/11/14/java-break-y-continue.html">java, break y continue</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-14T13:27:08+01:00" itemprop="datePublished">
+            
+            Nov 14, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          loop,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          break
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: break y continue</h1>
+<p>
+	Estas dos sentencias funcionan como en c. Break sirve para salir de una estructura de control como un switch case o de un bucle.</p>
+<p>
+	El continue sirve para que el bucle salte a la siguiente vuelta, sin salir del bucle.</p>
+<p>
+	Atenci&oacute;n al ejemplo y a c&oacute;mo hacer breaks cuando hay m&aacute;s de un bucle.</p>
+<p>
+	&nbsp;</p>
+<p>
+	/**<br />
+	* BreakContinue<br />
+	* Clase que muestra el uso de sentencias Break Continue para<br />
+	* alterar la ejecuci&oacute;n de bucles While, Do-While, o For<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac BreakContinue.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java BreakContinue<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	*&nbsp; clase BreakContinue<br />
+	* Clase que muestra el uso de Break y Continue que nos sirven para<br />
+	* modificar el normal comportamiento de los bucles.<br />
+	* - Con break se rompe el bucle y se sale de &eacute;l.<br />
+	* - Con continue interrumpimos la ejecuci&oacute;n actual del bucle y se salta a la siguiente vuelta<br />
+	*&nbsp;&nbsp; sin salir del bucle. &nbsp;<br />
+	*<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class BreakContinue {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaramos una serie de variables<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero, anterior;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int x,y;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x = 10;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;while (x &gt; 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x == 5)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break; // salimos del bucle<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x--;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a buscar los n&uacute;meros primos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// que hay del 2 al 20<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (numero = 2; numero &lt; 20; numero++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;anterior = numero;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;anterior--;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En cuanto es divisible, salimos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (numero % anterior == 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} while(anterior &gt; 2);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Si se ha llegado hasta el final, es primo<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (anterior == 2)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(numero + &quot; es un PRIMO&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Si tenemos dos bucles anidados, &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// &iquest;c&oacute;mo podemos salir de un bucle concreto con break?<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// hay que usar una etiqueta, que es un identificador seguido de<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// dos puntos:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;salida:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for(x=1;x&lt;20;x++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Bucle principal: &quot; + x);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (20 % x == 7)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{&nbsp;&nbsp; &nbsp;// salimos del bucle principal<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para salir desde el bucle interno hasta fuera<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// tendremos que usar la etiqueta salida<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for(y=10;y&gt;0;y--)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Bucle interno: &quot; + y);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (20 % y == 4)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{&nbsp;&nbsp; &nbsp;// Salimos de este y del bucle principal tambi&eacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// pero hay que especificar la etiqueta de salida<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break salida;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}// for2<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}// for1<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/loop/2011/11/11/java-el-bucle-for.html">Java, el bucle for</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-11T14:46:07+01:00" itemprop="datePublished">
+            
+            Nov 11, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          loop
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: el bucle for</h1>
+<p>
+	Se declara igualito que el bucle for de c. Los bucle for se utilizan cuando necesitamos que un n&uacute;mero concreto de iteraciones (ej: recorrer un array), ni m&aacute;s ni menos, aunque siempre se puede romper el bucle. A bajo nivel se supone que los bucle for son m&aacute;s r&aacute;pidos que los while.</p>
+<p>
+	/**<br />
+	* For<br />
+	* Clase que muestra el uso de un bucle for<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac For.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java For<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase For<br />
+	* Muestra el uso de un bucle for. Los bucles for sirven para<br />
+	* ejecutar unas sentencias un n&uacute;mero determinado de veces.<br />
+	* Los bucles while se usan cuando la condici&oacute;n de salida es m&aacute;s incierta,<br />
+	* o dependemos del valor de alguna variable.<br />
+	*<br />
+	* Formato:<br />
+	*&nbsp; for (inicio;condici&oacute;n;actualizaci&oacute;n)<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp; sentencias; &nbsp;<br />
+	*&nbsp; }<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class For {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a dar 10 vueltas.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// En los bucles for solemos usar un n&uacute;mero como &iacute;ndice<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// del bucle.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int i,j,k;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;i = j = k = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a dar 10 vueltas: dentro del for &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// - Primero iniciamos: i=0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// - Luego ponemos la condici&oacute;n de salida: i&gt;0<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// - Luego ponemos la actualiaci&oacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (i=0; i&lt;10; i++)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dentro del bucle 1 : &quot; + i);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// podemos inicializar la variable dentro del for<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// pero ojo, el &aacute;mbito de z solo ser&aacute; el bucle for.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (int z = 10; z&gt;0; z--)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dentro del bucle 2 : &quot; + z);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos usar m&aacute;s de una variable usando la ,<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (j=0, k=20; j&lt;10 &amp;&amp; k&gt;0; j++, k=k-2)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dentro del bucle 3 : &quot; + j + &quot; , &quot; + k);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// El bucle infinito:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// for (;;)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/loop/2011/11/10/java-el-bucle-do-while.html">Java, el bucle do while</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-10T13:14:48+01:00" itemprop="datePublished">
+            
+            Nov 10, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          loop
+        </span>
+        
+        
+      </p>
+      <p>
+	JavaJutsu: el bucle do while</p>
+<p>
+	Esto es lo mismo que en c. El bucle do while es una iteraci&oacute;n que al menos se ejecuta una vez.</p>
+<p>
+	/**<br />
+	* DoWhile<br />
+	* Clase que muestra los bucles while<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac DoWhile.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java DoWhile<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase DoWhile<br />
+	* Muestra el uso de bucles do while. Este tipo de bucles<br />
+	* es como el while, repiten unas sentencias mientras una condici&oacute;n sea verdadera<br />
+	* pero en su caso la primera iteraci&oacute;n sucede siempre ya que la condici&oacute;n se comprueba<br />
+	* al final.<br />
+	* Formato:<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sentencias;<br />
+	*&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} while();<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class DoWhile {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a comprobar si un n&uacute;mero es primo<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para eso hay que verificar que solo es divisible<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por si misma o por 1.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero, anterior;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Les asignamos a las dos<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero = anterior = 7;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// para guardar el resultado<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;boolean esPrimo = true; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ejecutamos el do-while<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;anterior--;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (numero % anterior == 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;esPrimo = false;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} while(anterior &gt; 2 &amp;&amp; esPrimo);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Mostramos el resultado<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (esPrimo)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Este numero: &quot; + numero + &quot; es primo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;else<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Este numero: &quot; + numero + &quot; NO es primo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/2011/11/09/java-el-bucle-while.html">Java El Bucle While</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-09T00:00:00+01:00" itemprop="datePublished">
+            
+            Nov 9, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+      </p>
+      ﻿---
+layout: post
+title: "Java, el bucle while"
+date: 2011-11-09 14:11:39
+categories: Java, loop
+---
+<p>
+	JavaJutsu: el bucle while</p>
+<p>
+	Los bucles se hacen igual que en c. Vamos a ver un ejemplo con el bucle while:</p>
+<p>
+	/**<br />
+	* While<br />
+	* Clase que muestra los bucles while<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac While.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java While<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase While<br />
+	* Muestra el uso de bucles while. Este tipo de bucles<br />
+	* repiten unas sentencias mientras una condici&oacute;n sea verdadera.<br />
+	* El final no ser&aacute; previsible.<br />
+	* Formato:<br />
+	*&nbsp; while (true)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp;&nbsp; sentencias;<br />
+	*&nbsp; }<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class While {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a usar un contador<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int contador = 10;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Ejecutamos el bucle mientras contador sea mayor que 0<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;while (contador &gt; 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dentro del bucle &quot; + contador);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// y vamos decrementando<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;contador--;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Vamos a hacer otra prueba<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;contador = 10;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El siguiente bucle:&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n: podemos actualizar la variable en la propia condici&oacute;n<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;while (contador-- &gt; 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dentro del bucle &quot; + contador);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// el bucle infinito: simplemente poniendo en la condici&oacute;n true<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//while (true)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// {<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//&nbsp;&nbsp; sentencias;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// }<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/games,/dice,/svg/2011/11/07/d6-dice-set-in-svg.html">D6 dice set in svg</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-07T11:47:13+01:00" itemprop="datePublished">
+            
+            Nov 7, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          games,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          dice,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          svg
+        </span>
+        
+        
+      </p>
+      <h1>
+	D6 dices in svg</h1>
+<p>
+	Scalar vector graphics dice set, quick and dirty.</p>
+<p>
+	<img alt="d6 dice set" src="http://pello.info/filez/d6.dices.png" style="width: 407px; height: 134px;" /></p>
+<p>
+	Dados en formato vectorial.</p>
+<p>
+	<a href="http://pello.info/filez/dices.svg.by.px.zip">Download</a> (svg file, dices one by one)</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/switch/2011/11/04/java-el-switch-case.html">Java, el switch case</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-04T11:54:53+01:00" itemprop="datePublished">
+            
+            Nov 4, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          switch
+        </span>
+        
+        
+      </p>
+      <h1>
+	JavaJutsu: el switch case</h1>
+<p>
+	Cuando necesitamos comprobar una condici&oacute;n sobre el valor de una variable en lugar de usar un mont&oacute;n de if-else debemos usar un switch case. En el caso de Java es como c pero a partir de la versi&oacute;n 7 podemos usar Strings!!</p>
+<p>
+	/**<br />
+	* SwitchCase<br />
+	* Clase que muestra el uso de un switch case<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac SwitchCase.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java SwitchCase<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase SwitchCase<br />
+	* Clase que muestra el uso de un switch case<br />
+	* Estas estructuras son como un if-else-if pero se aplican comprobando<br />
+	* si una variable tiene determinado valor<br />
+	*<br />
+	*&nbsp; switch (variable)<br />
+	* {<br />
+	*&nbsp;&nbsp; &nbsp;case valor1 : sentencias; break;<br />
+	*&nbsp;&nbsp; &nbsp;case valor2 : sentencias: break;<br />
+	*&nbsp;&nbsp; &nbsp;...<br />
+	*&nbsp;&nbsp; &nbsp;default: sentencias;<br />
+	* }<br />
+	*<br />
+	* NOTA: no olvides el break para cada caso.<br />
+	* NOTA2: el switchcase en java&nbsp; funciona para tipos simples (int, char) y desde la versi&oacute;n 7 para todos<br />
+	* incluidos Strings<br />
+	*&nbsp; &nbsp;<br />
+	* NOTA3: no se permiten los intervalos como en VB.<br />
+	*<br />
+	&nbsp;<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class SwitchCase {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int dorsal = 10;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Seg&uacute;n el valor de edad sacaremos un mensaje u otro<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// NO hay que olvidar el break para cada CASO!!!!!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (numero)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 0:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres un 0&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 15:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres la ni&ntilde;a bonita&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 42:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres la respuesta a todo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 69:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres el puerto tftp, malpensao.&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;default:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres un n&uacute;mero sin personalidad: &quot; + numero);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Podemos agrupar m&aacute;s opciones como una especia de OR:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch (dorsal)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 3:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 4:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 5:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Dorsal de un defensa&quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 10:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El dorsal del capit&aacute;n: &quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case 9:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;El dorsal de un ariete: &quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;default:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Eres un n&uacute;mero sin personalidad: &quot; + dorsal);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;break;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/if/2011/11/03/java-el-condicional-if-else-y-if-else-if.html">java, el condicional if-else y if-else-if</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-03T13:38:07+01:00" itemprop="datePublished">
+            
+            Nov 3, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          if
+        </span>
+        
+        
+      </p>
+      <h1>
+	Javajutsu: condicional if-else</h1>
+<p>
+	En java no existe una operaci&oacute;n elseif o elsif, as&iacute; que hay que hacer un else y luego un if como en c.</p>
+<p>
+	&nbsp;</p>
+<h3>
+	Ejemplo de if-else</h3>
+<p>
+	/**<br />
+	* IfElse<br />
+	* Clase que muestra un bloque condicional if-else<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac IfElse.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java IfElse<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase IfElse<br />
+	*&nbsp; Muestra el uso de un bloque condicional if-else: si se cumple la<br />
+	* condici&oacute;n del if se ejecuta su bloque, en caso contrario se ejecuta<br />
+	* el bloque del else.<br />
+	*&nbsp; if (condici&oacute;n)<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_if;<br />
+	*&nbsp; }<br />
+	* else<br />
+	* {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_else;<br />
+	* }<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class IfElse {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaramos una variable.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int a = 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int b = 0;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (a &gt;= b)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;A es mayor o igual que B&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;else<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;A es menor que B&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+<p>
+	&nbsp;</p>
+<h3>
+	Ejemplo de if-else-if</h3>
+<p>
+	/**<br />
+	* IfElse<br />
+	* Clase que muestra un bloque condicional if-else<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac IfElse.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java IfElse<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase IfElse<br />
+	*&nbsp; Muestra el uso de un bloque condicional if-else: si se cumple la<br />
+	* condici&oacute;n del if se ejecuta su bloque, en caso contrario se ejecuta<br />
+	* el bloque del else.<br />
+	*&nbsp; if (condici&oacute;n)<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_if;<br />
+	*&nbsp; }<br />
+	* else<br />
+	* {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_else;<br />
+	* }<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class IfElse {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaramos una variable.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int a = 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int b = 0;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (a &gt;= b)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;A es mayor o igual que B&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;else<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;A es menor que B&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/if/2011/11/02/java-el-condicional-if.html">Java, el condicional if</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-11-02T15:24:05+01:00" itemprop="datePublished">
+            
+            Nov 2, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          if
+        </span>
+        
+        
+      </p>
+      <h1>
+	Javajutsu: estructura condicinal if</h1>
+<p>
+	El if se hace como en c, aunque no todo es igual. Ver c&oacute;digo comentado.</p>
+<p>
+	/**<br />
+	* If<br />
+	* Clase que muestra el uso de un bloque condicional if<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac If.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java If<br />
+	*/<br />
+	&nbsp;<br />
+	// Librer&iacute;a necesaria para trabajar con la entrada/salida<br />
+	import java.io.*;<br />
+	&nbsp;<br />
+	/**<br />
+	* clase If<br />
+	* Muestra el uso de un bloque condicional if, cuyo interior solo<br />
+	* se ejecuta si la condici&oacute;n del if es verdadera<br />
+	*&nbsp; if (condici&oacute;n)<br />
+	*&nbsp; {<br />
+	*&nbsp;&nbsp;&nbsp; sentecias_bloque_if;<br />
+	*&nbsp; }<br />
+	*<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class If {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Declaramos una variable.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int x = 666;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int y = 0;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x == 666)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x lleva la marca de la bestia&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// La condic&oacute;n del If puede ser cualquier expresi&oacute;n compleja siempre que devuelva un<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// valor booleano<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x &gt; 0 &amp;&amp; y &lt; 0)<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x es positivo e y negativo&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Atenci&oacute;n: JAVA NO considera los enteros como booleanos!!<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Tradicionalmente en c y otros lenguajes similares cualquier valor que sea distinto de 0 se considera como un true booleano<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// mientras que el 0 se considera como false.<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;/*<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (x) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;x es distinto de 0&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (y) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;y es distinto de 0&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// por tanto !y es como preguntar si y es igual a 0<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// esta forma de escribir es muy kewl pero se considera poco clara<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (!y) // En JAVA NO HACER ESTO<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;y es 0!!&quot;);<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}*/<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
+      <h2><a href="/java,/bit,/operators/2011/10/27/java-operadores-de-bits.html">Java, operadores de bits</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2011-10-27T13:46:08+02:00" itemprop="datePublished">
+            
+            Oct 27, 2011
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          Java,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          bit,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          operators
+        </span>
+        
+        
+      </p>
+      <p>
+	JavaJutsu: operadores de bits</p>
+<p>
+	&iquest;Te interesan los operadores a nivel de bits en Java? Algo malo debes estar haciendo ;)</p>
+<p>
+	Los operadores haberlos haylos, otra cosa es que se usen con frecuencia.</p>
+<p>
+	/**<br />
+	* OperadoresBits<br />
+	* Clase que muestra el uso de operadores de bits<br />
+	*<br />
+	* Para compilar:<br />
+	*&nbsp;&nbsp; javac OperadoresBits.java<br />
+	*<br />
+	* Para ejecutarlo:<br />
+	*&nbsp;&nbsp; java OperadoresBits<br />
+	*/<br />
+	&nbsp;<br />
+	<br />
+	/**<br />
+	* clase OperadoresBits<br />
+	* Muestra el uso de operadores de bits. Su uso no es que sea muy frecuente<br />
+	* pero suele estar presente en todos los lenguajes tipo c.<br />
+	*<br />
+	* &amp; : AND Conjunci&oacute;n de bits:&nbsp; 1011 &amp; 1001 = 1001<br />
+	* | : OR disjunci&oacute;n de bits:&nbsp;&nbsp; 1011 | 1001 = 1011<br />
+	* ^ : XOR disjunci&oacute;n excluyente de bits:&nbsp;&nbsp; 1011 ^ 1001 = 0010<br />
+	* &lt;&lt;: desplazamiento de bits a la izquierda<br />
+	* &gt;&gt;: desplazamiento de bits a la derecha<br />
+	* &nbsp;<br />
+	*<br />
+	* &nbsp;<br />
+	* @author Pello Altadill<br />
+	*/<br />
+	public class OperadoresBits {<br />
+	&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;/**<br />
+	&nbsp;&nbsp; &nbsp;* main<br />
+	&nbsp;&nbsp; &nbsp;* Funci&oacute;n principal<br />
+	&nbsp;&nbsp; &nbsp;* esta funci&oacute;n es la que se inicia directamente al ejecutar el programa<br />
+	&nbsp;&nbsp; &nbsp;*/<br />
+	&nbsp;&nbsp; &nbsp;public static void main (String args[])<br />
+	&nbsp;&nbsp; &nbsp;{<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;int numero1, numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero1 = 0x0010;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero2 = 0x1101;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Resultado: \n&quot; + (numero1 &amp; numero2));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;System.out.println(&quot;Resultado: \n&quot; + (numero1 | numero2));<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// se puede abreviar:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// numero1 = numero1 &amp; numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;numero1 &amp;= numero2;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Para operaciones en las que el resultado vaya a una de los propios<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// operandos (numero1 = numero1 &amp; 0x1111) podemos usar una operadores de asignaci&oacute;n especial:<br />
+	&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// &amp;=, |=, ^=, &gt;&gt;=, &gt;&gt;&gt;=, &lt;&lt;= &nbsp;<br />
+	&nbsp;<br />
+	&nbsp;&nbsp; &nbsp;}<br />
+	}</p>
+
+    </div>
+    <div class="clearfix"></div>
+    
+    
+
+  <!-- Pagination links -->
+  <ul class="pagination">
+  
+  <li>
+    <a href="/page/12">
+      &laquo;
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/index.html">
+      1
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/2">
+      2
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/3">
+      3
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/4">
+      4
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/5">
+      5
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/6">
+      6
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/7">
+      7
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/8">
+      8
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/9">
+      9
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/10">
+      10
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/11">
+      11
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/12">
+      12
+    </a>
+  </li>
+  
+
+  
+  <li class="active">
+    <a>
+      13
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/14">
+      14
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/15">
+      15
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/16">
+      16
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/17">
+      17
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/18">
+      18
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/19">
+      19
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/20">
+      20
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/21">
+      21
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/22">
+      22
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/23">
+      23
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/24">
+      24
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/25">
+      25
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/26">
+      26
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/27">
+      27
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/28">
+      28
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="/page/14">
+      &raquo;
+    </a>
+  </li>
+  
+</ul>
+
+
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="pelloprojects">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pello.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+            <span class="octicon octicon-person"></span>
+              Pello Altadill
+            
+            </li>
+            
+          <span class="octicon octicon-mail"></span>
+            <li><a href="mailto:p_at_pello_dot_io">p_at_pello_dot_io</a></li>
+            
+        </ul>
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/pxai"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">pxai</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/pello_io"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">pello_io</span></a>
+
+          </li>
+          
+        </ul>
+        <p>Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3><span class="octicon octicon-beaker"></span> Projects</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="http://eta.bar" title="">eta.bar</a>
+            MEAN 2
+          </li>
+          <li>
+            <a href="https://github.com/pxai/jobtrends" title="">Jobtrends</a>
+            MEAN
+          </li>
+          <li>
+            <a href="https://github.com/pxai/seronoser" title="">SeronoSer</a>
+            Angular game
+          </li>
+          <li>
+            <a href="https://artean.cuatrovientos.org" title="">Artean</a>
+            Symfony3
+          </li>
+          <li>
+            <a href="https://github.com/pxai/4vientos" title="">4vientos</a>
+            Codeigniter
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-git-branch"></span> Repositories</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=typescript&type=&language=">TypeScript</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=android&type=&language=java">Android</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/gulp-optimized-web">Gulp optimization</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/grunt-optimized-web">Grunt optimization</a>
+          </li>
+        </ul>
+      </div>
+       <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-repo"></span> Books</h3>
+        <ul class="social-media-list">
+            <li>
+                <a href="books.html">Información</a>
+              </li>
+          <li>
+            <a href="https://www.amazon.es/Dise%C3%B1o-Interfaces-Eugenia-P%C3%A9rez-Martinez/dp/8416228620/">Diseño de interfaces Web</a>
+          </li>
+          <li>
+            <a href="https://www.amazon.es/Java-Limpio-Programaci%C3%B3n-pr%C3%A1cticas-desarrollo/dp/1546987916/">Java Limpio</a> | <a href="https://www.amazon.es/dp/B074W4D2NM">Versión Kindle</a> 
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/2012/"
+       style="">
+            2012, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dao/"
+       style="">
+            DAO, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jee/"
+       style="">
+            JEE, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java, (27)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mvc/"
+       style="">
+            MVC (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            OOP (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ruby/"
+       style="">
+            Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts/"
+       style="">
+            Struts, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/access/"
+       style="">
+            access, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/activity/"
+       style="">
+            activity (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ado-net/"
+       style="">
+            ado.net (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ant/"
+       style="">
+            ant, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/apache/"
+       style="">
+            apache, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/args/"
+       style="">
+            args (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arkapong/"
+       style="">
+            arkapong, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/array/"
+       style="">
+            array (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arrays/"
+       style="">
+            arrays (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp-net/"
+       style="">
+            asp.net, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp3/"
+       style="">
+            asp3, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asynctask/"
+       style="">
+            asynctask (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/audits/"
+       style="">
+            audits (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/auth/"
+       style="">
+            auth, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backbone/"
+       style="">
+            backbone, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backend/"
+       style="">
+            backend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/banner/"
+       style="">
+            banner (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bash/"
+       style="">
+            bash (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/basics/"
+       style="">
+            basics (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bit/"
+       style="">
+            bit, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boardgames/"
+       style="">
+            boardgames (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boolean/"
+       style="">
+            boolean, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/break/"
+       style="">
+            break (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/browser/"
+       style="">
+            browser, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c# (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c#, (17)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++ (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c0ders/"
+       style="">
+            c0ders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/callbacks/"
+       style="">
+            callbacks (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/charset/"
+       style="">
+            charset (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cinema/"
+       style="">
+            cinema, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/classes/"
+       style="">
+            classes (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/code/"
+       style="">
+            code (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coders/"
+       style="">
+            coders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding (29)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/collections/"
+       style="">
+            collections (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/comic/"
+       style="">
+            comic (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/computers/"
+       style="">
+            computers (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/content/"
+       style="">
+            content (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cooking/"
+       style="">
+            cooking (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cpan/"
+       style="">
+            cpan (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/css3/"
+       style="">
+            css3, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cvs/"
+       style="">
+            cvs (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dbf/"
+       style="">
+            dbf, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/debug/"
+       style="">
+            debug (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/delegate/"
+       style="">
+            delegate, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops (11)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops, (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/di/"
+       style="">
+            di, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dice/"
+       style="">
+            dice, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/docker/"
+       style="">
+            docker, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dtd/"
+       style="">
+            dtd (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/eclipse/"
+       style="">
+            eclipse, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/email/"
+       style="">
+            email (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/errors/"
+       style="">
+            errors (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/event/"
+       style="">
+            event (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/events/"
+       style="">
+            events (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/excel/"
+       style="">
+            excel (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/exceptions/"
+       style="">
+            exceptions (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/firewalls/"
+       style="">
+            firewalls (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/fortunes/"
+       style="">
+            fortunes (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frameworks/"
+       style="">
+            frameworks (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frontend/"
+       style="">
+            frontend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ftp/"
+       style="">
+            ftp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/functions/"
+       style="">
+            functions (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/games/"
+       style="">
+            games, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/gdb/"
+       style="">
+            gdb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/generator/"
+       style="">
+            generator, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/genpas/"
+       style="">
+            genpas, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getline/"
+       style="">
+            getline (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getopt/"
+       style="">
+            getopt (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/glibc/"
+       style="">
+            glibc, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/grub/"
+       style="">
+            grub (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hello/"
+       style="">
+            hello (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/helloworld/"
+       style="">
+            helloworld (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hibernate/"
+       style="">
+            hibernate (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hipstered/"
+       style="">
+            hipstered, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hsqldb/"
+       style="">
+            hsqldb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/html5/"
+       style="">
+            html5, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/i-o/"
+       style="">
+            i/o (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iban/"
+       style="">
+            iban (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ide/"
+       style="">
+            ide, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/if/"
+       style="">
+            if (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/indexer/"
+       style="">
+            indexer, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/inheritance/"
+       style="">
+            inheritance (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/intentss/"
+       style="">
+            intentss (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip/"
+       style="">
+            ip, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip-gre/"
+       style="">
+            ip_gre (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iptables/"
+       style="">
+            iptables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iterations/"
+       style="">
+            iterations (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/j2me/"
+       style="">
+            j2me, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jasmine/"
+       style="">
+            jasmine, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jdbc/"
+       style="">
+            jdbc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/joke/"
+       style="">
+            joke (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lab/"
+       style="">
+            lab (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/libgdx/"
+       style="">
+            libgdx (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linked/"
+       style="">
+            linked (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lists/"
+       style="">
+            lists (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/localstorage/"
+       style="">
+            localstorage (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mail/"
+       style="">
+            mail (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/markdown/"
+       style="">
+            markdown (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/maven/"
+       style="">
+            maven, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/methods/"
+       style="">
+            methods (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/metro/"
+       style="">
+            metro, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mobile/"
+       style="">
+            mobile (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mock/"
+       style="">
+            mock (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/modules/"
+       style="">
+            modules (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mongodb/"
+       style="">
+            mongodb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/monitoring/"
+       style="">
+            monitoring, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/music/"
+       style="">
+            music, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nessus/"
+       style="">
+            nessus, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/networking/"
+       style="">
+            networking (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nodejs/"
+       style="">
+            nodejs, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oem/"
+       style="">
+            oem, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oledb/"
+       style="">
+            oledb (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/openshift/"
+       style="">
+            openshift (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/operators/"
+       style="">
+            operators (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/optimization/"
+       style="">
+            optimization (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/overload/"
+       style="">
+            overload (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/paper/"
+       style="">
+            paper (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parser/"
+       style="">
+            parser (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parsing/"
+       style="">
+            parsing (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/password/"
+       style="">
+            password, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pattern/"
+       style="">
+            pattern (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/perl/"
+       style="">
+            perl, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postfix/"
+       style="">
+            postfix (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postgresql/"
+       style="">
+            postgresql, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pptp/"
+       style="">
+            pptp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/preprocessor/"
+       style="">
+            preprocessor (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/print/"
+       style="">
+            print (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/process/"
+       style="">
+            process, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/project/"
+       style="">
+            project (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/provider/"
+       style="">
+            provider (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pthread/"
+       style="">
+            pthread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/python/"
+       style="">
+            python, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/react/"
+       style="">
+            react (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/references/"
+       style="">
+            references, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/regexp/"
+       style="">
+            regexp (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/relational/"
+       style="">
+            relational (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/remote/"
+       style="">
+            remote (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scanf/"
+       style="">
+            scanf (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scrum/"
+       style="">
+            scrum, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/services/"
+       style="">
+            services (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shell/"
+       style="">
+            shell, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shortcuts/"
+       style="">
+            shortcuts (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/socket-io/"
+       style="">
+            socket.io, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sort/"
+       style="">
+            sort (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            spring (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sql/"
+       style="">
+            sql (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sqlite/"
+       style="">
+            sqlite (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/squid/"
+       style="">
+            squid, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/static/"
+       style="">
+            static (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/stdlib/"
+       style="">
+            stdlib (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strings/"
+       style="">
+            strings (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strtok/"
+       style="">
+            strtok, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/structures/"
+       style="">
+            structures (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts2/"
+       style="">
+            struts2, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/svg/"
+       style="">
+            svg (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/swap/"
+       style="">
+            swap, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/switch/"
+       style="">
+            switch (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sysadmin/"
+       style="">
+            sysadmin (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/syslog/"
+       style="">
+            syslog, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tdd/"
+       style="">
+            tdd, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/template/"
+       style="">
+            template (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/templates/"
+       style="">
+            templates, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/theme/"
+       style="">
+            theme (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/themes/"
+       style="">
+            themes, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tomcat/"
+       style="">
+            tomcat, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/transactions/"
+       style="">
+            transactions (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tutorial/"
+       style="">
+            tutorial (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/types/"
+       style="">
+            types (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vagrant/"
+       style="">
+            vagrant (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb/"
+       style="">
+            vb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/virtualization/"
+       style="">
+            virtualization, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vmware/"
+       style="">
+            vmware (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webmin/"
+       style="">
+            webmin, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webservices/"
+       style="">
+            webservices (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/websockets/"
+       style="">
+            websockets, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/wordpress/"
+       style="">
+            wordpress, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/world/"
+       style="">
+            world (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xml/"
+       style="">
+            xml, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xmlschema/"
+       style="">
+            xmlschema, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xsd/"
+       style="">
+            xsd (3)
+    </a>
+</span>
+      
+    </div>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93485415-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</footer>
+
+
+  </body>
+
+</html>

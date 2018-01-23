@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+>
+
+<channel rdf:about="http://coders.pello.info/">
+<title>c0ders</title>
+<link>http://coders.pello.info/</link>
+<description>C0ders :: codeblog :: comic strip about programmers</description>
+<items>
+ <rdf:Seq>
+  <rdf:li rdf:resource="http://coders.pello.info/" />
+ </rdf:Seq>
+</items>
+<image rdf:resource="http://coders.pello.info/images/codeblog.jpg" />
+<textinput rdf:resource="http://coders.pello.info" />
+</channel>
+
+<image rdf:about="http://coders.pello.info/">
+<title>Pieces of code to take over the world</title>
+<url>http://coders.pello.info/preview.jpg</url>
+<link>http://coders.pello.info/</link>
+</image>
+
+
+<item rdf:about="http://coders.pello.info">
+<title>Latest strip - Natural inspiration</title>
+<link>http://coders.pello.info</link>
+</item>
+
+
+
+<textinput rdf:about="http://coders.pello.info">
+<title>c0ders</title>
+<description>Coders</description>
+<name>home</name>
+<link>http://coders.pello.info</link>
+</textinput>
+
+</rdf:RDF>

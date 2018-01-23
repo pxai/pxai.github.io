@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A night out with Jasmine</title>
+  <meta name="description" content="A night out with Jasmine Unit testing is much more than a tool for ensuring that a program behaves as expected. Nowadays it&#39;s the key for new development tec...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/jasmine,/tdd,/node.js/2014/04/23/a-night-out-with-jasmine.html">
+  <link rel="alternate" type="application/rss+xml" title="pello.io" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">
+    <img src="/images/logo.png" title="Pello.io logo" />
+    pello.io</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" title="Projects" href="archive.html">
+            <span class="octicon octicon-calendar"></span> Archive
+          </a>
+          <a class="page-link" title="Projects" href="#pelloprojects">
+            <span class="octicon octicon-beaker"></span> Projects
+          </a>
+          <a class="page-link" title="Github projects" href="https://github.com/pxai">
+            <span class="octicon octicon-octoface"></span> GitHub
+          </a>
+          
+            
+            
+          
+            
+            
+          <span class="octicon octicon-person"></span><span class="octicon octicon-person"></span>
+            <a class="page-link" href="/about/">
+              About
+            </a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+
+        </div>
+      </nav>
+    
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">A night out with Jasmine</h1>
+    <p class="post-meta">
+      <span class="octicon octicon-calendar"></span>
+      <time datetime="2014-04-23T02:37:18+02:00" itemprop="datePublished">
+        
+        Apr 23, 2014
+      </time>
+      
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h5>A night out with Jasmine</h5>
+<p>
+Unit testing is much more than a tool for ensuring that a program behaves as expected. Nowadays it's the key for new development techniques such as TDD and BDD in which you begin writing tests before the required code. It's all about requirements and behaviour; developers must focus on understanding the requirements instead of thinking about the way they implement the code. In the event that you've forgotten the fundamental benefits of unit testing here you have a quick reminder:</p>
+<ul>
+<li>Obviously, you are testing that your code works</li>
+<li>When changes are made you can automatically verify that everything works</li>
+<li>Tests are a pretty good way to document the project.</li>
+</ul>
+
+<p>Jasmine is a BDD framework for javascript code. In a nutshell, BDD it's an evolution of TDD where unit tests look like user stories, and so tests are defined in the same terms of the expected behaviour of the software units. When you discover functions names in Jasmine tests these simple definitions will make more sense.</p>
+<p>Let's get our hands dirty, while you take a look at Jasmine's site
+http://jasmine.github.io/2.0/introduction.html you can get the master from the github site
+https://github.com/pivotal/jasmine/archive/master.zip</p>
+<p>
+Or, if you are using node then just sigh, coff slightly, adjust your spectacles and simply try with this: npm -g install jasmine-node
+</p>
+<p>
+Beware! at the time of writing this Jasmine is in 2.0 version and there are some changes and deprecated functions. So, be careful with what you read out there, check dates.
+</p>
+<p>
+Ok, once jasmine is installed let's write this piece of code in a file called hello.js
+</p>
+<pre class="brush: jscript">
+exports.hello = function () {
+	return 'Hello world';
+};
+</pre>
+
+<p>
+Behold the almighty helloworld sample.
+</p>
+
+<p>
+With Jasmine, the test file is expected to live in a dir called specs in a file called
+name.spec.js, so hello.spec.js in this case.
+</p>
+<p>And this is what the test would look like:</p>
+<pre class="brush: jscript">
+/*
+* specs/hello.spec.js
+*/
+var hl = require("../hello.js");
+
+// testing hello function
+describe("hello", function() {
+	it('returns "Hello world"', function() {
+		expect(hl.hello()).toEqual("Hello world");
+	});
+});
+</pre>
+
+<p>
+To run the test, in the same directory where hello.js resides we type jasmine-node command with the dir of the test and it will pass all specs files within
+</p>
+<pre class="brush: bash">
+
+linux$ jasmine-node specs/
+.
+
+Finished in 0.020 seconds
+1 tests, 1 assertions, 0 failures, 0 skipped
+linux$
+</pre>
+
+<p>
+¿How could we test functions that are using a callback? In the same hello.js file we add this function:
+</p>
+<pre class="brush: jscript">
+
+exports.helloAsync = function (callback) {
+	return callback(null,'Async Hello World');
+};
+</pre>
+
+<p>And this is how the test should look like:
+<pre class="brush: jscript">
+describe("helloAsync", function() {
+	it("does an asynchronous call", function() {
+		hl.helloAsync(function(err,response) {
+			expect(response).toContain("Async Hello World");
+		});
+	});
+});
+</pre>
+
+<p>Now if we run the test, we will check 2 test and 2 assertions:
+</p>
+
+<pre class="brush: bash">
+linux$ jasmine-node specs/
+..
+
+Finished in 0.029 seconds
+2 tests, 2 assertions, 0 failures, 0 skipped
+linux$
+</pre>
+
+<p>Maybe you've noticed that in the second test instead of toEqual we're using .toContain. These are different matchers with different effects as indicated by their obvious names. As you can see, Jasmine drives us to write tests that apart from being 'extracool' can be read as natural language.
+</p>
+
+<h5>Developing a simply utility, TDD style</h5>
+<p>
+Our beloved system administrator wants a program to convert people names such as "john, doe" into account names like "john_doe". Remember, we are trying TDD now so focus on the requirement, and try not to think about using regular expressions or any kind of implementation details. TDD dictates to follow this steps:
+</p>
+<ol>
+<li>Write the test code</li>
+<li>Pass the test and see how it fails</li>
+<li>Write just the necessary code, quick and dirty, to turn the test from red to green</li>
+<li>Once the test is passed successfuly, refactor the code.</li>
+<li>Feel kwel, you earned a good cup of whatever</li>
+</ol>
+
+<p>Ok, we create a specs dir, and inside a username.spec.js file containing our test of a code that right now it is but a ghost:
+</p>
+<pre class="brush: jscript">
+
+var username = require('../username.js');
+
+describe('Test to ensure username is created', function () {
+	it('returns name_surname with simple Name,Surname',function () {
+		expect(username.create('john,doe')).toEqual('john_doe');
+	});
+
+});
+</pre>
+
+<p>
+Not only if we test this fails, but also if we run it this code FAILS. why? username.js does not exist, as simply as that. Well then, time for step 2 in TDD, we write our code in a file named username.js one dir level below.
+</p>
+
+<pre class="brush: jscript">
+/**
+* username.js
+* Pello Altadill Izura
+* http://pello.info
+*/
+
+exports.create = function (personName) {
+	var result = '';
+	var parts = personName.split(',');
+	result = parts[0] + '_' + parts[1];
+
+	return result;
+};
+</pre>
+
+<p>Now what we get is what we expected to:
+</p>
+
+<pre class="brush: bash">
+linux$ jasmine-node specs/
+.
+
+Finished in 0.033 seconds
+1 test, 1 assertion, 0 failures, 0 skipped
+
+linux$
+</pre>
+
+<p>The requirements were minimal in order to show the process of TDD. But the world is not a pleasant place where everything just works fine. As Melissandre said, there is one hell, the one we are living in now. This could be a more realistic problem, which might be more useful to ilustrate some other Jasmine features.
+</p>
+
+<p>Our Benevolent Dictator thinks that we deserve the honor to raise from the mud in which we creep and serve him with our bare hands, although we are not worthy of such a gift from a demigod. We want to get on well with OBD if we want him to lower the proxy constraints for us among other mundane privileges. He is in a need for a program that translates people names to system names with this specifications:
+</p>
+<ul>
+<li>People names come with Name, Surname notation and they may be translated to name_surname</li>
+<li>Names can come in either lower or uppercase</li>
+<li>Names can come with extra spaces</li>
+<li>Some people may have two names like 'John John, Kennedy' or 'Jar Jar, Binks' and they might be translated to name1name2_surname</li>
+<li>Some names can be null or empty spaces ','. (That may be OBD's fault but It's better not to mention it)</li>
+</ul>
+
+<p>
+We'll try to acomplish these specs, so our unit tests might look like this in Jasmine style:
+</p>
+<pre class="brush: jscript">
+
+var username = require('../username.js');
+
+describe('Test to ensure username is created', function () {
+	it('returns name_surname with simple Name,Surname',function () {
+		expect(username.create('john,doe')).toEqual('john_doe');
+	});
+
+	it('converts any uppercase character to lowercase', function () {
+		expect(username.create('Han,Solo')).toEqual('han_solo');
+	});
+
+	it('removes any space character', function () {
+		expect(username.create('   Luke, Skywalker ')).toEqual('luke_skywalker');
+	});
+
+	it('returns multiple names together', function () {
+		expect(username.create('Obi Wan,Kenobi')).toEqual('obiwan_kenobi');
+	});
+
+	it('throws error if name is empty', function () {
+		expect(function() {
+					username.create('');
+			   }).toThrow('Person name is empty');
+	});
+});
+</pre>
+
+<p>If we test all of this with our previous code Jasmine will scream our name:
+</p>
+
+<pre class="brush: bash">
+linux$ jasmine-node specs/
+.FFFF
+
+Failures:
+
+  1) Test to ensure username is created converts any uppercase character to lowercase
+   Message:
+     Expected 'Han_Solo' to equal 'han_solo'.
+   Stacktrace:
+     Error: Expected 'Han_Solo' to equal 'han_solo'.
+    at null.<anonymous> (/root/nodejs/jasmine/users/specs/username.spec.js:9:39)
+
+  2) Test to ensure username is created removes any space character
+   Message:
+     Expected '   Luke_ Skywalker ' to equal 'luke_skywalker'.
+   Stacktrace:
+     Error: Expected '   Luke_ Skywalker ' to equal 'luke_skywalker'.
+    at null.<anonymous> (/root/nodejs/jasmine/users/specs/username.spec.js:13:50)
+
+  3) Test to ensure username is created returns multiple names together
+   Message:
+     Expected 'Obi Wan_Kenobi' to equal 'obiwan_kenobi'.
+   Stacktrace:
+     Error: Expected 'Obi Wan_Kenobi' to equal 'obiwan_kenobi'.
+    at null.<anonymous> (/root/nodejs/jasmine/users/specs/username.spec.js:17:45)
+
+  4) Test to ensure username is created returns empty string with spaces
+   Message:
+     Expected '_undefined' to equal ''.
+   Stacktrace:
+     Error: Expected '_undefined' to equal ''.
+    at null.<anonymous> (/root/nodejs/jasmine/users/specs/username.spec.js:21:31)
+
+Finished in 0.061 seconds
+5 tests, 5 assertions, 4 failures, 0 skipped
+</pre>
+
+<p>Let's fix each of the tests</p>
+<pre class="brush: jscript">
+
+/**
+* username.js
+* Pello Altadill Izura
+* http://pello.info
+*/
+
+exports.create = function (personName) {
+	var result = '';
+	personName = personName.toLowerCase();
+	personName = personName.replace(/\s/g,'');
+	if (personName == '' ) {
+		throw new Error('Person name is empty');
+	}
+	var parts = personName.split(',');
+	result = parts[0] + '_' + parts[1];
+
+	return result;
+};
+</pre>
+
+<p>
+The \s replacement fixes many things. And now we throw an Error whenever a personName comes empty. Maybe this is not the preferred behaviour of our program, but It helps to show how to check if exceptions are thrown.
+</p>
+
+<h5>Jasmine matchers at a glance</h5>
+<p>
+We have already used .toEqual(), .toContain() and .toThrow(), but if you're familiar with unit testing you might expect many others to exist. So instead of blowing your mind with poor-man's wordgames, let's see what we have inside Jasmine's toolbox.</p>
+
+<h6>Negate matching</h6>
+<p>at any moment we can reverse the matcher using a not like this</p>
+<pre class="brush: jscript">
+expect(666).not.toEqual(333);
+</pre>
+
+<h6>toEqual</h6>
+<p>Tests equality with primitive types: numbers, strings, booleans, null. But NOT with objects.
+Some examples:</p>
+<pre class="brush: jscript">
+		var one = {'name' : 'John'};
+		var other = {'name' : 'John'};
+		var another = one;
+		var oneArray = [42, 15, 69];
+		var otherArray = [42, 15, 69];
+		var anotherArray = [6, 66, 666];
+		var phrase = 'By demon be driven';
+
+
+		expect(6).toEqual(6);
+		expect(6).toEqual(6.0);
+		expect(one).toEqual(other);
+		expect(oneArray).toEqual(otherArray);
+		expect(6).not.toEqual('6');
+</pre>
+
+<h6>toBe</h6>
+<p>Tests equality between objects. Some examples:</p>
+<pre class="brush: jscript">
+		var one = {'name' : 'John'};
+		var other = {'name' : 'John'};
+		var another = one;
+		var oneArray = [42, 15, 69];
+		var otherArray = [42, 15, 69];
+		var anotherArray = [6, 66, 666];
+
+		expect(6).toBe(6);
+		expect(6).not.toBe('6');
+		expect(6).toBe(6.0);
+		expect(one).toBe(another);
+		expect(oneArray).not.toBe(otherArray);
+		expect(one).not.toBe(other);
+</pre>
+
+<h6>toContain</h6>
+<p>Checks if an element of a string or of an array is present. Some examples:</p>
+<pre class="brush: jscript">
+		var phrase = 'By demon be driven';
+
+		expect(oneArray).toContain(42);
+		expect(phrase).toContain('demon');
+</pre>
+
+<h6>toBeTruthy</h6>
+<p>Checks if what we expect is true. Some examples:</p>
+<pre class="brush: jscript">
+		expect(true).toBeTruthy();
+		expect(1).toBeTruthy();
+		expect('Metallica').toBeTruthy();
+		expect(66).toBeTruthy(); // anything but 0
+</pre>
+
+<h6>toBeFalsy</h6>
+<p>Checks if what we expect is false. Some examples:</p>
+<pre class="brush: jscript">
+		var phrase = 'By demon be driven';
+
+		expect(false).toBeFalsy();
+		expect(0).toBeFalsy();
+		expect('').toBeFalsy();
+		expect(null).toBeFalsy();
+		expect(undefined).toBeFalsy();
+		expect(NaN).toBeFalsy();
+		expect(true).not.toBeFalsy();
+		expect(phrase).not.toBeFalsy();
+</pre>
+
+<h6>toBeNull</h6>
+<p>Checks if something is null. Some examples:</p>
+<pre class="brush: jscript">
+		expect(null).toBeNull();
+		expect('').not.toBeNull();
+		expect([]).not.toBeNull();
+</pre>
+
+<h6>toBeNaN</h6>
+<p>Checks if we have anything but a number. Some examples:</p>
+<pre class="brush: jscript">
+		var phrase = 'By demon be driven';
+
+		expect(NaN).toBeNaN();
+		expect(parseInt('One')).toBeNaN();
+		expect(parseInt('666')).not.toBeNaN();
+		expect(phrase).not.toBeNaN();
+		expect(6).not.toBeNaN();
+</pre>
+
+<h6>toBeDefined</h6>
+<p>Checks if a variable is defined. Some examples:</p>
+<pre class="brush: jscript">
+		var unnamed;
+		var god = 'Cthulhu';
+		var anotherGod = god;
+		expect(god).toBeDefined();
+		expect(another).toBeDefined();
+		expect(666).toBeDefined();
+		expect(true).toBeDefined();
+		expect(null).toBeDefined(); // yes, it is
+		expect(unnamed).not.toBeDefined();
+</pre>
+
+<h6>toBeUndefined</h6>
+<p>Checks if a variable is not defined Some examples:</p>
+<pre class="brush: jscript">
+		var unnamable;
+		var unnamed;
+		expect(unnamable).toBeUndefined();
+		expect(unnamed).toBeUndefined();
+		expect(null).not.toBeUndefined();
+		// This would throw Reference Error
+		//expect(notDeclaredVar).toBeUndefined();
+</pre>
+
+<h6>toBeGreaterThan</h6>
+<p>Checks if the value, integer or String is greater than other. Some examples:</p>
+<pre class="brush: jscript">
+		expect(6).toBeGreaterThan(5);
+		expect('b').toBeGreaterThan('a');
+		expect(6).not.toBeGreaterThan('6');
+</pre>
+
+<h6>toBeLessThan</h6>
+<p>Checks if the value is lesser. Some examples:</p>
+<pre class="brush: jscript">
+		expect(5).toBeLessThan(6);
+		expect(-5.1).toBeLessThan(-5.0);
+		expect('a').toBeLessThan('b');
+</pre>
+
+<h6>toBeCloseTo</h6>
+<p>Checks if a value is closed to another providing certain precision. When the precision is 0 it parses the number to Int. Some examples:</p>
+<pre class="brush: jscript">
+		expect(66.64).toBeCloseTo(66.62,1);
+		expect(66.64).toBeCloseTo(67,0);
+		expect(42.44).toBeCloseTo(42,0);
+		expect(42.59).toBeCloseTo(43,0);
+		expect(Math.PI).toBeCloseTo(3.14,2);
+		expect(Math.PI).toBeCloseTo(3,0);
+</pre>
+
+<h6>toMatch</h6>
+<p>This is great, we can check if the value matches a regular expression. Some examples:
+</p>
+<pre class="brush: jscript">
+		expect('Thorin Kili Gloin').toMatch(/gloin/i);
+		expect('Jasmine').toMatch(/[a-z]+/i);
+		expect('Jasmine and Eugene').not.toMatch(/^[a-z]+$/gi);
+		expect('Jasmine and Eugene').toMatch(/^[a-z\s]+$/gi);
+</pre>
+
+<h6>toThrow</h6>
+<p>As explained before, checks if an Error is thrown.</p>
+We'll try with this dumb function:
+<pre class="brush: jscript">
+		var vomitError = function () {
+			throw new Error('I puke errors');
+		};
+
+	it('checks toThrow',function () {
+		expect(vomitError).toThrow();
+	});
+</pre>
+
+<h6>Creating our own matchers</h6>
+<p>Maybe you need a more specific matcher to be able to test something that Jasmine's default matchers are not capable of. Well, you can define your own matchers.
+Inside the describe block we can define our own matcher, in this case is one matcher to test if a String is complex enough to be a secure password.
+</p>
+
+<pre class="brush: jscript">
+	/**
+	* customMatcher
+	* toBeComplex
+	* checks if a String contains alphanumeric and symbols
+	* and a min lenght of 8
+	*/
+	beforeEach(function() {
+		this.addMatchers({
+			toBeComplex: function() {
+				this.message = function() {
+					return "Expected " + this.actual + " to be complex";
+				};
+					return this.actual.match(/[a-z]{1,}/)
+						&& this.actual.match(/[A-Z]{1,}/)
+						&& this.actual.match(/[0-9]{1,}/)
+						&& this.actual.match(/[\.\,\;\:\-\!\?\_]{1,}/)
+						&& (this.actual.length>7);
+			}
+		});
+
+	});
+</pre>
+
+<p>And now we can use our tester just like the others:
+</p>
+<pre class="brush: jscript">
+	// toBeComplex
+	// Checks if a String is valid to be a password
+	it('checks toBeComplex',function () {
+		expect('Death-666').toBeComplex();
+		expect('.-;.:,!?').not.toBeComplex();
+		expect('Death66').not.toBeComplex();
+		expect('josua').not.toBeComplex();
+	});
+</pre>
+
+<p>'josua' has always been a very bad password.
+</p>
+<p>If you need params in this matcher is quite easy to add them. We define a slightly different matcher now adding the minimun length.
+</p>
+<pre class="brush: jscript">
+			toBeComplexAndLongerThan: function(length) {
+				this.message = function() {
+					return "Expected " + this.actual + " to be complex and longer than " + length;
+				};
+					return this.actual.match(/[a-z]{1,}/)
+						&& this.actual.match(/[A-Z]{1,}/)
+						&& this.actual.match(/[0-9]{1,}/)
+						&& this.actual.match(/[\.\,\;\:\-\!\?\_]{1,}/)
+						&& (this.actual.length>length);
+			}
+</pre>
+
+<p>Now we test it:
+</p>
+<pre class="brush: jscript">
+		expect('Josua:It666').toBeComplexAndLongerThan(10);
+</pre>
+
+
+<h5>Spies, spies everywhere</h5>
+<p>Matches are fine to check if our functions are returning what are expected to. But, how could we be sure that certain functions are being called? Jasmine as many other tools brings us the possibility to introuce the so called spies. By the way I introduce the use of setup/teardown like methods in Jasmine: beforeEach and afterEach.
+</p>
+
+<p>
+First I'll show how to use the spies in a very simple problem, and after that we'll move to test a tcp server with async calls.
+</p>
+<p>stringutils: this is a simple class with some methods to do simple stuff with strings.
+<pre class="brush: jscript">
+/**
+* stringutils.js
+* Some String utils
+*/
+exports.StringUtils = function () {
+
+		this.len = function (string) {
+			return string.length;
+		};
+
+		this.vowels = function (string) {
+			var totalVowels = 0;
+
+			for (var i = 0; i< this.len(string);i++) {
+				if (string[i].match(/^[aeiou]{1}$/i)) {
+					totalVowels++;
+				}
+			}
+
+			return totalVowels;
+		};
+
+		this.reverse = function (string) {
+			var gnirts = '';
+			for (var i = this.len(string) -1;i>=0 ;i--) {
+				gnirts += string[i];
+			}
+
+			return gnirts;
+		}
+};
+</pre>
+
+<p>
+Ok, I'm afraid that I'll not get rich with this, but should be enough to apply simple spies on it in this spec below:</p>
+
+<pre class="brush: jscript">
+var stringutils = require("../stringutils.js");
+
+// testing hello function
+describe("testing stringutils", function() {
+
+	var myStringUtils;
+
+	beforeEach(function() {
+		myStringUtils = new stringutils.StringUtils();
+		spyOn(myStringUtils,'len');
+		spyOn(myStringUtils,'vowels');
+		spyOn(myStringUtils,'reverse');
+
+		myStringUtils.len('Eugene');
+		myStringUtils.vowels('Eugene');
+		myStringUtils.reverse('Eugene');
+    });
+
+	it('calls len function',function () {
+		expect(myStringUtils.len).toHaveBeenCalled();
+		expect(myStringUtils.len).toHaveBeenCalledWith('Eugene');
+	});
+
+	it('calls vowels function',function () {
+		expect(myStringUtils.vowels).toHaveBeenCalled();
+		expect(myStringUtils.vowels).toHaveBeenCalledWith('Eugene');
+	});
+
+
+	it('calls reverse function',function () {
+		expect(myStringUtils.reverse).toHaveBeenCalled();
+		expect(myStringUtils.reverse).toHaveBeenCalledWith('Eugene');
+	});
+
+	afterEach(function () {
+
+	});
+
+});
+</pre>
+
+<p>
+To set spies, we have to call spyOn method. Then we can check if any method has been called and even we can test if they where called with certain parameters.
+</p>
+<ul>
+<li>toHaveBeenCalled()</li>
+<li>toHaveBeenCalledWith(something)</li>
+</ul>
+
+<p>We could chain some of these to make the function behave as we want:
+</p>
+
+<ul>
+<li>andCallFake: instead of call</li>
+<lli>andCallThrough(): calls the original functions that spyOn is faking</li>
+<li>andReturn(arguments): show as the parameters when the spied function is called</li>
+<li>andThrows(exception): throws an exception when the function is called</li>
+</ul>
+
+<h5>Another sample, a tcp server</h5>
+<p>Now let's try harder with a simple node tcp echo server. This is the server
+</p>
+
+<pre class="brush: jscript">
+/**
+* echoserver.js
+* Simple sample echo server writen in nodejs
+* Pello Altadill
+*/
+var net = require('net');
+
+exports.EchoServer = function (port, host) {
+
+	var self = this;
+	this.port = port || 1666;
+	this.host = host || '0.0.0.0';
+	this.server = net.createServer();
+	this.timeout = 5000; // 5 secs
+	this.keepAlive = true;
+	this.keepAliveTime = this.timeout;
+	this.clientSockets = [];
+
+	this.init = function () {
+		this.server.listen(this.port, this.host);
+	};
+
+	this.listening = function() {
+		console.log('Server> Server listening on port ' + port);
+	};
+
+	this.connection = function(socket) {
+		self.clientSockets.push(socket);
+		console.log('Server> Connected to server, total clients: ' + self.clientSockets.length);
+
+		// console.log(socket);
+		if (this.keepAlive) {
+			socket.setKeepAlive(this.keepAliveTime);
+		} else {
+			socket.setTimeout(this.timeout);
+		}
+
+		socket.on('timeout', function () {
+			console.log('Server> timeout');
+			socket.end();
+		});
+
+		socket.on('data', function (msg) {
+			console.log('Server> Received data ' + msg);
+			console.log('Server> Sending it back');
+			socket.write(msg);
+		});
+
+		socket.on('close', function () {
+			console.log('Server> Socket closed');
+			var index = self.clientSockets.indexOf(socket);
+			self.clientSockets.splice(index, 1);
+		});
+	};
+
+	this.close = function(err) {
+		console.log('Server> Connection closed ' + err);
+	};
+
+	this.error = function(err) {
+		console.log('Server> Error on server ' + err);
+	};
+
+	this.close = function () {
+		this.server.close();
+		this.server.unref();
+	};
+
+	this.server.on('listening',this.listening);
+
+	this.server.on('connection', this.connection);
+
+	this.server.on('close', this.close);
+
+	this.server.on('error', this.error);
+
+};
+</pre>
+
+<p>And this is a way to test some behaviours of the server
+</p>
+
+<pre class="brush: jscript">
+var server = require("../echoserver.js");
+var net = require('net');
+var myServer;
+
+// testing hello function
+describe("server", function() {
+
+	var successCallBack;
+
+	 beforeEach(function() {
+
+		successCallBack = jasmine.createSpy();
+
+		myServer = new server.EchoServer(1666,'0.0.0.0');
+		spyOn(myServer, 'init').andCallThrough();
+		spyOn(myServer.server, 'listen').andCallThrough();
+		spyOn(myServer, 'connection').andCallThrough();
+		myServer.init();
+
+    });
+
+	it('Check server port', function() {
+		expect(myServer.port).toEqual(1666);
+	});
+
+	it('Check server host', function() {
+		expect(myServer.host).toEqual('0.0.0.0');
+	});
+
+	it('Check server init was called', function() {
+		expect(myServer.init).toHaveBeenCalled();
+	});
+
+	it('Check server listen was called', function() {
+		expect(myServer.server.listen).toHaveBeenCalled();
+	});
+
+	it('Check server connection was called', function() {
+		var client = net.connect({ port: 1666 },
+            	function() {
+               		client.write('Eat this madafaka!');
+            	}, successCallBack);
+
+		waitsFor(function() {
+			console.log('Waiting here: ' + successCallBack.callCount );
+			return successCallBack.callCount > 0;
+		}, "operation never completed", 10000);
+
+		runs(function() {
+			expect(successCallBack).toHaveBeenCalled();
+		});
+
+	});
+
+	it('checks that server responds the same ', function(done) {
+			var client = net.connect({ port: 1666 });
+			client.write('hello there');
+	 		client.on('data', function(data){
+	 			console.log(data.toString());
+    			expect(data.toString()).toBe('hello there');
+    			done();
+  			});
+
+	});
+
+	 afterEach(function() {
+    });
+});
+</pre>
+
+<p>The last test is testing the result of an asynchronous call and it needs to use done() callback. This is valid for Jasmine >= 2.0 versions now. Maybe you've read something about run/waitFor but now this seems to be the official way to do this.
+</p>
+
+Some references:
+<ul>
+<li>Jasmine introduction: http://jasmine.github.io/2.0/introduction.html</li>
+<li>Jasmine wiki: https://github.com/pivotal/jasmine/wiki/Spies</li>
+<li><a href="http://eugeniaperez.es/wordpress/2012/12/02/jasmine-javascript-unit-tests-and-testing-tools/" title="Jasmine intro">Intro about Jasmine</a>, web focused</li>
+<li>Javascript Unit Testing, by Hazem Saleh PACKT</li>
+<li>Javascript Testing with Jasmine, by OREILLY</li>
+</ul>
+
+  </div>
+
+  <div id="disqus_thread"></div>
+<script>
+
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+   var disqus_config = function () {
+   this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+   this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+   };
+   */
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pello-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="pelloprojects">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pello.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+            <span class="octicon octicon-person"></span>
+              Pello Altadill
+            
+            </li>
+            
+          <span class="octicon octicon-mail"></span>
+            <li><a href="mailto:p_at_pello_dot_io">p_at_pello_dot_io</a></li>
+            
+        </ul>
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/pxai"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">pxai</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/pello_io"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">pello_io</span></a>
+
+          </li>
+          
+        </ul>
+        <p>Pello Xabier Altadill Izura´s personal site, programming, projects, code samples, guides, tricks,...
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3><span class="octicon octicon-beaker"></span> Projects</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="http://eta.bar" title="">eta.bar</a>
+            MEAN 2
+          </li>
+          <li>
+            <a href="https://github.com/pxai/jobtrends" title="">Jobtrends</a>
+            MEAN
+          </li>
+          <li>
+            <a href="https://github.com/pxai/seronoser" title="">SeronoSer</a>
+            Angular game
+          </li>
+          <li>
+            <a href="https://artean.cuatrovientos.org" title="">Artean</a>
+            Symfony3
+          </li>
+          <li>
+            <a href="https://github.com/pxai/4vientos" title="">4vientos</a>
+            Codeigniter
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-git-branch"></span> Repositories</h3>
+        <ul class="social-media-list">
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=angular2&type=&language=javascript">Angular2</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=typescript&type=&language=">TypeScript</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai?utf8=%E2%9C%93&tab=repositories&q=android&type=&language=java">Android</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/gulp-optimized-web">Gulp optimization</a>
+          </li>
+          <li>
+            <a href="https://github.com/pxai/grunt-optimized-web">Grunt optimization</a>
+          </li>
+        </ul>
+      </div>
+       <div class="footer-col footer-col-3">
+
+        <h3><span class="octicon octicon-repo"></span> Books</h3>
+        <ul class="social-media-list">
+            <li>
+                <a href="books.html">Información</a>
+              </li>
+          <li>
+            <a href="https://www.amazon.es/Dise%C3%B1o-Interfaces-Eugenia-P%C3%A9rez-Martinez/dp/8416228620/">Diseño de interfaces Web</a>
+          </li>
+          <li>
+            <a href="https://www.amazon.es/Java-Limpio-Programaci%C3%B3n-pr%C3%A1cticas-desarrollo/dp/1546987916/">Java Limpio</a> | <a href="https://www.amazon.es/dp/B074W4D2NM">Versión Kindle</a> 
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/net/"
+       style="">
+            .net, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/2012/"
+       style="">
+            2012, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dao/"
+       style="">
+            DAO, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jee/"
+       style="">
+            JEE, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            Java, (27)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/javascript/"
+       style="">
+            JavaScript, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mvc/"
+       style="">
+            MVC (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            OOP (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ruby/"
+       style="">
+            Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts/"
+       style="">
+            Struts, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/access/"
+       style="">
+            access, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/activity/"
+       style="">
+            activity (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ado-net/"
+       style="">
+            ado.net (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/android/"
+       style="">
+            android, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ant/"
+       style="">
+            ant, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/apache/"
+       style="">
+            apache, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/args/"
+       style="">
+            args (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arkapong/"
+       style="">
+            arkapong, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/array/"
+       style="">
+            array (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/arrays/"
+       style="">
+            arrays (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp-net/"
+       style="">
+            asp.net, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asp3/"
+       style="">
+            asp3, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/asynctask/"
+       style="">
+            asynctask (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/audits/"
+       style="">
+            audits (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/auth/"
+       style="">
+            auth, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backbone/"
+       style="">
+            backbone, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/backend/"
+       style="">
+            backend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/banner/"
+       style="">
+            banner (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bash/"
+       style="">
+            bash (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/basics/"
+       style="">
+            basics (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/bit/"
+       style="">
+            bit, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boardgames/"
+       style="">
+            boardgames (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/boolean/"
+       style="">
+            boolean, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/break/"
+       style="">
+            break (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/browser/"
+       style="">
+            browser, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c# (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c#, (17)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++ (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c++, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c/"
+       style="">
+            c, (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/c0ders/"
+       style="">
+            c0ders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/callbacks/"
+       style="">
+            callbacks (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/chaos/"
+       style="">
+            chaos, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/charset/"
+       style="">
+            charset (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cinema/"
+       style="">
+            cinema, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/classes/"
+       style="">
+            classes (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/code/"
+       style="">
+            code (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coders/"
+       style="">
+            coders, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding (29)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/coding/"
+       style="">
+            coding, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/collections/"
+       style="">
+            collections (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/comic/"
+       style="">
+            comic (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/computers/"
+       style="">
+            computers (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/console/"
+       style="">
+            console, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/content/"
+       style="">
+            content (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cooking/"
+       style="">
+            cooking (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cpan/"
+       style="">
+            cpan (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/css3/"
+       style="">
+            css3, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/cvs/"
+       style="">
+            cvs (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/db/"
+       style="">
+            db, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dbf/"
+       style="">
+            dbf, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/debug/"
+       style="">
+            debug (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/delegate/"
+       style="">
+            delegate, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops (11)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/devops/"
+       style="">
+            devops, (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/di/"
+       style="">
+            di, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dice/"
+       style="">
+            dice, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/docker/"
+       style="">
+            docker, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/dtd/"
+       style="">
+            dtd (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/eclipse/"
+       style="">
+            eclipse, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/email/"
+       style="">
+            email (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/errors/"
+       style="">
+            errors (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/event/"
+       style="">
+            event (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/events/"
+       style="">
+            events (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/excel/"
+       style="">
+            excel (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/exceptions/"
+       style="">
+            exceptions (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/firewalls/"
+       style="">
+            firewalls (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/fortunes/"
+       style="">
+            fortunes (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frameworks/"
+       style="">
+            frameworks (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/frontend/"
+       style="">
+            frontend (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ftp/"
+       style="">
+            ftp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/functions/"
+       style="">
+            functions (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/game/"
+       style="">
+            game, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/games/"
+       style="">
+            games, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/gdb/"
+       style="">
+            gdb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/generator/"
+       style="">
+            generator, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/genpas/"
+       style="">
+            genpas, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getline/"
+       style="">
+            getline (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/getopt/"
+       style="">
+            getopt (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/glibc/"
+       style="">
+            glibc, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/grub/"
+       style="">
+            grub (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hello/"
+       style="">
+            hello (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/helloworld/"
+       style="">
+            helloworld (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hibernate/"
+       style="">
+            hibernate (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hipstered/"
+       style="">
+            hipstered, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/hsqldb/"
+       style="">
+            hsqldb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/html5/"
+       style="">
+            html5, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/i-o/"
+       style="">
+            i/o (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iban/"
+       style="">
+            iban (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ide/"
+       style="">
+            ide, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/if/"
+       style="">
+            if (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/indexer/"
+       style="">
+            indexer, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/inheritance/"
+       style="">
+            inheritance (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/intentss/"
+       style="">
+            intentss (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/io/"
+       style="">
+            io, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip/"
+       style="">
+            ip, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/ip-gre/"
+       style="">
+            ip_gre (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iptables/"
+       style="">
+            iptables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/iterations/"
+       style="">
+            iterations (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/j2me/"
+       style="">
+            j2me, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jasmine/"
+       style="">
+            jasmine, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/java/"
+       style="">
+            java, (10)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/jdbc/"
+       style="">
+            jdbc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/joke/"
+       style="">
+            joke (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lab/"
+       style="">
+            lab (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/libgdx/"
+       style="">
+            libgdx (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linked/"
+       style="">
+            linked (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux (8)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/linux/"
+       style="">
+            linux, (20)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/lists/"
+       style="">
+            lists (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/localstorage/"
+       style="">
+            localstorage (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/loop/"
+       style="">
+            loop, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mail/"
+       style="">
+            mail (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/markdown/"
+       style="">
+            markdown (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/maven/"
+       style="">
+            maven, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/methods/"
+       style="">
+            methods (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/metro/"
+       style="">
+            metro, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/midlet/"
+       style="">
+            midlet, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/misc/"
+       style="">
+            misc, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mobile/"
+       style="">
+            mobile (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mock/"
+       style="">
+            mock (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/modules/"
+       style="">
+            modules (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mongodb/"
+       style="">
+            mongodb, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/monitoring/"
+       style="">
+            monitoring, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/music/"
+       style="">
+            music, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/mysql/"
+       style="">
+            mysql, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nessus/"
+       style="">
+            nessus, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/networking/"
+       style="">
+            networking (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/node-js/"
+       style="">
+            node.js, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/nodejs/"
+       style="">
+            nodejs, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oem/"
+       style="">
+            oem, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oledb/"
+       style="">
+            oledb (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop (9)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oop/"
+       style="">
+            oop, (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/openshift/"
+       style="">
+            openshift (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/operators/"
+       style="">
+            operators (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/optimization/"
+       style="">
+            optimization (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/oracle/"
+       style="">
+            oracle, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/overload/"
+       style="">
+            overload (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/paper/"
+       style="">
+            paper (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parser/"
+       style="">
+            parser (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/parsing/"
+       style="">
+            parsing (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/password/"
+       style="">
+            password, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pattern/"
+       style="">
+            pattern (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/perl/"
+       style="">
+            perl, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/php/"
+       style="">
+            php, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pointers/"
+       style="">
+            pointers, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postfix/"
+       style="">
+            postfix (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/postgresql/"
+       style="">
+            postgresql, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pptp/"
+       style="">
+            pptp, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/preprocessor/"
+       style="">
+            preprocessor (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/print/"
+       style="">
+            print (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/process/"
+       style="">
+            process, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/project/"
+       style="">
+            project (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/projects/"
+       style="">
+            projects, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/provider/"
+       style="">
+            provider (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/pthread/"
+       style="">
+            pthread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/python/"
+       style="">
+            python, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/qemu/"
+       style="">
+            qemu, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/react/"
+       style="">
+            react (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/references/"
+       style="">
+            references, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/regexp/"
+       style="">
+            regexp (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/relational/"
+       style="">
+            relational (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/remote/"
+       style="">
+            remote (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scanf/"
+       style="">
+            scanf (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/scrum/"
+       style="">
+            scrum, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/security/"
+       style="">
+            security, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/services/"
+       style="">
+            services (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shell/"
+       style="">
+            shell, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/shortcuts/"
+       style="">
+            shortcuts (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/socket-io/"
+       style="">
+            socket.io, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sort/"
+       style="">
+            sort (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            spring (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sql/"
+       style="">
+            sql (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sqlite/"
+       style="">
+            sqlite (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/squid/"
+       style="">
+            squid, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/static/"
+       style="">
+            static (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/stdlib/"
+       style="">
+            stdlib (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strings/"
+       style="">
+            strings (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/strtok/"
+       style="">
+            strtok, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/structures/"
+       style="">
+            structures (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/struts2/"
+       style="">
+            struts2, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/svg/"
+       style="">
+            svg (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/swap/"
+       style="">
+            swap, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/switch/"
+       style="">
+            switch (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/sysadmin/"
+       style="">
+            sysadmin (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/syslog/"
+       style="">
+            syslog, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tdd/"
+       style="">
+            tdd, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/template/"
+       style="">
+            template (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/templates/"
+       style="">
+            templates, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/test/"
+       style="">
+            test, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/theme/"
+       style="">
+            theme (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/themes/"
+       style="">
+            themes, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/thread/"
+       style="">
+            thread, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tomcat/"
+       style="">
+            tomcat, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/transactions/"
+       style="">
+            transactions (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/tutorial/"
+       style="">
+            tutorial (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/types/"
+       style="">
+            types (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vagrant/"
+       style="">
+            vagrant (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/variables/"
+       style="">
+            variables, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb/"
+       style="">
+            vb, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net (4)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vb-net/"
+       style="">
+            vb.net, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/virtualization/"
+       style="">
+            virtualization, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vmware/"
+       style="">
+            vmware (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/vpn/"
+       style="">
+            vpn, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/web/"
+       style="">
+            web, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webmin/"
+       style="">
+            webmin, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/webservices/"
+       style="">
+            webservices (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/websockets/"
+       style="">
+            websockets, (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/windows/"
+       style="">
+            windows, (5)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/wordpress/"
+       style="">
+            wordpress, (2)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/world/"
+       style="">
+            world (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xml/"
+       style="">
+            xml, (6)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xmlschema/"
+       style="">
+            xmlschema, (3)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/xsd/"
+       style="">
+            xsd (3)
+    </a>
+</span>
+      
+    </div>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93485415-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</footer>
+
+
+  </body>
+
+</html>

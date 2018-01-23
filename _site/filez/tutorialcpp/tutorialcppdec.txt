@@ -1,0 +1,224 @@
+20 Excepciones
+Capturando excepciones
+Las excepciones son un mecanismo de c++ para capturar 
+errores que se producen en tiempo de ejecucion. Un 
+programa puede estar bien hecho pero por causas 
+exogenas pueden producirse errores.
+Mediante este sistema hacemos que el codigo sea mucho 
+mas ROBUSTO.
+/**
+* Excepciones.cpp
+* codigo que muestra como capturar excepciones y evitar 
+que el programa
+* finalice inesperadamente.
+*
+* Pello Xabier Altadill Izura
+*
+*/
+#include <iostream.h>
+#include <fstream.h>
+#include <stdexcept.h> 
+// programa principal, para las pruebas
+int main () {
+int i;
+float flotante;
+char *palabra;
+char buffer[5];
+ifstream ficheroInexistente;
+// para capturar excepciones debemos crear un bloque try-catch
+// que englobe algun momento problematico o critico del programa:
+// try { codigo; } catch(TipoDeError) { 
+codigo_corrector; }
+// lo habitual suele ser alguna situacion que dependa 
+de la existencia
+// o no de un fichero, la entrada de datos de un 
+usuario, etc..
+// El programa no puede controlar lo que le meten, pero 
+puede estar
+// preparado para el error, reconducir la ejecucion y 
+corregir la situacion
+try 
+{ // inicio del bloque. Preparamos una serie de putadas...
+cout << "Mete lo primero que se te ocurra, distinto de 
+float: " << endl;
+cin >> flotante;
+char * buff = new char[100000000];
+ficheroInexistente.open("MotorDeAgua.txt");
+ficheroInexistente.getline(buffer,255);
+ficheroInexistente.close();
+}
+catch(std::bad_alloc& error_memoria)
+{
+cout << "Error de asignacion" << error_memoria.what() 
+<< endl; 
+//... handle exception thrown by operator new
+} // podemos seguir capturando
+catch (std::exception& stdexc) 
+{ // este es el tipo de error que se espera
+// y entre llaves metemos el codigo que se ejecuta en 
+caso de error.
+cout << "Error general, mensaje: " << stdexc.what() << endl;
+}
+cin >> i;
+return 1;
+}
+Excepciones personalizadas
+Una clase puede definir sus propias excepciones. Un 
+mecanismo muy util para malos usos de los objetos.
+Definimos la clase coche y preparamos el codigo para 
+capturar posibles fallos debidos a la falta de combustible.
+/**
+* Coche.hpp
+* Definicion de la clase coche, en la que se muestra el 
+uso de excepciones
+*
+* Pello Xabier Altadill Izura 
+* 
+*/
+#include<iostream.h>
+class Coche {
+public:
+Coche();
+Coche(char *m,int cil,int cab, int litros);
+~Coche();
+void arranca();
+void echaCombustible();
+void detiene();
+void acelera();
+private:
+char *marca;
+int cilindrada;
+int caballos; 
+int litrosCombustible;
+};
+// clase exclusiva para excepciones.
+// Nota: la podemos definir DENTRO de la Clase coche, 
+como un atributo MAS
+class Averia {
+public:
+// constructor
+Averia():mensaje("Error") {
+}
+// constructor con mensaje
+Averia(char *mensaje) {
+this->mensaje = mensaje;
+}
+char* dimeQuePasa() { return this->mensaje; };
+private:
+char *mensaje;
+};
+Y la implementacion
+/**
+* Coche.cpp
+* Implementacion de la clase coche, en la que se 
+muestra el uso de excepciones
+*
+* Pello Xabier Altadill Izura 
+* Compilacion: g++ -o Coche Coche.cpp
+*/
+#include "Coche.hpp"
+Coche::Coche() {
+cout << "Coche creado." << endl;
+}
+Coche::Coche (char *m,int cil,int cab, int litros) {
+marca = m;
+cilindrada = cil;
+caballos = cab;
+litrosCombustible = litros;
+cout << "Coche creado." << endl;
+}
+Coche::~Coche() {
+cout << "Coche destruido." << endl;
+}
+// el coche arranca
+void Coche::arranca() {
+// si no hay combustible: EXCEPCION!
+if (litrosCombustible == 0) {
+throw Averia(); 
+}
+litrosCombustible--;
+cout << "Arrancando: brummm! " << endl;
+}
+// el coche se detien
+void Coche::detiene() {
+cout << "Deteniendo coche " << endl;
+}
+// el coche acelera
+void Coche::acelera() {
+if (litrosCombustible == 0) {
+throw Averia("No puedo acelerar sin combustible"); 
+}
+cout << "Acelerando: BRRRRRUMMMMmmmmmmmmh!! " << endl;
+}
+// funcion principal para pruebas
+int main () {
+int i;
+Coche buga("Seat",250,1300,0);
+Coche tequi("Audi",260,1500,1);
+// vamos a arrancar el coche pero si algo falla
+// capturamos la excepcion
+try {
+buga.arranca();
+} catch (Averia excepcion) {
+cout << "Excepcion. Jar que no puedo. " << endl;
+}
+// arracamos el tequi
+tequi.arranca();
+// provocamos la excepcion y la capturamos mostrando la 
+explicacion.
+try {
+buga.acelera();
+} catch (Averia excepcion) {
+cout << "Jar que no puedo. " << excepcion.dimeQuePasa() 
+<< endl;
+}
+cin >> i;
+return 0;
+}
+21 Librerias standard
+Libreria standard c++
+La sintaxis de inclusion de librerias puede variar 
+segun la version y la plataforma del compilador c++.
+Puede ser asi:
+...
+#include <iostream>
+using namespace std;
+...
+O mas simple:
+...
+#include <iostream.h>
+...
+A lo que ibamos: al igual que en c, en c++ tenemos una 
+libreria base para desarrollar aplicaciones. Aqui se 
+hecha un rapido vistazo a todas ellas.
+#include <iostream>
+Libreria basica de entrada/salida. Imprescindible.
+#include <string>
+Libreria para el manejo de string con las funciones mas 
+usuales como strcpy, strncpy, strlen, strcat, strncat, 
+incluso las que sirven para buscar dividir un string en tokens.
+#include <time>
+Libreria para escribir fechas, con distintas opciones. 
+Podemos sacar la fecha del momento y separar los 
+valores de dia, hora, minuto, etc..
+#include <stdlib>
+Otra libreria basica, que contiene funciones como los 
+conversores de ascci-integer atoi, algoritmos de 
+ordenacion de arreglos como qsort..
+Operadores de bits:
+Otra opcion mas de c++
+& AND
+| OR
+^ exclusive OR
+~ complement
+Existen mas librerias standar y lo que es mejor, 
+librerias muy potentes disponibles para desarrollar 
+programas mas complejos: creacion de interfaces de 
+ventanas, comunicaciones, etc..
+El estilo A la hora de escribir codigo se pueden tomar 
+muchas costumbres y vicios que no facilitan la 
+generacion de un estilo claro. De todas formas, dentro 
+de un mismo proyecto seria mejor mantener un mismo 
+estilo. No debe ser una preocupacion, ya que existen 
+programas para formatear el codigo fuente, meter 
+espacios tabulaciones, saltos de linea, etc.

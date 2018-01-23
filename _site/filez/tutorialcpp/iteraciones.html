@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Iteraciones</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Clases"
+HREF="clases.html"><LINK
+REL="NEXT"
+TITLE="Punteros"
+HREF="punteros.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clases.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="punteros.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="ITERACIONES"
+></A
+>Capítulo 8. Iteraciones</H1
+><P
+>&#13;Iteracion con etiquetas
+Es la manera primigenia de implementar iteraciones pero 
+lo cierto es que el uso de etiquetas no se recomienda 
+ya que es dificil de entender y mantener un programa 
+con etiquetas. A ser posible hay que evitarlas.
+
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN191"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Loop.cpp
+* 
+* Programa que muestra como usar iteraciones
+* Pello Xabier Altadill Izura
+* Compilar: g++ Loop.cpp -o Loop
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+// Programa principal
+int main () {
+
+	cout &#60;&#60; " Hola, vamos a mostrar un loop " &#60;&#60; endl;
+	
+	//Inicializamos variables
+	int i = 0;
+	int max = 0;
+
+	// Le pedimos al usuario que meta el total de iteraciones
+	cout &#60;&#60; " Cuantas vueltas damos? ";
+	cin &#62;&#62; max;
+
+	// Vamos a implementar una iteracion con etiquetas
+	// en general no es recomendable usar etiquetas
+	bucle: i++;
+	cout &#60;&#60; "Contador: " &#60;&#60; i &#60;&#60; endl;
+	
+	// si no superamos el tama&#38;ntilde;o maximo, volvemos a la etiqueta
+	if (i &#60; max)
+		goto bucle;
+
+	// fin de programa
+	
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+Bucles
+Bueno, ahora en forma de clase vamos a ver una serie de 
+iteraciones. No tienen ningun misterio se implementan 
+como en c, php, perl, java, ...
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN193"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Bucles.hpp
+* 
+* Clase que muestra distintos tipos de iteraciones
+* Pello Xabier Altadill Izura
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Bucles {
+
+private:
+
+	int max;
+
+public:
+
+	// Constructor
+	Bucles();
+
+	// Destructor
+	~Bucles();
+	
+	// Contructor parametrizado
+	Bucles(int maximo);
+
+	// Bucle tipo while
+	void bucleWhile(int maximo);
+
+	// Bucle tipo for
+	void bucleFor(int maximo);
+
+	// Bucle tipo do while
+	void bucleDoWhile(int maximo);
+
+};&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Y aqui la implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN195"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Bucles.cpp
+* 
+* Clase que muestra distintos tipos de iteraciones
+* Pello Xabier Altadill Izura
+* Compilar: g++ Bucles.cpp -o Bucles
+*/
+
+#include "Bucles.hpp"
+
+// Constructor
+Bucles::Bucles(){}
+
+
+// Destructor
+Bucles::~Bucles(){}
+
+
+// Contructor parametrizado
+Bucles::Bucles(int maximo){}
+
+
+// Bucle tipo while
+void Bucles::bucleWhile(int maximo){
+	
+	int temp = 0;
+	cout &#60;&#60; " iniciamos el bucle WHILE: " &#60;&#60; temp &#60;&#60; " y 
+	max " &#60;&#60; maximo &#60;&#60; endl;
+
+	while (temp &#60; maximo) {
+		cout &#60;&#60; temp &#60;&#60; " es menor que " &#60;&#60; maximo &#60;&#60; endl;
+		temp++;
+	}
+
+}
+
+
+// Bucle tipo for
+void Bucles::bucleFor(int maximo){
+
+	int temp = 0;
+	cout &#60;&#60; " iniciamos el bucle FOR: " &#60;&#60; temp &#60;&#60; " y max " &#60;&#60; maximo &#60;&#60; endl;
+
+	for (temp=0; temp &#60; maximo; temp++) {
+
+		cout &#60;&#60; temp &#60;&#60; " es menor que " &#60;&#60; maximo &#60;&#60; endl;
+
+	}	
+
+}
+
+
+// Bucle tipo do while
+void Bucles::bucleDoWhile(int maximo){
+	
+	int temp = 0;
+	cout &#60;&#60; " iniciamos e bucle: " &#60;&#60; temp &#60;&#60; " y max " &#60;&#60; maximo &#60;&#60; endl;
+
+	do {
+
+		cout &#60;&#60; temp &#60;&#60; " es menor que " &#60;&#60; maximo &#60;&#60; endl;
+		temp++;
+
+	} while (temp &#60; maximo);
+
+}
+
+
+int main () {
+
+	// Creamos dos instancias de la clase Bucles
+	Bucles ciclador = Bucles();
+	Bucles cicladorparam = Bucles(34);
+
+	// Invocamos los metodos
+	ciclador.bucleWhile(23);
+	
+	cicladorparam.bucleFor(10);
+	
+	ciclador.bucleDoWhile(5);
+
+	return 0;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+Switch/case Por supuesto tenemos el clasico switch-case 
+en c++
+En este ejemplo creamos una clase para mostrar el 
+funcionamiento de un menu de seleccion.
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN197"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>&#13;/**
+* Menu.hpp
+* 
+* Clase que especifica un menu de seleccion de opciones
+* que implementaremos con un case
+* Pello Xabier Altadill Izura
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Menu {
+	
+private:
+
+		int resultado;
+
+public:
+	
+	// Constructor
+	Menu();
+
+	// Destructor
+	~Menu();
+
+	// Menu tipo case 
+	int menu();
+
+};&#13;</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN199"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Menu.cpp
+* 
+* Clase que implementa Menu.hpp
+* Pello Xabier Altadill Izura
+* Compilar: g++ Menu.cpp -o Menu
+*/
+
+#include "Menu.hpp"
+
+// Constructor
+Menu::Menu(){}
+
+
+// Destructor
+Menu::~Menu(){}
+
+
+// Menu tipo case
+int Menu::menu(){
+	
+	int temp = 0;
+	
+	// Iniciamos un bucle que no para hasta que se seleccione 
+	// algo distinto de 0.
+
+	do {
+		cout &#60;&#60; " MENU Seleccion." &#60;&#60; endl;
+		cout &#60;&#60; " 1. Ensalada" &#60;&#60; endl;
+		cout &#60;&#60; " 2. Cordero " &#60;&#60; endl;
+		cout &#60;&#60; " 3. Merluza " &#60;&#60; endl;
+		cout &#60;&#60; " 4. Pato " &#60;&#60; endl;
+		cout &#60;&#60; " Elije algo: ";
+		cin &#62;&#62; temp;
+
+		// Segun lo elegido sacamos algo.
+
+		switch (temp) {
+			case 0 : 
+				cout &#60;&#60; " Nos vamos " &#60;&#60; endl;
+				break;
+	
+			case 1 : 
+				cout &#60;&#60; " Estas a dieta? " &#60;&#60; endl;
+				break;
+			
+			case 2 : 
+				cout &#60;&#60; " Vaya digestion... " &#60;&#60; endl;
+				break;
+	
+			case 3 : 
+				cout &#60;&#60; " Que sano eres " &#60;&#60; endl;
+				break;
+	
+			case 4 : 
+				cout &#60;&#60; " Vaya finolis esta hecho " &#60;&#60; endl;
+				break;
+		
+			default :
+				cout &#60;&#60; " Chico, decidete." &#60;&#60; endl;
+				temp = 0;
+		} //end switch
+
+	} while(!temp);
+	
+	return temp;
+
+}
+
+
+int main () {
+
+	// Aqui guardaremos el resultado
+	int resultado = 0;
+	
+	cout &#60;&#60; " Vamos a sacar el menu." &#60;&#60; endl;
+	
+	// Creamos dos instancias de la clase Menu
+	Menu menutero = Menu();
+
+	// Invocamos los metodos
+	resultado = menutero.menu();
+
+	cout &#60;&#60; " El resultado es: " &#60;&#60; resultado &#60;&#60; endl;
+
+	return 0;
+
+}&#13;</PRE
+><P
+></P
+></DIV
+>  &#13;</P
+><P
+>   <DIV
+CLASS="INFORMALFIGURE"
+><P
+></P
+><A
+NAME="LARGOPNG"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="irudiak/caballero.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+
+Largo es el camino. 
+Bueno, aun queda un huevo por 
+recorrer...&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clases.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="punteros.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Clases</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Punteros</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

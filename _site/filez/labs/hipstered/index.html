@@ -1,0 +1,164 @@
+<!doctype html>
+<!-- greetz for you as always -->
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>hipstered web editor :: by Pello Xabier Altadill Izura - http://pello.info</title>
+  <meta name="description" content="HTML5 based web editor">
+  <meta name="author" content="Pello Xabier Altadill Izura">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <!-- CSS: implied media=all -->
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hipstered.css">
+  <!-- end CSS-->
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except for Modernizr / Respond.
+       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
+       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="js/libs/jquery.min.js"></script>
+
+<!-- this is for codemirror -->
+<script src="js/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="js/codemirror/lib/codemirror.css">
+<script src="js/codemirror/mode/javascript/javascript.js"></script>
+<script src="js/codemirror/mode/xml/xml.js"></script>
+<script src="js/codemirror/mode/css/css.js"></script>
+<script src="js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="js/codemirror/addon/edit/matchbrackets.js"></script>
+<link rel="stylesheet" href="js/codemirror/theme/lesser-dark.css">
+
+<!-- hipstered editor code for tabs... -->
+<script src="js/hipstered.js"></script>
+      <script type="text/javascript">
+      </script>
+</head>
+
+<body>
+
+
+  <div id="container">
+
+    <div id="savedialog" class="dialog">
+      <div class="dialogtitle">
+        <div class="dialogtitletext">Save file</div> 
+        <div class="close"><a href="#" id="cancelsave">x</a></div>
+      </div>
+      <div class="dialogcontent">
+        <input type="text" name="savedialogname" id="savedialogname" value="" required /> 
+        <a href="#" id="confirmsave" class="button"><img src="img/save.png" alt="click to save file" title="click to save file" /></a>
+      </div>
+    </div>
+
+    <header>
+      <div id="logo">
+       <img src="img/logoxsmall.png" alt="hipstered logo" title="hipstered logo" />
+       <div>Proof of concept</div>
+     </div>
+      <div id="editbuttons">
+        <ul>
+          <li><a href="#" id="newfile"><img src="img/new.png" alt="click to create new file" title="click to create new file" /><br />New</a></li>
+          <li><a href="#" id="savefile"><img src="img/save.png" alt="click to save file" title="click to save file" /><br />Save</a></li>
+          <li><a href="#" id="saveasfile"><img src="img/saveas.png" alt="click to save file with another name" title="click to save file with another name" /><br />Save as</a></li>
+        </ul>
+      </div>
+    </header>
+    <div id="main" role="main">
+      <div id="splash">
+      </div>
+    </div>
+
+    <div id="config">
+    	<form method="post">
+    		<label for="username">Username</label><br />
+    		<input type="text" name="username" id="username" placeholder="Username here..." required /><br />
+    		<label for="password">Password</label><br />
+    		<input type="password" name="password" id="password" placeholder="Password here..." required /><br />
+    		<label for="reenterpassword">Reenter Password</label><br />
+    		<input type="password" name="reenterpassword" id="reenterpassword" placeholder="Repeat Password..." required /><br />
+    		<label for="email">Email</label><br />
+    		<input type="email" name="email" id="email" placeholder="Email here..."  /><br />
+    		<label for="forecolor">Fore Color</label><br />
+    		<input type="color" name="forecolor" id="forecolor" value="#000000" /><br />
+    		<label for="backcolor">Background Color</label><br />
+    		<input type="color" name="backcolor" id="backcolor" value="#FFFFFF" /><br />
+    		<input type="submit" name="submit" id="submitconfig" value="Begin" />
+    	</form>
+    </div>
+    <div id="editor">
+
+      <div id="openedfiles">
+        <ul id="openedfilestab">
+        </ul>
+
+      </div>
+    <div id="editzone">
+      <textarea name="editarea" id="editarea" placeholder="Awaiting for your code" ></textarea>
+    </div>
+    <div id="preview">
+        <div class="title3">Preview</div>
+        <div id="previewzone">
+        </div>
+    </div>
+
+    </div>
+
+    <footer>
+		<div id="options"><a href="#" id="deleteconfig">Delete account</a></div>
+    <div id="status">Status content</div>
+    </footer>
+  </div> <!--!< end of #container -->
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/plugins.js"></script>
+
+  <!-- end scripts-->
+
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35803210-1']);
+  _gaq.push(['_setDomainName', 'pello.info']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  
+</body>
+</html>

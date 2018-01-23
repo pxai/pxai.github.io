@@ -1,0 +1,743 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Clases y sus amigas</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="Tutorial de C++"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Miembros estaticos"
+HREF="miembros-estaticos.html"><LINK
+REL="NEXT"
+TITLE="Entrada/Salida "
+HREF="entrada-salida.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Tutorial de C++: o el diario de Peter Class</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="miembros-estaticos.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="entrada-salida.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="CLASES-AMIGAS"
+></A
+>Capítulo 16. Clases y sus amigas</H1
+><P
+>&#13;Clases dentro de Clases
+Una clase puede ser el atributo de otra clase.
+Veamos como metemos la clase soldado dentro del tanque, 
+esta seria la cabecera:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN333"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Tanque.hpp
+* Clase que define el objeto Tanque . El objeto tanque estara lleno
+* de Objeto soldados, lo que nos sirve para demostrar el uso de clases
+* como atributos, etc..
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+#include "Soldado.hpp"
+
+class Tanque {
+
+public:
+
+	// constructores
+	Tanque();
+
+	Tanque(char *nombre, int proyectiles,Soldado soldado);
+
+	// destructor
+	~Tanque();
+
+	// copia
+	Tanque(Tanque const &#38;);
+
+	// get/set
+	char *getNombre () const { return this-&#62;nombre; }
+	
+	void setNombre (char *nombre) { this-&#62;nombre = nombre; }
+
+	int getProyectiles () const { return this-&#62;proyectiles; }
+
+	void setProyectiles (int proyectiles) { this-&#62;proyectiles = proyectiles; }
+	
+	Soldado getSoldado () const { return this-&#62;soldado; }
+
+	void setSoldado (Soldado soldado) { this-&#62;soldado = soldado; }
+
+	void avanzar(int metros) const;
+	
+	void disparar();
+
+
+private:
+
+	char *nombre;
+
+	int proyectiles;
+
+	Soldado soldado;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN335"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Tanque.cpp
+* Programa que implementa la clase Tanque
+* 
+* Pello Xabier Altadill Izura
+* Compilacion: g++ Tanque.cpp -o Tanque
+*/
+
+#include "Tanque.hpp"
+
+// Constructor
+Tanque::Tanque(): nombre("Supertanque"), 
+proyectiles(10), soldado(Soldado()) {
+
+	cout &#60;&#60; "-clase Tanque- Tanque " &#60;&#60; nombre &#60;&#60; " construido. Proyectiles: " &#60;&#60; proyectiles &#60;&#60; endl;
+
+}
+
+
+// Constructor parametrizado
+Tanque::Tanque(char *nombre, int proyectiles, Soldado soldado) {
+
+	this-&#62;nombre = nombre;
+	this-&#62;proyectiles = proyectiles;
+	this-&#62;soldado = soldado;
+	cout &#60;&#60; "-clase Tanque- " &#60;&#60; nombre &#60;&#60; " :Tanque construido. Proyectiles: " &#60;&#60; proyectiles &#60;&#60; endl;
+
+}
+
+
+// Destructor
+Tanque::~Tanque() {
+	
+	cout &#60;&#60; "-clase Tanque- Tanque "&#60;&#60; this-&#62;getNombre() &#60;&#60; " destruido."&#60;&#60; endl;
+
+}
+
+
+// constructor copia
+Tanque::Tanque(const Tanque &#38; original) {
+	
+	nombre = new char;
+	nombre = original.getNombre();
+	cout &#60;&#60; "-clase Tanque- Tanque copia creada."&#60;&#60; endl;
+
+}
+
+
+// metodo avanzar
+void Tanque::avanzar(int metros) const {
+
+	cout &#60;&#60; "-clase Tanque-" &#60;&#60; this-&#62;getNombre() &#60;&#60; " avanzando: " &#60;&#60; metros &#60;&#60; " m." &#60;&#60; endl;
+
+}
+
+
+// metodo disparar
+void Tanque::disparar(){
+	
+	if (proyectiles &#62; 0) {
+
+		proyectiles--;
+		cout &#60;&#60; "-clase Tanque-" &#60;&#60; this-&#62;getNombre() &#60;&#60; "BOOOOM!!" &#60;&#60; endl;
+
+	} else {
+		
+		cout &#60;&#60; "-clase Tanque-" &#60;&#60; this-&#62;getNombre() &#60;&#60; " No queda municion." &#60;&#60; endl;
+
+	}
+
+}
+
+
+// funcion principal
+// Aqui haremos multiples pruebas...
+int main () { 
+
+	int i, resp;
+	
+	// creamos los Tanques
+	Tanque tanqueta = Tanque();
+
+	// podemos sacar lso datos del soldado asi:
+	cout &#60;&#60; "El nombre del soldado es: " &#60;&#60; (tanqueta.getSoldado()).getNombre()&#60;&#60; endl;
+
+	tanqueta.avanzar(5);
+	tanqueta.disparar();
+	tanqueta.getSoldado().matar();
+
+	return 0;	
+}</PRE
+><P
+></P
+></DIV
+>  
+
+
+friend: haciendo amigos
+Mediante la palabra reservada friend podemos declara 
+relaciones de confianza entre clases y permitir que una 
+clase amiga pueda acceder a los atributos y metodos 
+privados de esa clase.
+Veamos el ejemplo con la Pluma y la Espada. La pluma 
+vence a la espada pero ademas la declara como amiga 
+porque es asi de enrollada. Veamos la declaracion de Pluma:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN337"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Pluma.hpp
+* Clase que define el objeto pluma, un objeto que sirve para escribir
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Pluma {
+
+public:
+	
+	Pluma();
+	
+	Pluma(char *tipo, char *usuario);
+	
+	~Pluma();
+	
+	Pluma(Pluma const &#38;);
+
+
+	// ATENCION!!! definimos la clase ESPADA como friend
+	// por tanto desde ella se podra acceder a los elementos PRIVADOS de la Pluma
+	friend class Espada;
+
+	char *getTipo() const { return this-&#62;tipo;}
+
+	char *getUsuario() const { return this-&#62;usuario;}
+
+
+private:
+
+	// metodo para escribir con la pluma
+	void escribe (char *texto) {cout &#60;&#60; "escribo con la pluma: " &#60;&#60; texto &#60;&#60; endl;}
+	
+	void test() { cout &#60;&#60; "Mega funcion privada de Pluma!" &#60;&#60; endl;}
+
+
+	char *tipo;
+	
+	char *usuario;
+	
+};</PRE
+><P
+></P
+></DIV
+>  
+
+
+Y su implementacion:
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN339"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Pluma.cpp
+* Programa que implementa la clase Pluma
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -c Pluma.cpp
+*/
+
+#include "Pluma.hpp"
+
+// Constructor
+Pluma::Pluma(): tipo("tinta china"), usuario("Bertrand Russel") {
+
+	cout &#60;&#60; "Pluma construida." &#60;&#60; endl;
+
+}
+
+
+// Constructor
+Pluma::Pluma(char *tipo, char *usuario) {
+
+	this-&#62;tipo = tipo;
+	this-&#62;usuario = usuario;
+	cout &#60;&#60; "Pluma construida de tipo: " &#60;&#60; tipo &#60;&#60; endl;
+
+}
+
+
+// Destructor
+Pluma::~Pluma() {
+	
+	cout &#60;&#60; "Pluma destruida." &#60;&#60; endl;
+
+}
+
+
+// Constructor copia
+Pluma::Pluma(Pluma const &#38; original) {
+
+	tipo = new char;
+	tipo = original.tipo;
+
+}</PRE
+><P
+></P
+></DIV
+>  
+
+
+Y ahora la declaracion de la Espada
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN341"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Espada.hpp
+* Clase que define el objeto Espada, un objeto que 
+sirve para matar
+*
+* Pello Xabier Altadill Izura
+*
+*/
+
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Espada {
+
+public:
+	
+	Espada();
+	
+	Espada(char *tipo);
+	
+	~Espada();
+
+	Espada(Espada const &#38;);
+
+	// desde este metodo accederemos a la 
+	// parte privada de la pluma
+	void usarPluma (char *texto); 
+
+	char *getTipo() const { return this-&#62;tipo;}
+
+private:
+
+	char *tipo;
+
+};</PRE
+><P
+></P
+></DIV
+>  
+
+Y su implementacion:
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN343"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* Espada.cpp
+* Programa que implementa la clase Espada
+*
+* Pello Xabier Altadill Izura
+*
+* Compilacion: g++ -o Espada Pluma.o Espada.cpp
+*/
+
+#include "Espada.hpp"
+#include "Pluma.cpp"
+
+// Constructor
+Espada::Espada(): tipo("katana") {
+
+	cout &#60;&#60; "Espada construida." &#60;&#60; endl;
+
+}
+
+
+// Constructor
+Espada::Espada(char *tipo) {
+
+	this-&#62;tipo = tipo;
+	cout &#60;&#60; "Espada construida de tipo: " &#60;&#60; tipo &#60;&#60; endl;
+
+}
+
+
+// Destructor
+Espada::~Espada() {
+	
+	cout &#60;&#60; "Espada destruida." &#60;&#60; endl;
+
+}
+
+
+// Constructor copia
+Espada::Espada(Espada const &#38; original) {
+	
+	tipo = new char;
+	tipo = original.tipo;
+
+}
+
+
+// metodo desde el que accedemos a Pluma
+void Espada::usarPluma(char *texto) {
+	
+	// implementamos una pluma y...
+	Pluma plumilla = Pluma();
+
+	// y ahora accedemos a sus miembros privados: atributos ...
+	cout &#60;&#60; "La pluma es tipo: " &#60;&#60; plumilla.tipo &#60;&#60; endl;
+	cout &#60;&#60; "Y su usuario es: " &#60;&#60; plumilla.usuario &#60;&#60; endl;
+
+	plumilla.escribe(texto);
+	// e incluso a sus metodos!
+	plumilla.test();
+
+}
+
+
+// funcion principal
+int main () {
+
+	int i;
+
+	Espada tizona = Espada("mandoble");
+	
+	// invocamos un metodo que accedere a la zona privada de la clase
+	tizona.usarPluma("jaja uso la pluma a mi antojo");
+
+	return 0;
+}</PRE
+><P
+></P
+></DIV
+>  
+
+La funcion amiga
+Podemos declarar una funcion como amiga y nos dara 
+acceso a TODO a traves de ese funcion.
+Para ilustrar esto definimos las clases Chico y Chica 
+en un unico fichero
+
+<DIV
+CLASS="INFORMALEXAMPLE"
+><P
+></P
+><A
+NAME="AEN345"
+></A
+><PRE
+CLASS="PROGRAMLISTING"
+>/**
+* ChicoChica.cpp
+* Clase que define el objeto Chico y Chica. Chico tiene una funcion llamada
+* esNovio que dentro de chica la declaramos como friend 
+y le dara acceso a todo
+*
+* Pello Xabier Altadill Izura
+* Compilacion: g++ -o ChicoChica ChicoChica.cpp
+*/
+
+using namespace std;
+#include &#60;iostream&#62;
+
+class Chico {
+
+public:
+
+	// constructor
+	Chico():nombre("Romeo") {}
+
+	// constructor
+	Chico(char *nombre) { this-&#62;nombre = nombre;}
+
+	// destructor
+	~Chico() {}
+
+
+	// constructor copia
+	Chico(Chico const &#38; origen) {
+
+		nombre = new char;
+		nombre = origen.nombre;
+
+	}
+
+
+	// desde este metodo accederemos a la 
+	// parte privada de la clase chica
+	void esNovio(); 
+
+	char *getNombre() const { return this-&#62;nombre;}
+
+
+private:
+	
+	char *nombre;
+
+};
+
+
+class Chica {
+
+public:
+	
+	// constructor
+	Chica():
+		nombre("Julieta"),
+		edad(23),
+		coeficienteInteligencia(140),
+		medidas("95-60-95") {
+		}
+		
+
+	// destructor
+	~Chica() {}
+
+
+	// constructor copia
+	Chica(Chica const &#38; origen) {
+
+		nombre = new char;
+		nombre = origen.nombre;
+
+	}
+
+
+	// Aqui definimos un metodo friend externo
+	// que tendra acceso a toda la clase chica
+	friend void Chico::esNovio(); 
+
+	// otra opcion seria declara Chico como friend:
+	// friend class Chico;
+
+
+private:
+	
+	void pensar() { cout &#60;&#60; "estoy pensado..." &#60;&#60; endl; }
+		
+	void entrarHabitacion() { cout &#60;&#60; "estoy entrando en la habitacion..." &#60;&#60; endl; }
+	
+		
+	char *nombre;
+	
+	int edad;
+	
+	int coeficienteInteligencia;
+	
+	char *medidas;
+};
+
+
+// implementacion de la funcion del chico esNovio
+void Chico::esNovio() {
+	
+	Chica neska = Chica();
+
+	neska.entrarHabitacion();
+
+	cout &#60;&#60; "Con esta funcion entro en todo! " &#60;&#60; endl;
+	cout &#60;&#60; "Dime tu edad real chica: " &#60;&#60; neska.edad &#60;&#60; endl;
+	cout &#60;&#60; "Y tu coeficiente intelectual: " &#60;&#60; 
+	
+	neska.coeficienteInteligencia &#60;&#60; endl;
+	cout &#60;&#60; "joder, me parece que no te gustara el futbol." &#60;&#60; endl;
+
+}
+
+
+// funcion principal, para las pruebas
+int main () {
+	
+	int i;
+	
+	Chico mutiko = Chico();
+	
+	// vamos a ver si llamamos a esNovio...
+	mutiko.esNovio();
+
+	return 0;
+}</PRE
+><P
+></P
+></DIV
+>  
+&#13;</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="miembros-estaticos.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="entrada-salida.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Miembros estaticos</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Entrada/Salida</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

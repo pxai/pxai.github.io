@@ -1,0 +1,3260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20050926;20151400">
+	<META NAME="CHANGEDBY" CONTENT="pello">
+	<META NAME="CHANGED" CONTENT="20090330;9393100">
+	<META NAME="SDENDNOTE" CONTENT="ARABIC">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21.59cm 27.94cm; margin: 2cm }
+		P { margin-bottom: 0.21cm; background: transparent; page-break-before: auto }
+		H1 { margin-bottom: 0.21cm; background: transparent; page-break-before: always }
+		H1.western { font-family: "Bitstream Vera Sans", sans-serif; font-size: 16pt }
+		H1.cjk { font-family: "HG Mincho Light J", "MS Mincho", "HG Mincho J", "HG Mincho L", "HG Mincho", "Mincho", "MS PMincho", "HG Mincho Light J", "MS Gothic", "HG Gothic J", "HG Gothic B", "HG Gothic", "Gothic", "MS PGothic", "Andale Sans UI", "Arial Unicode MS", "Lucida Sans Unicode", "Tahoma"; font-size: 16pt }
+		H1.ctl { font-family: "Tahoma", "Lucidasans", "Lucida Sans", "Arial Unicode MS"; font-size: 16pt }
+		H2 { margin-bottom: 0.21cm; background: transparent; page-break-before: auto }
+		H2.western { font-family: "Bitstream Vera Sans"; font-size: 15pt; font-style: normal }
+		H2.cjk { font-family: "HG Mincho Light J", "MS Mincho", "HG Mincho J", "HG Mincho L", "HG Mincho", "Mincho", "MS PMincho", "HG Mincho Light J", "MS Gothic", "HG Gothic J", "HG Gothic B", "HG Gothic", "Gothic", "MS PGothic", "Andale Sans UI", "Arial Unicode MS", "Lucida Sans Unicode", "Tahoma"; font-size: 14pt; font-style: oblique }
+		H2.ctl { font-family: "Tahoma", "Lucidasans", "Lucida Sans", "Arial Unicode MS"; font-size: 14pt; font-style: italic }
+		H3 { margin-bottom: 0.21cm; background: transparent; page-break-before: auto }
+		H3.western { font-family: "Bitstream Vera Sans", sans-serif; font-size: 12pt }
+		H3.cjk { font-family: "HG Mincho Light J", "MS Mincho", "HG Mincho J", "HG Mincho L", "HG Mincho", "Mincho", "MS PMincho", "HG Mincho Light J", "MS Gothic", "HG Gothic J", "HG Gothic B", "HG Gothic", "Gothic", "MS PGothic", "Andale Sans UI", "Arial Unicode MS", "Lucida Sans Unicode", "Tahoma" }
+		H3.ctl { font-family: "Tahoma", "Lucidasans", "Lucida Sans", "Arial Unicode MS" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="es-ES" DIR="LTR">
+<DIV TYPE=HEADER>
+	<P STYLE="margin-bottom: 0.5cm"><FONT COLOR="#800000">4party	Taller
+	Shell, comandos y programaci&oacute;n</FONT></P>
+</DIV>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="shell_linux_html_23fc6cd1.jpg" NAME="Imagen1" ALIGN=LEFT WIDTH=193 HEIGHT=229 BORDER=0><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT SIZE=7>Comandos
+linux unix y programaci&oacute;n shell</FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><IMG SRC="shell_linux_html_302c1c06.gif" NAME="Imagen2" ALIGN=LEFT WIDTH=300 HEIGHT=33 BORDER=0><BR CLEAR=LEFT><FONT SIZE=4 STYLE="font-size: 16pt">Documento
+de la charla de I&ntilde;igo Tejedor &amp; Pello Altadill</FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT SIZE=5><A HREF="http://4party.cuatrovientos.org/"><FONT SIZE=5 STYLE="font-size: 20pt">http://4party.cuatrovientos.org</FONT></A></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=4><BR></FONT><BR>
+</P>
+<DIV ID="&Iacute;ndice de contenido1" DIR="LTR">
+	<DIV ID="&Iacute;ndice de contenido1_Head" DIR="LTR">
+		<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Bitstream Vera Sans, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>&Iacute;ndice
+		de contenido</B></FONT></FONT></P>
+	</DIV>
+	<P STYLE="margin-bottom: 0cm">1.INTRODUCCI&Oacute;N	3</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">El mapa de ficheros
+	y directorios en linux	4</P>
+	<P STYLE="margin-bottom: 0cm">2.El shell	5</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Buscar ayuda	5</P>
+	<P STYLE="margin-bottom: 0cm">3.Gu&iacute;a de comandos	6</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Comandos b&aacute;sicos
+	y manejo de ficheros	6</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Comandos de
+	administraci&oacute;n: usuarios, procesos, kernel	9</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Comunicaciones	10</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Comunicaci&oacute;n
+	entre procesos	12</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Redirecci&oacute;n
+	de entrada/salida	12</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Compresi&oacute;n
+	de ficheros y directorios	13</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Accediendo a
+	dispositivos y particiones	14</P>
+	<P STYLE="margin-bottom: 0cm">4.Usando el shell	16</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Las flechas	16</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">El historial de
+	comandos	16</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Relleno de
+	comandos y ficheros	17</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Comodines	18</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Ejecuci&oacute;n
+	de comandos	18</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">Comandos en segundo
+	plano	19</P>
+	<P STYLE="margin-bottom: 0cm">5.Programaci&oacute;n de scripts de
+	shell	22</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm"><BR>Introducci&oacute;n
+		22</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Variables	23</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">arrays	24</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">Otros usos	24</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Operaciones	25</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">Aritm&eacute;ticas	25</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">L&oacute;gicas	26</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Condicionales	27</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">case	30</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Iteraciones	31</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">for	31</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">while	32</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">until	33</P>
+	<P STYLE="margin-left: 1cm; margin-bottom: 0cm">select	34</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Funciones	34</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Librer&iacute;as	35</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Se&ntilde;ales	36</P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm">Colores	36</P>
+	<P STYLE="margin-bottom: 0cm">6.Bibliograf&iacute;a, referencias y
+	enlaces	38</P>
+</DIV>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<OL>
+	<LI><H1 CLASS="western"></SPAN>INTRODUCCI&Oacute;N</H1>
+</OL>
+<P><FONT SIZE=3>Este gu&iacute;a no es para leer de forma seguida,
+este gu&iacute;a pretende ser una referencia de comandos Unix/Linux y
+de programaci&oacute;n de scripts de shell que se pueda consultar en
+cualquier momento. No pretende ser una gu&iacute;a exhaustiva, sino
+una referencia que sirva como recordatorio de los comandos m&aacute;s
+utilizados. </FONT>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT SIZE=3>&iquest;Y qu&eacute; es Linux?<BR>Los sistemas
+operativos del tipo Linux esta formado por procesos y ficheros. Y no
+hay nada m&aacute;s. Los dispositivos como el disco, el cdrom, la
+pantalla, esta representado como un fichero en el sistema linux,
+dentro de /dev. Los sockets de comunicaci&oacute;n son ficheros.  Los
+directorios son ficheros. Los ficheros son ficheros.</FONT></P>
+<P><BR><BR>
+</P>
+<P STYLE="page-break-before: always"><BR><BR>
+</P>
+<H3 CLASS="western"><FONT SIZE=3>El mapa de ficheros y directorios en
+linux</FONT></H3>
+<P><FONT SIZE=3>Hay directorios que pueden cambiar segun la
+distribucion que sea. Las de linux se parecen bastante, pero en
+general tienen lo mismo. </FONT>
+</P>
+<P><FONT SIZE=4><FONT SIZE=3>/ +-<B>/bin </B>: los binarios MAS
+basicos como: ls, cd, pwd, cp, rm <BR>  +-<B>/boot </B>: archivos de
+arranque, imagen de kernel. <BR>  +-<B>/cdrom</B> : punto de montaje
+del cdrom <BR>  +-<B>/etc</B> : configuracion. Todas las
+configuraciones (red,scripts de inicio,firewall,usuarios) <BR> 
++-----<B>/mail/ </B>: configuracion de sendmail <BR>  +-----<B>/rc.d/
+</B>: ficheros con scripts de inicio de sistema <BR> 
++-----<B><SPAN STYLE="font-style: normal">/sysconfig/</SPAN></B> :
+configuracion de sistema (red,rutas,interfaces) <BR>  +-<B>/dev</B> :
+todos los dispositivos de sistema (pantalla,raton,impresora,disco
+duro) representados por un fichero <BR>  +-<B>/home</B> : directorios
+particulares de los usuarios <BR>  +-<B>/lib </B>: librerias de
+sistema, modulos de kernel <BR>  +<B>-/lost+found</B> : directorio en
+el que se guarda contenido perdido tras un chequeo de disco <BR> 
++-<B>/mnt</B> : punto de montaje (opcional) para particiones locales,
+remotas (nfs),.. <BR>  +-<B>/proc</B> : sistema de ficheros que
+refleja el estado y configuracion del sistema <BR>  +-<B>/sbin</B> :
+binarios basicos que influyen en configuraciones (firewall, rutas,)
+de kernel <BR>  +-<B>/usr</B> : binarios de servidores, programas,
+manuales, documentos, etc (este ocupa el que mas) <BR>  +-<B>/opt </B>:
+binarios opcionales o programas que no se instalan desde el
+principio. <BR>  +-<B>/root</B> : directorio home de superusuario. <BR>
+ +-<B>/tmp</B> : directorio temporal, utilizado para guardar
+sesiones, sockets, etc.. <BR>  +-<B>/var</B> : directorio en el que
+se guarda informacion variable: logs, BBDD (postgres, mysql) <BR> 
++-----<B>/log/ </B>: todos los logs de sistema y servidores <BR> 
++-----<B>/lib/pgsql/</B> : postgres <BR>  +-----<B>/lib/mysql/</B> :
+mysql <BR>  +-----/<B>spool/mqueue/</B> : cola de correo del servidor
+(entregas sendmail) <BR>  +-----<B>/spool/mail/ </B>: buzones de
+correo</FONT><BR></FONT><BR><BR>
+</P>
+<OL START=2>
+	<LI><H1 CLASS="western"></SPAN><B>El shell</B></H1>
+</OL>
+<P><FONT SIZE=4><BR><FONT SIZE=3>Al entrar en un Linux en modo
+consola estamos usando un shell o interprete de comandos. Un shell no
+es m&aacute;s que un programa que le facilita al usuario interactuar
+con el sistema operativo: administrar el sistema, programar, crear
+todo tipo de contenidos de texto, etc... para hacer todo eso el
+usuario debe utilizar una serie de comandos que le permiten manipular
+ficheros, procesos, etc...</FONT></FONT></P>
+<P><FONT SIZE=3>En los sistemas Windows el shell es un entorno visual
+intuitivo y f&aacute;cil de utilizar, aunque tambi&eacute;n tiene
+otro shell disponible, una herencia del sistema MS-DOS que no ha
+evolucionado mucho. En Linux disponemos de multitud de entornos
+visuales para elegir, pero la gran diferencia respecto a Windows es
+que en Linux el entorno gr&aacute;fico no es m&aacute;s que un
+programa m&aacute;s; es algo opcional que podemos lanzar desde un
+shell o int&eacute;rprete de comandos. La otra diferencia importante
+es que el shell de linux es una herramienta muy poderosa.</FONT></P>
+<P><FONT SIZE=4><FONT SIZE=3>Existen distintos interpretes de
+comandos en el mundo Unix: csh, bash, tsh, ksh,.. pero salvo peque&ntilde;as
+diferencias todos son parecidos. En este documento partimos sobretodo
+de bash2, ya que esta muy extendido a trav&eacute;s de Linux.</FONT><BR></FONT><BR><BR>
+</P>
+<H2 CLASS="western">Buscar ayuda</H2>
+<P><FONT SIZE=3>Todos los comandos tienen ayuda sobre sus opciones y
+m&aacute;s de una forma de llegar a esa ayuda:</FONT></P>
+<P><FONT SIZE=3>man comando : a trav&eacute;s de man accedemos a la
+p&aacute;gina de manual de cualquier programa. El manual de comandos
+nos da TODA la informaci&oacute;n de un comando e incluso al final
+nos sugiere otros comandos similares o relacionados. Es la forma
+cl&aacute;sica de acceder a la ayuda extendida aunque para los usos
+m&aacute;s frecuentes de comandos siempre se puede usar opciones m&aacute;s
+simples que pueden variar de un comando a otro:</FONT></P>
+<P><FONT SIZE=4>comando -h<BR>comando –help<BR>comando -?<BR>info
+comand</FONT></P>
+<OL START=3>
+	<LI><H1 CLASS="western"></SPAN>Gu&iacute;a de comandos</H1>
+</OL>
+<H2 CLASS="western">Comandos b&aacute;sicos y manejo de ficheros</H2>
+<P><BR><BR>
+</P>
+<P><B>cd<BR></B><SPAN STYLE="font-weight: medium">Descripci&oacute;n:
+=chage dir. comando para cambiarnos de directorio.<BR>Ejemplos: cd,
+cd /ruta/de/directorio, cd ../../directorio/</SPAN></P>
+<P STYLE="font-weight: medium"><B>pwd</B><BR>Descripci&oacute;n: nos
+dice en qu&eacute; directorio nos encontramos actualmente<BR>Ejemplos:
+pwd</P>
+<P><B>ls</B><BR>Descripci&oacute;n: =list. listar contenido de
+directorios.<BR>Ejemplos: ls, ls -l, ls -fl, ls --color</P>
+<P><B>cp</B><BR>Descripci&oacute;n: =copy. copiar
+ficheros/directorios.<BR>Ejemplos:cp -rfp directorio /tmp, cp archivo
+archivo_nuevo</P>
+<P><B>rm</B><BR>Descripci&oacute;n: =remove. borrar
+ficheros/directorios.<BR>Ejemplos: rm -f fichero, rm -rf directorio,
+rm -i fichero</P>
+<P><B>mkdir</B><BR>Descripci&oacute;n: =make dir. crear
+directorios.<BR>Ejemplos: mkdir directorio</P>
+<P><B>rmdir</B><BR>Descripci&oacute;n: =remove dir. borrar
+directorios, deben estar vacios.<BR>Ejemplos: rmdir directorio</P>
+<P><B>mv</B><BR>Descripci&oacute;n: =move. renombrar o mover
+ficheros/directorios.<BR>Ejemplos: mv directorio directorio, mv
+fichero nuevo_nombre, mv fichero a_directorio</P>
+<P><B>nano<BR></B><SPAN STYLE="font-weight: medium">Descripci&oacute;n:
+editor de fichero muy simple. Vi o emacs son para la 31337.<BR>Ejemplo:
+nano -w<BR><BR></SPAN><B>clear</B><SPAN STYLE="font-weight: medium"><BR>Descripci&oacute;n:
+limpia la pantalla. Ctrl-L tiene el mismo efecto.</SPAN></P>
+<P STYLE="font-weight: medium"><B>exit</B><BR>Descripci&oacute;n:
+termina la sesi&oacute;n del shell. Ctrl-D tiene el mismo efecto.</P>
+<P><B>date</B><BR>Descripci&oacute;n: gesti&oacute;n de fecha de
+sistema, se puede ver y establecer.<BR>Ejemplos: date, date 10091923 
+</P>
+<P><B>history</B><BR>Descripci&oacute;n: muestra el historial de
+comandos introducidos por el usuario.<BR>Ejemplos: history | more</P>
+<P><B>more</B><BR>Descripci&oacute;n: muestra el contenido de un
+fichero con pausas cada 25 lineas.<BR>Ejemplos: more fichero</P>
+<P>Al hacer <B>more</B>:<BR>/cadena : podemos hacer b&uacute;squeda
+de cadena<BR>f : adelante<BR>b: volver arriba<BR>v: iniciar vi en la
+linea que estamos</P>
+<P>Nota: estas opciones tambi&eacute;n sirven para el comando <B>man</B></P>
+<P><B>grep</B><BR>Descripci&oacute;n: filtra los contenidos de un
+fichero.<BR>Ejemplos:cat fichero | grep cadena, grep -il “cadena”
+directorio/</P>
+<P><B>cat</B><BR>Descripci&oacute;n: muestra todo el contenido de un
+fichero sin pausa alguna.<BR>Ejemplos: cat fichero</P>
+<P><B>chmod</B><BR>Descripci&oacute;n: cambia los permisos de
+lectura/escritura/ejecucion de ficheros/directorios.<BR>Ejemplos:
+chmod +r fichero, chmod +w directorio, chmod +rw directorio -R, chmod
+-r fichero<BR><FONT SIZE=3>chmod +x fichero : da permiso de ejecucion</FONT></P>
+<P><B>chown</B><BR>Descripci&oacute;n: =change owner. cambia los
+permisos de usuario:grupo de ficheros/directorios.<BR>Ejemplos: chown
+root:root fichero, chown pello:usuarios directorio -R</P>
+<P><B>tar</B><BR>Descripci&oacute;n: =Tape ARchiver. archivador de
+ficheros.<BR>Ejemplos: tar cvf fichero.tar directorio , tar xvf
+fichero.tar, tar zcvf fichero.tgz directorio, tar zxvf fichero.tgz</P>
+<P><B>gunzip</B><BR>Descripci&oacute;n: descompresor compatible con
+ZIP.<BR>Ejemplos: gunzip fichero</P>
+<P><B>rpm</B><BR>Descripci&oacute;n: gestor de paquetes de redhat y
+fedora. Para instalar o actualizar software de sistema.<BR>Ejemplos:
+rpm -i paquete.rpm, rpm -qa programa, rpm --force paquete.rpm, rpm -q
+--info programa</P>
+<P><B>dpkg</B><BR>Descripci&oacute;n: gestor de paquetes de Debian.
+Para instalar o actualizar software en el sistema.<BR>Ejemplos: dpkg
+-i paquete.deb</P>
+<P><B>alias</B><BR>Descripci&oacute;n: para crear alias de comandos.
+&Uacute;til para comandos largos.</P>
+<P><B>mount</B><BR>Descripci&oacute;n: montar unidades de disco duro,
+diskette, cdrom.<BR>Ejemplos: mount /dev/hda2 /mnt/lnx, mount
+/dev/hdb1 /mnt -t vfat</P>
+<P><B>umount</B><BR>Descripci&oacute;n: desmontar unidades.<BR>Ejemplos:
+umount /dev/hda2, umount /mnt/lnx</P>
+<P><B>who</B><BR>Descripci&oacute;n: muestra los usuarios de sistema
+que han iniciado una sesion.<BR>Ejemplos: who, w, who am i</P>
+<P><B>sort</B><BR>Descripci&oacute;n: ordena el contenido de un
+fichero.<BR>Ejemplos: cat /etc/numeros | sort, ls | sort</P>
+<P><B>ln</B><BR>Descripci&oacute;n: =link. para crear enlaces,
+accesos directos.<BR>Ejemplos: ln -s /directorio enlace</P>
+<P><B>tail</B><BR>Descripci&oacute;n: muestra el final (10 lineas) de
+un fichero.<BR>Ejemplos:tail -f /var/log/maillog, tail -100
+/var/log/maillog | more</P>
+<P><B>head</B><BR>Descripci&oacute;n: muestra la cabecera (10 lineas)
+de un fichero.<BR>Ejemplos: head fichero, head -100 /var/log/maillog
+| more</P>
+<P><B>file</B><BR>Descripci&oacute;n: nos dice de que tipo es un
+fichero.<BR>Ejemplos: file fichero, file *</P>
+<P><B>cmp</B><BR>Descripci&oacute;n: compara dos ficheros y nos dice
+si son distintos<BR>Ejemplos: cmp fichero1 fichero2</P>
+<P><B>file</B><BR>Descripci&oacute;n: nos dice de que tipo es un
+fichero.<BR>Ejemplos: file fichero, file *</P>
+<P STYLE="margin-bottom: 0cm"><B>diff</B><BR>Descripci&oacute;n:
+muestra las diferencias entre dos ficheros. Muy usado para parchear
+software.<BR>Ejemplos: diff fichero1 fichero2</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><B>wc</B><BR>Descripci&oacute;n: word
+count, calcula n&uacute;mero de palabras y otros datos similares de
+un fichero.<BR>Ejemplos: wc fichero, wc -l fichero 
+</P>
+<H2 CLASS="western">Comandos de administraci&oacute;n: usuarios,
+procesos, kernel</H2>
+<P><BR><BR>
+</P>
+<P><B>sysctl</B><BR>Descripci&oacute;n: Configurar los par&aacute;metros
+del kernel en tiempo de ejuecuci&oacute;n.<BR>Ejemplos: sysctl -a</P>
+<P><B>ulimit</B><BR>Descripci&oacute;n: muestra los limites del
+sistema (maximo de ficheros abiertos, etc..)<BR>Ejemplos: ulimit</P>
+<P><B>adduser<BR></B>Descripci&oacute;n: a&ntilde;adir usuario de
+sistema.<BR>Ejemplos: adduser pepe, adduser -s /bin/false pepe</P>
+<P><B>userdel<BR></B>Descripci&oacute;n: = eliminar usuario de
+sistema<BR>Ejemplos: userdel pepe</P>
+<P><B>usermod<BR></B>Descripci&oacute;n: = modificar usuario de
+sistema<BR>Ejemplos: usermod -s /bin/bash pepe</P>
+<P><B>df</B><BR>Descripci&oacute;n: = disk free. espacio en disco
+disponible. Muy util.<BR>Ejemplos: df, df -h</P>
+<P><B>uname</B><BR>Descripci&oacute;n: =unix name. Informacion sobre
+el tipo de unix en el que estamos, kernel, etc.<BR>Ejemplos: uname,
+uname -a</P>
+<P><B>netstat</B><BR>Descripci&oacute;n: la informacion sobre las
+conexiones de red activas.<BR>Ejemplos: netstat, netstat -ln, netstat
+-l, netstat -a</P>
+<P><B>ps</B><BR>Descripci&oacute;n: =proccess toda la informacion
+sobre procesos en ejecucion.<BR>Ejemplos: ps, ps -axf, ps -A, ps
+-auxf</P>
+<P><B>pstree</B><BR>Descripci&oacute;n: =proccess tree, muestra los
+procesos en forma de &aacute;rbol<BR>Ejemplos: pstree</P>
+<P><B>kill</B><BR>Descripci&oacute;n: env&iacute;a se&ntilde;ales a
+procesos. La m&aacute;s com&uacute;n es la de matar el
+proceso.<BR>Ejemplo: kill -9 34 (la se&ntilde;al -9 es KILL y mata el
+proceso numero 34)</P>
+<P><B>free</B><BR>Descripci&oacute;n: muestra el estado de la memoria
+RAM y el SWAP.<BR>Ejemplos: free</P>
+<P><B>vmstat</B><BR>Descripci&oacute;n: muestra el estado de la
+memoria virtual<BR>Ejemplos: vmstat, vmstat -s</P>
+<P><B>du</B><BR>Descripci&oacute;n: =disk use. uso de disco. Muestra
+el espacio que esta ocupado en disco.<BR>Ejemplos: du *, du -sH /*,
+du -sH /etc</P>
+<P><B>lsof</B><BR>Descripci&oacute;n: muestra los ficheros(librerias,
+conexiones) que utiliza cada proceso<BR>Ejemplos: lsof, lsof -i, lsof
+| grep fichero</P>
+<P><B>lsmod<BR></B>Descripci&oacute;n: Muestra los modulos de kernel
+que estan cargados.<BR>Ejemplos: lsmod</P>
+<P><B>insmod</B><BR>Descripci&oacute;n: instala modulos de
+kernel<BR>Ejemplo: insmod e1000, insmod usb_core</P>
+<P><B>modprobe<BR></B>Descripci&oacute;n: Trata de instalar un
+modulo, si lo encuentra lo instala pero de forma temporal.<BR>Ejemplos:
+modprobe ip_tables, modprobe eepro100</P>
+<P><B>rmmod<BR></B>Descripci&oacute;n: Elimina modulos del kernel que
+estan cargados<BR>Ejemplos: rmmod &lt;nombre de modulo&gt;</P>
+<P><B>fdisk<BR></B>Descripci&oacute;n: sirve para gestionar las
+particiones de una unidad de disco<BR>Ejemplos: fdisk /dev/hda ,
+fdisk -l /dev/sda</P>
+<H2 CLASS="western"><B>Comunicaciones</B></H2>
+<P STYLE="margin-bottom: 0cm"><B><BR></B><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=3><B>telnet<BR></B>Descripci&oacute;n:
+Establece conexiones a puertos TCP</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=3>Ejemplo: telnet localhost
+25</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=3><B><BR>mesg<BR></B><SPAN STYLE="font-weight: medium">Descripci&oacute;n:
+Establece si se aceptan mensajes a trav&eacute;s de write o
+talk.<BR>Ejemplo: mesg -y</SPAN></FONT></P>
+<P STYLE="margin-bottom: 0cm; font-weight: medium"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; font-weight: medium"><FONT SIZE=3><B>write</B><BR>Descripci&oacute;n:
+env&iacute;a mensajes a otros usuarios.<BR>Ejemplo: write jrmorris
+pts/0<BR><BR><B>wall</B><BR>Descripci&oacute;n: env&iacute;a un
+mensaje a todos los usuarios conectados al sistema<BR>Ejemplo: wall
+“a cascarla el sistema”<BR></FONT><BR>
+</P>
+<P><B>ifconfig</B><BR>Descripci&oacute;n: =interface config.
+configuracion de interfaces de red, modems, etc.<BR>Ejemplos:
+ifconfig, ifconfig eth0 ip netmask 255.255.255.0</P>
+<P><B>route</B><BR>Descripci&oacute;n: gestiona las rutas a otras
+redes.<BR>Ejemplos: route, route -n</P>
+<P><B>iptraf</B><BR>Descripci&oacute;n: muestra en una aplicacion de
+consola TODO el trafico de red IP, UDP, ICMP. <BR>Permite utilizar
+filtros, y es SUMAMENTE UTIL para diagnostico y depuracion de
+firewalls<BR>Ejemplos: iptraf</P>
+<P><B>tcpdump</B><BR>Descripci&oacute;n: vuelca el contenido del
+trafico de red.<BR>Ejemplos: tcpdump, tcpdump -u</P>
+<P><B>ping</B><BR>Descripci&oacute;n: heramienta de red para
+comprobar entre otras cosas si llegamos a un host remoto.<BR>Ejemplos:
+ping www.rediris.es</P>
+<P><B>traceroute</B><BR>Descripci&oacute;n: herramienta de red que
+nos muestra el camino que se necesita para llegar a otra
+maquina.<BR>Ejemplos: traceroute <A HREF="http://www.rediris.es/">www.rediris.es</A></P>
+<P><B>mtr</B><BR>Descripci&oacute;n: Matt's Trace Route, un
+traceroute de consola algo m&aacute;s visual, muy util para observar
+donde hay p&eacute;rdidas de paquetes.</P>
+<P><B>mail</B><BR>Descripci&oacute;n: envio y lectura de correo
+electronico.<BR>Ejemplos: mail pepe@cuatrovientos.org &lt; fichero,
+mail -v pepe@cuatrovientos.org &lt; fichero</P>
+<P><B>wget</B><BR>Descripci&oacute;n: programa para descargar
+ficheros por http o ftp.<BR>Ejemplos: wget
+http://www.rediris.es/documento.pdf</P>
+<P><B>lynx</B><BR>Descripci&oacute;n: navegador web con opciones de
+ftp, https.<BR>Ejemplos: lynx www.cuatrovientos.org, lynx --source
+http://www.cuatrovientos.org/script.sh | sh</P>
+<P><B>ftp</B><BR>Descripci&oacute;n: cliente FTP.<BR>Ejemplos: ftp
+ftp.cuatrovientos.org</P>
+<P><B>whois</B><BR>Descripci&oacute;n: whois de dominios.<BR>Ejemplos:
+whois cuatrovientos.org</P>
+<P><BR><BR>
+</P>
+<P><FONT SIZE=3><B>sniffit</B><BR>Descripci&oacute;n: Sniffer o
+husmeador de todo el trafico de red. No suele venir instalado por
+defecto.<BR>Ejemplos: sniffit -i</FONT></P>
+<P><BR><BR>
+</P>
+<H2 CLASS="western">Comunicaci&oacute;n entre procesos</H2>
+<P><FONT SIZE=3>Tuberias o pipes: | sirven para comunicar procesos,
+usualmente para pasar el resultado <B>de un proceso a otro</B>
+<B>proceso</B>: por ejemplo ps axf | grep bash: lista todos los
+procesos y filtra los que se llamen bash . La tuber&iacute;a en
+definitiva lo que hace es unir la salida de un comando con la entrada
+de otro.</FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<H2 CLASS="western"><FONT SIZE=4><B>Redirecci&oacute;n de
+entrada/salida</B></FONT></H2>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><BR><FONT FACE="Courier, monospace">proceso &gt; fichero</FONT>
+: con este s&iacute;mbolo podemos redirigir la salida est&aacute;ndar
+de un comando a un fichero. T&eacute;ngase en cuenta una cosa. Si
+decimos fichero siempre lo vamos a decir de manera gen&eacute;rica,
+puede ser un fichero de texto o la pantalla de terminal, ah&iacute;
+cabe TODO.</FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux<FONT SIZE=4>~</FONT>$
+ps -axf &gt; procesos.txt</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux<FONT SIZE=4>~</FONT>$
+more procesos.txt</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+  <FONT FACE="Courier, monospace"><FONT SIZE=3>PID TTY      STAT  
+TIME COMMAND</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+    <FONT FACE="Courier, monospace"><FONT SIZE=3>1 ?        S     
+0:00 init [2]  </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+    <FONT FACE="Courier, monospace"><FONT SIZE=3>2 ?        SN    
+0:00 [ksoftirqd/0]</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+    <FONT FACE="Courier, monospace"><FONT SIZE=3>3 ?        S&lt;    
+0:01 [events/0]</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+    <FONT FACE="Courier, monospace"><FONT SIZE=3>4 ?        S&lt;    
+0:00  \_ [khelper]</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>...</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Nota: para evitar accidentes con la redirecci&oacute;n
+<FONT FACE="Courier, monospace">&gt;,</FONT> puede establecerse una
+opci&oacute;n en el shell que se llama noclobber. </FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><FONT FACE="Courier, monospace">procesa |&gt; fichero </FONT>:
+con esto redirigimos el resultado a un fichero, sobrescribi&eacute;ndolo
+incluso con la opci&oacute;n de shell noclobber activada.</FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><BR><FONT FACE="Courier, monospace">procesa &gt;&gt;
+fichero </FONT>: con esto redirigimos el resultado a un fichero, pero
+sin sobrescribirlo, lo que hacemos es escribir al final de este
+(append en ingles).<BR></FONT><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><FONT FACE="Courier, monospace">procesa &lt; fichero</FONT>
+: con esto redirigimos el contenido del fichero a un programa. Se usa
+para utilizar el contenido de un fichero como input de un comando.<BR></FONT><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux<FONT SIZE=4>~</FONT>$
+procesa &lt; fichero.txt</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><FONT FACE="Courier, monospace">proceso &lt;&lt; END </FONT>:
+este redirecci&oacute;n se utiliza para iniciar el paso de par&aacute;metros
+a un programa, y se termina cuando escribimos &quot;END&quot; o
+cualquier otra palabra que hayamos especificado al inicio del
+comando. Un ejemplo cl&aacute;sico ser&iacute;a una sesi&oacute;n FTP
+automatizada a la que le direccionamos todos los comandos de golpe.
+Al aparecer de nuevo la palabra FINAL se terminan de aceptar datos y
+se ejecuta el comando.</FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux<FONT SIZE=4>~</FONT>$
+ftp -inv &lt;&lt; FINAL</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>open ftp.rediris.es</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>user usuario password</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>cd /debian</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>ls</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>exit</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>FINAL</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>...</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><FONT FACE="Courier, monospace">proceso &lt;&gt; fichero</FONT>
+: esta redirecci&oacute;n permite que un proceso utilice un fichero
+tanto para leer como para escribir:</FONT></P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux<FONT SIZE=4>~</FONT>$
+proceso &lt;&gt; fichero</FONT></FONT></P>
+<P><BR><BR>
+</P>
+<H2 CLASS="western">Compresi&oacute;n de ficheros y directorios</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Existen varias opciones de compresi&oacute;n de ficheros
+en Linux: gzip, bz2, rar, zip, y todos<BR>ellos se pueden  combinar
+con el empaquetar o archivador TAR.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><B>tar</B></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Archivador, agrupa ficheros en uno, adem&aacute;s se le
+puede decir que comprima 	 <BR>tar cfp resultado.tar /etc /var :
+guarda el contenido de /etc y /var dentro del fichero resultado.tar 	
+<BR>tar xfp resultado.tar : saca todo el contenido de resultado.tar 	
+<BR>tar zcfp usr.tgz /usr : archiva y comprime con gzip el directorio
+/usr<BR>tar jcfp usr.tgz /usr : archiva y comprime con bzip2 el
+directorio /usr<BR>tar zxfp usr.tgz : DEScomprime el fichero anterior</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><B>gzip/gunzip, zip/unzip, rar/unrar</B></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Compresor/Descompresor. Los ficheros comprimidos con
+gzip o con zip no se descomprimen igual. Un fichero comprimido con el
+winzip habr&iacute;a que abrirlo con el unzip en linux.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><BR>gzip fichero : comprime fichero, le a&ntilde;ade la
+extensi&oacute;n gz 	 <BR>gunzip fichero.gz : descomprime ficheros
+gz.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>zip -r9 todo.zip directorio/ : comprime el directorio en
+el fichero todo.zip <BR>unzip : descomprime para ficheros zip</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3><B>bz2/bunzip2</B></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Compresor ca&ntilde;ero, comprime bastante m&aacute;s
+que gzip, aunque tarda y chupa mas cpu	 <BR>bz2 fichero : comprime
+fichero, le a&ntilde;ade la extensi&oacute;n bz2 	 <BR>bunzip2
+fichero.bz2: descomprime<BR>tar jcfp usr.tar.bz2 /usr: archiva y
+comprime con bz2</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H2 CLASS="western">Accediendo a dispositivos y particiones</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para acceder a diskettes, cdroms, dvds, pendrives,
+cualquier dispositivo USB, etc... es necesario “montarlo” de
+forma manual, salvo que todo est&eacute; configurado de una forma
+c&oacute;moda con automount.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>En linux hay un &uacute;nico sistema de ficheros, y si
+se mete un CD o un USB en el sistema hay que montarlo sobre alg&uacute;n
+directorio del sistema. Existen algunos directorios predefinidos para
+esto, aunque en principio lo podemos montar donde nos de la gana.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para montar un diskette por ejemplo:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/fd0
+/floppy<BR></FONT></FONT><BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3 STYLE="font-size: 13pt">Para montar un cdrom o dvd</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/cdrom
+/mnt</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/dvd
+/montaje/dvd<BR><BR>(el contenido del dvd queda dentro de
+/montaje/dvd)</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para montar un USB basta con usar el dispositivo
+/dev/sda o /dev/sda1. Linux suele emular los dispositivos USB como
+discos SCSI. Dependiendo de c&oacute;mo est&eacute;n formateados hay
+que montarlos de una forma u otra. Siempre se puede comprobar c&oacute;mo
+esta el particionado usando fdisk.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/usb
+/mnt<BR></FONT></FONT><BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para acceder a otras particiones o discos del sistema se
+siguen los mismos pasos, puede que dependiendo del tipo de partici&oacute;n
+sea necesario especificarlo.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/hda3
+/mnt -t vfat</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~# mount /dev/hda1
+/montaje/ -t ntfs -o ro</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm">Cuando dejamos de usar el dispositivo y
+en el caso de que se pueda sacar hay que desmontarlo. El comando es
+similar: umount y basta con especificar o el dispositivo o el
+directorio donde se ha montado.</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3><BR>linux~#
+umount /dev/hda3 <BR></FONT></FONT><BR>
+</P>
+<OL START=4>
+	<LI><H1 CLASS="western"></SPAN>Usando el shell</H1>
+</OL>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Nada m&aacute;s logearnos en un sistema linux nos
+enfrentaremos o visto de otro modo nos beneficiaremos del shell y de
+toda su potencia:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$ </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Ese el &aacute;rido aspecto que puede tener el shell: un
+prompt a la espera de que metamos comandos.  antes de salir ese
+prompt, el bash comprueba si dentro del directorio del usuario existe
+alg&uacute;n fichero de inicializaci&oacute;n como .bashrc o
+.profile,  y en caso de existir los ejecuta: a trav&eacute;s de esos
+ficheros se establecen algunas variables, alias de comandos, aspecto
+del prompt, etc...</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para empezar podemos echar un ojo a las variables de
+entorno del sistema:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+set<BR>BASH=/bin/bash<BR>BASH_VERSINFO=([0]=&quot;2&quot; [1]=&quot;05b&quot;
+[2]=&quot;0&quot; [3]=&quot;1&quot; [4]=&quot;release&quot;
+[5]=&quot;i386-pc-linux-gnu&quot;)<BR>BASH_VERSION='2.05b.0(1)-release'<BR>COLUMNS=80<BR>DIRSTACK=()<BR>EUID=1000<BR>GROUPS=()<BR>HISTFILE=/home/usuario/.bash_history<BR>HISTFILESIZE=500<BR>...</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">En el shell ya podemos empezar a meter
+comandos para hacer la tarea que sea. Muchas veces escribir comandos
+de texto puede resultar una tarea tediosa y repetitiva, por eso el
+bash dispone de multitud de facilidades para que no tengamos que
+escribir tanto.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western">Las flechas</H2>
+<P STYLE="margin-bottom: 0cm">A trav&eacute;s de las teclas cursoras
+podemos volver a los comandos que hemos introducido anteriormente,
+algo que los usuarios de MSDOS recordar&aacute;n como el DOSKEY.</P>
+<P STYLE="margin-bottom: 0cm">En cualquier momento podemos movernos
+al inicio o al final del comando podemos usar las teclas Inicio o
+fin, o en su defecto Ctrl-A o Ctrl-E.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western">El historial de comandos</H2>
+<P STYLE="margin-bottom: 0cm">A trav&eacute;s del comando history
+podemos echar un ojo a los &uacute;ltimos comandos que hemos
+ejecutado y podemos repetir cualquiera de ellos gracias al comando
+especial !</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+</FONT>ls</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">Desktop
+ php  script</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+    </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>2
+ ls</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>3
+ mkdir scripts</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>4
+ mkdir php</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>5
+ mkdir Desktop</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>6
+ ls</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>7
+ history</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+!6</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">Desktop
+ php  script</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Si simplemente recordamos que habiamos
+ejecutado un comando que empezaba por hi podemos ejecutarlo haciendo:</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+!hi</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western">Relleno de comandos y ficheros</H2>
+<P STYLE="margin-bottom: 0cm">Escribir comandos y nombres de ficheros
+enteros puede ser un rollo. En el shell podemos usar el tabulador en
+cualquier momento para que nos rellene los comandos y nos complete
+las rutas de ficheros con lo que nos ahorarremos un mont&oacute;n de
+trabajo. Por ejemplo:</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+mo</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>(tabulamos
+y nos muestra todas las posibilidades)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>moc
+                 more                 mozilla-1.7.8</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>moc-qt3
+             mount                mozilla-firefox</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>mogrify
+             mountpoint           mozilla-suite</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>montage
+             mozilla              mozilla-thunderbird</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+mou</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>(tabulamos)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+mount</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">A la hora de completar los nombres de
+ficheros y rutas de directorios la tabulaci&oacute;n resulta
+enormemente pr&aacute;ctica:</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls /lib/mo</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>(tabulaci&oacute;n)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls /lib/modules/</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>(tabulaci&oacute;n)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls /lib/modules/2.6.8-2-386</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Gracias a la tabulaci&oacute;n nos
+ahorramos la tediosa tarea de escribir largos textos.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western">Comodines</H2>
+<P STYLE="margin-bottom: 0cm">El shell reconoce una serie de
+caracteres comod&iacute;n para poder referirse a un conjunto de
+ficheros o directorios</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm">* : se corresponde con cualquier
+	contenidos</P>
+	<LI><P STYLE="margin-bottom: 0cm">? : se corresponde con un &uacute;nico
+	car&aacute;cter</P>
+	<LI><P STYLE="margin-bottom: 0cm">[] : se corresponde con un
+	conjunto de caracteres</P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>programa.c
+test.c texto.txt ejemplo.pdf test.o</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls *.c</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>programa.c
+test.c</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$
+ls *.?</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"><FONT SIZE=3>programa.c
+test.c test.o</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western">Ejecuci&oacute;n de comandos</H2>
+<P STYLE="margin-bottom: 0cm">Para ejecutar un comando en el shell
+basta con ponerlo, y si el comando se encuentra dentro de los
+directorios indicados en la variable PATH se ejecutar&aacute; sin
+problemas.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+uptime</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">20:49:05
+up  2:35,  2 users,  load average: 0.00, 0.00, 0.00</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+</FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Podemos encadenar m&aacute;s de un
+comando en la linea separandolos con ;</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+uptime;uname -a;date</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">20:49:37
+up  2:35,  2 users,  load average: 0.00, 0.00, 0.00</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">Linux
+4vientos 2.6.8-2-386 #1 Tue Aug 16 12:46:35 UTC 2005 i686 GNU/Linux</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">dom jun
+ 3 20:49:37 CEST 2007</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+</FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Si todo va bien, el comando har&aacute;
+lo que tenga que hacer e impl&iacute;citamente devolver&aacute; un
+valor booleano TRUE. Sabiendo eso podemos encadenar comandos de
+manera condicional usando &amp;&amp; y ||</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+ls fichero &amp;&amp; more fichero</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Cuando usamos &amp;&amp; estamos
+haciendo que el segundo comando se ejecute <B>solamente</B> si el
+primero se ha ejecutado con &eacute;xito. Es un and l&oacute;gico,
+podemos encadenar m&aacute;s de dos comandos.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+ls fichero &amp;&amp; cat fichero &amp;&amp; echo “sin problemas
+OK”</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Si usamos || el siguiente comando se
+ejecutar&aacute; <B>solamente</B> si el primero no se ha ejecutado
+correctamente o ha devuelto alg&uacute;n error.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+ls fichero || echo “El fichero no existe”</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Podemos combinar los dos:</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+ls fichero &amp;&amp; cat fichero || echo “No hay fichero”</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H3 CLASS="western">Comandos en segundo plano</H3>
+<P STYLE="margin-bottom: 0cm">Los sistemas linux son mutitarea:
+podemos ejecutar m&aacute;s de un comando a al vez. Podemos dejar un
+comando que se ejecute en segundo plano y mientras podemos ejecutar
+m&aacute;s. Para dejar un comando en segundo plano simplemente
+metemos un &amp; al final del mismo.  Por ejemplo podemos comprimir
+un directorio y dejar la operaci&oacute;n en segundo plano:</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~#</FONT>
+tar zcfp etc.tar.gz /etc &amp;</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">[2]
+4376</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+</FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">En cualquer momento podemos llevar el
+comando a primer plano mediante el comando <FONT FACE="Courier, monospace">fg</FONT>.
+Asimismo lo podemos pausar con <FONT FACE="Courier, monospace">Ctrl-Z</FONT>
+y reanudarlo en segundo plano con <FONT FACE="Courier, monospace">bg</FONT>.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux<FONT SIZE=3>~</FONT>#
+fg</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">tar
+zcfp usr.tar.gz /usr</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">(Ctrl-Z)</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">[2]+ 
+Stopped                 tar zcfp usr.tar.gz /usr</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+bg</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">[2]+
+tar zcfp usr.tar.gz /usr &amp;</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+</FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Si queremos terminar alguno de los
+procesos que tenemos en marcha debemos mandarle una se&ntilde;al.
+Para eso se usa el comando kill, que a pesar de su nombre no es que
+sirva solo para matar procesos, en realidad sirve para enviar se&ntilde;ales
+a los procesos. La se&ntilde;al m&aacute;s frecuente es KILL o 9:</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+ps</FONT></P>
+<P STYLE="margin-bottom: 0cm">  <FONT FACE="Courier, monospace">PID
+TTY          TIME CMD</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">3593
+pts/0    00:00:00 bash</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">3767
+pts/0    00:00:00 xmms</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">3849
+pts/0    00:00:00 ps</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+kill -9 3767</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#
+ps</FONT></P>
+<P STYLE="margin-bottom: 0cm">  <FONT FACE="Courier, monospace">PID
+TTY          TIME CMD</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">3593
+pts/0    00:00:00 bash</FONT></P>
+<P STYLE="margin-bottom: 0cm"> <FONT FACE="Courier, monospace">3849
+pts/0    00:00:00 ps</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">linux~#</FONT>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Para conocer las se&ntilde;ales
+disponibles podemos echar un ojo en el manual de kill con el comando
+<FONT FACE="Courier, monospace">man kill</FONT>.</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">Comandos built-in del shell</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm">El shell dispone de un conjunto de
+comandos que vienen de serie. Son comandos muy sencillos que pueden
+ayudar en la programaci&oacute;n de scripts. Vamos a listarlos,
+pueden usarse dentro de un script o desde el propio prompt:</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">!</FONT>
+	 	: negaci&oacute;n</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace"># </FONT>
+		: comentarios</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">: </FONT>
+		: comando nulo</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">.</FONT>
+		: el punto sirve para ejecutar ficheros. Con los scripts del mismo
+	directorio se hace: ./script.sh</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">alias</FONT>:
+	sirve para crear alias de comandos largos: alias dir='ls -l | more'</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">bind</FONT>
+	: gestiona la librer&iacute;a readline</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">bg</FONT>	:
+	pasa procesos a background o segundo plano</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">break</FONT>
+	: fuerza la salida de fors, whiles, selects o untils</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">builtin</FONT>:
+	permite modificar el comportamiento de comandos</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">cd</FONT>	:
+	el cambio de directorio</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">command</FONT>
+	: ejecutar determinado comando con sus argumentos</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">continue</FONT>:
+	salta a la siguiente iteraci&oacute;n en fors, whiles, selects o
+	untils</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">declare</FONT>:
+	declaraci&oacute;n de variables</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">dirs</FONT>	:
+	muestra la pila de directorios</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">disown</FONT>:
+	quita los procesos dependientes del shell para que no dependan de
+	este</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">do</FONT>,
+	<FONT FACE="Courier, monospace">done</FONT> : parte de las
+	iteraciones</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">echo</FONT>
+	: mostrar datos por  salida 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">enable</FONT>:
+	habilitar o deshabilitar los comandos builtin.</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">exec</FONT>
+	: ejecuta un comando en lugar del proceso actual</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">exit</FONT>:
+	termina el script o el shell</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">export</FONT>:
+	convierte las variables en globales</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">fc</FONT>
+	: editar comandos del historial</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">fg</FONT>:
+	pasar comandos a primer plano</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">getopts</FONT>:
+	para tomar los argumentos opcionales del script, al estilo de c</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">help</FONT>	:
+	muestra la ayuda</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">history</FONT>:
+	el historial de comandos</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">if:</FONT>
+	para crear estructuras condicionales</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">jobs</FONT>:
+	muestra los procesos que tenemos en marcha</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">kill</FONT>:
+	env&iacute;o de se&ntilde;ales a procesos<FONT FACE="Courier, monospace">.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">let</FONT>:
+	ejecuci&oacute;n de operaciones aritm&eacute;ticas</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">local</FONT>:
+	declaraci&oacute;n de variables locales</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">logout</FONT>:
+	salida del shell</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">popd</FONT>:
+	saca un directorio de la pila de directorios</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">printf</FONT>:
+	sacar datos formateados como en c</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">pwd</FONT>:
+	muestra el directorio actual</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">pushd</FONT>:
+	mete un directorio en la pila</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">read</FONT>:
+	lee desde la entrada est&aacute;ndar</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">readonly</FONT>:
+	previene que variables de shell sean sobrescritas</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">return</FONT>:
+	para terminar funciones</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">select</FONT>:
+	estructura de selecci&oacute;n</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">set</FONT>:
+	muestra variables del shell, y puede establecer muchas opciones</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">shopt</FONT>:
+	establece o quita opciones de shell</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">shift</FONT>:
+	desplaza posiciones en el shell</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">source</FONT>:
+	similar al .</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">suspend</FONT>:
+	suspende el shell actual, suele hacerse en el su</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">test</FONT>:
+	para construir condicionales</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">time</FONT>:
+	mide el tiempo de ejecuci&oacute;n de un comandos</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">times</FONT>:
+	muestra tiempos acumulados de procesos</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">trap</FONT>:
+	para atrapar se&ntilde;ales</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">true</FONT>:
+	constante booleana</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">type</FONT>:distingue
+	si un comando es builtin, funci&oacute;n,alias, palabra clave,..</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">ulimit</FONT>:
+	muestra los limites de recursos del sistema</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">umask</FONT>:
+	muestra/establece permisos que sse deben aplicar a nuevos ficheros</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">unalias</FONT>:
+	quita los alias</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">unset</FONT>:
+	desestablece funciones o variables</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">until</FONT>:
+	para crear iteraciones</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">wait</FONT>:
+	detiene la ejecuci&oacute;n a la espera que termine otro proceso</P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT FACE="Courier, monospace">while</FONT>:
+	para crear iteraciones.</P>
+</UL>
+<OL START=5>
+	<LI><H1 CLASS="western"></SPAN>Programaci&oacute;n de scripts de
+	shell</H1>
+</OL>
+<H2 CLASS="western"><BR>Introducci&oacute;n 
+</H2>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Un script de shell no es m&aacute;s que un fichero de
+texto que contiene una serie de comandos del sistema linux adem&aacute;s
+de los comandos que forman parte del shell (built-in) con los que
+podemos crear estructuras que facilitan la programaci&oacute;n de
+scripts complejos.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para poder ejecutar los ficheros deben ser ejecutables
+por tanto si no es ejecutable hay que forzar que lo sea:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$ chmod u+x
+scriptshell.sh</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>o con n&uacute;meros:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$ chmod 755
+scriptshell.sh</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>A partir de ah&iacute; ya podemos ejecutar el script
+invocando directamente el fichero. En los sistemas linux y en el
+shell bash2 debemos hacerlo especificando el directorio actual:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$ ./scriptshell.sh</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Si no ponemos ./ el script no se ejecutar&aacute; y el
+sistema dir&aacute; que no lo encuentra.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Otra forma de ejecutar el script es usar el comando
+<FONT FACE="Courier, monospace">source</FONT>. A trav&eacute;s de
+este comando podemos ejecutar un script aunque no tenga permisos de
+ejecuci&oacute;n.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>linux~$ source
+scriptshell.sh</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Si no ponemos ./ el script no se ejecutar&aacute; y el
+sistema dir&aacute; que no lo encuentra.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Hola mundo</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es el aspecto que tendr&iacute;a el script m&aacute;s
+b&aacute;sico posible:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Esto es un comentario </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Hola mundo&quot;</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este ser&iacute;a similar pero usando una variable:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+En la primera linea establezco con qu&eacute; shell se debe ejecutar </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Se define una variable </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">SALUDO=&quot;Hola
+mundo&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-n &quot;Este script te dice: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+${SALUDO}</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H2 CLASS="western">Variables</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>En el shell se pueden definir variables y por tanto
+dentro de los scripts tambi&eacute;n. Aqu&iacute; no hay declaraci&oacute;n
+de tipos pero s&iacute; que podemos definir variables que contienen
+n&uacute;meros, cadenas, booleanos e incluso arrays.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para declarar una variable basta con hacer:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>VARIABLE=valor</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>La podemos exportar para que se convierta en una
+variable global.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>export VARIABLE</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>A partir de que se crea la variable ya podemos acceder a
+ella a trav&eacute;s de su nombre con el s&iacute;mbolo del d&oacute;lar
+por delante.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>echo $VARIABLE</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de variables:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/sh
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Muestra el uso de variables </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+No existen los tipos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+definici&oacute;n de variables</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">una_variable=666
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">MI_NOMBRE=&quot;Richard&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">NOMBRES=&quot;I&ntilde;igo
+Asier Sten Roberto Pello&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">BOOLEANO=true
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Echemos un ojo a las variables &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Un n&uacute;mero: ${una_variable}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Un nombre ${MI_NOMBRE}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Un grupo de nombres: ${NOMBRES}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Al script se le pueden pasar argumentos. Para recogerlos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+hay que usar : ${n&uacute;mero}  donde: </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${0} : nombre del script </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${1} : primer argumento </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${2} : segundo argumento </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+...etc. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Has invocado el script pas&aacute;ndome ${0} eta ${1} &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Otras variables especiales </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+$# : N&uacute;mero de argumentos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Me has pasado $# argumentos&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+$@ : grupo de par&aacute;metros del script </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+IDa: ${!} y $@ </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Variables de entorno </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Mi directorio actual: ${PWD} y mi usuario ${UID}&quot;</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">arrays</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Como ya se ha dicho, existe la posibilidad de declarar y
+usar arrays. Son algo limitados pero pueden resultar pr&aacute;cticos.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de arrays</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Muestra el uso de arrays </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Podemos crear arrays de una dimensi&oacute;n </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">asociaciones[0]=&quot;Gruslin&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">asociaciones[1]=&quot;Hackresi&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">asociaciones[2]=&quot;NavarradotNET&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">asociaciones[3]=&quot;Riberlug&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Otra forma de definirlos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">partidos=(&quot;UPN&quot;
+&quot;PSN&quot; &quot;CDN&quot; &quot;IUN&quot; &quot;Nafarroa BAI&quot;
+&quot;RCN&quot; ) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">numeros=(15
+23 45 42 23 1337 23 666 69) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+${asociaciones[0]} es una asociaci&oacute;n, ${partidos[1]} un
+partido </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#echo
+&quot;Tama&ntilde;o: $#asociaciones&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#echo
+&quot;Tama&ntilde;o: ${$#{partidos}}&quot;</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">Otros usos</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Muchas veces puede que nos interese tomar solamente
+parte del valor de una variable, o asignarle un valor por defecto.
+Este es un ejemplo de algunas cosas que podemos hacer con las
+variables:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Muestra el uso de variables </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Sacar parte del valor de una variable (substring) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">NOMBRE=&quot;Navarrux
+Live edition&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+${NOMBRE} una parte ${NOMBRE:8} y otra ${NOMBRE:8:4} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Valores por defecto. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${variable:-valorpordefecto} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">SINVALOR=
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Variable SINVALOR: ${SINVALOR:-31337} eta ${VACIO:-'Miguel
+Indurain'}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;La variable SINVALOR no tiene valor algun ${SINVALOR} &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Esto es igual pero el valor queda establecido </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${variable:=valorpordefecto} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Variable SINVALOR: ${SINVALOR:=31337} eta ${VACIO:='Miguel
+Indurain'}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;La variable SINVALOR no tiene valor algun ${SINVALOR} &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Y lo contrario: si la variable S&Iacute; tiene valor, se le pone otro
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${variable:+valorpordefecto} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">PROGRAMA='sniffit'
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;valor de PROGRAMA: ${PROGRAMA:+'tcpdump'} y ahora ${PROGRAMA}&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Si la variable est&aacute; sin definir o vac&iacute;a se muestra un
+error. En caso </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+contrario se le asigna un valor por defecto </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${variable:?valorpordefecto} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valor de: ${EJEMPLO:?'Roberto'} y luego {EJEMPLO}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Otros </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+${!prefijo*} : nos devuelve una lista de las variables que comienzan </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+con determinado prefijo. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Podemos probar con el for:  </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+i in ${!P*};do echo $i ;done </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H2 CLASS="western">Operaciones</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Ya que tenemos variables, que menos que poder operar con
+ellas de alguna forma, Al igual que en cualquier otro lenguaje de
+programaci&oacute;n disponemos de operadores aritm&eacute;ticos y
+l&oacute;gicos, aunque su uso no es tan simple.</FONT></P>
+<H3 CLASS="western">Aritm&eacute;ticas</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo del uso de operaciones aritm&eacute;ticas</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+-, +, *, /, %, **, variable++, variable--, --variable, ++variable </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+== : igualdad </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+!= : desigualdad </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Pruebas </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">VALOR1=23
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">VALOR2=45
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Para las operaciones puede usarse expr o [] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">RESULTADO=`expr
+${VALOR1} + ${VALOR2}` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Resultado: ${RESULTADO}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">RESULTADO=`expr
+${VALOR1} + ${VALOR2} + 3` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Resultado: ${RESULTADO}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">VALOR1=5
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">VALOR2=4
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${VALOR1} y ${VALOR2}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">RESULTADO=$[${VALOR1}
++ ${VALOR2} + 2] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Ahora: ${VALOR1} + ${VALOR2} + 2 = ${RESULTADO}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">RESULTADO=$[${VALOR1}
++ $[${VALOR2} * 3]] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Ahora: ${VALOR1} + ${VALOR2} * 3 = ${RESULTADO}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">L&oacute;gicas</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de operaciones l&oacute;gicas</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+operaciones l&oacute;gicas </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+ &amp;&amp; : and </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+ || : or </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+ !  : not </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">booleano=true
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Si la variable booleano es true veremos por pantalla &quot;OK&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">$booleano
+&amp;&amp; echo &quot;OK&quot; || echo &quot;no es true&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">otrobool=!${booleano}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">test
+${otrobool} || echo &quot;Ahora es falso&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Mediante &amp;&amp; podemos encadenar comandos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#who
+&amp;&amp; ps -axf &amp;&amp; echo &quot;OK&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+comparaciones : -eq, -ne, -lt, -le, -gt, or -ge </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">valor=6
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">test
+$valor -le 6  &amp;&amp; echo &quot;Se cumple&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Asignaciones </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">nuevo=${valor}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">test
+ ${nuevo} -eq ${valor}  &amp;&amp; echo &quot;Son los mismo&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Ahora ${nuevo} es lo mismo que ${valor}&quot; </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H2 CLASS="western">Condicionales</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>En el shell podemos crear las habituales estructuras
+condicionales if o if-else.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Esta ser&iacute;a la forma de if:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>if condici&oacute;n;
+then</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>fi</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>o tambi&eacute;n:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>if condici&oacute;n</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>then</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>fi</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Esta ser&iacute;a la forma de el if-else</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>if condici&oacute;n</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>then</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>else </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>fi</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Y tambi&eacute;n tenemos el if-elseif...-else</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>if <I>condici&oacute;n</I></FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>then</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>elif condici&oacute;n</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>then</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>else </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>fi</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de condicionales if y test</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Condicionales </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">VARIABLE=45
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ ${VARIABLE} -gt 0 ]; then </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${VARIABLE} es mayor que 0&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Podemos meter el then en la siguiente linea </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ -e /etc/shadow ] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+    <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;OK, parece que tienes un sistema con shadow pass&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Estructura if-else </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">OTRA=-23
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ ${OTRA} -lt 0 ] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${OTRA} es menor que 0&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">else
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${OTRA} es mayor que 0&quot;; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Estructura if-elseif </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Vamos a usar &quot;read&quot; para pedirle datos al usuario </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-n &quot;Mete un valor: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">read
+VALOR1 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-n &quot;Mete otro valor: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">read
+VALOR2 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Has introducido los valores ${VALOR1} y ${VALOR2} &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ ${VALOR1} -gt ${VALOR2} ] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${VALOR1} es mayor que ${VALOR2}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">elif
+[ ${VALOR1} -lt ${VALOR2} ] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${VALOR1} es menor que ${VALOR2}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">else
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${VALOR1} y ${VALOR2} son iguales&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Estructura test </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Ejecutar operacion si no se cumple la condici&oacute;n </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+test  condici&oacute;n || operacion </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Ejecutar operaci&oacute;n si se cumple </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+test  condici&oacute;n &amp;&amp; operacion </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Este test crea un fichero si no existe. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">test
+ -f './fichero.txt' || touch fichero.txt </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><B>Comprobaciones que podemos hacer:</B></P>
+<P>En las condicionales podemos hacer una serie de comprobaciones con
+ficheros, las mostramos en orden alfab&eacute;tico:</P>
+<UL>
+	<LI><P><FONT FACE="Courier, monospace">-a fichero</FONT><FONT FACE="Bitstream Vera Sans">
+	</FONT>: verdadero si el fichero existe</P>
+	<LI><P><FONT FACE="Courier, monospace">-e fichero</FONT> : lo mismo</P>
+	<LI><P><FONT FACE="Courier, monospace">-b fichero</FONT> : verdadero
+	si el fichero existe y tiene alg&uacute;n bloque especial</P>
+	<LI><P><FONT FACE="Courier, monospace">-c fichero</FONT> : verdadero
+	si el fichero existe y es del tipo car&aacute;cter (suelen ser
+	dispositivos)</P>
+</UL>
+<UL>
+	<LI><P><FONT FACE="Courier, monospace">-d fichero</FONT> : verdadero
+	si el fichero existe y es un directorio. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-f fichero</FONT> : 
+	verdadero si el fichero existe y es un fichero com&uacute;n.</P>
+	<LI><P><FONT FACE="Courier, monospace">-g fichero</FONT> : 
+	verdadero si el fichero existe y tiene el bit setGruopID 
+	establecido</P>
+	<LI><P><FONT FACE="Courier, monospace">-h fichero</FONT> : verdadero
+	si el fichero existe y es un enlace s&iacute;mbolico 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-k fichero </FONT>: verdadero
+	si el fichero existe y tiene el sticky bit establecido</P>
+	<LI><P><FONT FACE="Courier, monospace">-p fichero</FONT> : verdadero
+	si el fichero existe y es una tuber&iacute;a con nombre. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-r fichero</FONT> : verdadero
+	si el fichero existe y tiene permisos de lectura. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-s fichero</FONT> : verdadero
+	si el fichero existe y es mayor que 0.</P>
+	<LI><P><FONT FACE="Courier, monospace">-u fichero</FONT> : verdadero
+	si el fichero existe y tiene el bit setUID  establecido. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-w fichero</FONT> : verdadero
+	si el fichero existe y tiene permisos de escritura.</P>
+	<LI><P><FONT FACE="Courier, monospace">-x fichero</FONT> : verdadero
+	si el fichero existe y tiene permisos de ejecuci&oacute;n .</P>
+	<LI><P><FONT FACE="Courier, monospace">-O fichero</FONT> : verdadero
+	si el fichero existe y el EUID es de nuetro usuario.</P>
+	<LI><P><FONT FACE="Courier, monospace">-G fichero</FONT> : verdadero
+	si el fichero existe y el EGID es de nuestro grupo. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-L fichero</FONT> : verdadero
+	si el fichero existe y es un enalce simb&oacute;lico. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-S fichero</FONT> : verdadero
+	si el fichero existe y es un socket. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-N fichero</FONT> : verdadero
+	si el fichero existe y ha cambiado tras la &uacute;ltima lectura. 
+	</P>
+	<LI><P><FONT FACE="Courier, monospace">-t descriptor</FONT> :
+	verdadero si en un descriptor de fichero abierto y un terminal 
+	</P>
+</UL>
+<P>A partir de ah&iacute; podemos hacer las comprobaciones tan
+complejas como haga falta:</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/sh</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+script para comprobar si un fichero existe. Espera un par&aacute;metro</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ -e $1 ] &amp;&amp; [ -f $1 ]</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;OK, el fichero existe &quot;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">else
+echo &quot;NO existe&quot;</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi<BR></FONT></FONT><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Para comprobar la negaci&oacute;n usar&iacute;amos el s&iacute;mbolo:
+!</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if
+[ ! -e $1 ] </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">then</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+“No existe”</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fi</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P><BR><BR>
+</P>
+<P>Otros test que podemos hacer comparando ficheros:</P>
+<UL>
+	<LI><P><FONT FACE="Courier, monospace">fichero1 -nt fichero2</FONT>
+	: verdadero si fichero1 es m&aacute;s reciente que fichero2 o si el
+	fichero1 existe y el otro no.</P>
+	<LI><P><FONT FACE="Courier, monospace">fichero1 -ot fichero2</FONT>:
+	verdadero si fichero1 es m&aacute;s viejo que fichero2 o si el
+	fichero1 existe y el otro no.</P>
+	<LI><P><FONT FACE="Courier, monospace">fichero1 -ef fichero2</FONT>:
+	verdadero si los dos comparten el mismo n&uacute;mero de inodo y
+	dispositivo.</P>
+	<P></P>
+</UL>
+<P><BR><BR>
+</P>
+<H3 CLASS="western">case</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>El case o el switch-case tan t&iacute;pico del lenguaje
+C tambi&eacute;n est&aacute; disponible aqu&iacute;. Esta ser&iacute;a
+su forma:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>case variable in</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+  <FONT FACE="Courier, monospace"><FONT SIZE=3>valor1)</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones_si_variable=valor1</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace">	;;</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+  <FONT FACE="Courier, monospace"><FONT SIZE=3>valor2)</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+     <FONT FACE="Courier, monospace"><FONT SIZE=3>operaciones_si_variable=varlo2</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	;;</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+       <FONT FACE="Courier, monospace"><FONT SIZE=3>*)</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones_en_cualquier_otro_caso</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>esac</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de la estructura case</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">NOMBRE=&quot;&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-n &quot;Dame un nombre: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">read
+NOMBRE </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">case
+${NOMBRE} in </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">i&ntilde;igo)
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${NOMBRE} dice:  me dedico a Navarrux&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">;;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">sten)
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${NOMBRE} dice: tengo un blog friki&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">;;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">asier)
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${NOMBRE}&gt; dice: .NET me gusta&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">;;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">pello)
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;${NOMBRE}&gt; dice: el shell mola&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">;;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">*)
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+      <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;A ${NOMBRE} no lo conozco&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">esac</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H2 CLASS="western">Iteraciones</H2>
+<P>Tambi&eacute;n tenemos las cl&aacute;sicas iteraciones for y while
+adem&aacute;s de otras, siempre que necesitemos realizar tareas
+repetitivas, recorrer arrays o resultados de comandos, etc...</P>
+<H3 CLASS="western">for</H3>
+<P>Se puede hacer un for de distintas maneras. El m&aacute;s simple
+tiene esta forma:</P>
+<P><FONT FACE="Courier, monospace">for var in lista</FONT></P>
+<P><FONT FACE="Courier, monospace">do</FONT></P>
+<P> <FONT FACE="Courier, monospace">operaciones</FONT></P>
+<P><FONT FACE="Courier, monospace">done</FONT></P>
+<P>Aunque se pueden crear los t&iacute;picos for que se inicializan
+con un valor y se hacen ejecutar x veces. Mejor verlo en c&oacute;digo:</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de la iteraci&oacute;n for:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+un for simple </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;FOR simple: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+i in a b c d e f g h i </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+ &quot;letra: $i&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+for para recorrer array </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">NOMBRES=&quot;I&ntilde;igo
+Sten Asier Pello Roberto&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;FOR simple para recorrer un array: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Participantes en la 4party: &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+i in ${NOMBRES} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+${i} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+for con el resultado de un comando </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;FOR con el resultado de un comando&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+i in `cat direcciones.txt` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+${i} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+for con un grupo de ficheros </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;FOR con ficheros&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+i in *.sh </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	ls
+-lh ${i} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+for cl&aacute;sico con un &iacute;ndice </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;FOR cl&aacute;sico &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">for
+(( cont=0 ; ${cont} &lt; 10 ; cont=`expr $cont + 1` )) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+&quot;Ahora valgo&gt; ${cont}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">while</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Muchas veces nos interesa una iteraci&oacute;n sin un
+n&uacute;mero de vueltas fijo, que simplemente dependa de una
+condici&oacute;n. Eso lo podemos conseguir con el while, cuya forma
+resumida es esta:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>while condici&oacute;n</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>do</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>done</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de la iteraci&oacute;n while:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Estructura while </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;WHILE en marcha&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">cont=0
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Un bucle que terminar&aacute; cuando $cont sea mayor que 100 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">while
+(test ${cont} -lt 100) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">cont=`expr
+$cont + 10` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valor del contador: ${cont}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valor final del contador: ${cont}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Un while infinito </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+while true; do comando; done </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">until</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Until es similar a while, salvo que su ejecuci&oacute;n
+se detiene de forma inversa. Cuando la condici&oacute;n resulta
+falsa, termina el bucle. Esta es su forma:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>until condici&oacute;n</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>do</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>done</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de la iteraci&oacute;n until:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+El bucle until </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Un bucle until se ejecuta hasta que el test resulte falso </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Estructura until&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">cont=15
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">until
+(test ${cont} -lt 0) </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">cont=`expr
+$cont - 1` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+   <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valor del contador: ${cont}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valor final del contador: ${cont}&quot;</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<H3 CLASS="western">select</H3>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Mediante select podemos crear men&uacute;s de selecci&oacute;n
+de manera muy c&oacute;moda. Podemos definir un array con todas las
+opciones y select las mostrar&aacute; por nosotros. Esta es su forma
+general:</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>select variable in lista</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>do </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>	operaciones</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT FACE="Courier, monospace"><FONT SIZE=3>done</FONT></FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este es un ejemplo de uso de la iteraci&oacute;n select</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Estructura select </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+El select es similar al choice de msdos </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+sirve para crear menus de seleccion </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Select de distros&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">DISTROS=&quot;Debian
+Ubuntu Navarrux Gentoo Mandriva&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Selecciona la mejor opci&oacute;n por favor: ${resultado}&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">select
+resultado in ${DISTROS} </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Si la longitud de cadena de resultado es &gt; 0 ya est&aacute;
+seleccionado </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(test
+${#resultado} -ne 0 ) &amp;&amp; break </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Selecciona la mejor opci&oacute;n por favor: ${resultado}&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Sistema seleccionado: [${resultado}] longitud de cadena:
+${#resultado}&quot; </FONT></FONT>
+</P>
+<H2 CLASS="western">Funciones</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Para estructurar mejor el c&oacute;digo, dividir las
+partes complicadas e incluso reutilizar funcionalidades podemos
+crear. Las funciones de shell pueden recibir par&aacute;metros con
+las variables especiales $1, $2, ...</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Aqu&iacute; vemos varios ejemplos de funciones</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+funciones </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Antes que nada hay que definir las funciones, si no dar&iacute;a
+error </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+las funciones toman los par&aacute;metros con $numero, como el script
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+variable </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">RESULTADO=0
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Una funci&oacute;n que muestra valores por pantalla </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">muestrapantalla
+() { </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+ <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Valores: $0&gt; $1 y $2 y $3&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Puede usarse return pero solo para devolver n&uacute;meros </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">sumame
+() { </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+&quot;Estamos en la funci&oacute;n: ${FUNCNAME}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+&quot;Parametros: $1 y $2&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	RESULTADO=`expr
+${1} + ${2}` </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	return
+0 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Es posible la funci&oacute;n recursiva </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">boom
+() { </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	echo
+&quot;No ejecutes esto... &quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">	boom
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+La llamada de se puede hacer as&iacute;, sin par&eacute;ntesis</FONT></FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">muestrapantalla
+3 4 &quot;epa&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Llamamos a la funci&oacute;n y si devuelve 0 es correcto. </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">sumame
+45 67 &amp;&amp; echo &quot;OK&quot; || echo &quot;Ocurri&oacute; un
+error&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Resultado: ${RESULTADO} $!&quot; </FONT></FONT>
+</P>
+<H2 CLASS="western">Librer&iacute;as</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>A la hora de programar scripts de shell no es que
+existan herramientas para declarar librer&iacute;as, pero se pueden
+simular de cierta manera metiendo c&oacute;digo de funciones en
+ficheros de scripts separados.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este ser&iacute;a un ejemplo de uso de librer&iacute;as,
+usando un fichero con las funciones mostradas anteriormente</FONT>:</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+No es que existan las librer&iacute;as pero se puede simular </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+algo similar </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Esta es la forma de importar funciones </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">source
+libreria.sh </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">muestrapantalla
+69 123 &quot;epa&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">sumame
+1337 3389 &amp;&amp; echo &quot;OK&quot; || echo &quot;Ocurri&oacute;
+un error&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Resultado: ${RESULTADO} $!&quot;</FONT></FONT></P>
+<H2 CLASS="western">Se&ntilde;ales</H2>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Las se&ntilde;ales son un m&eacute;todo de los sistemas
+linux para intercomunicar procesos. Las se&ntilde;ales m&aacute;s
+frecuentes usadas por los usuarios son las de cancelar y matar
+procesos. Pero hay m&aacute;s y los procesos linux son capaces de
+capturar las se&ntilde;ales para modificar su comportamiento.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Desde un script de shell tambi&eacute;n se pueden
+capturar las se&ntilde;ales.</FONT></P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este ser&iacute;a un simple ejemplo de la captura de
+se&ntilde;ales:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+se&ntilde;ales </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">funcion
+() { </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;Se ha recibido una se&ntilde;al: ${FUNCNAME} ${0}&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#exit
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Lo primero es establecer que se&ntilde;ales se atrapar&aacute;n. Lo
+hacemos con trap </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Con esto evitaremos que se haga caso a Ctrl-C CTRL-Z </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+trap &quot;:&quot; INT QUIT TSTP </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Esto es similar pero al recibir la se&ntilde;al dirigimos la
+ejecuci&oacute;n a la funci&oacute;n </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">trap
+&quot;funcion&quot; INT QUIT TSTP </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Un bucle sin fin para probar </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">while
+true </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">do
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">sleep
+2 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+  <FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+&quot;ufff qu&eacute; sue&ntilde;o...&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">done</FONT></FONT></P>
+<H2 CLASS="western">Colores</H2>
+<P>Usando la opci&oacute;n -e del comando echo podemos cambiar los
+colores de la terminal. Se puede hacer de forma controlada,
+estableciendo un color y restableciendo el color anterior para
+cambiar colores puntualmente. Para los colores se usan los c&oacute;digos
+ANSI.</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=3>Este ser&iacute;a un ejemplo del uso de los c&oacute;digos
+ANSI:</FONT></P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#!/bin/bash
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">##
+Los colores ANSI </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+para darle color a los scripts debemos usar los c&oacute;digo ANSI </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+junto &quot;con echo -e&quot;. Para meter el car&aacute;cter especial
+escape </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+usamos \033 </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Ejem: \033[0m : volver al color por defecto </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+\033[40m: color de fondo negro </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+\033[40m\033[32m: fondo negro primer plano verde </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Esta es la muestra de colores, ejec&uacute;talo para ver c&oacute;mo
+queda </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[37m  Blanco        \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;37m  Gris claro   \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[30m  Negro        \033[0m (esto es negro)&quot;
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;30m  Gris         \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[31m  Rojo          \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;31m  Rojo claro    \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[32m  Verde  	\033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;32m  Verde claro  \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[33m  Marr&oacute;n        \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;33m  Amarillo       \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[34m  Azul         \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;34m  Azul claro   \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[35m  Purpura       \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;35m  Rosa         \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[36m  Cyan         \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[1;36m  Cyan claro   \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">#
+Se pueden poner fondos de otro color: </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[42m\033[31m  Navarrux v1.0        \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; background: #e6e6e6; font-weight: medium; page-break-before: auto">
+<FONT FACE="Courier, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">echo
+-e &quot;\033[40m\033[4;33m  Amarillo         \033[0m&quot; </FONT></FONT>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<OL START=6>
+	<LI><H1 CLASS="western"></SPAN>Bibliograf&iacute;a, referencias y
+	enlaces</H1>
+</OL>
+<P><B>Bibliograf&iacute;a</B></P>
+<P>Learning The Bash Shell – O'Reilly</P>
+<P>Bash Quick Reference - O'Reilly</P>
+<P>Linux Shell Scripting With Bash - Sams</P>
+<P>Unix Shell Programming 3Rd - Sams</P>
+<P><B>Referencias</B></P>
+<P>man bash: manual de sistema de bash,</P>
+<P><B>Enlaces</B></P>
+<P><A HREF="http://es.tldp.org/">http://es.tldp.org/</A></P>
+<P><A HREF="http://www.navarrux.org/">http://www.navarrux.org</A></P>
+<P><A HREF="http://aula0.cuatrovientos.org/">http://aula0.cuatrovientos.org</A></P>
+<P><A HREF="http://www.cuatrovientos.org/">http://www.cuatrovientos.org</A></P>
+<P><BR><BR>
+</P>
+<P>&iexcl;Saludos a I&ntilde;igo Tejedor!</P>
+<P><BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<FONT SIZE=4>Distribuido bajo licencia Copyleft.</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=4><A HREF="http://creativecommons.org/licenses/by/2.0/es/legalcode.es">http://creativecommons.org/licenses/by/2.0/es/legalcode.es</A></FONT></P>
+<UL>
+	<P></P>
+	<P></P>
+</UL>
+<DIV TYPE=FOOTER>
+	<P STYLE="margin-top: 0.5cm; margin-bottom: 0cm"><FONT COLOR="#800000"><SDFIELD TYPE=DOCINFO SUBTYPE=TITLE></SDFIELD>El mapa de ficheros y directorios en linux
+	- Colores	<SDFIELD TYPE=PAGE SUBTYPE=RANDOM FORMAT=PAGE>41</SDFIELD></FONT></P>
+</DIV>
+</BODY>
+</HTML>
