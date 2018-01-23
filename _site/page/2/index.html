@@ -175,6 +175,49 @@
     
     <div class="col-xs-12">
       
+      <h2><a href="/javascript,/basics/2015/04/05/rediscovering-javascript-basics.html">Rediscovering Javascript basics</a></h2>
+      
+    </div>
+
+    <div class="col-xs-8">
+      <p class="post-meta">
+        
+        <span class="label label-info">
+          <span class="octicon octicon-calendar"></span>
+          <time datetime="2015-04-05T01:42:36+02:00" itemprop="datePublished">
+            
+            Apr 5, 2015
+          </time>
+        </span>
+        &nbsp;
+        
+
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          JavaScript,
+        </span>
+        &nbsp;
+        
+        <span class="octicon octicon-tag"></span> <span class="label label-default">
+          <i class="fa fa-fw fa-tag"></i>
+          basics
+        </span>
+        
+        
+      </p>
+      <img src="http://s14.postimg.org/uwmqswvs1/i07_06.jpg" title="NaN" alt="NaN wtf" />
+<p>This will be just another quick reveiw of the Javascript language basics. For any seasoned developer this may seem a pointless effort but perhaps you find something useful, at least to become a js nitpicker or a soon-to-be guru :D.
+
+
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="col-xs-12"><hr /></div>
+    
+    
+    <div class="col-xs-12">
+      
       <h2><a href="/javascript/2015/04/03/rediscovering-javascript.html">Rediscovering Javascript</a></h2>
       
     </div>
@@ -587,66 +630,6 @@ In addition to that and in order to be nice with a wider range of users you have
     </div>
     <div class="clearfix"></div>
     
-    <div class="col-xs-12"><hr /></div>
-    
-    
-    <div class="col-xs-12">
-      
-      <h2><a href="/coding/2014/07/27/keeping-node-js-app-js-clean-custom-middleware-for-express.html">Keeping Node.js app.js clean + custom middleware for express</a></h2>
-      
-    </div>
-
-    <div class="col-xs-8">
-      <p class="post-meta">
-        
-        <span class="label label-info">
-          <span class="octicon octicon-calendar"></span>
-          <time datetime="2014-07-27T01:03:41+02:00" itemprop="datePublished">
-            
-            Jul 27, 2014
-          </time>
-        </span>
-        &nbsp;
-        
-
-        
-        <span class="octicon octicon-tag"></span> <span class="label label-default">
-          <i class="fa fa-fw fa-tag"></i>
-          coding
-        </span>
-        
-        
-      </p>
-      <img src="http://chicagouncommon.com/photography/neat_stuff.jpg" alt="neat stuff" title="Neat stuff" />
-<p>
-This post has two purposes: to continue <a href="http://pello.io/index.php/blog/node-js-express-routes-mongoose-simple-and-separated">the previous one</a> showing ways to improve the organization of routes and secondly to see how to add your own middleware to an express application.
-</p>
-<p>The previous version have a problem when it comes to the routes. We require all of them with a single require command but we were applying them one by one.</p>
-<pre class="brush:js">
-var routes = require('./routes');
-...
-// We set routes
-app.use('/', routes.home);
-app.use('/guestbook', routes.guestbook);
-</pre>
-<h5>Use a contructor in routes/index.js</h5>
-<p><i>There Is More Than One Way To Do It</i> claims the <b>Programming Perl</b> book on the cover. Something that, undoubtedly, fits Node.js. There is more than one style in Node-foo, and I guess that you have to choose the way that better fits your needs. My need here was to minimize the code to initialize the routes in the main file of the Node.js express application. We change the routes/index.js to have a constructor with a parameter: the express app itself</p>
-<p>This is routes/index.js</p>
-<pre class="brush: js">
-/**
- * routes/index.js
- * All routes are here to import all of them just with one command
- * in the main app.js
- * https://github.com/pello-io/simple-express-mongoose
- * Pello Altadill - http://pello.info
- */
-var home = require('./home');
-var guestbook = require('./guestbook');
-
-
-    </div>
-    <div class="clearfix"></div>
-    
     
 
   <!-- Pagination links -->
@@ -1047,7 +1030,7 @@ var guestbook = require('./guestbook');
       <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/java/"
        style="">
-            Java (2)
+            Java (3)
     </a>
 </span>
       
@@ -1090,6 +1073,13 @@ var guestbook = require('./guestbook');
     <a href="/tag/ruby/"
        style="">
             Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            Spring (1)
     </a>
 </span>
       
@@ -1262,6 +1252,13 @@ var guestbook = require('./guestbook');
 </span>
       
       <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/book/"
+       style="">
+            book (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/boolean/"
        style="">
             boolean, (1)
@@ -1376,7 +1373,7 @@ var guestbook = require('./guestbook');
       <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/code/"
        style="">
-            code (1)
+            code (2)
     </a>
 </span>
       

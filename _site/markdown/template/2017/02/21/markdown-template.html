@@ -183,12 +183,12 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h1 id="markdown-template">Markdown template</h1>
+    <h2 id="markdown-template">Markdown template</h2>
 
 <p>Based on <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Adams reference</a>
 I made this on my own just for fun and learning and further improvement.</p>
 
-<h2 id="contents">Contents</h2>
+<h4 id="contents">Contents</h4>
 <p>This is the list of contents described in this template</p>
 <ul>
   <li>Special emphasis</li>
@@ -203,7 +203,7 @@ I made this on my own just for fun and learning and further improvement.</p>
   <li>Blockquotes</li>
 </ul>
 
-<h2 id="special-emphasis">Special emphasis</h2>
+<h4 id="special-emphasis">Special emphasis</h4>
 <p>You can get these effects</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Italics with *asterisks* or _underscores_
 2. Bold or Strong with **double asterisks** or __double underscore__
@@ -217,22 +217,22 @@ I made this on my own just for fun and learning and further improvement.</p>
   <li>Strike or delete with using <del>tildes</del></li>
 </ol>
 
-<h2 id="titles">Titles</h2>
+<h4 id="titles">Titles</h4>
 <p>Titles have different sizes</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># H1-like title
-## H2-like title
-### H3-like title
-#### H4-like title
-##### H5-like title
-###### H6-like title
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## H1-like title
+#### H2-like title
+####H3-like title
+#####H4-like title
+######H5-like title
+#######H6-like title
 </code></pre></div></div>
 
-<h1 id="h1-like-title">H1-like title</h1>
-<h2 id="h2-like-title">H2-like title</h2>
-<h3 id="h3-like-title">H3-like title</h3>
-<h4 id="h4-like-title">H4-like title</h4>
-<h5 id="h5-like-title">H5-like title</h5>
-<h6 id="h6-like-title">H6-like title</h6>
+<h2 id="h1-like-title">H1-like title</h2>
+<h4 id="h2-like-title">H2-like title</h4>
+<p>####H3-like title
+#####H4-like title
+######H5-like title
+#######H6-like title</p>
 
 <p>Other ways to create H1 and H2-like titles:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H1-like title
@@ -247,9 +247,9 @@ I made this on my own just for fun and learning and further improvement.</p>
 
 <h2 id="h2-like-title-1">H2-like title</h2>
 
-<h2 id="lists">Lists</h2>
-<p>Lists have different modes</p>
-<h3 id="ordered">Ordered</h3>
+<h4 id="lists">Lists</h4>
+<p>Lists have different modes
+####Ordered</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Ordered 
 2. With
 3. Numbers
@@ -262,7 +262,7 @@ I made this on my own just for fun and learning and further improvement.</p>
 ⋅1. Even with sublists ⋅2. Like this using dots</li>
 </ol>
 
-<h3 id="unorderded-list-with">Unorderded list with</h3>
+<p>####Unorderded list with</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Minuses -
 - Plus sign +
 - Asterisk *
@@ -274,7 +274,7 @@ I made this on my own just for fun and learning and further improvement.</p>
   <li>Asterisk *</li>
 </ul>
 
-<h3 id="sublists">Sublists</h3>
+<p>####Sublists</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Ordered or unordered
 * Just use dots ··
 ··* Like this
@@ -291,7 +291,7 @@ I made this on my own just for fun and learning and further improvement.</p>
 ···Just like this</li>
 </ul>
 
-<h2 id="horizontal-rules">Horizontal rules</h2>
+<h4 id="horizontal-rules">Horizontal rules</h4>
 
 <p>You can make the using three or more</p>
 <ul>
@@ -308,7 +308,7 @@ With hyphens
 With underscores
 ________
 
-## Links
+#### Links
 Links can be made around text or any other element
 </code></pre></div></div>
 <p><a href="http://pello.io">Simple link to my page</a>
@@ -319,19 +319,19 @@ Links can be made around text or any other element
 <a href="http://reddit.com">Go to another reference</a>
 We can just use angle brackets with urls like <a href="http://pello.io">http://pello.io</a></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Simple link
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>####Simple link
 [Simple link to my page](http://pello.io)
 
-### Simple with title
+####Simple with title
 [Simple link to my page](http://pello.io "My homepage")
 
-### Link to reference
+####Link to reference
 [Link to reference][Sample Reference]
 
-### Link to reference
+####Link to reference
 [Link to repository file](2017-02-21-markdown-template.md)
 
-### Link to numbered reference
+####Link to numbered reference
 [Go to this reference][1]
 [Go to another reference][2]
 
@@ -339,10 +339,10 @@ We can just use angle brackets with urls like <a href="http://pello.io">http://p
 [1]: https://github.com
 [2]: http://reddit.com
 
-### Links with angle brackets
+####Links with angle brackets
 We can just use angle brackets with urls like &lt;http://pello.io&gt; 
 
-## Images
+#### Images
 Images must be available online
 </code></pre></div></div>
 <p><img src="http://pello.io/images/logo.png" alt="alt text" title="This is the logo" /></p>
@@ -350,24 +350,24 @@ Images must be available online
 <p>With reference
 ![alt text][pellologo]
 [pellologo]: (http://pello.io/images/logo.png “This is the logo”)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Inline images
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>####Inline images
 ![alt text](http://pello.io/images/logo.png "This is the logo")
 
-### Reference like images
+####Reference like images
 ![alt text][pellologo]
 [pellologo]: (http://pello.io/images/logo.png "This is the logo")
 
-## Youtube videos
+#### Youtube videos
 </code></pre></div></div>
 <p><a href="http://www.youtube.com/watch?v=v0MkJtI3FvU"><img src="http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>We can't embbed but we could add a video link with a caption. You need to specify the video id
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/v0MkJtI3FvU/0.jpg)](http://www.youtube.com/watch?v=v0MkJtI3FvU)
 
-## Tables
+#### Tables
 Tables are a bit tricky, they are made using pipes and dashes. Each header must have at least three dashes
 of separation. Outer pipes are optional.
 Notice that tables must not be perfectly aligned with the same number of spaces. 
-### Simple table
+####Simple table
 </code></pre></div></div>
 <p>| Id     | Name         | Description    |
 | —— | ———— | ————– |
@@ -381,7 +381,7 @@ Notice that tables must not be perfectly aligned with the same number of spaces.
 | 15     | Pretty       | Means pretty   |
 | 666    | Evil         | Evil number    |
 
-### Alignment
+####Alignment
 Using special headers we can set content alignment in tables. Don't forget the spaces.
 </code></pre></div></div>
 
@@ -391,7 +391,7 @@ Using special headers we can set content alignment in tables. Don't forget the s
 | 15     | Pretty     | Means pretty |
 | 666    | Evil       | Evil number  |
 
-### Nested markdown 
+####Nested markdown 
 </code></pre></div></div>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inside the cells we can still use markdown. 
@@ -404,23 +404,23 @@ Using special headers we can set content alignment in tables. Don't forget the s
 | 666    | **Evil**         | Evil number    |
 
 
-## Code
+#### Code
 Using triple back-ticks , we can somehow get the code style
 
-### Simple word
+####Simple word
 </code></pre></div></div>
 <p>We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
 just <code class="highlighter-rouge">like this</code>, looking good?</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>We can just use backquotes to make a something in the middle of a paragraph to look like a code or command:
 just `like this`, looking good?
 
-### Code listing
+####Code listing
 
 </code></pre></div></div>
 <p>Just using triple quotes
 We get this effect of highlighted code</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### Syntax highlighting
+####Syntax highlighting
 For sites like GitHub, we add the language after the first back-ticks
 ```javascript
 const number = 666;
@@ -432,14 +432,14 @@ function sample (parameter) {
     }
 }
 </code></pre></div></div>
-<h3 id="inline-html">Inline HTML</h3>
+<p>####Inline HTML</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You can just use HTML tags in your code, and it will work in most cases
 with simple tags &lt;strong&gt;like this&lt;/strong&gt;
 </code></pre></div></div>
 <p>You can just use HTML tags in your code, and it will work in most cases
 with simple tags <strong>like this</strong></p>
 
-<h2 id="blockquotes">Blockquotes</h2>
+<h4 id="blockquotes">Blockquotes</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; Hi there
 &gt; This is a replay of an email
 &gt; and it looks great
@@ -626,7 +626,7 @@ and it looks great.</p>
       <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/java/"
        style="">
-            Java (2)
+            Java (3)
     </a>
 </span>
       
@@ -669,6 +669,13 @@ and it looks great.</p>
     <a href="/tag/ruby/"
        style="">
             Ruby (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/spring/"
+       style="">
+            Spring (1)
     </a>
 </span>
       
@@ -841,6 +848,13 @@ and it looks great.</p>
 </span>
       
       <span class="site-tag"><span class="octicon octicon-tag"></span>
+    <a href="/tag/book/"
+       style="">
+            book (1)
+    </a>
+</span>
+      
+      <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/boolean/"
        style="">
             boolean, (1)
@@ -955,7 +969,7 @@ and it looks great.</p>
       <span class="site-tag"><span class="octicon octicon-tag"></span>
     <a href="/tag/code/"
        style="">
-            code (1)
+            code (2)
     </a>
 </span>
       
